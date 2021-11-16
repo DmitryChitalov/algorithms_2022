@@ -28,3 +28,41 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+
+
+companies = defaultdict(int)
+n = int(input("Количество компаний: "))
+for i in range(n):
+    s = 0
+    comp_name = input("Название компании: ")
+    for k in range(4):
+        temp_s = int(input(f"Введите сумму за {k + 1}-й квартал: "))
+        s = s + temp_s
+    companies[comp_name] = s
+
+avr = sum(companies.values()) / len(companies)
+
+print(f'Среднегодовая прибыль - {avr} руб.')
+print('Выше среднего---:')
+for key, val in companies.items():
+    if val > avr:
+        print(f'Компания {key} - {val} руб:')
+print('---Ниже среднего:')
+for key, val in companies.items():
+    if val < avr:
+        print(f'Компания {key} - {val} руб:')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
