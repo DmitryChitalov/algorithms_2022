@@ -16,4 +16,48 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+####################################################
+
+dic = {'Amazon': 100, 'Apple': 200, 'Microsoft': 300, 'Visa': 400, 'Alibaba': 500}
+
+def check_1(dic):
+    """
+    Сложность: O(n^2)
+    """
+    global key_max
+
+    lst_max = {}                                                                    # O(1)
+    while len(lst_max) < 3:                                                         # O(n)
+        max_v = 0                                                                   # O(1)
+        for k, v in dic.items():                                                    # O(n)
+            if max_v < v:                                                           # O(1)
+                key_max = k                                                         # O(1)
+        max_value = dic.pop(key_max)                                                # O(1)
+        lst_max.setdefault(key_max, max_value)                                      # O(1)
+
+    return lst_max                                                                  # O(1)
+
+print(check_1(dic))
+
+####################################################
+
+def value(item):
+    return item[1]                                                              # O(1)
+
+def check_2(dic):
+    """
+    Сложность: O(n log n)
+    """
+    lst_max = dict()                                                            # O(1)
+    i = 0                                                                       # O(1)
+    for k, v in sorted(dic.items(), key=value, reverse=True):                   # O(n + n log n)
+        if i < 3:                                                               # O(1)
+            lst_max.setdefault(k, v)                                            # O(1)
+        i = i + 1                                                               # O(1)
+    return lst_max                                                              # O(1)
+
+print(check_2(dic))
+
+# Вывод: Check_2, будет выполнятся быстрее т.к у него сложность sorted() - Линейно-логарифмическая,
+# а у первого Квадратичная то есть время выполнения дольше
 
