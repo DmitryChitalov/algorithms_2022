@@ -16,4 +16,15 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+vault = {'firm1': 900, 'firm2': 200, 'firm3': 300, 'firm4': 400}
+forbes = []
+vault2 = vault.copy()
+for i in (1, 2, 3):  # O(n)
+    maxim = max(vault2.items())[0]  # O(n)
+    forbes.append(maxim)  # O(n)
+    vault2.pop(maxim)  # O(1)
+print(forbes)
 
+nlargest(3, vault.values())   # O(nlong)
+
+Numpy.partition(array, 3)   # O(logn)
