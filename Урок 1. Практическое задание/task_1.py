@@ -39,7 +39,7 @@ def check_2(lst_obj):
 
     Сложность: O(n**2).
     """
-    for j in range(len(lst_obj)):          # O(n**2)
+    for j in range(len(lst_obj)):          # O(n)
         if lst_obj[j] in lst_obj[j+1:]:    # O(n)
             return False                   # O(1)
     return True                            # O(1)
@@ -53,11 +53,11 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: O(n**2)
+    Сложность: O(n log n)
     """
     lst_copy = list(lst_obj)                 # O(len(n))
     lst_copy.sort()                          # O(n log n)
-    for i in range(len(lst_obj) - 1):        # O(n**2)
+    for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)
