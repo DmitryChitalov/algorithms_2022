@@ -20,3 +20,20 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+vault = {'Ivan': ['password', 0], 'Bob': ['qwerty', 1], 'John': ['', 0]}
+
+
+def checker(tuple_coup):  # o(1)
+    print(tuple_coup)
+    if tuple_coup[0]:   # надо бы input pass==dict pass
+        if tuple_coup[1]:
+            print('Access granted')
+        else:
+            print('Need authentication')
+    else:
+        print('No password')
+
+
+checker(vault.get('Ivan'))
+checker(vault.get('Bob'))
+checker(vault.get('John'))
