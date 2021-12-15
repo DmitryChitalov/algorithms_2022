@@ -39,7 +39,7 @@ def variant2(vault):
     for k, v in vault.items():  # O(n)
         for i in range(3):  # O(1)
             if v > r_list[i][1]:  # O(1)
-                r_list.insert(i, (k, v))  # O(n)
+                r_list.insert(i, (k, v))  # O(1)
                 r_list.pop()  # O(1)
                 break  # O(1)
     print(r_list)
