@@ -20,3 +20,46 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class User:
+    def __init__(self, name, password, activated):
+        self.name = name
+        self.password = password
+        self.activated = activated
+
+
+class Result:
+    accessGranted = "Доступ рашрешен"
+    accountNotActivated = "Учетная запись не активирована"
+    invalidLoginOrPassword = "Неверный логин или пароль"
+
+
+listOfUsers = [User("Ivan", "12345", True), User("Galina", "mel223", True), User("Maksim", "bro777", False)]
+dictOfUsers = {"Ivan": User("Ivan", "12345", True), "Galina": User("Galina", "mel223", True),
+               "Maksim": User("Maksim", "bro777", False)}
+
+
+# Сложность O(N), необходимо перебрать весь список
+def new_user_list(login, password):
+    for user in listOfUsers:
+        if user.name == login and user.password == password:
+            if user.activated:
+                return Result.accessGranted
+            else:
+                return Result.accountNotActivated
+    return Result.invalidLoginOrPassword
+
+
+# Сложность O(1), доступ в словарь по ключу
+def new_user_dict(login, password):
+    user = dictOfUsers.get(login)
+    if user != None:
+        if user.name == login and user.password == password:
+            if user.activated:
+                return Result.accessGranted
+            else:
+                return Result.accountNotActivated
+    return Result.invalidLoginOrPassword
+
+# Вывод - в данном случае словарь - сложность O(1)  предпочтительней списка так как константная, выполняется быстрее и за постояннное время.
