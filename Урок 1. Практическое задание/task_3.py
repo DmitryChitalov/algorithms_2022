@@ -17,3 +17,27 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+companies = {'mail': 990, 'microsoft': 1250, 'apple': 1300, 'google': 1100, 'yandex ': 1000}
+
+
+def get_3_comp1(dict1):  # O(n log n)
+    sorted_keys = sorted(dict1, key=dict1.get, reverse=True)  # O(n log n)
+    return sorted_keys[:3]  # O(1)
+
+
+def get_3_comp2(dict1):
+    comps = []
+    buff_dict = dict1.copy()  # O(n)
+    for i in range(3):  # O(1) (тк у нас же конечное число шагов, или твт всеравно будет O(N) ? от этого собственно заваист вывод в конце)
+        company = max(buff_dict, key=buff_dict.get)  # O(n)
+        comps.append(company)  # O(1)
+        del buff_dict[company]  # O(1)
+    return comps
+
+
+# print(get_3_comp1(companies))
+print(get_3_comp2(companies))
+
+# # Получается, что при условии, что число искомых компаний сильно меньше чем N ( 3 , как у нас в задаче),
+# более эффективным будет второе решение, тк оно является линейным. Но при условии что число команий стремится к N,
+# оно превратится практически в квадратичное, и тогда более эффективным будет первое решение.
