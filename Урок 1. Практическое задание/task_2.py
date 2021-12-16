@@ -18,7 +18,7 @@ an = [-2, 3, 5, -1, 7, 1, 0]
 
 def check_1(a):
     """
-    Сложность: O(n^2)
+    Сложность: O(n)
     """
     n = a[0]                     # O(1)
     lst = list(a)                # O(n)
@@ -40,5 +40,5 @@ def check_2(a):
             n = a[i]           # O(1)
     return n                   # O(1)
 
-print(check_1(an))
-print(check_2(an))
+print(check_1(an))             # O(n)
+print(check_2(an))             # O(n)

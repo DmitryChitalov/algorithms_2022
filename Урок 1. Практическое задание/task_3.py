@@ -22,12 +22,11 @@ dic = {'Amazon': 100, 'Apple': 200, 'Microsoft': 300, 'Visa': 400, 'Alibaba': 50
 
 def check_1(dic):
     """
-    Сложность: O(n^2)
+    Сложность: O(n)
     """
-    global key_max
 
     lst_max = {}                                                                    # O(1)
-    while len(lst_max) < 3:                                                         # O(n)
+    while len(lst_max) < 3:                                                         # O(1)
         max_v = 0                                                                   # O(1)
         for k, v in dic.items():                                                    # O(n)
             if max_v < v:                                                           # O(1)
@@ -37,7 +36,7 @@ def check_1(dic):
 
     return lst_max                                                                  # O(1)
 
-print(check_1(dic))
+# print(check_1(dic))
 
 ####################################################
 

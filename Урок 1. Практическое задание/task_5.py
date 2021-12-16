@@ -28,7 +28,6 @@ class StackClass:
         return self.elems == []
 
     def push_in(self, el):
-        global i
         """Предполагаем, что верхний элемент стека находится в конце списка"""
         for i in range(len(self.elems)):
             if len(self.elems[i]) < qs:
