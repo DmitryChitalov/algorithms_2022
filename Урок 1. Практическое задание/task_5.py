@@ -51,18 +51,19 @@ class Stack_of_stacks:
         return len(self.elem[-1])
 
 
-plates = Stack_of_stacks()
-print(plates.is_empty())
+if __name__ == '__main__':
+    plates = Stack_of_stacks()
+    print(plates.is_empty())
 
-for i in range(11):
-    plates.push_in(i)
+    for i in range(11):
+        plates.push_in(i)
 
-print(plates.stack_size())
-print(plates.num_stacks())
-print(plates.num_in_last())
+    print(plates.stack_size())
+    print(plates.num_stacks())
+    print(plates.num_in_last())
 
-print(plates.pop_out())
+    print(plates.pop_out())
 
-print(plates.stack_size())
-print(plates.num_stacks())
-print(plates.num_in_last())
+    print(plates.stack_size())
+    print(plates.num_stacks())
+    print(plates.num_in_last())

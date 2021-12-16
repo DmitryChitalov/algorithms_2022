@@ -25,10 +25,12 @@ def get_3_comp1(dict1):  # O(n log n)
     return sorted_keys[:3]  # O(1)
 
 
-def get_3_comp2(dict1):
+def get_3_comp2(dict1):  # O(n)
     comps = []
     buff_dict = dict1.copy()  # O(n)
-    for i in range(3):  # O(1) (тк у нас же конечное число шагов, или твт всеравно будет O(N) ? от этого собственно заваист вывод в конце)
+    for i in range(
+            3):  # O(1) (тк у нас же конечное число шагов, или твт всеравно будет O(N) ? от этого собственно заваист
+        # вывод в конце)
         company = max(buff_dict, key=buff_dict.get)  # O(n)
         comps.append(company)  # O(1)
         del buff_dict[company]  # O(1)
