@@ -13,3 +13,30 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+
+# O(n^2)
+def min_n(lst):
+    for i in range(len(lst)):  # O(n)
+        min_ = True  # O(1)
+        for j in range(len(lst[::-1])):  # O(n)
+            if lst[i] > lst[j]:  # O(1)
+                min_ = False  # O(1)
+        if min_:  # O(1)
+            return lst[i]  # O(1)
+
+
+# O(n)
+def min_nn(lst):
+    min_ = lst[0]  # O(1)
+    for i in range(1, len(lst)):  # O(n)
+        if min_ > lst[i]:  # O(1)
+            min_ = lst[i]  # O(1)
+    return min_  # O(1)
+
+
+if __name__ == '__main__':
+    assert min_nn([1, 2, 3, -5, 8, 6, 10, -1, 4, 11]) == -5
+    print(min_nn([1, 2, 3, -5, 8, 6, 10, -1, 4, 11]))
+    assert min_n([1, 2, 3, -5, 8, 6, 10, -1, 4, 11]) == -5
+    print(min_n([1, 2, 3, -5, 8, 6, 10, -1, 4, 11]))
