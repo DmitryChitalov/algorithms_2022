@@ -20,3 +20,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users_ = {'Mike': {'password': '0000', 'activation': 'True'},
+         'Mike1': {'password': '0000', 'activation': 'True'},
+         'Mike2': {'password': '0000', 'activation': 'False'},
+         'Mike3': {'password': '0000', 'activation': 'True'}
+          }
+
+O(1)
+def autorization_user(users_, user_name, user_password):
+    if users_.get(user_name):
+        if users_[user_name]['password'] == user_password and users_[user_name]['activation']:
+            return 'Добро пожаловать'
+        elif users_[user_name]['password'] == user_password and not users_[user_name]['activation']:
+            return 'Запись не активирована'
+        elif users_[user_name]['password'] != user_password:
+            return 'Пароль неверный'
+    else:
+        return 'Несуществующий пользователь'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
