@@ -20,7 +20,7 @@
 companies = {'comp_1' : 20000, 'comp_2' : 40000, 'comp_3' : 50000,
              'comp_4' : 110000, 'comp_5' : 30000, 'comp_6' : 40000}
 
-# Сложность O(n) -- Оптимальная
+# Сложность O(n) -- Линейная
 
 best_3 = []                             # O(1)
 while len(best_3) < 3:                  # O(1)
@@ -39,3 +39,6 @@ print(best_3)
 companies = sorted(companies.items(), reverse=True, key=lambda item: item[1])   # O(n*log(n))
 for i in range(3):                                                              # O(1)
     print(companies[i])                                                         # O(1)
+
+# Первое решение с линейной сложностью оптимальнее, т.к. при линейно-логарифмический сложности
+# количество операций растет быстрее при увеличении n
