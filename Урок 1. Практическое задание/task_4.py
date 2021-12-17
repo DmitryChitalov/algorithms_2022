@@ -20,3 +20,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+user = {}
+
+user['Arthur'] = {'Password': '1234', 'Activate': 'activated'}
+user['Ruslan'] = {'Password': '12345', 'Activate': 'no activated'}
+user['Dasha'] = {'Password': '123456', 'Activate': 'activated'}
+
+def Check_1(user):
+    """
+    Сложность: O(1)
+    """
+    log = input('Login: ')                                                                  # O(1)
+    pas = input('Password: ')                                                               # O(1)
+    try:                                                                                    # O(1)
+        if pas == user[log]['Password']:                                                    # O(1)
+            if user[log]['Activate'] == 'activated':                                        # O(1)
+                return 'Ваша учетка активирована!\nВы в системе'                            # O(1)
+            else:                                                                           # O(1)
+                input('Ваша учетка должна быть активирована, хотите её активировать(Y/N)')  # O(1)
+                return 'ОК'                                                                 # O(1)
+    except KeyError:                                                                        # O(1)
+        return 'Не правильный логин или пароль'                                             # O(1)
+
+print(Check_1(user))
+
+############################################################################
+def Check_2(user):
+    """
+        Сложность: O(n)
+    """
+    log = input('Login: ')                                                                  # O(1)
+    pas = input('Password: ')                                                               # O(1)
+    if log in user and user[log]['Password'] == pas:                                        # O(n)
+        if user[log]['Activate'] == 'activated':                                            # O(1)
+            return 'Ваша учетка активирована!\nВы в системе'                                # O(1)
+        else:                                                                               # O(1)
+            input('Ваша учетка должна быть активирована, хотите её активировать(Y/N)')      # O(1)
+            return 'ОК'                                                                     # O(1)
+    return 'Не правильный логин или пароль'                                                 # O(1)
+
+# print(Check_2(user))
+
+# Вывод: Check_1, будет выполнятся быстрее т.к у него сложность - Константная,
+# а у второго Линейная то есть время выполнения дольше
+
