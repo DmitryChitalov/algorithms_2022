@@ -17,3 +17,14 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def reverse_digit_recursion(num):
+    if num <= 0:
+        return 0
+
+    return (num % 10) * (10 ** (len(str(num)) - 1)) + reverse_digit_recursion(num // 10)
+
+
+if __name__ == '__main__':
+    print(f'Перевернутое число: {reverse_digit_recursion(int(input("Введите число:")))}')

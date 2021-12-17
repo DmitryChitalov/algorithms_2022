@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def sum_recursion(num, lst=[0, 0]):
+
+    lst[0 if (num % 10) % 2 == 0 else 1] += 1
+
+    if num < 10:
+        return lst
+
+    return sum_recursion(num // 10, lst)
+
+
+if __name__ == '__main__':
+    print(f'Количество четных и нечетных цифр в числе равно: {sum_recursion(int(input("Введите число:")))}')
