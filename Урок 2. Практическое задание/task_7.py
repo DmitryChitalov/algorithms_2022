@@ -12,3 +12,14 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def get_summ(n):
+    if n == 1:
+        return 1
+    else:
+        return get_summ(n - 1) + n
+
+
+for num in range(1, 10):
+    print(get_summ(num), '=', int(num * (num + 1) / 2))
