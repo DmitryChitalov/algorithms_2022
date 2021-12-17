@@ -18,3 +18,48 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+
+class StackClass:
+    def __init__(self):
+        self.elem = [[], [], [], [], [], []]
+
+    def push_in(self, el):
+        """Предположим что верхний элемент находится в конце списка"""
+        for i in range(0, len(self.elem) - 1, 1):
+            if len(self.elem[i]) < 5:
+                self.elem[i].append(el)
+                break
+
+    def pop_out(self):
+        return self.elem.pop()
+
+    def get_val(self):
+        return self.elem[len(self.elem) - 1]
+
+    def get_size(self):
+        return len(self.elem)
+
+class Stack:
+
+    def __init__(self):
+        self.stack = []
+        self.max = None
+
+    def push(self, item):
+        self.stack.append(item)
+        if len(self.stack) == 1 or item > self.max:
+            self.max = item
+
+if __name__ == '__main__':
+    stack_1 = StackClass()
+    i = 0
+    while i < 18:
+        stack_1.push_in(1 + i)
+        i += 1
+    print(stack_1.elem)
+
+
+
+
+
+
