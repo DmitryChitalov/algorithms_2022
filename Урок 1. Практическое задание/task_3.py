@@ -27,7 +27,7 @@ company = {
 
 # 1     Сложность: О(NlogN) - Линейно-логарифмитическая
 
-lst_dic = list(company.items())
+lst_dic = list(company.items())                    # O(N)
 lst_dic.sort(key=lambda i: i[1], reverse=True)     # O(NlogN)
 for i in range(3):                                 # O(1)
     print(lst_dic[i][0], ':', lst_dic[i][1])       # O(1)
