@@ -30,13 +30,13 @@ class User:
 
 
 class Result:
-    accessGranted = "Доступ рашрешен"
-    accountNotActivated = "Учетная запись не активирована"
-    invalidLoginOrPassword = "Неверный логин или пароль"
+    access_granted = "Доступ рашрешен"
+    account_not_activated = "Учетная запись не активирована"
+    invalid_login_or_password = "Неверный логин или пароль"
 
 
-listOfUsers = [User("Ivan", "12345", True), User("Galina", "mel223", True), User("Maksim", "bro777", False)]
-dictOfUsers = {"Ivan": User("Ivan", "12345", True), "Galina": User("Galina", "mel223", True),
+list_users = [User("Ivan", "12345", True), User("Galina", "mel223", True), User("Maksim", "bro777", False)]
+dict_users = {"Ivan": User("Ivan", "12345", True), "Galina": User("Galina", "mel223", True),
                "Maksim": User("Maksim", "bro777", False)}
 
 
@@ -45,10 +45,10 @@ def new_user_list(login, password):
     for user in listOfUsers:
         if user.name == login and user.password == password:
             if user.activated:
-                return Result.accessGranted
+                return Result.access_granted
             else:
-                return Result.accountNotActivated
-    return Result.invalidLoginOrPassword
+                return Result.account_not_activated
+    return Result.invalid_login_or_password
 
 
 # Сложность O(1), доступ в словарь по ключу
@@ -57,9 +57,9 @@ def new_user_dict(login, password):
     if user != None:
         if user.name == login and user.password == password:
             if user.activated:
-                return Result.accessGranted
+                return Result.access_granted
             else:
-                return Result.accountNotActivated
-    return Result.invalidLoginOrPassword
+                return Result.account_not_activated
+    return Result.invalid_login_or_password
 
 # Вывод - в данном случае словарь - сложность O(1)  предпочтительней списка так как константная, выполняется быстрее и за постояннное время.
