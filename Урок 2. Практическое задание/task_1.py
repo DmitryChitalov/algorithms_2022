@@ -27,3 +27,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    operations = ['+', '-', '/', '*', '0']
+    opr = input('Введите операцию (+, -, *, / или 0 для выхода)')
+    if opr not in operations:
+        print('Вот не надо тут изобретать, сказали же что вводить')
+        calculator()
+    if opr == '0':
+        print('До свидания')
+        return
+    try:
+        x = float(input('Введите первое число'))
+        y = float(input('Введите второе число'))
+    except ValueError:
+        print('Вот не надо тут изобретать, сказали же что вводить')
+        calculator()
+    if opr == '+':
+        print(x + y)
+        calculator()
+    elif opr == '-':
+        print(x - y)
+        calculator()
+    elif opr == '*':
+        print(x * y)
+        calculator()
+    elif opr == '/':
+        if y == 0:
+            print('Математику надо было в школе учить')
+            calculator()
+        print(x / y)
+        calculator()
+
+
+calculator()

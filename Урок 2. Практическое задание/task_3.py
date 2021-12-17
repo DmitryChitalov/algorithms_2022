@@ -17,3 +17,18 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+inverted_num = []
+
+
+def invert_a_num(num):
+    if num > 10:
+        inverted_num.append(str(num % 10))
+        invert_a_num(num // 10)
+    else:
+        inverted_num.append(str(num))
+
+        print(''.join(inverted_num).lstrip('0'))
+
+
+invert_a_num(1230054300)
