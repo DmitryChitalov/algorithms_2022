@@ -27,3 +27,81 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def is_number(my_str):
+    try:
+        float(my_str)
+        return True
+    except ValueError:
+        return False
+
+
+def get_data(step, all_data):
+    my_step = step
+    if my_step == 0:
+        data = input('Введите операцию (+, -, *, / или 0 для выхода) ')
+        if data not in ['+', '-', '*', '/', '0']:
+            print('Вы ввели что-то помимо допустимого знака операции, введите еще раз')  # что то пошло не так,
+            # вызываем функцию заново с этого же шага, передаем ей структуру, которая частично заполнена на
+            # предыдущих шагах
+            all_data = get_data(my_step, all_data)
+            return all_data  # если все прошло хорошо во вложенном вызове функции, то структура заполнена и ее можно
+            # возвращать
+        else:
+            all_data['operator'] = data
+            my_step += 1
+    if all_data['operator'] == '0':
+        return all_data
+
+    if my_step == 1:
+        data = input('Введите число номер %s ' % my_step)
+        if not is_number(data):
+            print('Вы ввели не число, попробуйте еще раз')
+            all_data = get_data(my_step, all_data)  # что то пошло не так,
+            # вызываем функцию заново с этого же шага, передаем ей структуру, которая частично заполнена на
+            # предыдущих шагах
+            return all_data  # если все прошло хорошо во вложенном вызове функции, то структура заполнена и ее можно
+            # возвращать, и не идти дальше по функции
+
+        my_step += 1
+        all_data['num_1'] = float(data)
+
+    if my_step == 2:
+        data = input('Введите число номер %s ' % my_step)
+        if not is_number(data):
+            print('Вы ввели не число, попробуйте еще раз')
+            all_data = get_data(my_step, all_data)
+            return all_data
+        elif all_data['operator'] == '/' and float(data) == 0:
+            print('Деление на ноль. Введите другой делитель, отличный от 0')
+            all_data = get_data(my_step, all_data)
+            return all_data
+
+        my_step += 1
+        all_data['num_2'] = float(data)
+
+    if my_step == 3:
+        return all_data
+
+
+def calculate():
+    data = {'operator': '', 'num_1': '', 'num_2': ''}
+    data = get_data(0, data)
+    if data['operator'] == '0':
+        exit()
+    else:
+        if data['operator'] == '+':
+            result = data['num_1'] + data['num_2']
+        elif data['operator'] == '-':
+            result = data['num_1'] - data['num_2']
+        elif data['operator'] == '*':
+            result = data['num_1'] * data['num_2']
+        elif data['operator'] == '/':
+            result = data['num_1'] / data['num_2']
+
+        print('Ваш результат %s' % result)
+        calculate()
+
+
+calculate()
