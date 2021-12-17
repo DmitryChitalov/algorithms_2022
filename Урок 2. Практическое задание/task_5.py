@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def Ascii(num, num_end, string='', count=0):
+    if num == num_end + 1:
+        print(string)
+        exit()
+    else:
+        count += 1
+        string = string + ("%s - %s " % (num, chr(num)))
+        if count == 10:
+            count = 0
+            print(string)
+            string = ''
+        Ascii(num + 1, num_end, string, count)
+
+
+print(Ascii(32, 127))
