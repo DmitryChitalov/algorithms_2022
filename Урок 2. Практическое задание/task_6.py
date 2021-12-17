@@ -17,7 +17,14 @@ def game_resursion(round, num):
         print(f'Загаданное число: {num}')
         return
 
-    user_num = int(input('Введите число (0..100): '))
+    # Валидация, циклом
+    while True:
+        user_num = input('Введите число (0..100): ')
+        if user_num.isdigit():
+            user_num = int(user_num)
+            break
+        print('Не корректный ввод, повторите')
+
     if user_num == num:
         print(f'Да, это число {num}. Вы выиграли.')
         print(f'Гейм, как говорится, овер.')

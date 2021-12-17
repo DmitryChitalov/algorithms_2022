@@ -40,8 +40,20 @@ def calc_recursion():
     if operation == '0':
         exit(0)
 
-    num1 = int(input('Введите первое число: '))
-    num2 = int(input('Введите второе число: '))
+    # Валидация, циклом, что бы при каждой ошибке не начинать заново
+    while True:
+        num1 = input('Введите первое число: ')
+        if num1.isdigit():
+            num1 = int(num1)
+            break
+        print('Не корректный ввод, повторите')
+
+    while True:
+        num2 = input('Введите второе число: ')
+        if num2.isdigit():
+            num2 = int(num2)
+            break
+        print('Не корректный ввод, повторите')
 
     if operation == '+':
         res = num1 + num2

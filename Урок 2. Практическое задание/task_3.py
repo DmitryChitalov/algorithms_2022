@@ -20,10 +20,10 @@
 
 
 def reverse_digit_recursion(num):
-    if num <= 0:
-        return 0
+    if num < 10:
+        return str(num % 10)
 
-    return (num % 10) * (10 ** (len(str(num)) - 1)) + reverse_digit_recursion(num // 10)
+    return str(num % 10) + reverse_digit_recursion(num // 10)
 
 
 if __name__ == '__main__':
