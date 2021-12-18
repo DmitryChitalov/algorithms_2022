@@ -27,3 +27,26 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc_recursion():
+    action_dict = {'+': (lambda x,y: x+y), '-': (lambda x,y: x-y), '*': (lambda x,y: x*y),
+                   '/': (lambda x,y: x/y)}
+    action = input('Действие ')
+    if action == '0':
+        return 'Выход'
+    elif action_dict.get(action) is None:
+        print('Неверное действие')
+        return None
+    exp = (x for x in action_dict.keys() if x == action)
+    num1 = int(input('Первое число '))
+    num2 = int(input('Второе число '))
+    if action == '/' and num2 == 0:
+        print('Деление на ноль')
+        return calc_recursion()
+    res = action_dict[action](num1, num2)
+    print(num1, *exp, num2, '=', res)
+    return calc_recursion()
+
+
+print(calc_recursion())
