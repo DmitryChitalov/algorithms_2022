@@ -7,8 +7,28 @@
 для n = 5
 1+2+3+4+5 = 5(5+1)/2
 
-Нужно написать функцибю-рекурсию только для левой части выражения!
+Нужно написать функцию-рекурсию только для левой части выражения!
 Результат нужно сверить с правой частью.
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def proof(func):
+    def checker(arg):
+        if arg < 0:
+            return 'Только натуральные числа!!!'
+        if func(arg) == arg * (arg + 1) / 2:
+            return func(arg)
+
+    return checker
+
+
+@proof
+def sum_recursion(n: int):
+    return n if n == 0 else sum_recursion(n - 1) + n
+
+
+if __name__ == '__main__':
+    print(sum_recursion(-5))
+    print(sum_recursion(5))
