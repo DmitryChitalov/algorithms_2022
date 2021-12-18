@@ -7,3 +7,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+from random import randint
+
+
+def guess_number(n=10, number=randint(0, 101)):
+    user_number = int(input('Введите число: '))
+    if n == 0:
+        return f'Количество попыток исчерпано. Ответ: {number}'
+    if user_number == number:
+        return f'Вы угадали! {number}'
+    elif user_number < number:
+        print('Ваше число меньше загаданного')
+    elif user_number > number:
+        print('Ваше число больше загаданного')
+    return guess_number(n - 1, number)
+
+
+if __name__ == '__main__':
+    print(guess_number())
