@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_symbols():
+    for s in range(32, 128):
+        print("%4d - %s" % (s, chr(s)), end='')
+        if s % 10 == 0:
+            print()
+    print()
+
+
+if __name__ == '__main__':
+    ascii_symbols()
+
