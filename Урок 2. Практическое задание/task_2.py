@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_and_odd(number: int, even=0, odd=0):
+    """
+    Функция считает количество чётных и нечётных чисел в виде кортежа,
+    где первый элемент - это количество чётных чисел,
+    второй - нечётных.
+    :param number:
+    :param even:
+    :param odd:
+    :return: tuple
+    """
+    if number == 0:
+        return even, odd
+    n = number % 10
+    if n % 2 == 0:
+        even += 1
+    elif n % 2 != 0:
+        odd += 1
+    return even_and_odd(number // 10, even, odd)
+
+
+if __name__ == '__main__':
+    print(even_and_odd(123))
