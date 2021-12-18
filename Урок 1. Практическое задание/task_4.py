@@ -20,3 +20,27 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+# общая сложность данного решения O(n)
+user_data = {'user1': ['pass1', 'active'],
+             'user2': ['pass2', 'non_active'],
+             'user3': ['pass3', 'active']}
+
+
+def auth(auth_dict, login, password):
+    for key, val in auth_dict.items():
+        if key == login:
+            if password == val[0] and val[1] == 'active':
+                return 'Вы допущены к ресурсу, можете продолжать работу!'
+            elif password != val[0]:
+                return 'Неверный пароль, попробуйте еще раз!'
+            elif val[1] == 'non_active':
+                return 'Пожалуйста, активуруйте учетную запись!'
+
+    return 'Такого пользователя не существует, пройдите регистрацию!'
+
+
+input_login = input('Введите логин: ')
+input_password = input('Введите пароль: ')
+print(auth(user_data, input_login, input_password))
+
+# этот вариант лучший
