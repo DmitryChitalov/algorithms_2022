@@ -14,10 +14,10 @@
 """
 
 
-def get_sum(n, i=1):
-    if i == n:
-        return i
-    return i + get_sum(n, i + 1)
+def get_sum(n):
+    if n == 1:
+        return 1
+    return n + get_sum(n - 1)
 
 
 x = 5

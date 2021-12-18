@@ -28,7 +28,10 @@ def invert_a_num(num):
     else:
         inverted_num.append(str(num))
 
-        print(''.join(inverted_num).lstrip('0'))
+        print(''.join(inverted_num))
 
+
+# думал, то что под "проверить на числе, оканчивающимся на 0" имелось в виду как раз избавиться
+# от нулей в начале перевернутого числа
 
 invert_a_num(1230054300)
