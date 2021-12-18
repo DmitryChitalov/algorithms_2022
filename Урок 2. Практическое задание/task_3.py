@@ -17,3 +17,25 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+def recur_method(numb, even='', odd=''):
+    """Рекурсия"""
+    # все цифры числа извлечены
+    if numb == 0:
+        return even
+    else:
+        # достаем очередную цифру числа
+        cur_n = numb % 10
+        # число естественно становится короче
+        numb = numb // 10
+        # проверяем что цифра является нулем
+        if cur_n == 0:
+            even += '0'
+        else:
+            even += str(cur_n)
+        return recur_method(numb, even, odd)
+
+try:
+    NUMB = int(input("Введите натуральное число: "))
+    print(f"Обратное число: {recur_method(NUMB)}")
+except ValueError:
+    print("Вы вместо числа ввели строку. Исправьтесь")

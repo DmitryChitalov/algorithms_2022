@@ -10,3 +10,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def rec_sum(i, m, n, sum):
+    if i == n:
+        print('n =', n, 'sum = ', sum)
+    else:
+        return rec_sum(i + 1, m/2*-1, n, sum+m)
+
+
+rec_sum(0, 1, int(input('n: ')), 0)
+#
+# po = 0; pl = 1
+# for i in (1, 2, 3): po = po + pl;pl = -pl / 2
+# print('for', i + 1, 'elems summ =', po)

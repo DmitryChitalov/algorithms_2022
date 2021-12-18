@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    """Рекурсия"""
+    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    num_1 = 3  # int(input("Введите первое число: "))
+    num_2 = 4  # int(input("Введите второе число: "))
+    if operation_type == '0':
+        return print("Выход")
+
+    elif operation_type == '+':
+        res = num_1 + num_2
+        print(f"Ваш результат {res}")
+        return calc()
+
+    elif operation_type == '-':
+        res = num_1 - num_2
+        print(f"Ваш результат {res}")
+        return calc()
+
+    elif operation_type == '*':
+        res = num_1 * num_2
+        print(f"Ваш результат {res}")
+        return calc()
+
+    elif operation_type == '/':
+        try:
+            res = num_1 / num_2
+        except ZeroDivisionError:
+            print("Деление на 0 невозможно")
+        else:
+            print(f"Ваш результат {res}")
+        finally:
+            return calc()
+
+
+calc()
