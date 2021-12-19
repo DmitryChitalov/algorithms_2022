@@ -18,3 +18,22 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+def num_reverse(num=None, rev=''):
+    if num is None:
+        num = input("Введите число: \n")
+        if not num.isdigit():
+            print("Вы ввели не число!")
+            return num_reverse()
+        num = int(num)
+
+    tail = num % 10
+    body = num // 10
+    if num != 0:
+        rev += str(tail)
+        return num_reverse(body, rev)
+    print(rev)
+
+
+num_reverse()

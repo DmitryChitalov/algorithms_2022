@@ -10,3 +10,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_number(num=1.0, count=None):
+    if count is None:
+        count = input("Введите число: \n")
+        if not count.isdigit():
+            print("Вы ввели не число!")
+            return sum_number()
+        count = int(count)
+    if count <= 0:
+        return 0
+    res = num / -2
+    count -= 1
+    return num + sum_number(res, count)
+
+print(sum_number())
