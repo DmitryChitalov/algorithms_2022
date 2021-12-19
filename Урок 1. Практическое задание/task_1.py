@@ -22,9 +22,9 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: O(n).
+    Сложность: O(N).
     """
-    lst_to_set = set(lst_obj)  # O(n)
+    lst_to_set = set(lst_obj)  # O(N)
     return lst_to_set  # O(1)
 
 
