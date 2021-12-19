@@ -21,14 +21,14 @@
 """
 
 
-def ascii_symbols():
-    for s in range(32, 128):
-        print("%4d - %s" % (s, chr(s)), end='')
-        if s % 10 == 0:
-            print()
-    print()
+def ascii_symbols(s=32):
+    if s == 128:
+        return
+    print('%4d - %s' % (s, chr(s)), end='')
+    if not (31 - s) % 10:
+        print()
+    ascii_symbols(s + 1)
 
 
 if __name__ == '__main__':
     ascii_symbols()
-
