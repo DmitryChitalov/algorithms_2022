@@ -19,9 +19,13 @@ def func(cnt=10):
         print(f'Вы проиграли\nЧисло {rand_num}')
         return
     if player_num == rand_num:
-        print(f'Число {rand_num}')
+        print(f'Вы победили!\nЧисло {rand_num}')
     else:
         print(f'Попыток: {cnt}')
+        if player_num < rand_num:
+            print('Загаданное число больше')
+        else:
+            print('Загаданное число меньше')
         func(cnt - 1)
 
 
