@@ -17,3 +17,11 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def int_reverse(number: int):
+    return str(number) if number < 10 else str(number % 10) + int_reverse(number // 10)
+
+
+if __name__ == '__main__':
+    print(int_reverse(560))
