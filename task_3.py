@@ -23,15 +23,15 @@ companies_income = {
 
 
 # 1: O(n^2)
-list_income = list(companies_income.values())  # O(len(n))
+list_income = list(companies_income.values())  # O(n)
 list_income.sort(reverse=True)                 # O(n log n)
 
 
 def get_key(*args):
     keys = []                                        # O(1)
     for arg in args:                                 # O(n)
-        for key, value in companies_income.items():  # O(n^2)
-            if arg == value:                         # O(n)
+        for key, value in companies_income.items():  # O(n)
+            if arg == value:                         # O(1)
                 keys.append(key)                     # O(1)
     return keys
 
@@ -42,13 +42,13 @@ print(f'Top 3 companies (according to income): {str(top_companies).strip("[]")}'
 
 
 # 2: O(n log n)
-list_income = list(companies_income.values())  # O(len(n))
+list_income = list(companies_income.values())  # O(n)
 list_income.sort(reverse=True)                 # O(n log n)
 
 
 def get_key(val):
     for key, value in companies_income.items():  # O(n)
-        if val == value:                         # O(n)
+        if val == value:                         # O(1)
             return key
 
 
@@ -60,5 +60,5 @@ print(f'Top 3 companies (according to income): {top_company_1}, {top_company_2},
 
 """
 Вывод: предпочтительнее второй вариант, так как он характеризуется линейно-логарифмической сложностью, в отличие от
-первого - у него квадратичная сложность. Следовательно, время выполнения второго алгоритма будет меньше.
+первого - у него квадратичная сложность. Следовательно, вычислительная сложность второго алгоритма будет меньше.
 """
