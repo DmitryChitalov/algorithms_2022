@@ -22,7 +22,7 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: O(1).
+    Сложность: O(n).
     """
     lst_to_set = set(lst_obj)  # O(n)
     return lst_to_set  # O(1)
@@ -37,7 +37,7 @@ def check_2(lst_obj):
     что такой элемент отсутствует
     в оставшихся справа элементах
 
-    Сложность: O(N).
+    Сложность: O(N^2).
     """
     for j in range(len(lst_obj)):          # O(N)
         if lst_obj[j] in lst_obj[j+1:]:    # O(N)
