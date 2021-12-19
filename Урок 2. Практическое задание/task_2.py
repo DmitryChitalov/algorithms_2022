@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def nums_recursion(num, positive=0, negative=0):
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {positive, negative}'
+    last_num = num % 10
+    remain = num // 10
+    if last_num % 2 == 0:
+        positive += 1
+    else:
+        negative += 1
+    return nums_recursion(remain, positive, negative)
+
+
+print(nums_recursion(12373))
