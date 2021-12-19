@@ -27,31 +27,35 @@ companies = {
     'Samsung': 4313
 }
 
-def sort_companies_1(companies):  # O(n^2)
-    list1 = list(companies.items())
-    for x in range(len(list1)):
-        lowest_index = x
-        for y in range(x+1, len(list1)):
-            if list1[y][1] > list1[lowest_index][1]:
-                lowest_index = y
-        list1[x], list1[lowest_index] = list1[lowest_index], list1[x]
-    return(list1[0:3])
+# 1) O(n^2)
+def sort_companies_1(companies):
+    list1 = list(companies.items())  # O(n)
+    for x in range(len(list1)):  # 0(n)
+        lowest_index = x  # 0(1)
+        for y in range(x+1, len(list1)):  # 0(n)
+            if list1[y][1] > list1[lowest_index][1]:  # O(1)
+                lowest_index = y  # O(1)
+        list1[x], list1[lowest_index] = list1[lowest_index], list1[x]  # O(1)
+    return(list1[0:3])  # 0(1)
 
-def sort_companies_2(companies):  # O(n logn)
-    list2 = list(companies.items())
-    list2.sort(key=lambda i: i[1], reverse=True)
-    return(list2[0:3])
+# 2) O(n logn)
+def sort_companies_2(companies):
+    list2 = list(companies.items())  # O(n)
+    list2.sort(key=lambda i: i[1], reverse=True)  # O(n logn)
+    return(list2[0:3])  # 0(1)
 
-
-def sort_companies_3(companies):  # O(n)
-    list3 = list(companies.items())
-    max_list = []
-    for i in range(3):
-        max_value = max(list3, key=lambda i: i[1])
-        list3.remove(max_value)
-        max_list.append(max_value)
-    return(max_list)
+# 3) O(n)
+def sort_companies_3(companies):
+    list3 = list(companies.items())  # O(n)
+    max_list = []  # O(1)
+    for i in range(3):  # O(1)
+        max_value = max(list3, key=lambda i: i[1])  # O(n)
+        list3.remove(max_value)  # O(n)
+        max_list.append(max_value) # O(1)
+    return(max_list)  # 0(1)
 
 print(sort_companies_1(companies))
 print(sort_companies_2(companies))
 print(sort_companies_3(companies))
+
+# Третье решение самое эффективное, так как имеет самую низкую сложность из всех трех решений (линейную).

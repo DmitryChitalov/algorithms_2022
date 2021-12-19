@@ -21,7 +21,7 @@ def find_min_two(lst2):
             if x > y:
                 minim = False
         if minim:
-            print(x)
+            return(x)
 
 # 2) O(n)
 def find_min_one(lst1):
@@ -30,6 +30,11 @@ def find_min_one(lst1):
         if lst1[x] < i:
             i = lst1[x]
     return i
+
+
+lst = [2, 5, 1, 4, 25, 7]
+print(find_min_two(lst))
+print(find_min_one(lst))
 
 
 
