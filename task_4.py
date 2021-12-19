@@ -32,9 +32,9 @@ users = [
 # 1: O(n)
 def admission(login, password):
     for i in users:                                                  # O(n)
-        if i.get("Login") == login:                                  # O(n)
-            if i.get("Password") == password:                        # O(n)
-                if i.get("is_active"):                               # O(n)
+        if i.get("Login") == login:                                  # O(1)
+            if i.get("Password") == password:                        # O(1)
+                if i.get("is_active"):                               # O(1)
                     return f'Access allowed'                         # O(1)
                 else:
                     return f'You need to activate your account'      # O(1)
@@ -56,9 +56,9 @@ for i in users:
 # 2: O(n^2)
 def admission(login, password):
     for k in login_list:                                                                        # O(n)
-        for j in password_list:                                                                 # O(n^2)
-            if k == login and j == password and login_list.index(k) == password_list.index(j):  # O(n)
-                if is_active_list[login_list.index(k)]:                                         # O(n)
+        for j in password_list:                                                                 # O(n)
+            if k == login and j == password and login_list.index(k) == password_list.index(j):  # O(1)
+                if is_active_list[login_list.index(k)]:                                         # O(1)
                     return f'Access allowed'                                                    # O(1)
                 else:
                     return f'You need to activate your account'                                 # O(1)
@@ -68,5 +68,5 @@ def admission(login, password):
 
 """
 Вывод: предпочтительнее первый вариант, так как он характеризуется линейной сложностью, в отличие от
-второго - у него квадратичная сложность. Следовательно, время выполнения первого алгоритма будет меньше.
+второго - у него квадратичная сложность. Следовательно, вычислительная сложность первого алгоритма будет меньше.
 """
