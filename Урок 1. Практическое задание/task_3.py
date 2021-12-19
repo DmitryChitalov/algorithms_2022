@@ -17,3 +17,40 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+storage = {
+    'company_1': 656757.57,
+    'company_2': 346434.55,
+    'company_3': 244435.88,
+    'company_4': 225536.44,
+    'company_5': 768575.43,
+    'company_6': 565464.32,
+    'company_7': 575243.12,
+    'company_8': 464656.89
+}
+
+
+def version_1(dct):
+    """ Сложность: O(n log n) """
+    sort_items = sorted(dct.items(), key=lambda x: x[1], reverse=True)  # O(n log n)
+    res = dict(sort_items[:3])  # O(1) ?
+    return res  # O(1)
+
+
+def version_2(dct):
+    """ Сложность: O(n) """
+    res = []  # O(1)
+    copy_dct = dct.copy()  # O(n)
+    for i in range(3):  # O(1)
+        top = max(copy_dct.items(), key=lambda x: x[1])  # O(n)
+        res.append(top)  # O(1)
+        del copy_dct[top[0]]  # O(1)
+    return dict(res)  # O(1)
+    # 1 + n + 3(n + 2) + 1  =  4n + 8
+
+
+print(version_1(storage))
+print(version_2(storage))
+
+
+# решение 2 (version_2) эффективнее, т.к. зависимость затрат времени от входящего объема данных линейная,
+# в отличии от линейно-логарифмической в решении 1
