@@ -14,3 +14,18 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cash = dict()
+salt = 'abcdefg'
+
+while True:
+    url = input('Введите URL (0, чтобы выйти)')
+    if url == '0':
+        break
+    if url in cash.keys():
+        print('Хеш:', cash[url])
+    else:
+        cash[url] = hashlib.sha512(salt.encode('utf-8') + url.encode('utf-8')).hexdigest()
+        print('Записано в кэш')
