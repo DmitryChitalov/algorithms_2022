@@ -22,3 +22,26 @@
 р
 а
 """
+
+import hashlib
+
+
+def get_unique_hash(s, set):
+    """Функция формирует хэш из подстрок строки - s
+    и передает во множество - set
+    """
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+            if s[i: j] == s:
+                pass
+            else:
+                my_set.add(hashlib.sha256(s[i: j].encode('utf-8')).hexdigest())
+    return set
+
+
+my_set = set()
+s = 'papa'
+s2 = 'He1l0'
+
+print(len(get_unique_hash(s, my_set)))
+print(len(get_unique_hash(s2, my_set)))
