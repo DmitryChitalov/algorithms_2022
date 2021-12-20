@@ -21,6 +21,10 @@ def func(n):
         return n + func(n-1)
 
 
-print(func(5) == 5*(5+1)/2)
-print(func(15) == 15*(15+1)/2)
-print(func(1) == 1*(1+1)/2)
+n = 5
+exp = n*(n+1)/2
+print(func(n) == n*(n+1)/2)
+n = 14
+print(func(n) == n*(n+1)/2)
+
+
