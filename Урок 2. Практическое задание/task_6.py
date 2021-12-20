@@ -1,6 +1,8 @@
-#!+
+import random
+
+
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -18,21 +20,20 @@ Geekbrains. Факультет python-разработки
 """
 
 
-from random import randint as ri
-
-def guess_number(n, count = 1):
-    unum = int(input(f'Угадайте число от 1 до 100: '))
+def guess_number(n, count=1):
+    user_number = int(input(f'Угадайте число от 1 до 100: '))
     if count > 9:
         print(f'Вы угадали. Загадано число {n}')
         return
-    if unum == n:
+    if user_number == n:
         print(f'Поздравляю, Вы угадали. Это число {n}. Использовано попыток - {count}')
         return
-    elif unum > n:
+    elif user_number > n:
         print(f'Много!')
         guess_number(n, count + 1)
     else:
         print(f'Мало!')
         guess_number(n, count + 1)
 
-guess_number(ri(0,101))
+
+guess_number(random.randint(0, 101))

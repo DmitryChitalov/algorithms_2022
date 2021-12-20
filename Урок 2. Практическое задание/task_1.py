@@ -1,6 +1,5 @@
-#!+
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -37,15 +36,22 @@ Geekbrains. Факультет python-разработки
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
-def calc(act = False, n1 = False, n2 = False):
+
+
+def calc(act=False, n1=False, n2=False):
     actions = ('+', '-', '*', '/')
     act = input(f'Введите операцию (+, -, *, / или 0 для выхода): ')
     if act == '0':
         print('Bye!!!')
         return
     elif act in actions:
-        n1 = input(f'Введите первое число: ')
-        n2 = input(f'Введите второе число: ')
+        try:
+            n1 = float(input(f'Введите первое число: '))
+            n2 = float(input(f'Введите второе число: '))
+        except ValueError:
+            print(f'Введено не число')
+            calc()
+
         if act == '+':
             print(f'{n1} {act} {n2} = {float(n1) + float(n2)}')
             calc()
@@ -64,5 +70,6 @@ def calc(act = False, n1 = False, n2 = False):
     else:
         print(f'Введен не верный знак операции. Введите заново.')
         calc()
+
 
 calc()

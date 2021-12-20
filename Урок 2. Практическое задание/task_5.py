@@ -1,6 +1,5 @@
-#!+
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -30,8 +29,8 @@ Geekbrains. Факультет python-разработки
 """
 
 
-def sym_table(num = 32, count = 1):
-    if num >=128:
+def symbol_table(num=32, count=1):
+    if num >= 128:
         return
     else:
         if count < 10:
@@ -39,6 +38,7 @@ def sym_table(num = 32, count = 1):
         else:
             print(f'{num} - {chr(num)}')
             count = 0
-        sym_table(num + 1, count + 1)
+        symbol_table(num + 1, count + 1)
 
-sym_table()
+
+symbol_table()

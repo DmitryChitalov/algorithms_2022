@@ -1,6 +1,5 @@
-#!-
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -23,15 +22,15 @@ Geekbrains. Факультет python-разработки
 """
 
 
-def summ_n (n):
-	if n == 1:
-		return n
-	else:
-		return n + summ_n(n-1) 
+def sum_n(n):
+    if n == 1:
+        return n
+    else:
+        return n + sum_n(n-1)
 
-x = 10
 
-if summ_n(x) == x * ( x + 1 ) / 2:
-	print(f'1+...+{x}  =  {x} * ( {x} + 1 ) / 2  is  {summ_n(x) == x * ( x + 1 ) / 2} ')
+x = 100
+if sum_n(x) == x * (x+1) / 2:
+    print(f'1+...+{x} = {x} * ({x}+1) / 2  is  {sum_n(x) == x * (x+1) / 2} ')
 else:
-	print(f'1+...+{x}  =  {x} * ( {x} + 1 ) / 2  is  {summ_n(x) == x * ( x + 1 ) / 2} ')	
+    print(f'1+...+{x} = {x} * ({x}+1) / 2  is  {sum_n(x) == x * (x+1) / 2} ')

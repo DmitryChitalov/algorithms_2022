@@ -1,6 +1,5 @@
-#!+
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -29,13 +28,14 @@ Geekbrains. Факультет python-разработки
 """
 
 
-def reverse_number(num, rn=''):
-    if num < 10:
-        rn += str(num)
-        print(f'Перевернутоe число: {rn}')
+def reverse_number(number, rev_numb=''):
+    if number < 10:
+        rev_numb += str(number)
+        print(f'Перевернутоe число: {rev_numb}')
         return
     else:
-        rn += str(num%10)
-        reverse_number(num//10, rn)
+        rev_numb += str(number % 10)
+        reverse_number(number // 10, rev_numb)
+
 
 reverse_number(int(input(f'Введите число: ')))

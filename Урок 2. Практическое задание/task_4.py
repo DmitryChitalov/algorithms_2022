@@ -1,6 +1,5 @@
-#!+
 """
-2021-12-18
+2021-12-20
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
 Четверть 1. Алгоритмы и структуры данных на Python. Базовый курс
@@ -21,14 +20,15 @@ Geekbrains. Факультет python-разработки
 """
 
 
-def summ(n, a = 1, sum = 0,count = 0):
+def sequence_sum(n, a=1.0, seq_sum=0, count=0):
     if n == 0:
-        print(f'Количество элементов - {count}, их сумма - {sum}')
+        print(f'Количество элементов - {count}, их сумма - {seq_sum}')
         return
     else:
         n -= 1
         count += 1
-        sum += a
-        summ(n, a/(-2), sum, count)
+        seq_sum += a
+        sequence_sum(n, a/(-2), seq_sum, count)
 
-summ(int(input(f'Введите количество элементов: ')))
+
+sequence_sum(int(input(f'Введите количество элементов: ')))
