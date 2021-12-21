@@ -22,9 +22,11 @@ b) выполните со списком и словарем операции: 
 вы уже знаете, что такое декоратор и как его реализовать,
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
-
-
+"""
+"""
 ВЫВОДЫ:
+Замеры производились на пайтон версии 3.9
+
 а) Добавление элемента в словарь медленнее.
 Я вижу тут две причины:
     1. Данных просто больше, есть ключи и значения
@@ -34,10 +36,17 @@ b) выполните со списком и словарем операции: 
 словаря значительно сложнее и может решить больший круг задач, а операции с ней стоят сравнимо со списком,
 выбивается только удаление, думаю это потому, что нужно очистить больше данных и обновить хэш таблицу.
 
+Получение элементов списка быстрее, полагаю потому, что список адресует элементы напрямую в памяти, без вычисления 
+адресов через хэш-таблицы.
+Последовательное удаление из списка также быстрее, поскольку нужно очистить последнюю ячейку, однако
+ситуация в корне меняется если нужно удалить произвольный элемент из списка, на это времени уходит намного (на четыре 
+порядка) больше, думаю потому, что нужно перераспределять память под оставшуюся часть списка, 
+видимо поэтому сложность алгоритма O(n).
 """
 
 from time import time
 from random import randint
+from random import shuffle
 
 
 def take_time(func):
@@ -85,6 +94,22 @@ def edit_element_from_dict(dct):  # O(n)
 
 
 @take_time
+def del_element_random_from_list(lst):  # O(n^2)
+    lst_idx = [i for i in range(1, int(len(lst) / 2))]
+    shuffle(lst_idx)
+    for i in lst_idx:
+        del lst[i]
+
+
+@take_time
+def del_element_random_from_dict(dct):  # O(n)
+    lst_idx = [i for i in range(int(len(dct.keys()) / 2), len(dct.keys()))]
+    shuffle(lst_idx)
+    for i in lst_idx:
+        del dct[i]
+
+
+@take_time
 def del_element_from_list(lst):  # O(n^2)
     for i in range(len(lst) - 1, -1, -1):
         del lst[i]
@@ -97,7 +122,7 @@ def del_element_from_dict(dct):  # O(n)
 
 
 if __name__ == '__main__':
-    n = 5000000
+    n = 500000
 
     print('Задание а)')
     lst = load_list(n)
@@ -110,6 +135,9 @@ if __name__ == '__main__':
 
     edit_element_from_list(lst)
     edit_element_from_dict(dct)
+
+    del_element_random_from_list(lst)
+    del_element_random_from_dict(dct)
 
     del_element_from_list(lst)
     del_element_from_dict(dct)

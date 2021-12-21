@@ -35,16 +35,20 @@ from random import randint
 from hashlib import sha256
 
 
+def sha256_with_salt(salt, message):
+    return sha256(salt.encode('utf-8') + message.encode('utf-8')).hexdigest()
+
+
 def validate(password, vault):
     pwd_data = vault.lrange(password, 0, 1)
     if pwd_data:
         salt, hash = vault.lindex(password, 0), vault.lindex(password, 1)
-        return hash == sha256(salt.encode('utf-8') + password.encode('utf-8')).hexdigest()
+        return hash == sha256_with_salt(salt, password)
     else:
         salt = str(randint(1, 100000))
-        hash = sha256(salt.encode('utf-8') + password.encode('utf-8')).hexdigest()
-        vault.lpush(password, salt)
-        vault.rpush(password, hash)
+        hash = sha256_with_salt(salt, password)
+        vault.rpush(password, salt, hash)
+
         return hash
 
 
