@@ -7,3 +7,23 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+import random
+
+
+def random_num(count, num):
+    print(f'{count} попытка')
+    answer = int(input('Есть число от 0 до 100, введите его: '))
+    if count == 10 or answer == num:
+        if answer == num:
+            print('Угадали!')
+        else:
+            print(f'Жаль, вы не угадали, это число: {num}')
+    else:
+        if answer > num:
+            print(f'Загаданное число меньше ')
+        else:
+            print(f'Загаданное число больше ')
+        random_num(count + 1, num)
+
+
+random_num(1, random.randint(0, 100))

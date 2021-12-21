@@ -17,3 +17,30 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def append_to_string(num, result):
+    if num == 0 and result == '':
+        return result
+    else:
+        return result + str(num)
+
+
+def rev_num_h(n, result):
+    res_n, num = divmod(n, 10)
+    result = append_to_string(num, result)
+    if res_n == 0:
+        return result
+    else:
+        return rev_num_h(res_n, result)
+
+
+def rev_num(n):
+    return rev_num_h(n, '')
+
+
+numb = int(input('Введите число чтобы его перевернуть: '))
+print(rev_num(numb))
+print(rev_num(345))
+print(rev_num(340))
+
