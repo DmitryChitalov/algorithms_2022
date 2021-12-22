@@ -20,13 +20,14 @@
 """
 import hashlib
 
+
 def parts(word):
     result = list()
     hash_collect = set()
     for x in range(1, len(word)):
         start = 0
         end = x
-        part = word[start : end]
+        part = word[start: end]
         word_hash = hashlib.sha3_256(part.encode()).hexdigest()
         if word_hash in hash_collect:
             pass
@@ -36,7 +37,7 @@ def parts(word):
         for y in range(len(word) - x):
             start += 1
             end += 1
-            part = word[start : end]
+            part = word[start: end]
             word_hash = hashlib.sha3_256(part.encode()).hexdigest()
             if word_hash in hash_collect:
                 pass

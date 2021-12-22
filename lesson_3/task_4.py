@@ -13,6 +13,7 @@
 from uuid import uuid4
 import hashlib
 
+
 def caching(func):
     def wrapper(url, cache={}):
         key = url
@@ -20,6 +21,7 @@ def caching(func):
             cache[key] = func(url)
         return cache[key]
     return wrapper
+
 
 @ caching
 def hashing(url):
@@ -38,3 +40,32 @@ print(hash1)
 print(hash2)
 print(hash3)
 print(hash4)
+print('-----------------------------------------------------------------')
+
+
+class Caching:
+    cache = {}
+
+    def __init__(self, url):
+        self.url = url
+        print(self.result())
+
+    def result(self):
+        key = self.url
+        if key not in Caching.cache:
+            Caching.cache[key] = self.__hashing()
+        else:
+            print('Хэш уже имеется в кэше')
+        return Caching.cache[key]
+
+    def __hashing(self):
+        salt = uuid4().hex
+        url_hash = hashlib.sha512(salt.encode() + self.url.encode()).hexdigest()
+        print(f'Создан новый хэш')
+        return url_hash
+
+
+hash1 = Caching('https://gb.ru/')
+hash2 = Caching('https://www.google.ru/?hl=ru')
+hash3 = Caching('https://yandex.ru/')
+hash4 = Caching('https://gb.ru/')
