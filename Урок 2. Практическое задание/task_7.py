@@ -12,3 +12,27 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+try:
+    n = int(input("Введите число: "))
+    # if recur_method(NUMB) == NUMB * (NUMB + 1) / 2:
+     #    print('Равенство верно')
+except ValueError:
+    print("Вы вместо числа ввели строку (((. Исправьтесь")
+
+def left(n):
+    if n == 1:
+        return n
+    elif n > 0:
+        return n + left(n - 1)
+
+
+def right(n):
+    return n * (n + 1) // 2
+
+while True > 0:
+    if left(n) == right(n):
+        print(f'Для n={n} - верно')
+    else:
+        print(f'Для n={n} - не верно')
+    break

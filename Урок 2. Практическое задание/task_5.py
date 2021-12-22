@@ -16,6 +16,21 @@
 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
 
 Решите через рекурсию. Решение через цикл не принимается.
-
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_table(result=32, res="", counter=0):
+    if counter % 10 == 0:
+        res += f"\n{chr(result)} - {ord(chr(result))}"
+    elif counter % 10 != 0:
+        res += f"{chr(result)} - {ord(chr(result))}"
+    if result == 127:
+        return res
+    else:
+        counter += 1
+        return ascii_table(result + 1, res, counter)
+
+
+res = ascii_table()
+print(res)
+

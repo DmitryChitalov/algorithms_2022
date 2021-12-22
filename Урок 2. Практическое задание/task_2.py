@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+num = abs(int(input("Введите число: ")))
+even = odd = 0
+
+
+def recur_method(number):
+    global odd
+    global even
+    if number != 0:
+        if number % 10 % 2 != 0:
+            odd = odd + 1
+        else:
+            even = even + 1
+        number = number // 10
+        recur_method(number)
+    else:
+        print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+
+
+recur_method(num)
+

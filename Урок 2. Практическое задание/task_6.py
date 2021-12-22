@@ -7,3 +7,23 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+import random
+
+rand_i = random.randint(0, 100)
+
+
+def game(a, guess, i):
+    guess = int(input(f"Введите число от 0 до 100: "))
+    if guess == a:
+        return print(f"Поздравляю, Вы уагдали число {guess} c {i} попыток")
+    elif i == 10:
+        print('Вы исчерпали свои 10 попыток')
+    elif guess > a:
+        print(f"Загаданное число меньше")
+        game(a, guess, i + 1)
+    elif guess < a:
+        print(f"Загаданное число больше")
+        game(a, guess, i + 1)
+
+
+game(rand_i, 0, 1)

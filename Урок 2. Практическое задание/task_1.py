@@ -27,3 +27,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculation():
+    oper = input("Введите операцию +, -, *, / или 0 для выхода:")
+    if oper == '0':
+        return False
+    if oper not in ('0', '+', '-', '*', '/'):
+        print("Вы вместо трехзначного числа ввели строку. Исправьтесь"), calculation()
+
+    a = int(input("Введите первое число:  "))
+    b = int(input("Введите второе число:  "))
+    equation = f"{a}, {oper}, {b}"
+    if '+' in equation:
+        print(f"{a + b}"), calculation()
+    if '-' in equation:
+        print(f"{a - b}"), calculation()
+    if '*' in equation:
+        print(f"{a * b}"), calculation()
+    if '/' in equation:
+        try:
+            print(f"{a / b}"), calculation()
+        except ZeroDivisionError:
+            print("Делить на 0 нельзя, даже если очень хочется")
+
+
+
+calculation()

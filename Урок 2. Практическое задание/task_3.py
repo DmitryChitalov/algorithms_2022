@@ -16,4 +16,32 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
+
+number = int(input("Введите число, которое требуется перевернуть: "))
+rev = []
+
+
+def revers_number(num):
+    if num != 0:
+        x = num % 10
+        rev.append(x)
+        revers_number(num // 10)
+
+
+revers_number(number)
+print(f'Перевернутое число: ' + ''.join(map(str, rev)))
 """
+
+number = int(input("Введите число, которое требуется перевернуть: "))
+
+
+def revers_number(num):
+    if num < 10:
+        return str(num)
+    else:
+        return str(num % 10) + str(revers_number(num // 10))
+
+
+
+revers_number(number)
+print(f'Перевернутое число: {revers_number(number)}')

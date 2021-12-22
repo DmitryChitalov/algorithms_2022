@@ -17,3 +17,39 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+base_company = {
+    'yandex': 2000,
+    'gazprom': 500,
+    'microsoft': 2300,
+    'perecrestok': 5400,
+    'rosnano': 10,
+    'appel': 2000,
+    'biocad': 4030,
+    'apteka': 299,
+    'hiomi': 569,
+    'wacom': 8901,
+    'adidas': 4313,
+    'acron': 6703
+}
+
+# первый вариант - O(n log n)
+top_3 = {}  # O(1)
+list_profit = []  # O(1)
+
+for v in base_company.values():
+    list_profit.append(v)
+profit_3 = sorted(list_profit)[-3:]  # O(n log n)
+for k, v in base_company.items():
+    if v in profit_3:
+        top_3[k] = v
+print(f'Три компании с наибольшей годовой прибылью: {top_3}')
+
+
+# второй вариант - O(n log n)
+top_3 = sorted(base_company.items(),
+               key=lambda x: x[1])[-3:]  # O(n log n)
+print(f'Три компании с наибольшей годовой прибылью: {top_3}')
+
+
+''' лучший вариант -- первый
+'''
