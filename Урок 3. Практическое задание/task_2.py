@@ -22,3 +22,64 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from sqlite3 import Error
+from passlib.handlers.pbkdf2 import pbkdf2_sha256
+from sqlalchemy import create_engine, Column, Integer, String, MetaData
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./users.db'
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+Base = declarative_base()
+Session = sessionmaker()
+Session.configure(bind=engine)
+session = Session()
+metadata = MetaData()
+
+salt = b'secret_word'
+
+
+class Users(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    email = Column(String,  unique=True)
+    password = Column(String)
+
+
+Base.metadata.create_all(engine)
+
+
+def login():
+    email = input('Введите вашу электронную почту ')
+    password = input('Введите ваш пароль для регистрации ')
+
+    try:
+        user = Users(email=email,
+                     password=pbkdf2_sha256.hash(password, rounds=2, salt=salt))
+        session.add(user)
+        session.commit()
+        session.refresh(user)
+        print(f'Пользователь с электронной почтой {email} зарегистрирован')
+    except Error as e:
+        return e
+
+
+def verify():
+    login_verify = input('Для входа в аккаунт введите ваш логин (эл почту) ')
+    current_user = session.query(Users).filter_by(email=login_verify).first()
+    if current_user:
+        pass_verify = input('Для входа в аккаунт введите ваш пароль ')
+
+        if current_user.password == pbkdf2_sha256.hash(pass_verify, rounds=2, salt=salt):
+            print('Добро пожаловать в сервис ')
+        else:
+            print('Пароль введен не верно')
+            verify()
+    else:
+        print('Пользователь с такой почтой не зарегистрирован ')
+        verify()
+
+
+login()
+verify()
