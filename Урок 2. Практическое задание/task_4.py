@@ -10,3 +10,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+def summ(result=0, count_start=0, count_total=0):
+    if count_start == 0:
+        count_total = int(input('Введите количество элементов:'))
+    if count_start < count_total:
+        result = result + float(input('Введите число:'))
+        return summ(result, count_start + 1, count_total)
+    else:
+        print(f'Количество элементов {count_total}, их сумма {result}')
+        return
+
+summ()
