@@ -14,3 +14,36 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+
+class UrlHasher:
+
+    def __init__(self):
+        self.__urls = dict()
+
+    def insert_to_cache(self, url):
+        if self.__urls.get(url) is None:
+            url_hash = hashlib.sha256(url.encode('utf-8')).hexdigest()
+            self.__urls.setdefault(url, url_hash)
+            print('Данные внесены в кэш!')
+        else:
+            print(f'ХЭШ {url} уже существует {self.__urls.get(url)}')
+
+    def get_cache(self, key=None):
+        if len(self.__urls) == 0:
+            return 'Empty cache'
+
+        if key is None:
+            return self.__urls
+        return key, self.__urls[key]
+
+
+test = UrlHasher()
+test.insert_to_cache('yandex.ru')
+test.insert_to_cache('yandex.ru')
+test.insert_to_cache('google.com')
+print(test.get_cache('google.com'))
+test2 = UrlHasher()
+print(test2.get_cache())
