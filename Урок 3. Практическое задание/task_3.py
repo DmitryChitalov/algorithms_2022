@@ -22,3 +22,21 @@
 р
 а
 """
+
+import hashlib
+
+
+def num_substr(line):
+    var_set = set()
+    n = len(line)
+    for i in range(n):
+        for ii in range(i+1, n+1):
+            substr = line[i:ii]
+            if substr != line:
+                var_set.add(hashlib.md5(substr.encode('utf-8')).hexdigest())
+                # print(substr)
+
+    print(f'{line} - {len(var_set)} уникальных подстрок')
+
+
+num_substr('papa')
