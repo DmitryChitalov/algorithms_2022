@@ -21,3 +21,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+nums = [1,2,3,4]
+
+print(timeit("func_1(nums)", globals=globals()))
+
+print(timeit('''
+new_arr = []
+for i in range(len(nums)):
+    if nums[i] % 2 == 0:
+        new_arr.append(i)
+''', globals=globals()))
+
+
+'''
+Вывод: Использовал код на прямую и скорость не много увеличилась.
+'''

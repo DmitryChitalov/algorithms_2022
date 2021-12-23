@@ -80,3 +80,8 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+'''
+Вывод: Нет смысла от мемоизации, она не использует данные, они постоянно меняются.
+'''
