@@ -18,7 +18,7 @@ from uuid import uuid4
 import hashlib
 
 
-class hashed:
+class Hashed:
     def __init__(self, url_adr):
         self.url_adr = url_adr
         self.salt = uuid4().hex
@@ -26,7 +26,7 @@ class hashed:
 
 
 def get_url(my_stg):
-    new_url = hashed(my_stg)
+    new_url = Hashed(my_stg)
     return new_url
 
 
