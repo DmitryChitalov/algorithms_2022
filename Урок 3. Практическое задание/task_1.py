@@ -23,3 +23,72 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+import random
+
+
+def time_of_function(function):
+    def wrapper(*args):
+        start_time = time.time()
+        res = function(*args)
+        print(f'Время выполенения {function.__name__}: {time.time() - start_time}')
+        return res
+
+    return wrapper
+
+
+# a)
+
+list_1 = []
+dict_1 = {}
+
+
+@time_of_function
+def create_list(n):
+    for i in range(n):  # O(n)
+        list_1.append(random.randint(0, 1000000000))  # O (1)
+
+
+create_list(1000000)
+
+
+@time_of_function
+def create_dict(n):
+    for i in range(n):  # O(n)
+        dict_1[i] = random.randint(0, 1000000000)  # O(1)
+
+
+create_dict(1000000)
+
+
+# Сложность по О-натации одинаковая О(n) - линейная.
+# Список заполняется быстрее, словарь реализуется с помощью хэш-таблиц, поэтому заполняется словарь медленнее.
+
+# б)
+
+
+@time_of_function
+def list_change():
+    for i in range(len(list_1)):  # O(n)
+        list_1[i] += 1  # O(n)
+    list_1.pop(999999)
+    return
+
+
+list_change()
+
+
+@time_of_function
+def dict_change():
+    for i in dict_1.keys():  # O(n)
+        dict_1[i] = 'jhfkjgv'  # O(1)
+    dict_1.pop(999999)
+    return
+
+
+dict_change()
+
+
+# операции со словарем имеет сложность О(1) поэтому выполняются быстрее,
+# операции со спискаом выполняются медленнее, т.к. имеют сложность О(n)
+
