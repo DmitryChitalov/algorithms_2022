@@ -30,30 +30,23 @@
 
 
 def calc_recursion():
-    global num2, num1
     action_dict = {'+': (lambda x,y: x+y), '-': (lambda x,y: x-y), '*': (lambda x,y: x*y),
                    '/': (lambda x,y: x/y)}
     action = input('Действие ')
     if action == '0':
-        print('Выход')
-        return
+        return 'Выход'
     elif action_dict.get(action) is None:
-        print('Incorrect')
-        return
+        print('Неверное действие')
+        return None
     exp = (x for x in action_dict.keys() if x == action)
-    try:
-        num1 = int(input('Первое число '))
-        num2 = int(input('Второе число '))
-    except:
-        print('Некорректный ввод')
-        calc_recursion()
-    try:
-        res = action_dict[action](num1, num2)
-    except ZeroDivisionError:
+    num1 = int(input('Первое число '))
+    num2 = int(input('Второе число '))
+    if action == '/' and num2 == 0:
         print('Деление на ноль')
         return calc_recursion()
+    res = action_dict[action](num1, num2)
     print(num1, *exp, num2, '=', res)
     return calc_recursion()
 
 
-calc_recursion()
+print(calc_recursion())
