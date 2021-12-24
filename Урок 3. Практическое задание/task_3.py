@@ -22,3 +22,23 @@
 р
 а
 """
+from hashlib import md5
+
+memory = set()
+test = 'Hello'  # h, e, l, o, he, el, ll, lo, hel, ell, llo,
+
+
+def find_substrings(string: str):
+    length = len(string)
+    for i in range(length):
+        for j in range(i + 1, length + 1):
+            if string[i:j] != string:
+                memory.add(md5(string[i:j].encode()).hexdigest())
+                print(string[i:j])
+    print(memory, f'Количество элементов:  {len(memory)}')
+
+            
+
+
+if __name__ == '__main__':
+    find_substrings('Hello')
