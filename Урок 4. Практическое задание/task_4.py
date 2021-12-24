@@ -9,6 +9,8 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
+import numpy as np
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +39,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    max_elem = sorted([(i, array.count(i)) for i in set(array)], key=lambda t: t[1])[-1]
+    return f'Чаще всего встречается число {max_elem[0]}, ' \
+           f'оно появилось в массиве {max_elem[1]} раз(а)'
+
+
+def func_13():
+    return np.argmax(np.bincount(array))
+
+
+print(timeit("func_1()", setup='from __main__ import func_1', number=100000))
+print(timeit("func_2()", setup='from __main__ import func_2', number=100000))
+print(timeit("func_3()", setup='from __main__ import func_3', number=100000))
+print(timeit("func_13()", setup='from __main__ import func_13', number=100000))

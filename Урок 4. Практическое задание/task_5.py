@@ -12,6 +12,7 @@
 10, 100, 1000
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -34,5 +35,19 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+# i = int(input('Введите порядковый номер искомого простого числа: '))
+# print(simple(i))
+n1 = 10
+n2 = 100
+n3 = 1000
+print(timeit("simple(10)", setup='from __main__ import simple, n1', number=1))
+print(timeit("simple(100)", setup='from __main__ import simple, n2', number=1))
+print(timeit("simple(1000)", setup='from __main__ import simple, n3', number=1))
+
+n = int(input("Введите верхнюю границу диапазона: "))
+sieve = set(range(2, n + 1))
+while sieve:
+    prime = min(sieve)
+    print(prime, end="\t")
+    sieve -= set(range(prime, n + 1, prime))
+ # не сделал
