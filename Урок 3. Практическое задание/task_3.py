@@ -22,3 +22,27 @@
 р
 а
 """
+import hashlib
+
+
+def substring_count(input_string):
+
+    input_string = str(input_string).lower()
+
+    length = len(input_string)
+    print(input_string, length)
+    hash_set = set()
+
+    for i in range(length):
+        for j in range(i + 1, length + 1):
+            if input_string[i:j] != input_string:
+                h = hashlib.sha256(input_string[i:j].encode('utf-8')).hexdigest()
+            hash_set.add(h)
+    print(hash_set)
+
+    return len(hash_set)
+
+
+some_string = 'рара'
+
+print(f'Количество подстрок в строке {some_string}: {substring_count(some_string)}')

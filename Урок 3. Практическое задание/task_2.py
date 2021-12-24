@@ -22,3 +22,18 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from hashlib import sha256
+from tabulate import tabulate
+
+from os.path import join, dirname
+from sqlite3 import connect, OperationalError, IntegrityError
+
+class HashClass:
+    def __init__(self):
+        self.db_obj = join(dirname(__file__), "demo.sqlite")
+        self.conn = connect(HashClass.db_obj)
+        self.crs = self.conn.cursor()
+
+"""
+ не получается дальше
+"""
