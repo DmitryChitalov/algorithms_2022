@@ -30,23 +30,34 @@
 
 
 def calculator():
-    operand_1 = input('Input the first operand: ')
-    operand_2 = input('Input the second operand: ')
     operation = input('Input operator (+, -, *, / or 0 to exit): ')
-    if operation not in '/+-*0':
-        print('You inputted a wrong operator!')
-        return calculator()
-    if not operand_1.isdigit() or not operand_1.isdigit():
-        print('You inputted not a number(s)')
-        return calculator()
-    if operation == '/' and operand_2 == '0':
-        print('You cannot divide on zero')
-        return calculator()
-    result = eval(f'{int(operand_1)}{operation}{int(operand_2)}')
     if operation == '0':
-        return result
-    print(f'Result: {result}')
-    return calculator()
+        return
+    if operation in '/+-*':
+        try:
+            operand_1 = int(input('Input the first integer: '))
+            operand_2 = int(input('Input the second integer: '))
+            if operation == '+':
+                print(f'Result: {operand_1 + operand_2}')
+                return calculator()
+            elif operation == '-':
+                print(f'Result: {operand_1 - operand_2}')
+                return calculator()
+            elif operation == '*':
+                print(f'Result: {operand_1 * operand_2}')
+                return calculator()
+            elif operation == '/':
+                try:
+                    print(f'Result: {operand_1 / operand_2}')
+                except ZeroDivisionError:
+                    print('You cannot divide by zero!')
+                else:
+                    print(f'Result: {operand_1 / operand_2}')
+                finally:
+                    return calculator()
+        except ValueError:
+            print('You input wrong symbol. Try again!')
+            return calculator()
 
 
 if __name__ == '__main__':
