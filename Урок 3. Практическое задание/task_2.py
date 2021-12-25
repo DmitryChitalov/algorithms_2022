@@ -25,19 +25,35 @@ f1dcaeeafeb855965535d77c55782349444b
 from hashlib import sha256
 import json
 
-with open('result.json', 'w', encoding='utf-8') as f:
-    data = {'user_1': {}}
-    data['user_1']['login'] = input('Input your login: ')
-    data['user_1']['password'] = sha256(data['user_1']['login'].encode() +
-                                        input('Input your password. Remember it: ').encode()).hexdigest()
-    print(data['user_1']['password'])
-    json.dump(data, f)
 
-with open('result.json', 'r', encoding='utf-8') as f:
-    data_json = json.load(f)
-    user = input('Your login: ')
-    password = sha256(user.encode() + input('Your password: ').encode()).hexdigest()
-    if data_json['user_1']['login'] == user and data_json['user_1']['password'] == password:
+def to_hash(salt, string):
+    return sha256(salt.encode() + string.encode()).hexdigest()
+
+
+def add_user(login, password):
+    data = {}
+    if not data.get(login):
+        data[login] = to_hash(login, password)
+        print(f'Your hash: {data[login]}')
+        with open('result.json', 'w', encoding='utf-8') as f:
+            json.dump(data, f)
+    else:
+        print('Current user already exists!')
+
+
+def log_in(login, password):
+    with open('result.json', 'r', encoding='utf-8') as f:
+        data_json = json.load(f)
+    password = to_hash(login, password)
+    if data_json.get(login) and data_json[login] == password:
         print('Welcome!')
     else:
         print('Something wrong...')
+
+
+if __name__ == '__main__':
+    user = input('Input your login: ')
+    passwd = input('Input your password: ')
+    add_user(user, passwd)
+    check_pass = input('Check your password: ')
+    log_in(user, check_pass)
