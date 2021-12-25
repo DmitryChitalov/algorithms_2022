@@ -21,19 +21,27 @@ f1dcaeeafeb855965535d77c55782349444b
 или, если вы уже знаете, как Python взаимодействует с базами данных,
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
+
 """
-from hashlib import sha256
-from tabulate import tabulate
+import hashlib
+from uuid import uuid4
 
-from os.path import join, dirname
-from sqlite3 import connect, OperationalError, IntegrityError
+password = input("Введите пароль ")
 
-class HashClass:
-    def __init__(self):
-        self.db_obj = join(dirname(__file__), "demo.sqlite")
-        self.conn = connect(HashClass.db_obj)
-        self.crs = self.conn.cursor()
+salt = uuid4().hex
 
+
+def hash_pass(data, sal):
+    res = hashlib.sha256(sal.encode() + data.encode()).hexdigest()
+    pass_2 = input("Введите пароль повторно ")
+    exp_res = hashlib.sha256(sal.encode() + pass_2.encode()).hexdigest()
+    if exp_res == res:
+        return res, print(res)
+    else:
+        return print("Неверный пароль")
+
+
+hash_password = hash_pass(password, salt)
 """
  не получается дальше
 """
