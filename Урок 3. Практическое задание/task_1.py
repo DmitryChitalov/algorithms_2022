@@ -50,17 +50,17 @@ def timer(func):
 def fill_ls(n: int) -> list:
     """
     Function generated list of numbers from 0 to n
-    :param int n:
+    :param int n: amount of elements
     :return list: list of integers
     """
     return [i for i in range(n + 1)]  # O(n) каждый раз в конец списка добавляется объект
-    
+
 
 @timer
 def insert_fill_ls(n: int):
     result = []
-    for i in range(n + 1):  #  O(n)
-        result.insert(0, i)  # O(n) в начало списка, то есть сдвигается весь список, чтобы вставить новый элемент в начало
+    for i in range(n + 1):  # O(n)
+        result.insert(0, i)  # O(n) сдвигается весь список, чтобы вставить новый элемент в начало
     return result
 
 
@@ -71,12 +71,23 @@ def fill_dict(n: int) -> dict:
     :param int n: amount of keys
     :return dict: dict of integers
     """
-    return {k: v for k, v in enumerate([random.randint(0, n + 1) for _ in range(n + 1)])}  # O(n) так как словарь формируется из в процессе создаваемого списка, 
-    # а добавление элемента в словарь имеет сложность O(1), так как словарь - это хэш таблица
+    return {k: v for k, v in enumerate([random.randint(0, n + 1) for _ in range(n + 1)])}
+    # O(n) так как словарь формируется из в процессе создаваемого списка,
+    # а добавление элемента в словарь имеет сложность O(1)
+
+
+"""
+Из-за того, что словарю необходимо создать хэш-таблицу, затрачивается больше времени на его создание.
+В отличие от словаря:
+Function: fill_ls, Timing: 0.5406186580657959
+Function: fill_dict, Timing: 16.212496519088745
+Но если элемент нужно вставить в начало списка, то время заполнения списка будет больше, 
+так как сложность вставки составляет O(n).
+Здесь словарь заполняется медленней, так как для его создания создаётся отдельный список
+"""
 
 
 # Ex. b
-
 @timer
 def change_ls(items: list):
     for i in range(len(items)):  # O(n)
@@ -90,13 +101,17 @@ def change_dict(items: dict):
     for k in items.keys():  # O(n)
         items[k] = random.randint(0, len(items.values()))  # O(1) обращение по ключу
     for _ in range(len(items)):  # O(n)
-        items.pop(_)  # O(1) удаляем с конца
+        items.pop(_)  # O(1) удаляем по ключу
 
 
+"""
+Скорость изменения и удаления элементов из списка выполняется быстрее, так как обход элементов происходит поочерёдно
+У словаря изменение и удаление происходит медленнее, возможно из-за поиска ключа и значения.
+"""
 if __name__ == '__main__':
-    ls = fill_ls(100000)
-    insert_ls = insert_fill_ls(100000)  # медленнее, чем append, так как insert здесь вставляет в начало списка 
-    dct = fill_dict(100000)  # быстрее, так как словарь - это хэш-таблица 
+    ls = fill_ls(10_000_000)
+    # insert_ls = insert_fill_ls(10_000_000)  # очень долго!!!
+    dct = fill_dict(10_000_000)
     change_ls(ls)
-    change_ls(insert_ls)
+    # change_ls(insert_ls)  # очень долго!!!
     change_dict(dct)
