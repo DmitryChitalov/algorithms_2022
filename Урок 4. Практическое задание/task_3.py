@@ -11,6 +11,9 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!!!
 """
+from timeit import timeit
+
+NUMBER = 1230
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +38,33 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def my_revers_slice(number):
+    return str(number % 10)[::-1]
+
+
+# def my_revers_reversed(number):
+#     return reversed(str(number % 10))
+
+
+"""
+Самый быстрый вариант - мною предложенный, так как по сравнению с 3 вариантом не создаются переменные,
+на которые тоже тратится время, хоть и незначительное.
+Первый вариант - рекурсия - самый медленный
+Второй - цикл - быстрее рекурсии
+Третий - преобразование числа в строку и развёрнутый срез
+Мой - такой же как и третий, но без переменных
+Пробовал с функцией reversed, но разницы со срезом практически нет, и порой кто-то из них быстрее оказывается. 
+"""
+if __name__ == '__main__':
+    revers(NUMBER)
+    revers_2(NUMBER)
+    revers_3(NUMBER)
+    my_revers_slice(NUMBER)
+    # my_revers_reversed(NUMBER)
+    print(timeit("revers(NUMBER)", globals=globals()))
+    print(timeit("revers_2(NUMBER)", globals=globals()))
+    print(timeit("revers_3(NUMBER)", globals=globals()))
+    print(timeit("my_revers_slice(NUMBER)", globals=globals()))
+    # print(timeit("my_revers_reversed(NUMBER)", globals=globals()))
