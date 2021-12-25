@@ -35,4 +35,3 @@ def optimize_func(array):
 
 print(timeit("func_1(TEST_LIST)", globals=globals()))
 print(timeit("optimize_func(TEST_LIST)", globals=globals()))
-# print(timeit("memorize_func(TEST_LIST)", globals=globals()))
