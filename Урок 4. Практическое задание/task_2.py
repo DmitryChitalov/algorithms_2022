@@ -7,7 +7,7 @@
 Выполнена попытка оптимизировать решение через мемоизацию.
 Сделаны замеры обеих реализаций.
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
+Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!
 
 П.С. задание не такое простое, как кажется
 """
@@ -17,9 +17,7 @@ from random import randint
 
 
 def recursive_reverse(number):
-    if number == 0:
-        return str(number % 10)
-    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+    return str(number % 10) if number == 0 else f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
 num_100 = randint(10000, 1000000)
@@ -54,14 +52,13 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
 @memoize
 def recursive_reverse_mem(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+    return '' if number == 0 else f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
 print('Оптимизированная функция recursive_reverse_mem')
@@ -80,3 +77,8 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+На мой взгляд мемоизация не нужна, так как функция str() имеет сложность O(1), которая является наименьшей.
+Мемоизация здесь незначительно ускоряет алгоритм
+"""
