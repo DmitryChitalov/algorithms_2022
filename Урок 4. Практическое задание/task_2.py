@@ -81,7 +81,31 @@ print(
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
 
+print('Функция revers_3')
+def revers_3(enter_num):
+    enter_num = str(enter_num)
+    revers_num = enter_num[::-1]
+    return revers_num
+
+print(
+    timeit(
+        "revers_3(num_100)",
+        setup='from __main__ import revers_3, num_100',
+        number=10000))
+print(
+    timeit(
+        "revers_3(num_1000)",
+        setup='from __main__ import revers_3, num_1000',
+        number=10000))
+print(
+    timeit(
+        "revers_3(num_10000)",
+        setup='from __main__ import revers_3, num_10000',
+        number=10000))
 
 '''
-Вывод: Нет смысла от мемоизации, она не использует данные, они постоянно меняются.
+Вывод: Нет смысла в мемоизации, она кэширует данные из функции, при повторном вызове
+данные берутся из кэша а не из рекурсии, скорость конечно увеличивается за счет мемоизации, 
+но если сделать на пример через срез из задания 3, то можно выйграть в скорости и лаконичности кода.
+P.S. Такие простые задачи лучше не решать через рекурсию.
 '''
