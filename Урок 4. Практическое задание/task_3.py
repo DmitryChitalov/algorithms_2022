@@ -12,6 +12,8 @@
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!!!
 """
 
+from timeit import timeit
+
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -35,3 +37,19 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+n = 786129
+
+print(timeit("revers(n)", globals=globals()))
+print(timeit("revers_2(n)", globals=globals()))
+print(timeit("revers_3(n)", globals=globals()))
+print(timeit("revers_4(n)", globals=globals()))
+
+
+# третья функция эффективнее, т.к. работа со срезами самая быстрая
+# в четвертой функции join занимает бОльшую часть времени, без него reversed примерно равна по времени с третьей функцией
