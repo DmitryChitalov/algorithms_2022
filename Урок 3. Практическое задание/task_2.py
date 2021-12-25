@@ -25,55 +25,28 @@ f1dcaeeafeb855965535d77c55782349444b
 import hashlib
 from uuid import uuid4
 import json
+def get_hash():
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    hash_password = hashlib.sha256(login.encode() + password.encode()).hexdigest()
+    data_users = login, hash_password
+    return data_users
 
-password = input('Введите пароль: ')
-salt = uuid4().hex
-hash_password = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
-data_users = (salt, hash_password)
+def register_users():
+    login, reg_hash = get_hash()
+    with open('users.json', 'w', encoding='utf-8')as f:
+        json.dump(data_users, f)
+    return login, reg_hash
 
-with open('users.json', 'w', encoding='utf-8')as f:
-    json.dump(data_users, f)
-
-password_again = input('Введите пароль для проверки: ')
-
-with open('users.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
-
-
-hash_checking = hashlib.sha256(data_users[0].encode() + password_again.encode()).hexdigest()
-if hash_checking == data[1]:
-    print('Вы ввели верный пароль')
-else:
-    print('Пароль неверный')
+def log_in():
+    login, reg_hash = get_hash()
+    with open('users.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        return data
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    hash_checking = hashlib.sha256(data_users[0].encode() + password_again.encode()).hexdigest()
+    if hash_checking == data[1]:
+        print('Вы ввели верный пароль')
+    else:
+        print('Пароль неверный')
