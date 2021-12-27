@@ -50,9 +50,11 @@ def memoize(f):
     def decorate(*args):
 
         if args in cache:
+            print(args)
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(cache)
             return cache[args]
     return decorate
 
@@ -80,3 +82,14 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+
+# при первом запуске алгоритма, происходит заполнение кэша аргументами, но эти данные не используются.
+# при последующих запусках кода данные берутся из кэша, с чем и связано уменьшение времени при использовании мемоизации.
+# Вывод: при обнократном вызове мемоизация не требуется.
+
+
+
+
+
