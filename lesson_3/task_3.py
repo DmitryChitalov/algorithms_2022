@@ -18,7 +18,7 @@
 р
 а
 """
-import hashlib
+from hashlib import sha3_256
 
 
 def parts(word):
@@ -28,7 +28,7 @@ def parts(word):
         start = 0
         end = x
         part = word[start: end]
-        word_hash = hashlib.sha3_256(part.encode()).hexdigest()
+        word_hash = sha3_256(part.encode()).hexdigest()
         if word_hash in hash_collect:
             pass
         else:
@@ -38,7 +38,7 @@ def parts(word):
             start += 1
             end += 1
             part = word[start: end]
-            word_hash = hashlib.sha3_256(part.encode()).hexdigest()
+            word_hash = sha3_256(part.encode()).hexdigest()
             if word_hash in hash_collect:
                 pass
             else:

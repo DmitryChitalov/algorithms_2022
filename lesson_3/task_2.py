@@ -19,42 +19,61 @@ f1dcaeeafeb855965535d77c55782349444b
 п.с. статья на Хабре - python db-api
 """
 from uuid import uuid4
-import hashlib
+from hashlib import sha256
 import json
 
-try:
-    with open('users.json', 'x', encoding='utf-8') as f:
-        users = {}
-        json.dump(users, f)
 
-except FileExistsError:
-    pass
+class Hashing:
+    def __init__(self):
+        self.users = {}
+        self.salt = None
+        self.key = None
+        self.user = input('Введите имя пользователя: ')
+        self.password = input('Введите пароль: ')
+        self.ready_json()
+        self.create_keys()
+        self.check()
 
-finally:
-    with open('users.json', 'r', encoding='utf-8') as f:
-        users = json.load(f)
+    @staticmethod
+    def create_key_with_salt(salt, password):
+        result_key = sha256(salt.encode() + password.encode()).hexdigest()
+        return result_key
 
-user = input('Введите имя пользователя: ')
-password = input('Введите пароль: ')
+    def ready_json(self):
+        try:
+            with open('users.json', 'x', encoding='utf-8') as f:
+                json.dump(self.users, f)
+        except FileExistsError:
+            pass
+        finally:
+            with open('users.json', 'r', encoding='utf-8') as f:
+                self.users = json.load(f)
+                return self.users
 
-if user in users:
-    new_key = hashlib.sha256(users[user][0].encode() + password.encode()).hexdigest()
+    def create_keys(self):
+        if self.user in self.users:
+            self.key = self.create_key_with_salt(self.users[self.user][0], self.password)
+            return self.key
+        else:
+            self.salt = uuid4().hex
+            key = self.create_key_with_salt(self.salt, self.password)
+            print(f'В базе данных хранится строка: {key}')
+            self.users[self.user] = [self.salt, key]
+            with open('users.json', 'w', encoding='utf-8') as f:
+                json.dump(self.users, f)
 
-else:
-    salt = uuid4().hex
-    key = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
-    print(f'В базе данных хранится строка: {key}')
-    users[user] = [salt, key]
-    with open('users.json', 'w', encoding='utf-8') as f:
-        json.dump(users, f)
+            check_password = input('Введите пароль еще раз для проверки: ')
+            with open('users.json', 'r', encoding='utf-8') as f:
+                self.users = json.load(f)
 
-    new_password = input('Введите пароль еще раз для проверки: ')
-    with open('users.json', 'r', encoding='utf-8') as f:
-        users = json.load(f)
+            self.key = self.create_key_with_salt(self.users[self.user][0], check_password)
+            return self.key
 
-    new_key = hashlib.sha256(users[user][0].encode() + new_password.encode()).hexdigest()
+    def check(self):
+        if self.key == self.users[self.user][1]:
+            print('Вы ввели правильный пароль')
+        else:
+            print('Пароль неправильный')
 
-if new_key == users[user][1]:
-    print('Вы ввели правильный пароль')
-else:
-    print('Пароль неправильный')
+
+try_hash = Hashing()
