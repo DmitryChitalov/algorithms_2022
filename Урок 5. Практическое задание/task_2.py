@@ -66,6 +66,9 @@ class Hex:
     def __str__(self):
         return f'{self.number}'
 
+    def __repr__(self):
+        return 'Hexadecimal'
+
 
 if __name__ == '__main__':
     print(sum_hexadecimal('A2', 'C4F'))
@@ -73,3 +76,4 @@ if __name__ == '__main__':
     print(Hex('C4F') + 'A2')
     print(Hex('A2') * Hex('C4F'))
     print(Hex('C4F') * 'A2')
+    print([Hex('C4F') * 'A2'])
