@@ -27,7 +27,7 @@ service_db = [{'login': 'Human3000', 'password': 'asd12dasd', 'auth': True},
               {'login': 'Humblealx', 'password': 'asd83fj291d', 'auth': True}]  #O(1)
 
 '''
-#O(n)
+СЛОЖНОСТЬ - #O(n)
 '''
 def auth_in_service(login, password):
     message = f'\nДобро пожаловать! \n{login}' #O(1)
@@ -61,7 +61,7 @@ service_db = ['Human3000', 'asd12dasd', True,
               'Humblealx', 'asd83fj291d', True]
 
 '''
-#O(n)
+СЛОЖНОСТЬ - #O(n)
 '''
 def auth_in_service_2(login, password):
     message = f'\nДобро пожаловать! \n{login}' #O(1)
@@ -77,3 +77,27 @@ def auth_in_service_2(login, password):
 print(auth_in_service_2('Human3000', 'asd12dasd'))
 print(auth_in_service_2('Guy123', 'asdad2123asd'))
 print(auth_in_service_2('Guy123', 'asdad2123asdф'))
+
+# service_db = {{'login': 'Human3000', 'password': 'asd12dasd', 'auth': True},
+#               {'login': 'Guy123', 'password': 'asdad2123asd', 'auth': False},
+#               {'login': 'Humblealx', 'password': 'asd83fj291d', 'auth': True}}
+service_db = {'Human3000': {'password': 'asd12dasd', 'auth': True},
+              'Guy123':{'password': 'asdad2123asd', 'auth': False},
+              'Humblealx':{'password': 'asd83fj291d', 'auth': True}}
+
+
+'''
+Сложность - О(1)
+'''
+def auth(users, user_name, password):
+    if users.get(user_name):
+        if users[user_name]['password'] == password and users[user_name]['auth'] == True:
+            return '\nДобро пожаловать!'
+        elif users[user_name]['password'] == password and users[user_name]['auth'] == False:
+            return '\nАктивируйте свою учётую запись!'
+        else:
+            return '\nНе правилно введён логин или пароль'
+    else:
+        return '\nНе правилно введён логин или пароль'
+
+print(auth(service_db, 'Humblealx', 'asd83fj291d'))

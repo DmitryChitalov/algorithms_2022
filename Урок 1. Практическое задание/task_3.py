@@ -17,10 +17,15 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+""" 
+Первый и наверное самый замудрённый
+вариант выполнения алгоритма 
+СЛОЖНОСТЬ - O(n)
+"""
 companies = {'Apple': 1000000, 'Microsoft': 12381173, 'Disney': 12378389, 'Sony': 384593, '20th century fox': 35934723}  #O(1)
 temp_companies = companies.copy()  #O(n)
 top_companies = {}  #O(1)
-for i in range(3):  #O(n)
+for i in range(3):  #O(1)
     max_income = max(temp_companies.values()) #O(n)
     # max(temp_companies.values())
     top_companies[list(temp_companies)[list(temp_companies.values()).index(max_income)]] = max_income  #O(1)
@@ -35,7 +40,7 @@ end
 
 """ 
 Второй чуть получше 
-O(n log n)
+СЛОЖНОСТЬ - O(n log n)
 """
 
 companies = {'Apple': 1000000, 'Microsoft': 12381173, 'Disney': 12378389, 'Sony': 384593, '20th century fox': 35934723} #O(1)
@@ -44,7 +49,7 @@ print(sort_companies)
 n = 0  #O(1)
 for i in sort_companies:  #O(n)
     n += 1 #O(1)
-    name = list(companies)[list(companies.values()).index(i)] #O(1)
+    name = list(companies)[list(companies.values()).index(i)] #O(n)
     print(name, companies[name])
     if n == 3: #O(1)
         break
