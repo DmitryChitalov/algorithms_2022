@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a8439ed6-4e74-4ba7-a795-f611bdd8fe4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,12 +20,6 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1" />
-    <option name="y" value="42" />
-    <option name="width" value="1555" />
-    <option name="height" value="981" />
-  </component>
   <component name="ProjectId" id="1fjjSUHOqTKmrXO5uUXwgPm0j2f" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -38,7 +32,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="I:/Курсы GeekBrains. 2022/Алгоритмы и структуры данных на Python/Урок_4/Урок 4. Пример практического задания" />
   </component>
-  <component name="RunManager" selected="Python.task_1">
+  <component name="RunManager" selected="Python.task_2">
     <configuration name="ТЕСТОВЫЙ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Урок 4. Практическое задание" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,7 +75,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Урок 4. Практическое задание" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -89,12 +83,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Урок 4. Пример практического задания" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Урок 4. Пример практического задания/task_3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/task_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_1" />
         <item itemvalue="Python.ТЕСТОВЫЙ" />
         <item itemvalue="Python.task_5" />
         <item itemvalue="Python.task_4" />
-        <item itemvalue="Python.task_3" />
       </list>
     </recent_temporary>
   </component>
@@ -177,21 +170,52 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1820" height="292" key="GridCell.Tab.0.bottom" timestamp="1640696037408">
+    <state width="413" height="466" key="DebuggerActiveHint" timestamp="1640700438745">
       <screen x="1920" y="0" width="1858" height="1080" />
     </state>
-    <state width="1820" height="292" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640696037408" />
-    <state width="1820" height="292" key="GridCell.Tab.0.center" timestamp="1640696037408">
+    <state width="413" height="466" key="DebuggerActiveHint/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640700438745" />
+    <state width="1820" height="292" key="GridCell.Tab.0.bottom" timestamp="1640701513344">
       <screen x="1920" y="0" width="1858" height="1080" />
     </state>
-    <state width="1820" height="292" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640696037408" />
-    <state width="1820" height="292" key="GridCell.Tab.0.left" timestamp="1640696037408">
+    <state width="1820" height="292" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701513344" />
+    <state width="1820" height="292" key="GridCell.Tab.0.center" timestamp="1640701513344">
       <screen x="1920" y="0" width="1858" height="1080" />
     </state>
-    <state width="1820" height="292" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640696037408" />
-    <state width="1820" height="292" key="GridCell.Tab.0.right" timestamp="1640696037408">
+    <state width="1820" height="292" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701513344" />
+    <state width="1820" height="292" key="GridCell.Tab.0.left" timestamp="1640701513344">
       <screen x="1920" y="0" width="1858" height="1080" />
     </state>
-    <state width="1820" height="292" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640696037408" />
+    <state width="1820" height="292" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701513344" />
+    <state width="1820" height="292" key="GridCell.Tab.0.right" timestamp="1640701513344">
+      <screen x="1920" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1820" height="292" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701513344" />
+    <state width="1820" height="360" key="GridCell.Tab.1.bottom" timestamp="1640701143663">
+      <screen x="1920" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1820" height="360" key="GridCell.Tab.1.bottom/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701143663" />
+    <state width="1820" height="360" key="GridCell.Tab.1.center" timestamp="1640701143663">
+      <screen x="1920" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1820" height="360" key="GridCell.Tab.1.center/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701143663" />
+    <state width="1820" height="360" key="GridCell.Tab.1.left" timestamp="1640701143663">
+      <screen x="1920" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1820" height="360" key="GridCell.Tab.1.left/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701143663" />
+    <state width="1820" height="360" key="GridCell.Tab.1.right" timestamp="1640701143663">
+      <screen x="1920" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1820" height="360" key="GridCell.Tab.1.right/0.0.1920.1160/1920.0.1858.1080@1920.0.1858.1080" timestamp="1640701143663" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/task_2.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
