@@ -21,7 +21,6 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS user_data (
 conn.commit()
 
 cursor.execute("INSERT INTO user_data (login, password_hash_salted) values (?, ?);", (login, res_hash))
-# Если мы не просто читаем, но и вносим изменения в базу данных - необходимо сохранить транзакцию
 conn.commit()
 
 cursor.execute("SELECT password_hash_salted FROM user_data WHERE login = ?", (login,))
