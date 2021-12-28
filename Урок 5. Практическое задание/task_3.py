@@ -64,11 +64,14 @@ my_deque.clear()
 """
 Результаты:
         append_func(my_list) 37.0279414
-        pop_func(my_list) 20.107726400000004
-        extend_func(my_list) 87.7690196
+            pop_func(my_list) 20.107726400000004
+                extend_func(my_list) 87.7690196
         append_func(my_deque) 11.819256599999989
-        pop_func(my_deque) 9.834385200000014
-        extend_func(my_deque) 24.896275099999997
+            pop_func(my_deque) 9.834385200000014
+                extend_func(my_deque) 24.896275099999997
+Вывод:
+        Вставка данных в конец и pop с конца в деке осуществляется быстрее,
+        чем в списке.
 """
 
 # Сравниваю appendleft, popleft, extendleft
@@ -102,11 +105,14 @@ my_deque.clear()
 """
 Результаты:
         appendleft - list =  41.152481599999994
-        popleft - list =  11.216579199999998
-        extendleft - list =  0.7733928000000034
+            popleft - list =  11.216579199999998
+                extendleft - list =  0.7733928000000034
         appendleft - deque =  0.04241929999999883
-        popleft - deque =  0.03181289999999848
-        extendleft - deque =  0.338146100000003
+            popleft - deque =  0.03181289999999848
+                extendleft - deque =  0.338146100000003
+Вывод:
+        Добавление в начало и pop с начала списка в деке
+        осуществляется гораздно быстрее, чем в списке.
 """
 
 
@@ -127,4 +133,7 @@ for i in range(200):
 Результаты:
         Получение элемента - list =  30.9816783
         Получение элемента - deque =  28.2499809
+Вывод: 
+        Получение элемента по идексу осуществляется
+        с одинаковыми временными результатами.
 """
