@@ -28,3 +28,51 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+# Namedtuple, default-dict
+from collections import namedtuple
+from numpy import mean
+
+
+class Companies:
+    DATA = []
+    quarts = ('I', 'II', 'III', 'IV')
+
+    def __init__(self, name: str, data):
+        self.name = name
+        self.data = data
+        self.info = namedtuple(name, Companies.quarts)(*data)
+        Companies.DATA.append(self.info)
+
+    def mean(self):
+        return mean(list(self.data))
+
+    @classmethod
+    def all_mean(cls):
+        return mean([list(i) for i in cls.DATA])
+
+    def __repr__(self):
+        return f'{self.name}'
+
+
+def analyzing():
+    companies = []
+    n = int(input('Input amount of companies: '))
+    i = 0
+    while n > i:
+        name = input('Input company name: ').strip()
+        values = map(int, input('Input data of company: ').replace(',', ' ').split())
+        company = Companies(name, values)
+        companies.append(company)
+        i += 1
+    print(f'Средняя прибыль всех компаний за год: {Companies.all_mean()}')
+    for i in companies:
+        if i.mean() < Companies.all_mean():
+            print(f'Предприятие, с прибылью ниже среднего значения: {i.name}')
+        else:
+            print(f'Предприятие, с прибылью выше среднего значения: {i.name}')
+    return companies
+
+
+if __name__ == '__main__':
+    result = analyzing()
+    print(result)
