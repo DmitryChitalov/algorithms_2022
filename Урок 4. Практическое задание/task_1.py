@@ -12,7 +12,7 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
-from timeit import Timer
+from timeit import Timer, timeit
 
 
 def func_1(nums):
@@ -47,16 +47,23 @@ b = func_2(mas)
 c = func_3(mas)
 d = func_4(mas)
 
-if a == b and a == c and a == d: print('OK')
+if (a == b) and (a == c) and (a == d): print('OK')
 t1 = Timer(stmt="func_1(mas)", globals=globals())
 
-print("func_1", t1.timeit(number=200000), "seconds")
+print("func_1", t1.timeit(number=2000), "seconds")
 t2 = Timer(stmt="func_2(mas)", globals=globals())
-print("func_2", t1.timeit(number=200000), "seconds")
+print("func_2", t1.timeit(number=2000), "seconds")
 t3 = Timer(stmt="func_3(mas)", globals=globals())
-print("func_3", t1.timeit(number=200000), "seconds")
+print("func_3", t1.timeit(number=2000), "seconds")
 t4 = Timer(stmt="func_4(mas)", globals=globals())
-print("func_4", t1.timeit(number=200000), "seconds")
+print("func_4", t1.timeit(number=2000), "seconds")
+
+print('----------Only timeit------------')
+
+print("func_1", timeit("func_1(mas)", number=2000, globals=globals()), "seconds")
+print("func_2", timeit("func_2(mas)", number=2000, globals=globals()), "seconds")
+print("func_3", timeit("func_3(mas)", number=2000, globals=globals()), "seconds")
+print("func_4", timeit("func_4(mas)", number=2000, globals=globals()), "seconds")
 
 # честно говоря разница особо не заметна, результаты пляшут при разных проходах.
 #
@@ -99,6 +106,17 @@ print("func_4", t1.timeit(number=200000), "seconds")
 #
 # все проходы были сделаны подряд, без подбора по результатам
 
-
-
+# Однако при замерах с использованием ТОЛЬКО функции timeit - последние два варианта стали работать ощутимо медленне. В чем причина - загадка.
+# Значит это все таки не равнозначные методы измерения времени?
+# Вот  пример, количество повторений уменьшено в 100 раз
+#
+# func_1 0.278636332 seconds
+# func_2 0.29593977000000005 seconds
+# func_3 0.288870085 seconds
+# func_4 0.27463777 seconds
+# ----------Only timeit------------
+# func_1 0.259166115 seconds
+# func_2 0.2328024059999998 seconds
+# func_3 7.215676302 seconds
+# func_4 7.154397805 seconds
 
