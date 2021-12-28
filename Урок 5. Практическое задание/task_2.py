@@ -24,3 +24,42 @@ reduce
 __mul__
 __add__
 """
+
+
+class HexDigit:
+    def __init__(self, digit):
+        self._data = self._to_array(digit)
+
+    def _to_array(self, digit):
+        return list(str(digit))
+
+    def _digit10(self):
+        return int(''.join(self._data), 16)
+
+    def __str__(self):
+        return ''.join(self._data)
+
+    def __add__(self, other):
+        if not isinstance(other, HexDigit):
+            raise TypeError('Оба операнда должны быть одного типа')
+
+        return HexDigit(hex(self._digit10() + other._digit10())[2:])
+
+    def __mul__(self, other):
+        if not isinstance(other, HexDigit):
+            raise TypeError('Оба операнда должны быть одного типа')
+
+        return HexDigit(hex(self._digit10() * other._digit10())[2:])
+
+
+if __name__ == '__main__':
+    try:
+        a = hex(int(input('Введите первое число (х16): '), 16))[2:]
+        b = hex(int(input('Введите второе число (х16): '), 16))[2:]
+    except ValueError as e:
+        print('Вы ошиблись при вводе, попробуйте еще раз.')
+        exit(e)
+
+    print(f'Сумма чисел: {HexDigit(a) + HexDigit(b)}')
+    print(f'Произведение чисел: {HexDigit(a) * HexDigit(b)}')
+
