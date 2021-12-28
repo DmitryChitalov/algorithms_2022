@@ -57,9 +57,7 @@ t3 = Timer(stmt="func_3(mas)", globals=globals())
 print("func_3", t1.timeit(number=2000), "seconds")
 t4 = Timer(stmt="func_4(mas)", globals=globals())
 print("func_4", t1.timeit(number=2000), "seconds")
-
 print('----------Only timeit------------')
-
 print("func_1", timeit("func_1(mas)", number=2000, globals=globals()), "seconds")
 print("func_2", timeit("func_2(mas)", number=2000, globals=globals()), "seconds")
 print("func_3", timeit("func_3(mas)", number=2000, globals=globals()), "seconds")
@@ -106,7 +104,7 @@ print("func_4", timeit("func_4(mas)", number=2000, globals=globals()), "seconds"
 #
 # все проходы были сделаны подряд, без подбора по результатам
 
-# Однако при замерах с использованием ТОЛЬКО функции timeit - последние два варианта стали работать ощутимо медленне. В чем причина - загадка.
+# Однако при замерах с использованием ТОЛЬКО функции timeit - последние два варианта стали работать ощутимо медленнее. А второй - ощутимо быстрее. В чем причина - загадка.
 # Значит это все таки не равнозначные методы измерения времени?
 # Вот  пример, количество повторений уменьшено в 100 раз
 #
