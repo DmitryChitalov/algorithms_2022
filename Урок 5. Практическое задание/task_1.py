@@ -33,46 +33,29 @@ from collections import namedtuple
 from numpy import mean
 
 
-class Companies:
-    DATA = []
-    quarts = ('I', 'II', 'III', 'IV')
-
-    def __init__(self, name: str, data):
-        self.name = name
-        self.data = data
-        self.info = namedtuple(name, Companies.quarts)(*data)
-        Companies.DATA.append(self.info)
-
-    def mean(self):
-        return mean(list(self.data))
-
-    @classmethod
-    def all_mean(cls):
-        return mean([list(i) for i in cls.DATA])
-
-    def __repr__(self):
-        return f'{self.name}'
-
-
 def analyzing():
-    companies = []
+    data = {}
     n = int(input('Input amount of companies: '))
-    i = 0
-    while n > i:
-        name = input('Input company name: ').strip()
-        values = map(int, input('Input data of company: ').replace(',', ' ').split())
-        company = Companies(name, values)
-        companies.append(company)
-        i += 1
-    print(f'Средняя прибыль всех компаний за год: {Companies.all_mean()}')
-    for i in companies:
-        if i.mean() < Companies.all_mean():
-            print(f'Предприятие, с прибылью ниже среднего значения: {i.name}')
-        else:
-            print(f'Предприятие, с прибылью выше среднего значения: {i.name}')
-    return companies
+    companies = namedtuple('Company', 'name I II III IV')
+    for i in range(n):
+        name = input('Input company\'s name: ')
+        values = tuple(map(int, input('Input the values for the four quarters: ').split()))
+        company = companies(name=name, I=values[0], II=values[1], III=values[2], IV=values[3])
+        data[company.name] = mean(values)
+
+    total_average = 0
+    for v in data.values():
+        total_average += v
+    total_average = total_average / n
+
+    for k, v in data.items():
+        if v > total_average:
+            print(f'Profit is above average - {k}')
+        elif v < total_average:
+            print(f'Profit is low average - {k}')
+        elif v == total_average:
+            print(f'Average profit - {k}')
 
 
 if __name__ == '__main__':
-    result = analyzing()
-    print(result)
+    analyzing()
