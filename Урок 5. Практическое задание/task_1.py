@@ -28,3 +28,27 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+import collections
+
+company = collections.namedtuple('company', ['name', 'q1', 'q2', 'q3', 'q4', 'y'])
+companys = []
+n = int(input("Введити кол-во компаний: "))
+total = 0
+for i in range(n):
+    name = input(f"Название {i + 1}-ого предприятия: ")
+    q = input("Введите числа через пробел ")
+    q = q.split(' ')
+    y = int(q[0]) + int(q[1]) + int(q[2]) + int(q[3])
+    print(type(y))
+    total += y
+    companys.append(company(name=name, q1=q[0], q2=q[1], q3=q[2], q4=q[3], y=y))
+total_avg = total / n
+print(f"Предприятия с прибылью выше средней {total_avg}: ")
+for company in companys:
+    if company.y >= total_avg:
+        print(company.name)
+print(f"Предприятия с прибылью ниже средней {total_avg}: ")
+for company in companys:
+    if company.y < total_avg:
+        print(company.name)
