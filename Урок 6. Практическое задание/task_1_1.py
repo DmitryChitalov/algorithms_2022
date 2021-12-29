@@ -30,3 +30,60 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+from timeit import timeit
+
+"""
+Изначальный вариант взял из этого же курса.
+Поиск минимального числа в массиве.
+Урок 2, task 2
+"""
+
+# Изначальный вариант
+nums = [x for x in range(1000000)]
+
+
+@profile
+def default_variant(n):
+    if len(n) == 0:
+        return None
+    result = n[0]
+    for i in range(len(n)):
+        if n[i] < result:
+            result = n[i]
+    return result
+
+
+print(f'Время работы исходного скрипта = ',
+      timeit('default_variant(nums)', globals=globals(), number=1))
+
+# Оптимизация
+del nums
+nums_2 = (x for x in range(1000000))
+
+
+@profile
+def variant_2(n):
+    res = next(n)
+    for i in n:
+        if i < res:
+            res = i
+    return res
+
+
+
+print(f'Время работы оптимизированного скрипта = ',
+      timeit('variant_2(nums_2)', globals=globals(), number=1))
+
+"""
+Итог:
+    Вместо списка создал генератор.
+            1) Время работы значительно уменьшилось:
+                Время работы исходного скрипта =  171.9503764
+                Время работы оптимизированного скрипта =  5.681598
+            2) Экономия памяти 57.7 MiB в исходном варианте
+                против 19.2 MiB
+    Если массив будет большой и будет необходимость часто обращаться к массиву и брать
+    из него элементы по индексам, то можно использовать array из NumPy.
+"""
