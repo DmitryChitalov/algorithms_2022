@@ -48,8 +48,11 @@ print(func_1())
 print(func_2())
 print(func_3())
 
-print("func_1", timeit("func_1()", number=200000, globals=globals()), "seconds")
-print("func_2", timeit("func_2()", number=200000, globals=globals()), "seconds")
-print("func_3", timeit("func_3()", number=200000, globals=globals()), "seconds")
+print("func_1", timeit("func_1()", number=2000000, globals=globals()), "seconds")
+print("func_2", timeit("func_2()", number=2000000, globals=globals()), "seconds")
+print("func_3", timeit("func_3()", number=2000000, globals=globals()), "seconds")
 
-# Третий вариант самый быстрый, тк используются встроенные функции, которые имеют самое большое быстродействие
+# Третий вариант самый быстрый, тк используются встроенные функции, которые имеют самое большое быстродействие. Но по времени сопоставимо с первым вариантом
+# func_1 4.3276527 seconds
+# func_2 6.4848463999999995 seconds
+# func_3 4.1112109 seconds
