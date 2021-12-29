@@ -24,3 +24,23 @@ reduce
 __mul__
 __add__
 """
+
+class Hex:
+    def __init__(self, number):
+        self.num = str(number)
+        print(self.num)
+
+
+    def __mul__(self, other):
+        return hex(int(self.num, 16) * int(other.num, 16))[2:].upper()
+
+
+    def __add__(self, other):
+        return hex(int(self.num, 16) + int(other.num, 16))[2:].upper()
+
+
+a = Hex(input('Введите шестнадцатиричное число'))
+b = Hex(input('Введите шестнадцатиричное число'))
+
+print('sum', a + b)
+print('product', a * b)
