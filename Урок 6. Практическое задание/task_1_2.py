@@ -30,3 +30,56 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+
+
+"""
+Изначальный вариант взял из курса основ.
+Расчет массы с использованием ООП
+Урок 9, task 2
+"""
+
+
+# Изначальный вариант
+class Road:
+
+    def __init__(self, length, width):
+        self._length, self._width = length, width
+
+    def calc_mass(self, mass, thickness):
+        calc_mass_result = (self._length * self._width * mass * thickness)
+        return f'{round(calc_mass_result * 0.001)} т.'
+
+@profile
+def road_default():
+    test = Road(1000, 1000)
+    return test.calc_mass(1000,1000)
+
+# road_default()
+
+
+# Оптимизированный вариант
+class Road2:
+    __slots__ = ('_length', '_width')
+
+    def __init__(self, length, width):
+        self._length, self._width = length, width
+
+    def calc_mass(self, mass, thickness):
+        calc_mass_result = (self._length * self._width * mass * thickness)
+        return f'{round(calc_mass_result * 0.001)} т.'
+
+
+@profile
+def road_default():
+    test = Road2(1000, 1000)
+    return test.calc_mass(1000,1000)
+
+# road_default()
+
+
+"""
+В данной задаче важен принцип оптимизиации создания классов.
+Если известно, что в классе могу присутствовать только определенные атрибуты
+тогда имеет смысл записать их в слоты в виде кортежа.
+"""
