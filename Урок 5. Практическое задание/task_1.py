@@ -29,7 +29,7 @@
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
 
-import collections
+from collections import namedtuple
 
 company = collections.namedtuple('company', ['name', 'q1', 'q2', 'q3', 'q4', 'y'])
 companys = []

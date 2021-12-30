@@ -49,6 +49,7 @@ append_deque(my_deque)
 
 #print(timeit('append_list(my_list.copy())', globals=globals(),number=100))  # 3.3322939
 #print(timeit('append_list(my_deque.copy())', globals=globals(),number=100))  # 3.1007219
+#Операции append примерно однаковы в списке и в deque
 
 def pop_list(my_list):
     for i in range(n):
@@ -62,7 +63,7 @@ def pop_deque(my_deque):
 
 #print(timeit('pop_list(my_list.copy())', globals=globals(), number=100))  # 2.2110874999999997
 #print(timeit('pop_deque(my_deque.copy())', globals=globals(), number=100))  # 2.4850788
-
+# операции pop примерно одинаковы и в списке и в deque
 
 def extend_list(my_list):
     for i in range(n):
@@ -75,7 +76,8 @@ def extend_deque(my_deque):
     return my_deque
 
 #print(timeit('extend_list(my_list.copy())', globals=globals(), number=100))  # 5.517878300000001
-#print(timeit('extend_deque(my_deque.copy())', globals=globals(), number=100))  # 7.144756100000002
+#print(timeit('extend_deque(my_deque.copy())', globals=globals(), number=100))  # 5.144756100000002
+# операции extend примерно одинаковы
 
 # 2)
 def insert_list(my_list):
@@ -116,7 +118,7 @@ def extendleft_deque(my_deque):
 
 #print(timeit('extendleft_list(my_list.copy())', globals=globals(), number=100))  # 2.3823975
 #print(timeit('extendleft_deque(my_deque.copy())', globals=globals(), number=100))  # 0.4582151999999997
-
+# операции из 2го пункта задачи в deque намного быстрее чем в списке
 
 my_list.clear()
 my_deque.clear()
@@ -136,6 +138,6 @@ def get_elem_deque(my_deque):
         elem = my_deque[i]
     return elem
 
-print(timeit('get_elem_list(my_list)', globals=globals(), number=100))  # 1.6376079
-print(timeit('get_elem_deque(my_deque)', globals=globals(), number=100))  # 33.543159499999994
-
+#print(timeit('get_elem_list(my_list)', globals=globals(), number=100))  # 1.6376079
+#print(timeit('get_elem_deque(my_deque)', globals=globals(), number=100))  # 33.543159499999994
+# операции получения элемента в списке намного быстрее чем в deque
