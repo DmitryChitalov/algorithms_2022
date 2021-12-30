@@ -30,9 +30,6 @@
 
 Это файл для четвертого скрипта
 """
-
-from collections import namedtuple
-from recordclass import recordclass
 from memory_profiler import memory_usage, profile
 
 """
@@ -56,7 +53,6 @@ def get_rev(n):
     return func(n)
 
 
-@dec
 def func(num, reversed=''):
     if num == 0:
         return reversed
