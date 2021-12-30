@@ -23,3 +23,68 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+lst = []
+dct = dict()
+
+
+def check(func):
+    def execute(*arg):
+        start_val = time()
+        func(*arg)
+        end_val = time()
+        return end_val - start_val
+    return execute
+
+
+# Заполнение списка O(n)
+@check
+def create_lst(n):
+    for i in range(0, n):  # O(n)
+        lst.append(i)      # O(1)
+    return lst             # O(1)
+
+
+# Заполнение словаря O(n)
+@check
+def create_dct(n):
+    for i in range(0, n):  # O(n)
+        dct[i] = 'test'    # O(1)
+    return dct             # O(1)
+
+
+print(f'Заполнение списка. Затрачено время: {create_lst(10000000)}')
+print(f'Заполнение списка. Затрачено время: {create_dct(10000000)}')
+#  Списки заполняются быстрее, т.к. для списка не нужно создавать еще и ключ.
+
+# -------------------------------------------------------------------
+
+# Изминение списка # O(n)
+@check
+def update_lst():
+    for i in lst:          # O(n)
+        lst[i] = i + 1     # O(1)
+
+# Удаление из списка # O(n)
+@check
+def delete_lst(n):
+    lst.pop(n)             # O(n)
+
+# Изменение словаря # O(1)
+@check
+def update_dct():
+    for i in dct:
+        dct[i] = 'test_2'  # O(1)
+
+# Удаление из словаря # O(1)
+@check
+def delete_dct(n):
+    dct.pop(n)             # O(1)
+
+print(f'Изминение элемента списка заняло: {update_lst()}')
+print(f'Изминение элемента словаря заняло: {update_dct()}')
+print(f'Удаление элемента списка заняло: {delete_lst(1)}')
+print(f'Удаление элемента словаря заняло: {delete_dct(1)}')
+# Удаление и изменение словаря происходит быстрее, чем у списка, т.к. поиск происходит по ключу, константная сложность
