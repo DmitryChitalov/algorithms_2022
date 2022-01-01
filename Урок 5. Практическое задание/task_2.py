@@ -24,3 +24,22 @@ reduce
 __mul__
 __add__
 """
+
+class HexNum:
+    def __init__(self):
+        self.hex_num = input(f"Введите число: ")
+        self.num = int(self.hex_num, 16)
+
+    def __mul__(self, other):
+        return list(hex(self.num * other.num))[2:]
+
+    def __add__(self, other):
+        return list(hex(self.num + other.num))[2:]
+
+
+
+num_1 = HexNum()
+num_2 = HexNum()
+
+print(f'Сумма чисел: {num_1 + num_2}')
+print(f'Произведение чисел: {num_1 * num_2}')
