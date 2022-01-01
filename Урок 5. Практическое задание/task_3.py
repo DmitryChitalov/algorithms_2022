@@ -38,53 +38,57 @@ deque_1 = deque([randint(0, 10000) for j in range(10000)])
 
 
 def list_app(list_1):
-    for i in range(1000):
+    for i in range(100000):
         list_1.append(i)
     return list_1
 
 
+
 def deque_app(deque_1):
-    for i in range(1000):
+    for i in range(100000):
         deque_1.append(i)
     return deque_1
 
 
-print(timeit("list_app(list_1)", globals=globals(), number=1000))  # 0.0583916
-print(timeit("deque_app(deque_1)", globals=globals(), number=1000))  # 0.04081199999999999 - немного быстрее, чем list
+print(timeit("list_app(list_1)", globals=globals(), number=100))  # 0.670205
+print(timeit("deque_app(deque_1)", globals=globals(), number=100))  # 0.6700514 - время выполнения одинаково с list
 
 
 def list_pop(list_1):
-    for i in range(1000):
+    for i in range(100000):
         list_1.pop()
     return list_1
 
 
+
 def deque_pop(deque_1):
-    for i in range(1000):
+    for i in range(100000):
         deque_1.pop()
     return deque_1
 
 
-print(timeit("list_pop(list_1)", globals=globals(), number=1000))  # 0.03890349999999998
-print(timeit("deque_pop(deque_1)", globals=globals(), number=1000))  # 0.035758399999999996 - почти одинаково с list
+print(timeit("list_pop(list_1)", globals=globals(), number=100))  # 0.4542149
+print(timeit("deque_pop(deque_1)", globals=globals(), number=100))  # 0.4584407000000001 - время выполнения одинаково с list
 
-lst = [i for i in range(10)]
+lst = list(range(10))
 
 
 def list_extend(list_1):
-    for i in range(1000):
+    for i in range(100000):
         list_1.extend(lst)
     return list_1
 
 
+
 def deque_extend(deque_1):
-    for i in range(1000):
+    for i in range(100000):
         deque_1.extend(lst)
     return deque_1
 
 
-print(timeit("list_extend(list_1)", globals=globals(), number=1000))  # 0.21735469999999998
-print(timeit("deque_extend(deque_1)", globals=globals(), number=1000))  # 0.11559010000000003 - немного быстрее, чем list
+print(timeit("list_extend(list_1)", globals=globals(), number=100))  # 2.6497157000000002
+print(timeit("deque_extend(deque_1)", globals=globals(), number=100))  # 2.6415951 - время выполнения одинаково с list
+
 
 
 # 2) сравнить операции
