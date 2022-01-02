@@ -30,3 +30,53 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+Курс алгоритмы, урок 4, задание 4.
+
+Через 'NumPy'.
+
+Результаты и выводы:
+
+Результат немного подозрителен) что-то уж совсем мало памяти, но тем не менее теорию подтверждает.
+
+До:    31.6 MiB      0.5 MiB       10003       array = [randint(0, 100000) for i in range(10000)]
+После: 31.6 MiB      0.0 MiB       10003       array_np = np.array([randint(0, 100000) for i in range(10000)])
+"""
+
+from memory_profiler import profile
+from random import randint
+import numpy as np
+
+
+# array = [1, 3, 1, 3, 4, 5, 1]
+
+@profile
+def func_1():
+    array = [randint(0, 100000) for i in range(10000)]
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+@profile
+def func_2():
+    array_np = np.array([randint(0, 100000) for i in range(10000)])
+    u, c = np.unique(array_np, return_counts=True)
+    m_idx = c.argmax()
+    num = u[m_idx]
+    m = c[m_idx]
+
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+if __name__ == "__main__":
+    print(func_1())
+    print(func_2())
