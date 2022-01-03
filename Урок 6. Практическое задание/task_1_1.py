@@ -30,3 +30,52 @@
 
 Это файл для первого скрипта
 """
+
+
+
+
+from memory_profiler import memory_usage
+from random import randint
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# Курс основ, урок 5, задание 4
+# Представлен список чисел. Необходимо вывести те его элементы, значения которых больше предыдущего.
+
+src = [randint(0, 100000000) for i in range(100000000)]
+
+
+
+@memory
+def initial_version():
+    answer = []
+    for i in range(len(src) - 1):
+        if src[i] < src[i + 1]:
+            answer.append(src[i + 1])
+    print(type(answer))
+
+
+@memory
+def optimized_version():
+    answer = (src[i + 1] for i in range(len(src) - 1) if src[i] < src[i + 1])
+    print(type(answer))
+
+
+initial_version()
+optimized_version()
+
+# <class 'list'>
+# Выполнение initial_version заняло 197.05859375 Mib
+# <class 'generator'>
+# Выполнение optimized_version заняло 0.03515625 Mib - существенная экономия памяти при использовании генератора
