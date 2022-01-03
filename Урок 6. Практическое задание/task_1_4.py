@@ -30,3 +30,51 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# ДЗ 1, Задание 2 из Основ. Создать список из кубов нечётных чисел от 1 до 1000, вычислить сумму тех чисел из списка,
+# которые делятся нацело на 7
+# Без оптимизации:
+
+my_lst = []
+
+for i in range(1, 1001):
+    if i % 2 == 1:
+        my_lst.append(i ** 3)
+
+
+@memory
+def get_sum_1(lst):
+    new_list = [i for i in lst if i % 7 == 0]
+    return sum(new_list)
+
+
+print(get_sum_1(my_lst))
+
+# С оптимизацией:
+
+
+@memory
+def get_sum_2(lst):
+    new_list = filter(lambda i: i % 7 == 0, lst)
+    return sum(new_list)
+
+
+print(get_sum_2(my_lst))
+
+# До оптимизации: 0.0078 MiB, после оптимизации: 0.0039 MiB.
+# Что изменил: Использовал функцию filter

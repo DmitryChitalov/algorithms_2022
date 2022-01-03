@@ -30,3 +30,38 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import profile
+
+# ДЗ 1, Задание 2 из Алгоритмов. Поиск минимального значения из списка
+# Без оптимизации:
+
+
+@profile
+def find_min(my_lst):
+    min_value = my_lst[0]
+    for i in my_lst:
+        if i < min_value:
+            min_value = i
+    return min_value
+
+
+print(find_min(list(range(100000))))
+
+# С оптимизацией:
+
+
+@profile
+def find_min_gen(my_gen):
+    min_value = next(my_gen)
+    for i in my_gen:
+        if i < min_value:
+            min_value = i
+    return min_value
+
+
+my_gen = (num for num in range(100000))
+print(find_min_gen(my_gen))
+
+# До оптимизации: 22.2 MiB, после оптимизации: 18.4 MiB.
+# Что изменил: Изменил список на генератор

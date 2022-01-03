@@ -30,3 +30,56 @@
 
 Это файл для третьего скрипта
 """
+
+from pympler import asizeof
+from recordclass import recordclass
+
+# ДЗ 3, Задание 1 из Основ. Написать функцию, которая переводит числа от 1 до 10 с английского на русский.
+# Без оптимизации:
+
+transl = {'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять', 'six': 'шесть',
+          'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
+
+def num_translate(eng_num):
+    if eng_num not in transl.keys():
+        return 'Ошибка ввода'
+    return transl[eng_num]
+
+print(num_translate(input()))
+print(asizeof.asizeof(transl))
+
+# С оптимизацией:
+
+rc = recordclass('translations', ('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'))
+transl_rc = rc(one='один', two='два', three='три', four='четыре', five='пять', six='шесть', seven='семь',
+               eight='восемь', nine='девять', ten='десять')
+
+def num_translate(eng_num):
+    if eng_num == 'one':
+        return transl_rc.one
+    elif eng_num == 'two':
+        return transl_rc.two
+    elif eng_num == 'three':
+        return transl_rc.three
+    elif eng_num == 'four':
+        return transl_rc.four
+    elif eng_num == 'five':
+        return transl_rc.five
+    elif eng_num == 'six':
+        return transl_rc.six
+    elif eng_num == 'seven':
+        return transl_rc.seven
+    elif eng_num == 'eight':
+        return transl_rc.eight
+    elif eng_num == 'nine':
+        return transl_rc.nine
+    elif eng_num == 'ten':
+        return transl_rc.ten
+    else:
+        return 'Ошибка ввода'
+
+print(num_translate(input()))
+print(asizeof.asizeof(transl_rc))
+
+# До оптимизации: 1784, после оптимизации: 96.
+# Что изменил: Изменил словарь на recordclass
