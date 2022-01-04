@@ -30,3 +30,45 @@
 
 Это файл для третьего скрипта
 """
+from timeit import timeit
+from memory_profiler import profile
+from random import randint
+from numpy import array, unique
+
+
+@profile
+def list_func():
+    array = [randint(0, 1000) for i in range(1000)]
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+print(f'Время работы исходного варианта = ',
+      timeit('list_func()', globals=globals(), number=1))
+
+
+@profile
+def numpy_func():
+    array_np = array([randint(0, 1000) for i in range(1000)])
+    u, c = unique(array_np, return_counts=True)
+    m_idx = c.argmax()
+    num = u[m_idx]
+    m = c[m_idx]
+
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+print(f'Время работы оптимизированного оптимизированного варианта скрипта = ',
+      timeit('numpy_func()', globals=globals(), number=1))
+
+# numpy в разы ускоряет работу кода:
+# list_func() - 0.24963255299999987
+# numpy_func() - 0.05613947500000016
