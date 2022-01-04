@@ -55,20 +55,19 @@ def tuple_():
 
 @profile
 def gen():
-    products = (fruit for fruit in fruits if fruit in fruits2)
-    for i in products:
-        return i
+    for i in (fruit for fruit in fruits if fruit in fruits2):
+        yield i
 
 
 if __name__ == '__main__':
     print('Original', asizeof(original()), sep='\n')
     print('Generator', asizeof(gen()), sep='\n')
-    print('Tuple',asizeof(tuple_()), sep='\n')
+    print('Tuple', asizeof(tuple_()), sep='\n')
     print('Array', asizeof(array_()), sep='\n')
     print("""Разницы в оптимизации для данного скрипта не были замечены.
 Но самими объектами занимается разное количество памяти:
 - Список 368 байт
-- Генератор 96 
+- Генератор 176
 - Кортеж 344 
 - Массив NumPy 120
 """)
