@@ -29,4 +29,38 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+Курс основ урок 6
+2: Дан список, заполненный произвольными числами.
+ Получить список из элементов исходного, удовлетворяющих следующим условиям:
+Элемент кратен 3,
+Элемент положительный,
+Элемент не кратен 4.
 """
+from random import randint
+import psutil
+from memory_profiler import profile
+from pympler.asizeof import asizeof
+from numpy import array
+
+@profile
+def original():
+    numbers = [randint(-100, 101) for number in range(50)]
+    result = [number for number in numbers if number > 0 and number % 3 == 0 and number % 4 != 0]
+    del numbers
+    return result
+
+
+@profile
+def optimize():
+    numbers = array([randint(-100, 101) for number in range(50)])
+    result = array([number for number in numbers if number > 0 and number % 3 == 0 and number % 4 != 0])
+    del numbers
+    return result
+
+
+if __name__ == '__main__':
+    print(asizeof(original()))
+    del original
+    print(asizeof(optimize()))
+    del optimize
+    print("""Для оптимизации восльпользовался NumPy Arrayб что уменьшило размер объектов почти в 2 раза.""")
