@@ -29,4 +29,81 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+Курс Основ
+Урок 3
+5. Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов,
+взятых из трёх списков (по одному из каждого):
+
+nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+
+Например:
+>>> get_jokes(2)
+["лес завтра зеленый", "город вчера веселый"]
+
+Документировать код функции.
+Сможете ли вы добавить еще один аргумент — флаг,
+разрешающий или запрещающий повторы слов в шутках (когда каждое слово можно использовать только в одной шутке)?
+Сможете ли вы сделать аргументы именованными?
 """
+from memory_profiler import profile
+from pympler.asizeof import asizeof
+
+
+@profile
+def get_jokes(number: int) -> list:
+    """
+    Create a list consisting joke-strings. Its quantity depends by input number
+    :param number:
+    :return list:
+    """
+    import random
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+    result = []
+    i = 0
+    while i != number:
+        # добавляет случайный элемент из список, и объединяем их в строку
+        joke = ' '.join([random.choice(nouns), random.choice(adverbs), random.choice(adjectives)])
+        result.append(joke)
+        i += 1
+    del nouns
+    del adverbs
+    del adjectives
+    del i
+    return result
+
+
+@profile
+def optimize(number: int) -> list:
+    """
+    Create a list consisting joke-strings. Its quantity depends by input number
+    :param number:
+    :return list:
+    """
+    import random
+    nouns = ("автомобиль", "лес", "огонь", "город", "дом")
+    adverbs = ("сегодня", "вчера", "завтра", "позавчера", "ночью")
+    adjectives = ("веселый", "яркий", "зеленый", "утопичный", "мягкий")
+    result = []
+    i = 0
+    while i != number:
+        # добавляет случайный элемент из список, и объединяем их в строку
+        joke = ' '.join((random.choice(nouns), random.choice(adverbs), random.choice(adjectives)))
+        result.append(joke)
+        i += 1
+    del nouns
+    del adverbs
+    del adjectives
+    del i
+    return result
+
+
+if __name__ == '__main__':
+    print(asizeof(get_jokes(5)))
+    del get_jokes
+    print(asizeof(optimize(5)))
+    del optimize
+    print("""Оптимизация незначительна если использовать кортеж вместо списка""")
