@@ -31,6 +31,7 @@
 Это файл для второго скрипта
 """
 from memory_profiler import profile
+import psutil
 from numpy import array
 from pympler.asizeof import asizeof
 
@@ -44,11 +45,11 @@ my_list_1 = [2, 2, 5, 12, 8, 2, 12]
 В этом случае ответ будет:
 [5, 8]
 """
+numbers_list = [4, 5, 8, 45, 8, 4, 5, 4, 5, 45, 4, 845, 9, 889, 1, 5, 35, 4]
 
 
 @profile
 def original():
-    numbers_list = [4, 5, 8, 45, 8, 4, 5, 4, 5, 45, 4, 845, 9, 889, 1, 5, 35, 4]
     result = []  # пустой список, в который будем добавлять уник. элементы
     for number in numbers_list:
         if numbers_list.count(number) == 1:  # проверяем количество элементов и их уникальность в списке.
@@ -57,22 +58,20 @@ def original():
 
 
 @profile
-def lc():
-    numbers_list = [4, 5, 8, 45, 8, 4, 5, 4, 5, 45, 4, 845, 9, 889, 1, 5, 35, 4]
+def array_():
     return array(number for number in numbers_list if numbers_list.count(number) == 1)
 
 
 @profile
 def gen():
-    numbers_list = [4, 5, 8, 45, 8, 4, 5, 4, 5, 45, 4, 845, 9, 889, 1, 5, 35, 4]
     for i in numbers_list:
         if i % 2 == 0:
             yield i
 
 
 if __name__ == '__main__':
-    print(asizeof(original()))
-    print(asizeof(lc()))
-    print(asizeof(gen()))
+    print('Original', asizeof(original()), sep='\n')
+    print('NumPy Array', asizeof(array_()), sep='\n')
+    print('Generator', asizeof(gen()), sep='\n')
     print("""В оптимизированном варианте NumPy Array справился лучше всех,
 так как он лучше справляется с числовыми данными. В данном скрипте он оказался лучше генератора""")
