@@ -50,10 +50,6 @@
 from random import randint
 from memory_profiler import profile
 
-# result = [12, 44, 4, 10, 78, 123]
-# src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
-src = [randint(0, 100000) for i in range(1000000)]
-
 
 @profile
 def make_list():
@@ -70,5 +66,7 @@ def make_generator():
 
 
 if __name__ == "__main__":
+    src = [randint(0, 100000) for i in range(1000000)]
+
     make_list()
     make_generator()

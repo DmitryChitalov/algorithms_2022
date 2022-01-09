@@ -49,8 +49,6 @@ from random import randint
 import numpy as np
 
 
-# array = [1, 3, 1, 3, 4, 5, 1]
-
 @profile
 def func_1():
     array = [randint(0, 100000) for i in range(10000)]

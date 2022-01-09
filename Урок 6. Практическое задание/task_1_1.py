@@ -113,19 +113,6 @@ def matrix_operation():
 
     matrix_lst.append(0)
 
-    # matrix1 = Matrix([[i for i in range(100000)], [i for i in range(100000)], [i for i in range(100000)]])
-    # matrix2 = Matrix([[i for i in range(100000)], [i for i in range(100000)], [i for i in range(100000)]])
-    # # matrix3 = Matrix([[2, 2, 2], [2, 2, 2], [1, 1]])
-    #
-    # print('matrix1:\n', matrix1, sep='')
-    # print('matrix2:\n', matrix2, sep='')
-    # print('matrix1 == matrix2\n', matrix1 == matrix2, sep='')
-    # print('matrix1 + matrix2 + matrix2\n', matrix1 + matrix2 + matrix2, sep='')
-    # print('matrix1:\n', matrix1, sep='')
-    # print('matrix2:\n', matrix2, sep='')
-    # # print('matrix1 + matrix3\n', matrix1 + matrix3, sep='')
-
-    return True
 
 if __name__ == "__main__":
     matrix_operation()

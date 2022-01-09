@@ -57,41 +57,42 @@ def memory(func):
     return wrapper
 
 
-def sumdigit(digit):
-    sum = 0
+def sum_digit(digit):
+    result = 0
     while True:
         remainder = digit % 10
-        sum += remainder
+        result += remainder
         digit = digit // 10
         if digit <= 0:
             break
 
-    return sum
+    return result
 
 
 @memory
 def before(cube_list):
-    sum = 0
+    result = 0
     for elem in cube_list:
-        if sumdigit(elem) % 7 == 0:
-            sum += elem
+        if sum_digit(elem) % 7 == 0:
+            result += elem
 
-    print('Сумма 1:', sum)
+    print('Сумма 1:', result)
 
-    sum = 0
+    result = 0
     for i in range(len(cube_list)):
         cube_list[i] += 17
-        if sumdigit(cube_list[i]) % 7 == 0:
-            sum += cube_list[i]
+        if sum_digit(cube_list[i]) % 7 == 0:
+            result += cube_list[i]
 
-    print('Сумма 2:', sum)
+    print('Сумма 2:', result)
 
 
 def multiple_seven(elem):
-    if sumdigit(elem) % 7 == 0:
+    if sum_digit(elem) % 7 == 0:
         return elem
     else:
         return 0
+
 
 @memory
 def after(cube_list):

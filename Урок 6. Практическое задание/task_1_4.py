@@ -48,9 +48,6 @@ from memory_profiler import profile, memory_usage
 from random import randint
 
 
-nums = [randint(0, 10000) for i in range(100000)]
-
-
 def memory(func):
     def wrapper(*args, **kwargs):
         m1 = memory_usage()
@@ -74,6 +71,8 @@ def func_3(nums):
 
 
 if __name__ == '__main__':
+    nums = [randint(0, 10000) for i in range(100000)]
+
     func_2(nums)
     func_3(nums)
 
