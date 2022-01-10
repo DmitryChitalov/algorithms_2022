@@ -31,8 +31,8 @@ def check_2(lst_obj):
     в оставшихся справа элементах
     Сложность: o(n^2).
     """
-    for j in range(len(lst_obj)):          # o(n) + o(1)
-        if lst_obj[j] in lst_obj[j+1:]:    # o(n)+o(n)
+    for j in range(len(lst_obj)):          # o(n) для in + o(n) для range(len)
+        if lst_obj[j] in lst_obj[j+1:]:    # o(n) для in + o(n)для среза
             return False                   # o(1)
     return True                            # o(1)
 
@@ -47,7 +47,7 @@ def check_3(lst_obj):
     """
     lst_copy = list(lst_obj)                 # o(n) от длины
     lst_copy.sort()                          # o(n log n)
-    for i in range(len(lst_obj) - 1):        # o(n)
+    for i in range(len(lst_obj) - 1):        # o(n) для in +o(1) для len
         if lst_copy[i] == lst_copy[i+1]:     # o(1)
             return False                     # o(1)
     return True                              # o(1)

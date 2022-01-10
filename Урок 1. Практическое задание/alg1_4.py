@@ -15,6 +15,11 @@
     который вы придумаете, например, реализовать словарь.
     Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+my_users_1 = {'user1': {'password': '111', 'activation': True},
+              'user2': {'password': '111', 'activation': True},
+              'user3': {'password': '111', 'activation': True},
+              'user4': {'password': '111', 'activation': False}
+              }
 
 
 # 1 сложность o(1)
@@ -30,38 +35,11 @@ def authentication_1(users, user_name, user_password):
         return "Данного пользователя не существует"
 
 
-# 2 сложность o(n)
-def authentication_2(users, user_name, user_password):
-    for k, v in users.items():
-        if k == user_name:
-            if v['password'] == user_password and v['activation']:
-                return "Доступ предоставлен"
-            elif v['password'] == user_password and not v['activation']:
-                return "Пройдите активацию"
-            elif v['password'] != user_password:
-                return "Пароль не верный"
-
-    return "Данного пользователя не существует"
-
-
-# Первое решение эффективнее, потому что поиск по ключю имеет сложность о(1), а во втором решении цикл for in
-
-
-my_users = {'user1': {'password': '111', 'activation': True},
-            'user2': {'password': '111', 'activation': True},
-            'user3': {'password': '111', 'activation': True},
-            'user4': {'password': '111', 'activation': False}
-            }
-
-print(authentication_1(my_users, 'user1', '111'))
-print(authentication_1(my_users, 'user4', '111'))
-print(authentication_1(my_users, 'user1', '1111'))
-print(authentication_1(my_users, 'user5', '111'))
-print(authentication_1(my_users, 'user1', '111'))
-print(authentication_1(my_users, 'user4', '111'))
-print(authentication_1(my_users, 'user1', '1111'))
-print("*********************************")
-print(authentication_2(my_users, 'user1', '111'))
-print(authentication_2(my_users, 'user4', '111'))
-print(authentication_2(my_users, 'user1', '1111'))
-print(authentication_2(my_users, 'user5', '111'))
+print(authentication_1(my_users_1, 'user1', '111'))
+print(authentication_1(my_users_1, 'user4', '111'))
+print(authentication_1(my_users_1, 'user1', '1111'))
+print(authentication_1(my_users_1, 'user5', '111'))
+print(authentication_1(my_users_1, 'user1', '111'))
+print(authentication_1(my_users_1, 'user4', '111'))
+print(authentication_1(my_users_1, 'user1', '1111'))
+print(authentication_2('user5', '111'))

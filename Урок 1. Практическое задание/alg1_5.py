@@ -44,23 +44,21 @@ class PlateStack:
         return size_list
 
 
-if __name__ == '__main__':
+stack = PlateStack(10)
 
-    stack = PlateStack(10)
+print(stack.is_empty())
+for i in range(68):
+    stack.push_in(i)
 
-    print(stack.is_empty())
-    for i in range(68):
-        stack.push_in(i)
+print(stack.stack_size())
 
-    print(stack.stack_size())
+stack.get_val()
 
-    stack.get_val()
+print(stack.pop_out())
+print(stack.pop_out())
+print(stack.pop_out())
 
-    print(stack.pop_out())
-    print(stack.pop_out())
-    print(stack.pop_out())
+print(stack.stack_size())
+stack.get_val()
 
-    print(stack.stack_size())
-    stack.get_val()
-
-    print(stack.is_empty())
+print(stack.is_empty())

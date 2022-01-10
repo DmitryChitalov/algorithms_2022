@@ -42,12 +42,10 @@ def sorted_1(company):
     print(top_3)
 
 
-sorted_1(company)
-
 # 2 сложность не знаю
 from collections import Counter
 
-company = {
+company2 = {
     'Chanel': 160000,
     'Lancome': 58000,
     'Lanvin': 49000,
@@ -69,7 +67,8 @@ def sorted_3(company):
     print(top3_company)
 
 
-sorted_2(company)
-sorted_3(company)
+sorted_1(company)
+sorted_2(company2)
+sorted_3(company2)
 
 # кажется, что 2 вариант решения самый эффективный (но я не уверена)
