@@ -42,8 +42,8 @@ def append_deque(dqe):
     return dqe
 
 
-print(timeit('append_list(lst)', globals=globals(), number=100))  # 0.004245600000000002
-print(timeit('append_deque(dqe)', globals=globals(), number=100))  # 0.003983499999999994
+print(timeit('append_list(lst)', globals=globals(), number=100))  # 0.0044043
+print(timeit('append_deque(dqe)', globals=globals(), number=100))  # 0.004266800000000001
 
 print('\nСравнение операции pop')
 
@@ -61,7 +61,7 @@ def pop_deque(dqe):
 
 
 print(timeit('pop_list(lst)', globals=globals(), number=100))  # 0.003933899999999997
-print(timeit('pop_deque(dqe)', globals=globals(), number=100))  # 0.003745399999999996
+print(timeit('pop_deque(dqe)', globals=globals(), number=100))  # 0.004016699999999998
 
 print('\nСравнение операции extend')
 
@@ -78,10 +78,10 @@ def extend_deque(dqe):
     return dqe
 
 
-print(timeit('extend_list(lst)', globals=globals(), number=100))  # 0.007864800000000005
-print(timeit('extend_deque(dqe)', globals=globals(), number=100))  # 0.009074199999999998
+print(timeit('extend_list(lst)', globals=globals(), number=100))  # 0.0.007569900000000004
+print(timeit('extend_deque(dqe)', globals=globals(), number=100))  # 0.0087623
 
-'''У дека быстрее операции append, pop, у списка - операция extend.'''
+'''Операции append, pop и extend у списка и дека приблизительно одинаковые по скорости выполнения.'''
 
 # 2) сравнить операции appendleft, popleft, extendleft дека и соответствующих им операций списка
 print('\n\nСравнение операций insert и appendleft')
