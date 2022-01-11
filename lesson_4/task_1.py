@@ -18,21 +18,16 @@ def func_1(nums):
     return new_arr
 
 def func_2(nums):
-    new_arr = []
-    for x in nums:
-        if x % 2 == 0:
-            new_arr.append(nums.index(x))
+    new_arr = map(nums.index,filter(lambda x: x %2 == 0, nums ))
     return new_arr
 
 
 print(func_1([1, 2, 3, 4, 5, 6]))
-print(func_2([1, 2, 3, 4, 5, 6]))
+print(*func_2([1, 2, 3, 4, 5, 6]))
 
 print('------------------------------------')
 
 print(timeit("func_1([1, 2, 3, 4, 5, 6])", globals=globals()))  # --> 0.5734779
-print(timeit("func_2([1, 2, 3, 4, 5, 6])", globals=globals()))  # --> 0.5538630000000001
+print(timeit("func_2([1, 2, 3, 4, 5, 6])", globals=globals()))  # --> 0.29793559999999997
 
-''' Из функции func_1 были удалены встроенные функции range и len и обращение по индексу к элементу массива. 
-Вместо этого в func_2 производится перебор элементов массива без обращения по индексу и добавлен метод index. 
-Всё это позволило ускорить выполнение функции.'''
+''' В func_2 были использованы встроенные функции map и filter, что позволило ускорить работу функции'''
