@@ -30,3 +30,51 @@
 
 Это файл для второго скрипта
 """
+
+from pympler.asizeof import asizeof
+
+'''
+Курс основ python урок 5 задание 2:
+Написать программу сложения и умножения двух шестнадцатеричных чисел.
+При этом каждое число представляется как массив,
+элементы которого это цифры числа.
+Например, пользователь ввёл A2 и C4F.
+Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
+Сумма чисел из примера: [‘C’, ‘F’, ‘1’],
+произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
+'''
+
+class HexNum:
+    def __init__(self, hexnum):
+        self.hexnum = int(hexnum, 16)
+
+    def __mul__(self, other):
+        return list(hex(self.hexnum * other.hexnum))[2:]
+
+    def __add__(self, other):
+        return list(hex(self.hexnum + other.hexnum))[2:]
+
+hexnum1 = HexNum('AAA')
+print(f'hexnum1: {asizeof((hexnum1))}')
+
+
+class HexNum:
+    __slots__ = 'hexnum'
+
+    def __init__(self, hexnum):
+        self.hexnum = int(hexnum, 16)
+
+    def __mul__(self, other):
+        return list(hex(self.hexnum * other.hexnum))[2:]
+
+    def __add__(self, other):
+        return list(hex(self.hexnum + other.hexnum))[2:]
+
+hexnum2 = HexNum('AAA')
+print(f'hexnum2: {asizeof((hexnum2))}')
+
+
+"""
+Вывод: Используя слоты, мы ограничиваем объект в создании дополнительных атрибутов, 
+тем самым экономим память
+"""
