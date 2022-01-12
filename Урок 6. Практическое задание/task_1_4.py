@@ -30,3 +30,47 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import memory_usage
+
+"""
+Курс алгоритмизация python урок 2 задание 3:
+Сформировать из введенного числа
+обратное по порядку входящих в него
+цифр и вывести на экран. Например, если введено число 3486,
+то надо вывести число 6843.
+"""
+def dec(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(*args)
+        return f'Заняло пямяти = {memory_usage()[0] - start[0]}'
+    return wrapper
+
+@dec
+def rev(n):
+    return func(n)
+
+
+def func(num, rev=''):
+    if num == 0:
+        return rev
+    rev += str(num % 10)
+    return func(num // 10, rev)
+
+
+@dec
+def rev_while(enter_num, rev_num=''):
+    while enter_num != 0:
+        rev_num = rev_num + str(enter_num % 10)
+        enter_num //= 10
+    return rev_num
+
+
+
+print(rev(23456789765432134567892345678976543213456789))
+print(rev_while(23456789765432134567892345678976543213456789))
+
+
+"""
+Вывод: Рекурсия каждый вызов сохраняет в памяти и занимает ее много, поэтому цикл быстрее и занимает меньше памяти
+"""
