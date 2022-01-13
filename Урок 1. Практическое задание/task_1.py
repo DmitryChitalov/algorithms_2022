@@ -1,6 +1,5 @@
 """
 Задание 1.
-Задание 1.
 
 Для каждой из трех функций выполнить следующее:
 
@@ -25,7 +24,7 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # !!! 999
+    lst_to_set = set(lst_obj)  # !!!
     return lst_to_set  # !!!
 
 
