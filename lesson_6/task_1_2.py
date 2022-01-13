@@ -23,7 +23,6 @@
 Это файл для второго скрипта
 """
 from memory_profiler import memory_usage
-from json import dumps, loads
 
 
 def decor(func):
