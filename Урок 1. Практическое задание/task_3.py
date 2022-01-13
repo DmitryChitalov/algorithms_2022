@@ -16,4 +16,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+import time
 
+companies = {'company_1': 40000, 'company_2': 5500, 'company_3': 32000, 'company_4': 11000}  # O(1)
+comp = {key: key ** 2 for key in range(1000000)}
+
+def get_profit_1(n):
+    """
+    Первое решение через добавление ключей и значений n в список и его дальнейшая сортировка
+    и срез для получения трех наибольших значений в n.
+    Сложность алгоритма - O(n log n) - линейно-логарифмическая
+    Наилучший вариант, т.к самая низкая сложность алгоритма.
+    """
+    res = []  # O(1)
+    for i in n.items():  # O(n)
+        res.append(i)  # O(1)
+    res.sort(key=lambda x: (x[1], x[0]), reverse=True)  # O(n log n)
+    return res[0:3]
+
+
+def get_profit_2(n):
+    """
+    Второе решение через временный словарь и список. В цикле находим максимальное значение во временном словаре, добавляем
+    в список и удаляем его из словаря.
+    Сложность алгоритма - O(n**2)
+    Наихудший вариант.
+    """
+    _res = {key: val for key, val in n.items()}  # O(n)
+    res = []  # O(1)
+    for i in range(3):  # O(1)
+        res.append(*((key, val) for key, val in _res.items() if val == max(_res.values())))  # O(n**2)
+        _res.pop(res[-1][0])  # O(1)
+    return res  # O(1)

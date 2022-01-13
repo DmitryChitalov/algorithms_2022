@@ -18,3 +18,59 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+
+
+class Plate:
+    """Реализация структуры "Стопка тарелок"
+    Сами стопки являются вложенными списками в списке self.stack.
+    Максимальное кол-во тарелок в стопке - 5, если кол-во больше, то создается
+    новая стопка (новый список в списке).
+    Тарелки отображаются единицами (1).
+    Немного намудрил но так мне показалось интереснее.
+    """
+
+    def __init__(self):
+        self.stack = []
+
+    def is_empty(self):
+        """Проверка на пустоту стека"""
+        return True if len(self.stack) == 0 else False
+
+    def get_full_size(self):
+        size = 0
+        for el in self.stack:
+            size += len(el)
+        return size
+
+    def put_in_stack(self, n):
+        """n - кол-во тарелок которые нужно положить в стопку стека
+        Максимальное кол-во тарелок (единиц) в стопке - 5
+        """
+        if self.is_empty():
+            self.stack.append([])
+        for i in range(n):
+            if len(self.stack[-1]) < 5:
+                self.stack[-1].append(1)
+            else:
+                self.stack.append([1])
+
+    def pop_out(self, n):
+        """n - кол-во тарелок которые нужно достать из стека.
+        Если n > кол-ва тарелок в стеке - Поднимаем ошибку
+        """
+        elems = []
+        if self.get_full_size() >= n:
+            for i in range(n):
+                elems.append(self.stack[-1].pop())
+                if len(self.stack[-1]) == 0:
+                    self.stack.remove(self.stack[-1])
+            return elems
+        else:
+            raise ValueError('Невозможная операция')
+
+
+test = Plate()
+test.put_in_stack(14)
+print(test.stack, '\n', test.get_full_size())
+print(test.pop_out(3))
+print(test.stack, '\n', test.get_full_size())
