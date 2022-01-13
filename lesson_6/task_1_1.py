@@ -38,12 +38,11 @@ def decor(func):
 # Исходное решение - задание 1_2 из курса 'Основы языка Python'
 @decor
 def func():
-    # Создать список, состоящий из кубов нечётных чисел от 1 до 1000
     odd_numb_cube = []
-    for idx in range(0, 1001):
+    for idx in range(0, 1000001):
         if idx % 2:
             odd_numb_cube.append(idx ** 3)
-    print("Список, состоящий из кубов нечетных чисел от 1 до 1000:\n", odd_numb_cube)
+    print("Список, состоящий из кубов нечетных чисел от 1 до 1000000:\n", odd_numb_cube)
     # Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7
     sum_of_numbers = 0
     for numb in odd_numb_cube:
@@ -74,49 +73,36 @@ def func():
 # Оптимизированное решение
 @decor
 def func2():
-    # Создать список, состоящий из кубов нечётных чисел от 1 до 1000
-    odd_numb_cube = [x ** 3 for x in filter(lambda x: x % 2, range(0, 1001))]
-    # Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7
-    sum_of_numbers = 0
-    for numb in odd_numb_cube:
-        member = numb
-        sum_of_digits = 0
-        while member:
-            sum_of_digits += member % 10
-            member //= 10
-        del member
-        if not sum_of_digits % 7:
-            sum_of_numbers += numb
-        del sum_of_digits
-    # К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого
-    # списка, сумма цифр которых делится нацело на 7.
-    sum_of_numbers_2 = 0
-    for numb in odd_numb_cube:
-        numb += 17
-        member = numb
-        sum_of_digits = 0
-        while member:
-            sum_of_digits += member % 10
-            member //= 10
-        del member
-        if not sum_of_digits % 7:
-            sum_of_numbers_2 += numb
-        del sum_of_digits
-    return f"Список, состоящий из кубов нечетных чисел от 1 до 1000:\n {odd_numb_cube}\n" \
-           f"Сумма чисел из списка, сумма цифр которых делится нацело на 7: {sum_of_numbers}\n" \
-           f"Сумма чисел из списка, сумма цифр которых делится нацело на 7, после добавления 17 " \
-           f"к каждому элементу списка: {sum_of_numbers_2}"
+    def odd_cube():
+        for x in range(0, 1000001):
+            if x % 2:
+                yield x ** 3
+            else:
+                pass
+
+    def digits_sum(numb):
+        numb_digits_sum = sum(map(int, str(numb)))
+        if not numb_digits_sum % 7:
+            return numb
+        else:
+            return 0
+
+    sum_of_numbers = sum(map(digits_sum, odd_cube()))
+    sum_of_numbers_2 = sum(map(digits_sum, map(lambda x: x + 17, odd_cube())))
+    return odd_cube(), sum_of_numbers, sum_of_numbers_2
 
 
 if __name__ == '__main__':
     print('Исходное решение')
-    res1, mem_dif = func()
-    print(f'Выполнение исходного решения заняло {mem_dif} Mib')  # 0.015625 Mib
+    res1, mem_dif1 = func()
     print('\nОптимизированное решение')
-    res2, mem_dif = func2()
-    print(res2)
-    print(f'Выполнение оптимизированного решения заняло {mem_dif} Mib')  # 0.00390625 Mib
+    (odd_cube, sum_of_numbers, sum_of_numbers_2), mem_dif2 = func2()
+    print(f"Список, состоящий из кубов нечетных чисел от 1 до 1000000:\n {list(odd_cube)}")
+    print(f"Сумма чисел из списка, сумма цифр которых делится нацело на 7: {sum_of_numbers}")
+    print(f"Сумма чисел из списка, сумма цифр которых делится нацело на 7, после добавления 17 "
+          f"к каждому элементу списка: {sum_of_numbers_2}")
+    print(f'\nВыполнение исходного решения заняло {mem_dif1} Mib')  # 1.68359375 Mib
+    print(f'Выполнение оптимизированного решения заняло {mem_dif2} Mib')  # 0.00390625 Mib
 
-'''С целью оптимизации памяти для создания списка, состоящего из кубов нечётных чисел от 1 до 1000 вместо цикла 
-был использован List Comprehensions. Также для возврата результата были использованы f-строки. Всё это привело
-к оптимизации памяти'''
+'''С целью оптимизации решения был применен генератор, а также встроенная функция map. Разница между исходным
+и оптимизированным решением будет тем очевиднее, чем больше чисел будет содержать список.'''
