@@ -57,4 +57,4 @@ def pal_checker(string):
     return still_equal
 
 if __name__ == '__main__':
-    print(pal_checker("молоко делили ледоколом"))
+    print(pal_checker("молоко делилиледоколом"))
