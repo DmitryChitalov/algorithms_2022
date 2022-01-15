@@ -53,12 +53,12 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: T(N) = 2 len(lst_obj) + N log N + N + 1
+    Сложность: T(N) = len(lst_obj) + N log N + N + 2
     """
     lst_copy = list(lst_obj)                 # O(len(lst_obj))
     lst_copy.sort()                          # O(N log N)
     for i in range(len(lst_obj) - 1):        # O(N)
-        if lst_copy[i] == lst_copy[i+1]:     # O(len(lst_obj))
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)
 
