@@ -43,7 +43,7 @@ def is_yes(message: str) -> bool:
     :param message: str
     :return: bool
     """
-    return input(message).lower() in ("yes", "y", "yea")
+    return input(message).lower() in ("yes", "y", "yea")            # O(1)
 
 
 def activate_user(user: dict):
@@ -51,7 +51,7 @@ def activate_user(user: dict):
     Activate user
     :param user: dict
     """
-    user["is_activated"] = True
+    user["is_activated"] = True                                     # O(1)
     print(f"User: {user.get('Login')} is activated, {user}")
 
 
@@ -61,19 +61,19 @@ def check_user(user_name: str) -> bool:
     :param user_name: str
     :return: bool
     """
-    credentials = user_getter(user_name)                                # solution 1
-    credentials = user_getter_2(user_name)                              # solution 2
+    credentials = user_getter(user_name)                                # solution 1        O(1)
+    # credentials = user_getter_2(user_name)                              # solution 2        O(n)
 
-    if credentials and credentials.get("is_activated"):
+    if credentials and credentials.get("is_activated"):                                      # O(1)
         print( f"User {credentials.get('Login')} can use our services")
-    elif credentials and not credentials.get("is_activated") and is_yes("your account not activated, activate now?\n"):
+    elif credentials and not credentials.get("is_activated") and is_yes("your account not activated, activate now?\n"):   # O(1)
         activate_user(credentials)
     else:
         message = "User account not activated" if credentials and not credentials.get("is_activated") \
-            else f"User \"{user_name}\" doesn't exist, you can't use our services"
+            else f"User \"{user_name}\" doesn't exist, you can't use our services"                             # O(1)
         print(message)
-        return False
-    return True
+        return False                                # (1)
+    return True                                     # (1)
 
 
 """ Solutions: """
@@ -102,12 +102,13 @@ def user_getter_2(name: str) -> dict:
             return credentials                      # O(1)
 
 
-
 print("Available users is system: ", [(x, f'activated: {k.get("is_activated")}') for x, k in users_list.items()])
-print(check_user(input("user_name?\n").lower()))
+print('Account active:', check_user(input("User name?\n").lower()))
 
 
-
+"""
+Вывод 1 решение самое оптимальное, наименьшая сложность и лаконичность
+"""
 
 
 
