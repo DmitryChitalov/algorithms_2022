@@ -26,6 +26,7 @@ from timeit import timeit
 def find_median(original_array, m):
     for i in range(m):
         original_array.remove(max(original_array))
+    return max(original_array)
 
 
 if __name__ == '__main__':
