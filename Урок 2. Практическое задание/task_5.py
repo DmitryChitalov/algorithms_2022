@@ -19,3 +19,29 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+
+def recursion_print_ascii1(current_num = 32):
+    if current_num == 128:
+        print()
+        return
+    end_char = '  ' if (current_num-1) % 10 else '\n'
+    print(f'{current_num} - {chr(current_num)}', end=end_char)
+    current_num += 1
+    recursion_print_ascii1(current_num)
+
+
+def recursion_print_ascii2(current_num = 32):
+    if current_num == 128:
+        return ''
+    end_char = '  ' if (current_num-1) % 10 else '\n'
+    return f'{current_num} - {chr(current_num)}{end_char}' + recursion_print_ascii2(current_num + 1)
+
+recursion_print_ascii1()
+
+print(recursion_print_ascii2())
+
+
+
+    

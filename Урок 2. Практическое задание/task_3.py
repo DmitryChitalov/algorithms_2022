@@ -18,3 +18,28 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+def get_number(mess):
+    try:
+        num = int(input(mess))
+        return num
+    except ValueError:
+        print('You enter wrong number')
+        return get_number(mess)
+
+
+def reverse(number):
+    def recursion_reverse(number):
+        if number < 10:
+            return [number]
+
+        number, remain = divmod(number, 10)
+        return [remain] + recursion_reverse(number)
+    
+    result_list = recursion_reverse(number)
+    result_list_str = [str(num) for num in result_list]
+    return ''.join(result_list_str)
+    
+number = get_number('Enter number for reverse: ')
+
+print(reverse(number))

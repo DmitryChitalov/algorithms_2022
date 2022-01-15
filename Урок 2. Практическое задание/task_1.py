@@ -27,3 +27,52 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def get_number(mess):
+    try:
+        num = int(input(mess))
+        return num
+    except ValueError:
+        print('You enter wrong number')
+        return get_number(mess)
+
+def get_operation(mess):
+    right_operation = []
+    right_operation.append('+')
+    right_operation.append('-')
+    right_operation.append('*')
+    right_operation.append('/')
+    right_operation.append('0')
+    def recursion_get_operation():
+        operation = input(mess)
+        if operation in right_operation:
+            return operation
+        else:
+            print('You enter wrong operation')
+            return recursion_get_operation()
+    return recursion_get_operation()
+
+def calculator():
+    operation = get_operation('Enter operation (+, -, *, / or 0 for exit): ')
+
+    if operation == '0':
+        return
+    num1 = get_number('Enter first number: ')
+    num2 = get_number('Enter second number: ')
+
+    match operation:
+        case '+':
+            print(f'{num1} {operation} {num2} = {num1 + num2}')
+        case '-':
+            print(f'{num1} {operation} {num2} = {num1 - num2}')
+        case '*':
+            print(f'{num1} {operation} {num2} = {num1 * num2}')
+        case '/':
+            print(f'{num1} {operation} {num2} = {num1 / num2}')
+    calculator()
+
+calculator()
+
+
+
+
