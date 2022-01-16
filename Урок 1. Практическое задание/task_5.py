@@ -50,15 +50,16 @@ class PlatesStack():
         return "Total stacks: %s with max height %s plates" % (len(self.plate_stack_arr), self.MAX_PLATES_IN_STACK)
 
 
-""" инициализация плюс операции """
-testStack = PlatesStack()
-testStack.add_new_plates(3)
-testStack.add_new_plates(6)
-testStack.add_new_plates(14)
-testStack.add_new_plates(17)
+if __name__ == "__main__":
+    """ инициализация плюс операции """
+    testStack = PlatesStack()
+    testStack.add_new_plates(3)
+    testStack.add_new_plates(6)
+    testStack.add_new_plates(14)
+    testStack.add_new_plates(17)
 
-""" Проверка """
-[print(i) for i in testStack.show_all_plate_stacks]  # красиво принтует стопки :)
-print(testStack.total_plates_quantity)
-print(testStack.total_stacks)
+    """ Проверка """
+    [print(i) for i in testStack.show_all_plate_stacks]  # красиво принтует стопки :)
+    print(testStack.total_plates_quantity)
+    print(testStack.total_stacks)
 
