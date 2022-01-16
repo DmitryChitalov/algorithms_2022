@@ -25,26 +25,26 @@ def check_allowance():
     """Функция должна реализовать проверку, может ли пользователь быть допущен к ресурсу.
 
     Алгоритм 1:
-    Сложность: .
+    Сложность: O(n).
     """
-    us_login = input('Введите логин: ')
-    if us_login in users_dict:
-        us_password = input('Введите пароль: ')
-        if users_dict[us_login][0] == us_password:
-            if users_dict[us_login][1] == 1:
-                return 'У Вас есть допуск к ресурсу.'
+    us_login = input('Введите логин: ')             # O(1)
+    if us_login in users_dict:                      # O(n)
+        us_password = input('Введите пароль: ')     # O(1)
+        if users_dict[us_login][0] == us_password:  # O(1)
+            if users_dict[us_login][1] == 1:        # O(1)
+                return 'У Вас есть допуск к ресурсу.'            # O(1)
             else:
                 aut_init = input('У Вас нет допуска к ресурсу.'
-                                 'Пройти активацию?(y/n) :')
-                if aut_init == 'y':
-                    users_dict[us_login][1] = 1
-                    return 'У Вас есть допуск к ресурсу.'
+                                 'Пройти активацию?(y/n) :')     # O(1)
+                if aut_init == 'y':                              # O(1)
+                    users_dict[us_login][1] = 1                  # O(1)
+                    return 'У Вас есть допуск к ресурсу.'        # O(1)
                 else:
-                    return 'У Вас нет допуска к ресурсу.'
+                    return 'У Вас нет допуска к ресурсу.'        # O(1)
         else:
-            return 'Вы ввели неверный пароль.'
+            return 'Вы ввели неверный пароль.'                   # O(1)
     else:
-        return 'Нет такого пользователя.'
+        return 'Нет такого пользователя.'                        # O(1)
 
 users_dict = {'Aaa': ['1234', 0], 'Bbb': ['1234', 1], 'Ccc': ['1234', 0], 'Ddd': ['1234', 0],
               'Fff': ['1234', 1], 'Ggg': ['1234', 0], 'Vvv': ['1234', 1], 'Qqq': ['1234', 0],
