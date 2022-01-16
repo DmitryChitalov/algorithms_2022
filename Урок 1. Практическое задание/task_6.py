@@ -15,47 +15,48 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
-# палиндром
-
-class DequeClass:
+class QueueClass:
     def __init__(self):
-        self.elems = []
+        self.base = []
+        self.solved = []
+        self.revision = []
+
 
     def is_empty(self):
-        return self.elems == []
+        return self.base == []
 
-    def add_to_front(self, elem):
-        self.elems.append(elem)
+    def to_queue(self, item):
+        self.base.insert(0, item)
 
-    def add_to_rear(self, elem):
-        self.elems.insert(0, elem)
+    def from_queue(self):
+        return self.base.pop()
 
-    def remove_from_front(self):
-        return self.elems.pop()
+    def to_solved(self):
+        self.solved.insert(0, self.base.pop())
 
-    def remove_from_rear(self):
-        return self.elems.pop(0)
+    def to_revision(self):
+        self.revision.insert(0, self.base.pop())
+
+    def return_from_revision_to_base(self):
+        self.base.insert(0, self.revision.pop())
 
     def size(self):
-        return len(self.elems)
+        return len(self.base)
 
 
-def pal_checker(string):
-    string = string.replace(" ", "")
-    dc_obj = DequeClass()
+if __name__ == '__main__':
+    qc_obj = QueueClass()
 
-    for el in string:
-        dc_obj.add_to_rear(el)
+    qc_obj.to_queue('my_obj')
+    qc_obj.to_queue(4)
+    qc_obj.to_queue(True)
 
-    still_equal = True
-
-    while dc_obj.size() > 1 and still_equal:
-        first = dc_obj.remove_from_front()
-        last = dc_obj.remove_from_rear()
-        if first != last:
-            still_equal = False
-
-    return still_equal
-
-
-print(pal_checker("топот"))
+    print(qc_obj.base)
+    qc_obj.to_solved()
+    print(qc_obj.solved)
+    qc_obj.to_revision()
+    print(qc_obj.base)
+    print(qc_obj.revision)
+    qc_obj.return_from_revision_to_base()
+    print(qc_obj.revision)
+    print(qc_obj.base)
