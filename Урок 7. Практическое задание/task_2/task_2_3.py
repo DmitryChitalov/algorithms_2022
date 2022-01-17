@@ -18,39 +18,45 @@
 from timeit import timeit
 from random import randint
 from statistics import median
-from algorithms.sort.heap_sort import max_heap_sort
 from task_2_2 import no_sort
+from task_2_1 import heap_sort
 
 m = 10
-ARRAY_10 = [randint(-100, 100) for i in range(2 * m + 1)]
+ARRAY_10_for_2_1 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_10_for_2_2 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_10_for_2_3 = [randint(-100, 100) for _ in range(2 * m + 1)]
 m = 100
-ARRAY_100 = [randint(-100, 100) for j in range(2 * m + 1)]
+ARRAY_100_for_2_1 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_100_for_2_2 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_100_for_2_3 = [randint(-100, 100) for _ in range(2 * m + 1)]
 m = 1000
-ARRAY_1000 = [randint(-100, 100) for k in range(2 * m + 1)]
+ARRAY_1000_for_2_1 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_1000_for_2_2 = [randint(-100, 100) for _ in range(2 * m + 1)]
+ARRAY_1000_for_2_3 = [randint(-100, 100) for _ in range(2 * m + 1)]
 
 print('_____________________________task 2_3.py_____________________________________')
-print(f'Median of array with m = 10: {median(ARRAY_10)}', 'Timing: ',
-      timeit('median(ARRAY_10)', globals=globals(), number=100))
-print(f'Median of array with m = 100: {median(ARRAY_100)}', 'Timing: ',
-      timeit('median(ARRAY_100)', globals=globals(), number=100))
-print(f'Median of array with m = 1000: {median(ARRAY_1000)}', 'Timing: ',
-      timeit('median(ARRAY_1000)', globals=globals(), number=100))
+print(f'Median of array with m = 10, median: {median(ARRAY_10_for_2_3[:])}', 'Timing: ',
+      timeit('median(ARRAY_10_for_2_3[:])', globals=globals(), number=100))
+print(f'Median of array with m = 100, median: {median(ARRAY_100_for_2_2[:])}', 'Timing: ',
+      timeit('median(ARRAY_100_for_2_3[:])', globals=globals(), number=100))
+print(f'Median of array with m = 1000, median: {median(ARRAY_1000_for_2_3[:])}', 'Timing: ',
+      timeit('median(ARRAY_1000_for_2_3[:])', globals=globals(), number=100))
 
 print('_____________________________task 2_1.py_____________________________________')
-print(f'Median of array with m = 10: {median(ARRAY_10)}',
-      timeit('max_heap_sort(ARRAY_10)', globals=globals(), number=100))
-print(f'Median of array with m = 100: {median(ARRAY_100)}',
-      timeit('max_heap_sort(ARRAY_100)', globals=globals(), number=100))
-print(f'Median of array with m = 1000: {median(ARRAY_1000)}',
-      timeit('max_heap_sort(ARRAY_1000)', globals=globals(), number=100))
+print(f'Median of array with m = 10, heap_sort: {heap_sort(ARRAY_10_for_2_1[:])}',
+      timeit('heap_sort(ARRAY_10_for_2_1[:])', globals=globals(), number=100))
+print(f'Median of array with m = 100, heap_sort: {heap_sort(ARRAY_100_for_2_1[:])}',
+      timeit('heap_sort(ARRAY_100_for_2_1[:])', globals=globals(), number=100))
+print(f'Median of array with m = 1000, heap_sort: {heap_sort(ARRAY_1000_for_2_1[:])}',
+      timeit('heap_sort(ARRAY_1000_for_2_1[:])', globals=globals(), number=100))
 
 print('_____________________________task 2_2.py_____________________________________')
-print(f'Median of array with m = 10: {no_sort(ARRAY_10[:])}',
-      timeit('no_sort(ARRAY_10[:])', globals=globals(), number=100))
-print(f'Median of array with m = 100: {no_sort(ARRAY_100[:])}',
-      timeit('no_sort(ARRAY_100[:])', globals=globals(), number=100))
-print(f'Median of array with m = 1000: {no_sort(ARRAY_1000[:])}',
-      timeit('no_sort(ARRAY_1000[:])', globals=globals(), number=100))
+print(f'Median of array with m = 10, no_sort: {no_sort(ARRAY_10_for_2_2[:])}',
+      timeit('no_sort(ARRAY_10_for_2_2[:])', globals=globals(), number=100))
+print(f'Median of array with m = 100, no_sort: {no_sort(ARRAY_100_for_2_2[:])}',
+      timeit('no_sort(ARRAY_100_for_2_2[:])', globals=globals(), number=100))
+print(f'Median of array with m = 1000, no_sort: {no_sort(ARRAY_1000_for_2_2[:])}',
+      timeit('no_sort(ARRAY_1000_for_2_2[:])', globals=globals(), number=100))
 
 print("""
     Встроенная функция поиска медианы справляется лучше всех, 
