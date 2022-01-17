@@ -27,10 +27,6 @@ class BinaryTree:
         try:
             if self.root < new_node:
                 raise ValueError
-        except ValueError:
-            print('You cannot input value bigger than root here!')
-        else:
-            # если у узла нет левого потомка
             if self.left_child is None:
                 # тогда узел просто вставляется в дерево
                 # формируется новое поддерево
@@ -42,16 +38,15 @@ class BinaryTree:
                 # и спускаем имеющегося потомка на один уровень ниже
                 tree_obj.left_child = self.left_child
                 self.left_child = tree_obj
+        except ValueError:
+            print('You cannot input value bigger than root here!')
 
     # добавить правого потомка
     def insert_right(self, new_node):
         try:
             if self.root > new_node:
                 raise ValueError
-        except ValueError:
-            print('You cannot input value bigger than root here!')
-        else:
-            # если у узла нет правого потомка
+                # если у узла нет правого потомка
             if self.right_child is None:
                 # тогда узел просто вставляется в дерево
                 # формируется новое поддерево
@@ -63,14 +58,22 @@ class BinaryTree:
                 # и спускаем имеющегося потомка на один уровень ниже
                 tree_obj.right_child = self.right_child
                 self.right_child = tree_obj
+        except ValueError:
+            print('You cannot input value less than root here!')
 
     # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        try:
+            return self.left_child
+        except AttributeError:
+            return None
 
     # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        try:
+            return self.left_child
+        except AttributeError:
+            return None
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -78,17 +81,20 @@ class BinaryTree:
 
     # метод доступа к корню
     def get_root_val(self):
-        return self.root
+        try:
+            return self.root
+        except AttributeError:
+            print()
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+print(r.get_root_val())  # OK
+print(r.get_left_child())  # None
+r.insert_left(40)  # ValueError
+print(r.get_left_child())  # None
+print(r.get_left_child().get_root_val())  # Error
+r.insert_right(12)  # OK
+print(r.get_right_child())  # 12
+print(r.get_right_child().get_root_val())  # 8
+r.get_right_child().set_root_val(16)  # 8
+print(r.get_right_child().get_root_val())  # 16?
