@@ -14,16 +14,25 @@ from timeit import timeit
 from random import randrange
 
 
-def find_median(m):
+def create_lst(m):
     lst = [randrange(-100, 100) for _ in range(2 * m + 1)]
-    work_lst = lst.copy()
+    return lst
+
+
+def find_median_cycle(lst, m):
     for _ in range(m):
-        work_lst.remove(max(work_lst))
-    return lst, max(work_lst)
+        lst.remove(max(lst))
+    return max(lst)
 
 
-print(find_median(2))
+m1 = 10
+lst1 = create_lst(m1)
+print(timeit('find_median_cycle(lst1.copy(), m1)', globals=globals(), number=1000))  # 0.004336400000000001
 
-print(timeit('find_median(10)', globals=globals(), number=1000))  # 0.015245799999999997
-print(timeit('find_median(100)', globals=globals(), number=1000))  # 0.3195213
-print(timeit('find_median(1000)', globals=globals(), number=1000))  # 23.6803932
+m2 = 100
+lst2 = create_lst(m2)
+print(timeit('find_median_cycle(lst2.copy(), m2)', globals=globals(), number=1000))  # 0.22498410000000002
+
+m3 = 1000
+lst3 = create_lst(m3)
+print(timeit('find_median_cycle(lst3.copy(), m3)', globals=globals(), number=1000))  # 22.4307817

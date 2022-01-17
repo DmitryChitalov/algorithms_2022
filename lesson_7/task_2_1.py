@@ -15,26 +15,33 @@ from timeit import timeit
 from random import randrange
 
 
-# Гномья сортировка
-def find_median(m):
+def create_lst(m):
     lst = [randrange(-100, 100) for _ in range(2 * m + 1)]
+    return lst
 
-    def gnome_opt(lst, m):
-        i, j, size = 1, 2, len(lst)
-        while i < size:
-            if lst[i - 1] <= lst[i]:
+
+# Гномья сортировка
+def find_median_gnome(lst, m):
+    i, j, size = 1, 2, len(lst)
+    while i < size:
+        if lst[i - 1] <= lst[i]:
+            i, j = j, j + 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            i -= 1
+            if i == 0:
                 i, j = j, j + 1
-            else:
-                lst[i - 1], lst[i] = lst[i], lst[i - 1]
-                i -= 1
-                if i == 0:
-                    i, j = j, j + 1
-        return lst, lst[m]
-    return gnome_opt(lst, m)
+    return lst[m]
 
 
-print(find_median(2))
+m1 = 10
+lst1 = create_lst(m1)
+print(timeit('find_median_gnome(lst1.copy(), m1)', globals=globals(), number=1000))  # 0.020183
 
-print(timeit('find_median(10)', globals=globals(), number=1000))  # 0.0275792
-print(timeit('find_median(100)', globals=globals(), number=1000))  # 1.4857689
-print(timeit('find_median(1000)', globals=globals(), number=1000))  # 159.09634640000002
+m2 = 100
+lst2 = create_lst(m2)
+print(timeit('find_median_gnome(lst2.copy(), m2)', globals=globals(), number=1000))  # 1.3294885
+
+m3 = 1000
+lst3 = create_lst(m3)
+print(timeit('find_median_gnome(lst3.copy(), m3)', globals=globals(), number=1000))  # 161.0634322
