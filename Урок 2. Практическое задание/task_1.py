@@ -67,15 +67,9 @@ class Calculator:
         num1 = cls.get_number('Enter first number: ')
         num2 = cls.get_number('Enter second number: ')
 
-        match operation:
-            case '+':
-                print(f'{num1} {operation} {num2} = {num1 + num2}')
-            case '-':
-                print(f'{num1} {operation} {num2} = {num1 - num2}')
-            case '*':
-                print(f'{num1} {operation} {num2} = {num1 * num2}')
-            case '/':
-                print(f'{num1} {operation} {num2} = {num1 / num2}')
+        expression = f'{num1} {operation} {num2}'
+        result = eval(expression)
+        print(f'{expression} = {result}')
         cls.run()
 
 Calculator.run()
