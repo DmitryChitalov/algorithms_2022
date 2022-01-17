@@ -4,9 +4,9 @@ import random
 ##############################################################################
 def check_1(lst_obj):
     """
-    Сложность: O(len(lst)).
+    Сложность: O(n).
     """
-    lst_to_set = set(lst_obj)  # O(len(lst)) зависит от длины аргумента
+    lst_to_set = set(lst_obj)  # O(n)
     return lst_to_set  # O(1)
 
 
@@ -26,7 +26,7 @@ def check_3(lst_obj):
     """
     Сложность: O(nlog(n))
     """
-    lst_copy = list(lst_obj)                            # O(len(lst)) зависит от длины аргумента
+    lst_copy = list(lst_obj)                            # O(n)
     lst_copy.sort()                                     # O(nlog(n))
     for i in range(len(lst_obj) - 1):                   # O(n)
         if lst_copy[i] == lst_copy[i+1]:                # O(1)

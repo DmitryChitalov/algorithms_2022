@@ -1,4 +1,4 @@
-def sw(a):
+def show_least(a):
     # a = [какой-то массив, набор чисел]
     # t = сначала это первый элемент, потом мы его сравниваем до тех пор,
     # пока не найдём меньше, тогда он становится m
@@ -10,7 +10,7 @@ def sw(a):
 # Сложность: О(n)
 
 
-def lw(a):
+def least_of_listed(a):
     k = len(a)
     while k != 0:               # O(n)
         for i in range(1, k):   # O(n)
@@ -24,4 +24,4 @@ def lw(a):
     return a[0]
 # Сложность: О(n^2)
 b = [9, 4, 8, 3, 5]
-print(lw(b), sw(b))
+print(least_of_listed(b), show_least(b))

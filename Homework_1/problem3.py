@@ -1,27 +1,29 @@
-def sw(B):
-    C = []
-    A = B
+def show_largest(h):
+    c = []
+    a = h
+    m = a[0]
     for l in range(3):              # O(1)
-        for i in range(len(A)):     # O(n)
-            m = A[0]
-            if m[1] < A[i][1]:
-                m = A[i]
-        C += [m[0]]
+        for i in range(len(a)):     # O(n)
+            m = a[0]
+            if m[1] < a[i][1]:
+                m = a[i]
+        c += [m[0]]
         A.remove(m)
-    return C
+    return c
 # Сложность: O(n)
 
-def lw(B):
-    A = B
-    k = len(A)
+
+def largest_of_listed(l):
+    a = l
+    k = len(a)
     while k != 0:                   # O(n)
         for i in range(1, k):       # O(n)
-            if A[i][1] < A[i-1][1]:
-                p = A[i-1]
-                del A[i-1]
-                A.insert(i, p)
+            if a[i][1] < a[i-1][1]:
+                p = a[i-1]
+                del a[i-1]
+                a.insert(i, p)
         k -= 1
-    return A[-1][0], A[-2][0], A[-3][0]
+    return a[-1][0], a[-2][0], a[-3][0]
 # Сложность: O(n^2)
-B = [['A', 4], ['B', 6], ['C', 8], ['D', 5]]
-print(lw(B), sw(B))
+b = [['A', 4], ['B', 6], ['C', 8], ['D', 5]]
+print(largest_of_listed(b), show_largest(b))

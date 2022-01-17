@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework_1/problem1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_1/problem1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework_1/problem2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_1/problem2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Homework_1/problem3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_1/problem3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Homework_1/problem4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_1/problem4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +48,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Homework_1/problem2.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Homework_1/problem3.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Homework_1/problem4.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -157,7 +160,7 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
       <workItem from="1642282082872" duration="1093000" />
-      <workItem from="1642406749134" duration="2336000" />
+      <workItem from="1642406749134" duration="4678000" />
     </task>
     <task id="LOCAL-00001" summary="Homework_1">
       <created>1642282615318</created>
@@ -166,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642282615318</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Homework_1">
+      <created>1642409149001</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1642409149002</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">

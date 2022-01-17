@@ -1,4 +1,4 @@
-a = [['login', 'password', 0]]
+b = [['login', 'password', 0]]
 
 
 def enter(a):
@@ -22,4 +22,6 @@ def enter(a):
                 return print('Password is wrong')
     return print(f'There is no such login as {login}')
 # Сложность: О(n)
-enter(a)
+enter(b)
+
+# Идей для второго решения нет
