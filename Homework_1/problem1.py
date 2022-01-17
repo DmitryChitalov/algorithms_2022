@@ -4,16 +4,16 @@ import random
 ##############################################################################
 def check_1(lst_obj):
     """
-    Сложность: O(n).
+    Сложность: O(len(lst)).
     """
-    lst_to_set = set(lst_obj)  # O(len(lst))
+    lst_to_set = set(lst_obj)  # O(len(lst)) зависит от длины аргумента
     return lst_to_set  # O(1)
 
 
 ##############################################################################
 def check_2(lst_obj):
     """
-    Сложность: O(n).
+    Сложность: O(n^2).
     """
     for j in range(len(lst_obj)):          # O(n)
         if lst_obj[j] in lst_obj[j+1:]:    # O(n)
@@ -26,7 +26,7 @@ def check_3(lst_obj):
     """
     Сложность: O(nlog(n))
     """
-    lst_copy = list(lst_obj)                            # O(len(lst))
+    lst_copy = list(lst_obj)                            # O(len(lst)) зависит от длины аргумента
     lst_copy.sort()                                     # O(nlog(n))
     for i in range(len(lst_obj) - 1):                   # O(n)
         if lst_copy[i] == lst_copy[i+1]:                # O(1)

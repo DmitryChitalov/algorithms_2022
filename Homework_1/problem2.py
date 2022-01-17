@@ -1,21 +1,27 @@
-def sw(A):
-    m = A[0]
-    for i in range(len(A)):     # O(n)
-        if m > A[i]:
-            m = A[i]
-    return m
+def sw(a):
+    # a = [какой-то массив, набор чисел]
+    # t = сначала это первый элемент, потом мы его сравниваем до тех пор,
+    # пока не найдём меньше, тогда он становится m
+    t = a[0]
+    for i in range(len(a)):     # O(n)
+        if t > a[i]:
+            t = a[i]
+    return t
 # Сложность: О(n)
 
-def lw(A):
-    k = len(A)
+
+def lw(a):
+    k = len(a)
     while k != 0:               # O(n)
         for i in range(1, k):   # O(n)
-            if A[i] < A[i-1]:
-                p = A[i-1]
-                del A[i-1]
-                A.insert(i, p)
+            if a[i] < a[i-1]:
+                p = a[i-1]
+                # p обозначили удаляемый элемент, чтобы потом вставить
+                # его на другое место
+                del a[i-1]
+                a.insert(i, p)
         k -= 1
-    return A[0]
+    return a[0]
 # Сложность: О(n^2)
-B = [9, 4, 8, 3, 5]
-print(lw(B), sw(B))
+b = [9, 4, 8, 3, 5]
+print(lw(b), sw(b))
