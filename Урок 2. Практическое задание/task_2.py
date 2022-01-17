@@ -52,18 +52,18 @@ def calc_odd_even(number):
     recursion_calc(number)
     return odd_even
 
-def odd_even2(number):
+def calc_odd_even2(number):
     if number < 10:
-        return (1, 0)
+        return {'odd': 1, 'even': 0}
 
     number = number // 10
-    odd, even = odd_even2(number)
-    if (odd + even) % 2:
-        return (odd, even+1)
+    odd_even = calc_odd_even2(number)
+    if (odd_even['odd'] + odd_even['even']) % 2:
+        return {'odd': odd_even['odd'], 'even': odd_even['even'] + 1}
     else:
-        return (odd+1, even)
+        return {'odd': odd_even['odd'] + 1, 'even': odd_even['even']}
 
 num = get_number('Enter number for calculater odd and even digits: ')
 print(calc_odd_even(num))
 
-print(odd_even2(num))
+print(calc_odd_even2(num))

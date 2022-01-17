@@ -21,11 +21,11 @@ def get_number(mess):
         print('You enter wrong number')
         return get_number(mess)
 
-def check_equality(amounts_elements):
-    def sum_range(amounts_elements, current_number = 1):
-        if amounts_elements == current_number:
+def check_equality(amount_elements):
+    def sum_range(amount_elements, current_number = 1):
+        if amount_elements == current_number:
             return current_number
-        return current_number + sum_range(amounts_elements, current_number+1)
-    return sum_range(amounts_elements) == amounts_elements*(amounts_elements+1)/2
+        return current_number + sum_range(amount_elements, current_number+1)
+    return sum_range(amount_elements) == amount_elements*(amount_elements+1)/2
     
 print(check_equality(30))

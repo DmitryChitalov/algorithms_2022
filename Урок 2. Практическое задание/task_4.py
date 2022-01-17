@@ -25,7 +25,6 @@ def sum_array(amount_elements, current_element = 1):
         return current_element
     return current_element + sum_array(amount_elements - 1, current_element / -2)
 
-    
 
 amount_elements = get_number('Enter amount of elements for range (1 -0.5 0.25 ...): ')
 

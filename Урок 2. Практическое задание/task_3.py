@@ -28,7 +28,7 @@ def get_number(mess):
         return get_number(mess)
 
 
-def reverse(number):
+def reverse(number: int) -> str:
     def recursion_reverse(number):
         if number < 10:
             return [number]

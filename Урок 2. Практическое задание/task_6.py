@@ -31,15 +31,25 @@ def quessing_game(hidden_number, remaining_try = 10):
         print(f'You lose, {hidden_number=}')
         return
 
-    additional_message = ''
+    prompt_proximity = ''
 
     if abs(quess - hidden_number) < 10:
-        additional_message = 'but very hot'
+        prompt_proximity = 'but very hot!'
 
     if quess > hidden_number:
-        print(f'You enter too big number {additional_message}')
+        prompt_big_or_low = "big"   
     elif quess < hidden_number:
-        print(f'You enter too low nuber {additional_message}')
+        prompt_big_or_low = "low"
+    
+    if prompt_big_or_low and prompt_proximity:
+        prompt_common = f'You enter too {prompt_big_or_low} number, {prompt_proximity}'
+    elif prompt_big_or_low and not prompt_proximity:
+        prompt_common = f'You enter too {prompt_big_or_low} number!'
+    
+    if prompt_big_or_low:
+        print(prompt_common)
+
+        
 
     quessing_game(hidden_number, remaining_try)
 

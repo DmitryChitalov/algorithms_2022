@@ -28,50 +28,57 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-def get_number(mess):
-    try:
-        num = int(input(mess))
-        return num
-    except ValueError:
-        print('You enter wrong number')
-        return get_number(mess)
+class Calculator:
+    STOP_CALC = '0'
+    
+    @classmethod
+    def get_number(cls, mess):
+        try:
+            num = int(input(mess))
+            return num
+        except ValueError:
+            print('You enter wrong number')
+            return cls.get_number(mess)
+  
+    @classmethod
+    def get_operation(cls, mess):
+        allowed_operations = set()
+        allowed_operations.add('+')
+        allowed_operations.add('-')
+        allowed_operations.add('*')
+        allowed_operations.add('/')
+        allowed_operations.add(cls.STOP_CALC)
 
-def get_operation(mess):
-    right_operation = []
-    right_operation.append('+')
-    right_operation.append('-')
-    right_operation.append('*')
-    right_operation.append('/')
-    right_operation.append('0')
-    def recursion_get_operation():
-        operation = input(mess)
-        if operation in right_operation:
-            return operation
-        else:
-            print('You enter wrong operation')
-            return recursion_get_operation()
-    return recursion_get_operation()
+        def recursion_get_operation():
+            operation = input(mess)
+            if operation in allowed_operations:
+                return operation
+            else:
+                print('You enter wrong operation')
+                return recursion_get_operation()
+        return recursion_get_operation()
 
-def calculator():
-    operation = get_operation('Enter operation (+, -, *, / or 0 for exit): ')
+    @classmethod
+    def run(cls):
+        operation = cls.get_operation('Enter operation (+, -, *, / or 0 for exit): ')
 
-    if operation == '0':
-        return
-    num1 = get_number('Enter first number: ')
-    num2 = get_number('Enter second number: ')
+        if operation == cls.STOP_CALC:
+            return
+        num1 = cls.get_number('Enter first number: ')
+        num2 = cls.get_number('Enter second number: ')
 
-    match operation:
-        case '+':
-            print(f'{num1} {operation} {num2} = {num1 + num2}')
-        case '-':
-            print(f'{num1} {operation} {num2} = {num1 - num2}')
-        case '*':
-            print(f'{num1} {operation} {num2} = {num1 * num2}')
-        case '/':
-            print(f'{num1} {operation} {num2} = {num1 / num2}')
-    calculator()
+        match operation:
+            case '+':
+                print(f'{num1} {operation} {num2} = {num1 + num2}')
+            case '-':
+                print(f'{num1} {operation} {num2} = {num1 - num2}')
+            case '*':
+                print(f'{num1} {operation} {num2} = {num1 * num2}')
+            case '/':
+                print(f'{num1} {operation} {num2} = {num1 / num2}')
+        cls.run()
 
-calculator()
+Calculator.run()
 
 
 
