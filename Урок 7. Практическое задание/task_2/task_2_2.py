@@ -17,28 +17,28 @@ from timeit import timeit
 from random import randint
 
 m = 10
-ARRAY_10 = [randint(-100, 100) for i in range(2 * m + 1)]
+ARRAY_10 = [randint(-1000, 1000) for z in range(2 * m + 1)]
 m = 100
-ARRAY_100 = [randint(-100, 100) for j in range(2 * m + 1)]
+ARRAY_100 = [randint(-1000, 1000) for y in range(2 * m + 1)]
 m = 1000
-ARRAY_1000 = [randint(-100, 100) for k in range(2 * m + 1)]
+ARRAY_1000 = [randint(-1000, 1000) for x in range(2 * m + 1)]
 
 
 def no_sort(arr):
     left = []
     right = []
-    for i in range(len(arr)):
-        for j in range(len(arr)):
-            if arr[i] > arr[j]:
-                left.append(arr[j])
-            if arr[i] < arr[j]:
-                right.append(arr[j])
-            if arr[i] == arr[j] and i > j:
-                left.append(arr[j])
-            if arr[i] == arr[j] and i < j:
-                right.append(arr[j])
+    for n in range(len(arr)):
+        for t in range(len(arr)):
+            if arr[n] > arr[t]:
+                left.append(arr[t])
+            if arr[n] < arr[t]:
+                right.append(arr[t])
+            if arr[n] == arr[t] and n > t:
+                left.append(arr[t])
+            if arr[n] == arr[t] and n < t:
+                right.append(arr[t])
         if len(left) == len(right):
-            return arr[i]
+            return arr[n]
         left.clear()
         right.clear()
 
