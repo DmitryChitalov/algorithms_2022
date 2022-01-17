@@ -58,12 +58,16 @@ def calc_odd_even2(number):
 
     number = number // 10
     odd_even = calc_odd_even2(number)
-    if (odd_even['odd'] + odd_even['even']) % 2:
-        return {'odd': odd_even['odd'], 'even': odd_even['even'] + 1}
+    is_even_number_now = bool((odd_even['odd'] + odd_even['even']) % 2)
+    if is_even_number_now:
+        return {'odd': odd_even['odd'], 
+                'even': odd_even['even'] + 1}
     else:
-        return {'odd': odd_even['odd'] + 1, 'even': odd_even['even']}
+        return {'odd': odd_even['odd'] + 1, 
+                'even': odd_even['even']}
 
 num = get_number('Enter number for calculater odd and even digits: ')
+
 print(calc_odd_even(num))
 
 print(calc_odd_even2(num))
