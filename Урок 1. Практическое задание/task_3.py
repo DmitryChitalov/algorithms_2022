@@ -16,4 +16,14 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+info_table = {'Apple': 3000, 'IBM': 10,'Tesla': 500, 'Evergrind': -500, 'Rosneft': 5}
 
+
+#по ключу
+def way_max_1(info_table):
+    max = info_table[0]  # O(1)
+    for key in info_table:  # O(n)
+        if key > max:  # O(1)
+            max = key  # O(1)
+    return max
+print(way_max_1(info_table))

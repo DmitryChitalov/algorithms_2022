@@ -13,22 +13,17 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
-import numpy as np
+list = [ 0, -1, 10, -25, 100, -3]
 
-list = np.random.randint(-10, 10, 10)
-
-print("Таков список: ",list)
-
+# O(n**2)
 def search_min_quadratic(list):
-    min = list[0]  # O(1)
-    for i in list:  # O(n)
-        if i < min:  # O(1)
-            min = i  # O(1)
-
-    return min
+    for i in list:   # O(n)
+        if i < list[0]:  # O(1)
+            list.insert(0, list[list.index(i)])  # O(n)
+    return list[0]
 
 
-
+O(n)
 def search_min_linear(list):
     min = list[0]       #O(1)
     for i in list:      #O(n)
