@@ -24,3 +24,20 @@ reduce
 __mul__
 __add__
 """
+
+
+class Hexadecimal_number:
+    def __init__(self, value):
+        need_num = set(range(0, 10)).union({'a', 'b', 'c', 'd', 'e', 'f'})
+        if set(value) <= need_num:
+            self.value = value
+        else:
+            self.value = None
+
+    def __add__(self, other):
+
+
+
+number1 = Hexadecimal_number('aq123')
+
+print(number1.value)
