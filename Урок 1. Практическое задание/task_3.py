@@ -16,14 +16,38 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
-info_table = {'Apple': 3000, 'IBM': 10,'Tesla': 500, 'Evergrind': -500, 'Rosneft': 5}
+info_table = {
+    'Apple': 3000,
+    'IBM': 10,
+    'Tesla': 500,
+    'Evergrind': -500,
+    'Rosneft': 5,
+    'Gazprom': 25
+}
 
 
-#по ключу
 def way_max_1(info_table):
-    max = info_table[0]  # O(1)
-    for key in info_table:  # O(n)
-        if key > max:  # O(1)
-            max = key  # O(1)
-    return max
+    # Сложность: Т(n) =  O(n**2)
+    copy_table = [(company, revenue) for company, revenue in info_table.copy().items()]  # O(n**2)
+    copy_table.sort(key=lambda x: x[-1])                                                 # O(n log n)
+    max_revenues = {company: revenue for company, revenue in copy_table[-3:]}            # O(1)
+    return max_revenues                                                                  # O(1)
+
+
+def way_max_2(info_table):
+    # Сложность: Т(n) =  O(n)
+    copy_table = info_table.copy()                                          # O(n)
+    max_revenues = {}                                                       # O(1)
+    for i in range(3):                                                      # O(1)
+        company, revenue = max(copy_table.items(), key = lambda x: x[1])    # O(n)
+        del copy_table[company]                                             # O(1)
+        max_revenues.update({company: revenue})                             # O(1)
+    return max_revenues
+
+
+# def way_max_3(info_table):
+#     for key, val in sorted(info_table.items(), key= lambda x: x[1]):
+#         info_table_sorted = {k: info_table[k] for k in sorted(info_table, key=info_table.get, reverse=True)}
+
 print(way_max_1(info_table))
+print(way_max_2(info_table))

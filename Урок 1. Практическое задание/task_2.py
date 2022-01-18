@@ -23,7 +23,7 @@ def search_min_quadratic(list):
     return list[0]
 
 
-O(n)
+# O(n)
 def search_min_linear(list):
     min = list[0]       #O(1)
     for i in list:      #O(n)
