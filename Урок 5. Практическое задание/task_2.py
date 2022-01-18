@@ -24,20 +24,76 @@ reduce
 __mul__
 __add__
 """
+from collections import deque
 
 
 class Hexadecimal_number:
     def __init__(self, value):
-        need_num = set(range(0, 10)).union({'a', 'b', 'c', 'd', 'e', 'f'})
-        if set(value) <= need_num:
-            self.value = value
+        need_num = {'a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+
+        if set(value.lower()) <= need_num:
+            self.value = list(value.lower())
         else:
             self.value = None
 
     def __add__(self, other):
+        return list(str(
+            hex(int('0x' + ''.join(map(str, self.value)), 16) + int('0x' + ''.join(map(str, other.value)), 16))))[2:]
+
+    def __mul__(self, other):
+        return list(str(
+            hex(int('0x' + ''.join(map(str, self.value)), 16) * int('0x' + ''.join(map(str, other.value)), 16))))[2:]
 
 
+number1 = Hexadecimal_number('A2')
+number2 = Hexadecimal_number('C4f')
 
-number1 = Hexadecimal_number('aq123')
+print(number1 + number2)
+print(number1 * number2)
 
-print(number1.value)
+
+def plus16(pl1, pl2, adding):
+    result = deque(str(hex(int('0x' + pl1, 16) + int('0x' + pl2, 16) + adding)))
+    result.popleft()
+    result.popleft()
+    return result
+
+
+def x16(pl1, pl2):
+    result = deque(str(hex(int('0x' + pl1, 16) * int('0x' + pl2, 16))))
+    result.popleft()
+    result.popleft()
+    return result
+
+
+# def sum16(num1, num2):
+#     summand1 = deque(num1)
+#     summand2 = deque(num2)
+#     if len(summand1) > len(summand2):
+#         for i in range(0, len(summand1) - len(summand2)):
+#             summand2.appendleft('0')
+#     else:
+#         for i in range(0, len(summand2) - len(summand1)):
+#             summand1.appendleft('0')
+#     summand1.reverse()
+#     summand2.reverse()
+#     summ_all = deque()
+#     inter_summ = []
+#     for i in range(0, len(summand1)):
+#         if len(inter_summ) > 1:
+#             inter_summ = plus16(summand1[i], summand2[i], int(inter_summ[0]))
+#         else:
+#             inter_summ = plus16(summand1[i], summand2[i], 0)
+#         summ_all.appendleft(inter_summ[-1])
+#     if len(inter_summ) > 1:
+#         summ_all.appendleft(inter_summ[0])
+#
+#     return summ_all
+
+
+print(plus16('a2', 'c4f', 0))
+print(x16('a2', 'c4f'))
+
+# Полнейшее чувство изобретения велосипеда. Коллекции в данной задаче совершенно не нужны.
+# Пытался делать поразрядно,но  На умножении вообще сломал мозг.
+# Да и опять же зачем здесь коллекции если не используются никакие их особенности ( да удаляются первые элементы из дека, но можно обойтись обычным списком взяв срез)
