@@ -20,3 +20,18 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+account_dict = {
+    'user1': {'login': 'Alex', 'password': 1111, 'status': True},
+                'user2': {'login': 'Vika', 'password': 1213, 'status': False},
+                'user3': {'login': 'Nick', 'password': 2132, 'status': True}
+}
+
+def check_acc(account_dict):
+    for i in account_dict.keys():
+        for val in account_dict.values():
+            if val == [i]["login"]["password"]["status"] and ["status"] == True:
+             return check_acc
+    else:
+        print('Активируйте сою учетную запись!')
+
+print (check_acc(account_dict))
