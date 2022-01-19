@@ -24,35 +24,26 @@ def gnome(data):
             data[i - 1], data[i] = data[i], data[i - 1]
             if i > 1:
                 i -= 1
-    return data
+    return data[m]
 
 
 m = 10
 some_list = [randint(-100, 100) for i in range(2 * m + 1)]
 
 
-def gnome_median(sort_data):
-    gnome(sort_data)
-    median = sort_data[m]
-    median_left = []
-    median_right = [median]
-    for i in sort_data:
-        if i < median:
-            median_left.append(i)
-        elif i > median:
-            median_right.append(i)
-    median_left.append(median)
-    return median_left, median_right
+# def gnome_median(sort_data):
+#     return sort_data[m]
 
 
 m = 10
 some_list = [randint(-100, 100) for i in range(2 * m + 1)]
-print(timeit('gnome_median(some_list[:])', globals=globals(), number=100))
+print(timeit('gnome(some_list[:])', globals=globals(), number=100))
 
 m = 100
 some_list = [randint(-100, 100) for i in range(2 * m + 1)]
-print(timeit('gnome_median(some_list[:])', globals=globals(), number=100))
+print(timeit('gnome(some_list[:])', globals=globals(), number=100))
 
 m = 1000
 some_list = [randint(-100, 100) for i in range(2 * m + 1)]
-print(timeit('gnome_median(some_list[:])', globals=globals(), number=100))
+print(timeit('gnome(some_list[:])', globals=globals(), number=100))
+
