@@ -16,5 +16,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
-1230->3210
+1230->0321
 """
+def reverse_number(number: int) -> str:
+    """
+    Function reverse numbers from user input
+    :param number:
+    :return:
+    """
+    return "" if not number else "%s%s" % (str(number % 10), reverse_number(int(number)//10))
+
+
+print(reverse_number(3560))

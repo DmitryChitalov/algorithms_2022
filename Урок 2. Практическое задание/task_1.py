@@ -27,3 +27,53 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator_recursive(operator: str = None):
+    result = 0
+    if operator:
+        try:
+            num = int(input("первое число\n"))
+            num2 = int(input("второе число\n"))
+            operations = {
+                "-": num - num2,
+                "+": num + num2,
+                "*": num * num2,
+                "/": num / num2
+            }
+            result = operations[operator]
+            print("Результат = %s" % result)
+        except ValueError:
+            print("Вводите числа! живо!")
+        except ZeroDivisionError:
+            print("кто на ноль делит!? аллооооо")
+        finally:
+            operator = None
+    else:
+        while operator not in ["+", "-", "*", "/", "0"]:
+            operator = input("ведите операцию (+, -, *, /) или 0 для выхода\n")
+
+    if operator == "0":
+        return "Программа завершена"
+    else:
+        calculator_recursive(operator)
+
+
+calculator_recursive()
+
+
+""" 
+Интересный момент если сделать доп. рекурсивную фунцию для назначения оператора, 
+то могут происходить ошибки. 
+Если первым написать какуюто строку а после ввести правильное значение, то вернется None. 
+Получается не всегда можно заменить цикл? или я неправильно понял как вернуть результат? 
+"""
+
+def get_operator_recursive():
+    """Тестовая доп. рекурсивная функция для получения оператора"""
+    operator = input("ведите операцию (+, -, *, /) или 0 для выхода\n")
+    if operator in ["+", "-", "*", "/", "0"]:
+        return operator
+    else:
+        get_operator_recursive()
+
+#print(get_operator_recursive())
