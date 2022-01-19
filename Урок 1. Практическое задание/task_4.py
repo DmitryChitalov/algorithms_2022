@@ -20,3 +20,25 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+user1 = {'Login': 'user1', 'Password': '81dc9bdb52d04dc20036dbd8313ed055', 'Active?': True}
+user2 = {'Login': 'user2', 'Password': '81dc9bddcdcss20036dbd8313ed055', 'Active?': False}
+
+'''O(1)'''
+def access1(user):
+    if user['Active?']:
+        return f"{user['Login']} Учетная запись активирована"
+    return f"{user['Login']} Учетная запись не активирована"
+
+'''O(1) - На мой взгляд это решение лучше, т.к. не работает с индексами словаря'''
+def access2(user):
+    if True in user.values():
+        return f"{user['Login']} Учетная запись активирована"
+    return f"{user['Login']} Учетная запись не активирована"
+
+
+print(access1(user1))
+print(access1(user2))
+print(access2(user1))
+print(access2(user2))
+print(7%3)
