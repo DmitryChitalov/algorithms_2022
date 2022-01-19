@@ -12,3 +12,20 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+n = int(input('n = '))
+
+
+def get_sum(n):
+    if n == 0:
+        return n
+    if n == 1:
+        print(f'{n} = ', end='')
+        return n + get_sum(n - 1)
+    else:
+        print(f'{n} + ', end='')
+        return n + get_sum(n - 1)
+
+
+print(get_sum(n))
+print(f'{n}({n}+1)/2 = {n * (n + 1) / 2}')
