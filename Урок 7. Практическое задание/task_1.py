@@ -22,12 +22,14 @@ from timeit import timeit
 
 def bubble_sort(list_obj):
     n = 1
+    count = 0
     while n < len(list_obj):
         for i in range(len(list_obj) - 1):
             if list_obj[i] < list_obj[i - 1]:
                 list_obj[i], list_obj[i - 1] = list_obj[i - 1], list_obj[i]
+            count += 1
         n += 1
-    return list_obj
+    return count, list_obj
 
 def bubble_sort_2(list_obj):
     count = 0
@@ -67,8 +69,28 @@ print('Пузырек 500 элементов = ',
 print('Пузырек_2 500 элементов = ',
       timeit('bubble_sort_2(list_1[:])', globals=globals(), number=1000))
 # Пузырек 500 элементов = 111.17879389999999
-# Пузырек_2 500 элементов = 91.0835901
-# Доработка пузырькового метода не оказалась эффективной
+# Пузырек_2 500 элементов = 91.84096865949038
+
+sorted_list = list(reversed([x for x in range(500)]))
+print('(список сортированный) Пузырек 500 элементов = ',
+      timeit('bubble_sort(sorted_list[:])', globals=globals(), number=1000))
+print('(список сортированный) Пузырек_new 500 элементов = ',
+      timeit('bubble_sort_2(sorted_list[:])', globals=globals(), number=1000))
+# (список сортированный) Пузырек 500 элементов =  125.84570490000002
+# (список сортированный) Пузырек_new 500 элементов =  0.1950034000000187
+'''
+Доработанный пузырек может быть эффективен на небольших массивах
+и точно эффективен на отсортированных массивах
+'''
+
+
+
+
+
+
+
+
+
 
 
 

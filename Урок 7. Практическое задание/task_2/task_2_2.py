@@ -15,21 +15,24 @@
 """
 from timeit import timeit
 from random import randint
-from statistics import median
+
+def get_mediana(my_list, m):
+    for i in range(m):
+        my_list.remove(max(my_list))
+    return my_list
 
 m = 10
 my_list_10 = [randint(0, 100) for x in range(2*m+1)]
-print(timeit("median(my_list_10[:])", globals=globals(), number=1000))
+print(timeit("get_mediana(my_list_10[:], m)", globals=globals(), number=1000))
+
 m = 100
 my_list_100 = [randint(0, 100) for x in range(2*m+1)]
-print(timeit("median(my_list_100[:])", globals=globals(), number=1000))
+print(timeit("get_mediana(my_list_100[:], m)", globals=globals(), number=1000))
+
 m = 1000
 my_list_1000 = [randint(0, 100) for x in range(2*m+1)]
-print(timeit("median(my_list_1000[:])", globals=globals(), number=1000))
-
-
-# Результаты:
-# m 10 - 0.004026799999999997
-# m 100 - 0.040113099999999985
-# m 1000 - 0.6270933000000001
-# Самый лучший способ решения
+print(timeit("get_mediana(my_list_1000[:], m)", globals=globals(), number=30))
+# Результаты
+# 0.0198922
+# 1.2371535
+# 3.0462731000000005

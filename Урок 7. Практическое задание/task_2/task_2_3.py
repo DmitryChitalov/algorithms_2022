@@ -18,8 +18,6 @@
 from timeit import timeit
 from random import randint
 from statistics import median
-# Есть хороший пакет с готовыми алгоритмами и другими полезными модулями
-from algorithms.sort.heap_sort import max_heap_sort
 
 m = 10
 ARRAY_10 = [randint(-100, 100) for i in range(2 * m + 1)]
@@ -39,5 +37,8 @@ print(f'Медиана массива с m = 1000: {median(ARRAY_1000)}',
 Медиана массива с m = 10: -21 0.01916049999999997
 Медиана массива с m = 100: 1 1.3750762
 Медиана массива с m = 1000: 1 106.606775
+
+Самым быстрым способом оказался способ через функцию median из statistic
+Cамым худшим оказался нахождение медианы через сортировку
 
 '''
