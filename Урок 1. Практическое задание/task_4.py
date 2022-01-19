@@ -21,31 +21,6 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-
-users_data = {
-    'Viktor': {
-        'login': 'Viktor',
-        'password': 'abra',
-        'is_activated': False
-    },
-    'Peter': {
-        'login': 'Peter',
-        'password': "abracad",
-        'is_activated': False
-    },
-    'Sara': {
-        'login': 'Sara',
-        'password': "abracadabra",
-        'is_activated': True
-    },
-    'Ivan': {
-        'login': 'Ivan',
-        'password': "abracadabra111",
-        'is_activated': True
-    }
-}
-
-
 def activate_user(user: dict):
     user['is_activated'] = True                  #O(1)
     print(f"{user.get('Login')} , {user}")       #O(1)
@@ -89,4 +64,30 @@ def check_status(user_name):
     return True
 
 print(check_status(input("Ваш логин: ")))
+
 """ Решение с функцией def auth_1(user_name) самое эффективное, так как наименее сложное"""
+
+
+users_data = {
+    'Viktor': {
+        'login': 'Viktor',
+        'password': 'abra',
+        'is_activated': False
+    },
+    'Peter': {
+        'login': 'Peter',
+        'password': "abracad",
+        'is_activated': False
+    },
+    'Sara': {
+        'login': 'Sara',
+        'password': "abracadabra",
+        'is_activated': True
+    },
+    'Ivan': {
+        'login': 'Ivan',
+        'password': "abracadabra111",
+        'is_activated': True
+    }
+}
+

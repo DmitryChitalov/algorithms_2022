@@ -14,7 +14,7 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 --код с нуля писать не нужно, требуется доработать пример с урока
 """
-from task_15 import DequeClass
+from task_6 import DequeClass
 
 
 def pal_checker(string):

@@ -17,8 +17,8 @@ list = [ 0, -1, 10, -25, 100, -3]
 
 # O(n**2)
 def search_min_quadratic(list):
-    for i in list:   # O(n)
-        if i < list[0]:  # O(1)
+    for i in list:                               # O(n)
+        if i < list[0]:                          # O(1)
             list.insert(0, list[list.index(i)])  # O(n)
     return list[0]
 
