@@ -27,9 +27,9 @@ info_table = {
 
 
 def way_max_1(info_table):
-    # Сложность: Т(n) =  O(n**2)
-    copy_table = [[company, revenue] for company, revenue in info_table.copy().items()]  # O(n**2)
-    copy_table.sort(key=lambda x: x[-1], reverse = True)                                                 # O(n log n)
+    # Сложность: Т(n) =  O(n log n)
+    copy_table = [[company, revenue] for company, revenue in info_table.copy().items()]  # O(n)
+    copy_table.sort(key=lambda x: x[-1], reverse = True)                                  # O(n log n)
 
     max_revenues = {company: revenue for company, revenue in copy_table[0:3]}            # O(1)
     return max_revenues                                                                  # O(1)
@@ -52,3 +52,6 @@ def way_max_2(info_table):
 
 print(way_max_1(info_table))
 print(way_max_2(info_table))
+
+#copy_table = [[company, revenue] for company, revenue in info_table.copy().items()]  # O(n)
+#Исправлена О-нотация
