@@ -29,7 +29,6 @@
 """
 
 def calculator_recursive(operator: str = None):
-    result = 0
     if operator:
         try:
             num = int(input("первое число\n"))

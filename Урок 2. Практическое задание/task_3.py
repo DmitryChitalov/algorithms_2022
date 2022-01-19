@@ -28,3 +28,4 @@ def reverse_number(number: int) -> str:
 
 
 print(reverse_number(3560))
+print(reverse_number(1234567890))
