@@ -58,7 +58,7 @@ def check_list_extend(my_lst):
 
 
 def check_deque_extend(my_deque):
-    add_deque = deque(randint(0, 10000) for i in range(10))
+    add_deque = list(randint(0, 10000) for i in range(10))
     for i in range(0, 1000):
         my_deque.extend(add_deque)
 
@@ -105,12 +105,12 @@ def deque_get(my_deque, idx):
 
 def check_list_get(my_lst):
     for i in range(0, 10000):
-        list_get(my_lst, 5)
+        list_get(my_lst, randint(1,10))
 
 
 def check_deque_get(my_deque):
     for i in range(0, 10000):
-        deque_get(my_deque, 5)
+        deque_get(my_deque, randint(1,10))
 
 
 new_lst = list(randint(0, 10000) for i in range(1000))
@@ -118,7 +118,7 @@ new_deque = deque(randint(0, 10000) for j in range(1000))
 print("list append", timeit("check_list_append(new_lst)", number=2000, globals=globals()), "seconds")
 print("deque append", timeit("check_deque_append(new_deque)", number=2000, globals=globals()), "seconds")
 
-# В результате 4х проходов, list append незначительно медленнее
+# В результате 4х проходов, list append незначительно медленнее чем deque append
 # list append 2.115750741 seconds
 # deque append 1.7006729270000003 seconds
 
@@ -135,7 +135,7 @@ print("-------------------------------------------------------------------------
 print("list pop", timeit("check_list_pop(new_lst)", number=2000, globals=globals()), "seconds")
 print("deque pop", timeit("check_deque_pop(new_deque)", number=2000, globals=globals()), "seconds")
 
-# В результате 4х проходов, list pop незначительно медленнее
+# В результате 4х проходов, list pop незначительно медленнее чем deque pop
 # list pop 2.2226102789999995 seconds
 # deque pop 1.8161810469999997 seconds
 
@@ -152,7 +152,7 @@ print("-------------------------------------------------------------------------
 print("list extend", timeit("check_list_extend(new_lst)", number=2000, globals=globals()), "seconds")
 print("deque extend", timeit("check_deque_extend(new_deque)", number=2000, globals=globals()), "seconds")
 
-# За четыре прохода,  list extend выполняется в среднем в два раза медленне.
+# За четыре прохода,  list extend выполняется в среднем в два раза медленне чем deque extend.
 # Сделать большее количество повтрений ( как и увеличть массивы для добавления не представляется возможным, возникает Memory Error)
 
 # list extend 0.736774881 seconds
@@ -174,7 +174,7 @@ print("-------------------------------------------------------------------------
 print("list insert", timeit("check_list_insert(new_lst)", number=200, globals=globals()), "seconds")
 print("deque appendleft", timeit("check_deque_appendleft(new_deque)", number=200, globals=globals()), "seconds")
 
-# За 4 прохода list insert ощутимо медленнее
+# За 4 прохода list insert ощутимо медленнее чем deque appendleft
 # list insert 7.410647322 seconds
 # deque appendleft 0.017128385000000357 seconds
 
@@ -190,7 +190,7 @@ print("deque appendleft", timeit("check_deque_appendleft(new_deque)", number=200
 print("-------------------------------------------------------------------------------------")
 print("list popleft", timeit("check_list_popleft(new_lst)", number=20000, globals=globals()), "seconds")
 print("deque popleft", timeit("check_deque_popleft(new_deque)", number=20000, globals=globals()), "seconds")
-# За четыре прохода  list popleft значительно медленнее
+# За четыре прохода  list popleft значительно медленнее чем deque popleft
 # list popleft 3.971813061 seconds
 # deque popleft 0.00023720599999776937 seconds
 
@@ -208,6 +208,7 @@ print("-------------------------------------------------------------------------
 print("list extendleft", timeit("check_list_extendleft(new_lst)", number=200, globals=globals()), "seconds")
 print("deque extendleft", timeit("check_deque_extendleft(new_deque)", number=200, globals=globals()), "seconds")
 
+# За четыре прохода  list extendleft значительно медленнее чем deque extendleft
 # list extendleft 7.503493503 seconds
 # deque extendleft 0.03978234100000044 seconds
 #
@@ -222,10 +223,10 @@ print("deque extendleft", timeit("check_deque_extendleft(new_deque)", number=200
 
 print("-------------------------------------------------------------------------------------")
 print("-------------------------------------------------------------------------------------")
-print("list get", timeit("check_list_get(new_lst)", number=2000, globals=globals()), "seconds")
-print("deque get", timeit("check_deque_get(new_deque)", number=2000, globals=globals()), "seconds")
+print("list get", timeit("check_list_get(new_lst)", number=200, globals=globals()), "seconds")
+print("deque get", timeit("check_deque_get(new_deque)", number=200, globals=globals()), "seconds")
 
-# За 4 прохода время обращения по индексу примерно одинаковое
+# За 4 прохода время обращения по индексу у list get  и у deque get примерно одинаковое
 # list get 2.787052984 seconds
 # deque get 2.9590267850000003 seconds
 
@@ -234,5 +235,19 @@ print("deque get", timeit("check_deque_get(new_deque)", number=2000, globals=glo
 
 # list get 2.806539452 seconds
 # deque get 2.7502907340000005 seconds
+
 # list get 2.8312156400000004 seconds
 # deque get 2.951112911 seconds
+
+
+#Итоговые выводы
+#
+#  1) в сравнении  операций append, pop, extend списка и дека ,
+#  операции append и pop для списка выполняются немного медленнее чем для дека.
+# операция extend - сильно быстрее для дека, чем для списка
+
+# 2) в сравнении операций appendleft, popleft, extendleft дека и соответствующих им операций списка - все операции
+# для дека выполняются намного быстрее , чем для списка.
+
+# 3) в сравнении операции получения элемента списка и дека по индексу - время выполнения для списка и дека примерно одинаковое
+#

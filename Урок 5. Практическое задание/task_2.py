@@ -27,7 +27,7 @@ __add__
 from collections import deque
 
 
-class Hexadecimal_number:
+class HexNum:
     def __init__(self, value):
         need_num = {'a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
@@ -45,8 +45,8 @@ class Hexadecimal_number:
             hex(int('0x' + ''.join(map(str, self.value)), 16) * int('0x' + ''.join(map(str, other.value)), 16))))[2:]
 
 
-number1 = Hexadecimal_number('A2')
-number2 = Hexadecimal_number('C4f')
+number1 = HexNum('A2')
+number2 = HexNum('C4f')
 
 print(number1 + number2)
 print(number1 * number2)
