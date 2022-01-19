@@ -18,7 +18,7 @@ from timeit import timeit
 import math
 
 
-def shellSort(array):
+def shell_sort(array):
     n = len(array)
     k = int(math.log2(n))
     interval = 2**k - 1
@@ -37,18 +37,19 @@ def shellSort(array):
 
 m = 10
 orig_list = [randint(0, 1000) for _ in range(2 * m + 1)]
-print(timeit('shellSort(orig_list[:])', globals=globals(), number=1000))
-lst = shellSort(orig_list)
+print(timeit('shell_sort(orig_list[:])', globals=globals(), number=1000))
+lst = shell_sort(orig_list)
 print(f'медиана равна {lst[m]}')
 
 m = 100
 orig_list = [randint(0, 1000) for _ in range(2 * m + 1)]
-print(timeit('shellSort(orig_list[:])', globals=globals(), number=1000))
-lst = shellSort(orig_list)
+print(timeit('shell_sort(orig_list[:])', globals=globals(), number=1000))
+lst = shell_sort(orig_list)
 print(f'медиана равна {lst[m]}')
 
 m = 1000
 orig_list = [randint(0, 1000) for _ in range(2 * m + 1)]
-print(timeit('shellSort(orig_list[:])', globals=globals(), number=1000))
-lst = shellSort(orig_list)
+print(timeit('shell_sort(orig_list[:])', globals=globals(), number=1000))
+lst = shell_sort(orig_list)
 print(f'медиана равна {lst[m]}')
+
