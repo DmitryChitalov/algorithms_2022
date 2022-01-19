@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def recursive_char_print(n: int = 32) -> str:
+    """
+    By default function prints char codes and Ascii symbol from char code 32
+    :param n: char code (int)
+    :return: string with symbols ASCII
+    """
+    if n >= 127:
+        return " %s - %s " % (n, chr(n))
+    elif (n-2) % 10 -9 == 0:
+        return " %s - %s \n" % (n, chr(n)) + recursive_char_print(n+1)
+    else:
+        return " %s - %s " % (n, chr(n)) + recursive_char_print(n+1)
+
+print(recursive_char_print(32))
+
