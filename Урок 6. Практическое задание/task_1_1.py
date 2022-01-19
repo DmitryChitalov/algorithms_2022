@@ -30,3 +30,25 @@
 
 Это файл для первого скрипта
 """
+#src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+#result = [i for i in src if src.count(i) == 1]
+#print(result)
+
+from random import randint
+from memory_profiler import profile
+src = [randint(0, 1000000) for i in range(1000000)]
+
+@profile
+def for_list():
+    result = [elem for idx, elem in enumerate(src) if elem > src[idx - 1] and idx > 0]
+    return result
+for_list()
+@profile
+def for_generator():
+    result = (elem for idx, elem in enumerate(src) if elem > src[idx - 1] and idx > 0)
+    return result
+for_generator()
+
+"""
+В первой функции 61.8 MIB 0.0 MIB во второй функции 57.9 MIB 0.0 MIB 
+"""

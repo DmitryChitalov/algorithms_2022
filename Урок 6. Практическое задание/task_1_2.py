@@ -30,3 +30,45 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+from pympler import asizeof
+
+
+class Road:
+    def __init__(self, lenght, widht, weight, high):
+        self._lenght = lenght
+        self._widht = widht
+        self.weight = weight
+        self.high = high
+    def calculate_mass(self):
+        calculate_mass = self._lenght * self._widht * self.weight * self.high / 1000
+        print(f'Для покрытия дорожного полотна полностью потребуется: {round(calculate_mass)} тонн асфальта')
+@profile
+def func_1():
+    r = Road(1000, 1000, 50, 1)
+    r.calculate_mass()
+    print(asizeof.asizeof(r))
+func_1()
+
+
+class Road_2:
+    __slots__ = ['lenght', 'widht', 'high', 'weight']
+    def __init__(self, lenght, widht,weight, high):
+        self.lenght = lenght
+        self.widht = widht
+        self.high = high
+        self.weight = weight
+    def calculate_mass(self):
+        calculate_mass = self.lenght * self.widht * self.weight * self.high / 1000
+        print(f'Для покрытия дорожного полотна полностью потребуется: {round(calculate_mass)} тонн асфальта')
+@profile
+def func_2():
+    r = Road_2(1000, 1000, 50, 1)
+    r.calculate_mass()
+    print(asizeof.asizeof(r))
+func_2()
+
+"""
+Применил слоты в ооп, но показатель MIB остался таким же
+зато размер обьекта уменьшился в 3 раза
+"""
