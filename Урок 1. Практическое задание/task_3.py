@@ -17,3 +17,23 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+com_prof = {'saturn': 101000, 'uec': 130000, 'engineering': 100750, 'centr': 130007, 'enmash': 102100}
+
+# Общая сложность сложность O(N^2)
+sort_val_com_prof = sorted (com_prof.values())
+sort_com_prof = {}
+
+for i in sort_val_com_prof:  # сложность O(N)
+    for k in com_prof.keys(): # сложность O(N)
+        if com_prof[k] == i: # сложность O(N)
+            sort_com_prof[k] = com_prof[k] # сложность O(1)
+
+print((list(sort_com_prof.keys())[-3:]))
+
+# Общая сложность сложность O(N log N)
+
+sort_com_prof1 = {}
+sort_keys = sorted(com_prof, key=com_prof.get) # сложность O(N log N)
+for w in sort_keys: # сложность O(N)
+    sort_com_prof1[w] = com_prof[w] # сложность O(1)
+print((list(sort_com_prof1.keys())[-3:]))
