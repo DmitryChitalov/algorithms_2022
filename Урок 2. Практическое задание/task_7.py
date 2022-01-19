@@ -12,3 +12,13 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+def is_equal(n: int) -> int:
+    def recursive_func(n: int) -> bool:
+        return n if n <= 1 else n + recursive_func(n - 1)
+    print(recursive_func(n), int(n*(n+1) / 2), sep=" = ")
+    return recursive_func(n) == int(n*(n+1) / 2)
+
+
+print(is_equal(4))
+
