@@ -36,3 +36,5 @@ def pal_checker(string):
 
 
 print(pal_checker("молоко делили ледоколом"))
+print(pal_checker("топот"))
+print(pal_checker("12344321"))
