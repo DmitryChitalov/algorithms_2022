@@ -16,4 +16,38 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+company = {"IBM": 7896558896,
+           "HP": 45578955,
+           "google": 8555665555,
+           "samsung": 445699999,
+           "apple": 99999999999
+}
+# Способ 1, сложность O(n log n)
 
+def by_value(item):
+    return item[1]                                                          #O(1)
+
+
+max_money = {}                                                              #O(1)
+i = 0                                                                       #O(1)
+for k, v in sorted(company.items(), key=by_value, reverse=True):            #O(n + n log n)
+    if i < 3:                                                               #O(len(n)
+        max_money.setdefault(k, v)                                          #O(1)
+    i = i + 1                                                               #O(1)
+print(max_money)                                                            #O(1)
+
+
+# Способ 2, сложность O(n^2)
+name_comp = list(company.keys())                                             #O(n)
+money_comp = list(company.values())                                          #O(n)
+for i in range(len(name_comp)):                                              #O(n)
+        for j in range(i+1, len(name_comp)):                                 #O(n)
+            if money_comp[i] > money_comp[j]:                                #O(1)
+                money_comp[i], money_comp[j] = money_comp[j], money_comp[i]  #O(1)
+                name_comp[i], name_comp[j] = name_comp[j], name_comp[i]      #O(1)
+print(name_comp[-3:])
+
+""" По сложности 1 способ более простой и будет работать быстрее чем 2 способ. В 1 способе используется функция sorted,
+а во 2 способе вложенный цикл for. Думаю, при работе с небольшим объёмом информации разница будет не существенная.
+Но при работе с большими объёмами 1 способ на много приоритетнее по скорости выполнения итераций.
+"""

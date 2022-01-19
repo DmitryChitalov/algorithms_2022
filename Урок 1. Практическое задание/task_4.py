@@ -20,3 +20,28 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+base_users = {
+    "Mixim":{'login':'Maximus', 'password':'123456', 'activ': True},
+    "Artem":{'login':'ARt58', 'password':'28082020', 'activ': False},
+    "Petr":{'login':'petruxa', 'password':'8979794', 'activ': True},
+    "Alexandra":{'login':'sanek', 'password':'25355664', 'activ': False},
+}
+
+def autentification(base_sql):
+    authentification_user = False                                             # O(1)
+    while not authentification_user:                                          # O(1)
+        login = input("Введите логин: ")                                      # O(1)
+        password = input("Введите пароль: ")                                  # O(1)
+        for user in base_sql:                                                 # O(n)
+            if login == login:
+                if password != password:                                 # O(1)
+                    print("Пароль не верный")                                 # O(1)
+                    break                                                     # O(1)
+                else:                                                         # O(1)
+                    authentification_user = True                              # O(1)
+                    break
+        else:
+            print("Пользователь не найден!")                                  # O(1)
+
+
+print(autentification(base_users))
