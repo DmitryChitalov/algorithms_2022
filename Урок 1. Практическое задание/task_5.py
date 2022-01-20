@@ -18,3 +18,26 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+
+
+class MyStack:
+    def __init__(self):
+        self.els = [[], [], [], []]
+
+    def push_in(self):
+        for el in range(0, len(self.els) - 1):
+            if len(self.els[el]) < 10:
+                self.els[el].append(el)
+                break
+
+    def pop_out(self):
+        return self.els.pop()
+
+
+if __name__ == '__main__':
+    new_stack = MyStack()
+    i = 0
+    while i < 25:
+        new_stack.push_in()
+        i += 1
+    print(new_stack.els)

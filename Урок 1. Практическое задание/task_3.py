@@ -17,3 +17,46 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+COMPANIES = {'OOO "Ньютон"': 123456,
+             'АО "Эйнштейн"': 123321,
+             'OOO "Рога и копыта"': 123123,
+             'ЗАО "Лидер"': 654321}
+
+
+def companies_found_1(companies):
+    """
+    Функция вывода трех лидеров по годовой прибыли:
+    сложность линейная O(n)
+    (короче код и выполнение линейно зависит о числа элементов,
+    при этом используется генератор, считающийся быстрой процедурой)
+    """
+    gen = (item for item in sorted(companies.items(), key=lambda x: x[1], reverse=True))
+    first = next(gen)
+    second = next(gen)
+    third = next(gen)
+    return dict((first, second, third))
+
+
+if __name__ == '__main__':
+    print(companies_found_1(COMPANIES))
+
+
+def companies_found_2(companies):
+    """
+    Функция вывода трех лидеров по годовой прибыли:
+    сложность квадратичная O(n^2)
+    (длинее код и рост числа элементов приводит
+    к квадратичному увеличению времени выполнения)
+    """
+    best_companies = {}
+    prof_list = list(companies.values())
+    prof_list.sort(reverse=True)
+    for el in prof_list[:3]:
+        for name, prof in companies.items():
+            if prof == el:
+                best_companies[name] = prof
+    return best_companies
+
+
+if __name__ == '__main__':
+    print(companies_found_2(COMPANIES))
