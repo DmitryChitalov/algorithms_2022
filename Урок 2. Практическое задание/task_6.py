@@ -24,9 +24,9 @@ def find_digit_game(digit, attempt=10):
         else:
             attempt -= 1
             if human_ch < digit:
-                print("Больше")
+                print("Значение больше")
             elif human_ch > digit:
-                print("Меньше")
+                print("Значение меньше")
             return find_digit_game(digit, attempt)
 
 

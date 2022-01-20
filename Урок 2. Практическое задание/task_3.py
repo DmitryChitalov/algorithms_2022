@@ -31,4 +31,4 @@ def reverce(digit):
 try:
     print(reverce(346546652))
 except TypeError:
-    print("Не число")
+    print("Ошибка, Не число")

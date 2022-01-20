@@ -18,4 +18,4 @@ def sum_el(q_ele):
     else:
         return (-0.5)**(q_ele-1) + sum_el(q_ele-1)
 
-print(sum_el(998))
+print(sum_el(978))
