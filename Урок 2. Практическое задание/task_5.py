@@ -29,4 +29,4 @@ def ascii_display(sym_num=32):
     return ascii_display(sym_num + 1)
 
 
-ascii_display()
+ascii_display(32)

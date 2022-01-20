@@ -22,3 +22,15 @@
 р
 а
 """
+
+import itertools
+
+
+def u_string(string):
+    for i in itertools.combinations(string, 3):
+        print(i)
+
+
+
+
+print(u_string("papa"))

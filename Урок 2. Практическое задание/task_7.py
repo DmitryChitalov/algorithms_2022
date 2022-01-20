@@ -26,6 +26,6 @@ try:
         print("Верно")
 
 except ValueError:
-    print("Строка")
+    print("Введена строка")
 
 
