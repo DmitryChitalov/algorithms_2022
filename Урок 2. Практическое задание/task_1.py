@@ -62,7 +62,3 @@ def calc():
 
 
 calc()
-
-
-
-

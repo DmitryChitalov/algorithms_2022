@@ -21,6 +21,7 @@
 """Изменение значений переменных"""
 
 
+
 def calc(digit, even=0, odd=0):
     digit_part = digit // 10
     digit_last = digit % 10
