@@ -7,3 +7,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+import random
+num = random.randint(0, 100)
+print(num)
+
+def guess_the_number(attems):
+    num_user = int(input("Угадайте число от 0 до 100: "))
+    if num_user == num or attems == 0:
+        return print("Игра завершена, правильное число: ", num)
+    elif num_user < num:
+        print("Введите число больше!")
+        return guess_the_number(attems - 1)
+    else:
+        print("Введите число меньше!")
+        return guess_the_number(attems - 1)
+
+print(guess_the_number(10))
+
+
