@@ -12,3 +12,13 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+def sum_range(num, sum_num = 0):
+    if num == 0:
+        return sum_num
+    else:
+        return sum_range(num - 1, sum_num + num)
+
+
+num = 5
+print(sum_range(num) == num * (num + 1) / 2)
