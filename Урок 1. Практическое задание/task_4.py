@@ -20,3 +20,28 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+USERS = {'user_1': {'user_login': 'tomilov.alex@gmail.com',
+                    'user_password': 123,
+                    'is_active': True},
+         'user_2': {'user_login': 'ildar.gimadeev@mail.ru',
+                    'user_password': 123,
+                    'is_active': False}
+         }
+
+
+def user_check_1(users, user_login, user_password):
+    """
+    Функция проверки пользователя:
+    сложность линейная O(n)
+    """
+    user_active = {'user_login': user_login, 'user_password': user_password, 'is_active': True}
+    access = True if user_active in users.values() else False
+    return access
+
+
+if __name__ == '__main__':
+    print(user_check_1(USERS, 'tomilov.alex@gmail.com', 123))
+    print(user_check_1(USERS, 'ildar.gimadeev@mail.ru', 123))
+
+# Эту часть задания не успеваю доделать до занятий
