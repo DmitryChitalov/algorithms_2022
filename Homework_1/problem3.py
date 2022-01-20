@@ -8,7 +8,7 @@ def show_largest(h):
             if m[1] < a[i][1]:
                 m = a[i]
         c += [m[0]]
-        A.remove(m)
+        а.remove(m)
     return c
 # Сложность: O(n)
 
