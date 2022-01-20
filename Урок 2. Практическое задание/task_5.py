@@ -21,16 +21,28 @@
 """
 def recursive_char_print(n: int = 32) -> str:
     """
+    Version 1
     By default function prints char codes and Ascii symbol from char code 32
     :param n: char code (int)
     :return: string with symbols ASCII
     """
     if n >= 127:
         return " %s - %s " % (n, chr(n))
-    elif (n-2) % 10 -9 == 0:
-        return " %s - %s \n" % (n, chr(n)) + recursive_char_print(n+1)
     else:
-        return " %s - %s " % (n, chr(n)) + recursive_char_print(n+1)
+        return " %s - %s %s" % (n, chr(n), "\n" if (n-2) % 10 - 9 == 0 else "") + recursive_char_print(n+1)
 
-print(recursive_char_print(32))
+print(recursive_char_print())
 
+
+def recursive_char_print_with_ternary_operators(n: int = 32) -> str:
+    """
+    Version 2
+    Less readable func but still working same way as version 1
+    :param n: char code (int)
+    :return: string with symbols ASCII
+    """
+    return " %s - %s " % (n, chr(n)) if n >= 127 else \
+        " %s - %s %s" % (n, chr(n), "\n" if n % 10 - 7 == 0 else "") + recursive_char_print(n+1)
+
+
+#print(recursive_char_print_with_ternary_operators())

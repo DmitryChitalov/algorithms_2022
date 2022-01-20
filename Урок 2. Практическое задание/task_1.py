@@ -29,7 +29,7 @@
 """
 
 def calculator_recursive(operator: str = None):
-    if operator:
+    if operator in ["+", "-", "*", "/"]:
         try:
             num = int(input("первое число\n"))
             num2 = int(input("второе число\n"))
@@ -47,32 +47,12 @@ def calculator_recursive(operator: str = None):
             print("кто на ноль делит!? аллооооо")
         finally:
             operator = None
-    else:
-        while operator not in ["+", "-", "*", "/", "0"]:
-            operator = input("ведите операцию (+, -, *, /) или 0 для выхода\n")
-
-    if operator == "0":
+    elif operator == "0":
         return "Программа завершена"
     else:
+        operator = input("ведите операцию (+, -, *, /) или 0 для выхода\n")
         calculator_recursive(operator)
 
 
+
 calculator_recursive()
-
-
-""" 
-Интересный момент если сделать доп. рекурсивную фунцию для назначения оператора, 
-то могут происходить ошибки. 
-Если первым написать какуюто строку а после ввести правильное значение, то вернется None. 
-Получается не всегда можно заменить цикл? или я неправильно понял как вернуть результат? 
-"""
-
-def get_operator_recursive():
-    """Тестовая доп. рекурсивная функция для получения оператора"""
-    operator = input("ведите операцию (+, -, *, /) или 0 для выхода\n")
-    if operator in ["+", "-", "*", "/", "0"]:
-        return operator
-    else:
-        get_operator_recursive()
-
-#print(get_operator_recursive())
