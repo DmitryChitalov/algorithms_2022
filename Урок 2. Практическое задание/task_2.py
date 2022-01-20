@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def acc_number(num, even = 0, uneven = 0):
+    if num == 0:
+        print("Количество четных и нечетных цифр в числе равно:", even, uneven)
+    else:
+        giv_num = num % 10
+        num //= 10
+        if giv_num % 2 == 0:
+            even += 1
+        else:
+            uneven += 1
+        return acc_number(num, even, uneven)
+
+
+num = int(input("Введите число: "))
+acc_number(num)
