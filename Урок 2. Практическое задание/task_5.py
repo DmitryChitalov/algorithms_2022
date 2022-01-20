@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_display(sym_num=32):
+    if sym_num == 127:
+        return "Ok"
+    print(f'{sym_num:^3}- {chr(sym_num)} ', end=" ")
+    if (sym_num - 31) % 10 == 0:
+        print('\n')
+    return ascii_display(sym_num + 1)
+
+
+ascii_display()

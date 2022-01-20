@@ -17,3 +17,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+"""Изменение значений переменных"""
+
+
+def calc(digit, even=0, odd=0):
+    digit_part = digit // 10
+    digit_last = digit % 10
+    if digit == 0:
+        return even, odd
+    else:
+        if digit_last % 2 == 0:
+            even += 1
+            return calc(digit_part, even, odd)
+        else:
+            odd += 1
+            return calc(digit_part, even, odd)
+
+
+try:
+    print(calc(48907504))
+except TypeError:
+    print('Не число')
