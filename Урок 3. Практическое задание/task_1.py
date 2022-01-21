@@ -23,58 +23,77 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
-import hashlib
-from binascii import hexlify
+import time
+import timeit
 
-print(10)
-object = hashlib.pbkdf2_hmac(hash_name='sha256', 
-   password=b'123',
-   salt=b'salt',
-   iterations=1000000)
-
-print(hexlify(object))
-
-# Продвинутая хэш функция:
-hashlib.pbkdf2_hmac(hash_name='sha256', 
-   password=b'123',
-   salt=b'salt',
-   iterations=1000000)
-# Преобразовать в строку для базы данных:
-from binascii import hexlify
-print(hexlify(object))
-# генерация случайных байтов:
-os.urandom()
-# генерация случайного числа:
-uuid4.uuid4()
-salt = uuid4().hex
-
-res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+def time_counter(*, rep = 1):
+    def time_counter_inner1(func):
+        def time_counter_inner2(*args, **kwargs):
+            start = time.perf_counter()
+            for i in range(rep):
+               result = func(*args, **kwargs)
+            print(f'{func.__name__} time: '
+                  f'{time.perf_counter() - start} with repetition {rep}') 
+            return result
+        return time_counter_inner2
+    return  time_counter_inner1
 
 
-def memorize(func):
-    def g(n, memory={}):
-        r = memory.get(n)
-        if r is None:
-            r = func(n)
-            memory[n] = r
-        return r
-    return g
+@time_counter(rep=100)
+def completing_a_list_1_to_100000():
+   list_ = []
+   for num in range(10**5):
+      list_.append(num)
+   return list_
+
+@time_counter(rep=100)
+def completing_a_dict_1_to_100000():
+   dict_ = {}
+   for num in range(10**5):
+      dict_[num] = num 
+   return dict_ 
+   
+
+list_ = completing_a_list_1_to_100000()
+dict_ = completing_a_dict_1_to_100000()
+
+# Скорость заполенения у списка и у словаря абсолютно одинаковые
+
+@time_counter(rep=100000)
+def update_element_in_list(list_, index, value):
+   list_[index] = value
+
+@time_counter(rep=100000)
+def update_element_in_dict(dict_, key, value):
+   dict_[key] = value
+
+update_element_in_list(list_, 0, 123)
+update_element_in_dict(dict_, 0, 123)
+
+# Скорость изменений значений у списка и у словаря абсолютно одинаковые
+
+del_elements_in_list_1_to_10000 = """
+for i in range(10000):
+   del list_[0] """
+
+del_elements_in_dict_1_to_10000 = """
+for i in range(10000):
+   del dict_[i] """
 
 
-@memorize
-def f(n):
-    if n < 2:
-        return n
-    return f(n - 1) + f(n - 2)
+time_for_del_elements_in_list_1_to_10000 = timeit.timeit(stmt=del_elements_in_list_1_to_10000, globals=globals(), number=1)
+time_for_del_elements_in_dict_1_to_10000 = timeit.timeit(stmt=del_elements_in_dict_1_to_10000, globals=globals(), number=1)
 
-from sys import getsizeof
-from pympler.asizeof import asizeof
+print(f'{time_for_del_elements_in_list_1_to_10000=}')
+print(f'{time_for_del_elements_in_dict_1_to_10000=}')
+
+# Скорость удаления у словаря(O(1)) значительно быстрее чем у списка(O(n))
+# В словаре ключ находится по хэшу, соотвественно его не надо искать перебором
+# В списке значение находится по индексу, поэтому если необходимо взять 
+# не последний элемент в списке, то элементы приходится перебирать по одному.
+# Поэтому если требуется удалять значния из списка или брать произвольное значение, 
+# то выгоднее брать либо последний элемент, либо близко к нему
 
 
-d = {1: '1', 2: '2', 3: '3'}
-print(getsizeof(d))  # -> 240
-print(asizeof(d))  # -> 504
 
-t = (1, 2, 3)
-print(getsizeof(t))  # -> 72
-print(asizeof(t))  # -> 168
+
