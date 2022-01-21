@@ -16,7 +16,6 @@
 """
 import hashlib
 import os
-from pymongo import MongoClient
 
 
 class Cache:
