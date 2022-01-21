@@ -14,41 +14,49 @@
 класса-стек в самом же классе.
 """
 
-class StackClass:
-    def __init__(self):
-        self.elems = []
+
+class PlateStackClass:
+    def __init__(self, max_size):
+        self.elems = [[]]  # вывод содержимого
+        self.max_size = max_size
+
+
+    def is_empty(self):
+        return self.elems == [[]]  # тру если пустой, фолс если не пустой
 
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
-        for i in range(0, len(self.elems) - 1):
-            if len(self.elems[i]) < 5:
-                self.elems[i].append(el)
-                break
+        if len(self.elems[-1]) < self.max_size:
+            self.elems[-1].append(el)
+        else:
+            self.elems.append([])  # добавить элемент в конец
+            self.elems[-1].append(el)
 
-    def pop_out(self):
-        return self.elems.pop()
+    def pop_out(self):  # забирает последний элемент и удаляет из стека
+        result = self.elems[-1].pop()  # отвечает за забор одного элемента с конца в буфер
+        if len(self.elems[-1]) == 0:  # удаляет пустой список в стеке
+            self.elems.pop()
+        return result
 
-    def get_val(self):
-        return self.elems[len(self.elems) - 1]
+    def get_val(self):  # Получить последний элемент из последнего списка
+        return self.elems[-1][-1]
+
+    def get_list_val(self):
+        return self.elems[-1]  # получить последний список  из стека
 
     def stack_size(self):
+        elem_sum = 0
+        for stack in self.elems:
+            elem_sum += len(stack)
+        return elem_sum  # узнать длину стека
+
+    def stack_count(self):
         return len(self.elems)
 
-class Stack:
-    def __init__(self):
-        self.stack = []
-        self.max = None
-
-    def push(self, item):
-        self.stack.append(item)
-        if len(self.stack) == 1 or item > self.max:
-            self.max = item
-
 if __name__ == '__main__':
-    stack_1 = StackClass()
-    i = 0
-    while i < 18:
-        stack_1.push_in(1+i)
-        i += 1
+    Plate = PlateStackClass(5)
 
-    print(stack_1.elems)
+
+"""скопировал ваше решение. Грокнул его. Исправил синтаксическую ошибку - self.elems = [[]] (списка не хватало)
+сделал лаконичнее код, где нужно было достать последний элемент. Добавил функцию get_val, чтобы можно было получать 
+одну тарелку из стопки"""

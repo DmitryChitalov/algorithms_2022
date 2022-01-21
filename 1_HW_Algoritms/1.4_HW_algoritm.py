@@ -21,11 +21,11 @@
 #  первое решение  O(1)
 def authentication(users_data, database):
       if users_data in database.keys() and database.get(users_data) == 0:                 # O(1)
-            return print(f'Привет {users_data[0]}, тебе нужно пройти активацию ')
+            return print(f'Привет {users_data[0]}, тебе нужно пройти активацию ')         # O(1)
       elif users_data in database.keys() and database.get(users_data) == 1:               # O(1)
-            return print(f'привет {users_data[0]}, делай все что пожелаешь')
+            return print(f'привет {users_data[0]}, делай все что пожелаешь')              # O(1)
       else:
-            return print(f'учетная запись не найдена')
+            return print(f'учетная запись не найдена')                                    # O(1)
 
 
 users = {
@@ -34,11 +34,26 @@ users = {
       ('tom', '3333'): 0
 }
 
-login = tuple(input("Введите логин и пароль через пробел: ").split())
+login = tuple(input("Введите логин и пароль через пробел: ").split())                     # O(1)
 
-authentication(login, users)
+authentication(login, users)                                                              # O(1)
 
 
-#  второе решение придумать не могу. Но первое вполне сносное. Хранилище выполнено в словаре, что позволяет быстро
+# второе решение O(n)
+
+def authentication2(users_data, database):
+      for key, value in database.items():                                                 # O(n)
+            if key == users_data:                                                         # O(1)
+                  if value == 1:                                                          # O(1)
+                        return print('Доступ разрешен')                                   # O(1)
+                  elif value == 0:                                                        # O(1)
+                        return print('нужно активироать акаунт')                          # O(1)
+            else:                                                                         # O(1)
+                  return print('Логин или пароль не найден')                              # O(1)
+
+
+authentication2(login, users)                                                             # O(1)
+
+#  первое решение эфеткивнее. Хранилище выполнено в словаре, что позволяет быстро
 #  искать пользователя (хэш). Причем ключем является кортеж с логином и паролем. Кортеж не изменяемый тип данных
 #  как раз подходит для хранении логина и пароля, а значение является меткой активации (информация, которая меняется)
