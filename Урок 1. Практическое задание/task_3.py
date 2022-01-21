@@ -22,7 +22,7 @@ my_dict = {'Comp1': 3500, 'Comp2': 6400, 'Comp3': 84150, 'Comp4': 13800, 'Comp5'
 # Решение №1
 # Сложность O(n log n)
 
-a = list(my_dict.values())          # O(1)
+a = list(my_dict.values())          # O(n)
 a.sort(reverse=True)                # O(n log n)
 
 for key, value in my_dict.items():  # O(n)
