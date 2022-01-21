@@ -20,3 +20,24 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {'user1': ['pass1', True], 'user2': ['pass2', False], 'user3': ['pass3', False],
+         'user4': ['pass4', True], 'user5': ['pass4', True]}
+
+
+def user_login(login, password):
+    user = users.get(login)
+    if not user:
+        return 'Авторизация не выполнена'
+    if not user[1]:
+        return 'Необходимо активировать учётную запись'
+    if user[0] == password:
+        return 'Успешная авторизация'
+    else:
+        return 'Авторизация не выполнена'
+
+if __name__ == '__main__':
+    print(user_login('123', '123'))
+    print(user_login('user2', 'pass2'))
+    print(user_login('user4', '123'))
+    print(user_login('user4', 'pass4'))
