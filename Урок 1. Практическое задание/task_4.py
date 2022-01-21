@@ -28,41 +28,38 @@ users = {'ivanov': ('password1', 0), 'petrov': ('password2', 1), 'sidorov': ('pa
 
 
 def auth_func(user_login, user_password):
-    for key, val in users.items():                                                      # O(n)
-        if user_login == key and user_password == val[0]:                               # O(1)
-            if val[1] == 0:                                                             # O(1)
-                print('Your account is inactive. Do you want to activate it? (Y/N)')    # O(1)
-                if input().lower() == 'y':                                              # O(1)
-                    users[key] = (user_password, 1)                                     # O(1)
-                    return print("Activated. Access granted")                           # O(1)
+    for key, val in users.items():  # O(n)
+        if user_login == key and user_password == val[0]:  # O(1)
+            if val[1] == 0:  # O(1)
+                print('Your account is inactive. Do you want to activate it? (Y/N)')  # O(1)
+                if input().lower() == 'y':  # O(1)
+                    users[key] = (user_password, 1)  # O(1)
+                    return print("Activated. Access granted")  # O(1)
             else:
-                return print("Access granted")                                          # O(1)
-    return print('Access denied')                                                       # O(1)
+                return print("Access granted")  # O(1)
+    return print('Access denied')  # O(1)
 
 
-auth_func('ivanov', 'password1')
+# auth_func('ivanov', 'password1')
 
 
 # Решение №2
-# Сложность O(n)
-
-logins = ['ivanov', 'petrov', 'sidorov']
-passwords = ['password1', 'password2', 'password3']
-is_activated = [0, 1, 0]
+# Сложность O(1)
 
 
-def auth_func1(user_login, user_password):
-    for i in logins:                                                                    # O(n)
-        if user_login == i and user_password == passwords[logins.index(i)]:             # O(1)
-            if is_activated[logins.index(i)] == 0:                                      # O(1)
-                print('Your account is inactive. Do you want to activate it? (Y/N)')    # O(1)
-                if input().lower() == 'y':                                              # O(1)
-                    is_activated[logins.index(i)] = 1                                   # O(1)
-                    return print("Activated. Access granted")                           # O(1)
-            else:
-                return print('Access granted')                                          # O(1)
-    return print('Access denied')                                                       # O(1)
+users = {'ivanov': ('password1', 0), 'petrov': ('password2', 1), 'sidorov': ('password3', 0)}
 
 
-auth_func1('sidorov', 'password3')
+def auth_func(user_login, user_password):
+    if users.get(user_login) and user_password == users.get(user_login)[0]:  # O(1)
+        if users.get(user_login)[1] == 0:  # O(1)
+            print('Your account is inactive. Do you want to activate it? (Y/N)')  # O(1)
+            if input().lower() == 'y':  # O(1)
+                users[user_login] = (user_password, 1)  # O(1)
+                return print("Activated. Access granted")  # O(1)
+        else:
+            return print("Access granted")  # O(1)
+    return print('Access denied')  # O(1)
 
+
+auth_func('ivanov', 'password1')
