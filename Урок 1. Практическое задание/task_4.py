@@ -34,3 +34,10 @@ users = {
                 "Activate": True}
 }
 
+
+def log_in_v1(username):
+    pass
+
+
+def log_in_v2(username):
+    pass
