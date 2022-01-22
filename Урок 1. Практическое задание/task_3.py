@@ -23,40 +23,56 @@ COMPANIES = {'OOO "Ньютон"': 123456,
              'ЗАО "Лидер"': 654321}
 
 
-def companies_found_1(companies):
+# короче код и выполнение линейно зависит о числа элементов,
+# для получения отсортированного словаря используется генераторное выражение
+def companies_found_1(companies, my_count):
     """
-    Функция вывода трех лидеров по годовой прибыли:
+    Функция вывода my_count лидеров по годовой прибыли:
     сложность линейная O(n)
-    (короче код и выполнение линейно зависит о числа элементов,
-    при этом используется генератор, считающийся быстрой процедурой)
     """
+    i = 1  # O(1)
+
+    # O(n) + O(n log n) + O(1) + O(1) -> O(n)
     gen = (item for item in sorted(companies.items(), key=lambda x: x[1], reverse=True))
-    first = next(gen)
-    second = next(gen)
-    third = next(gen)
-    return dict((first, second, third))
+
+    while i <= my_count:  # O(1)
+        print(next(gen))  # O(1)
+        i += 1  # O(1)
 
 
 if __name__ == '__main__':
-    print(companies_found_1(COMPANIES))
+    companies_found_1(COMPANIES, 3)
 
 
+# вместо цикла использован рекурсивный вызов, хотя циклом было бы быстрее
 def companies_found_2(companies):
     """
     Функция вывода трех лидеров по годовой прибыли:
-    сложность квадратичная O(n^2)
-    (длинее код и рост числа элементов приводит
-    к квадратичному увеличению времени выполнения)
+    сложность линейная O(n)
     """
-    best_companies = {}
-    prof_list = list(companies.values())
-    prof_list.sort(reverse=True)
-    for el in prof_list[:3]:
-        for name, prof in companies.items():
-            if prof == el:
-                best_companies[name] = prof
-    return best_companies
+    best_companies = companies.copy()  # O(n)
+    min_item = min(best_companies.items(), key=lambda x: x[1])  # O(n)
+    if len(companies) <= 3:  # O(1)
+        return best_companies  # O(1)
+    del best_companies[min_item[0]]  # O(1)
+    return companies_found_2(best_companies)  # O(n)
 
 
 if __name__ == '__main__':
     print(companies_found_2(COMPANIES))
+
+
+# вариант из разбора
+def companies_found_3(companies):
+    """
+    Функция вывода трех лидеров по годовой прибыли:
+    сложность линейно-логарифмическая O(n log n)
+    """
+    companies_list = list(companies.items())  # O(1)
+    companies_list.sort(key=lambda x: x[1], reverse=True)  # O(n log n)
+    for i in range(3):  # O(1)
+        print(companies_list[i])  # O(1)
+
+
+if __name__ == '__main__':
+    companies_found_3(COMPANIES)

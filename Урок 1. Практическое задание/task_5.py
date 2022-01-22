@@ -20,24 +20,38 @@
 """
 
 
+# немного отличный вариант от разбора
 class MyStack:
-    def __init__(self):
-        self.els = [[], [], [], []]
+    def __init__(self, limit):
+        self.limit = limit
+        self.els = [[]]
 
-    def push_in(self):
-        for el in range(0, len(self.els) - 1):
-            if len(self.els[el]) < 10:
-                self.els[el].append(el)
-                break
+    def push_in(self, el):
+        if len(self.els[len(self.els)-1]) < self.limit:
+            self.els[len(self.els)-1].append(el)
+        else:
+            self.els.append([])
+            self.els[len(self.els)-1].append(el)
 
     def pop_out(self):
-        return self.els.pop()
+        result = self.els[len(self.els)-1].pop()
+        if len(self.els[len(self.els)-1]) == 0:
+            self.els.pop()
+        return result
+
+    def stack_size(self):
+        els_count = 0
+        for stack in self.els:
+            els_count += len(stack)
+        return els_count
 
 
 if __name__ == '__main__':
-    new_stack = MyStack()
-    i = 0
-    while i < 25:
-        new_stack.push_in()
+    new_stack = MyStack(10)
+    i = 1
+    while i <= 25:
+        new_stack.push_in(i)
         i += 1
     print(new_stack.els)
+    print(new_stack.pop_out())
+    print(new_stack.stack_size())

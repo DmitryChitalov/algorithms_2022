@@ -30,18 +30,50 @@ USERS = {'user_1': {'user_login': 'tomilov.alex@gmail.com',
          }
 
 
-def user_check_1(users, user_login, user_password):
+# вариант с разбора с использованием доступа по ключу (немного измененный вариант)
+def user_check_1(users, user_name, user_login, user_password):
     """
     Функция проверки пользователя:
-    сложность линейная O(n)
+    сложность константная O(1)
     """
-    user_active = {'user_login': user_login, 'user_password': user_password, 'is_active': True}
-    access = True if user_active in users.values() else False
-    return access
+    if users.get(user_name):
+        if users[user_name]['user_login'] == user_login \
+                and users[user_name]['user_password'] == user_password \
+                and users[user_name]['is_active']:
+            return True, print('Добро пожаловать')
+        elif users[user_name]['user_login'] == user_login \
+                and users[user_name]['user_password'] == user_password \
+                and not users[user_name]['is_active']:
+            return False, print('Пользователь не активирован')
+    return False, print('Проверьте логин или пароль')
 
 
 if __name__ == '__main__':
-    print(user_check_1(USERS, 'tomilov.alex@gmail.com', 123))
-    print(user_check_1(USERS, 'ildar.gimadeev@mail.ru', 123))
+    user_check_1(USERS, 'user_1', 'tomilov.alex@gmail.com', 123)
+    user_check_1(USERS, 'user_2', 'ildar.gimadeev@mail.ru', 123)
+    user_check_1(USERS, 'user_3', 'mikhail.adeev@mail.ru', 123)
 
-# напрашиваются декораторы, но не успею разобратья до занятия
+
+# вариант с разбора с перебором значений (немного измененный вариант)
+def user_check_1(users, user_name, user_login, user_password):
+    """
+    Функция проверки пользователя:
+    сложность константная O(n)
+    """
+    for name, data in users.items():
+        if user_name == user_name:
+            if data['user_login'] == user_login \
+                    and data['user_password'] == user_password \
+                    and data['is_active']:
+                return True, print('Добро пожаловать')
+            elif data['user_login'] == user_login \
+                    and data['user_password'] == user_password \
+                    and not data['is_active']:
+                return False, print('Пользователь не активирован')
+    return False, print('Проверьте логин или пароль')
+
+
+if __name__ == '__main__':
+    user_check_1(USERS, 'user_1', 'tomilov.alex@gmail.com', 123)
+    user_check_1(USERS, 'user_2', 'ildar.gimadeev@mail.ru', 123)
+    user_check_1(USERS, 'user_3', 'mikhail.adeev@mail.ru', 123)
