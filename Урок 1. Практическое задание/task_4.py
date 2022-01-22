@@ -35,8 +35,21 @@ users = {
 }
 
 
-def log_in_v1(username):
-    pass
+def log_in_v1(users_list=users):
+    username = input('Your login: ')                                                        # O(1)
+    password = input('Your password: ')                                                     # O(1)
+    if users_list.get(username):                                                                 # O(1)
+        if users_list[username]['Password'] == password and users_list[username]['Activate']:         # O(1)
+            return print('Вход осуществлен')                                                # O(1)
+        elif users_list[username]['Password'] == password and not users_list[username]['Activate']:   # O(1)
+            return print('У вас не активирован аккаунт!')                                   # O(1)
+        else:
+            return print('Пароль введен неверно!')                                          # O(1)
+    else:
+        return print('Такого пользователя не существует!')                                  # O(1)
+
+
+log_in_v1()
 
 
 def log_in_v2(username):
