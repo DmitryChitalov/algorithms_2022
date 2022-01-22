@@ -24,18 +24,26 @@ company = {
     'ООО "Мастер и Марго-Рита"': 6500,
     'ООО "Сибиряки': 17300}
 
-def top3_company_v1(dict):
+
+def top3_company_v1(dict):                  # O( n log n)
     top3_company = {}                       # O(1)
     dict_list = list(dict.values())         # O(n)
     dict_list.sort(reverse=True)            # O( n log n)
-    for el in dict_list[:3]:                #
-        for name, prof in dict.items():     #
-            if prof == el:                  #
-                top3_company[name] = prof   #
-    return top3_company                     #
+    for el in dict_list[:3]:                # O(n)
+        for name, prof in dict.items():     # O(n)
+            if prof == el:                  # O(n)
+                top3_company[name] = prof   # O(1)
+    return top3_company                     # O(1)
 
-def top3_company_v2(dict):
-    pass
+
+def top3_company_v2(dict):                                      # O(n)
+    top3_company = {}                                           # O(1)
+    for x in range(3):                                          # O(1)
+        company, money = max(dict.items(), key=lambda x: x[1])  # O(n)
+        del dict[company]                                       # O(1)
+        top3_company.update({company: money})                   # O(1)
+    return top3_company                                         # O(1)
+
 
 print(top3_company_v1(company))
 print(top3_company_v2(company))
