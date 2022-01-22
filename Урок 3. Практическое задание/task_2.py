@@ -27,6 +27,7 @@ from getpass import getpass
 import hashlib
 import os
 from sqlalchemy import Column, Integer, String, BLOB
+from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -54,53 +55,59 @@ session = sessionmaker(bind=engine)
 work_session = session()
 
 
-def create_user():
-    while True:
-        name = input('Enter your name: ')
-        current_user = work_session.query(User_db).filter(User_db.name == name).count()
-        if current_user:
-            print('This name already use, try another')
-        else:
-            break
-    password = getpass(prompt="New password: ")
-    salt = os.urandom(8)
+def get_password_hash(message, salt):
+    password = getpass(prompt=message)
     password_hash = hashlib.pbkdf2_hmac(hash_name='sha256',
                         password=password.encode('utf-8'),
                         salt=salt,
-                        iterations = 100000).hex() 
-    user = User_db(name=name, password=password_hash, salt=salt)
-    work_session.add(user)
-    work_session.commit()
+                        iterations = 100000).hex()
+    return password_hash
 
-def enter():
-    name = input('Enter your name: ')
-    current_user = work_session.query(User_db).filter(User_db.name == name).one()
-    if current_user:
+
+class Resourse:
+    def create_user(self):
         while True:
-            password = getpass(prompt="Enter password for check: ")
+            name = input('Enter your name: ')
+            current_user = work_session.query(User_db).filter(User_db.name == name).count()
+            if current_user:
+                print('This name already use, try another')
+            else:
+                break
+        salt = os.urandom(8)
+        password_hash = get_password_hash("New password: ", salt)
+        user = User_db(name=name, password=password_hash, salt=salt)
+        work_session.add(user)
+        work_session.commit()
+
+    def enter_user(self):
+        while True:
+            name = input('Enter your name: ')
+            try:
+                current_user = work_session.query(User_db).filter(User_db.name == name).one()
+                break
+            except NoResultFound:
+                print('Unknown name, try another')
+
+        while True:
             salt = current_user.salt
-            password_hash = hashlib.pbkdf2_hmac(hash_name='sha256',
-                    password=password.encode('utf-8'),
-                    salt=salt,
-                    iterations = 100000).hex()
+            password_hash = get_password_hash("Enter password for check: ", salt)
             if password_hash == current_user.password:
                 print("You enter right password!")
                 break
             else:
                 print("You enter wrong password!")
 
-    else:
-        print("Unknown user")
 
 Base.metadata.create_all(engine)
 
+resourse = Resourse()
 
 while True:
     command = input("Do you want create or just enter exists user? create/enter/exit: ")
     if 'create' in command:
-        create_user()  
+        resourse.create_user()
     elif 'enter' in command:
-        enter()
+        resourse.enter_user()
     elif 'exit' in command:
         break
     
