@@ -21,3 +21,16 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+users = {
+    "Andrey": {"Password": "123456",
+               "Activate": True},
+    "Kiril": {"Password": "654321",
+              "Activate": False},
+    "Yuri": {"Password": "135246",
+             "Activate": True},
+    "Alex": {"Password": "246135",
+             "Activate": False},
+    "Mikhail": {"Password": "531642",
+                "Activate": True}
+}
+
