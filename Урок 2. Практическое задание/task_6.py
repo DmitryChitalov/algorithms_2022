@@ -7,3 +7,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+from random import randint
+
+
+def guess_random(x, n=randint(0, 100), cnt=1):
+    if cnt == 10:
+        return print(f'Не угадали! Загаданное число - {n}')
+    elif n > x:
+        x = int(input('Загаданное число больше Вашего, попробуйте еще: '))
+        return guess_random(x, n, cnt+1)
+    elif n < x:
+        x = int(input('Загаданное число меньше Вашего, попробуйте еще: '))
+        return guess_random(x, n, cnt+1)
+    else:
+        return print('Угадано!')
+
+
+num = int(input('Компьютер загадал число от 0 до 100, угадайте его: '))
+guess_random(num)
