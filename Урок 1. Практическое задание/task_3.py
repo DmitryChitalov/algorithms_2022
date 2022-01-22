@@ -17,3 +17,25 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {
+    'ООО "Рога и копыта"': 10000,
+    'ООО "Фарма фирма"': 14000,
+    'ООО "Ко и компания"': 9000,
+    'ООО "Мастер и Марго-Рита"': 6500,
+    'ООО "Сибиряки': 17300}
+
+def top3_company_v1(dict):
+    top3_company = {}                       # O(1)
+    dict_list = list(dict.values())         # O(n)
+    dict_list.sort(reverse=True)            # O( n log n)
+    for el in dict_list[:3]:                #
+        for name, prof in dict.items():     #
+            if prof == el:                  #
+                top3_company[name] = prof   #
+    return top3_company                     #
+
+def top3_company_v2(dict):
+    pass
+
+print(top3_company_v1(company))
+print(top3_company_v2(company))
