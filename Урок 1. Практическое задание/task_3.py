@@ -25,7 +25,7 @@ company = {
     'ООО "Сибиряки': 17300}
 
 
-def top3_company_v1(dict):                  # O( n log n)
+def top3_company_v1(dict):                  # O( n log n) или O(n**4) так и не понял как суммировать
     top3_company = {}                       # O(1)
     dict_list = list(dict.values())         # O(n)
     dict_list.sort(reverse=True)            # O( n log n)
