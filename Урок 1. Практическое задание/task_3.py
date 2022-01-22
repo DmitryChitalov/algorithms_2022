@@ -47,3 +47,5 @@ def top3_company_v2(dict):                                      # O(n)
 
 print(top3_company_v1(company))
 print(top3_company_v2(company))
+
+# Наилучший вариант top3_company_v2 так как затрачивает меньше ресурсов
