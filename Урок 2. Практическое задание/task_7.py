@@ -12,3 +12,22 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def print_serie(n):
+    if n <= 1:
+        print(f'{n} = ', end='')
+        return
+    else:
+        print(f'{n}+', end='')
+        return print_serie(n - 1)
+
+
+def sum_serie(x, sum_val=0):
+    print(sum_val) if x < 1 else sum_serie(x - 1, sum_val + x)
+
+
+val = int(input('Введите длину ряда: '))
+print_serie(val)
+sum_serie(val)
+print(f'{val}({val}+1)/2 = {int(val*(val + 1)/2)}')

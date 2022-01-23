@@ -18,3 +18,19 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+def last_zero(n):
+    return last_zero(n[1:] + '0') if n[0] == '0' else n
+
+
+def num_reverse(x, rev=''):
+    if x == 0:
+        return print(f'Перевернутое число: {int(last_zero(rev))}')
+    else:
+        rev = rev + str(int(x) % 10)
+        return num_reverse(int(x) // 10, rev)
+
+
+num = int(input('Введите число: '))
+num_reverse(num)
