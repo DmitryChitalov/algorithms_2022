@@ -18,3 +18,29 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+
+
+class MyStack:
+    def __init__(self, capacity):
+        self.lst = []
+        self.capacity = capacity
+    
+    def push(self, value):
+        if len(self.lst) == 0 or len(self.lst[len(self.lst) - 1]) == self.capacity:
+            self.lst.append([value])
+        else:
+            self.lst[len(self.lst) - 1].append(value)
+    
+    def pop(self):
+        self.lst[len(self.lst) - 1].pop()
+        if len(self.lst[len(self.lst) - 1]) == 0:
+            self.lst.pop()
+
+
+tarelki = MyStack(10)
+for _ in range(21):
+    tarelki.push(1)
+
+tarelki.pop()
+
+print(tarelki.lst)
