@@ -19,34 +19,65 @@
 класса-стек в самом же классе.
 """
 
-class QueueClass:
-    def __init__(self):
-        self.elems = []
-        self.maxsize = 10
+
+class MyStack:
+    def __init__(self, max_size):
+        self.elements = [[]]
+        self.max_size = max_size
+
+    def __str__(self):
+        return str(self.elements)
 
     def is_empty(self):
-        return self.elems == []
+        return self.elements == []
 
-    def to_queue(self, item):
-        self.elems.insert(0, item)
+    def push_to_stack(self, el):
+        # Добавляем пустую стопку, если достигнут максимальный размер стопки
+        if len(self.elements[len(self.elements)-1]) == self.max_size:
+            self.elements.append([])
+        self.elements[len(self.elements)-1].append(el)
 
-    def from_queue(self):
-        return self.elems.pop()
+    def pop_from_stack(self):
+        if self.is_empty():
+            return None
+        result = self.elements[len(self.elements)-1].pop()
+        if len(self.elements[len(self.elements)-1]) == 0:     # Убираем пустую стопку
+            self.elements.pop()
+        return result
 
-    def size(self):
-        return len(self.elems)
+    def stack_size(self):  # Общее количество элементов в стеке
+        result = 0
+        for stack in self.elements:
+            result += len(stack)
+        return result
+
+    def stack_count(self):  # Количество стоек
+        return len(self.elements)
+
+    def get_val(self):  # Возвращает последнее значение
+        return self.elements[len(self.elements) - 1]
 
 
 if __name__ == '__main__':
-    qc_obj = QueueClass()
-    print(qc_obj.is_empty())  # -> True. Очередь пустая
-
-    # помещаем объекты в очередь
-    qc_obj.to_queue('my_obj')
-    qc_obj.to_queue(4)
-    qc_obj.to_queue(True)
-
-    print(qc_obj.is_empty())  # -> False. Очередь пустая
-    print(qc_obj.size())  # -> 3
-    print(qc_obj.from_queue())  # -> my_obj
-    print(qc_obj.size())  # -> 2
+    plates = MyStack(3)
+    plates.push_to_stack('1')
+    plates.push_to_stack('2')
+    plates.push_to_stack('3')
+    plates.push_to_stack('4')
+    plates.push_to_stack('5')
+    plates.push_to_stack('6')
+    plates.push_to_stack('7')
+    print(plates)
+    print(f'Количество элементов: {plates.stack_size()}, количество стопок: {plates.stack_count()}')
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    print(plates)
+    print(f'Количество элементов: {plates.stack_size()}, количество стопок: {plates.stack_count()}')
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    plates.pop_from_stack()
+    print(plates)
+    print(f'Количество элементов: {plates.stack_size()}, количество стопок: {plates.stack_count()}')

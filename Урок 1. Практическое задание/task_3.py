@@ -18,22 +18,33 @@
 """
 companies = {"Firm1": 100000, "Firm2": 140000, "Firm3": 90000, "Firm4": 120000, "Firm5": 50000}
 
-companieslist = list(companies.items())
-companieslist.sort(key=lambda k: k[1], reverse=True)
-for i in range(3):
-    if len(companieslist) > i:
-        print(companieslist[i][0], ':', companieslist[i][1])
 
-print(f'-'*20)
+# Вариант 1 Сложность O(n log n)
+def sort_v1(companies):
+    companieslist = list(companies.items())  # O(1)
+    companieslist.sort(key=lambda k: k[1], reverse=True)    # O(n log n)
+    for i in range(3):  # O(1)
+        if len(companieslist) > i:  # O(1)
+            print(companieslist[i][0], ':', companieslist[i][1])    # O(1)
 
-for i in range(3):
-    _max = 0
-    _max_key = ''
-    for company in companies:
-        if companies[company] > _max:
-            _max = companies[company]
-            _max_key = company
-    print(_max_key, companies.pop(_max_key))
-    if len(companies) == 0:
-        break
 
+# Вариант 2 Сложность O(n)
+def sort_v2(companies):
+    for i in range(3):  # O(1)
+        _max = 0    # O(1)
+        _max_key = ''   # O(1)
+        for company in companies:   # O(n)
+            if companies[company] > _max:   # O(1)
+                _max = companies[company]   # O(1)
+                _max_key = company  # O(1)
+        print(_max_key, companies.pop(_max_key))    # O(1)
+        if len(companies) == 0:     # O(1)
+            break   # O(1)
+
+
+sort_v1(companies)
+sort_v2(companies)
+
+"""
+Вариант 2 лучше, линейная сложность лучше линейно-логарифмической
+"""

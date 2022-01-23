@@ -15,6 +15,7 @@
 """
 
 
+# Сложность O(n^2) сортируем массив и выбираем первое значение
 def min_list_n2(mylist):
     for i in range(0, len(mylist) - 1):
         _min = i
@@ -25,6 +26,7 @@ def min_list_n2(mylist):
     return mylist[0]
 
 
+# Линейная сложность O(n)
 def min_list_n(mylist):
     result = mylist[0]
     for i in mylist:
