@@ -18,9 +18,9 @@
 """
 
 
-def top3_1(companies): # O(N)
+def top3_1(companies):  # O(N)
     top = []
-    for key, value in companies.items(): 
+    for key, value in companies.items():
         if len(top) == 0:
             top.append([key, value])
         elif len(top) == 1:
@@ -50,21 +50,22 @@ def top3_1(companies): # O(N)
             elif value > top[2][1]:
                 top[2] = [key, value]
     return top
-            
-def top3_2(companies): # O(nlogn)
-    return sorted(companies.items(), 
-                key=lambda companies: companies[1], reverse=True)[0:3]
 
-    
+
+def top3_2(companies):  # O(nlogn)
+    return sorted(companies.items(),
+                  key=lambda companies: companies[1], reverse=True)[0:3]
+
+
 companies = {
-        'XP': 25_000_000,
-        'Zomy': 27_000_000,
-        'Besedka': 2_000_000,
-        'Macrohard': 21_000_000,
-        'Koyoka': 35_000_000,
-        'EVM': 21_000_000,
-        }
-  
+    'XP': 25_000_000,
+    'Zomy': 27_000_000,
+    'Besedka': 2_000_000,
+    'Macrohard': 21_000_000,
+    'Koyoka': 35_000_000,
+    'EVM': 21_000_000,
+}
 
-print(*top3_1(companies), sep = '\n')
-print(*top3_2(companies), sep = '\n')
+
+print(*top3_1(companies), sep='\n')
+print(*top3_2(companies), sep='\n')

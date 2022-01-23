@@ -28,7 +28,7 @@ def get_min1(lst):
         else:
             return n1
 
-        
+
 def get_min2(lst):
     """Функция возвращает минимальное значение перебором. Сначала определяется начальное значение минимума,
     как первый элемент массива. Далее идет проход по всему массиву и если встречается число меньше, то минимум
@@ -39,9 +39,9 @@ def get_min2(lst):
     min_value = lst[0]
     for n in lst:
         if n < min_value:
-            mi = n
+            min_value = n
     return min_value
 
-print(get_min1([1,3,4,-5,0,7]))
-print(get_min2([1,3,4,-5,0,7]))
 
+print(get_min1([1, 3, 4, -5, 0, 7]))
+print(get_min2([1, 3, 4, -5, 0, 7]))

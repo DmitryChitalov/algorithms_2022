@@ -37,10 +37,10 @@ class MyStack:
             self.lst.pop()
 
 
-tarelki = MyStack(10)
+stack1 = MyStack(10)
 for _ in range(21):
-    tarelki.push(1)
+    stack1.push(1)
 
-tarelki.pop()
+stack1.pop()
 
 print(tarelki.lst)

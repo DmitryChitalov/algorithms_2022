@@ -22,31 +22,32 @@
 """
 
 
-def check_login(users_list, user, password): # O(1)
-    if users_list.setdefault(user, None) == None: # O(1)
+def check_login(users_list, user, password):  # O(1)
+    if users_list.setdefault(user, None) == None:  # O(1)
         print('Нет такого пользователя')
-    elif users_list[user]['password'] == password and users_list[user]['activation']: # O(1)
+    # O(1)
+    elif users_list[user]['password'] == password and users_list[user]['activation']:
         print(f'Добро пожаловать, {user}')
-    elif users_list[user]['password'] != password: # O(1)
-         print(f'Неверный пароль!')
-    else: # O(1)
-         print(f'Учетная запись {user} не активирована')
-    
+    elif users_list[user]['password'] != password:  # O(1)
+        print(f'Неверный пароль!')
+    else:  # O(1)
+        print(f'Учетная запись {user} не активирована')
 
-def check_login2(users_list, user, password): # O(n)
-    for key, value in users_list.items(): # O(n)
+
+def check_login2(users_list, user, password):  # O(n)
+    for key, value in users_list.items():  # O(n)
         if key == user:
-            if value['password'] == password and value['activation']: # O(1)
+            if value['password'] == password and value['activation']:  # O(1)
                 print(f'Добро пожаловать, {user}')
                 break
-            elif value['password'] != password: # O(1)
+            elif value['password'] != password:  # O(1)
                 print(f'Неверный пароль!')
                 break
-            else: # O(1)
+            else:  # O(1)
                 print(f'Учетная запись {user} не активирована')
                 break
     print('Нет такого пользователя')
-    
+
 
 my_users = {'user1': {'password': '11111', 'activation': True},
             'user2': {'password': '11111', 'activation': False},
