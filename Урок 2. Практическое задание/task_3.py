@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+def lead_zero(st):
+    if st[0] == '0':
+        return lead_zero(st[1:]+'0')
+    return st
+
+
+def reverse_num(num, __st=''):
+    __st += str(num % 10)
+    if num // 10 == 0:
+        return int(lead_zero(__st))
+    return reverse_num(num // 10, __st)
+
+
+if __name__ == '__main__':
+    n = int(input('Введите число: '))
+    print(reverse_num(n))

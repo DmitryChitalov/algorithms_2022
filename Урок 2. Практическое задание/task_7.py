@@ -12,3 +12,12 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def check_sum(n):
+    return n if n == 1 else n + check_sum(n-1)
+
+
+if __name__ == '__main__':
+    num = int(input('Введите число: '))
+    print(check_sum(num), num*(num+1)/2)
