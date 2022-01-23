@@ -31,5 +31,5 @@ def print_ascii(n=32):
     print(f'{n} - {chr(n)}', end=end)
     print_ascii(n + 1)
 
-
-print_ascii()
+if __name__ == '__main__':
+    print_ascii()

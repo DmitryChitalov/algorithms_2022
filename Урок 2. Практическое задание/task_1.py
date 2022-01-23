@@ -43,16 +43,16 @@ def calculator(op='', n1=None, n2=None):
         input_str = input('Введите первое число: ')
         if not input_str.isnumeric():
             print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
-            calculator(op=op)
+            calculator(op = op)
         else:
-            calculator(op=op, n1=int(input_str))
+            calculator(op = op, n1 = int(input_str))
     elif n2 is None:
         input_str = input('Введите второе число: ')
         if not input_str.isnumeric():
             print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
-            calculator(op=op, n1=n1)
+            calculator(op = op, n1 = n1)
         else:
-            calculator(op=op, n1=n1, n2=int(input_str))
+            calculator(op = op, n1 = n1, n2 = int(input_str))
     else:
         print('Ващ результат: ', end='')
         match op:

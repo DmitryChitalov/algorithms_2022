@@ -17,4 +17,4 @@ def row_summ(n, num = 1):
     return num + row_summ(n - 1, num * -0.5)
 
 n = int(input('Введите число: '))
-print(f'Количество элементов -{n}, их сумма - {row_summ(n)}.')
+print(f'Количество элементов - {n}, их сумма - {row_summ(n)}.')

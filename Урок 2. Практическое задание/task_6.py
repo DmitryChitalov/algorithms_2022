@@ -24,5 +24,5 @@ def guess(n1=0, n2=100):
         print('Не понимаю...')
         guess(n1, n2)
 
-
-guess()
+if __name__ == '__main__':
+    guess()

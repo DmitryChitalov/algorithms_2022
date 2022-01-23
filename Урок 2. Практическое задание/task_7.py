@@ -20,5 +20,6 @@ def nat_summ(n):
     return n + nat_summ(n - 1)
 
 
-n = 7
-print(n * (n + 1) / 2, nat_summ(n))
+if __name__ == '__main__':
+    n = 7
+    print(n * (n + 1) / 2, nat_summ(n))
