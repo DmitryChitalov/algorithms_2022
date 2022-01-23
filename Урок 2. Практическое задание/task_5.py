@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii(n=32):
+    if n > 127:
+        return 0
+    if n > 32 and n % 10 == 1:
+        end = '\n'
+    else:
+        end = ' '
+    print(f'{n} - {chr(n)}', end=end)
+    print_ascii(n + 1)
+
+
+print_ascii()

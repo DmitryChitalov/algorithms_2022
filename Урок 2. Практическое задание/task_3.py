@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+def reverse_num(num, rev=0, m=1):
+    if num == 0:
+        return rev * m
+    if num % 10 == 0 and rev == 0:
+        return reverse_num(num // 10, 0, 10 * m)
+    return reverse_num(num // 10, 10*rev + num % 10, m)
+
+
+print(reverse_num(12000))
+print(reverse_num(12345))
+print(reverse_num(7890))
+print(reverse_num(7077))

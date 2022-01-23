@@ -7,3 +7,22 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+from random import randint
+
+
+def guess(n1=0, n2=100):
+    guess_n = randint(n1, n2)
+    answer = input(f'Число {guess_n}. Больше, меньше? ')
+    if answer == '>':
+        guess(guess_n + 1, n2)
+    elif answer == '<':
+        guess(n1, guess_n - 1)
+    elif answer == '=':
+        print('Ура!')
+        return 0
+    else:
+        print('Не понимаю...')
+        guess(n1, n2)
+
+
+guess()
