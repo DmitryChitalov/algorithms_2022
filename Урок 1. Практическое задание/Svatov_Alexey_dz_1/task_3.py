@@ -68,32 +68,40 @@ company_profit = dict([('Apple', 57411000000),
                        ('Nippon Telegraph and Telephone', 8643000000)])
 
 
-def top_3_company_profit_v1(company_dict):
-    _dict = company_dict.copy()
-    top_3_company_profit = {}
-    count = 0
-    for name, profit in _dict.items():
-        if (profit == max(_dict.values())) and (name not in top_3_company_profit.keys()):
-            top_3_company_profit.update([(name, profit)])
-            _dict[name] = 0
-            count += 1
-        if count == 3:
-            break
-    return top_3_company_profit
+def top_3_company_profit_v1(company_dict):  # O(N^2 + 2N) - квадратичная
+    _dict = company_dict.copy()  # O(N)
+    top_3_company_profit = {}  # O(N)
+    count = 0  # O(1)
+    for name, profit in _dict.items():  # O(N)
+        if (profit == max(_dict.values())) and (name not in top_3_company_profit.keys()):  # O(N)
+            top_3_company_profit.update([(name, profit)])  # O(1)
+            _dict[name] = 0  # O(1)
+            count += 1  # O(1)
+            if count == 3: # O(1)
+                break # O(1)
+    return top_3_company_profit  # O(1)
 
 
-# def top_3_company_profit_v2(company_dict):
-#     top_3_company_profit = company_dict.copy()
-#     for name, profit in company_dict.items():
-#         if profit < (max(top_3_company_profit.values())):
-#             top_3_company_profit.pop(name)
-#         if len(top_3_company_profit) == 3:
-#             break
-#     return top_3_company_profit
+def top_3_company_profit_v2(company_dict):  # O(7N) - линейная
+    re_company_dict = {profit: name for name, profit in company_dict.items()}  # O(N)
+    result = ''  # O(1)
+    for i in range(0, 3):  # O(3)
+        _profit = max(re_company_dict.keys())  # O(N)
+        _name = re_company_dict.pop(max(re_company_dict.keys()))  # O(N)
+        result += f'Компания: {_name}, прибыль: {_profit}\n'  # O(1)
+    return result # O(1)
+
+
+def top_3_company_profit_v3(company_dict): # O(2N) - линейная
+    re_company_dict = {profit: name for name, profit in company_dict.items()}  # O(N)
+    sort_top_3_company_list = sorted(re_company_dict.keys(), reverse=True)[0:3] # O(N)
+    result = f'Компания: {re_company_dict.get(sort_top_3_company_list[0])}, прибыль: {sort_top_3_company_list[0]},\n' \
+             f'Компания: {re_company_dict.get(sort_top_3_company_list[1])}, прибыль: {sort_top_3_company_list[1]},\n' \
+             f'Компания: {re_company_dict.get(sort_top_3_company_list[2])}, прибыль: {sort_top_3_company_list[2]},\n' # O(1)
+    return result # O(1)
 
 
 print(f'result_v1 \n {top_3_company_profit_v1(company_profit)} \n')
-print(f'result_v2 \n {top_3_company_profit_v2(company_profit)} \n')
-print(f'result_v3 \n {top_3_company_profit_v2(company_profit)} \n')
+print(f'result_v2 \n{top_3_company_profit_v2(company_profit)} \n')
+print(f'result_v3 \n{top_3_company_profit_v3(company_profit)} \n')
 # for name, profit in company_profit.items():
-#     print(f'{name}:{profit}')
