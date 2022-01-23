@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def counting():
+    sign = input('Введите оператор (+, -, *, / или 0 для выхода): ')
+    if sign not in ('+', '-', '*', '/', '0'):
+        print('Некорректный оператор')
+        return counting()
+    elif sign == '0':
+        return print('Выход.')
+    else:
+        x = input('Введите первое число: ')
+        if x.isdigit():
+            x = int(x)
+        else:
+            print('Вы ввели не число.')
+            return counting()
+        y = input('Введите второе число: ')
+        if y.isdigit():
+            y = int(y)
+        else:
+            print('Вы ввели не число.')
+            return counting()
+        if sign == '+':
+            print(f'Результат: {x + y}')
+        elif sign == '-':
+            print(f'Результат: {x - y}')
+        elif sign == '*':
+            print(f'Результат: {x * y}')
+        elif sign == '/' and y != 0:
+            print(f'Результат: {x / y}')
+        else:
+            print('На ноль делить нельзя!')
+            return counting()
+        return counting()
+
+
+counting()

@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_table(i=32, cnt=1):
+    if i < 128 and cnt < 10:
+        print(f'{i} -> {chr(i)} ', end='')
+        return ascii_table(i+1, cnt + 1)
+    elif cnt == 10:
+        print(f'{i} -> {chr(i)} ')
+        return ascii_table(i + 1)
+    return
+
+
+ascii_table()
