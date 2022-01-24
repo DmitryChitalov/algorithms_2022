@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="Lesson 1, task 1 complited." />
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="Lesson 1, task 7 complited." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,6 +76,49 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
     </task>
+    <task id="LOCAL-00001" summary="Lesson 1, task 1 complited.">
+      <created>1643040992232</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1643040992232</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Lesson 1, task 2 complited.">
+      <created>1643041045835</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1643041045835</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Lesson 1, task 3 complited.">
+      <created>1643041092570</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1643041092570</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Lesson 1, task 4 complited.">
+      <created>1643041123637</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1643041123637</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Lesson 1, task 4 complited.">
+      <created>1643041211186</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1643041211186</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Revert &quot;Lesson 1, task 4 complited.&quot;&#10;&#10;This reverts commit 97a2fe4d">
+      <created>1643041279708</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643041279708</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -124,6 +167,14 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lesson 1, task 1 complited." />
+    <MESSAGE value="Lesson 1, task 2 complited." />
+    <MESSAGE value="Lesson 1, task 3 complited." />
+    <MESSAGE value="Lesson 1, task 4 complited." />
+    <MESSAGE value="Revert &quot;Lesson 1, task 4 complited.&quot;&#10;&#10;This reverts commit 97a2fe4d" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Lesson 1, task 4 complited.&quot;&#10;&#10;This reverts commit 97a2fe4d" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 3. Практическое задание/task_3.py">
