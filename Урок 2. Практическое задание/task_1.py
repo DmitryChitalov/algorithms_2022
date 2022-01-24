@@ -27,3 +27,67 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+class CalcNumbers:
+    def __init__(self):
+        self.inp = CalcNumbers.check_inp()  # проверка до инициализации в переменной экземпляра
+        self.x = CalcNumbers.check_val_x()  # проверка до инициализации в переменной экземпляра
+        self.y = CalcNumbers.check_val_y()  # проверка до инициализации в переменной экземпляра
+        self.result = CalcNumbers.calc(self)  # результат выводится через __str__()
+
+    @staticmethod
+    def check_inp():
+        inp = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if inp not in ['+', '-', '*', '/', '0']:
+            print('Введено что-то не то...')
+            return CalcNumbers.check_inp()  # рекурсивный вызов, если проверка не пройдена
+        elif inp == '0':
+            return exit(0)
+        else:
+            return inp
+
+    @staticmethod
+    def check_val_x():
+        try:
+            x = int(input('Введите первое число: '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку -(. Исправьтесь')
+            return CalcNumbers.check_val_x()  # рекурсивный вызов, если проверка не пройдена
+        if x not in range(100, 1000) and x != 0:
+            print('Вы ввели не трехзначное число')
+            return CalcNumbers.check_val_x()  # рекурсивный вызов, если проверка не пройдена
+        else:
+            return x
+
+    @staticmethod
+    def check_val_y():
+        try:
+            y = int(input('Введите второе число: '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку -(. Исправьтесь')
+            return CalcNumbers.check_val_y()  # рекурсивный вызов, если проверка не пройдена
+        else:
+            return y
+
+    def calc(self):
+        if self.inp == '+':
+            return self.x + self.y
+        elif self.inp == '-':
+            return self.x - self.y
+        elif self.inp == '*':
+            return self.x * self.y
+        elif self.inp == '/':
+            try:
+                return self.x / self.y
+            except ZeroDivisionError:
+                print('На ноль делить нельзя')
+                return CalcNumbers.check_inp()  # рекурсивный вызов, если проверка не пройдена
+
+    def __str__(self):
+        return f'Ваш результат: {self.result}'
+
+
+if __name__ == '__main__':
+    calc_1 = CalcNumbers()
+    print(calc_1)

@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def view_ascii(num=32, end=127):
+    if num in range(num, end + 1):
+        print() if (num - 2) % 10 == 0 else print(num, chr(num), sep=' - ', end='  |  ')
+        return view_ascii(num+1)
+
+
+if __name__ == '__main__':
+    view_ascii()

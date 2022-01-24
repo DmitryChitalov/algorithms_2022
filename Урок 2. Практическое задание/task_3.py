@@ -18,3 +18,38 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+#  полный переворот с использованием свойств строки
+def rev_str(inp):
+    if inp:
+        return rev_str(inp[1:]) + inp[0]
+    return f'Перевернутое число: {inp}'
+
+
+if __name__ == '__main__':
+    print(rev_str(inp=input('Введите число, которое требуется перевернуть: ')))
+
+
+# либо без рекурсии
+# def rev_str(inp):
+#     return f'Перевернутое число: {inp[::-1]}'
+#
+#
+# if __name__ == '__main__':
+#     print(rev_str(inp=input('Введите число, которое требуется перевернуть: ')))
+
+
+# 1230->3210
+def rev_number(inp, rev_num=0, ending=''):
+    if inp:
+        inp, d = divmod(inp, 10)
+        rev_num = rev_num * 10 + d
+        if rev_num == 0 and d == 0:
+            ending = ending + '0'
+        return rev_number(inp, rev_num, ending)
+    return f'Перевернутое число: {rev_num}{ending}'
+
+
+if __name__ == '__main__':
+    print(rev_number(inp=int(input('Введите число, которое требуется перевернуть: '))))
