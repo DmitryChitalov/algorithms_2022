@@ -33,28 +33,28 @@ users_dict = {'Thomas': ['Thomas123', True],
               'Billy': ['Billy123', True]}
 
 
-def authentication_v1(input_dict, name, password):
-    if (name in input_dict.keys()) and (input_dict.get(name)[0] == password):
-        if input_dict.get(name)[1]:
-            print('Пользователь может быть допущен к ресурсу')
-        else:
-            print('Необходимо пройти активацию учётной записи')
-    else:
-        print('Неверная пара логин/пароль')
+def authentication_v1(input_dict, name, password): #O(logN)
+    if (name in input_dict.keys()) and (input_dict.get(name)[0] == password): #O(logN)
+        if input_dict.get(name)[1]: #O(1)
+            print('Пользователь может быть допущен к ресурсу') #O(1)
+        else: #O(1)
+            print('Необходимо пройти активацию учётной записи') #O(1)
+    else:#O(1)
+        print('Неверная пара логин/пароль') #O(1)
 
 
-def authentication_v2(input_dict, name, password):
-    for name_dict, pass_auth_dict in input_dict.items():
-        if (name_dict == name) and (pass_auth_dict[0] == password):
-            if pass_auth_dict[1]:
-                result = 'Пользователь может быть допущен к ресурсу'
-                break
-            else:
-                result = 'Необходимо пройти активацию учётной записи'
-                break
-        else:
-            result = 'Неверная пара логин/пароль'
-    return print(result)
+def authentication_v2(input_dict, name, password): #O(N*logN)
+    for name_dict, pass_auth_dict in input_dict.items(): #O(N)
+        if (name_dict == name) and (pass_auth_dict[0] == password): #O(logN)
+            if pass_auth_dict[1]: #O(1)
+                result = 'Пользователь может быть допущен к ресурсу' #O(1)
+                break #O(1)
+            else: #O(1)
+                result = 'Необходимо пройти активацию учётной записи' #O(1)
+                break #O(1)
+        else: #O(1)
+            result = 'Неверная пара логин/пароль' #O(1)
+    return print(result) #O(1)
 
 
 authentication_v1(users_dict, 'Thomas', 'Thomas123')
