@@ -12,3 +12,18 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+import random
+
+
+def my_sum(n):
+    if n == 1:
+        return 1
+    else:
+        return my_sum(n-1) + n
+
+
+n = random.randint(1, 1000)
+if my_sum(n) == (n * (n + 1) / 2):
+    print('Равенство верно')
+else:
+    print('Равенство не верно')
