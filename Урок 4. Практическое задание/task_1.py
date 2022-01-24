@@ -14,16 +14,15 @@
 # ==============================================================================
 # === Ответ ====================================================================
 # ==============================================================================
-# 1) List Comprehension дает ускорение в 2 раза.
-# 2) Функция filter ускорение не дает.
+# 1) reqular_circle - самый медленный вариант
+# 2) List Comprehension дает ускорение в 2 раза.
 # 3) Можно ускорить работу через numpy в 10 раз, но требуется входные данные 
 # сначала сконвертировать, плюс потеря времени на компиляцию функции. 
 # Зато функция потом быстро выполняется.
 # Результаты замеров:
-# foo_reqular_circle---min time:     0.9182304000714794
-# foo_list_comprehension---min time: 0.49410859995987266
-# foo_filter---min time:             0.8611214000266045
-# foo_compile_with_numpy---min time: 0.102828299975954
+# foo_reqular_circle---min time:     0.8832532999804243
+# foo_list_comprehension---min time: 0.7768935000058264
+# foo_compile_with_numpy---min time: 0.2066441000206396
 # ==============================================================================
 
 import numbers
@@ -32,7 +31,7 @@ import numpy as np
 import numba
 from numba import jit
 from numba import types
-
+import math
 
 
 l=[i for i in range(10**7)]
@@ -51,26 +50,19 @@ funcs.append("foo_reqular_circle")
 
 # ====================================
 def foo_list_comprehension(nums):
-    new_arr = [num for num in nums if num % 2 == 0]
+    new_arr = [i for i, num in enumerate(nums, 0) if num % 2 == 0]
     return new_arr
 
 
 funcs.append("foo_list_comprehension")
 
 # ====================================
-def foo_filter(nums):
-    new_arr = list(filter(lambda num: num % 2 == 0, nums))
-    return new_arr
-
-funcs.append("foo_filter")
-
-# ====================================
 @jit(nopython=True)
 def foo_compile_with_numpy(nums):
-    new_arr = [num for num in nums if num % 2 == 0]
+    new_arr = [i for i, num in enumerate(nums, 0) if num % 2 == 0]
     return new_arr
 
-
+# ====================================
 # ====================================
 for func in funcs:
     print(f'{f"{func}---min time: ":35}'+
