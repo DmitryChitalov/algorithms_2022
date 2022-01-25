@@ -48,6 +48,7 @@ def go_list():
         test_list.append(i+1)
 
 
+
 go_list()
 #Врем заполнения списска через append = 0.0010061264038085938
 
@@ -67,28 +68,44 @@ go_dict()
 что не нужно хэшировать данны, на что тратится время.
 """
 n = random.randint(0, 9)
-
+#Сложность O(n)
 @timing
 def plus_list():
-    test_list[n] = n + n
+    for i in range(1, 10000):
+        test_list[n] = n + i
+#Врем добавления в список = 0.0020003318786621094
 
+
+#Сложность O(1)
 @timing
 def plus_dict():
-    test_dict[n] = n + n
+    for i in range(1, 10000):
+        test_dict[n] = n + i
+#Врем добавления в словарь = 0.001997232437133789
 
 plus_list()
 plus_dict()
 
-
-
+"""
+Операция добавления в список и словарь заняла почти одинаковое время. 
+Сложность выполнения соответственно тоже одинаковая.
+"""
+#Сложность O(1)
 @timing
-def pop_list():
-    test_list.pop(n)
+def clear_list():
+    test_list.clear()
 
+
+#Сложность O(1)
 @timing
-def pop_dict():
-    test_dict.pop(n)
+def clear_dict():
+    test_dict.clear()
 
-pop_list()
-pop_dict()
+clear_list()
+clear_dict()
+
+"""
+Очистка списка и словаря заняла одинаковое время.
+По сложности так же одинаковы.
+"""
 

@@ -22,3 +22,29 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import hashlib
+import json
+from uuid import uuid4
+
+
+
+def hash_pass():
+    data_base = open('save_pass', 'w')
+    passwd = input('Введите пароль: ')
+    salt = uuid4().hex
+    hashAndSalt = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+    data_base.write(json.dumps(hashAndSalt))
+    print(f'В базе данных хранится строка:{hashAndSalt}')
+    new_passwd = input('Введите пароль еще раз для проверки: ')
+    salt = uuid4().hex
+    new_hashAndSalt = hashlib.sha256(salt.encode() + new_passwd.encode()).hexdigest()
+    if hashAndSalt == new_hashAndSalt:
+        print('Вы ввели правельый пароль')
+    else:
+        print('Пароль не верный')
+    return hash_pass()
+
+
+hash_pass()
+
