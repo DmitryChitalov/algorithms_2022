@@ -22,3 +22,18 @@
 р
 а
 """
+from hashlib import sha1
+
+
+def substring_count(string):
+    str_len = len(string) + 1
+    hash_count = set()
+    for i in range(str_len):
+        for k in range(i + 1, str_len):
+            if string[i:k] != string:
+                hash_count.add(sha1(string[i:k].encode()).hexdigest())
+    return len(hash_count)
+
+
+x = str(input("Enter string: "))
+print(f'String {x} has {substring_count(x)} unique substring.')
