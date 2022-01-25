@@ -23,3 +23,89 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import random
+from functools import wraps
+from time import time
+
+
+
+def timing(f):
+    @wraps(f)
+    def wrap(*args):
+        ts = time()
+        result = f(*args)
+        te = time()
+        print(f.__name__, te-ts)
+        return result
+    return wrap
+
+test_list = []
+test_dict = {}
+#Сложность O(n)
+@timing
+def go_list():
+    for i in range(10000):
+        test_list.append(i+1)
+
+
+
+go_list()
+#Врем заполнения списска через append = 0.0010061264038085938
+
+#Сложность O(n)
+@timing
+def go_dict():
+    for i in range(10000):
+        test_dict.setdefault(i+1, chr(97+i))
+
+
+go_dict()
+#Врем заполнения словаря через setdefault = 0.003990650177001953
+
+"""
+Заполнения списска через append в несколько раз быстрее
+чам заполнения словаря через setdefault. Это связано с тем, 
+что не нужно хэшировать данны, на что тратится время.
+"""
+n = random.randint(0, 9)
+#Сложность O(n)
+@timing
+def plus_list():
+    for i in range(1, 10000):
+        test_list[n] = n + i
+#Врем добавления в список = 0.0020003318786621094
+
+
+#Сложность O(1)
+@timing
+def plus_dict():
+    for i in range(1, 10000):
+        test_dict[n] = n + i
+#Врем добавления в словарь = 0.001997232437133789
+
+plus_list()
+plus_dict()
+
+"""
+Операция добавления в список и словарь заняла почти одинаковое время. 
+Сложность выполнения соответственно тоже одинаковая.
+"""
+#Сложность O(1)
+@timing
+def clear_list():
+    test_list.clear()
+
+
+#Сложность O(1)
+@timing
+def clear_dict():
+    test_dict.clear()
+
+clear_list()
+clear_dict()
+
+"""
+Очистка списка и словаря заняла одинаковое время.
+По сложности так же одинаковы.
+"""
+
