@@ -13,3 +13,27 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+"""O(n^2) - квадратичная"""
+
+from functools import reduce
+
+numbers = [3, 5, 7, 9, 1, 0]
+print(reduce(lambda x, y: x if x < y else y, numbers))
+
+
+
+
+
+"""O(n) - линейная"""
+
+def min_num(n):
+    low = n[0]      # O(1) - Константная
+    for i in n:     # O(N) - Линейная
+        if i < low: # O(1) - Константная
+            low = i # O(1) - Константная
+    return low      # O(1) - Константная
+
+
+numbers = [3, 5, 7, 9, 1, 0]
+print(min_num(numbers))

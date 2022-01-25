@@ -16,4 +16,31 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+from collections import Counter
+import heapq
+
+
+storage = {
+    'Пятерочка': 1500,
+    'Ашан': 2000,
+    'Ярче': 1000,
+    'ИП Кузнецов К.В.': 100,
+    'Дикси': 900,
+    'METRO': 3000,
+    'Перекресток': 1450
+}
+
+
+# O(N log N) - Линейно-логарифмическая
+# 1 вариант
+print(sorted(storage, key=storage.get, reverse=True)[:3])
+
+# 2 вариант
+print(dict(Counter(storage).most_common(3)))
+
+# O(log N) - Логарифмическая
+print(heapq.nlargest(3, storage, key=storage.get))
+
+
+
 
