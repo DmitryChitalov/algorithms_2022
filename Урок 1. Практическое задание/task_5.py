@@ -18,3 +18,39 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = [[]]           # элемент стека - массив стопок
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+       for i in range(len(self.elems)):               # ищем свободное место в стопкax
+           if len(self.elems[i]) < 5:                   # если i-ая стопка имеет размер менее 5 то вставляем тарелку туда
+               self.elems[i].append(el)
+           elif len(self.elems[len(self.elems)-1]) == 5: #если размер последней стопки = 5 то добавляем новую
+               self.elems.append([])
+               self.elems[len(self.elems)-1].append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+
+    stack_1 = StackClass()
+    i = 0
+    for i in range (20):
+        stack_1.push_in(i)
+
+
+    print(stack_1.elems)

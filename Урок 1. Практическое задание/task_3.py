@@ -16,4 +16,27 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+data = {'Gazprom': 20000, 'Sberbank': 15000, 'Yandex': 12000, 'Lukoil': 17500, 'MVideo': 7000}
 
+def top3_1(dict):   #O(n^2)
+    dict_to_sort = dict.copy()                              #создаем копию чтобы не менять исходный словарь, сложность O(n)
+    new_dict = {}                                           #O(1)
+    for i in range(3):                                      #общая O(n^2)
+        list = [(k, v) for k, v in dict_to_sort.items()]    #O(n)
+        max = list[0]                                       #O(1)
+        for i in range(len(list)-1):                        #O(n)
+            if max[1] < list [i+1][1]:                      #O(1)
+                max = list[i+1]                             #O(1)
+        new_dict[max[0]] = max[1]                           #O(1)
+        del dict_to_sort[max[0]]                            #O(1)
+    return new_dict                                         #O(1)
+
+
+def top3_2(dict):  #O(n log n)
+    sorted_dict = sorted(dict.items(), key = lambda el: el[1], reverse= True)  #O(n log n)
+    return(sorted_dict[0:3])                                                   #O(1)
+
+print(top3_1(data))
+print(top3_2(data))
+
+#Предпочтительнее 2 вариант - функция top3_2()
