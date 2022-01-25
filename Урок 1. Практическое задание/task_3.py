@@ -17,3 +17,31 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company_list = {
+    'Chanel': 160000,
+    'Lancome': 58000,
+    'Lanvin': 49000,
+    'Dolce & Gabbana': 10900,
+    'Versace': 800000,
+    'Givenchy': 969000,
+    'Gucci': 93000}
+
+
+# 1 O(n)
+
+def sorted_1(company):
+    company_sort = sorted([(v, k) for (k, v) in company.items()], reverse=True)  # O(n)
+    top3 = [v for (k, v) in company_sort[:3]]  # O(1)
+    return top3
+
+
+# 2 O(n log n)
+
+def sorted_2(company):
+    result = list(sorted(company.items(), key=lambda x: x[1], reverse=True))  # O(n log n)
+    return result[:3]
+
+
+print(sorted_1(company_list))
+print(sorted_2(company_list))
+# 1-е решение лучше
