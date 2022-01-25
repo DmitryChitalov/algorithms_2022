@@ -73,14 +73,6 @@ def list_update1():
     return new_list
 
 
-# O(1)
-@time_decor
-def list_update2(val):
-    for i in range(val):
-        new_list[i] = i + 1
-    return new_list
-
-
 # O(n)
 @time_decor
 def dict_update1():
@@ -89,23 +81,12 @@ def dict_update1():
     return new_dict
 
 
-# O(1)
-@time_decor
-def dict_update2(val):
-    for i in range(val):
-        new_dict[i] = i + 1
-    return new_dict
-
-
 list_update1()  # Time for list_update = 0.00700068473815918
 dict_update1()  # Time for dict_update = 0.020002126693725586
-list_update2(100000)  # Time for list_update2 = 0.010999441146850586
-dict_update2(100000)  # Time for dict_update2 = 0.016000986099243164
-# У первых и вторых решений скорость выполнения почти одинаковая.
 # Список изменяется быстрее
 
 
-# O(1)
+# O(n)
 @time_decor
 def list_remove(val):
     for i in range(val):
@@ -113,7 +94,7 @@ def list_remove(val):
     return new_list
 
 
-# O()
+# O(1)
 @time_decor
 def dict_remove(val):
     for i in range(val):
