@@ -37,12 +37,11 @@ def min_num_2(lst):
 
 
 # сложность O(len(n))
-def random_list(rl):
+def random_list():
     rl = []  # O(1)
     for i in range(3):  # O(len(n))
         rl.append(randint(0, 99))  # O(1)
     return rl  # O(1)
 
-
-print(min_num(random_list(0)))
-print(min_num_2(random_list(0)))
+print(min_num(random_list()))
+print(min_num_2(random_list()))
