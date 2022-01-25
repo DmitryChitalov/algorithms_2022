@@ -12,3 +12,16 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def check(n, count=0, result=0):
+    if count < n:
+        return check(n, count + 1, result + (count + 1))
+    else:
+        if result == (n * (n + 1) / 2):
+            print(f'Утвеждение "1+2+...+n = n(n+1)/2" верно. Результат: {result} = {int(n * (n + 1) / 2)}')
+        else:
+            print(f'Утвеждение "1+2+...+n = n(n+1)/2" не верно. Результат: {result} = {int(n * (n + 1) / 2)}')
+
+
+check(6)

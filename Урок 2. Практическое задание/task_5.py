@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def screen(data, count=10):
+    if data > 127:
+        return
+    count = count - 1
+    if count > 0:
+        print(f'  {data} - {chr(data)}', end='')
+        return screen(data + 1, count)
+    else:
+        print(f'{data} - {chr(data)}')
+        return screen(data + 1)
+
+screen(32)

@@ -17,3 +17,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def check(value, even=0, odd=0):
+    if value == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    if value % 2 == 1:
+        odd = odd + 1
+    if value % 2 == 0:
+        even = even + 1
+    return check(value // 10, even, odd)
+
+
+check(1234447)

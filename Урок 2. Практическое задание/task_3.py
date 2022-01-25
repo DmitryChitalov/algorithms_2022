@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+def reverse(old_value, new_value=''):
+    if old_value == '0' and new_value == '':
+        print(f'Ноль есть ноль')
+        return
+    if old_value == '0':
+        print(f'Перевернутое число: {new_value}')
+        return
+    try:
+        value = int(old_value)
+    except ValueError:
+        print('Ошибка! Вы ввели строку. Попробуте еще раз.')
+    return reverse(str(value // 10), new_value + str(value % 10))
+
+reverse(input('Введите число, которое требуется перевернуть:'))
