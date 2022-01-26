@@ -12,3 +12,11 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def sum_(num):
+    return num if num == 1 else sum_(num - 1) + num
+
+
+n = 5
+print(sum_(n) == n * (n + 1) / 2)
