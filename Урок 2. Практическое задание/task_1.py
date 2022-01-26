@@ -27,3 +27,48 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    operation = input('Знак (+, -, *, /:) или 0 для выхода ')
+    if operation == '0':
+        return 'exit'
+    else:
+        if operation in '+-*/':
+            try:
+                a = float(input('a = '))
+                b = float(input('b = '))
+
+                if operation == '+':
+                    result = a + b
+                    print(result)
+                    return calculator()
+                elif operation == '-':
+                    result = a - b
+                    print(result)
+                    return calculator()
+                elif operation == '*':
+                    result = a * b
+                    print(result)
+                    return calculator()
+
+                elif operation == '/':
+                    try:
+                        result = a / b
+                    except ZeroDivisionError:
+                        print('Ошибка: Деление на 0.')
+                    else:
+                        print(result)
+                    finally:
+                        return calculator()
+
+            except ValueError:
+                print('Символ некорректный')
+                return calculator()
+
+        else:
+            print('Неверный знак')
+            return calculator()
+
+
+calculator()

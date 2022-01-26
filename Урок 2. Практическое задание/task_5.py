@@ -19,3 +19,23 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii_aux(code, line_end):
+    if code > 127:
+        return
+    print(code, ' - ', chr(code), " ", end=line_end)
+    code = code + 1
+    if (code - 31) % 10 == 0:
+        line_end = '\n'
+    else:
+        line_end = ''
+    print_ascii_aux(code, line_end)
+
+
+def print_ascii_table():
+    print_ascii_aux(32, '')
+
+
+if __name__ == "__main__":
+    print_ascii_table()

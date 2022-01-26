@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check(a, even=0, odd=0):
+    if a == 0:
+        return even, odd
+    else:
+        m = a % 10
+        a = a // 10
+        if m % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return check(a, even, odd)
+try:
+    numb = int(input('Введите число: '))
+    print(f'Количество чётных & нечёиных цифр в числе: {check(numb)}')
+except ValueError:
+    print('Ошибка: Неверный формат числа!')
