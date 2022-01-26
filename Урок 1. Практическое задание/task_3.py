@@ -16,4 +16,22 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+import heapq
+import operator
 
+array = {'Company 1': 86266, 'Company 2': 64137, 'Company 3': 34467, 'Company 4': 111112}
+
+"""Решение №1 O(n)"""
+print(heapq.nlargest(3, array.items(), key=operator.itemgetter(1)))
+"""O(n)"""
+
+"""Решение №2 O(nlog n)"""
+result = {}
+sorted_keys = sorted(array, key=array.get, reverse=True)
+"""O(nlog n)"""
+for i in sorted_keys:
+    """O(n)"""
+    result[i] = array[i]
+    """O(1)"""
+print(list(result.items())[:3])
+"""O(1)"""
