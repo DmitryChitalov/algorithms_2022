@@ -27,3 +27,31 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def sum(a, b):
+    return f'{a} + {b} = {a + b}'
+def sub(a, b):
+    return f'{a} - {b} = {a - b}'
+def mult(a, b):
+    return f'{a} * {b} = {a * b}'
+def div(a, b):
+    return f'{a} / {b} = {a / b}'
+
+def check():
+    oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if oper == '0':
+        print('Выход')
+    else:
+        try:
+            num_1 = float(input('Введите первое число: '))
+            num_2 = float(input('Введите второе число: '))
+            func = {'+': sum(num_1, num_2),
+                    '-': sub(num_1, num_2),
+                    '*': mult(num_1, num_2),
+                    '/': div(num_1, num_2)}
+            print(f'Ваш результат :', func[oper])
+            return check()
+        except (ValueError, ZeroDivisionError, KeyError):
+            print('Вы ввели строку а не число или делили на ноль или вместо операции ввели текст (((. Исправьтесь')
+            return check()
+check()

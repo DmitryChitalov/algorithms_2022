@@ -17,3 +17,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def count():
+    i = 0
+    def func():
+        nonlocal i
+        i += 1
+        return i
+    return func
+
+def check(num_1):
+    if num_1 == 0:
+        return ((even()-1), (odd()-1))
+    else:
+        num_2 = num_1 % 10
+        num_1 = num_1 // 10
+        if num_2 % 2 == 0:
+            even()
+        else:
+            odd()
+        return check(num_1)
+
+even = count()
+odd = count()
+
+try:
+    num = int(input('Введите натуральное число: '))
+    print(f'Количество четных и нечетных цифр в числе: {check(num)}')
+except ValueError:
+    print('Вы вместо числа ввели строку (((. Исправьтесь')

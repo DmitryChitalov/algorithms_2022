@@ -7,3 +7,32 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+import random
+
+def check(num, i = 10):
+    try:
+        num_play = int(input(f'Угадай число от 0 до 100! У тебя {i} попыток : '))
+        if i == 1:
+            print(f'У тебя закончились попытки, ты проиграл!!!\nЗагаданное число было : {num}')
+        else:
+            if num_play != num:
+                print('Не угадал!!!')
+                if num_play < num:
+                    print('Твое число меньше')
+                    i -= 1
+                    return check(num, i)
+                else:
+                    print('Твое число больше')
+                    i -= 1
+                    return check(num, i)
+            else:
+                print('Угадал молодец!!!')
+                return True
+    except ValueError:
+        print('Вы вместо числа ввели строку (((. Исправьтесь')
+        return check(num, i)
+
+num = random.randint(0, 100)
+
+check(num)

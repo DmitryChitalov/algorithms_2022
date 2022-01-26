@@ -19,3 +19,26 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def check(a = 32, b = 1):
+    if a == 128:
+        return
+    else:
+        if a < 100:
+            if b % 10 == 0:
+                print(f'|  {a} - {chr(a)} ')
+            else:
+                print(f'|  {a} - {chr(a)} ', end=' ')
+            b += 1
+            a += 1
+            return check(a, b)
+        else:
+            if b % 10 == 0:
+                print(f'|  {a} - {chr(a)}')
+            else:
+                print(f'|  {a} - {chr(a)}', end=' ')
+            b += 1
+            a += 1
+            return check(a, b)
+
+check()
