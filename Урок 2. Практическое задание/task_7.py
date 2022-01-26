@@ -28,17 +28,28 @@ import sys
 
 
 # @recursion_check
-# без декоратора можно вводить число не больше 997
-def check_nat_numbers(n, i=1, sum_i=0):
+# # без декоратора можно вводить число не больше 997
+# def check_nat_numbers(n, i=1, sum_i=0):
+#     if sys.getrecursionlimit() == 1000 and n > 997:
+#         print('Введено число больше 998. Стек переполнен')
+#         return exit(0)
+#     if i <= n:
+#         sum_i += i
+#         return check_nat_numbers(n, i + 1, sum_i)
+#     return f'{int(n * (n + 1) / 2)} = {sum_i}'
+#
+#
+# if __name__ == '__main__':
+#     print(check_nat_numbers(n=int(input('Введите любое натуральное число: '))))
+
+
+def check_nat_numbers(n):
     if sys.getrecursionlimit() == 1000 and n > 997:
         print('Введено число больше 998. Стек переполнен')
         return exit(0)
-    if i <= n:
-        sum_i += i
-        return check_nat_numbers(n, i + 1, sum_i)
-    check_num = int(n * (n + 1) / 2)
-    return check_num == sum_i
+    return n if n == 1 else check_nat_numbers(n - 1) + n
 
 
 if __name__ == '__main__':
-    print(check_nat_numbers(n=int(input('Введите любое натуральное число: '))))
+    n = int(input("Введите любое натуральное число: "))
+    print(f'{check_nat_numbers(n)} = {int(n * (n + 1) / 2)}')
