@@ -31,7 +31,7 @@ users = {'John': {'login': 'qwerty', 'password': '4k9i', 'is_authenticated': 0},
 
 
 def check_authentication(key):  # Итог: O(n)
-    for v in islice(key.values(), 2, 3):  # O(n)
+    for v in islice(key.values(), 2, 3):  # O(1)
         if v == 0:  # O(n)
             print('We suggest you to complete authentication')  # O(1)
         else:
@@ -51,5 +51,16 @@ def check_authentication_v2(key):  # Итог: O(n^2)
                 print('All right')  # O(1)
 
 
-check_authentication(users['Weirdo'])
-check_authentication(users['Alexey'])
+check_authentication_v2(users['Weirdo'])
+check_authentication_v2(users['Alexey'])
+
+
+def check_authentication_v3(key):  # Итог: O(1)
+    if key.get('is_authenticated') == 0:  # O(1)
+        print('We suggest you to complete authentication')  # O(1)
+    elif key.get('is_authenticated') == 1:  # O(1)
+        print('All right')  # O(1)
+
+
+check_authentication_v2(users['Weirdo'])
+check_authentication_v2(users['Alexey'])

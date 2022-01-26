@@ -33,11 +33,11 @@ sorted_ver()
 
 
 def max_ver():  # Итог: O(n)
-    for v in islice(key_val, 3):  # O(n)
+    for v in islice(key_val, 3):  # O(1)
         print('max: ', max(key_val, key=lambda i: i[1]))  # O(n)
         key_val.remove(max(key_val, key=lambda i: i[1]))  # O(n)
 
 
 max_ver()
 
-# Вывод: решение с max_ver() эффективнее, т.к O(n) потребляет меньше времени чем O(n log n)
+# Вывод: решение с sorted_ver() эффективнее, т.к O(n log n) потребляет меньше времени чем O(n^2)
