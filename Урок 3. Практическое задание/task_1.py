@@ -23,3 +23,33 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+def time_checker (func):
+    def wrap(n):
+        start = time.time()
+        res = func(n)
+        finish = time.time()
+        print (f'Used time fo func {func}: {finish - start}')
+        return  res
+    return wrap
+
+
+@time_checker
+def add_to_list(n):
+    lst = [i for i in range(n)]
+    return lst
+
+
+@time_checker
+def add_to_dict(n):
+    dict = {i:i**2 for i in range(n)}
+    return dict
+
+
+a = add_to_list(50000)
+b = add_to_dict(50000)
+
+# Словарь заполняется медленнее, вероятно из-за хэширования и контроля уникальности ключей
+
+
