@@ -34,5 +34,16 @@ def simple(i):
     return n
 
 
+def eratos(i):
+    t = list(range(i + 1))
+    t[1] = 0
+    for n in t:
+        if n > 1:
+            for j in range(2 * n, len(t), n):
+                t[j] = 0
+    return t
+
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+#Код взят из википедии. Не смог заставить его делать то, что нужно

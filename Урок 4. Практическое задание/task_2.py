@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,4 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+# C кэшем быстрее на порядок

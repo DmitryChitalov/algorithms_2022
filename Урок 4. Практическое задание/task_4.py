@@ -9,6 +9,8 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from collections import Counter
+from timeit import default_timer, timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +39,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    a = Counter(array)
+    b = list(a.keys())
+    c = list(a.values())
+    return f'Чаще всего встречается число {b[0]}, оно появилось в массиве {c[0]} раз(а)'
+
+
 print(func_1())
+print(timeit('func_1()', setup='from __main__ import func_1', number=100))
 print(func_2())
+print(timeit('func_2()', setup='from __main__ import func_2', number=100))
+print(func_3())
+print(timeit('func_3()', setup='from __main__ import func_3', number=100))
+#Самое быстрое решение 2. Решение 3 тоже довольно быстрое.
