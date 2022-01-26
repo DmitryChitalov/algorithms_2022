@@ -48,11 +48,12 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
+            print(f'Аргументы {args} в кеше найдены')
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(f'Аргументы {args} добавлены в кеш. КЕШ = {cache}')
             return cache[args]
     return decorate
 
@@ -80,3 +81,12 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Добавил логирование в декоратор и увидел, что данные на каждом шаге добавляются в кэш
+и при этом кешированные данные не используются.
+Замеры времени выполнения у функции с кешем быстрее т.к в первый запуск из 10000 создается кеш
+    и после этого используется в оставшихся запусках.
+Вывод:
+        Мемоизация в данном случае бесполезна.
+"""
