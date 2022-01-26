@@ -20,3 +20,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+from itertools import islice
+
+users = {'John': {'login': 'qwerty', 'password': '4k9i', 'is_authenticated': 0},
+         'Stone': {'login': 'qwy', 'password': '4529i', 'is_authenticated': 1},
+         'Andrey': {'login': 'swe', 'password': '123456', 'is_authenticated': 1},
+         'Weirdo': {'login': 'ty', 'password': '12345', 'is_authenticated': 0},
+         'Sasha': {'login': 'asd', 'password': '1234', 'is_authenticated': 0},
+         'Alexey': {'login': 'zxc', 'password': '123', 'is_authenticated': 1}}
+
+
+def check_authentication(key):  # Итог: O(n)
+    for v in islice(key.values(), 2, 3):  # O(1)
+        if v == 0:  # O(n)
+            print('We suggest you to complete authentication')  # O(1)
+        else:
+            print('All right')  # O(1)
+
+
+check_authentication(users['Weirdo'])
+check_authentication(users['Alexey'])
+
+
+def check_authentication_v2(key):  # Итог: O(n^2)
+    for i in key.items():  # O(n^2)
+        for v in i:  # O(n)
+            if v == 0:  # O(n)
+                print('We suggest you to complete authentication')  # O(1)
+            elif v == 1:  # O(n)
+                print('All right')  # O(1)
+
+
+check_authentication_v2(users['Weirdo'])
+check_authentication_v2(users['Alexey'])
+
+
+def check_authentication_v3(key):  # Итог: O(1)
+    if key.get('is_authenticated') == 0:  # O(1)
+        print('We suggest you to complete authentication')  # O(1)
+    elif key.get('is_authenticated') == 1:  # O(1)
+        print('All right')  # O(1)
+
+
+check_authentication_v2(users['Weirdo'])
+check_authentication_v2(users['Alexey'])
