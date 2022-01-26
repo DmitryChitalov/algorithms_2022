@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd(n):
+    if n % 2 == 0:
+        result = (1, 0)
+    else:
+        result = (0, 1)
+    if n < 10:
+        return result
+
+    return tuple(map(sum, zip(even_odd(n // 10), result)))
+
+
+print(even_odd(123))

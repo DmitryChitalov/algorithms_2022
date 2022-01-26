@@ -18,3 +18,13 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+
+def number(n):
+    if n < 10:
+        return str(n)
+    else:
+        return str(n % 10) + number(n // 10)
+
+
+print(number(1230))

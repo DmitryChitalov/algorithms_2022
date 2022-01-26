@@ -10,3 +10,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_of_elements(a, n):
+    if n == 0:
+        return 0
+    return a + sum_of_elements(a / -2, n - 1)
+
+
+print(sum_of_elements(1, 3))

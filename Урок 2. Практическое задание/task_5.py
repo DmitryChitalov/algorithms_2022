@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbols(n):
+    if (n + 9) % 10 != 0:
+        print(n, '-', chr(n), end=' ')
+    else:
+        print('\n')
+    if n != 127:
+        symbols(n + 1)
+
+
+symbols(32)

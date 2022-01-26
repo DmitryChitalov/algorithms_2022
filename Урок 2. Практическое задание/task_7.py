@@ -12,3 +12,13 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def review(n):
+    if n == 0:
+        return 0
+    else:
+        return n + review(n - 1)
+
+
+print(review(7) == 7 * (7 + 1) / 2)
