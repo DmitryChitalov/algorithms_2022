@@ -24,8 +24,7 @@ def func_1(nums):
     return new_arr
 
 def func_2(nums):
-    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
-    return new_arr
+     return [i for i in range(len(nums)) if nums[i] % 2 == 0]
 
 numbers_10 = [i for i in range(10)]
 numbers_100 = [i for i in range(100)]
