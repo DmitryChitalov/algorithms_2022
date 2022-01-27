@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+string = input('Введите строку : ')
+
+sum_hash = set()
+sum_sub = set()
+for i in range(len(string)):
+    for j in range(len(string), i, -1):
+        hash_str = hashlib.sha1(string[i:j].encode('utf-8')).hexdigest()
+        if string != string[i:j]:
+            sum_sub.add(string[i:j])
+            sum_hash.add(hash_str)
+
+print(f'{string} - {len(sum_sub)} уникальных подстрок \n')
+for i in sum_sub:
+    print(i)
