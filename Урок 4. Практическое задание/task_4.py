@@ -9,6 +9,8 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
+
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -25,6 +27,7 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
+
 def func_2():
     new_array = []
     for el in array:
@@ -36,6 +39,33 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    numb = max(array, key=array.count)
+    return f'Чаще всего встречается число {numb}, ' \
+           f'оно появилось в массиве {array.count(numb)} раз(а)'
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(
+    timeit(
+        "func_1()",
+        setup="from __main__ import func_1", number=10000))
+
+print(
+    timeit(
+        "func_2()",
+        setup="from __main__ import func_2", number=10000))
+
+print(
+    timeit(
+        "func_3()",
+        setup="from __main__ import func_3", number=10000))
+
+"""
+Ускорить выполнение задачи не  получилось по сравнению с 
+func_1 (0.0187091) < func_3 (0.0213386)
+но код с применением функции max более компактный.
+"""
