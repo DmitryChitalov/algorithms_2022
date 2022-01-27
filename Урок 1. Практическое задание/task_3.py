@@ -17,3 +17,46 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company_gain = {
+    "Apple": 24624623454,
+    "Microsoft": 9567415235365232,
+    "Reebok": 23134134,
+    "Adidas": 23153251,
+    "SAMSUNG": 341412312312344,
+    "TCMS": 314235986786969
+}
+
+# variant-1
+
+# Слолжность:  T(N) = 6 + N * (5 * len(N) + 6)
+
+
+gain_1 = 0   # O(1)
+gain_2 = 0   # O(1)
+gain_3 = 0   # O(1)
+comp_1 = ''   # O(1)
+comp_2 = ''   # O(1)
+comp_3 = ''   # O(1)
+
+for item, val in company_gain.items():  # O(N)
+    if val > gain_1:                    # O(len(gain_1))
+        gain_1 = val                    # O(1)
+        comp_1 = item                   # O(1)
+    if gain_2 < val < gain_1:           # O(len(gain_2) + len(val))
+        gain_2 = val                    # O(1)
+        comp_2 = item                   # O(1)
+    if gain_3 < val < gain_2:           # O(len(gain_3) + len(val))
+        gain_3 = val                    # O(1)
+        comp_3 = item                   # O(1)
+
+print(comp_1, comp_2, comp_3)
+
+
+# variant-2
+
+# Слолжность:  T(N) = N log N + N + 3   (походу 2е решение более простое !!!)
+
+list_company = list(company_gain.items())                        # O(1)
+list_company.sort(key=lambda value: value[1], reverse=True)      # O(N log N)
+for i in list_company:                                           # O(N)
+    print(i[0], ':', i[1])                                       # O(2)

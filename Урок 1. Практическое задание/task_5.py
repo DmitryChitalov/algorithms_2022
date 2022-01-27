@@ -18,3 +18,30 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+data = []
+steck_length = 2
+def add_steck(*arg):
+    temp_steck = []
+    k = 0
+    while k < len(arg):
+        j = 0
+        temp_steck.clear()
+        while j < steck_length:
+            temp_steck.append(arg[k])
+            j += 1
+        data.extend(temp_steck)
+        k += 1
+
+
+
+
+add_steck([23, 34, 5, 4, 43525, 34])
+print(data)
+
+
+
+
+
+
+
+
