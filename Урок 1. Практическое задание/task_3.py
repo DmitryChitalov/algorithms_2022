@@ -17,3 +17,31 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+my_dict = {'Comp1': 3500, 'Comp2': 6400, 'Comp3': 84150, 'Comp4': 13800, 'Comp5': 600}
+
+# Решение №1
+# Сложность O(n log n)
+
+a = list(my_dict.values())          # O(n)
+a.sort(reverse=True)                # O(n log n)
+
+for key, value in my_dict.items():  # O(n)
+    if value in a[0:3]:             # O(1)
+        print(key)                  # O(1)
+
+
+# Решение №2
+# Сложность O(n^2)
+
+sort_val = sorted(my_dict.values(), reverse=True)   # O(n log n)
+sort_my_dict = {}                                   # O(1)
+
+for i in sort_val:                                  # O(n)
+    for j in my_dict.keys():                        # O(n)
+        if my_dict[j] == i:                         # O(1)
+            sort_my_dict[j] = my_dict[j]            # O(1)
+
+print(list(sort_my_dict)[0:3])
+
+
+# Решение #1 эффективнее, т.к. имеет меньшую сложность
