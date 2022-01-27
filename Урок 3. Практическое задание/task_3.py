@@ -22,3 +22,22 @@
 р
 а
 """
+
+
+def make_sub_str(s='papa'):
+    """
+    Функция подсчета уникальных подстрок.
+    В вычисление хеша подставляется slice с минимальной разницей в единицу,
+    посколько полное слово получать не нужно.
+    """
+    sub_s = set()
+    for i in range(len(s)):
+        for y in range(len(s) - 1, i, -1):
+            sub_s.add(hashlib.sha256(s[i:y].encode()).hexdigest)
+    return f'Количество уникальных подстрок: {len(sub_s)}'
+
+
+if __name__ == '__main__':
+    import hashlib
+
+    print(make_sub_str())
