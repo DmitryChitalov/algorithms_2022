@@ -10,3 +10,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+def sum_elements(sum_num, num, n):
+    if n > 0:
+        n -= 1
+        sum_num += num
+        num *= - 1/2
+        return   sum_elements(sum_num, num, n)
+    else:
+        return sum_num
+sum_num = 0
+num = 1
+n = int(input("Введите количество элементов : "))
+print(f"Колличество элементов - {n}, их сумма - {sum_elements(sum_num,num, n)}")

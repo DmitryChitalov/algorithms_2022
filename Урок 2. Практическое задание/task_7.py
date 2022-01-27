@@ -12,3 +12,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+def sum_elements(n, sum_num = 0, num = 1):
+    if n > 0:
+        sum_num += num
+        num += 1
+        n -= 1
+        return sum_elements(n , sum_num, num)
+    else:
+       return  sum_num
+
+
+n = int(input('Введите любое натуральное число для проверки множества : '))
+print(f"Введенное число '{n}'")
+print(f"Сумма чисел до '{n}' = {sum_elements(n)}.")
+print(f"Выполняется ли равенство : {sum_elements(n) == n * (n + 1) / 2}")
+
+
+
+

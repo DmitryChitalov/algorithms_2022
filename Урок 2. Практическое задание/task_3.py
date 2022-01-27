@@ -12,8 +12,35 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 
+
 Пример:
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+# def reverse_num(n):
+#     num = 0
+#     while n > 0:
+#         num = num * 10 + (n % 10)
+#         n = n // 10
+#     return num
+# def num_zero(n):
+#     if n % 10 == 0:
+#         return reverse_num(n) * 10
+#     else:
+#         return reverse_num(n)
+# print(num_zero(int(input())))
+def reverse_num(n, num):
+    if n > 0:
+        num = num * 10 + (n % 10)
+        n = n // 10
+        return reverse_num(n, num)
+    else:
+        return num
+n = int(input('Введите число, которое требуется перевернуть: '))
+num = 0
+if n % 10 == 0:
+    print(f"Перевернутое число : {reverse_num(n, num) * 10}")
+else:
+    print(f"Перевернутое число : {reverse_num(n, num)}")
+

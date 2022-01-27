@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table(start = 32):
+    stop = 128
+    if start < stop:
+        print(f"{start} - {chr(start)}", end=' ')
+        if start % 10 == 1:
+            print()
+        return  table(start + 1)
+table()
+
