@@ -30,12 +30,12 @@ def check_3(lst_obj):
     Алгоритм 3:
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
-    Сложность: n + n log n + n(n + 1) + 1  - O(n^2)- квадратичная
+    Сложность: n + n log n + n(1 + 1) + 1  - O(n log n)- линейно-логарифмическая
     """
     lst_copy = list(lst_obj)                 # O(n) - линейная
     lst_copy.sort()                          # O(n log n) - линейно-логарифмическая
     for i in range(len(lst_obj) - 1):        # O(n) - линейная
-        if lst_copy[i] == lst_copy[i+1]:     # O(n) - линейная
+        if lst_copy[i] == lst_copy[i+1]:     # O(1) - константная
             return False                     # O(1) - константная
     return True                              # O(1) - константная
 
@@ -62,13 +62,16 @@ for i in range(len(our_list)):    # O(n)
         min_val = our_list[i]     # O(1)
 print(min_val)  # итого линейная
 
+min_val2 = our_list[0]
+for i in our_list:                # O(n)
+    if i < min_val2:              # O(1)
+        for j in our_list[i:]:    # O(n)
+            if i > j:             # O(1)
+                min_val2 = j
+            else:
+                min_val2 = i
 
-while len(our_list) > 1:             # O(n)
-    if our_list[0] < our_list[1]:    # O(1)
-        our_list.pop(1)              # O(n)
-    else:
-        our_list.pop(0)              # O(n)
-print(our_list)   # итого квадратичная
+print(min_val2)   # итого квадратичная
 
 
 
@@ -104,19 +107,15 @@ top3 = list_to_sort[0:3]                          # O(1)
 for key in companies_to_sort.keys():                   # O(n)
     if companies_to_sort[key] in top3:                # O(n)
         print(key)                                    # O(1)
-# Итоговая сложность O(n^2)
-key_list = []
-val_list = []
+# Итоговая сложность O(n^2) - здесь часть про ключ для вывода именно названия компаний,
+# ну и без нее сложность одинаковая. Разбор посмотрела, возник вопрос,
+# параллельное присваивание все равно имеет константную сложность?
 
-for val in companies_to_sort.values():          # O(n)
-    val_list.append(val)                          # O(1)
-val_list.sort(reverse=True)                       # O(n logn)
-for key in companies_to_sort.keys():              # O(n)
-    if companies_to_sort[key] == val_list[0] or companies_to_sort[key] == val_list[1] \
-            or companies_to_sort[key] == val_list[2]:    # O(1)
-        key_list.append(key)                            # O(1)
 
-print(key_list)
+companies = list(companies_to_sort.items())               # O(1)
+sorted_companies = sorted(companies, key=lambda el: el[1], reverse=True)   # O(n logn)
+print(sorted_companies[:3])                  # O(1)
+
 # Итоговая сложность O(n logn) - решение более эффективно
 
 
@@ -203,23 +202,41 @@ authentication_1(users_list)   # O(1) - это решение более эфф�
 класса-стек в самом же классе.
 """
 
-stack_collection = []
-stack_height = 0
-put_in_stack = ''
-stack_fill = []
-while put_in_stack != 'stop':       # O(n)
-    if stack_height < 3:               # O(1)
-        put_in_stack = input('Give me something: ')    # O(1)
-        stack_fill.append(put_in_stack)            # O(1)
-    else:
-        put_in_stack = input('Give me something: ')    # O(1)
-        stack_collection.append(stack_fill)          # O(1)
-        stack_fill = []      # O(1)
-        stack_fill.append(put_in_stack)         # O(1)
-    stack_height = len(stack_fill)   # O(1)
-stack_fill.pop()            # O(1)
-stack_collection.append(stack_fill)     # O(1)
-print(stack_collection)    # Итоговая сложность O(n) - линейная из-за цикла while для ввода пользователя
+class Stack:
+    def __init__(self, sub_len):
+        self.elems = [[]]
+        self.sub_len = sub_len
+
+    def put_in_stack(self, *args):
+        for arg in args:
+            if len(self.elems[len(self.elems) - 1]) == self.sub_len:
+                self.elems.append([])
+            self.elems[len(self.elems) - 1].append(arg)
+
+    def get_from_stack(self):
+        element = self.elems[len(self.elems) - 1].pop()
+        if len(self.elems[-1]) == 0:
+            self.elems.pop()
+        return element
+
+    def show(self):
+        return print(self.elems)
+
+    def length(self):
+        return print(len(self.elems))
+
+
+if __name__ == '__main__':
+    stack_b = Stack(2)
+
+    stack_b.put_in_stack('lala', 'dfkjhk', 'frfrfrf', 'jijijij', 'ccc', 'ggg', 'eeee')
+    stack_b.put_in_stack('rrr')
+    stack_b.get_from_stack()
+    stack_b.show()  # [['lala', 'dfkjhk'], ['frfrfrf', 'jijijij'], ['ccc', 'ggg'], ['eeee']]
+    stack_b.get_from_stack()
+    stack_b.show()  # [['lala', 'dfkjhk'], ['frfrfrf', 'jijijij'], ['ccc', 'ggg']]
+    stack_b.length()  # 3
+
 
 
 
@@ -236,42 +253,62 @@ print(stack_collection)    # Итоговая сложность O(n) - лине
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-idea_development = []
-in_process = []
-ready = []
+class Queue:
+    def __init__(self):
+        self.elems = []
+
+    def add_task(self, task):
+        return self.elems.insert(0, task)
+
+    def get_task(self):
+        return self.elems.pop()
+
+    def move_task(self, to_queue):
+        return to_queue.add_task(self.elems.pop())
+
+    def show(self):
+        return print(self.elems)
 
 
-def to_develop(idea, queue):
-    queue.insert(0, idea)
+class TaskBoard:
+    def __init__(self):
+        self.tasks = Queue()
+        self.fix = Queue()
+        self.ready = []
+
+    def add_task_to_board(self, *args):
+        for arg in args:
+            self.tasks.add_task(arg)
+
+    def to_process(self):
+        return self.ready.append(self.tasks.get_task())
+
+    def to_fix(self):
+        return self.tasks.move_task(self.fix)
+
+    def show_board(self):
+        return print('our tasks: ', end=''), self.tasks.show(), print('we have to fix: ', end=''), self.fix.show(), \
+               print('ready: ', self.ready)
 
 
-def step_up(queue_from, queue_to):
-    queue_to.insert(0, queue_from.pop())
+if __name__ == '__main__':
+    board = TaskBoard()
+    board.add_task_to_board('some work1', 'work', 'work work', 'hard work')
+    board.show_board()
+# our tasks: ['hard work', 'work work', 'work', 'some work1']
+# we have to fix: []
+# ready:  []
 
+    board.to_process()
+    board.to_process()
+    board.to_fix()
 
-to_develop('get some work1', idea_development)
-to_develop('coffee break1', idea_development)
-to_develop('get some work2', idea_development)
-to_develop('get some work3', idea_development)
-to_develop('coffee break2', idea_development)
-to_develop('get some work4', idea_development)
-to_develop(input('Any idea? '), idea_development)
+    board.show_board()
+# our tasks: ['hard work']
+# we have to fix: ['work work']
+# ready:  ['some work1', 'work']
 
-print('В разработке: ', idea_development)
-
-step_up(idea_development, in_process)
-step_up(idea_development, in_process)
-step_up(idea_development, in_process)
-
-print('В разработке: ', idea_development)
-print('В процессе решения: ', in_process)
-
-step_up(in_process, ready)
-step_up(in_process, ready)
-
-print('В разработке: ', idea_development)
-print('В процессе решения: ', in_process)
-print('Выполнено: ', ready)
+# Надеюсь правильно поняла, как должны были двигаться задачи
 
 
 """
