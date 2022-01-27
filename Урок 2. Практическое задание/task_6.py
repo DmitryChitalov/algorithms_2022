@@ -4,20 +4,6 @@
 неудачной попытки должно сообщаться больше или меньше введенное пользователем
 число, чем то, что загадано. Если за 10 попыток число не отгадано,
 то вывести загаданное число.
+
 Решите через рекурсию. Решение через цикл не принимается.
 """
-from random import randint
-
-def game(number, attempts):
-    if attempts == 0:
-        print(number)
-        return
-            # number
-    else:
-        answer = int(input('Введите число: '))
-        if answer == number:
-            print('You win')
-        else:
-            game(number, attempts-1)
-
-game(randint(1, 100), 10)
