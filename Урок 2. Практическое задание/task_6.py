@@ -7,3 +7,29 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+import random
+
+
+def guess_num(r_num, count):
+    answer = int(input("Ваше число: "))
+    if count == 0:
+        return "Вы проиграли, попытки исчерпаны"
+    elif answer != r_num and answer < r_num:
+        count -= 1
+        print(f"Не угадали! Число больше {answer} Попробуйте еще раз!")
+        return guess_num(r_num, count)
+    elif answer != r_num and answer > r_num:
+        count -= 1
+        print(f"Не угадали! Число меньше {answer} Попробуйте еще раз!")
+        return guess_num(r_num, count)
+    elif answer == r_num:
+        return "Вы угадали!"
+    else:
+        return "Как так, что же пошло не так.."
+
+
+if __name__ == "__main__":
+    r_num = random.randint(0, 100)
+    print(r_num)
+    print(guess_num(r_num, 10))
