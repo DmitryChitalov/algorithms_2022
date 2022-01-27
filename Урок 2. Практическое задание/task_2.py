@@ -17,3 +17,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def chet_nechet(num, even, odd):
+    if num == 0:
+        return even, odd
+    else:
+        digit = num % 10
+        num = num // 10
+        if digit % 2 == 0:
+            even += 1
+            return chet_nechet(num, even, odd)
+        else:
+            odd += 1
+            return chet_nechet(num, even, odd)
+
+
+if __name__ == "__main__":
+    num = int(input("Ваше число, сударь: "))
+    if num == 0:
+        print("Это 0 - странное число, вроде есть, а вроде нет")
+    even, odd = chet_nechet(num, 0, 0)
+    print(f"В нем четных чисел {even}, а нечетных чисел {odd}")

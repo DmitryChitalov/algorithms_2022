@@ -17,3 +17,15 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def rec_reverse(num):
+    if num < 10:
+        return num
+    else:
+        return str(num % 10) + str(rec_reverse(num//10))
+
+
+num = int(input("Число: "))
+print(rec_reverse(num))
+
