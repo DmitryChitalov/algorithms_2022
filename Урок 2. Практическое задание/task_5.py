@@ -28,7 +28,7 @@ def asscii_rec_func(n, count):
         if count % 10 == 0:
             return f"{n} - {chr(n)}\n " + asscii_rec_func(n+1,count+1)
         else:
-            return f"{n} - {chr(n)} " + asscii_rec_func(n + 1,count+1)
+            return f"{n} - {chr(n)} " + asscii_rec_func(n+1,count+1)
 
 
 if __name__ == "__main__":
