@@ -12,3 +12,15 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def equality(n, i=0, c=0):
+    a = n*(n+1)/2
+    b = n-i
+    i += 1
+    if i > n:
+        return a == c
+    return equality(n, i, b+c)
+
+
+print(equality(5))

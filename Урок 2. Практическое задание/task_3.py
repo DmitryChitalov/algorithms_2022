@@ -17,3 +17,16 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def reverse_num(number, reverse_list):
+    if number == 0:
+        if 0 == reverse_list[0]:
+            reverse_list.append(0)
+        return int(''.join(map(str, reverse_list)))
+    a = number % 10
+    reverse_list.append(a)
+    return reverse_num(number//10, reverse_list)
+
+
+print(reverse_num(34045680, []))

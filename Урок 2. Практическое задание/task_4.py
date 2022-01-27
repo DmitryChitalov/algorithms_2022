@@ -10,3 +10,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def div_sum(number, total=0.0, a=1.0):
+    if number == 0:
+        return total
+    b = a / -2
+    return div_sum(number-1, b+total, b)
+
+
+print(div_sum(3))
