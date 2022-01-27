@@ -14,6 +14,8 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from uuid import uuid4
+from hashlib import pbkdf2_hmac
 
 
 class UrlCache:
@@ -22,8 +24,6 @@ class UrlCache:
         self.cache = {}
 
     def caching(self, url):
-        from uuid import uuid4
-        from hashlib import pbkdf2_hmac
         url_in_cache = self.cache.get(url)
         if not url_in_cache:
             salt = uuid4().bytes
