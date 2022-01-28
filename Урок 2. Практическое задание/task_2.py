@@ -17,3 +17,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+import sys
+
+odd_number = 0
+even_number = 0
+
+
+def all_number(number):
+    if number != 0:
+        if (number % 10) % 2 == 1:
+            global odd_number
+            odd_number += 1
+            return all_number(number // 10)
+        elif (number % 10) % 2 == 0:
+            global even_number
+            even_number += 1
+            return all_number(number // 10)
+    else:
+        print(f"Even number {even_number}, odd number {odd_number}")
+        sys.exit()
+
+
+print(all_number(123))

@@ -22,3 +22,25 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from hashlib import pbkdf2_hmac
+
+
+def hash_password(password_input):
+    password_hash = pbkdf2_hmac('sha256',
+                                password=(password_input.encode('UTF-8')),
+                                salt=b'bubu',
+                                iterations=10000)
+    password = input('Введите пароль еще раз для проверки: ')
+    print(password_hash)
+    f'Введите пароль еще раз для проверки: {password}'
+    password_hash_2 = password_hash = pbkdf2_hmac('sha256',
+                                                  password=(password.encode('UTF-8')),
+                                                  salt=b'bubu',
+                                                  iterations=10000)
+    if password_hash == password_hash_2:
+        print(f'Вы ввели правильный пароль')
+    else:
+        print(f'Вы ввели неправильный пароль')
+
+
+hash_password(input('Введите пароль: '))
