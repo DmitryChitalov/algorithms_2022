@@ -19,9 +19,9 @@ def good_number(count=1, random_number=(random.randint(1, 100))):
         return print('Вы проиграли! Попытки закончились Т_Т')
     else:
         if my_number > random_number:
-            print('Я загадал число меньше!')
+            print('Я загадал число меньше!!!')
         else:
-            print('Я загадал число больше!')
+            print('Я загадал число больше!!!')
         good_number(count+1, random_number)
 
 
