@@ -12,3 +12,24 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def num(i):
+    if i == 1:
+        return i
+    return num(i-1) + i
+
+
+i = int(input('Введите число: '))
+if num(i) == i * (i + 1) // 2:
+    print('Равенство верно')
+
+
+
+"""n = int(input('Введите число: '))
+j = 0
+for i in range(1, n + 1):
+    j += i
+m = n * (n + 1) // 2
+print(j)
+print(m)"""
