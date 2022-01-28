@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+import sys
+
+
+def list_of_code(x, number):
+    if number == 128:
+        sys.exit()
+    elif x == 10:
+        x = 0
+        print('')
+        return list_of_code(x, number)
+    else:
+        print(f'{number} - {chr(number)}', end=' ')
+        return list_of_code(x + 1, number + 1)
+
+
+list_of_code(0, 32)

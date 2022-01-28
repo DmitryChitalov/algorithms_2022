@@ -16,5 +16,32 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
-1230->0321
 """
+"Ноль не переставляет в начало"
+
+
+def turn_over(number, x):
+    z = 0
+    if number != 0:
+        z = number % 10
+        if z == 0:
+            return turn_over(number // 10, x)
+        else:
+            return turn_over(number // 10, x + str(z))
+    print(f'Перевернутое число: {x}')
+
+
+turn_over(int(input()), '')
+
+'Ставит ноль в начало'
+
+
+def turn_over(number, x):
+    z = 0
+    if number != 0:
+        z = number % 10
+        return turn_over(number // 10, x + str(z))
+    print(f'Перевернутое число: {x}')
+
+
+turn_over(int(input()), '')
