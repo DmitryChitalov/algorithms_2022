@@ -23,3 +23,17 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+def reverce(digit):
+    if digit // 10 == 0:
+        return digit
+    first_part = digit // 10
+    last_part = digit % 10
+    return f'{last_part}{reverce(first_part)}'
+
+
+try:
+    print(reverce(346546652))
+except TypeError:
+    print("Ошибка, Не число")

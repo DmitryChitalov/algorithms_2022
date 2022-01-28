@@ -14,3 +14,24 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+
+mport hashlib
+
+url = {}
+salt = 'mysalt'
+
+
+def update_hesh(url_adr):
+    if url_adr in url:
+        return url[url_adr]
+    else:
+        new_hesh = hashlib.sha512(salt.encode() + url_adr.encode()).hexdigest()
+        url[url_adr] = new_hesh
+        return True
+
+
+print(update_hesh('https://www.google.com'))
+
+print(update_hesh('https://www.google.com'))
+

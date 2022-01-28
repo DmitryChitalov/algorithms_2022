@@ -22,3 +22,21 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+rom uuid import uuid4
+import hashlib
+
+def pas_check():
+    salt = uuid4().hex
+    pas_1 = input("Введите пароль: ")
+    pas_2 = input("Введите подтверждение пароля: ")
+    res_1 = hashlib.sha256(salt.encode() + pas_1.encode()).hexdigest()
+    res_2 = hashlib.sha256(salt.encode() + pas_2.encode()).hexdigest()
+    if res_1 == res_2:
+        print("Вы ввели правильный пароль")
+        return True
+    else:
+        print("Доступ запрещен")
+
+
+pas_check()
