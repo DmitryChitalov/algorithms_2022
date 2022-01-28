@@ -12,3 +12,12 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+def task(n):
+    if n == 0:
+        return 0
+    return n + task(n - 1)
+
+
+n = int(input())
+print(task(n) == n * (n + 1) / 2)
