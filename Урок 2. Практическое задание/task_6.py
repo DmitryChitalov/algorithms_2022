@@ -18,7 +18,7 @@ def user_names(num=0):
     user_names(num+1)
 
 
-# сделал в одну функцию
+# сделал в одну
 def game(user, count, number, i=0):
     i += 1
     if count > max_count:

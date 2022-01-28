@@ -29,6 +29,7 @@
 """
 
 
+# Исправил
 def calculator(total=0.0):
     operator = input('Enter an operator (+, -, *, /, total or 0 to exit): ')
     if operator == '0':

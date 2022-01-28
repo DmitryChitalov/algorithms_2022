@@ -12,6 +12,7 @@
 """
 
 
+# исправил
 def div_sum(number, total=1.0, a=1.0):
     if number == 1:
         return total
