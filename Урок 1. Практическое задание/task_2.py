@@ -14,11 +14,13 @@ lst = [5, 8, 10, 3, 18, 4, 75]
 
 
 def min_val_v1(list):
-    first_element = list[0]
-    for i in list[1:]:
-        if i < first_element:
-            first_element = i
-    return first_element
+    for i in list:
+        element = True
+        for j in list:
+            if i > j:
+                element = False
+        if element:
+            return i
 
 
 print(min_val_v1(lst))
