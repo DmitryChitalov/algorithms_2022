@@ -20,3 +20,60 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {'user1': {'pass': '1111', 'activation': True}, 'user2': {'pass': '2222', 'activation': False},
+         'user3': {'pass': '3333', 'activation': True}, 'user4': {'pass': '4444', 'activation': False}}
+
+
+def check_login(login):                                         #O(1)
+    return login in users.keys()
+
+
+def check_activation(login):                                    #O(1)
+    return users[login]['activation']
+
+
+def check_pass(login, passw):                                   #O(1)
+    return users[login]['pass'] == passw
+
+
+def main1():                  #returns True or False            # O(1)
+    login = input('Введите логин: ')
+    if check_login(login):                                      # O(1)
+        passw = input('Введите пароль: ')
+        if check_pass(login, passw):                            # O(1)
+            if check_activation(login):                         # O(1)
+                print('Добро пожаловать!')
+                return True
+            else:
+                print('Учетная запись не активирована. Пожалуйста завершите активацию и попробуйте снова.')
+                return False
+        else:
+            print('Неверный пароль.')
+            return False
+    else:
+        print(f'Пользователь {login} не найден. Пройдите регистрацию.')
+
+
+main1()
+
+
+###################
+
+
+def authentification2():                                # O(n) + O(1) + O(1) + O(1) = O(n)
+    login = input('Введите логин: ')
+    for el in users:                                    # O(n)
+        if login == el:                                 # O(1)
+            passw = input('Введите пароль: ')
+            if passw in users[login].values():          # O(1)
+                if True in users[login].values():       # O(1)
+                    return 'Authentication passed'
+                else:
+                    return 'Please finish activation'
+            else:
+                return 'Incorrect password'
+    return 'Incorrect login'
+
+
+print(authentification2())
