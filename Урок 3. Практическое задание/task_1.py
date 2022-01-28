@@ -23,3 +23,74 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+# a)
+from time import time
+
+
+def time_analyze(fn):
+    def wrapped(x):
+        time_start = time()
+        fn(x)
+        time_end = time()
+        return time_end - time_start
+    return wrapped
+
+
+@time_analyze
+# Сложность - O(1)
+def filling_list(x):
+    for i in range(100000):  # O(1)
+        x.append(i)   # O(1)
+    return x  # O(1)
+
+
+@time_analyze
+# Сложность - O(1)
+def filling_dict(x):
+    for i in range(100000):  # O(1)
+        x[i] = i  # O(1)
+    return x  # O(1)
+
+
+# b)
+
+@time_analyze
+# Сложность - O(N)
+def changing(x):
+    for i in x:  # O(N)
+        x[i] += 1   # O(1)
+    return x  # O(1)
+
+
+@time_analyze
+# Сложность - O(N)
+def deleting_list(x):
+    for i in range(len(x)):  # O(N)
+        x.pop()   # O(1)
+    return x  # O(1)
+
+
+@time_analyze
+# Сложность - O(N)
+def deleting_dict(x):
+    for i in list(x):  # O(N)
+        x.pop(i)   # O(1)
+    return x  # O(1)
+
+
+my_list = []
+my_dict = {}
+print(filling_list(my_list))    # 0.007979393005371094
+print(filling_dict(my_dict))    # 0.008977413177490234
+# Словарь заполняется несколько дольше, т.к. требуется время на генерацию хэша
+
+print(changing(my_list))    # 0.004985809326171875
+print(changing(my_dict))    # 0.008006572723388672
+# Словарь изменяется несколько дольше, т.к. требуется время на генерацию нового хэша (???).
+# Но ведь ключи не менялись. Пункт вызывает вопросы.
+
+print(deleting_list(my_list))    # 0.005012989044189453
+print(deleting_dict(my_dict))    # 0.00797271728515625
+# Словарь изменяется несколько дольше, вероятно по причине дополнительного времени на удаление кэша?
+
