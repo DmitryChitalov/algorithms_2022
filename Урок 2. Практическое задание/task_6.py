@@ -7,3 +7,22 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+import random
+
+
+def good_number(count=1, random_number=(random.randint(1, 100))):
+    my_number = int(input('Угадайте, какое число я загадал: '))
+    if my_number == random_number and count <= 10:
+        return print(f'Вы победили! Я действительно загадал {my_number}, вы справились с {count} попытки!')
+    elif count > 10:
+        return print('Вы проиграли! Попытки закончились Т_Т')
+    else:
+        if my_number > random_number:
+            print('Я загадал число меньше!')
+        else:
+            print('Я загадал число больше!')
+        good_number(count+1, random_number)
+
+
+good_number()
