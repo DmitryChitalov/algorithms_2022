@@ -12,3 +12,18 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+def prove(q_ele):
+    if q_ele == 1:
+        return 1
+    else:
+        return q_ele + prove(q_ele-1)
+
+
+try:
+    q_ele = int(input("Введите порядковый номер последовательности: "))
+    if prove(q_ele) == q_ele * (q_ele + 1) / 2:
+        print("Верно")
+
+except ValueError:
+    print("Введена строка")
+

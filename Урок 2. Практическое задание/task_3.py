@@ -17,3 +17,15 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+def reverce(digit):
+    if digit // 10 == 0:
+        return digit
+    first_part = digit // 10
+    last_part = digit % 10
+    return f'{last_part}{reverce(first_part)}'
+
+
+try:
+    print(reverce(346546652))
+except TypeError:
+    print("Ошибка, Не число")
