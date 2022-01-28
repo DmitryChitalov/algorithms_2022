@@ -25,13 +25,13 @@ company = {
     'ООО "Сибиряки': 17300}
 
 
-def top3_company_v1(dict):                  # O( n log n) или O(n**4) так и не понял как суммировать
+def top3_company_v1(dict):                  # O( n log n)
     top3_company = {}                       # O(1)
     dict_list = list(dict.values())         # O(n)
     dict_list.sort(reverse=True)            # O( n log n)
-    for el in dict_list[:3]:                # O(n)
+    for el in dict_list[:3]:                # O(1) вы комментировали ДЗ "констанстная сложность", не понимаю почему Т_Т
         for name, prof in dict.items():     # O(n)
-            if prof == el:                  # O(n)
+            if prof == el:                  # O(1)
                 top3_company[name] = prof   # O(1)
     return top3_company                     # O(1)
 
