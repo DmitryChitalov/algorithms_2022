@@ -20,3 +20,59 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+'Превое решение'
+"Общая сложность О(n) "
+import sys
+from typing import Dict
+
+dict1 = {'name1': ['kjdafo23423', 'activate']}
+dict1 = {'name1': ['kjdafo23423', 'activate']}
+inp_name = input()                                                      # O(1)
+inp_password = input()                                                  # O(1)
+try:
+    if inp_name == [k for k, v in dict1.items() if k == inp_name][0]:    # O(n)
+        print('Логин верный')                                           # O(1)
+except IndexError:                                                      # O(1)
+    print("Неправильный логин")                                         # O(1)
+    sys.exit(1)                                                         # O(1)
+try:                                                                    # O(1)
+    if inp_password == dict1.get(inp_name, 0)[0]:                       # O(1)
+        print('Пароль верный')                                          # O(1)
+    else:                                                               # O(1)
+        print("Неправильный пароль")                                    # O(1)
+        sys.exit(1)                                                     # O(1)
+except TypeError:                                                       # O(1)
+    print("Неправильный пароль")                                        # O(1)
+    sys.exit(1)                                                         # O(1)
+try:                                                                    # O(1)
+    if 'activate' == dict1.get(inp_name, 0)[1]:                         # O(1)
+        print('Вы авторизованы')                                        # O(1)
+except TypeError:                                                       # O(1)
+    print('You should verification')                                    # O(1)
+    sys.exit(1)                                                         # O(1)
+
+"Второе решение"
+"Итоговая сложность O(1)"
+dict1 = {'name1': ['kjdafo23423', 'activate']}
+inp_name = input()                                                      # O(1)
+inp_password = input()                                                  # O(1)
+try:
+    if inp_password == dict1.get(inp_name, 0)[0]:                       # O(1)
+        print('Пароль верный')                                          # O(1)
+    else:                                                               # O(1)
+        print("Неправильный пароль")                                    # O(1)
+        sys.exit(1)                                                     # O(1)
+except TypeError:                                                       # O(1)
+    print("Неправильный пароль")                                        # O(1)
+    sys.exit(1)                                                         # O(1)
+try:                                                                    # O(1)
+    if 'activate' == dict1.get(inp_name, 0)[1]:                         # O(1)
+        print('Вы авторизованы')                                        # O(1)
+    else:
+        print('Вы не авторизованы')
+except TypeError:                                                       # O(1)
+    print('You should verification')                                    # O(1)
+    sys.exit(1)                                                         # O(1)
+
+"Решения почти похожи, но если не делать проверку на логин, то второе решение становится менее сложным, чем перовое." \
+"Так как в первом решение идет поиск логина во всех ключах словаря"
