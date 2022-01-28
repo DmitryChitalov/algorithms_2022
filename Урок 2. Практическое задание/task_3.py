@@ -18,3 +18,13 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+def rev_digit(num, res=''):
+    if num == 0:
+        return print(res)
+    else:
+        print(num % 10, end='')
+        rev_digit(num // 10)
+
+
+rev_digit(120300040)
