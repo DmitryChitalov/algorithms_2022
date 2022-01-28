@@ -35,10 +35,10 @@ users = {
 }
 
 
-def log_in_v1(users_list=users):  # O(n)
+def log_in_v1(users_list=users):  # O(n^2)
     username = input('Your login: ')  # O(1)
     password = input('Your password: ')  # O(1)
-    if users_list.get(username):  # O(n)
+    if users_list.get(username):  # O(1)
         if users_list[username]['Password'] == password and users_list[username]['Activate']:  # O(n)
             return print('Вход осуществлен')  # O(1)
         elif users_list[username]['Password'] == password and not users_list[username]['Activate']:  # O(n)
