@@ -15,3 +15,48 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+print('----10----')
+m = 10
+lst = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(lst)
+print(timeit("median(lst)", globals=globals(), number=1000))
+print(median(lst))
+
+print('----100----')
+m = 100
+lst = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(lst)
+print(timeit("median(lst)", globals=globals(), number=1000))
+print(median(lst))
+
+print('----1000----')
+m = 1000
+lst = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(lst)
+print(timeit("median(lst)", globals=globals(), number=1000))
+print(median(lst))
+
+"""
+----10----
+0.010792999999999942
+
+----100----
+0.06245769999999995
+
+----1000----
+0.47483940000000013
+"""
+
+"""
+Вывод: 
+"""
+"""
+Встроенная функция оказалась конечно же самой быстрой для поиска медианы
+на втором месте по скорости идет нахождение медианы с предварительной сортировкой методом Шелла
+Самым медленным методом оказалось удаление максимальных элементов массива 
+"""
