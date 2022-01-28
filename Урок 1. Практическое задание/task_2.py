@@ -13,3 +13,31 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+'Сложность O(n)'
+
+list1 = [4, 2, 100, 2991, 1, 1323]
+x = 1                         # O(1)
+z = 0                         # O(1)
+for n in range(len(list1)):   # O(n)
+    v = list1[n]              # O(1)
+    if int(v) > z:            # O(1)
+        z = v                 # O(1)
+    else:                     # O(1)
+        z = v                 # O(1)
+        x = v                 # O(1)
+print(x)  # O(1)
+
+
+'Сложность O(n^2)'
+
+
+list1 = [4, 2, 100, 2991, 1, 1323]         # O(1)
+for i in list1:                            # O(n)
+    min_number = True                      # O(1)
+    for k in list1:                        # O(n)
+        if i > k:                          # O(1)
+            min_number = False             # O(1)
+    if min_number:                         # O(1)
+        print(i)                           # O(1)
+
