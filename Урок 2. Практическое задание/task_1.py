@@ -27,32 +27,3 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
-
-def calculate():
-    s = input("Введите операцию (+, -, *, / или 0 для выхода): ")
-    if s not in ('+', '-', '*', '/', '0'):
-        print("Неизвестная операция"), calculate()
-    elif s == '0':
-        print("Вы вышли из калькулятора")
-    else:
-        a = input()
-        b = input()
-        if a.isdigit() and b.isdigit():
-            a = int(a)
-            b = int(b)
-            if s == '+':
-                print(f'Ваш результат {a + b}'), calculate()
-            elif s == '-':
-                print(f'Ваш результат {a - b}'), calculate()
-            elif s == '*':
-                print(f'Ваш результат {a * b}'), calculate()
-            elif s == '/' and b != 0:
-                print(f'Ваш результат {a / b}'), calculate()
-            else:
-                print("На 0 делть нельзя"), calculate()
-        else:
-            print("Введите число")
-            return calculate()
-
-
-print(calculate())
