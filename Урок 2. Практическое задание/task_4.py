@@ -21,5 +21,4 @@ def row_generic(f, n) -> float:
 
 if __name__ == "__main__":
     n = int(input("Введите количество элементов: "))
-    f = float(input("Первый элемент последовательности: "))
-    print(f"Сумма элементов ряда:", row_generic(f, n))
+    print(f"Количество элементов - {n}, Сумма элементов ряда:", row_generic(1, n))

@@ -19,7 +19,7 @@
 """
 
 
-def chet_nechet(num, even, odd):
+def even_or_odd(num, even, odd):
     if num == 0:
         return even, odd
     else:
@@ -27,15 +27,15 @@ def chet_nechet(num, even, odd):
         num = num // 10
         if digit % 2 == 0:
             even += 1
-            return chet_nechet(num, even, odd)
+            return even_or_odd(num, even, odd)
         else:
             odd += 1
-            return chet_nechet(num, even, odd)
+            return even_or_odd(num, even, odd)
 
 
 if __name__ == "__main__":
     num = int(input("Ваше число, сударь: "))
     if num == 0:
         print("Это 0 - странное число, вроде есть, а вроде нет")
-    even, odd = chet_nechet(num, 0, 0)
+    even, odd = even_or_odd(num, 0, 0)
     print(f"В нем четных чисел {even}, а нечетных чисел {odd}")

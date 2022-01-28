@@ -25,11 +25,13 @@ def asscii_rec_func(n, count):
     if n == 127:
         return f"{n} - {chr(n)}"
     else:
-        if count % 10 == 0:
-            return f"{n} - {chr(n)}\n " + asscii_rec_func(n+1,count+1)
+        if n == 32:
+            return f" {n} - {chr(n)} " + asscii_rec_func(n + 1, count + 1)
+        elif count % 10 == 0:
+            return f" {n} - {chr(n)}\n " + asscii_rec_func(n+1,count+1)
         else:
             return f"{n} - {chr(n)} " + asscii_rec_func(n+1,count+1)
 
 
 if __name__ == "__main__":
-    print(asscii_rec_func(32, 0))
+    print(asscii_rec_func(32, 1))
