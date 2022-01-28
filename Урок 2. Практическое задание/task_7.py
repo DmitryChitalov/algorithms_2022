@@ -15,12 +15,15 @@
 
 
 def equality(n, i=0, c=0):
-    a = n*(n+1)/2
     b = n-i
     i += 1
     if i > n:
-        return a == c
+        return c
     return equality(n, i, b+c)
 
 
-print(equality(5))
+try:
+    num = int(input('Enter the number: '))
+    print(equality(num) == num*(num+1)/2)
+except ValueError:
+    print('You must enter the number')

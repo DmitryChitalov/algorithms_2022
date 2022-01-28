@@ -54,6 +54,9 @@ def calculator(total=0.0):
         print(number)
         return total + calculator(number)
     elif operator == '/':
+        if first_num == 0 or second_num == 0:
+            print("You can't divide by zero")
+            return calculator(total)
         number = first_num / second_num
         print(number)
         return total + calculator(number)

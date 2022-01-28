@@ -22,11 +22,8 @@
 
 
 def ascii_range(ascii_val, number):
-    if number < ascii_val:
-        print('Number must be greater than ascii_val')
-        return
     a = chr(ascii_val)
-    if ord(a) == number:
+    if number == ascii_val:
         print(a)
         return
     print(a, end=' ')
@@ -36,3 +33,20 @@ def ascii_range(ascii_val, number):
 
 
 ascii_range(32, 127)
+
+
+# def ascii_range(ascii_val, number):
+#     if number < ascii_val:
+#         print('Number must be greater than ascii_val')
+#         return
+#     a = chr(ascii_val)
+#     if ord(a) == number:
+#         print(a)
+#         return
+#     print(a, end=' ')
+#     if (ascii_val - 31) % 10 == 0:
+#         print('\n')
+#     return ascii_range(ascii_val+1, number)
+#
+#
+# ascii_range(32, 127)

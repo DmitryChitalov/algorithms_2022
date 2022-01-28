@@ -19,11 +19,10 @@
 """
 
 
+# не могу придумать как сделать без списка если не копипастить с вашего примера
 def reverse_num(number, reverse_list):
     if number == 0:
-        if 0 == reverse_list[0]:
-            reverse_list.append(0)
-        return int(''.join(map(str, reverse_list)))
+        return ''.join(map(str, reverse_list))
     a = number % 10
     reverse_list.append(a)
     return reverse_num(number//10, reverse_list)
