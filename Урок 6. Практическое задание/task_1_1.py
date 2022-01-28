@@ -30,3 +30,62 @@
 
 Это файл для первого скрипта
 """
+"До потимитизации"
+
+from memory_profiler import profile, memory_usage
+from sys import getsizeof
+
+
+def decor_memory(func):
+    def wrapper():
+        memory_1 = memory_usage()
+        res = func()
+        memory_2 = memory_usage()
+        all_memory = memory_1[0] - memory_2[0]
+        return res, print(all_memory)
+
+    return wrapper
+
+
+x = ['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй', 'директор аэлита']
+
+
+@profile
+def strings():
+    for k in x:
+        z = (k[:k.find(" "):-1])
+        m = (z[z.find(" ")::-1])
+        m = m.strip()
+        print(f"Привет, {m.title()}!")
+
+
+strings()
+print(getsizeof(strings))  # 136/ -0.01171875
+
+"""Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    53     18.2 MiB     18.2 MiB           1   @profile
+    54                                         def strings():
+    55     18.2 MiB      0.0 MiB           5       for k in x:
+    56     18.2 MiB      0.0 MiB           4           z = (k[:k.find(" "):-1])
+    57     18.2 MiB      0.0 MiB           4           m = (z[z.find(" ")::-1])
+    58     18.2 MiB      0.0 MiB           4           m = m.strip()
+    59     18.2 MiB      0.0 MiB           4           print(f"Привет, {m.title()}!")"""
+
+
+"После оптимизации Применены: comprehension, f'', встроенные функции"
+
+
+@profile
+def opt_strings():
+    print(*[f'Привет, {x.split(" ")[-1].capitalize()}!\n' for x in x], sep='')
+
+
+opt_strings()
+print(getsizeof(opt_strings()))  # 56/ -0.00390625
+
+""""Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    68     18.2 MiB     18.2 MiB           1   @profile
+    69                                         def opt_strings():
+    70     18.2 MiB      0.0 MiB           7       print(*[f'Привет, {x.split(" ")[-1].capitalize()}!\n' for x in x], sep='')"""
