@@ -23,4 +23,4 @@ try:
     input_number = int(input('Введите количество элементов: '))
     print(f'Количество элементов - {input_number}, их сумма - {sum_of_elements(input_number,input_number)}')
 except ValueError:
-    print('Вы ввели строку, введите число')
+    print('Вы ввели строку, введите число!!!')

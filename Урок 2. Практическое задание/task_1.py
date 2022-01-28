@@ -36,7 +36,7 @@ def simple_calc():
         return "выход"
     else:
         if enter_operation == '':
-            print("Вы ввели некорректный символ операции, попробуйте еще раз!")
+            print("Вы ввели некорректный символ операции, попробуйте еще раз!!!")
             return simple_calc()
         elif enter_operation in "+-*/":
             try:
@@ -65,11 +65,11 @@ def simple_calc():
                         return simple_calc()
 
             except ValueError:
-                print("Вместо числа введено строковое значение, попробуйте еще раз!")
+                print("Вместо числа введено строковое значение, попробуйте еще раз!!!")
                 return simple_calc()
 
         else:
-            print("Вы ввели некорректный символ операции, попробуйте еще раз!")
+            print("Вы ввели некорректный символ операции, попробуйте еще раз!!!")
             return simple_calc()
 
 

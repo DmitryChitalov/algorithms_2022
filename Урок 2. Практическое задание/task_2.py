@@ -32,7 +32,7 @@ def find_number(num, even=0, odd=0):
                 odd += 1
             return find_number(num, even, odd)
     except TypeError:
-        print("Введено не целое число, попробуйте еще раз!")
+        print("Введено не целое число, попробуйте еще раз!!!")
 
 
 find_number(input("Введите целое число: "))

@@ -15,7 +15,7 @@ def good_number(count=1, random_number=(random.randint(1, 100))):
     try:
         my_number = int(input('Угадайте, какое число я загадал: '))
         if my_number == random_number and count <= 10:
-            return print(f'Вы победили! Я действительно загадал {my_number}, вы справились с {count} попытки!')
+            return print(f'Вы победили! Я действительно загадал {my_number}, вы справились с {count} попытки!!!')
         elif count > 10:
             return print('Вы проиграли! Попытки закончились Т_Т')
         else:

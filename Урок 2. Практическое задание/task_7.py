@@ -25,4 +25,4 @@ try:
     if proof(number) == number * (number + 1) / 2:
         print(f'{proof(number)} = {int(number * (number + 1) / 2)} - поздравляю, вы доказали равенство!!!')
 except ValueError:
-    print('Вы ввели строку, введите число')
+    print('Вы ввели строку, введите число!!!')
