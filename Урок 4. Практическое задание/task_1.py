@@ -21,3 +21,9 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(func_1(num), timeit(stmt='func_1(num)', setup='from __main__ import func_1, num', number=10000))
+# [1, 3, 5, 7, 9] 0.026060599999999996
+# Не знаю как оптимизировать

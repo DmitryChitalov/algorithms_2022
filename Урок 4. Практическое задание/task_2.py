@@ -80,3 +80,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+'''
+Мемоизация не нужна.
+Код выполняется один раз и наполненый кэш не используется, поэтому он тут не нужен.
+'''
