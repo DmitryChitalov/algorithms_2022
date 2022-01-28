@@ -20,3 +20,32 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Константная сложность O(1) в данном случае решение простое и быстрое
+def users_activating_1(user_base,user_name, password):
+    if userbase.get(user_name): # если такой ключ есть
+        if userbase[user_name]['password'] == password:
+            if userbase[user_name]['activating']:
+                return f"Привет \"{user_name}\", доступ к ресурсу разрешен"
+            return f"Доступ запрещен. Пройдите активацию."
+        return f"Пароль не подходит."
+    return f"Пользователь \"{user_name}\" не найден."
+
+# Линейная сложность O(n) при использовании цикла добавляется перебор значений а значит увеличивается время обработки
+def users_activating_2(user_base, user_name, password):
+    for k, v in userbase.items():
+        if k == user_name:
+            if v ['password'] == password and v ['activating']:
+                return f"Привет \"{user_name}\", доступ к ресурсу разрешен"
+            elif v['password'] != password:
+                return f"Пароль не подходит."
+            return f"Доступ запрещен. Пройдите активацию."
+    return f"Пользователь \"{user_name}\" не найден."
+
+userbase = {
+        'user1' : {'password' : 1, 'activating' : True},
+        'user2' : {'password' : 2, 'activating' : False}
+        }
+
+print(users_activating_1(userbase,'user2', 2))
+print(users_activating_2(userbase,'user2', 2))
