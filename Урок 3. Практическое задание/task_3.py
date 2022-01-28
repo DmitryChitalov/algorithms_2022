@@ -22,3 +22,19 @@
 р
 а
 """
+
+
+from binascii import hexlify
+from hashlib import md5, sha512
+
+
+def count_unique_substring(input_str):
+    hash_set = set()
+    for i in range(0, len(input_str) - 1):
+        for j in range(i + 1, len(input_str) + i):
+            s_hash = md5(input_str[i:j].encode()).hexdigest()
+            hash_set.add(s_hash)
+    return len(hash_set)
+
+
+print(count_unique_substring('papa'))
