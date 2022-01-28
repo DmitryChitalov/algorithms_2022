@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii_symbol(code=32, count=0, stop=127):
+    if code <= stop:
+        if count == 10:
+            print('\n')
+            count = 0
+        else:
+            print(f'{code} - {chr(code)}', end=' ')
+        table_ascii_symbol(code + 1, count + 1)
+
+
+table_ascii_symbol()
