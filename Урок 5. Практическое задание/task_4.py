@@ -55,6 +55,29 @@ print(f"{min(repeat(stmt='test_order_dict_get(10**5)', repeat=3, setup=setup, nu
 # ===> simple_dict и order_dict извлекают произвольные значения за сопоставимое время O(1)
 print('=================================================================')
 
+# change value
+setup = """
+from collections import OrderedDict
+simple_dict = dict()
+order_dict = OrderedDict()
+simple_dict = {i:i for i in range(10**6)}
+order_dict = OrderedDict({i:i for i in range(10**6)})
+
+def test_simple_dict_change(n):
+    for i in range(n):
+        simple_dict[i] = i + i
+
+def test_order_dict_change(n):
+    for i in range(n):
+         order_dict[i] = i + i 
+"""
+# 0.07343450002372265
+print(f"{min(repeat(stmt='test_simple_dict_change(10**5)', repeat=3, setup=setup, number=10))=}")
+# 0.0943836000515148
+print(f"{min(repeat(stmt='test_order_dict_change(10**5)', repeat=3, setup=setup, number=10))=}")
+# ===> simple_dict и order_dict вставляют значения за сопоставимое время, 
+# но simple_dict немного быстрее. Характеризуются скоростью O(1)
+print('=================================================================')
 
 # popitem last
 setup = """
@@ -120,7 +143,7 @@ def test_order_dict_move_to_end(n):
 print(f"{min(repeat(stmt='test_simple_dict_move_to_end(10**4)', repeat=3, setup=setup, number=1))=}")
 # 0.0007449999684467912
 print(f"{min(repeat(stmt='test_order_dict_move_to_end(10**4)', repeat=3, setup=setup, number=1))=}")
-# ===> перемещение элементов в конец(начало) в order_dict немного быстрее чем в simple_dict
+# ===> перемещение элементов в конец(начало) в order_dict быстрее чем в simple_dict
 # скорость обоих операция характеризуется O(1)
 print('=================================================================')
 
