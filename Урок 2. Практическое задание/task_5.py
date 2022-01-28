@@ -19,3 +19,24 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii(char=32):
+    if char == 128:
+        return True
+    print(f'{char:5}: {chr(char)}', end=' ')
+    if (char - 31) % 10 == 0:
+        print('\n')
+    return table_ascii(char + 1)
+
+
+table_ascii()
+
+
+"""i = 1
+for char in range(32, 128):
+    if i % 10 == 0:
+        print(f'{char:5}: {chr(char)}')
+    else:
+        print(f'{char:5}: {chr(char)}', end=' ')
+    i += 1"""

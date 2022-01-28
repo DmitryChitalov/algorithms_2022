@@ -6,17 +6,13 @@
 выполняться при вводе символа '0' в качестве знака операции. Если пользователь
 вводит неверный знак (не '0', '+', '-', '*', '/'), то программа должна
 сообщать ему об ошибке и снова запрашивать знак операции.
-
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя.
-
 Подсказка:
 Вариант исполнения:
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
-
 Решите через рекурсию. Решение через цикл не принимается.
-
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
@@ -27,3 +23,57 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        return
+    try:
+        operand_1 = int(input('Введите первое число: '))
+        operand_2 = int(input('Введите второе число: '))
+        if operation == '+':
+            print(f'Ваш результат: {operand_1+operand_2}')
+        elif operation == '-':
+            print(f'Ваш результат: {operand_1 - operand_2}')
+        elif operation == '*':
+            print(f'Ваш результат: {operand_1 * operand_2}')
+        elif operation == '/':
+            try:
+                print(f'Ваш результат: {operand_1 // operand_2}')
+                return calculate()
+            except ZeroDivisionError:
+                print('Деление на 0 запрещено!')
+    except ValueError:
+        print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+    return calculate()
+
+
+calculate()
+
+"""operand = {
+    '+': (lambda x, y: x + y),
+    '-': (lambda x, y: x - y),
+    '*': (lambda x, y: x * y),
+    '/': (lambda x, y: x / y)
+}
+
+
+def calculate(i): # Не получилось доработать этот вариант (Вернусь к нему позже)
+    try:
+        if isinstance(i, int) or isinstance(i, float):
+            return i
+        if isinstance(i, tuple):
+            return operand[i[1]](calculate(i[0]), calculate(i[2]))
+        else:
+            exit(0)
+    except ZeroDivisionError:
+        print('Деление на 0 запрещено!')
+    return calculate(i)
+
+
+print(calculate(2+2))
+print(calculate(8-2))
+print(calculate(6*3))
+print(calculate(9/3))
+print(calculate(9/0))"""

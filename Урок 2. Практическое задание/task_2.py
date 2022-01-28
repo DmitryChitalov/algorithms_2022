@@ -17,3 +17,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+"""i = int(input('Введите число: '))
+even = 0
+odd = 0
+while i > 0:
+    if i % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    i = i // 10
+print(f'Количество четных цифр: {even}\nКоличество нечетных цифр: {odd}')
+"""
+
+
+def counting_numbers(i, even=0, odd=0):
+    if i == 0:
+        return even, odd
+    else:
+        num_i = i % 10
+        i //= 10
+        if num_i % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return counting_numbers(i, even, odd)
+
+
+i = int(input('Введите число: '))
+print(f'Количество четных и нечетных цифр в числе равно: {counting_numbers(i)}')
