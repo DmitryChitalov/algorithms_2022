@@ -12,3 +12,17 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def proof(num):
+    if num == 0:
+        return 0
+    return num + proof(num - 1)
+
+
+try:
+    number = int(input("Введите число: "))
+    if proof(number) == number * (number + 1) / 2:
+        print(f'{proof(number)} = {int(number * (number + 1) / 2)} - поздравляю, вы доказали равенство!!!')
+except ValueError:
+    print('Вы ввели строку, введите число')

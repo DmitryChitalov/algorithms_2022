@@ -10,3 +10,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_of_elements(i, j):
+    if i == 0:
+        return 0
+    else:
+        return (-0.5) ** (j - i) + sum_of_elements(i - 1, j)
+
+
+try:
+    input_number = int(input('Введите количество элементов: '))
+    print(f'Количество элементов - {input_number}, их сумма - {sum_of_elements(input_number,input_number)}')
+except ValueError:
+    print('Вы ввели строку, введите число')

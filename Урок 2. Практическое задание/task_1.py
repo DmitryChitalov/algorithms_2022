@@ -27,3 +27,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def simple_calc():
+    enter_operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if enter_operation == "0":
+        return "выход"
+    else:
+        if enter_operation == '':
+            print("Вы ввели некорректный символ операции, попробуйте еще раз!")
+            return simple_calc()
+        elif enter_operation in "+-*/":
+            try:
+                num_1 = int(input("Введите первое число: "))
+                num_2 = int(input("Введите второе число: "))
+                if enter_operation == "+":
+                    result = num_1 + num_2
+                    print("Ваш результат: ", result)
+                    return simple_calc()
+                elif enter_operation == "-":
+                    result = num_1 - num_2
+                    print("Ваш результат: ", result)
+                    return simple_calc()
+                elif enter_operation == "*":
+                    result = num_1 * num_2
+                    print("Ваш результат: ", result)
+                    return simple_calc()
+                elif enter_operation == "/":
+                    try:
+                        result = num_1 / num_2
+                    except ZeroDivisionError:
+                        print("На 0 делить нельзя")
+                    else:
+                        print("Ваш результат: ", result)
+                    finally:
+                        return simple_calc()
+
+            except ValueError:
+                print("Вместо числа введено строковое значение, попробуйте еще раз!")
+                return simple_calc()
+
+        else:
+            print("Вы ввели некорректный символ операции, попробуйте еще раз!")
+            return simple_calc()
+
+
+simple_calc()
