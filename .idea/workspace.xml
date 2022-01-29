@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/algorithms_2022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/algorithms_2022.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework_4/problem1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework_4/problem3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/.idea/Урок 1. Пример практического задания.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_4.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/.idea/Урок 4. Практическое задание.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_4/problem2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework_4/problem4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_5.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +133,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sashk\Documents\GitHub\algorithms_2022\Homework_3" />
       <recent name="C:\Users\sashk\Documents\GitHub\algorithms_2022\Homework_2" />
       <recent name="C:\Users\sashk\Documents\GitHub\algorithms_2022\Homework_1" />
     </key>
@@ -228,7 +230,8 @@
       <workItem from="1642666429046" duration="1680000" />
       <workItem from="1643044289374" duration="10537000" />
       <workItem from="1643131122780" duration="1251000" />
-      <workItem from="1643185952310" duration="594000" />
+      <workItem from="1643185952310" duration="1384000" />
+      <workItem from="1643466163554" duration="720000" />
     </task>
     <task id="LOCAL-00001" summary="Homework_1">
       <created>1642282615318</created>
@@ -265,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642666844720</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Homework_3">
+      <created>1643189080204</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643189080204</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -309,7 +319,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Homework_1" />
     <MESSAGE value="Homework_1 исправления&#10;Homework_2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Homework_1 исправления&#10;Homework_2" />
+    <MESSAGE value="Homework_3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Homework_3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/algorithms_2022$problem4.coverage" NAME="problem4 Coverage Results" MODIFIED="1643056685272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Homework_3" />
