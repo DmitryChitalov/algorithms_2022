@@ -22,3 +22,25 @@
 р
 а
 """
+
+
+def get_hash(user_str):
+    return hashlib.md5(user_str.encode('utf-8')).hexdigest()
+
+
+@Timer(text="Поиск подстрок за {:.6f} секунд")
+def unique_substr(stri):
+    n = len(stri)
+    res = set()
+
+    for i in range(n):
+        for j in range(i + 1, n + 1):
+            res1 = stri[i:j]
+            if res1 != stri:
+                res.add(get_hash(res1))
+    return len(res)
+
+
+user_str = input('Введите строку: ')
+##print(all_substr(user_str))
+print(f'{user_str} - {unique_substr(user_str)} уникальных подстрок')
