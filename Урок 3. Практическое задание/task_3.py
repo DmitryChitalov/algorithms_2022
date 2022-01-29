@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+def unique_set(some_string: str) -> set:
+    """
+    find unique substrings in string
+    :param some_string: str
+    :return: set
+    """
+    hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
+                for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
+    return hash_set
+
+
+if __name__ == "__main__":
+    print(unique_set("papa"))

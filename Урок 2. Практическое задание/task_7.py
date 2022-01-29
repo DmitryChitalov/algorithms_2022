@@ -12,3 +12,19 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+def recursive_func(n: int) -> bool:
+    """ Рекурсивная функция левой части уравнения """
+    return n if n <= 1 else n + recursive_func(n - 1)
+
+def is_equal(n: int) -> int:
+    """ Сравнивание правой части с левой"""
+    print("Равенство верно" if recursive_func(n) == int(n*(n+1) / 2) else "равенство не верно")
+    return recursive_func(n) == int(n*(n+1) / 2)
+
+
+try:
+    print(is_equal(int(input("введите натуральное число \n"))))
+except ValueError:
+    print("только числа")
+
