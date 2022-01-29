@@ -25,13 +25,14 @@ b) выполните со списком и словарем операции: 
 """
 import time
 
-def time_checker (func):
+
+def time_checker(func):
     def wrap(n):
         start = time.time()
         res = func(n)
         finish = time.time()
-        print (f'Used time fo func {func}: {finish - start}')
-        return  res
+        print(f'Used time fo func {func}: {finish - start}')
+        return res
     return wrap
 
 
@@ -43,7 +44,7 @@ def add_to_list(n):
 
 @time_checker
 def add_to_dict(n):
-    dict = {i:i**2 for i in range(n)}
+    dict = {i: i**2 for i in range(n)}
     return dict
 
 
@@ -52,4 +53,21 @@ b = add_to_dict(50000)
 
 # Словарь заполняется медленнее, вероятно из-за хэширования и контроля уникальности ключей
 
+@time_checker
+def append_to_list(n):
+    list = []
+    for i in range(n):
+        list.append(i)
+    return list
 
+
+c = append_to_list(50000)
+
+@time_checker
+def append_to_dict(n):
+    dict = {}
+    for i in range(n):
+        dict[i] = i ** 2
+    return dict
+
+c = append_to_dict(50000)
