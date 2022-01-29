@@ -26,7 +26,7 @@
 import hashlib
 
 
-def unique_subrows(row, set_hash_subrows=set(), dict_hash_subrows={}):
+def unique_subrows(row, set_hash_subrows=set()):
     for i in range(len(row)):
         for j in range(1, len(row) + 1):
             if row[i:j] != row and row[i:j]:
