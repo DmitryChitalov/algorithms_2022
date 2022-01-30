@@ -21,7 +21,7 @@
 """
 
 
-def ascii_symbols(symbol_num = 32):
+def ascii_symbols(symbol_num=32):
     row_count = 1
     if symbol_num == 128:
         return

@@ -10,7 +10,7 @@
 
 
 
-def num_finder(count = 10, target_num = 77):
+def num_finder(count=10, target_num=77):
     print(f'Необходимо угадать число от 0 до 100 за {count} попыток')
     answer = int(input('Введите число: '))
     if count == 0 or answer == target_num:

@@ -14,7 +14,7 @@
 """
 
 
-def sum_rec (num):
+def sum_rec(num):
     return num if num == 1 else num + sum_rec(num-1)
 
 print(sum_rec(5))

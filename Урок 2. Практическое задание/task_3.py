@@ -30,4 +30,4 @@ def reverse(num, reversed_num =''):
         return reverse(num, reversed_num)
 
 
-print(reverse(12345))
+print(reverse(123450))

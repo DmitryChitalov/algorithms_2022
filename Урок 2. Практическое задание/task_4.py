@@ -12,7 +12,7 @@
 """
 
 
-def recur_sum(i, count = 1, sum = 1, num = 1):
+def recur_sum(i, count=1, sum=1, num=1):
     if i == 0:
         print(f'Amount of elements - 0, sum = 0')
     if i == 1:

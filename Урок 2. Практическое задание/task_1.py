@@ -52,7 +52,7 @@ def calc():
     except ValueError:
         print('You entered not a number')
     print(f'Your result is: {res}')
-    return calc()
+    return calc() #вход в рекурсию
 
 
 calc()
