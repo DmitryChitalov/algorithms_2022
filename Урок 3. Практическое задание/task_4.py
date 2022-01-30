@@ -14,3 +14,19 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+cache = {'https://gb.ru': 'a178c3b95ccd6ed45cf2082b7157ee09353588496b9b4ff591ac2a0215b3de3a5227f7ebb9ed1ce922b518c97b07ab94397e7d02374ec69adee7f69519c049fd'}
+salt = input('Enter site name: ')
+url = input('Enter URL adress: ')
+if url in cache:
+    print(cache[url])
+else:
+    res = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
+    cache[url] = res
+    print(cache)
+
+
+
+
+

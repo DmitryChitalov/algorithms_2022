@@ -27,47 +27,67 @@ import time
 
 
 def time_checker(func):
-    def wrap(n):
+    def wrap(*args):
         start = time.time()
-        res = func(n)
+        res = func(*args)
         finish = time.time()
-        print(f'Used time fo func {func}: {finish - start}')
+        print(f'Used time fo func {func}: {(finish - start)*1000}')
         return res
     return wrap
 
 
+# O(n)
 @time_checker
 def add_to_list(n):
     lst = [i for i in range(n)]
     return lst
 
 
+# O(n)
 @time_checker
 def add_to_dict(n):
     dict = {i: i**2 for i in range(n)}
     return dict
 
+a = add_to_list(1000000)
+b = add_to_dict(1000000)
 
-a = add_to_list(50000)
-b = add_to_dict(50000)
 
-# Словарь заполняется медленнее, вероятно из-за хэширования и контроля уникальности ключей
-
+# Изменение элементов
+# O(n)
 @time_checker
-def append_to_list(n):
-    list = []
-    for i in range(n):
-        list.append(i)
+def insert_elem_list(list, el, pos):
+    list.insert(pos, el)
     return list
 
 
-c = append_to_list(50000)
-
+# O(n)
 @time_checker
-def append_to_dict(n):
-    dict = {}
-    for i in range(n):
-        dict[i] = i ** 2
+def add_elem_dict(dict, el, pos):
+    dict[pos] = el
     return dict
 
-c = append_to_dict(50000)
+
+insert_elem_list(a, 22, 2)
+add_elem_dict(b, 22, 2)
+
+
+# Получение и удаление
+@time_checker
+def pop_elem_list(list, idx):
+    el = list.pop(idx)
+    return list
+
+
+@time_checker
+def pop_dict(dict, key):
+    dict.pop(key)
+    return dict
+
+pop_elem_list(a, 1)
+pop_dict(b, 1)
+
+
+# Словарь заполняется медленнее, вероятно из-за хэширования и контроля уникальности ключей.
+# Однако операции добавления, изменения и удаления элементов со словарем выполняются быстрее
+# чем операции со списком, полагаюпо той же самой причине - хэширование
