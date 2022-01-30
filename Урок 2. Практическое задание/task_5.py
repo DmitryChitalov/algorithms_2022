@@ -32,3 +32,4 @@ def ascii_show(n=32, i=1):
 
 
 ascii_show()
+
