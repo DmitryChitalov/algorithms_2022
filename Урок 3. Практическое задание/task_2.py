@@ -43,3 +43,4 @@ with open('data.txt') as json_file:
     data = json.load(json_file)
 output = 'Password accepted' if data[salt] == res2 else 'Password denied'
 print(output)
+

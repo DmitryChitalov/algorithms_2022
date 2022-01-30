@@ -25,8 +25,3 @@ else:
     res = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
     cache[url] = res
     print(cache)
-
-
-
-
-
