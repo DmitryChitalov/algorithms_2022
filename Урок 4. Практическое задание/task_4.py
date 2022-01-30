@@ -9,8 +9,9 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [1, 3, 1, 3, 4, 5, 1, 3, 3]
 
 
 def func_1():
@@ -37,5 +38,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    counted_nums = {}
+
+    for el in array:
+        if el in counted_nums:
+            counted_nums[el] += 1
+        else:
+            counted_nums[el] = 1
+    return f'Чаще всего встречается число {el}, ' \
+           f'оно появилось в массиве {max(counted_nums.values())} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+
+print(timeit("func_1()", globals=globals(), number=1000))       #  0.001927200000000004
+print(timeit("func_2()", globals=globals(), number=1000))       # 0.0025773999999999936
+print(timeit("func_3()", globals=globals(), number=1000))       # 0.0017983000000000027 получилось ускорить за счет использования словаря
+
