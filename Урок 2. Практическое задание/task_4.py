@@ -20,3 +20,4 @@ def find_sum(elems_def):
 
 elems_def = int(input('Введите количество элементов: '))
 print(find_sum(elems_def))
+
