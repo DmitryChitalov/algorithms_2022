@@ -21,3 +21,4 @@ def task(n):
 
 n = int(input())
 print(task(n) == n * (n + 1) / 2)
+
