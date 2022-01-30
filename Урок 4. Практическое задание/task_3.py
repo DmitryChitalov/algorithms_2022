@@ -11,6 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!!!
 """
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +36,21 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+my_num = 123456789
+
+print(timeit("revers(my_num)", number=10000, globals=globals()))
+print(timeit("revers_2(my_num)", number=10000, globals=globals()))
+print(timeit("revers_3(my_num)", number=10000, globals=globals()))
+print(timeit("revers_4(my_num)", number=10000, globals=globals()))
+
+"""
+вариант 1 имеет экспоненциальную сложность и выполняется медленнее всего
+варианты 3 и 4 не используют вычислений и выполняются быстрее
+вариант 3 со срезом выполняется быстрее всего
+"""
