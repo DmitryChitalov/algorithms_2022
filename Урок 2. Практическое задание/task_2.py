@@ -33,3 +33,4 @@ def count(n, even=0, odd=0):
 
 n = int(input("Введите число: "))
 count(n)
+
