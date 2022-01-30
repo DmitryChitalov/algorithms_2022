@@ -27,3 +27,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    res = 0
+    try:
+        num_1 = int(input('Please, enter number 1: '))
+        operation = input('Enter operation: +, -, *, /. For exit enter 0 ')
+        num_2 = int(input("Please, enter number 2: "))
+        if operation == '0':        # выход из рекурсии
+            return
+        elif operation == '+':
+            res = num_1 + num_2
+        elif operation == '-':
+            res = num_1 - num_2
+        elif operation == '*':
+            res = num_1 * num_2
+        elif operation == '/':
+            res = num_1/num_2
+        else:
+            print('Wrong operator')
+    except ZeroDivisionError:
+        print('You can not divide by zero')
+    except ValueError:
+        print('You entered not a number')
+    print(f'Your result is: {res}')
+    return calc() #вход в рекурсию
+
+
+calc()

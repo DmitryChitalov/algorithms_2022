@@ -7,3 +7,23 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+
+def num_finder(count=10, target_num=77):
+    print(f'Необходимо угадать число от 0 до 100 за {count} попыток')
+    answer = int(input('Введите число: '))
+    if count == 0 or answer == target_num:
+        print('Игра окночена')
+        if answer == target_num:
+            print('Вы угадали!')
+        else:
+            print('Количество попыток закончилось. Вы проиграли')
+    else:
+        if answer > target_num:
+            print("Загаданное число меньше")
+        else:
+            print("Загаданное число меньше")
+        num_finder(count-1, target_num)
+
+num_finder()

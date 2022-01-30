@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_recur(num, even=[], odd=[]):
+    if num == 0:
+        return even, odd
+    else:
+        n = num % 10
+        num = num // 10
+        if n % 2 == 0:
+            even.append(n)
+        else:
+            odd.append(n)
+        return even_odd_recur(num, even, odd)
+
+
+print(even_odd_recur(3478007894))
