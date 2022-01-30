@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+import sys
+
+
+def calculate():
+    operator = input()
+    one_number = int(input())
+    two_number = int(input())
+
+    if operator == '0':
+        print("выход")
+        return sys.exit(1)
+    elif operator not in '0+=*/':
+        print('Неверный формат данных для ввода')
+        return calculate()
+    elif operator == '+':
+        print(one_number + two_number)
+        return calculate()
+    elif operator == '-':
+        print(one_number - two_number)
+        return calculate()
+    elif operator == '*':
+        print(one_number * two_number)
+        return calculate()
+    elif operator == '/' and two_number != 0:
+        print(one_number / two_number)
+        return calculate()
+    elif two_number == 0:
+        print('На ноль делить нельзя')
+        return calculate()
+
+
+calculate()

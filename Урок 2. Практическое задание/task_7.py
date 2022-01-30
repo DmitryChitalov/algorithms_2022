@@ -12,3 +12,13 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def equal(n, x, str_out, z):
+    if n == 0:
+        print(f'{z[:-1]} = {x}({x}+1)/2')
+    else:
+        return equal(n - 1, x + 1, str_out + str(x + 1), z + str(x + 1) + '+')
+
+
+equal(int(input()), 0, '', '')
