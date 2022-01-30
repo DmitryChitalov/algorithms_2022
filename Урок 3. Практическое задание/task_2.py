@@ -23,6 +23,7 @@ f1dcaeeafeb855965535d77c55782349444b
 п.с. статья на Хабре - python db-api
 """
 
+
 import hashlib
 import mysql.connector
 
