@@ -23,3 +23,74 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_checker(func):
+    def wrap(*args):
+        start = time.time()
+        res = func(*args)
+        finish = time.time()
+        print(f'Used time fo func {func}: {(finish - start)*1000}')  #домножил на 1000 чтобы нагляднее было видно результат
+        return res
+    return wrap
+
+
+# O(n)
+@time_checker
+def add_to_list(n):
+    lst = [i for i in range(n)]
+    return lst
+
+
+# O(n)
+@time_checker
+def add_to_dict(n):
+    dict = {i: i**2 for i in range(n)}
+    return dict
+
+
+a = add_to_list(1000000)
+b = add_to_dict(1000000)
+
+
+# Изменение элементов
+# O(n)
+@time_checker
+def insert_elem_list(lst, el, pos):
+    lst.insert(pos, el)
+    return lst
+
+
+# O(n)
+@time_checker
+def add_elem_dict(dct, el, pos):
+    dct[pos] = el
+    return dct
+
+
+insert_elem_list(a, 22, 2)
+add_elem_dict(b, 22, 2)
+
+
+# Получение и удаление
+@time_checker
+def pop_elem_list(lst, idx):
+    el = lst.pop(idx)
+    print(el)
+    return lst
+
+
+@time_checker
+def pop_dict(dct, key):
+    dct.pop(key)
+    return dct
+
+
+pop_elem_list(a, 1)
+pop_dict(b, 1)
+
+
+# Словарь заполняется медленнее, вероятно из-за хэширования и контроля уникальности ключей.
+# Однако операции добавления, изменения и удаления элементов со словарем выполняются быстрее
+# чем операции со списком, полагаюпо той же самой причине - хэширование

@@ -20,5 +20,27 @@ f1dcaeeafeb855965535d77c55782349444b
 Важно: для хранения хеша и соли воспользуйтесь или файлом (CSV, JSON)
 или, если вы уже знаете, как Python взаимодействует с базами данных,
 воспользуйтесь базой данный sqlite, postgres и т.д.
-п.с. статья на Хабре - python db-api
+п.с. статья на Хабре - python db-apiс
 """
+import hashlib
+import json
+data = {}
+
+salt = input('Enter your login: ')
+password = input('Enter your password: ')
+res = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+data[salt] = res
+print(f'Hash is: {res}')
+
+with open('data.txt', 'w') as outfile:
+    json.dump(data, outfile)
+
+salt = input('Enter your login and password again. Login: ')
+password2 = input('Password: ')
+res2 = hashlib.sha256(salt.encode() + password2.encode()).hexdigest()
+print(f'Second hash is: {res2}')
+with open('data.txt') as json_file:
+    data = json.load(json_file)
+output = 'Password accepted' if data[salt] == res2 else 'Password denied'
+print(output)
+

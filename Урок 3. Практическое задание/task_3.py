@@ -6,7 +6,7 @@
 
 Подсказка: вы должны в цикле для каждой подстроки вычислить хеш
 Все хеши записываем во множество.
-Оно отсечет дубли.
+Оно отсечет дубли
 
 Экономия на размере хранимых данных (для длинных строк) и
 скорость доступа вместе с уникальностью элементов,
@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+string = 'papa'
+
+substrings = set()
+
+for i in range(len(string)):
+    for j in range(i, len(string)):
+        hash_str = hashlib.sha256(string[i:j].encode()).hexdigest()
+        substrings.add(hash_str)
+
+print(f'{len(substrings)} различных подстрок в строке {string}')
+print(substrings)
