@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -80,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+""" Оптимизировать рекурсивную функцию нет смысла, так как даже очень большое число рекурсия обойдет за небольшое 
+колличество шагов"""
