@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_7.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_7.py" afterDir="false" />
-    </list>
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="Lesson 1 HomeWork from Sosnina Anastasia" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -248,6 +240,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lesson 1 HomeWork from Sosnina Anastasia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lesson 1 HomeWork from Sosnina Anastasia" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 3. Практическое задание/task_3.py">
