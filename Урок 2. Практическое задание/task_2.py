@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def find_number(num, even=0, odd=0):
+        if num == 0:
+            print("Количество четных и нечетных цифр в числе равно:", even, odd)
+        else:
+            giv_num = num % 10
+            num //= 10
+            if giv_num % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+            return find_number(num, even, odd)
+
+
+try:
+    my_number = int(input("Введите целое число: "))
+    find_number(my_number)
+except ValueError:
+    print("Введено не целое число, попробуйте еще раз!!!")
