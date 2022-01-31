@@ -27,3 +27,53 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc_recursion():
+    operation_list = ['0', '+', '-', '*', '/']
+
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if operation not in operation_list:
+        print('Операция не распознана, попробуйте еще раз')
+        calc_recursion()
+
+    if operation == '0':
+        exit(0)
+
+    # Валидация, циклом, что бы при каждой ошибке не начинать заново
+    while True:
+        num1 = input('Введите первое число: ')
+        if num1.isdigit():
+            num1 = int(num1)
+            break
+        print('Не корректный ввод, повторите')
+
+    while True:
+        num2 = input('Введите второе число: ')
+        if num2.isdigit():
+            num2 = int(num2)
+            break
+        print('Не корректный ввод, повторите')
+
+    if operation == '+':
+        res = num1 + num2
+    elif operation == '-':
+        res = num1 - num2
+    elif operation == '*':
+        res = num1 * num2
+    elif operation == '/':
+        if num2 == 0:
+            print('На ноль делить нельзя')
+            calc_recursion()
+
+        res = num1 / num2
+    else:
+        res = 0
+
+    print(f'Ваш результат: {res}')
+
+    return calc_recursion()
+
+
+if __name__ == '__main__':
+    calc_recursion()

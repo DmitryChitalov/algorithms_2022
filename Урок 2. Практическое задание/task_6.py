@@ -7,3 +7,35 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+from random import randint
+
+
+def game_resursion(round, num):
+    if round <= 0:
+        print('Вы проиграли.')
+        print(f'Загаданное число: {num}')
+        return
+
+    # Валидация, циклом
+    while True:
+        user_num = input('Введите число (0..100): ')
+        if user_num.isdigit():
+            user_num = int(user_num)
+            break
+        print('Не корректный ввод, повторите')
+
+    if user_num == num:
+        print(f'Да, это число {num}. Вы выиграли.')
+        print(f'Гейм, как говорится, овер.')
+        return
+
+    print('Не угадали, меньше.' if user_num > num else 'Не угадали, больше.')
+
+    game_resursion(round - 1, num)
+
+
+if __name__ == '__main__':
+    print('Первому игроку приготовиться: вход в игру - "Угадай число"')
+    print('Количество попыток: 10')
+    game_resursion(10, randint(0, 100))

@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_assii_resursion(start=32, end=127):
+    print(f'{start} - {chr(start)}', end='\n' if (start + 9) % 10 == 0 else ' ')
+    if start == end:
+        return
+    print_assii_resursion(start + 1)
+
+
+if __name__ == '__main__':
+    print('А это ASCII тайных знаков таблица, которая в памяти где-то хранится...')
+    print_assii_resursion()

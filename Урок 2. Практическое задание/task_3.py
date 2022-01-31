@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+
+def reverse_digit_recursion(num):
+    if num < 10:
+        return str(num % 10)
+
+    return str(num % 10) + reverse_digit_recursion(num // 10)
+
+
+if __name__ == '__main__':
+    print(f'Перевернутое число: {reverse_digit_recursion(int(input("Введите число:")))}')
