@@ -13,3 +13,16 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+lst=[9,4,1,7,2]
+minimal=lst[0]
+for el in lst:  # O(n)
+    if el < minimal:
+        minimal=el
+print(minimal)
+
+# O(n^2)
+for el in lst:
+        for el in lst:
+            if el < minimal:
+                minimal=el
+print(minimal)

@@ -12,3 +12,18 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def recur_method(numb):
+    if numb == 1:
+        return numb
+    else:
+        return recur_method(numb - 1) + numb
+
+
+try:
+    NUMB = int(input("Введите число: "))
+    if recur_method(NUMB) == NUMB * (NUMB + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print("Вы вместо числа ввели строку. Исправьтесь")

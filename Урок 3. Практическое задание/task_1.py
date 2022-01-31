@@ -23,3 +23,72 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from functools import wraps
+from time import time
+
+
+def timeit(f):
+    def timed(*args, **kw):
+        ts = time()
+        result = f(*args, **kw)
+        te = time()
+
+        print('func:%r took: %2.4f sec' % \
+              (f.__name__, te - ts))
+        return result
+
+    return timed
+
+
+lst = [z for z in range(100000)]
+dct = {z for z in range(100000)}
+
+
+@timeit
+def double_lst(lst):
+    return [num * 2 for num in lst]
+
+
+double_lst(lst)
+
+
+@timeit
+def double_dict(lst):
+    return {num: num * 2 for num in lst}
+
+
+double_dict(lst)
+
+
+@timeit
+def get_el_lst(lst):
+    return [num for num in lst if num != 999]
+
+
+get_el_lst(lst)
+
+
+@timeit
+def get_el_dct(lst):
+    return {num for num in lst if num != 999}
+
+
+get_el_dct(lst)
+
+
+@timeit
+def change_el_lst(lst):
+
+    return
+
+
+change_el_lst(lst)
+
+
+@timeit
+def change_el_dct(lst):
+    return
+
+
+change_el_dct(lst)
