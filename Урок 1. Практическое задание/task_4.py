@@ -20,3 +20,68 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+import json
+
+users = {
+    'Vladimir': {
+        'password': 'qwerty',
+        'activated': 1
+    },
+    'Alex': {
+        'password': '12345',
+        'activated': 1
+    },
+    'Max': {
+        'password': '098765',
+        'activated': 0
+    }
+}
+
+
+def auth_1(users): # O(1) данное решение оптимальнее для выполнения, нет цикла при отсутствии активации
+    user = input('Введите логин: ')
+    current_user = users.get(user)
+    if not current_user:
+        print('Пользователь не зарегистрирован!')
+        return False
+
+    password = input('Введите пароль: ')
+    if password != current_user['password']:
+        print('Пароль неверный!')
+        return False
+
+    if current_user['activated'] == 0:
+        print('Пользователь не активирован!')
+        return False
+    else:
+        print('Добро пожаловать!')
+
+
+auth_1(users)
+
+
+def auth_2(users): # O(n)
+    user = input('Введите логин: ')
+    current_user = users.get(user)
+    if not current_user:
+        print('Пользователь не зарегистрирован!')
+        return False
+
+    password = input('Введите пароль: ')
+    if password != current_user['password']:
+        print('Пароль неверный!')
+        return False
+
+    if current_user['activated'] == 0:
+        activated = input(f'Пользователь не активирован! Хотите Активировать? Введите y/n ')
+        while activated == 'n':
+            activated = input(f'Пользователь не активирован! Хотите Активировать? Введите y/n ')
+        else:
+            current_user['activated'] = 1
+            print(f'Аккаунт активирован. Добро пожаловать')
+    else:
+        print('Добро пожаловать!')
+
+
+auth_2(users)
