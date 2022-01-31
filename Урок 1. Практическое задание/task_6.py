@@ -15,3 +15,32 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+import random
+
+
+class Queue:
+
+    def __init__(self):
+        self.queue_task = []
+        self.tasks_solved = []
+
+    def add_task(self, task):
+        self.queue_task.append(task)
+
+    def solve_task(self):
+        case = random.randint(0, 2)
+        if case:
+            self.tasks_solved.append(self.queue_task.pop(0))
+        else:
+            self.queue_task.append(self.queue_task.pop(0))
+
+
+tasks = Queue()
+
+for task in range(30):
+    tasks.add_task(task)
+print(tasks.queue_task)
+
+while tasks.queue_task:
+    tasks.solve_task()
+print(tasks.tasks_solved)
