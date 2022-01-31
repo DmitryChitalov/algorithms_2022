@@ -46,8 +46,11 @@ def revers_4(enter_num):
 
 
 enter_num = 1234567899874563210
-print(revers_4(enter_num))
-print(timeit("revers(enter_num)", globals=globals(), number=1000))
-print(timeit("revers_2(enter_num)", globals=globals(), number=1000))
-print(timeit("revers_3(enter_num)", globals=globals(), number=1000))
-print(timeit("revers_4(enter_num)", globals=globals(), number=1000))
+print(timeit("revers(enter_num)", globals=globals(), number=1000))      # 0.006542599999999996
+print(timeit("revers_2(enter_num)", globals=globals(), number=1000))    # 0.0056104000000000015
+print(timeit("revers_3(enter_num)", globals=globals(), number=1000))    # 0.0005196999999999979
+print(timeit("revers_4(enter_num)", globals=globals(), number=1000))    # 0.0012665999999999927
+
+# быстрее всего выполняется переворот строки с помощью среза,
+# затем с помощью встроенных функций reversed() и join(),
+# самый медленный способ с использованием рекурсии
