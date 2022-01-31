@@ -22,3 +22,19 @@
 р
 а
 """
+from hashlib import sha256
+
+
+def unique_substrings(x):
+    my_set = set()
+    for i in range(len(x)):
+        for j in range(len(x)):
+            if x[i:j+1] != x and x[i:j+1] != '':
+                # print(x[i:j+1])
+                # print(sha256(x[i:j+1].encode()).hexdigest())
+                my_set.add(sha256(x[i:j+1].encode()).hexdigest())
+    return len(my_set)
+
+
+inp_str = input('Введите строку: ')
+print(f'Строка "{inp_str}" содержит {unique_substrings(inp_str)} уникальных подстрок.')
