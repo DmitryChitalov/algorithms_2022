@@ -58,8 +58,8 @@ class hexNum:
 if __name__ == "__main__":
     """ This is Collections """
     print("collections solution")
-    hex_num1 = "A2" # input("Hex number1")
-    hex_num2 = "C4F" # input("Hex number2")
+    hex_num1 = input("Hex number1")
+    hex_num2 = input("Hex number2")
     dict_instance = create_dict(hex_num1, hex_num2)
     print("sum: ", dict_sum(dict_instance))
     print("multiplication: ", dict_multiplication(dict_instance))
