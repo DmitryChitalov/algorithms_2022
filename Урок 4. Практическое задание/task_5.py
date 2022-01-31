@@ -12,6 +12,7 @@
 10, 100, 1000
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -34,5 +35,26 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+#i = int(input('Введите порядковый номер искомого простого числа: '))
+#print(simple(i))
+
+def simple_2(n):
+    a = [i for i in range(n+1)]
+    a[1] = 0
+    i = 2
+    while i <= n ** 0.5:
+        if a[i] != 0:
+            j = i ** 2
+            while j <= n:
+                a[j] = 0
+                j = j + i
+        i += 1
+    a = set(a)
+    a.remove(0)
+    return a
+
+
+for func in (simple_2, simple):
+    for num in (10, 100, 1000):
+       print(f'{func.__name__} on number {num}. Result: {timeit("func(num)", globals=globals(), number=100)} s')
+
