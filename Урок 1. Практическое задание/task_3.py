@@ -17,3 +17,27 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+budget = {'Megafon': 10000, 'Beeline': 5000, 'MTS': 7500, 'Tele2': 15000, 'Yota': 1500}
+
+def find_1(data): # O(N log N)
+    t = sorted(data.items(), key=lambda x: x[1], reverse=True)[0:3]  # O(N log N)
+    return t  # O(1)
+
+
+def find_2(data):  # O(n^2)
+    result = []  # O(1)
+    for i_1 in data.items():  # O(n)
+        for i_2 in i_1:  # O(n)
+            if type(i_2) == int:  # O(1)
+                result.append(i_2)  # O(1)
+                result.sort(reverse=True)  # O(n log n)
+    return result[0:3]  # O(1)
+
+
+print(find_1(budget))
+print('------------------')
+print(find_2(budget))
+
+'''
+Первый вариан будет эффективнее, т.к. в нем неиспользуются циклы
+'''

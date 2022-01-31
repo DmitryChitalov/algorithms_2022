@@ -13,3 +13,22 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+def test_1(lst): # O(n)
+    x = lst[0]
+    for i in lst:
+        if x > i:
+            x = i
+    return x
+
+def test_2(lst):  # O(n^2)
+    lst_find = lst.copy()
+    x = lst_find[0]
+    for i in lst:
+        if x > i:
+            x = i
+    return x
+
+lst_test = [16, 28, 3, 4, 5, 6, 7, 8, 9]
+print(f'Минимальное число: {test_1(lst_test)}')
+print(f'Минимальное число: {test_2(lst_test)}')
