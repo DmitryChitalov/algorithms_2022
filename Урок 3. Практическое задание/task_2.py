@@ -22,3 +22,56 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import json
+import os
+from hashlib import sha256
+from uuid import uuid4
+
+
+def load_file():
+    fr = open('test.json', 'a+')
+    if os.stat("test.json").st_size == 0:
+        my_dict = {}
+    else:
+        fr.seek(0)
+        my_dict = json.load(fr)
+    fr.close()
+    return my_dict
+
+
+def seek_dict(dct, pas):
+    for key, value in dct.items():
+        if sha256(value.encode() + pas.encode()).hexdigest() == key:
+            return key
+
+
+def write_file(dct, pas):
+    with open('test.json', 'w+') as fw:
+        salt = uuid4().hex
+        salted_hash = sha256(salt.encode() + pas.encode()).hexdigest()
+        dct[salted_hash] = salt
+        json.dump(dct, fw)
+        return salted_hash
+
+
+pwd = input('Введите пароль: ')
+hash1 = seek_dict(load_file(), pwd)
+if hash1:
+    print(f'В базе есть строка: {hash1}')
+    pwd = input('Введите пароль еще раз: ')
+    hash2 = seek_dict(load_file(), pwd)
+    if hash2 == hash1:
+        print('Пароль верен!')
+    else:
+        print('Пароль неверен!')
+else:
+    new_hash = write_file(load_file(), pwd)
+    print(f'В базу записан хэш: {new_hash}')
+    new_pwd = input('Введите пароль еще раз: ')  
+    # Тут происходит повторный ввод пароля, их надо сравнить. 
+    # Сделал отдельной переменной, если это дублирование имелось в виду  
+    hash2 = seek_dict(load_file(), new_pwd)
+    if hash2 == new_hash:
+        print('Пароль верен!')
+    else:
+        print('Пароль не совпадает!')
