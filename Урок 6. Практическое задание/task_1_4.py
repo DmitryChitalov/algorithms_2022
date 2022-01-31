@@ -30,3 +30,59 @@
 
 Это файл для четвертого скрипта
 """
+
+
+# Урок 1 Задание 4
+# Для оптимизации возьмем часть создание пользователей через класс. 
+# При большом количестве пользователей имеет смысл сделать их черезе слоты. 
+# Тогда потребление памяти уменьшается.
+# Например при 10000 пользователей 3.33203125 Mib против 2.375 Mib
+from memory_profiler import memory_usage
+
+
+class User:
+    def __init__(self, login, password, *, is_active):
+        self.login = login
+        self.password = password
+        self.is_active = is_active
+
+
+class WebResource:
+    users = {}
+
+
+def profiler():
+    web_resource = WebResource()
+    for u in range(10**4):
+        u = User(f'Ivanov{u}', f'{u}{u}', is_active=True)
+        web_resource.users[u.login] = u
+    return web_resource
+
+m1 = memory_usage()
+p1 = profiler()
+m2 = memory_usage()
+mem_diff = m2[0] - m1[0]
+print(f"Выполнение заняло {mem_diff} Mib")
+
+
+class User_slots:
+    __slots__ = ('login', 'password', 'is_active')
+    def __init__(self, login, password, *, is_active):
+        self.login = login
+        self.password = password
+        self.is_active = is_active
+
+
+def profiler2():
+    web_resource = WebResource()
+    for u in range(10**4):
+        u = User_slots(f'Ivanov{u}', f'{u}{u}', is_active=True)
+        web_resource.users[u.login] = u
+    return web_resource
+
+
+m1 = memory_usage()
+p2 = profiler2()
+m2 = memory_usage()
+mem_diff = m2[0] - m1[0]
+print(f"Выполнение заняло {mem_diff} Mib")
