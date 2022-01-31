@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,52 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def recursive_reverse_v2(number):
+    return ''.join(reversed(str(number)))
+
+
+print('Изменённая функция recursive_reverse_v2')
+print(
+    timeit(
+        'recursive_reverse_v2(num_100)',
+        setup='from __main__ import recursive_reverse_v2, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_v2(num_1000)',
+        setup='from __main__ import recursive_reverse_v2, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_v2(num_10000)',
+        setup='from __main__ import recursive_reverse_v2, num_10000',
+        number=10000))
+
+
+def recursive_reverse_v3(number):
+    return str(number)[::--1]
+
+
+print('Изменённая функция recursive_reverse_v3')
+print(
+    timeit(
+        'recursive_reverse_v3(num_100)',
+        setup='from __main__ import recursive_reverse_v3, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_v3(num_1000)',
+        setup='from __main__ import recursive_reverse_v3, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_v3(num_10000)',
+        setup='from __main__ import recursive_reverse_v3, num_10000',
+        number=10000))
+
+"""
+Исходная функция с мемоизацией работает быстрее, чем без неё.
+Проблема исходной функции в том, что она решает задачу с помощью рекурсии, эффективнее обойтись без неё (v_2 и v_3).
+"""
