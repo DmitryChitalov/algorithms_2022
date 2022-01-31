@@ -7,3 +7,26 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+from random import randint
+
+rand_num = randint(0, 100)
+
+
+def func(cnt=10):
+    player_num = int(input('Число '))
+    if cnt == 0:
+        print(f'Вы проиграли\nЧисло {rand_num}')
+        return
+    if player_num == rand_num:
+        print(f'Вы победили!\nЧисло {rand_num}')
+    else:
+        print(f'Попыток: {cnt}')
+        if player_num < rand_num:
+            print('Загаданное число больше')
+        else:
+            print('Загаданное число меньше')
+        func(cnt - 1)
+
+
+func()

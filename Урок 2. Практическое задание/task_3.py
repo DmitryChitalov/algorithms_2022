@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+
+def func(num, reversed=''):
+    if num == 0:
+        return reversed
+    reversed += str(num % 10)
+    return func(num//10, reversed)
+
+
+print(func(564897940))
+print(func(1234))

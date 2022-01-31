@@ -12,3 +12,19 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def func(n):
+    if n == 0:
+        return 0
+    else:
+        return n + func(n-1)
+
+
+n = 5
+exp = n*(n+1)/2
+print(func(n) == n*(n+1)/2)
+n = 14
+print(func(n) == n*(n+1)/2)
+
+

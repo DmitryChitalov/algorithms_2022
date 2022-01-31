@@ -27,3 +27,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc_recursion():
+    global num2, num1
+    action_dict = {'+': (lambda x,y: x+y), '-': (lambda x,y: x-y), '*': (lambda x,y: x*y),
+                   '/': (lambda x,y: x/y)}
+    action = input('Действие ')
+    if action == '0':
+        print('Выход')
+        return
+    elif action_dict.get(action) is None:
+        print('Incorrect')
+        return
+    exp = (x for x in action_dict.keys() if x == action)
+    try:
+        num1 = int(input('Первое число '))
+        num2 = int(input('Второе число '))
+    except:
+        print('Некорректный ввод')
+        calc_recursion()
+    try:
+        res = action_dict[action](num1, num2)
+    except ZeroDivisionError:
+        print('Деление на ноль')
+        return calc_recursion()
+    print(num1, *exp, num2, '=', res)
+    return calc_recursion()
+
+
+calc_recursion()
