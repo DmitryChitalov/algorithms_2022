@@ -7,3 +7,36 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+from random import randint
+
+
+#  Чтобы избавиться от двух циклов, создаем внутреннюю и внешнюю рекурсивные функции
+def guess_number(num, max_attempts):
+    # проверка на правильный ввод числа от 1 до 100 за 3 попытки
+    def input_number(quantity=3):  # quantity - количество неверных попыток
+        if quantity <= 0:  # базовый случай для input_number
+            return 0
+        try:
+            n_ = int(input(f'У Вас {max_attempts}'
+                           f' попыт{("ка","ки","ок")[0 if max_attempts == 1 else 1 if max_attempts < 5 else 2]},'
+                           f' чтобы угадать число. Введите число от 1 до 100: '))
+            _ = range(1, 101).index(n_)  # Проверка на диапазон [1...100]
+            return n_
+        except ValueError:
+            print('Неправильный ввод')
+        n_ = input_number(quantity - 1)  # Рекурсивный вызов вложенной функции
+        return n_
+
+    if max_attempts <= 0:  # базовый случай для guess_number1
+        return num
+    if (n := input_number()) == num:
+        print(f'Поздравляю! Вы угадали число: {num}')
+        return num
+    elif max_attempts == 1:
+        print(f'У вас закончились попытки. Вы проиграли. Загаданное число: {num}')
+    elif n != 0:  # 0 - было 3 неудачных попытки ввода числа
+        print(f'Загаданное число {("больше", "меньше")[num < n]}, чем {n}')
+    guess_number(num, max_attempts - 1)  # Рекурсивный вызов внешней функции
+
+
+guess_number(randint(1, 100), 10)

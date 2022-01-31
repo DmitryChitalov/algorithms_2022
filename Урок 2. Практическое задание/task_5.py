@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii_code(st_code, end_code):
+    if st_code > end_code:
+        return
+    print_ascii_code(st_code, end_code - 1)
+    (end_code - st_code) % 10 or print()  # С новой строки 0, 10, 20...
+    print(f'{str(end_code).rjust(3)} {chr(end_code)}', end=' ')
+
+
+print_ascii_code(32, 127)

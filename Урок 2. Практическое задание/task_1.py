@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+#  Чтобы избавиться от циклов, создаем две внутренних и внешнюю рекурсивные функции
+def recursive_calc():
+    ops = ((lambda x, y: x + y), (lambda x, y: x - y), (lambda x, y: x * y), (lambda x, y: x / y))
+
+    def input_op():  # Проверка ввода операции + - * / или 0 для выхода
+        try:
+            # list('0+-*/') преобразование нужно из-за 'any'.index('')=0; ''-enter;
+            return list('0+-*/').index(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+        except ValueError:
+            print('Вы ошиблись.', end=' ')
+        return input_op()
+
+    def input_number(ord_num):
+        try:
+            return float(input(f'Введите {("первое", "второе")[ord_num - 1]} число: '))
+        except ValueError:
+            print('Неверный формат числа ', end=' ')
+        return input_number(ord_num)
+
+    if (op := input_op() - 1) == -1:  # получаем индекс операции
+        return  # базовый случай: введен '0'
+    try:
+        result = ops[op](input_number(1), input_number(2))
+        print(f'-- Ваш результат: {int(result) if result.is_integer() else result}')
+    except ZeroDivisionError:
+        print('На ноль делить нельзя')
+    recursive_calc()
+
+
+recursive_calc()

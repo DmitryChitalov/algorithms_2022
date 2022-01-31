@@ -18,3 +18,40 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+'''  Первое решение до внимательного прочтения примера
+def digits_reverse(num, reverse_num=0):
+    if num > 0:
+        reverse_num = digits_reverse1(num // 10, reverse_num * 10 + num % 10)
+    return reverse_num
+'''
+
+
+def digits_reverse():
+    def input_number():  # ввод int числа. Выход: число и длина строки введенных символов
+        s = input(f'Введите число, которое требуется перевернуть или 0 для выхода: ')
+        try:
+            return int(s), s  # s нужна для красивого вывода (01,-01,+01, 10)->(10 -10,+10, 01)
+        except ValueError:
+            print('Неверный формат числа ', end=' ')
+        return input_number()
+
+    def reverse(n, r_n=0):  # получаем число, обратное по порядку входящих в него цифр
+        if n <= 0:
+            return r_n
+        return reverse(n // 10, r_n * 10 + n % 10)
+
+    num, line = input_number()
+    if num == 0:
+        return
+    r_num = reverse(abs(num))  # получили перевернутое число
+    # готовимся к выводу
+    sign, line = ('+', line[1:]) if line[0] == '+' else ('-', line[1:]) if line[0] == '-' else ('', line)
+    if len(line) > len(str(num)):  # число с ведущими 0, типа '001' '-001' '+001' -> '100' '-100' '+100'
+        print(f'Перевернутое число:{sign}{str(r_num).ljust(len(line), "0")}')
+    else:  # обычные числа, в том числе  типа '100' '-100' '+100' ->  '001' '-001' '+001'
+        print(f'Перевернутое число:{sign}{str(r_num).rjust(len(line), "0")}')
+    digits_reverse()
+
+
+digits_reverse()

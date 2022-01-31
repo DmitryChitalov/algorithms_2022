@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd_natural(num, result=None):
+    """
+    Рекурсивная программа для подсчета количества четных и нечетных цифр в заданном натуральном числе
+    :param num: заданное число
+    :param result: параметр по умолчанию None или список вида: [количество четных, количество нечетных]
+    :return:  список вида: [количество четных, количество нечетных] или None, если num не натуральное
+    """
+    if num > 0:
+        result = result or [0, 0]  # инициализация, если не задан в параметрах функции
+        count_even_odd_natural(num // 10, result)
+        result[num % 2] += 1
+    return result
+
+
+print(count_even_odd_natural(34560))  # [3,2]
+print(count_even_odd_natural(7879707543))  # [3,7]
+print(count_even_odd_natural(1234, count_even_odd_natural(12345)))  # С сохранение счетчиков [4,5]
+print(count_even_odd_natural(-7879707543))  # None - отрицательное - не натуральное
+print(count_even_odd_natural(0))  # None - 0 - не натуральное
