@@ -21,3 +21,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+nums_old = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+print(timeit('"func_1(nums_old)"', setup="from __main__ import func_1", number=10000000))  # время = 0.14428645999987566
+print(timeit('"func_2(nums_old)"', setup="from __main__ import func_1", number=10000000))  # время = 0.1355013389998021
+
+"""
+Обычный цикл for in заменён list comprehention (lc), который работает быстрее цикла.
+Это является одним из приёмов, применяемых при рефакторинге.
+"""
