@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44787c82-7482-4e33-bd06-62e250ccaece" name="Changes" comment="Задача 1 (очень странно, но она была в коммите)">
+    <list default="true" id="44787c82-7482-4e33-bd06-62e250ccaece" name="Changes" comment="Задача 2 &#10;try:&#10;except TypeError:&#10;вынесено вне рекурсии">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643642217960</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Задача 2 &#10;try:&#10;except TypeError:&#10;вынесено вне рекурсии">
+      <created>1643642521531</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1643642521531</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -279,6 +286,7 @@
     <MESSAGE value="Задача 4 доработка на проверку числа" />
     <MESSAGE value="Коммит для создания новой ветки" />
     <MESSAGE value="Задача 1 (очень странно, но она была в коммите)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Задача 1 (очень странно, но она была в коммите)" />
+    <MESSAGE value="Задача 2 &#10;try:&#10;except TypeError:&#10;вынесено вне рекурсии" />
+    <option name="LAST_COMMIT_MESSAGE" value="Задача 2 &#10;try:&#10;except TypeError:&#10;вынесено вне рекурсии" />
   </component>
 </project>
