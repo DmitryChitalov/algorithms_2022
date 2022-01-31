@@ -40,8 +40,8 @@ def simple_calc():
             return simple_calc()
         elif enter_operation in "+-*/":
             try:
-                num_1 = int(input("Введите первое число: "))
-                num_2 = int(input("Введите второе число: "))
+                num_1 = int(input("Введите первое число:  "))
+                num_2 = int(input("Введите второе число:  "))
                 if enter_operation == "+":
                     result = num_1 + num_2
                     print("Ваш результат: ", result)
