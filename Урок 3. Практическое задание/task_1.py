@@ -23,3 +23,87 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+
+def runtime(func):
+    from time import time
+
+    def time_counting(*args):
+        start = time()
+        func(*args)
+        end = time()
+        print(f"Время выполнения функции {func.__name__}"
+              f" составило: {end - start}")
+    return time_counting
+
+@runtime
+def completion_list_insert(num): # Добавление значений в начало списка.
+    # Время выполнения функции completion_list_insert составило: 2.0720081329345703
+    test_list = []
+    for i in range(n):               # O(n)
+        test_list.insert(0, i)       # O(n)
+
+@runtime
+def completion_list_app(num): # Добавление значений в конец списка.
+    # Время выполнения функции completion_list_app составило: 0.005988121032714844
+    for i in range(n):               # O(n)
+        test_list.append(i)          # O(1)
+
+@runtime
+def completion_dict_setdefault(num): # Проверка наличия ключа, если нет добавление.
+    # Время выполнения функции completion_dict_setdefault составило: 0.019992589950561523
+    test_dict = dict()               # O(1)
+    for i in range(n):               # O(n)
+        test_dict.setdefault(i,i)    # O(1)
+
+
+
+n = 10 ** 5
+test_list = []
+test_dict = dict()
+completion_list_insert(n)  #Время выполнения функции completion_list_insert составило: 2.0400002002716064
+completion_list_app(n) #Время выполнения функции completion_list_app составило: 0.00700831413269043
+completion_dict_setdefault(n)  #Время выполнения функции completion_dict_setdefault составило: 0.014999151229858398
+# Заполнение списков используя константную сложность, выполняется быстрей чем заполнение словарей. Так как при работе
+# со словарями создается хэш ключей для хранения записей
+
+@runtime
+def completion_list(num): # Замена значений списка.
+    # Время выполнения функции completion_list составило: 0.0059986114501953125
+    for i in range(n):                # O(n)
+        test_list[i] = i + 5          # O(1)
+
+@runtime
+def completion_dict(num): # Замена значений словаря.
+    # Время выполнения функции completion_dict составило: 0.014006614685058594
+    for i in range(n):                # O(n)
+        test_dict[i] = i + 5          # O(1)
+
+@runtime
+def list_pop(num): # удаление значений с конца списка.
+    # Время выполнения функции list_pop составило: 0.00601506233215332
+    for i in range(n):                 # O(n)
+        test_list.pop()                # O(1)
+
+@runtime
+def list_pop2(num): # удаление значений с начала списка.
+    # Время выполнения функции list_pop2 составило: 1.076000452041626
+    for i in range(n):                 # O(n)
+        test_list.pop(0)               # O(n)
+
+@runtime
+def dict_pop(num): # удаление значений.
+    # Время выполнения функции dict_pop составило: 0.010001659393310547
+    for i in range(n):                 # O(n)
+        test_dict.pop(i)               # O(1)
+
+completion_list(n)  # Время выполнения функции completion_list составило: 0.0059986114501953125
+completion_dict(n)  # Время выполнения функции completion_dict составило: 0.014006614685058594
+list_pop(n)  # Время выполнения функции list_pop составило: 0.00601506233215332
+completion_list_app(n)
+list_pop2(n)  # Время выполнения функции list_pop2 составило: 1.076000452041626
+dict_pop(n)  # Время выполнения функции dict_pop составило: 0.010001659393310547
+
+#При использовании константной сложности для замены или удаления элементов списка или словаря, работа со списками
+# выполняется быстрее так как не проверяется хэш.

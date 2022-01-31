@@ -22,3 +22,19 @@
 р
 а
 """
+
+from hashlib import sha256
+s_uniq_hash = set()
+s = input("введите строку : ")
+for i in range(len(s)):
+    for j in range(i + 1, len(s) + 1 ):
+        if s[i: j] != s:
+            s_uniq_hash.add(sha256(s[i:j].encode()).hexdigest())
+
+print(f"{s} - {len(s_uniq_hash)} уникальных подстрок",*s_uniq_hash,sep='\n')
+
+
+
+
+
+
