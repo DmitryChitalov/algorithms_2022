@@ -29,8 +29,11 @@ def func_2(nums):
 
 nums_old = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-print(timeit('"func_1(nums_old)"', setup="from __main__ import func_1", number=10000000))  # время = 0.14428645999987566
-print(timeit('"func_2(nums_old)"', setup="from __main__ import func_1", number=10000000))  # время = 0.1355013389998021
+print(timeit("func_1(nums_old)", setup='from __main__ import func_1, nums_old', number=100000))
+# время=0.9244872720000785
+
+print(timeit("func_2(nums_old)", setup='from __main__ import func_2, nums_old', number=100000))
+# время=0.35628081799995925
 
 """
 Обычный цикл for in заменён list comprehention (lc), который работает быстрее цикла.
