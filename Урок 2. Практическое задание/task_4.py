@@ -10,3 +10,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+def recursion(i, element, count_, summ):
+    if i == count_:
+        print(f'Количество элементов : {count_}, их сумма: {summ}')
+    else:
+        return recursion(i + 1, element / 2 * - 1, count_, summ + element)
+
+try:
+    count_ = int(input('Введите число: '))
+    recursion(0, 1, count_, 0)
+except:
+    print('Некорректный ввод')

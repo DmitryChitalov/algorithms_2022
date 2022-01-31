@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def recursion(ascii_symbol = 32):
+    if ascii_symbol == 128:
+        return True
+    else:
+        print(f'{ascii_symbol} - {chr(ascii_symbol)}', end=' ')
+        if ascii_symbol % 10 == 0:
+            print('\n')
+    recursion(ascii_symbol + 1)
+recursion()
