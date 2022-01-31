@@ -17,3 +17,11 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+#O(n log(n)) максимальная сложность
+my_dict = {'intel': 200000, 'amd': 150000, 'xerox': 270000, 'nvidia': 450000, 'hp': 382000}  #O(k)
+sort_dict = sorted(my_dict, key=my_dict.get) #O(n log(n))
+print(sort_dict[:3:]) #O(n)
+
+dict1 = {'intel': 200000, 'amd': 150000, 'xerox': 270000, 'nvidia': 450000, 'hp': 382000} #O(k)
+sorted_tuples = sorted(dict1.items(), key=lambda item: item[1]) #O(n**2)
+print(sorted_tuples[:3:]) #O(n)

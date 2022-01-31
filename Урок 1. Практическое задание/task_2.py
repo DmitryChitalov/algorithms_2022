@@ -13,3 +13,14 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+#O(n) максимальная сложность
+def min_search(lst_obj):
+
+    x = lst_obj[0] #O(1)
+    for i in range(len(lst_obj)): #O(n)
+        if lst_obj[i] < x: #O(n)
+            x = lst_obj[i] #O(1)
+    return x   #O(n)
+
+lst_obj = [1, 3, 7, 21, 8, 6]
+print(min_search(lst_obj))
