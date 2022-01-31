@@ -9,6 +9,9 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from collections import Counter
+from timeit import timeit
+
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +40,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    _max = max([(array.count(elem), elem) for elem in set(array)])
+    # _max = {elem: array.count(elem) for elem in array}
+    # _max = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {_max[1]}, ' \
+           f'оно появилось в массиве {_max[0]} раз(а)'
+
+
+print(timeit("func_1()", number=100000, globals=globals()))
+print(timeit("func_2()", number=100000, globals=globals()))
+print(timeit("func_3()", number=100000, globals=globals()))
+
+"""
+ускорить задачу можно при большом количестве одинаковых элементов
+"""
