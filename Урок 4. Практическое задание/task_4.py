@@ -37,5 +37,31 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    cnt = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {cnt[0][0]}, ' \
+           f'оно появилось в массиве {cnt[0][1]} раз(а)'
+
+
+if __name__ == '__main__':
+    from collections import Counter
+    import timeit
+
+    # print(func_1())
+    # print(func_2())
+    # print(func_3())
+
+    t = timeit.Timer(lambda: func_1())
+    print(t.repeat(3))
+    t = timeit.Timer(lambda: func_2())
+    print(t.repeat(3))
+    t = timeit.Timer(lambda: func_3())
+    print(t.repeat(3))
+
+
+# Использование простого цикла с функцией поиска и перезаписи числа вхождений в первом варианте
+# оказывается наиболее экономичным решением.
+# Второй вариант усложняет первый, используя создание другого массива с количеством вхождений,
+# потом поска максимального значения и взятия по индексу.
+# третий вариант с использованием функции Counter из Collections оказался самым неудачным по затратам
+# времени на выполнение операций.

@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,36 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+t_num_100 = timeit(
+    "recursive_reverse(num_100)",
+    setup='from __main__ import recursive_reverse, num_100',
+    number=10000)
+t_num_1000 = timeit(
+    "recursive_reverse(num_1000)",
+    setup='from __main__ import recursive_reverse, num_1000',
+    number=10000)
+t_num_10000 = timeit(
+    "recursive_reverse(num_10000)",
+    setup='from __main__ import recursive_reverse, num_10000',
+    number=10000)
+t_num_100_opt = timeit(
+    'recursive_reverse_mem(num_100)',
+    setup='from __main__ import recursive_reverse_mem, num_100',
+    number=10000)
+t_num_1000_opt = timeit(
+    'recursive_reverse_mem(num_1000)',
+    setup='from __main__ import recursive_reverse_mem, num_1000',
+    number=10000)
+t_num_10000_opt = timeit(
+    'recursive_reverse_mem(num_10000)',
+    setup='from __main__ import recursive_reverse_mem, num_10000',
+    number=10000)
+print('Отношение неоптимизированного и оптимизированного вариантов')
+print(t_num_100 / t_num_100_opt, t_num_1000 / t_num_1000_opt, t_num_10000 / t_num_10000_opt, sep=' | ')
+
+# C увеличением аргумета функции в 10 раз эффективность рекурсии
+# увеличивается кратно (у меня примерно: в 12, затем в 14 и в 24 раза)
+# за счет экономии на рекурсивных вызовах, если результаты этих вызовов есть в кеше.
+# Это говорит о необходимости сочетания рекурсии и мемоизации, где оно возможно
+# и особенно важно - при работе функции с "большими" аргументами.
