@@ -22,3 +22,27 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from hashlib import sha256
+hash_dict = {}
+
+
+def register():
+    login = input('Enter your login to register: ')
+    password = input('Enter your password to register: ')
+    pass_hash = sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    hash_dict[login] = pass_hash
+    return f'Registration completed successfully, hash: {pass_hash}'
+
+
+print(register(), '\n')
+
+
+def log_in(login, password):
+    if login in hash_dict \
+            and hash_dict[login] == sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest():
+        return 'You are logged in'
+    else:
+        return "You've entered wrong login or password"
+
+
+print(log_in(input('Enter your login to log-in: '), input('Enter your password to register: ')))
