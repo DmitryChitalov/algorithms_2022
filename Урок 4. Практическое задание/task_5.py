@@ -12,6 +12,7 @@
 10, 100, 1000
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -34,5 +35,33 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosthenes(n):
+    if n == 1:
+        return 1
+    else:
+        sieve = list(range(n ** 2))
+        sieve[1] = 0
+        for i in sieve:
+            if i > 1:
+                for j in range(2 * i, len(sieve), i):
+                    sieve[j] = 0
+        sieve = list(set(sieve))
+        del sieve[0]
+        return sieve[n - 1]
+
+
+print(timeit("simple(10)", setup="from __main__ import simple", number=1000))    # 0.0154305
+print(timeit("simple(100)", setup="from __main__ import simple", number=1000))   # 1.6851123
+print(timeit("simple(1000)", setup="from __main__ import simple", number=1000))  # 263.5214949
+
+
+print(timeit("eratosthenes(10)", setup="from __main__ import eratosthenes", number=1000))    # 0.0214467
+print(timeit("eratosthenes(100)", setup="from __main__ import eratosthenes", number=1000))   # 1.768089
+print(timeit("eratosthenes(1000)", setup="from __main__ import eratosthenes", number=1000))  # 226.8141871
+
+
+# Не понял где искать описание алгоритма "Решето Эратосфена" (в материалах преподавателя не нашел).
+# Нашел алгоритм в интернете.
+
+# Решето Эратосфена работает эффективнее на больших порядкомых номерах.
+# При малых значениях порядкового номера наивный алгоритм работает несколько быстрее
