@@ -20,7 +20,6 @@
 
 
 def find_number(num, even=0, odd=0):
-    try:
         if num == 0:
             print("Количество четных и нечетных цифр в числе равно:", even, odd)
         else:
@@ -31,8 +30,10 @@ def find_number(num, even=0, odd=0):
             else:
                 odd += 1
             return find_number(num, even, odd)
-    except TypeError:
-        print("Введено не целое число, попробуйте еще раз!!!")
 
 
-find_number(input("Введите целое число: "))
+try:
+    my_number = int(input("Введите целое число: "))
+    find_number(my_number)
+except ValueError:
+    print("Введено не целое число, попробуйте еще раз!!!")

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44787c82-7482-4e33-bd06-62e250ccaece" name="Changes" comment="Коммит для создания новой ветки">
+    <list default="true" id="44787c82-7482-4e33-bd06-62e250ccaece" name="Changes" comment="Задача 1 (очень странно, но она была в коммите)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +31,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.task_7">
-    <configuration name="task_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.task_2">
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -43,7 +44,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -138,11 +139,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_7" />
         <item itemvalue="Python.task_6" />
         <item itemvalue="Python.task_5" />
         <item itemvalue="Python.task_4" />
-        <item itemvalue="Python.task_3" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643383280217</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Задача 1 (очень странно, но она была в коммите)">
+      <created>1643642217960</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1643642217960</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -270,6 +278,7 @@
     <MESSAGE value="Задача 7" />
     <MESSAGE value="Задача 4 доработка на проверку числа" />
     <MESSAGE value="Коммит для создания новой ветки" />
-    <option name="LAST_COMMIT_MESSAGE" value="Коммит для создания новой ветки" />
+    <MESSAGE value="Задача 1 (очень странно, но она была в коммите)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Задача 1 (очень странно, но она была в коммите)" />
   </component>
 </project>
