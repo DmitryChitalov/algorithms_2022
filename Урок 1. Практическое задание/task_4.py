@@ -20,3 +20,33 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {'user_1' : {'passwd' : 12345, 'active' : 'no'}, 'user_2' : {'passwd' : 12345, 'active' : 'yes'},
+         'user_3' : {'passwd' : 11234, 'active' : 'yes'}, 'user_4' : {'passwd' : 54321, 'active' : 'no'}, }
+
+# Сложность O(n)
+
+def check_user_1(login, psswd):
+
+    if login in users and users[login]['passwd'] == psswd:      # O(n)
+        if users[login]['active'] == 'yes':                     # O(1)
+            print('Вы вошли')                                   # O(1)
+        else:
+            print('Пройдите активацию')                         # O(1)
+    else:
+        print('Неверный логин или пароль')                      # O(1)
+
+
+# Сложность O(1)
+
+def check_user_2(login, psswd):
+
+    if users[login]['passwd'] == psswd:                         # O(1)
+        if users[login]['active'] == 'yes':                     # O(1)
+            print('Вы вошли')                                   # O(1)
+        else:
+            print('Пройдите активацию')                         # O(1)
+    else:
+        print('Неверный пароль')                                # O(1)
+
+# Второе решение оптимальнее, т.к. О-нотация константная против линейной
