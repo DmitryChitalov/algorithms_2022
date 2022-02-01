@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def codes_and_symbols(start=32, cnt=0, stop=127):
+    if start <= stop:
+        if cnt == 10:
+            print('\n')
+            cnt = 0
+        else:
+            print(f'{start}-{chr(start)}', end=' ')
+        codes_and_symbols(start + 1, cnt + 1)
+
+
+codes_and_symbols()
