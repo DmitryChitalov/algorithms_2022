@@ -31,7 +31,7 @@ def measure_time(func):
         start = time.time()
         func()
         end = time.time()
-        print(f'{func.__name__} выполнилась за {end - start}')
+        print(f'{func.__name__} выполнилась за {end - start}.')
         return func
     return wrapper
 

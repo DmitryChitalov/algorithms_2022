@@ -38,3 +38,4 @@ def count_unique_substring(input_str):
 
 
 print(count_unique_substring('papa'))
+print(count_unique_substring('sawaz'))

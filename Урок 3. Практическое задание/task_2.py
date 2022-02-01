@@ -67,7 +67,7 @@ def verify_user(user_name, password):
         if p_hash == data[user_name][0].encode():
             print('Пароль верный!')
         else:
-            print('Неправильный пароль')
+            print('Неправильный пароль!')
 
 
 user_name = input('Введите логин: ')

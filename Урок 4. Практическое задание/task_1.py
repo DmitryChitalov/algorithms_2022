@@ -14,10 +14,13 @@
 
 from timeit import timeit
 
-
+@timeit
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+func_1([0, 1, 1, 3, 3, 4])

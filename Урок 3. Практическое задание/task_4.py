@@ -47,3 +47,4 @@ def cache_url(url):
 
 
 print(cache_url('https://pikabu.ru/'))
+print(cache_url('https://www.twitch.tv'))
