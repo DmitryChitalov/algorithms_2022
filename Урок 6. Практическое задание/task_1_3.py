@@ -30,38 +30,68 @@
 
 Это файл для третьего скрипта
 """
-
-
-# Так как не нашел хороших вариантов для оптимизации, то решил придумать задачи сам.
 # Дано 1000 точек на плоскости. Найти три точки, которые дают максимальную площадь.
+# ============= Итоги ==============
+# Первоначальный вариант:
+# Расход памяти: 2.8945 MiB
+# С dataobject: 1.0312 MiB
+# Объекты из библиотеки recordclass являются облегченными, 
+# поэтому требуют меньше оперативной памяти
 
 # ====== Генерация точек ===========
-import random
+from random import randint
+from memory_profiler import profile
+from recordclass import dataobject
 
-def gen_point():
-    x = random.randint(0, 2000)
-    y = random.randint(0, 2000)
-    return x, y
 
-point_list = [gen_point() for _ in range(10)]
+# @profile(precision=4)
+def foo():
+    point_list = [{'x': randint(0, 10**6) ,'y': randint(0, 10**6)} 
+                    for _ in range(10000)]
+    s_max = 0
+    points_with_max_s = {}
+    for num_p1 in range(10):
+        for num_p2 in range(10):
+            for num_p3 in range(10):
+                x1 = point_list[num_p1]['x']
+                x2 = point_list[num_p2]['x']
+                x3 = point_list[num_p3]['x']
+                y1 = point_list[num_p1]['y']
+                y2 = point_list[num_p2]['y']
+                y3 = point_list[num_p3]['y']
+                s = 1/2*abs((x2 - x1)*(y3 - y1) - (x3 - x1)*(y2 - y1))
+                if s_max < s:
+                    s_max = s
+                    points_with_max_s['p1'] = (x1, y1)
+                    points_with_max_s['p2'] = (x2, y2)
+                    points_with_max_s['p3'] = (x3, y3)
+    return points_with_max_s
 
-s_max = 0
-points_with_max_s = {}
-for num_p1 in range(10):
-    for num_p2 in range(10):
-        for num_p3 in range(10):
-            x1 = point_list[num_p1][0]
-            x2 = point_list[num_p2][0]
-            x3 = point_list[num_p3][0]
-            y1 = point_list[num_p1][1]
-            y2 = point_list[num_p2][1]
-            y3 = point_list[num_p3][1]
-            s = 1/2*abs((x2 - x1)*(y3 - y1) - (x3 - x1)*(y2 - y1))
-            if s_max < s:
-                s_max = s
-                points_with_max_s['p1'] = (x1, y1)
-                points_with_max_s['p2'] = (x2, y2)
-                points_with_max_s['p3'] = (x3, y3)
-print(points_with_max_s)
-print(s_max)
 
+@profile(precision=4)
+def foo2():
+    class Point(dataobject):
+        x:int
+        y:int
+    point_list = [Point(randint(10**6, 2*10**6), randint(2*10**6, 3*10**6))
+                 for _ in range(10000)]
+    s_max = 0
+    points_with_max_s = {}
+    for num_p1 in range(10):
+        for num_p2 in range(10):
+            for num_p3 in range(10):
+                x1 = point_list[num_p1].x
+                x2 = point_list[num_p2].x
+                x3 = point_list[num_p3].x
+                y1 = point_list[num_p1].y
+                y2 = point_list[num_p2].y
+                y3 = point_list[num_p3].y
+                s = 1/2*abs((x2 - x1)*(y3 - y1) - (x3 - x1)*(y2 - y1))
+                if s_max < s:
+                    s_max = s
+                    points_with_max_s['p1'] = (x1, y1)
+                    points_with_max_s['p2'] = (x2, y2)
+                    points_with_max_s['p3'] = (x3, y3)
+    return points_with_max_s
+
+foo2()
