@@ -21,3 +21,27 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_test_2(nums):
+    result2 = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return result2
+
+
+def func_test_3():
+    result3 = [i for i in range(0, 10, 2)]
+    return result3
+
+
+nums = list(range(10))
+
+print(timeit("func_1(nums)", globals=globals()))
+# 30.506479437 (100000), 29.936785721 (100), 4.191754138 (10)
+print(timeit("func_test_2(nums)", globals=globals()))
+# 23.428521345000004 (1000000), 24.703234115 (100), 4.293581484 (10)
+print(timeit("func_test_3()", globals=globals()))
+# 5.039466537999999 (1000000), 4.979664909 (100), 1.7441752389999987 (10)
+
+# list comprehension работает быстрей, чем цикл, однако, для реализации поставленной задачи целесообразно
+# воспользоваться параметром "шаг" в функции range.
+# Это нам позволяет исключить дополнительную работу в цикле, что существенно сокращает время исполнения
