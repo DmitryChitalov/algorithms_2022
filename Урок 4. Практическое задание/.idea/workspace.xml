@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a8439ed6-4e74-4ba7-a795-f611bdd8fe4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Svatov_Alexey_dz_4/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Svatov_Alexey_dz_4/task_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Svatov_Alexey_dz_4/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Svatov_Alexey_dz_4/task_3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +74,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_2">
+  <component name="RunManager" selected="Python.task_3">
     <configuration name="ТЕСТОВЫЙ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Урок 4. Практическое задание" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -183,8 +182,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_3" />
+        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_1" />
         <item itemvalue="Python.ТЕСТОВЫЙ" />
         <item itemvalue="Python.task_5" />

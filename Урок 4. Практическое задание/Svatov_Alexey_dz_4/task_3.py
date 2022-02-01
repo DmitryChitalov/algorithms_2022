@@ -49,3 +49,17 @@ print(f'revers_time = {timeit("revers(num)", setup="from __main__ import revers,
 print(f'revers_2_time = {timeit("revers_2(num)", setup="from __main__ import revers_2, num", number=100000)}')
 print(f'revers_3_time = {timeit("revers_3(num)", setup="from __main__ import revers_3, num", number=100000)}')
 print(f'revers_4_time = {timeit("revers_4(num)", setup="from __main__ import revers_4, num", number=100000)}')
+
+"""
+revers_time = 0.8301371140000811
+revers_2_time = 0.4307795210002041
+revers_3_time = 0.0667724840000119
+revers_4_time = 0.13485971300042365
+
+Эффективнее третий вариант решения, т.к.
+
+revers - решение с помощью рекурсии, что формирует стек вызовов, что нагружает оперативную память O(2^n).
+revers_2 - решение циклом с предусловием. O(n)
+revers_3 - решение срезом строки. O(1)
+revers_4 - решение итератором с join. O(n)
+"""
