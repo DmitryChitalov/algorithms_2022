@@ -74,7 +74,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_1">
+  <component name="RunManager" selected="Python.task_2">
     <configuration name="ТЕСТОВЫЙ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Урок 4. Практическое задание" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -183,8 +183,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.ТЕСТОВЫЙ" />
         <item itemvalue="Python.task_5" />
         <item itemvalue="Python.task_4" />
