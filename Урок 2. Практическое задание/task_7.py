@@ -12,3 +12,19 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def check(num):
+    if num == 0:
+        return 0
+    return num + check(num - 1)
+
+
+number = int(input("Введите число: "))
+if check(number) == number * (number + 1) / 2:
+    print(f'{check(number)} = {int(number * (number + 1) / 2)} - вы доказали равенство!')
+
+"""
+Введите число: 22
+253 = 253 - вы доказали равенство!
+"""

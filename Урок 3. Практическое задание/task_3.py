@@ -22,3 +22,18 @@
 р
 а
 """
+
+from hashlib import sha256
+
+
+def substring(string):
+    _ = set()
+    for i in range(1, len(string)):
+        for j in range(len(string) - i + 1):  # до конца строки не обязательно доходить
+            _.add(sha256(string[j:j + i].encode('utf-8')).hexdigest())
+    return len(_)
+
+
+if __name__ == '__main__':
+    string = 'papa'
+    print(f'{string} - {substring(string)} уникальных подстрок')
