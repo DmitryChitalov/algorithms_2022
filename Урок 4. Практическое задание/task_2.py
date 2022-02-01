@@ -80,3 +80,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# В первый проход заполняется кэш и эффекта от мемоизации нет.
+# Мемоизация ставновится полезной только при последующих проходах.
