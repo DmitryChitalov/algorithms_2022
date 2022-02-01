@@ -41,8 +41,9 @@ def func_2():
 
 
 def func_3():
-    return f'Чаще всего встречается число {Counter(array).most_common(1)[0][0]},' \
-           f'оно появилось в массиве {Counter(array).most_common(1)[0][1]} раз(а)'
+    x = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {x[0][0]},' \
+           f'оно появилось в массиве {x[0][1]} раз(а)'
 
 
 print(func_1())
