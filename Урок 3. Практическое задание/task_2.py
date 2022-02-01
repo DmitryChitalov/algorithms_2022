@@ -26,15 +26,17 @@ from hashlib import sha256
 hash_dict = {}
 
 
-def register():
+def get_hash():
     login = input('Enter your login to register: ')
     password = input('Enter your password to register: ')
     pass_hash = sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
-    hash_dict[login] = pass_hash
-    return f'Registration completed successfully, hash: {pass_hash}'
+    return login, pass_hash
 
 
-print(register(), '\n')
+def register():
+    login, reg_hash = get_hash()
+    hash_dict[login] = reg_hash
+    return f'Registration completed successfully, your hash: {reg_hash}'
 
 
 def log_in(login, password):
@@ -45,4 +47,5 @@ def log_in(login, password):
         return "You've entered wrong login or password"
 
 
-print(log_in(input('Enter your login to log-in: '), input('Enter your password to register: ')))
+print(register())
+print(log_in(input('Enter your login to log-in: '), input('Enter your password to log-in: ')))

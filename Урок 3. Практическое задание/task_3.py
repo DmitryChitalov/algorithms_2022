@@ -31,3 +31,4 @@ for i in range(len(papa_str)):
         papa_hash = sha256(papa_str[i:v].encode('utf-8')).hexdigest()
         papa_set.add(papa_hash)
 pprint(papa_set)
+print(f'\nДлина множества: {len(papa_set)}')
