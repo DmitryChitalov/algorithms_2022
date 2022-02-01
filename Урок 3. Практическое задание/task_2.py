@@ -22,3 +22,19 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from hashlib import sha256
+
+
+def authentication():
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    password_two = input('Введите пароль еще раз: ')
+    res_hash_password = sha256(login.encode() + password.encode()).hexdigest()
+    res_hash_password_two = sha256(login.encode() + password_two.encode()).hexdigest()
+    if res_hash_password == res_hash_password_two:
+        print('Пароли совпадают')
+    else:
+        print('Введен не верный пароль')
+
+
+authentication()

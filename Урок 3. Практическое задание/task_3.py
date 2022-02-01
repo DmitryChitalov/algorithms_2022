@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+line = input('Введите строку: ')
+substring = set()
+
+for i in range(len(line)):
+    for j in range(i+1, len(line) + 1):
+        if line[i:j] != line:
+            substring.add(hashlib.sha256(line[i:j].encode()).hexdigest())
+            print(line[i:j], end=' ')
+
+
+print(substring)
+print(len(substring))
