@@ -23,3 +23,34 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def measure_time(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        func()
+        end = time.time()
+        print(f'{func.__name__} выполнилась за {end - start}.')
+        return func
+    return wrapper
+
+
+@measure_time
+def fill_dict():
+    new_dict = {}
+    for i in range(0, 100_000_000):
+        new_dict[i] = f'value{i}'
+    return new_dict
+
+
+@measure_time
+def fill_list():
+    new_lst = []
+    for i in range(0, 100_000_000):
+        new_lst.append(f'value{i}')
+    return new_lst
+
+
+fill_dict()
+fill_list()

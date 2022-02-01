@@ -12,3 +12,14 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def nat_summ(n):
+    if n == 0:
+        return 0
+    return n + nat_summ(n - 1)
+
+
+if __name__ == '__main__':
+    n = 7
+    print(n * (n + 1) / 2, nat_summ(n))
