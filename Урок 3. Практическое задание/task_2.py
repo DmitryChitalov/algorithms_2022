@@ -26,19 +26,18 @@ f1dcaeeafeb855965535d77c55782349444b
 from hashlib import pbkdf2_hmac
 from binascii import hexlify
 
-
-def reg():
-    login = input('Введите логин: ')
-    p = input('Введите пароль: ')
-    return login, password_hash(p)
-
-
 def password_hash(p):
     obj = pbkdf2_hmac(hash_name='sha256',
                       password=p.encode('utf-8'),
                       salt=b'any_salt_1',
                       iterations=100000)
     return hexlify(obj)
+
+
+def reg():
+    login = input('Введите логин: ')
+    p = input('Введите пароль: ')
+    return login, password_hash(p)
 
 
 # Далее программа должна запросить пароль повторно и вновь вычислить хеш
