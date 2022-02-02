@@ -30,7 +30,7 @@ def mathematics():
         return f'До свидания'
     try:
         b = int(input('Введите первое число:'))
-        c = int(input('Введите второе число::'))
+        c = int(input('Введите второе число:'))
         if a == '+':
             print('Ваш результат', b + c)
         elif a == '*':

@@ -24,7 +24,7 @@ def recur_method(numb, num_even=0, num_odd=0):
             num_even += 1
         else:
             num_odd += 1
-        return recur_method(numb,  num_even, num_odd)
+        return recur_method(numb, num_even, num_odd)
 try:
     num = int(input("Введите натуральное число: "))
     print(recur_method(num))
