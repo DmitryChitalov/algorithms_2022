@@ -5,6 +5,8 @@ def sum(lst):
     for i in lst:
         n += int(i)
     return n
+
+
 Come = namedtuple("Come", "name come")
 
 earn_list = []

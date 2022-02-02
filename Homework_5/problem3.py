@@ -8,10 +8,12 @@ def func_1_lst():
     return lst.append(1)
 def func_1_deq():
     return deq.append(1)
+
 def func_2_lst():
     return lst.pop()
 def func_2_deq():
     return deq.pop()
+
 def func_3_lst():
     return lst.extend('a')
 def func_3_deq():
@@ -21,10 +23,12 @@ def func_11_lst():
     return lst.insert(1, 0)
 def func_11_deq():
     return deq.appendleft(1)
+
 def func_22_lst():
     return lst.pop(-1)
 def func_22_deq():
     return deq.popleft()
+
 def func_33_lst():
     return lst.insert(0, 'a')
 def func_33_deq():

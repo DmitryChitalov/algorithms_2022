@@ -8,18 +8,22 @@ def func_1_dct():
     return dct.setdefault(1, 2)
 def func_1_odt():
     return odt.setdefault(1, 2)
+
 def func_2_dct():
     return dct.get(1)
 def func_2_odt():
     return odt.get(1)
+
 def func_3_dct():
     return dct.values()
 def func_3_odt():
     return odt.values()
+
 def func_4_dct():
     return dct.keys()
 def func_4_odt():
     return odt.keys()
+
 def func_5_dct():
     return dct.items()
 def func_5_odt():
