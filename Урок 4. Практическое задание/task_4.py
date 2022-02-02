@@ -50,12 +50,20 @@ def func_3():
            f'оно появилось в массиве {max(counted_nums.values())} раз(а)'
 
 
+def func_4():
+   num = max(array, key=array.count)
+   return f'Чаще всего встречается число {num}, ' \
+          f'оно появилось в массиве {array.count(num)} раз(а)'
+
+
 print(func_1())
 print(func_2())
 print(func_3())
+print(func_4())
 
 
-print(timeit("func_1()", globals=globals(), number=1000))       #  0.001927200000000004
+print(timeit("func_1()", globals=globals(), number=1000))       # 0.001927200000000004
 print(timeit("func_2()", globals=globals(), number=1000))       # 0.0025773999999999936
-print(timeit("func_3()", globals=globals(), number=1000))       # 0.0017983000000000027 получилось ускорить за счет использования словаря
-
+print(timeit("func_3()", globals=globals(), number=1000))       # 0.0017983000000000027  получилось ускорить за счет
+                                                                # использования словаря
+print(timeit("func_4()", globals=globals(), number=1000))       # 0.002022999999999997   скорость сопоставима с циклом
