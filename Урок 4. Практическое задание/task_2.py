@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -31,17 +31,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=1000))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=1000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=1000))
 
 
 def memoize(f):
@@ -69,14 +69,18 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=1000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=1000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=1000))
+
+# Чем больше раз используются данные из кэша, тем эффективнее мемоизация.
+# При однократном вызове функции реверса числа чтения данных из кэша не будет, только запись.
+# Поэтому использование кэша не нужно.
