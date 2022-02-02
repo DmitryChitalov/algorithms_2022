@@ -48,6 +48,7 @@ if __name__ == "__main__":
     """
     my_dict = {}
     order_dict = collections.OrderedDict()
+    print("обновление элементов")
     for variable in (my_dict, order_dict):
         print(f'%s: {timeit("update_dict(variable ,items_to_dict)", globals=globals())} s' % type(variable))
     """
