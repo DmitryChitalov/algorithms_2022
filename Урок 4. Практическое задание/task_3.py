@@ -13,6 +13,9 @@
 """
 
 
+import timeit
+
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -37,34 +40,11 @@ def revers_3(enter_num):
     return revers_num
 
 
-def memoize(f):
-    cache = {}
-
-    def decorate(*args):
-
-        if args in cache:
-            return cache[args]
-        else:
-            cache[args] = f(*args)
-            return cache[args]
-
-    return decorate
-
-
-@memoize
-def revers_4(enter_num, revers_num=0):
-    if enter_num == 0:
-        return
-    else:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-        revers_4(enter_num, revers_num)
+def revers_4(enter_num):
+    return reversed(f'{enter_num}')
 
 
 if __name__ == '__main__':
-    import timeit
-
     # revers(123456)
     # revers_2(123456)
     # revers_3(123456)
@@ -79,7 +59,11 @@ if __name__ == '__main__':
     t = timeit.Timer(lambda: revers_4(123456))
     print(t.repeat(3))
 
-# Вариант первый с рекурсией выполняется дольше других (факториальная сложность).
-# Самый быстрый варинт из трех представленных - третий с реверсом строки.
-# Четверный вариант c мемоизацией рекурсии оказывается выйгрышным
-# за счет сокращения числа рекурсивных вызовов.
+# import модуля перенес вверх кода (в предыдущем варианте ДЗ был после инструкции if __name__ == '__main__)
+
+# вместо мемоизации операций функции в рекурсией, в качестве четвертого варианта предложен новый
+# улучшить время получилось немного получилось, результаты:
+# [1.0943018999999998, 1.0884261000000002, 1.0844249000000001]
+# [0.7374728999999998, 0.7403700999999998, 0.7360201999999996]
+# [0.25527250000000024, 0.25854210000000055, 0.25389700000000026]
+# [0.19834829999999926, 0.19635340000000046, 0.19616170000000022]

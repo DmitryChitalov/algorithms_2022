@@ -14,6 +14,9 @@
 """
 
 
+import cProfile
+
+
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
@@ -36,49 +39,35 @@ def simple(i):
 
 def simple_2(i):
     """С использованием «Решета Эратосфена»"""
-    count = 1
-    start = 3
-    end = i**2
-    sieve = [el for el in range(start, end) if el % 2 != 0]
-    prime = [2]
-    if i == 1:
-        return 2
-    while count < i:
-        for el in range(len(sieve)):
-            if sieve[el] != 0:
-                count += 1
-                if count == i:
-                    return sieve[el]
-                j = el + sieve[el]
-                while j < len(sieve):
-                    sieve[j] = 0
-                    j += sieve[el]
-        prime.extend([el for el in sieve if el != 0])
-        start, end = end, end + i**2
-        sieve = [el for el in range(start, end) if el % 2 != 0]
-        for el in range(len(sieve)):
-            for num in prime:
-                if sieve[el] % num == 0:
-                    sieve[el] = 0
-                    break
+    num = 2
+    edge = i**2
+    sieve = [el for el in range(edge)]
+    sieve[1] = 0
+    while num < edge:
+        if sieve[num] != 0:
+            m = num * 2
+            while m < edge:
+                sieve[m] = 0
+                m += num
+        num += 1
+    return [el for el in sieve if el != 0][i-1]
 
 
 if __name__ == '__main__':
-    import cProfile
-
     i = int(input('Введите порядковый номер искомого простого числа: '))
 
 
     def main():
-        simple(i)
-        simple_2(i)
+        print(simple(i))
+        print(simple_2(i))
 
     cProfile.run('main()')
 
-# В текущем виде кумулятивное время выполнение функции с решетом Эрастофена немного больше, чем у наивного варианта.
-# С точки зрения простоты кода - выгоднее наивный вариант. При этом время работы без учета вложенных функций
-# выгодно отличает вариант с решетом. Если потребуется поиск по "большим" индексам, то первый вариант оптизировать
-# проблемативно (он и так простой). В то же время код решетом Эрастофена можно оптимизировать под крупные аргументы
-# функции.
+#  import модуля перенес вверх кода (в предыдущем варианте ДЗ был после инструкции if __name__ == '__main__)
+#  результаты с реализацией функций с разбора (i = 1000):
+#  ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+#     1    0.236    0.236    0.236    0.236     task_5.py:20(simple)
+#     1    0.283    0.283    0.339    0.339     task_5.py:40(simple_2)
+
 
 
