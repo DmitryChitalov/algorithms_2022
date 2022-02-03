@@ -23,3 +23,90 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+my_list = []
+my_dict = dict()
+
+
+def speed_test(func):
+    def lead_time(*args):
+        time_start = time.time()
+        func(*args)
+        time_end = time.time()
+        return time_end - time_start
+
+    return lead_time
+
+
+@speed_test
+def list_creation():
+    for i in range(100000):  # O(n) - пришлось поставить заполнение 100000 элементов а не 100, так как при 100 все по 0
+        my_list.append(i)  # O(1)
+
+
+@speed_test
+def dict_creation():
+    for i in range(100000):  # O(n) - пришлось поставить заполнение 100000 элементов а не 100, так как при 100 все по 0
+        my_dict[i] = i  # O(1)
+
+
+print("Время затраченное для заполнения списка: ", list_creation())  # быстрее
+print("Время затраченное для заполнения словаря: ", dict_creation())  # медленнее
+# print(my_list)
+# print(my_dict)
+
+"""
+Выводы по первой части задания:
+Словарь заполняется медленнее так как ключи проходят хеширование
+"""
+
+
+@speed_test
+def list_change(j):  # O(n)
+    for i in j:  # O(n)
+        my_list[i] += i  # O(1)
+    return my_list
+
+
+@speed_test
+def modify_dict(j):  # O(1)
+    for i in j:  # O(1)
+        my_dict[i] += i  # O(1)
+    return my_dict
+
+
+print("Время затраченное для изменения элементов списка: ", list_change(my_list))  # быстрее
+print("Время затраченное для изменения элементов словаря: ", modify_dict(my_dict))  # медленнее
+
+
+# print(my_list)
+# print(my_dict)
+
+
+@speed_test
+def remove_list(j):  # O(n)
+    for i in range(len(j)):  # O(1)
+        my_list.pop()  # O(n)
+    return my_list
+
+
+@speed_test
+def remove_dict(j):  # O(1)
+    for i in range(len(j)):  # O(1)
+        my_dict.pop(i)  # O(1)
+    return my_dict
+
+
+print("Время затраченное для удаления элементов списка: ", remove_list(my_list))  # быстрее
+print("Время затраченное для удаления элементов словаря: ", remove_dict(my_dict))  # медленнее
+# print(my_list)
+# print(my_dict)
+
+"""
+Выводы по первой части задания:
+Судя по замерам времени работа со словарями проходит медленнее, хотя Асимптотическая сложность у словаря меньше
+Возможно опять связано с наличием встроенного хэша в словарь, но не уверен, скорее всего с тем, что перебираются
+ключи а не индексы, а возможно и то, и то, так как ключи захэшированы
+"""
