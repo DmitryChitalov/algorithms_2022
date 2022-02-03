@@ -39,14 +39,14 @@ def func_3(nums):
     return [i for i, en in enumerate(nums) if en % 2 == 0]
 
 
-print(f'Время выполнения функции: {timeit("func_1", globals=globals())}')
-print(f'Время выполнения функции: {timeit("func_1_1", globals=globals())}')
-print(f'Время выполнения функции: {timeit("func_2", globals=globals())}')
-print(f'Время выполнения функции: {timeit("func_3", globals=globals())}')
-print(f'Время выполнения функции с импортом: {timeit("func_1", "from __main__ import func_1", number=1000)}')
-print(f'Время выполнения функции с импортом: {timeit("func_1_1", "from __main__ import func_1_1", number=1000)}')
-print(f'Время выполнения функции с импортом: {timeit("func_2", "from __main__ import func_2", number=1000)}')
-print(f'Время выполнения функции с импортом: {timeit("func_3", "from __main__ import func_3", number=1000)}')
+print(f'Время выполнения функции func_1: {timeit("func_1", globals=globals())}')
+print(f'Время выполнения функции func_1_1: {timeit("func_1_1", globals=globals())}')
+print(f'Время выполнения функции func_2: {timeit("func_2", globals=globals())}')
+print(f'Время выполнения функции func_3: {timeit("func_3", globals=globals())}')
+print(f'Время выполнения функции с импортом func_1: {timeit("func_1", "from __main__ import func_1", number=1000)}')
+print(f'Время выполнения функции с импортом func_1_1: {timeit("func_1_1", "from __main__ import func_1_1", number=1000)}')
+print(f'Время выполнения функции с импортом func_2: {timeit("func_2", "from __main__ import func_2", number=1000)}')
+print(f'Время выполнения функции с импортом func_3: {timeit("func_3", "from __main__ import func_3", number=1000)}')
 
 """
 ничего не понял, делал разные замеры, в итоге все практически одинаковое, даже ради интереса взял пример из урока 
