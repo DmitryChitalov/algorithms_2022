@@ -27,3 +27,34 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def input_number():
+    while True:
+        number = input('Введите целое число: ')
+        if number.isdigit():
+            return int(number)
+        print('Вы ввели всё что угодно, но не целое число!')
+
+
+def mathematics():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if action == '0':
+        return f'Программа заверена!'
+    first_num = input_number()
+    second_num = input_number()
+    if action == '+':
+        print(f'Ваш результат {first_num + second_num}')
+    elif action == '-':
+        print(f'Ваш результат {first_num - second_num}')
+    elif action == '*':
+        print(f'Ваш результат {first_num * second_num}')
+    elif action == '/':
+        try:
+            print(f'Ваш результат {first_num / second_num}')
+        except ZeroDivisionError:
+            print('На 0 делить нельзя!')
+    return mathematics()
+
+
+print(mathematics())

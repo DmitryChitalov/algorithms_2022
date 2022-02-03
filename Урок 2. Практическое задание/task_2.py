@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def input_number():
+    while True:
+        number = input('Введите натуральное целое число: ')
+        if number.isdigit() and int(number) > 0:
+            return int(number)
+        print('Неверный формат!')
+
+
+def count_nums(nums, even=0, odd=0):
+    if nums > 0:
+        ev = nums % 10
+        if ev % 2 == 0:
+            return count_nums(nums // 10, even + 1, odd)
+        else:
+            return count_nums(nums // 10, even, odd + 1)
+    return even, odd
+
+
+print(f"Количество четных и нечетных цифр в числе равно: {count_nums(input_number())}")
