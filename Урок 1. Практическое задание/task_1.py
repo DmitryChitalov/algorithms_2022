@@ -16,7 +16,7 @@ import random
 
 
 ##############################################################################
-def check_1(lst_obj):
+def check_1(lst_obj):  # O(len(lst_obj)) , Линейная сложность.
     """Функция должна создать множество из списка.
 
     Алгоритм 1:
@@ -29,7 +29,7 @@ def check_1(lst_obj):
 
 
 ##############################################################################
-def check_2(lst_obj):
+def check_2(lst_obj):  # Линейная сложность: O(len(lst_obj))
     """Функция должная вернуть True, если все элементы списка различаются.
 
     Алгоритм 2:
@@ -37,10 +37,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: Факториальная сложность: (O((len(lst_obj))!) )*O(len(lst_obj)) + 2* O(1)  = O((len(lst_obj))!).
+    Сложность: Квадартичная сложность: (O(len(lst_obj)) )*O(len(lst_obj)) + 2* O(1)  = O((len(lst_obj))**2).
     """
     for j in range(len(lst_obj)):          # Линейная сложность: O(len(lst_obj))
-        if lst_obj[j] in lst_obj[j+1:]:    # Факториальная сложность (O((len(lst_obj))!) )
+        if lst_obj[j] in lst_obj[j+1:]:    # Линейная сложность: O(len(lst_obj))
             return False                   # Констаннтная сложность O(1)
     return True                            # Констаннтная сложность O(1)
 
@@ -53,15 +53,15 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: Линейная сложность: O(len(lst_obj)) + O(len(lst_obj)) + O(len(lst_obj))*(O(1) + O(1)) + O(1) =
-    = 3 * O(len(lst_obj)) = O(3*len(lst_obj))
+    Сложность:  Сложность типа NlogN: O(len(lst_obj)) + O(len(lst_obj)*log(len(lst_obj))) + O(len(lst_obj))*(O(1) +
+    O(1)) + O(1) = O(len(lst_obj)*log(len(lst_obj)))
     """
-    lst_copy = list(lst_obj)                 # O(len(lst_obj))
-    lst_copy.sort()                          # O(len(lst_obj))
-    for i in range(len(lst_obj) - 1):        # O(len(lst_obj))
-        if lst_copy[i] == lst_copy[i+1]:     # O(1)
-            return False                     # O(1)
-    return True                              # O(1)
+    lst_copy = list(lst_obj)                 # Линейная сложность: O(len(lst_obj))
+    lst_copy.sort()                          # Линейно-логарифмическая сложность: O(NlogN)
+    for i in range(len(lst_obj) - 1):        # Линейная сложность: O(len(lst_obj))
+        if lst_copy[i] == lst_copy[i+1]:     # Констаннтная сложность: O(1)
+            return False                     # Констаннтная сложность: O(1)
+    return True                              # Констаннтная сложность: O(1)
 
 
 for j in (50, 500, 1000, 5000, 10000):
@@ -75,6 +75,6 @@ print(check_3(lst))
 
 """
 Сложность алгоритма  в целом:  
-Факториальная сложность.
-O((len(lst_obj))!)
+Линейно-логарифмическая сложность: O(NlogN)
 """
+
