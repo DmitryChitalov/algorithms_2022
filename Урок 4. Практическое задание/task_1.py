@@ -39,10 +39,10 @@ def func_3(nums):
     return [i for i, en in enumerate(nums) if en % 2 == 0]
 
 
-print(f'Время выполнения функции: {timeit("func_1", globals=globals(), number=1000000)}')
-print(f'Время выполнения функции: {timeit("func_1_1", globals=globals(), number=1000000)}')
-print(f'Время выполнения функции: {timeit("func_2", globals=globals(), number=1000000)}')
-print(f'Время выполнения функции: {timeit("func_3", globals=globals(), number=1000000)}')
+print(f'Время выполнения функции: {timeit("func_1", globals=globals())}')
+print(f'Время выполнения функции: {timeit("func_1_1", globals=globals())}')
+print(f'Время выполнения функции: {timeit("func_2", globals=globals())}')
+print(f'Время выполнения функции: {timeit("func_3", globals=globals())}')
 print(f'Время выполнения функции с импортом: {timeit("func_1", "from __main__ import func_1", number=1000)}')
 print(f'Время выполнения функции с импортом: {timeit("func_1_1", "from __main__ import func_1_1", number=1000)}')
 print(f'Время выполнения функции с импортом: {timeit("func_2", "from __main__ import func_2", number=1000)}')
