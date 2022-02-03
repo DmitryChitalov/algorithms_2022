@@ -80,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# мемоизация здесь не требуется,при первом запуске значения добавляются в кэш, при дальнейших запусках данные
+# берутся из кэша
