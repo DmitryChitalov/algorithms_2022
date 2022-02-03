@@ -44,7 +44,8 @@ print(f'Время выполнения функции func_1_1: {timeit("func_1
 print(f'Время выполнения функции func_2: {timeit("func_2", globals=globals())}')
 print(f'Время выполнения функции func_3: {timeit("func_3", globals=globals())}')
 print(f'Время выполнения функции с импортом func_1: {timeit("func_1", "from __main__ import func_1", number=1000)}')
-print(f'Время выполнения функции с импортом func_1_1: {timeit("func_1_1", "from __main__ import func_1_1", number=1000)}')
+print(
+    f'Время выполнения функции с импортом func_1_1: {timeit("func_1_1", "from __main__ import func_1_1", number=1000)}')
 print(f'Время выполнения функции с импортом func_2: {timeit("func_2", "from __main__ import func_2", number=1000)}')
 print(f'Время выполнения функции с импортом func_3: {timeit("func_3", "from __main__ import func_3", number=1000)}')
 
