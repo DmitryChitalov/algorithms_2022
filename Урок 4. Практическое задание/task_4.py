@@ -45,16 +45,10 @@ def func_3():
            f'оно появилось в массиве {number[0][1]} раз(а)'
 
 
-def func_4():
-    return f'Чаще всего встречающееся число и количество вхождений в массив: {str(Counter(array).most_common(1)).strip("[()]")}'
-
-
 print(func_1())
 print(func_2())
 print(func_3())
-print(func_4())
 
-print(f'Замер времени функции func_1: {timeit("func_1", "from __main__ import func_1", number=10000)}')
+print(f'Замер времени функции func_1: {timeit("func_1", "from __main__ import func_1", number=1000)}')
 print(f'Замер времени функции func_2: {timeit("func_2", "from __main__ import func_2", number=10000)}')
 print(f'Замер времени функции func_3: {timeit("func_3", "from __main__ import func_3", number=10000)}')
-print(f'Замер времени функции func_3: {timeit("func_4", "from __main__ import func_4", number=10000)}')
