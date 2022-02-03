@@ -19,3 +19,22 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def code_symbol(k = 32, table = str('')):
+    if k > 122:
+        print(table)
+        return
+    else:
+        start = k
+        if k > 121:
+            stop = k + 6
+        else:
+            stop = k + 10
+        a = [f'{n} - {chr(n)}' for n in range(start, stop)]
+        a = ' '.join(a)
+        table = table + a + '\n'
+        k = k + 10
+    code_symbol(k, table)
+
+code_symbol()
+

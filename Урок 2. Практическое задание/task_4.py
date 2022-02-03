@@ -10,3 +10,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+def row_sum(num = int(input('Введите любое натуральное число: ')), n = 1, k = 0, sum_n = 0):
+    if num == 0:
+        print(sum_n)
+        return
+    else:
+        sum_n = sum_n + n
+        n = n / 2
+        k += 1
+        num -= 1
+        n = -n
+        row_sum(num, n, k, sum_n)
+
+row_sum()
+

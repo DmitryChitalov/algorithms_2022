@@ -12,3 +12,18 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+def proof_of_the_theorem(n = int(input('Введите любое натуральное число: '))):
+
+    def examination(n):
+        if n == 0:
+            return n
+        else:
+            return n + examination(n - 1)
+
+    if examination(n) == n * (n + 1) / 2:
+        return ('всё верно')
+
+print(proof_of_the_theorem())
+
+

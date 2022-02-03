@@ -17,3 +17,23 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+list_of_companies = [('Asics', 1), ('Kappa', 9), ('Reebok',8), ('Fila', 3)]
+
+# Сложность O(n*logn)
+def top_three(len):
+    sort_list_of_companies = sorted(len, key=lambda i: i[1])
+    print(sort_list_of_companies[-1:-4:-1])
+
+import copy
+# Сложность O(n)
+def top_three_two(len):
+    top = []
+    a = copy.deepcopy(len)                 # O(n)
+    for k in range(0, 3):                  # O(3)
+        i = max(a, key=lambda x: x[1])     # O(n)
+        top.append(i)                      # O(1)
+        a.pop(a.index(i))                  # O(1)
+    print(top)
+
+top_three_two(list_of_companies)
+top_three(list_of_companies)
