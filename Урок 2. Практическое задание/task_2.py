@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def number_of_digits(num = int(input('Введите любое натуральное число: ')), even = 0, not_even = 0):
+    if num == 0:
+        print(f' чётных чисел : {even}  не чётных чисел: {not_even}')
+        return
+    else:
+        number = num % 10
+        num = num // 10
+        if number % 2 == 0:
+            even += 1
+        else:
+            not_even += 1
+
+        number_of_digits(num, even, not_even)
+
+number_of_digits()
