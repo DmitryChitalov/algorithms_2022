@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+
+def input_number():
+    while True:
+        number = input('Введите натуральное целое число: ')
+        if number.isdigit() and int(number) > 0:
+            return int(number)
+        print('Неверный формат!')
+
+
+def revers_number(num):
+    if num < 10:
+        return str(num)
+    else:
+        return str(num % 10) + revers_number(num // 10)
+
+
+print(f'Перевернутое число: {revers_number(input_number())}')

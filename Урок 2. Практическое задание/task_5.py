@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_symbol(begin=32, count=0, end=127):
+    if begin <= end:
+        if count == 10:
+            print("\n", "-" * 70)
+            count = 0
+        print(f"{begin} - {chr(begin)}", end="|")
+        ascii_symbol(begin + 1, count + 1)
+
+
+print("-" * 70)  # для придания визуальной красоты выводимым данным
+ascii_symbol()
+print("\n", "-" * 70)  # для придания визуальной красоты выводимым данным

@@ -12,3 +12,22 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def input_number():
+    while True:
+        number = input('Введите натуральное число: ')
+        if number.isdigit():
+            return int(number)
+        print('Неверный формат, попробуйте ещё!')
+
+
+def check(num):
+    if num == 0:
+        return 0
+    return num + check(num - 1)
+
+
+digit = input_number()
+if check(digit) == digit * (digit + 1) / 2:
+    print(f'{check(digit)} = {int(digit * (digit + 1) / 2)} - Равенство доказано!')

@@ -10,3 +10,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def rec_quarter(count, i=0, num=1.0, sum_num=0.0):
+    if i == count:
+        print(sum_num)
+    else:
+        rec_quarter(count, i + 1, num / -2, sum_num + num)
+
+
+rec_quarter(3)
