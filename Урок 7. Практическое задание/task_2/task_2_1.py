@@ -14,3 +14,57 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+# ======= Замеры по всем трем реализациям =======
+# 1)
+# For m = 10 execution time = 1.0499963536858559e-05
+# For m = 100 execution time = 6.359996041283011e-05
+# For m = 1000 execution time = 0.0006757000228390098
+# 2)
+# For m = 10 execution time = 2.0600040443241596e-05
+# For m = 100 execution time = 0.0007572000031359494
+# For m = 1000 execution time = 0.07208329997956753
+# 3) 
+# # For m = 10 execution time = [0.00016140000661835074, 3.2999960239976645e-05, 2.6600027922540903e-05, 2.1000043489038944e-05, 1.9400031305849552e-05]
+# For m = 100 execution time = [5.660002352669835e-05, 3.0800001695752144e-05, 2.4600012693554163e-05, 2.2199994418770075e-05, 2.0899984519928694e-05]
+# For m = 1000 execution time = [6.830005440860987e-05, 4.080001963302493e-05, 3.5999983083456755e-05, 3.4599972423166037e-05, 3.270001616328955e-05]    
+# Вывод:
+# При небольшом количестве элементов в массиве реализация через 
+# предварительную сортировку кучей (O(nlogn)) немного опережает вариант 
+# со встроенной функцией numpa.median(средняя сложность O(n)), а далее она 
+# начинает проигрывать numpa.median
+# # numpa.median имеет интересную особенность разгона, когда чем дольше работает,
+# тем быстрее она возвращает результат
+# Реализация через удаление максимальных элементов приемлена только на 
+# небольших массивах, так как время выполения растет со скоростью n^2
+
+import random
+from heapq import heappush, heappop
+from timeit import timeit
+
+
+def heapsorted(iterable):
+    h = []
+    for value in iterable:
+        heappush(h, value)
+    return [heappop(h) for i in range(len(h))]
+
+def get_median(list_):
+    list_ = heapsorted(list_)
+    if len(list_) % 2 == 0:
+        raise ValueError('Need list with odd number of elements')
+    m = int((len(list_)-1)/2)
+    return list_[m]
+
+m=10
+list_1 = [i for i in random.choices(range(-100, 100), k=2*m + 1)]
+m=100
+list_2 = [i for i in random.choices(range(-100, 100), k=2*m + 1)]
+m=1000
+list_3 = [i for i in random.choices(range(-100, 100), k=2*m + 1)]
+
+for list_, m in [('list_1', 10), ('list_2', 100), ('list_3', 1000)]:
+    time_ = timeit(stmt=f'get_median({list_})', globals=globals(), number=1)
+    print(f'For {m = } execution time = {time_}')
+
+    
