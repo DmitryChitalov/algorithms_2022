@@ -39,5 +39,4 @@ print(timeit("func_3(my_nums)", number=10000, globals=globals()))
 
 """
 вариант с list comprehension работает быстрее
-если есть возможность, для ускорения можно воспользоваться итератором
 """

@@ -19,7 +19,6 @@ def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
-    primes = []
     while count <= i:
         t = 1
         is_simple = True
@@ -29,13 +28,12 @@ def simple(i):
                 break
             t += 1
         if is_simple:
-            primes.append(n)
             if count == i:
                 break
             count += 1
         n += 1
-    # return n
-    return primes
+    return n
+
 
 
 def simple2(n):
@@ -48,12 +46,42 @@ def simple2(n):
     return primes
 
 
-# i = int(input('Введите порядковый номер искомого простого числа: '))
-# print(simple(i))
-# print(simple2(i+446))
+def eratosfen(i):
+    # O(n log(log n))
+    """Используя алгоритм «Решето Эратосфена»"""
+    n = 2
+    l = i**2
+    sieve = [x for x in range(l)]
+    sieve[1] = 0
+    while n < i:
+        if sieve[n] != 0:
+            m = n * 2
+            while m < l:
+                sieve[m] = 0
+                m += n
+        n += 1
+    return [p for p in sieve if p != 0][i - 1]
+
+
+# print(timeit("simple2(100)", number=100, globals=globals()))
+
+print(timeit("simple(10)", number=100, globals=globals()))
+print(timeit("eratosfen(10)", number=100, globals=globals()))
 print(timeit("simple(100)", number=100, globals=globals()))
-print(timeit("simple2(499)", number=100, globals=globals()))
+print(timeit("eratosfen(100)", number=100, globals=globals()))
+print(timeit("simple(1000)", number=100, globals=globals()))
+print(timeit("eratosfen(1000)", number=100, globals=globals()))
 
 """
-реализовать решето Эратосфена для i-го простого числа не получилось 
+вероятно не самая оптимальная реализация Эратосфена
+реализация для поиска простых чисел меньших N получилась быстрее 
+но выйгрыш во времени выполнения получается
+
+0.0060143
+0.004820099999999994
+0.5367216
+0.4372595
+82.64826070000001
+57.97176060000001
+
 """
