@@ -14,6 +14,7 @@
 
 from timeit import timeit
 from random import randint
+from numpy import array, where
 
 
 def func_1(nums):
@@ -29,14 +30,18 @@ def func_2(nums):
 
 
 def func_3(nums):
-    yield [i for i, x in enumerate(nums) if x % 2 == 0]
+    intarray = array(nums)
+    return where(intarray % 2 == 0)
 
 
 my_nums = [randint(1, 1000) for my_num in range(1000)]
+
 print(timeit("func_1(my_nums)", number=10000, globals=globals()))
 print(timeit("func_2(my_nums)", number=10000, globals=globals()))
 print(timeit("func_3(my_nums)", number=10000, globals=globals()))
 
 """
-вариант с list comprehension работает быстрее
+из встроенных функций вариант с list comprehension работает быстрее
+вариант с использованием numpu работает быстре из-за внутренней оптимизации 
+модуля numpy
 """
