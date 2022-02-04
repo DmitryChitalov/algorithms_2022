@@ -24,3 +24,38 @@ reduce
 __mul__
 __add__
 """
+from collections import deque
+
+hex_num = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+           'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15,
+           0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9',
+           10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
+
+
+def sum_hex(x, y):
+    result = deque()
+    transfer = 0
+    if len(y) > len(x):
+        x, y = deque(y), deque(x)
+    else:
+        x, y = deque(x), deque(y)
+    while x:               # пока не закончатся символы в более длинном числе
+        if y:               # если в более коротком числе остались символы учитываем их
+            res = hex_num[x.pop()] + hex_num[y.pop()] + transfer    # достаем из очередей по последему символу
+        else:
+            res = hex_num[x.pop()] + transfer
+        transfer = 0
+        if res < 16:                # Если полученный результат менее 16 то вставляем символ в начало очреди
+            result.appendleft(hex_num[res])
+        else:                       # если более то вычитаем из результата 16, остаток вставляем в очередь, 1 - переносим к следующему расчету
+            result.appendleft(hex_num[res - 16])
+            transfer = 1
+    if transfer:                    # если по окончани вычисления в переменной остается еиница - вставляем в начало очереди
+        result.appendleft('1')
+    return result
+
+
+num1 = [sym for sym in (input('Введите первое число: ').upper())]
+num2 = [sym for sym in (input('Введите второе число: ').upper())]
+total = ''.join(sum_hex(num1, num2))
+print(f'Сумма чисел равна: {total}')
