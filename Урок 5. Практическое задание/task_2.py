@@ -17,6 +17,7 @@ defaultdict(list)
 int(, 16)
 reduce
 
+
 2) через ООП
 
 вспомните про перегрузку методов
@@ -24,3 +25,17 @@ reduce
 __mul__
 __add__
 """
+
+from collections import defaultdict
+
+result = defaultdict(list)
+a = "A2"
+b = "C4F"
+a = int(a, 16)
+b = int(b, 16)
+summa = list(hex(a + b))
+mult = list(hex(a * b))
+result['suma'] = list(hex(a + b)[2:])
+result['mult'] = list(hex(a * b)[2:])
+print(result['suma'])
+print(result['mult'])
