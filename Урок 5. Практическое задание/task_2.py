@@ -24,3 +24,19 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+
+def hex_sum():
+    return list(hex(int(''.join(my_dict[1]), 16) + int(''.join(my_dict[2]), 16)).upper())[2:]
+
+
+def hex_mul():
+    return list(hex(int(''.join(my_dict[1]), 16) * int(''.join(my_dict[2]), 16)).upper())[2:]
+
+
+my_dict = defaultdict(list)
+my_dict[1] = list(input('--> '))
+my_dict[2] = list(input('--> '))
+print(f'Сумма чисел: {hex_sum()}, \n'
+      f'Произведение чисел: {hex_mul()}')
