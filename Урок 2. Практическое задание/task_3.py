@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->0321
 """
+
+
+def revers(number, result=''):
+    if number != 0:
+        result = result + str(number % 10)
+        number = number // 10
+        return revers(number, result)
+    else:
+        return result
+
+try:
+    number = int(input('Введите число: '))
+    print(f'{number}->{revers(number)}')
+except ValueError:
+    print('Введено не натуральное число')

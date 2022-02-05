@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def shem(position=32):
+    if position == 128:
+        return
+    print(f'{position} - {chr(position)}', end=' ')
+    if (position - 31) % 10 == 0:
+        print('\n')
+    shem(position + 1)
+
+
+shem()
