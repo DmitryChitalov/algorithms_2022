@@ -10,3 +10,8 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+def recur_method(element):
+    return 0 if element == 0 else 1 + recur_method(element - 1) /  - 2
+
+n_cnt = int(input('Введите кол-во элементов: '))
+print(f'Кол-во элементов - {n_cnt}, их сумма - {recur_method(n_cnt)}')

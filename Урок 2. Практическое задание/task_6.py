@@ -7,3 +7,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def recur_method(cnt, numb):
+    print(f'Попытка номер {cnt}')
+    answer = int(input('Введите число от 0 до 100: '))
+    if cnt == 10 or answer == numb:
+        if answer == numb:
+            print(f'Вы верно отгадали загаданное число {numb}')
+        print(f'Загаданное число: {numb}')
+    else:
+        if numb < answer:
+            print(f'Зашаданное число меньше чем {answer}')
+        if numb > answer:
+            print(f'Зашаданное число больше чем {answer}')
+        recur_method(cnt + 1, numb)
+recur_method(1, random.randint(0, 100))
