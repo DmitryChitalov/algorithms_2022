@@ -9,36 +9,63 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
-
-from random import randint
 from memory_profiler import profile
 
 
 @profile
-def make_list():
-    # Cписком
-    result = [elem for idx, elem in enumerate(src) if elem > src[idx-1] and idx > 0]
-    print(result)
+def wrapper_fact(n):
+    def factorial(n):
+        if n == 1:
+            return 1
+        else:
+            return n * factorial(n - 1)
+
+    return factorial(n)
+
+
+print(wrapper_fact(10))
 
 
 @profile
-def make_generator():
-    # Оптимизация по памяти, генератором
-    result = (elem for idx, elem in enumerate(src) if elem > src[idx-1] and idx > 0)
-    print(result)
+def wrapper_reverse(n):
+    def recursive_reverse(number):
+        if number == 0:
+            return ''
+        return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+
+    return recursive_reverse(n)
 
 
-if __name__ == "__main__":
-    src = [randint(0, 100000) for i in range(1000000)]
-
-    make_list()
-    make_generator()
+print(wrapper_reverse(1234))
 
 """
-Оптимизация используя генератор. 
-попытаемся получить результат по памяти...
-В первом варианте lc, во втором генератор
-До:    62.2 MiB      0.0 MiB           1       print(result)
-После: 58.4 MiB      0.0 MiB           1       print(result)
-    
+вычисления факториала и разворота числа есть проблема многократного вывода профиля,
+решается добавлением необходимой для замера функции в функцию-обертку.
+При этом удобно, что в колонке "Occurences" показывается число вызовов строк.
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    4     19.7 MiB     19.7 MiB           1   @profile
+     5                                         def wrapper_fact(n):
+     6     19.7 MiB      0.0 MiB          11       def factorial(n):
+     7     19.7 MiB      0.0 MiB          10           if n == 1:
+     8     19.7 MiB      0.0 MiB           1               return 1
+     9                                                 else:
+    10     19.7 MiB      0.0 MiB           9               return n * factorial(n - 1)
+    11                                         
+    12     19.7 MiB      0.0 MiB           1       return factorial(n)
+
+3628800
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    18     19.7 MiB     19.7 MiB           1   @profile
+    19                                         def wrapper_reverse(n):
+    20     19.7 MiB      0.0 MiB           6       def recursive_reverse(number):
+    21     19.7 MiB      0.0 MiB           5           if number == 0:
+    22     19.7 MiB      0.0 MiB           1               return ''
+    23     19.7 MiB      0.0 MiB           4           return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+    24                                         
+    25     19.7 MiB      0.0 MiB           1       return recursive_reverse(n)
+4321
 """
