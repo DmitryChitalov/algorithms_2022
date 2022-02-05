@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def guessing(i, secret):
+    print('Попытка ' + str(i))
+    try:
+        user_try = int(input('Введите число от 0 до 100: '))
+    except ValueError:
+        return print('Неправильный ввод! Число было: ' + str(secret))
+    if user_try == secret:
+        print('Вы угадали')
+    else:
+        if i == 10:
+            return print('У Вас закончились попытки! Число было: ' + str(secret))
+        else:
+            if user_try > secret:
+                print('Ваше число больше')
+            else:
+                print('Ваше число меньше')
+        guessing(i+1, secret)
+
+
+guessing(1, random.randint(0, 100))
