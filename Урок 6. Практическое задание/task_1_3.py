@@ -30,3 +30,31 @@
 
 Это файл для третьего скрипта
 """
+# Факториал
+from memory_profiler import profile
+
+number = 15
+
+
+@profile
+def f_wrap(num):
+    def factorial_rec(num):
+        if num == 0:
+            return 1
+        return factorial_rec(num-1) * num
+
+
+@profile
+def factorial_cycle(num):
+    f = 1
+    i = 0
+    while i < num:
+        i += 1
+        f *= i
+    return f
+
+
+f_wrap(number)
+factorial_cycle(number)
+
+# Рекурсию из примера 1 во второй функции меняю на цикл

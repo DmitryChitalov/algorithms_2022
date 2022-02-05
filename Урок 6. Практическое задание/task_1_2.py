@@ -30,3 +30,36 @@
 
 Это файл для второго скрипта
 """
+# Урок 2 задание 2
+from memory_profiler import profile
+number = 3478004182736455068704
+
+
+@profile
+def rec(num):
+    def even_odd_recur(num, even=[], odd=[]):
+        if num == 0:
+            return even, odd
+        else:
+            n = num % 10
+            num = num // 10
+            if n % 2 == 0:
+                even.append(n)
+            else:
+                odd.append(n)
+            return even_odd_recur(num,even,odd)
+
+
+@profile
+def even_odd_cycle(num, even=[], odd=[]):
+    nums = str(num)
+    for i in range(len(nums)):
+        if int(nums[i]) % 2 == 0:
+            even.append(nums[i])
+        else:
+            odd.append(nums[i])
+    return even, odd
+
+
+rec(number)
+even_odd_cycle(number)

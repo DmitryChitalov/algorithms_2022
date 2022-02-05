@@ -30,3 +30,55 @@
 
 Это файл для четвертого скрипта
 """
+# Решето Эратосфена
+from memory_profiler import profile
+from numpy import array
+
+
+@profile
+def eratosfen(n):
+    a = [0] * n            # создание массива с n количеством элементов
+    for i in range(n):      # заполнение массива ...
+        a[i] = i            # значениями от 0 до n-1
+    a[1] = 0
+    m = 2                   # замена на 0 начинается с 3-го элемента (первые два уже нули)
+    while m < n:            # перебор всех элементов до заданного числа
+        if a[m] != 0:       # если он не равен нулю, то
+            j = m * 2       # увеличить в два раза (текущий элемент простое число)
+            while j < n:
+                a[j] = 0       # заменить на 0
+                j = j + m       # перейти в позицию на m больше
+        m += 1
+    b = []
+    for i in a:
+        if a[i] != 0:
+            b.append(a[i])
+    print(b)
+    return b
+
+
+@profile
+def eratosfen_opt(n):
+    ar = array([i for i in range(n)])
+    ar[1] = 0
+    b = []
+    m = 2
+    while m < n:
+        if ar[m] != 0:
+            j = m * 2
+            while j < n:
+                ar[j] = 0
+                j = j + m
+        m += 1
+    for i in ar:
+        if ar[i] != 0:
+            b.append(ar[i])
+    del ar
+    return b
+
+
+eratosfen(300)
+eratosfen_opt(300)
+
+
+# В первом примере массив создаю обычным путем (a = [0] * n), во втором примере использую array из NumPy
