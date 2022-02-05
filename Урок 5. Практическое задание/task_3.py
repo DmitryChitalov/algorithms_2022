@@ -25,3 +25,140 @@ appendleft, popleft, extendleft дека и соответствующих им 
 для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
 (append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+from collections import deque
+from random import randint, sample
+from timeit import timeit
+
+list_1 = [randint(0, 10000) for i in range(10000)]
+
+deque_1 = deque([randint(0, 10000) for j in range(10000)])
+
+
+# 1) сравнить операции  append, pop, extend
+
+
+def list_app(list_1):
+    for i in range(100000):
+        list_1.append(i)
+    return list_1
+
+
+
+def deque_app(deque_1):
+    for i in range(100000):
+        deque_1.append(i)
+    return deque_1
+
+
+print(timeit("list_app(list_1)", globals=globals(), number=100))  # 0.670205
+print(timeit("deque_app(deque_1)", globals=globals(), number=100))  # 0.6700514 - время выполнения одинаково с list
+
+
+def list_pop(list_1):
+    for i in range(100000):
+        list_1.pop()
+    return list_1
+
+
+
+def deque_pop(deque_1):
+    for i in range(100000):
+        deque_1.pop()
+    return deque_1
+
+
+print(timeit("list_pop(list_1)", globals=globals(), number=100))  # 0.4542149
+print(timeit("deque_pop(deque_1)", globals=globals(), number=100))  # 0.4584407000000001 - время выполнения одинаково с list
+
+lst = list(range(10))
+
+
+def list_extend(list_1):
+    for i in range(100000):
+        list_1.extend(lst)
+    return list_1
+
+
+
+def deque_extend(deque_1):
+    for i in range(100000):
+        deque_1.extend(lst)
+    return deque_1
+
+
+print(timeit("list_extend(list_1)", globals=globals(), number=100))  # 2.6497157000000002
+print(timeit("deque_extend(deque_1)", globals=globals(), number=100))  # 2.6415951 - время выполнения одинаково с list
+
+
+
+# 2) сравнить операции
+# appendleft, popleft, extendleft дека и соответствующих им операций списка
+
+
+def deque_appendleft(deque_1):
+    for i in range(1000):
+        deque_1.appendleft(i)
+    return deque_1
+
+
+def list_insert(list_1):
+    for i in range(1000):
+        list_1.insert(0, i)
+    return list_1
+
+
+print(timeit("deque_appendleft(deque_1)", globals=globals(),
+             number=10))  # 0.00036290000000005485 - существенно быстрее, чем insert
+print(timeit("list_insert(list_1)", globals=globals(), number=10))  # 73.1648253
+
+
+def deque_popleft(deque_1):
+    for i in range(1000):
+        deque_1.popleft()
+    return deque_1
+
+
+def list_pop_2(list_1):
+    for i in range(1000):
+        list_1.pop(i)
+    return list_1
+
+
+print(timeit("deque_popleft(deque_1)", globals=globals(),
+             number=10))  # 0.00029489999999998684 - существенно быстрее, чем list
+print(timeit("list_pop_2(list_1)", globals=globals(), number=10))  # 58.4558373
+
+
+def deque_extendleft(deque_1):
+    for i in range(1000):
+        deque_1.extendleft(lst)
+    return deque_1
+
+
+def list_ins(list_1):
+    for i in range(1000):
+        list_1.insert(0, lst)
+    return list_1
+
+
+# print(timeit("deque_extendleft(deque_1)", globals=globals(),
+#              number=10))  # 0.0011176000000000519 - существенно быстрее, чем list
+# print(timeit("list_ins(list_1)", globals=globals(), number=10))  # 72.6376191
+
+
+# 3) сравнить операции получения элемента списка и дека
+# и сделать выводы что и где быстрее
+
+def list_index(list_1):
+    random_index = sample(list_1, 50)
+    return random_index
+
+
+def deque_index(deque_1):
+    random_index = sample(deque_1, 50)
+    return random_index
+
+
+print(timeit("list_index(list_1)", globals=globals(),
+             number=10))  # 0.00036720000000001196 - быстрее, чем deque
+print(timeit("deque_index(deque_1)", globals=globals(), number=10))  # 0.9974212000000001
