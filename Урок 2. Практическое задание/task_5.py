@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def assii(start=32, end=127):
+    print(f'{start} - {chr(start)}', end='\n' if (start + 9) % 10 == 0 else ' ')
+    if start == end:
+        return
+    assii(start + 1)
+
+
+assii()
