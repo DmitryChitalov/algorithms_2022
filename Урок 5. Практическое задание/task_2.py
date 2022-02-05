@@ -24,3 +24,38 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+from functools import reduce
+
+
+def hex_sum(num1, num2):
+    return list(hex(int(num1, 16) + int(num2, 16))[2:])
+
+
+def hex_mul(num1, num2):
+    return list(hex(int(num1, 16) * int(num2, 16))[2:])
+
+
+nums = defaultdict(list)
+
+n = input('Введите первое число: ')
+nums[n].append(list(n))
+n = input('Введите второе число: ')
+nums[n].append(list(n))
+
+print(f'Сумма: {reduce(hex_sum, nums)}')
+print(f'Произведение: {reduce(hex_mul, nums)}')
+
+
+class HexNumber(str):
+    def __add__(self, other):
+        return list(hex(int(self, 16) + int(other, 16))[2:])
+
+    def __mul__(self, other):
+        return list(hex(int(self, 16) * int(other, 16))[2:])
+
+
+hex1 = HexNumber(nums.popitem()[0])
+hex2 = HexNumber(nums.popitem()[0])
+print(hex1 + hex2)
+print(hex1 * hex2)
