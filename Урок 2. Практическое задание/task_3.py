@@ -22,3 +22,16 @@
 number = input('Введите число: ')
 
 print(f'Чило {number} в обратном порядке: {number[::-1]}')
+
+
+def check(num, a = ''):
+    if num == 0:
+        return a
+    else:
+        a += f'{num % 10}'
+        num = num // 10
+        return check(num, a)
+
+
+num = int(input('Введите число: '))
+print(f'Чило {num} в обратном порядке: {check(num)}')
