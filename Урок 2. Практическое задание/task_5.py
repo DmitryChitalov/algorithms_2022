@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_key_value(key=32):
+    if key < 128:
+        if (key - 32) % 10 == 0:
+            print()
+        print(f"{key} - {chr(key)}", end=" ")
+        print_key_value(key + 1)
+    else:
+        return
+
+
+print_key_value()

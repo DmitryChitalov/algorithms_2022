@@ -7,3 +7,23 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+from random import randint
+
+
+def  game_number(number, count=0):
+    attempt = int(input("Ваше предположение? "))
+    if attempt == number:
+        print("Вы выиграли")
+        return 1
+    elif count > 10:
+        print("Вы проиграли")
+        return 0
+    if attempt > number:
+        print("Ваше число больше заданного")
+    else:
+        print("Ваше число меньше заданного")
+    game_number(number, count + 1)
+
+
+game_number(randint(0, 100))

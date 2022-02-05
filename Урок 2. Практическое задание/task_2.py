@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def parity(number, parity_num, not_parity):
+
+    if number < 1:
+        return f"Четных {parity_num}, Нечетных {not_parity}"
+    else:
+        if number & 1:
+            not_parity += 1
+        else:
+            parity_num += 1
+        return parity(number // 10, parity_num, not_parity)
+
+
+print(parity(int(input("Введите число")), 0, 0))

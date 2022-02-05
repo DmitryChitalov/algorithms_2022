@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230->3210
 """
+
+
+def user_revers(number, revers):
+    if number < 1:
+        return revers
+    else:
+        revers = revers * 10 + number % 10
+        return user_revers(number // 10, revers)
+
+
+print(user_revers(int(input("Введите число ")), 0))

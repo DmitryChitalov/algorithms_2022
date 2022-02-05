@@ -12,3 +12,17 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def sum_row(elem_count,res_sum=0):
+    if not elem_count:
+        return res_sum
+    return sum_row(elem_count - 1, res_sum + elem_count)
+
+
+try:
+    count = int(input("Введите число элементов: "))
+    if sum_row(count) == count * (count +1)/2:
+        print("Равенство верно")
+except ValueError:
+    print("Введена строка")
