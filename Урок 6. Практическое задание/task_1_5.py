@@ -30,3 +30,78 @@
 
 Это файл для пятого скрипта
 """
+
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        print(f"Выполнение заняло {memory_usage()[0] - m1[0]} Mib")
+        return res
+
+    return wrapper
+
+
+def sum_digit(digit):
+    result = 0
+    while True:
+        remainder = digit % 10
+        result += remainder
+        digit = digit // 10
+        if digit <= 0:
+            break
+
+    return result
+
+
+@memory
+def before(cube_list):
+    result = 0
+    for elem in cube_list:
+        if sum_digit(elem) % 7 == 0:
+            result += elem
+
+    print('Сумма 1:', result)
+
+    result = 0
+    for i in range(len(cube_list)):
+        cube_list[i] += 17
+        if sum_digit(cube_list[i]) % 7 == 0:
+            result += cube_list[i]
+
+    print('Сумма 2:', result)
+
+
+def multiple_seven(elem):
+    if sum_digit(elem) % 7 == 0:
+        return elem
+    else:
+        return 0
+
+# оптимизация
+@memory
+def after(cube_list):
+    sum_elem = sum(map(multiple_seven, cube_list))
+
+    print('Сумма 1:', sum_elem)
+
+    sum_elem = list(map(lambda x: x + 17, cube_list))
+    sum_elem = sum(map(multiple_seven, sum_elem))
+    print('Сумма 2:', sum_elem)
+
+
+if __name__ == '__main__':
+    cube_list = [i ** 3 for i in range(1, 100000, 2)]
+
+    before(cube_list.copy())
+    after(cube_list.copy())
+
+"""
+Используем 'map'.
+Использование map действительно позволяет существенно экономить память. 
+До:    Выполнение заняло 2.34375 Mib
+После: Выполнение заняло 0.11328125 Mib
+"""
