@@ -22,3 +22,19 @@
 р
 а
 """
+
+from hashlib import md5
+
+
+def unique_str(string: str):
+    len_str = len(string)
+    hash_code = set()
+    for i in range(len_str):
+        for j in range(i + 1, len_str + 1):
+            if i != j and string[i:j] != string:
+                hash_code.add(md5(string[i:j].encode()).hexdigest())
+                print(string[i:j])
+    # print(hash, f'Количество элементов:  {len(hash)}')
+
+
+unique_str("трали-вали")
