@@ -63,3 +63,5 @@ def even_odd_cycle(num, even=[], odd=[]):
 
 rec(number)
 even_odd_cycle(number)
+
+# Рекурсию из примера 1 во второй функции меняю на цикл
