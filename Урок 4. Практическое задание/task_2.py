@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+В данном примере рекурсия для извлечения результата подходит больше.
+Так как если нам понядобятся результаты вычисления большого числа один раз,
+то при мемоизации память будет им занята постоянно.
+"""
