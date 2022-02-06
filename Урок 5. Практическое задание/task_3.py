@@ -101,6 +101,18 @@ def deque_extend_left():
         my_deque.extendleft([1])
 
 
+def list_id():
+    my_list = [i for i in range(100)]
+    for i in range(100):
+        el = my_list[i]
+
+
+def deque_id():
+    my_deque = deque([i for i in range(100)])
+    for i in range(100):
+        el = my_deque[i]
+
+
 print("append test")
 print(timeit("list_append()", setup="from __main__ import list_append", number=10000))
 print(timeit("deque_append()", setup="from __main__ import deque_append", number=10000))
@@ -121,8 +133,11 @@ print("extend left test")
 print(timeit("list_extend_left()", setup="from __main__ import list_extend_left", number=10000))
 print(timeit("deque_extend_left()", setup="from __main__ import deque_extend_left", number=10000))
 
-
+print("get element by id")
+print(timeit("list_id()", setup="from __main__ import list_id", number=10000))
+print(timeit("deque_id()", setup="from __main__ import deque_id", number=10000))
 """
-функции pop, append и extend для list и deque выполняются за одинаковое время
-функции popleft, appendleft, extendleft для deque существенно быстрее чем аналоги для list
+1) функции pop, append и extend для list и deque выполняются за одинаковое время
+2) функции popleft, appendleft, extendleft для deque существенно быстрее чем аналоги для list
+3) получение элемента по id для списка и дека занимает одинаковое время
 """

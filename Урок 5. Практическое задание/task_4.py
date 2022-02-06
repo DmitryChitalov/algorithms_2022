@@ -49,7 +49,8 @@ print(timeit("ordered_dict_pop()", setup="from __main__ import ordered_dict_pop"
 print(timeit("ordered_dict_sort()", setup="from __main__ import ordered_dict_sort", number=100000))
 
 """
-В python начиная с версии 3.7 гарантированно сохраняется порядок элементов словаря.
+В python начиная с версии 3.6 появилась а с 3.7 официально объявлена в документации реализация dict,
+которая сохраняет порядок элементов словаря.
 Словари класса OrderedDict никакого выйгрыша в производительности не дают
 Использовать OrderedDict можно:
  - при сравнении словарей, если важен порядок элементов 
