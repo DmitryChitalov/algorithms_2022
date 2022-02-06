@@ -15,3 +15,21 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# сложность O(n)
+def min_number_finder(lst):
+    min_number = lst[0]                                     # O(1)
+    for i in lst:                                           # O(n)
+        if i < min_number:                                  # O(len(i)
+            min_number = i                                  # O(1)
+    return min_number                                       # O(1)
+
+
+# Сложность O(n**2)
+def min_number_finder2(lst):
+    min_number_2 = lst[0]                                   # O(1)
+    for i in lst:                                           # O(n)
+        for j in range(lst.index(i) + 1, len(lst) - 1, 1):  # O(n)
+            if min_number_2 > lst[j]:                       # O(len(lst[j])
+                min_number_2 = lst[j]                       # O(1)
+    return min_number_2                                     # O(1)
