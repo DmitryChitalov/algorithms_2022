@@ -89,19 +89,23 @@ class webCaching_opt:
 
 if __name__ == "__main__":
     obj = webCaching()
+    obj_opt = webCaching_opt()
+    print(f"Class webCaching instance size (empty): {asizeof.asizeof(obj)}")
+    print(f"Class webCaching_opt instance size (empty): {asizeof.asizeof(obj_opt)}")
     obj.set_cache("https://vk.com")
     obj.set_cache("https://vk.ru")
-    obj_opt = webCaching_opt()
     obj_opt.set_cache("https://vk.com")
     obj_opt.set_cache("https://vk.ru")
 
-    print(f"Class webCaching instance size: {asizeof.asizeof(obj)}")
-    print(f"Class webCaching_opt instance size: {asizeof.asizeof(obj_opt)}")
+    print(f"Class webCaching instance size (after filling): {asizeof.asizeof(obj)}")
+    print(f"Class webCaching_opt instance size (after filling): {asizeof.asizeof(obj_opt)}")
 
 """
 Результаты: 
-    Class webCaching instance size: 960
-    Class webCaching_opt instance size: 48
+    Class webCaching instance size (empty): 464
+    Class webCaching_opt instance size (empty): 48
+    Class webCaching instance size (after filling): 960
+    Class webCaching_opt instance size (after filling): 48
 Вывод: 
     Использование слотов существенно сокращет потребление памяти, с ростом количества записей в словаре, 
     потребление памяти не увеличивалось в оптимизированном Классе.
