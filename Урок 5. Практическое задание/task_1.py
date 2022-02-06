@@ -28,3 +28,35 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+num = int(input('Введите количество компаний: '))
+stats = namedtuple('company', 'name q1 q2 q3 q4')
+common = dict()
+
+for i in range(num):
+    data = stats(
+        name=input('Введите название предприятия: '),
+        q1=int(input('Введите прибыль за первый квартал: ')),
+        q2=int(input('Введите прибыль за второй квартал: ')),
+        q3=int(input('Введите прибыль за третий квартал: ')),
+        q4=int(input('Введите прибыль за четвертый квартал: ')))
+    avg_prof = (data.q1 + data.q2 + data.q3 + data.q4) / 4
+    common[data.name] = avg_prof
+
+
+common_avg = 0
+for i in common.keys():
+    common_avg = common_avg + common[i]
+
+common_avg = common_avg / num
+print(f'Средняя прибыль предприятий - {common_avg}')
+
+for i in common.keys():
+    if common[i] < common_avg:
+        print(f'Предприятие {i} имеет прибыль ниже средней')
+    if common[i] > common_avg:
+        print(f'Предприятие {i} имеет прибыль выше средней')
+    if common[i] == common_avg:
+        print(f'Предприятие {i} имеет среднюю прибыль')
