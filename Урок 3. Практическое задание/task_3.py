@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+
+
+def test(text):
+    hash_tabl = {}
+    for n in range(len(text)):
+        for i in range(len(text)):
+            if text[i:n + 1:] != '' and text[i:n + 1:] != text:  # Можно убрать второе условие если нужна строка
+                hash_tabl.setdefault(hashlib.sha256(text[i:n + 1:].encode()).hexdigest(), text[i:n + 1:])
+    return hash_tabl.values()
+
+
+for el in test(input('Введите строку: ')):
+    print(el)
