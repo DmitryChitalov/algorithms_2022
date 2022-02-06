@@ -2,7 +2,7 @@
 Задание 1.
 
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы
+курсов Алгоритмы и Основы Python
 
 На каждый скрипт нужно два решения - исходное и оптимизированное.
 
@@ -30,3 +30,38 @@
 
 Это файл для второго скрипта
 """
+from pympler import asizeof
+
+
+# Алгоритмы, ДЗ-5, task_2
+class CalcHex:
+
+    def __init__(self, x):
+        self.x = int(x, 16)
+
+    def __add__(self, other):
+        return list(hex(self.x + other.x))[2:]
+
+    def __mul__(self, other):
+        return list(hex(self.x * other.x))[2:]
+
+
+class CalcHex1:
+    __slots__ = ['x']
+
+    def __init__(self, x):
+        self.x = int(x, 16)
+
+    def __add__(self, other):
+        return list(hex(self.x + other.x))[2:]
+
+    def __mul__(self, other):
+        return list(hex(self.x * other.x))[2:]
+
+
+a = CalcHex('A2C7DEF234')
+print(asizeof.asizeof(a))   # 240
+b = CalcHex1('A2C7DEF234')
+print(asizeof.asizeof(b))   # 72
+
+# Используя слоты удается сократить объем памяти объекта более, чем в 3 раза

@@ -2,7 +2,7 @@
 Задание 1.
 
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы
+курсов Алгоритмы и Основы Python
 
 На каждый скрипт нужно два решения - исходное и оптимизированное.
 
@@ -30,3 +30,50 @@
 
 Это файл для четвертого скрипта
 """
+from collections import namedtuple
+from recordclass import recordclass
+from pympler import asizeof
+
+# Алгоритмы, ДЗ-5, task_1
+# Применяем namedtuple
+cnt = int(input('Введите количество предприятий для расчета прибыли: '))
+org = namedtuple('Orgs', 'name i_kv ii_kv iii_kv iv_kv', defaults='')
+
+org_info = [org(input('Введите название предприятия: '), *input('Через пробел введите прибыль данного предприятия за '
+            'каждый квартал(Всего 4 квартала): ').split()) for i in range(cnt)]
+
+my_dict = {j[0]: sum(map(int, j[1:])) for j in org_info}
+x = sum(my_dict.values())
+
+low_profit = [itm for itm in my_dict if my_dict[itm] < x/cnt]
+high_profit = [itm for itm in my_dict if my_dict[itm] > x/cnt]
+
+print(f'Средняя годовая прибыль всех предприятий: {x/cnt} \n'
+      f'Предприятия, с прибылью выше среднего значения: {high_profit} \n'
+      f'Предприятия, с прибылью ниже среднего значения: {low_profit}')
+
+print(asizeof.asizeof(org_info))    # 808
+
+# применяем recordclass
+cnt1 = int(input('Введите количество предприятий для расчета прибыли: '))
+org1 = recordclass('Orgs', 'name i_kv ii_kv iii_kv iv_kv', defaults='')
+
+org_info1 = [org1(input('Введите название предприятия: '), *input('Через пробел введите прибыль данного '
+                'предприятия за каждый квартал (Всего 4 квартала): ').split()) for z in range(cnt1)]
+
+my_dict = {}
+for j in org_info1:
+    my_dict[j[0]] = int(j[1]) + int(j[2]) + int(j[3]) + int(j[4])
+
+x1 = sum(my_dict.values())
+
+low_profit1 = [itm for itm in my_dict if my_dict[itm] < x1/cnt1]
+high_profit1 = [itm for itm in my_dict if my_dict[itm] > x1/cnt1]
+
+print(f'Средняя годовая прибыль всех предприятий: {x1/cnt1} \n'
+      f'Предприятия, с прибылью выше среднего значения: {high_profit1} \n'
+      f'Предприятия, с прибылью ниже среднего значения: {low_profit1}')
+
+print(asizeof.asizeof(org_info1))   # 200
+
+# С применением recordclass объем памяти,выделяемый на список предприятий уменшился в 4 раза
