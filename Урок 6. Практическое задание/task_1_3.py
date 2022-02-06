@@ -30,3 +30,76 @@
 
 Это файл для третьего скрипта
 """
+import memory_profiler
+from numpy import array
+from timeit import timeit
+from pympler import asizeof
+""" исходное """
+
+#@memory_profiler.profile
+def func_1(nums:list) -> list:
+    """
+    Задание 1 с урока 4.
+    Приведен код, который позволяет сохранить в
+    массиве индексы четных элементов другого массива
+    :param nums: list
+    :return: list
+    """
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+""" оптимизированное """
+#@memory_profiler.profile
+def func_1_opt(nums: list) -> array:
+    new_arr = array([x for x in nums if x % 2 == 0])
+    return new_arr
+
+if __name__ == "__main__":
+    numbers = list(range(50000))
+    obj1 = func_1(numbers)
+    print(f"размер obj1: {asizeof.asizeof(obj1)}")
+    print(f"Время исполнения функции func_1: {timeit('func_1(numbers)', globals=globals(), number=1000)} s")
+    #print(obj1)
+    obj_opt = func_1_opt(numbers)
+    print(f"размер obj_opt: {asizeof.asizeof(obj_opt)}")
+    print(f"Время исполнения функции func_1_opt: {timeit('func_1_opt(numbers)', globals=globals(), number=1000)} s")
+    #print(obj_opt)
+
+"""
+Результаты:
+    размер obj1: 1000312
+    Время исполнения функции func_1: 4.4547081 s
+    размер obj_opt: 100120
+    Время исполнения функции func_1_opt: 3.770931300000001 s
+Вывод: 
+    Размер массива сжался в 10 раз с помощью numpy. Время выполнения функции так же меньше чем в первоночальной функции.
+    Естественно на время выполнения повлиял Comprehension list что является хорошей комбинацией экономии времени 
+    выполнения функции и так же экономия памяти на храниние массива. 
+    Так же стоит заментить профилирование памяти в первоночальной фунции показало дополнительное потребление памяти 
+    при переборе массива и выполнения операций добавления и фильтрации элементов в новый массив.
+    Конечно можно так же было использовать функцию filter(lambda x: x%2 == 0, nums), однако в таком случае время 
+    увеличилось бы в 1,5 раза. Поэтому я оставил именно этот вариант оптимизации.
+    
+Профилирование памяти: 
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    40     32.4 MiB     32.4 MiB           1   @memory_profiler.profile
+    41                                         def func_1(nums:list) -> list:
+    49     32.4 MiB      0.0 MiB           1       new_arr = []
+    50     33.6 MiB      0.0 MiB       50001       for i in range(len(nums)):
+    51     33.6 MiB      0.7 MiB       50000           if nums[i] % 2 == 0:
+    52     33.6 MiB      0.3 MiB       25000               new_arr.append(i)
+    53     33.6 MiB      0.0 MiB           1       return new_arr
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    56     34.4 MiB     34.4 MiB           1   @memory_profiler.profile
+    57                                         def func_1_opt(nums: list) -> array:
+    58     34.7 MiB      0.3 MiB       50003       new_arr = array([x for x in nums if x % 2 == 0])
+    59     34.7 MiB      0.0 MiB           1       return new_arr
+"""

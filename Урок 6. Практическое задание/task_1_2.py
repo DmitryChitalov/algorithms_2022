@@ -31,13 +31,10 @@
 Это файл для второго скрипта
 """
 import hashlib
-import string
-import random
 from uuid import uuid4
 
-import memory_profiler
 from pympler import asizeof
-from memory_profiler import profile
+import memory_profiler
 
 """ исходное """
 
