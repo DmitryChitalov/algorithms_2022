@@ -22,3 +22,23 @@
 р
 а
 """
+
+import hashlib
+
+
+def unique():
+    string = input('Введите строку, состоящую из латинских букв')
+
+    sum_substring = set()
+    if len(string) == 1:
+        print(f'1 уникальная подстрока в строке {string}')
+    else:
+        for i in range(len(string)):
+            for j in range(len(string), i, -1):
+                hash_str = hashlib.sha1(string[i:j].encode('utf-8')).hexdigest()
+                sum_substring.add(hash_str)
+
+        print(f'{len(sum_substring)} уникальных подстрок в строке {string}')
+
+
+unique()
