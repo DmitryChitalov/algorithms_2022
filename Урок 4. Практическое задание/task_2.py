@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,4 +80,40 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+'''
+Данная попытка попытка оптимизировать решение мемоизацией бессмысленна. Количество выполнений функции 10000.
+С одним и тем же числом. За первое выполнение функции cache в memoize заполнится нужными значениями и будет 
+выдавать их 9999 раз из словаря очень быстро. В реальности числа разные. Если в функции задавать разные 
+значения - время выполнения оптимизированной не будет отличаться от неоптимизированной. Что и показал
+эксперимент.
+Не оптимизированная функция recursive_reverse с разными числами
+0.02254110000000001
+Оптимизированная функция recursive_reverse_mem  с разными числами
+0.022547400000000023
+'''
+
+
+def get_func0():
+    num = randint(100000, 1000000)
+    return recursive_reverse(num)
+
+
+def get_func1():
+    num = randint(100000, 1000000)
+    return recursive_reverse_mem(num)
+
+
+print('Не оптимизированная функция recursive_reverse с разными числами')
+print(
+    timeit(
+        "get_func0()",
+        setup='from __main__ import get_func0',
+        number=10000))
+print('Оптимизированная функция recursive_reverse_mem  с разными числами')
+print(
+    timeit(
+        'get_func1()',
+        setup='from __main__ import get_func1',
         number=10000))
