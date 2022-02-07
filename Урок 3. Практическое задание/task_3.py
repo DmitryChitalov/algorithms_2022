@@ -22,3 +22,16 @@
 р
 а
 """
+
+from hashlib import sha256
+
+def unic_substring(string):
+    set_unic = set()
+    for i in range(1, len(string)):
+        for j in range(len(string) - i + 1):
+            set_unic.add(sha256(string[j:j + i].encode('utf-8')).hexdigest())
+    return (f'Строка {string} coдержит {len(set_unic)} уникальных подстрок(и)')
+
+
+print(unic_substring('рара'))
+
