@@ -22,3 +22,46 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import json
+import hashlib
+from binascii import hexlify
+
+
+def data_base(dct=None):
+    if dct is not None:
+        with open('db.json', 'w') as file_w:
+            json.dump(dct, file_w)
+    try:
+        with open('db.json', encoding='utf-8') as file_r:
+            db = json.load(file_r)
+    except FileNotFoundError:
+        db = {}
+    return db
+
+
+def authorization(login):
+    db = data_base()
+
+    if login not in db:
+        print(f'{login} не зарегистрирован.\nРегистрация:')
+        password = input('Введите новый пароль: ')
+        pas_obj = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), login.encode('utf-8'), 100000)
+        pas_key = hexlify(pas_obj)
+
+        db[login] = pas_key.decode()
+        db = data_base(db)  # обновляем бд
+        print(f'В базу данных записана строка: {db[login]}')
+    else:
+        print(f'{login} есть в базе данных: {db[login]}')
+
+    password = input('Введите пароль для входа: ')
+    pas_obj = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), login.encode('utf-8'), 100000)
+    pas_key = hexlify(pas_obj)
+    if pas_key.decode() == db[login]:
+        print('Вход')
+    else:
+        print('Вы ввели неправильный пароль')
+
+
+authorization(input('Логин: '))
