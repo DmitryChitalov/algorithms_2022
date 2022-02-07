@@ -17,3 +17,31 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+di = {}
+di[1] = 'Company 1'
+di[10] = 'Company 2'
+di[100] = 'Company 3'
+di[1000] = 'Company 4'
+
+
+
+def func_1(di):
+    '''сложность линейная O(N)'''
+    while True:
+        if len(di) == 3:                        # O(N)
+            break
+        profobility = [k for k in di.keys()]    # O(N)
+        min_prof = min(profobility)             # O(N)
+        del di[min_prof]                        # O(1)
+    print(di)
+
+def func_2(di):
+    '''сложность линейно-логарифмическая O(N log N)'''
+    sort_li = sorted(di.items(), key=lambda item: item[1]) # O(N log N)
+    res = sort_li[-3:]                                       # O(1)
+    print(res)
+
+di1 = di.copy()
+func_1(di)
+func_2(di1)
