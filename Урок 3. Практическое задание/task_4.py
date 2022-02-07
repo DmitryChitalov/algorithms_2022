@@ -14,3 +14,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from hashlib import sha512
+
+
+def memorize(url, mem={}):
+    url_hash = mem.get(url)
+    if url_hash is None:
+        salt = 'protection'
+        mem[url] = sha512(salt.encode() + url.encode()).hexdigest()
+        print(f'{url} записан в кэш с хешем {mem[url]}')
+    else:
+        print(f'{url} - уже в кэше и имеет хеш {mem[url]}')
+
+
+print('Даём программе новые url:')
+memorize('www.vk.com')
+memorize('www.google.ru')
+memorize('www.yandex.ru')
+memorize('www.youtube.com')
+print('Проверяем программу, дав уже известный url:')
+memorize('www.yandex.ru')

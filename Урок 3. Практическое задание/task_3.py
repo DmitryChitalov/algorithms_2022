@@ -22,3 +22,13 @@
 р
 а
 """
+from hashlib import sha256
+
+
+def uniq_hashes(in_str):
+    uniq_hash = set(sha256(in_str[i:j + 1].encode()).hexdigest()
+                    for i in range(len(in_str)) for j in range(i + 1, (len(in_str) + 1)))
+    return uniq_hash
+
+
+print(f'Количество подстрок: {len(uniq_hashes(input("Введите строку строчными латинскими буквами: ")))}')
