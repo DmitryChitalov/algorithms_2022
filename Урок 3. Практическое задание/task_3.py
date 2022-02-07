@@ -22,3 +22,17 @@
 р
 а
 """
+
+import hashlib
+
+my_str = input('Введите строку')
+a = set()
+my_lst = list(my_str)
+
+for i in range(len(my_lst)):
+    for j in range(i + 1, len(my_lst) + 1):
+        el = ''.join(my_lst[i:j])
+        el = hashlib.sha1(el.encode('utf-8')).hexdigest()
+        a.add(el)
+
+print(f'Количество уникальных подстрок - {len(a) - 1}')
