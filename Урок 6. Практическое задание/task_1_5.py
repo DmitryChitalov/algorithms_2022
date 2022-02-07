@@ -31,11 +31,13 @@
 Это файл для пятого скрипта
 """
 import hashlib
+import json
 import pickle
+from timeit import timeit
 from pympler import asizeof
 import memory_profiler
 
-@memory_profiler.profile
+#@memory_profiler.profile
 def unique_set(some_string: str) -> set:
     """
     Задание 3 урок 3.
@@ -51,35 +53,59 @@ def unique_set(some_string: str) -> set:
     return hash_set
 
 
-@memory_profiler.profile
-def unique_set_opt(some_string: str) -> bytes:
+#@memory_profiler.profile
+def unique_set_opt_pickle(some_string: str) -> bytes:
     hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
                 for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
     return pickle.dumps(hash_set)
 
 
+#@memory_profiler.profile
+def unique_set_opt_json(some_string: str) -> str:
+    hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
+                for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
+    return json.dumps(list(hash_set))
+
 
 if __name__ == "__main__":
     test_str = "papapdawdawfawfawfawdawfawafdafsfcwadasdwdawpfjawpofjaicnawpodhajwopdawådplaw"
     test1 = unique_set(test_str)
-    test2 = unique_set_opt(test_str)
+    test2 = unique_set_opt_pickle(test_str)
+    test3 = unique_set_opt_json(test_str)
 
+    print("обьекты идентичны" if test1 == pickle.loads(test2) == set(json.loads(test3)) else "Обьекты различны")
     print(f"Size of test1: {asizeof.asizeof(test1)}")
+    print(f'time unique_set: {timeit("unique_set(test_str)", globals=globals(), number=1000)} s\n')
+
     print(f"Size of test2 (pickle obj): {asizeof.asizeof(test2)}")
+    print(f'time unique_set_opt_pickle: {timeit("unique_set_opt_pickle(test_str)", globals=globals(), number=1000)} s\n')
+
+    print(f"Size of test3 (json obj): {asizeof.asizeof(test3)}")
+    print(f'time unique_set_opt_json: {timeit("unique_set_opt_json(test_str)", globals=globals(), number=1000)} s\n')
 
     """
     Результаты: 
         Size of test1: 404800
-        Size of test2: 141768
+        time unique_set: 4.0415502 s
         
+        Size of test2 (pickle obj): 141768
+        time unique_set_opt_pickle: 4.234583300000001 s
+        
+        Size of test3 (json obj): 125408
+        time unique_set_opt_json: 4.541763999999999 s
     Вывод: 
-        При оптимизации функции метод 'консервирования' pickle показал дополнительное потребление памяти на 
-        преобразование результата вычислений функции, однако после консервирования на выходе обьект получался в 2,5 раза 
-        меньше. Тоесть можно сделать вывод что на в момент вычислений памяти потребуется больше, чем на хранения 
+        При оптимизации функции метод dumps 'консервирования' pickle и json показал дополнительное потребление памяти на 
+        преобразование результата вычислений функции, однако после консервирования на выходе обьект получался в 2,8-3,2
+        раза меньше. Тоесть можно сделать вывод что в момент вычислений памяти потребуется больше, чем на хранение 
         информации.  
+        Стоит заметить во всем этом есть свои дополнительные минусы такие как обратное преобразование в изначальный 
+        обьект. В случае с json, нужно еще дополнительно преобразовать обьект из set в list и что бы получить 
+        изначальный обьект обратно в set. Но это уже специфика задачи
+        
+        Время выполнения функции не сильно поменялось, примерно на 8% на pickle, 12% на json
     
     Профилирование функции: 
-    
+    test1
     Line #    Mem usage    Increment  Occurrences   Line Contents
     =============================================================
         38     31.4 MiB     31.4 MiB           1   @memory_profiler.profile
@@ -88,12 +114,21 @@ if __name__ == "__main__":
         50     31.8 MiB      0.4 MiB        3080                   for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
         51     31.8 MiB      0.0 MiB           1       return hash_set
 
-
+    test2
     Line #    Mem usage    Increment  Occurrences   Line Contents
     =============================================================
-        54     31.8 MiB     31.8 MiB           1   @memory_profiler.profile
-        55                                         def unique_set_opt(some_string: str) -> bytes:
-        56     32.3 MiB      0.0 MiB          80       hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
-        57     32.3 MiB      0.4 MiB        3080                   for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
-        58     32.6 MiB      0.4 MiB           1       return pickle.dumps(hash_set)
+        56     31.5 MiB     31.5 MiB           1   @memory_profiler.profile
+        57                                         def unique_set_opt_pickle(some_string: str) -> bytes:
+        58     31.9 MiB      0.0 MiB          80       hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
+        59     31.9 MiB      0.4 MiB        3080                   for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
+        60     32.2 MiB      0.3 MiB           1       return pickle.dumps(hash_set)
+        
+    test3
+    Line #    Mem usage    Increment  Occurrences   Line Contents
+    =============================================================
+        63     31.5 MiB     31.5 MiB           1   @memory_profiler.profile
+        64                                         def unique_set_opt_json(some_string: str) -> str:
+        65     31.9 MiB      0.0 MiB          80       hash_set = {hashlib.sha1(some_string[i:j].encode("utf-8")).hexdigest() for i in range(len(some_string))
+        66     31.9 MiB      0.4 MiB        3080                   for j in range(i+1, len(some_string)+1) if some_string != some_string[i:j]}
+        67     32.2 MiB      0.3 MiB           1       return json.dumps(list(hash_set))
     """
