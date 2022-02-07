@@ -28,3 +28,37 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+from statistics import mean
+
+companies = namedtuple('Company', 'company_name quarters')
+
+
+def companies_info():
+    quarter_list = []
+    companies_list = []
+    less_than_avg_companies = []
+    more_than_avg_companies = []
+    try:
+        number = int(input('Enter the number of companies for profit calculation: '))
+    except ValueError:
+        print('You have to enter a number, not a string')
+        return
+    for i in range(number):
+        company_name = input('Enter the name of the company: ')
+        quarters = input('Write the profit of each quarter (separated by a space): ')
+        i = companies(company_name, quarters)
+        quarter_list.extend(i.quarters.split())
+        companies_list.append(i)
+    avg_total_quarters = mean(map(int, quarter_list))
+    print(f'Average profit of each company: {avg_total_quarters}')
+    for v in range(len(companies_list)):
+        if sum(map(int, companies_list[v].quarters.split())) < avg_total_quarters:
+            less_than_avg_companies.append(companies_list[v].company_name)
+        else:
+            more_than_avg_companies.append(companies_list[v].company_name)
+    print(f'Companies with above-average profits: {more_than_avg_companies}\n'
+          f'Companies with below-average profits: {less_than_avg_companies}')
+
+
+companies_info()
