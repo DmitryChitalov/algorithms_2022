@@ -12,6 +12,7 @@
 10, 100, 1000
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 """
+from math import sqrt
 
 
 def simple(i):
@@ -36,3 +37,22 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+
+#============Функция алгоритма Решето Эратосфена============
+
+
+def sieve(num):
+    n = num * 10
+    a = [2, 3]
+    for i in range(4, n):
+        b = int(sqrt(i))
+        for j in range(2, b + 1):
+            if i % j == 0:
+                break
+            elif j == b:
+                a.append(i)
+    return a[num - 1]
+
+
+print(sieve(i))

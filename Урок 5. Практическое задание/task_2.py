@@ -24,3 +24,43 @@ reduce
 __mul__
 __add__
 """
+# 1) через collections
+from collections import defaultdict
+
+my_dict = defaultdict(list)
+
+my_dict[1] = list(input('Введите первое число: '))
+my_dict[2] = list(input('Введите второе число: '))
+
+multiplication = hex(int(''.join(my_dict[1]), 16) *
+                     int(''.join(my_dict[2]), 16)).removeprefix('0x')
+addition = hex(int(''.join(my_dict[1]), 16) +
+               int(''.join(my_dict[2]), 16)).removeprefix('0x')
+
+print(f'Сумма чисел: {addition}\n Произведение: {multiplication}')
+
+
+
+#  2) через ООП
+
+
+class MyDict:
+    def __init__(self, num_one, num_two):
+        self.num_one = num_one
+        self.num_two = num_two
+
+    def __add__(self, other):
+        return hex(int(''.join(self.num_one), 16) +
+                   int(''.join(other.num_two), 16)).removeprefix('0x')
+
+    def __mul__(self, other):
+        return hex(int(''.join(self.num_one), 16) *
+                   int(''.join(other.num_two), 16)).removeprefix('0x')
+
+
+a = list(input('Введите первое число: '))
+b = list(input('Введите второе число: '))
+addition = MyDict(a, b) + MyDict(a, b)
+multiplication = MyDict(a, b) * MyDict(a, b)
+print(f'Сумма чисел: {addition}\nПроизведение: {multiplication}')
+

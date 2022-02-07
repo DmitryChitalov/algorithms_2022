@@ -28,3 +28,24 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+from statistics import mean
+
+dict_company = defaultdict(int)
+number_organization = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for i in range(number_organization):
+    company_name = input('Введите название предприятия: ')
+    enterprise_profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+    dict_company[company_name] = mean([int(i) for i in enterprise_profit.split(' ')])
+
+average_profit = mean(dict_company.values())
+max_profit = [i for i in dict_company.keys() if dict_company[i] > average_profit]
+min_profit = [i for i in dict_company.keys() if dict_company[i] < average_profit]
+
+print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {max_profit}')
+print(f'Предприятия, с прибылью ниже среднего значения: {min_profit}')
+
+
+
