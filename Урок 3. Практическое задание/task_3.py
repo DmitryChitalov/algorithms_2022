@@ -22,3 +22,17 @@
 р
 а
 """
+
+from hashlib import sha256
+
+
+def count(str):
+    a = set()
+    for i in range(len(str)):
+        for j in range(i, len(str) + 1):
+            if i != j and str[i:j] != str:
+                a.add(sha256(str[i:j].encode()).hexdigest())
+    return f'{str} - {len(a)} уникальных подстрок'
+
+
+print(count('papa'))

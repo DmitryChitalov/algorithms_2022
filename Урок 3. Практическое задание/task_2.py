@@ -22,3 +22,38 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+
+from hashlib import sha256
+from sqlite3 import connect
+from uuid import uuid4
+
+
+def hashing(passwd_in, salt_in):
+    res_g = sha256(passwd_in.encode() + salt_in.encode()).hexdigest()
+    return res_g
+
+
+login = input('Введите логин: ')
+passwd = input('Введите пароль: ')
+salt = uuid4().hex
+res = hashing(passwd, salt)
+
+conn = connect('db.db')
+cursor = conn.cursor()
+cursor.execute('CREATE TABLE IF NOT EXISTS hash_db (login, hash, salt)')
+cursor.execute(f'INSERT INTO hash_db (login, hash, salt) VALUES ("{login}", "{res}", "{salt}")')
+conn.commit()
+print(f'В базе данных хранится строка: {res}')
+
+
+passwd = input('Введите пароль еще раз для проверки: ')
+salt = cursor.execute(f'SELECT salt FROM hash_db WHERE login = "{login}"').fetchall()[0][0]
+pass_check = cursor.execute(f'SELECT hash FROM hash_db WHERE login = "{login}"').fetchall()[0][0]
+res = hashing(passwd, salt)
+print(f'Повторно сгенерированный хеш: {res}')
+
+if res == pass_check:
+    print('Пароль верный!')
+else:
+    print('Пароль не верный')

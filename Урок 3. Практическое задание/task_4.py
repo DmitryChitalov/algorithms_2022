@@ -15,3 +15,38 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+
+from hashlib import sha256
+from uuid import uuid4
+
+
+class Hash:
+
+    def __init__(self):
+        self.data = dict()
+        self.salt = uuid4().hex
+
+    def generate(self, url):
+        return sha256(url.encode() + self.salt.encode()).hexdigest()
+
+    def write(self, url):
+        if self.check(url):
+            return f'{self.data[url]} - Хеш уже существует'
+        else:
+            return self.generate(url)
+
+    def check(self, url):
+        if url in self.data.keys():
+            return True
+        else:
+            return False
+
+
+
+task = Hash()
+
+print(task.write('https://gb.ru/education'))
+print(task.write('https://gb.ru/education'))
+print(task.write('https://yandex.ru/'))
+print(task.write('https://github.com/'))
