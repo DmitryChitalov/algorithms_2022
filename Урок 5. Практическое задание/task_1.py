@@ -32,7 +32,6 @@
 
 # Использовать named tuple
 
-from audioop import avg
 from collections import namedtuple
 
 
