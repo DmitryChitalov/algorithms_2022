@@ -36,7 +36,7 @@ organizations = namedtuple('Organizations', 'Name first_quarter second_quarter t
 
 organizations_stat = [
     organizations(input('Введите название предприятия: '), *input('Через пробел введите прибыль данного предприятия за '
-                                                                  'каждый квартал(Всего 4 квартала): ').split()) for i
+                                                                  'каждый квартал (Всего 4 квартала): ').split()) for i
     in range(count_of_organizations)]
 
 organizations_profit = {p[0]: sum(map(int, p[1:])) for p in organizations_stat}
