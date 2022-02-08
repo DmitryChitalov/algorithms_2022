@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+def number_of_unique_rows():
+    a = input('Введите строку, состоящуя только из строчных латинских букв: ')
+    b = set()
+    for i in range(1, len(a)):
+        for j in range(len(a) - i + 1):
+            res = hashlib.sha256(a[j:j + i].encode()).hexdigest()
+            b.add(res)
+    print(len(b))
+
+number_of_unique_rows()
+
+
+

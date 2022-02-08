@@ -23,3 +23,58 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+# декоратор для замеров времени
+def time_measurement(func):
+    def wrapper(arg1):
+        start_time = time.time()
+        c = func(arg1)
+        print(f'{func.__name__} : {(time.time() - start_time)} seconds')
+        return c
+    return wrapper
+
+# функция по наполнению списка
+@time_measurement
+def list_filling(num):              # O(n)
+    a = [i for i in range(num + 1)]
+    return a
+
+# функция по наполнению словаря
+@time_measurement
+def dictionary_filling(num):        # O(n)
+    d = {i: i for i in range(num + 1)}
+    return d
+
+list_filling(100000)
+dictionary_filling(100000)
+
+# Как видно из замеров по времени словарь медленнее по записи, чем список
+# сами функции реализовал одиноковыми по сложности в O-нотации O(n)
+#list_filling : 0.1352999210357666 seconds dictionary_filling : 0.3994269371032715 seconds
+
+# функция по удалению последнего элемента списка
+@time_measurement
+def list_removal(num):
+    a.pop(num)
+
+# функция по удалению последнего элемента словаря, немного не грамотно реализовал, просто для замера времени
+
+#d = dictionary_filling(1000000)
+
+@time_measurement
+def dictionary_removal(num):
+    del d[num]
+
+a = list_filling(100000)
+list_removal(-1)
+
+d = dictionary_filling(100000)
+dictionary_removal(99999)
+
+#list_removal : 7.152557373046875e-06 seconds
+#dictionary_removal : 1.7881393432617188e-05 seconds
+# как видно из замеров удаление последнего элемента намного быстрее у словаря
+
+

@@ -14,3 +14,30 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+class WebPageCaching():
+    def __init__(self):
+        self.web_caching = {}
+        self.salt = 'my_salt'
+
+    def add_check(self, a):
+        web = self.web_caching.setdefault(a)
+        if web == None:
+            url = a
+            url_caching = hashlib.sha256(self.salt.encode() + url.encode()).hexdigest()
+            self.web_caching[a] = url_caching
+            print('в кэше url-адреса не было, уже исправили.')
+        else:
+            print(f'хеш url-а: {web}, мы его даже посолили.')
+
+
+test = WebPageCaching()
+
+test.add_check('www.vk.ru')
+test.add_check('www.vk.ru')
+test.add_check('www.bk.ru')
+
+
+
