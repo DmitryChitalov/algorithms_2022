@@ -7,3 +7,75 @@
 
 И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях
 """
+
+from collections import OrderedDict
+from timeit import timeit
+
+n = 100
+ordinary_dictionary = {}
+ordered_dictionary = OrderedDict()
+
+
+def test_1_ordinary(num):
+    for i in range(n):
+        ordinary_dictionary[i] = i
+
+
+def test_1_ordered(num):
+    for i in range(n):
+        ordered_dictionary[i] = i
+
+
+print(f'Время выполнения функции test_1_ordinary = {timeit("test_1_ordinary(n)", globals=globals(), number=10000)}')
+print(f'Время выполнения функции test_1_ordered = {timeit("test_1_ordered(n)", globals=globals(), number=10000)}')
+
+
+"""
+Время выполнения функции test_1_ordinary = 0.03238809999311343
+Время выполнения функции test_1_ordered = 0.04038680001394823
+
+"""
+
+
+def test_2_ordinary(num):
+    for i in range(n):
+        ordinary_dictionary[i] = i ** 2
+
+
+def test_2_ordered(num):
+    for i in range(n):
+        ordered_dictionary[i] = i ** 2
+
+
+print(f'Время выполнения функции test_2_ordinary = {timeit("test_2_ordinary(n)", globals=globals(), number=10000)}')
+print(f'Время выполнения функции test_2_ordered = {timeit("test_2_ordered(n)", globals=globals(), number=10000)}')
+
+"""
+Время выполнения функции test_2_ordinary = 0.17998239997541532
+Время выполнения функции test_2_ordered = 0.19391940004425123
+"""
+
+
+def test_3_ordinary():
+    for i in range(len(ordinary_dictionary)):
+        ordinary_dictionary.pop(i)
+
+
+def test_3_ordered():
+    for i in range(len(ordered_dictionary)):
+        ordered_dictionary.pop(i)
+
+
+print(f'Время выполнения функции test_3_ordinary = {timeit("test_3_ordinary()", globals=globals(), number=10000)}')
+print(f'Время выполнения функции test_3_ordered = {timeit("test_3_ordered()", globals=globals(), number=10000)}')
+"""
+Время выполнения функции test_3_ordinary = 0.001601099967956543
+Время выполнения функции test_3_ordered = 0.0016095999744720757
+"""
+
+
+"""
+Выводы:
+нет смысла исп-ть OrderedDict в Python 3.6 и более поздних версиях
+я использую 3.10 и поэтому возможно тесты должны быть другие, но как-то так
+"""
