@@ -29,4 +29,39 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для второго скрипта
+Урок 4 задание 4
+Приведены два алгоритма. В них определяется число,
+которое встречается в массиве чаще всего.
+"""
+from memory_profiler import profile
+from random import randint
+
+# Исходный вариант
+@profile
+def func_2(array):
+    new_array = []
+    for el in array:
+        count2 = array.count(el)
+        new_array.append(count2)
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+# Оптимизированный вариант с ленивыми вычислениями
+@profile
+def func_3(array):
+    _max = max([(array.count(elem), elem) for elem in set(array)])
+    return f'Чаще всего встречается число {_max[1]}, ' \
+           f'оно появилось в массиве {_max[0]} раз(а)'
+
+
+my_list = [randint(1000000, 10000000000) for my_num in range(10000)]
+func_2(my_list)
+func_3(my_list)
+
+
+"""
+Решение с помощью ленивых вычислений оказалось эффективнее и по памяти и по производительности
 """

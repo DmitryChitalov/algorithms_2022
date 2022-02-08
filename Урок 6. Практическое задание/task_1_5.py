@@ -29,4 +29,25 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+Урок 3 задание 1
+"""
+import pickle
+from memory_profiler import profile
+
+
+@profile
+def fill_dict(n):
+    return {n: n for n in range(n)}
+
+
+@profile
+def fill_dict_serial(n):
+    return pickle.dumps({n: n for n in range(n)})
+
+
+fill_dict(100000)
+fill_dict_serial(100000)
+
+"""
+Сеарелизованные данные занимают меньше места в памяти
 """

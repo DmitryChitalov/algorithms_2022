@@ -29,4 +29,34 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+Урок 4 задание 1
+Приведен код, который позволяет сохранить в
+массиве индексы четных элементов другого массива
+"""
+from memory_profiler import profile
+from random import randint
+
+
+# Исходная функция возвращает массив
+@profile
+def func_2(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+# Оптимизированна функция возвращает генератор
+@profile
+def func_2_gen(nums):
+    return (i for i, x in enumerate(nums) if x % 2 == 0)
+
+
+my_nums = [randint(1, 10000) for my_num in range(100000)]
+func_2(my_nums)
+func_2_gen(my_nums)
+
+"""
+С использованием генератора память используемая функцией уменьшается
 """
