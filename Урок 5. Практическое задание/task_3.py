@@ -47,6 +47,7 @@ just_list = []
 just_deque = deque(just_list)
 
 
+# заполнение дека справа
 @time_it(100)
 def deque_append(number):
     for i in range(number):
@@ -54,6 +55,7 @@ def deque_append(number):
     return just_deque
 
 
+# заполнение дека справа
 @time_it(100)
 def deque_extend(number):
     for i in range(number):
@@ -61,6 +63,7 @@ def deque_extend(number):
     return just_deque
 
 
+# удаление элемента дека справа
 @time_it(100)
 def deque_pop(number):
     for i in range(number):
@@ -68,6 +71,7 @@ def deque_pop(number):
     return just_deque
 
 
+# заполнение списка справа
 @time_it(100)
 def list_append(number):
     for i in range(number):
@@ -75,6 +79,7 @@ def list_append(number):
     return just_list
 
 
+# заполнение списка справа
 @time_it(100)
 def list_extend(number):
     for i in range(number):
@@ -82,6 +87,7 @@ def list_extend(number):
     return just_list
 
 
+# удаление элемента списка справа
 @time_it(100)
 def list_pop(number):
     for i in range(number):
@@ -89,6 +95,7 @@ def list_pop(number):
     return just_list
 
 
+# заполнение дека слева
 @time_it(100)
 def deque_appendleft(number):
     for i in range(number):
@@ -96,6 +103,7 @@ def deque_appendleft(number):
     return just_deque
 
 
+# заполнение дека слева
 @time_it(100)
 def deque_extendleft(number):
     for i in range(number):
@@ -103,6 +111,7 @@ def deque_extendleft(number):
     return just_deque
 
 
+# удаление элемента дека слева
 @time_it(100)
 def deque_popleft(number):
     for i in range(number):
@@ -110,6 +119,7 @@ def deque_popleft(number):
     return just_deque
 
 
+# заполнение списка слева
 @time_it(100)
 def list_appendleft(number):
     for i in range(number):
@@ -117,6 +127,7 @@ def list_appendleft(number):
     return just_list
 
 
+# заполнение списка слева
 @time_it(100)
 def list_extendleft(number):
     for i in range(number):
@@ -124,6 +135,7 @@ def list_extendleft(number):
     return just_list
 
 
+# удаление элемента списка слева
 @time_it(100)
 def list_popleft(number):
     for i in range(number):
@@ -131,6 +143,7 @@ def list_popleft(number):
     return just_list
 
 
+# получение элемента дека
 @time_it(100)
 def deque_getting(number):
     for i in range(number):
@@ -138,6 +151,7 @@ def deque_getting(number):
     return just_deque
 
 
+# получение элемента списка
 @time_it(100)
 def list_getting(number):
     for i in range(number):
@@ -162,5 +176,5 @@ print(list_getting(1000), '\n')
 
 print('Вывод: список имеет очень небольшое преимущество по времени (и то не всегда, \n'
       'но в нескольких прогонах зачастую список был быстрее) перед деком в операциях вставки справа, \n'
-      'удаления справа и извлечения элемента, но когда дело доходит до вставки в начало или удаления \n'
+      'удаления справа и получения элемента, но когда дело доходит до вставки в начало или удаления \n'
       'в начале списка, то у дека просто невероятное преимущество по времени перед списком')
