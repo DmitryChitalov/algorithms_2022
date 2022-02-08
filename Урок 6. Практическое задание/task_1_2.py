@@ -30,3 +30,48 @@
 
 Это файл для второго скрипта
 """
+
+
+from memory_profiler import profile
+
+
+# @profile
+# def func_1(nums):
+#     new_arr = []
+#     [new_arr.append(i) for i, el in enumerate(nums) if el % 2 == 0]
+#     return new_arr[:10]
+#
+#
+# if __name__ == '__main__':
+#     print(func_1(nums=range(1, 1000000)))
+
+#  Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     38     19.4 MiB     19.4 MiB           1   @profile
+#     39                                         def func_1(nums):
+#     40     19.4 MiB      0.0 MiB           1       new_arr = []
+#     41     42.5 MiB -59961.1 MiB     1000002       [new_arr.append(i) for i, el in enumerate(nums) if el % 2 == 0]
+#     42     38.6 MiB     -3.9 MiB           1       return new_arr[:10]
+
+
+@profile
+def func_2(nums):
+    new_arr = filter(lambda i: nums[i] % 2 == 0, range(len(nums)))
+    return [next(new_arr) for _ in range(10)]
+
+
+if __name__ == '__main__':
+    print(func_2(nums=range(1, 1000000)))
+
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     57     19.4 MiB     19.4 MiB           1   @profile
+#     58                                         def func_2(nums):
+#     59     19.4 MiB      0.0 MiB          41       new_arr = filter(lambda i: nums[i] % 2 == 0, range(len(nums)))
+#     60     19.4 MiB      0.0 MiB          13       return [next(new_arr) for _ in range(10)]
+
+#  Задание 1 из урока 4 курса "Алгоритмы".
+#  Немного изменен вывод на первые 10 чисел.
+#  Применена функция filter для генерации массива и функция next для получения чисел из объекта генератора.
+#  Результат 38.6 MiB против 19.4 MiB с использованием filter.

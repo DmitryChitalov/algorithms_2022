@@ -30,3 +30,19 @@
 
 Это файл для пятого скрипта
 """
+
+
+from json import dumps
+from random import randint
+from pympler import asizeof
+
+
+scr = [randint(1, 100) for _ in range(1000)]
+result = [num for i, num in enumerate(scr) if i > 0 and scr[i] > scr[i - 1]]
+dumps_result = dumps(result)
+print(asizeof.asizeof(result))
+print(asizeof.asizeof(dumps_result))
+
+
+#  Основы. Урок 5, задание 5.
+#  Результат с использованием сериализации: 7096 против 2040 в пользу сериализации.
