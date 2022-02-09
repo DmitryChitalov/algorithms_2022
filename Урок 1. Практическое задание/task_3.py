@@ -36,7 +36,7 @@ def best_of_three_1(data):
 def best_of_three_2(data):
     """
     Поиск трех самых прибыльных компаний из словаря
-    сложность О(n^2)
+    сложность О(n)
     """
     best = []                                       # O(1)
     c_data = data.copy()                            # O(n)

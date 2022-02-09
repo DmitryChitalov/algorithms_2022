@@ -83,3 +83,4 @@ if __name__ == '__main__':
     print(board.main.show_task())
     print(board.mod.show_task())
     print(board.decided.show_task())
+    # Доработок не требуется

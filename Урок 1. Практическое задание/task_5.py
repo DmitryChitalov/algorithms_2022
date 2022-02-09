@@ -85,3 +85,4 @@ if __name__ == '__main__':
     print(stack_of_plates.get_val())
     print(stack_of_plates.is_empty())
     print(stack_of_plates.plates_size())
+    # Доработок не требуется

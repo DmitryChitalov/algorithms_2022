@@ -51,9 +51,9 @@ def check_user_1(data):
 def check_user_2(data):
     """
     Проверка пользователей
-    сложность O(n^2)
+    сложность O(n)
     """
-    while True:  # O(n)
+    while True:  # O(1)
         login = input('Login: ')  # O(1)
         if login in data.keys():  # O(n)
             passwd = input('Password: ')
