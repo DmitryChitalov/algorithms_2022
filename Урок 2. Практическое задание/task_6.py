@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+from random import randint
+
+
+def game(n=10, target=randint(0, 100)):
+    print(f'Загаданное число от 0 до 100. Доступно {n} попыток')
+    choise = int(input('Введите целое число: '))
+    if choise == target:
+        return print(f'Поздравляю, ты отгадал! Загаданное число - {target}')
+    elif choise > target:
+        print('Загаданное число МЕНЬШЕ\n')
+        return game(n-1, target)
+    elif choise < target:
+        print('Загаданное число БОЛЬШЕ\n')
+        return game(n-1, target)
+    else:
+        return print(f'Загаданное число было {target}')
+
+
+game()

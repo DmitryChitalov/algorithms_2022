@@ -13,3 +13,11 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def theorem(number):
+    return number if number == 1 else number + theorem(number - 1)
+
+
+n = 5
+print(theorem(n) == (n*(n+1)/2))

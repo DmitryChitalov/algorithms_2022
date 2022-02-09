@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def evunev_counter(digit, even=0, uneven=0):
+    if digit < 10:
+        if digit % 2 == 0:
+            return even + 1, uneven
+        else:
+            return even, uneven + 1
+    if digit % 2 == 0:
+        return evunev_counter(digit // 10, (even+1), uneven)
+    else:
+        return evunev_counter(digit // 10, even, (uneven+1))
+
+
+print('Количество четных и нечетных цифр в числе равно: ',
+      evunev_counter(int(input('Введите число: '))))
