@@ -15,3 +15,39 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from timeit import timeit
+from random import randint
+from statistics import median
+
+
+def find_median(lst):
+    return median(lst)
+
+
+my_list = [randint(-100, 100) for _ in range(2 * 5 + 1)]
+print(timeit('find_median(my_list)', globals=globals(), number=1000))
+
+my_list2 = [randint(-100, 100) for _ in range(2 * 50 + 1)]
+print(timeit('find_median(my_list2)', globals=globals(), number=1000))
+
+my_list3 = [randint(-100, 100) for _ in range(2 * 500 + 1)]
+print(timeit('find_median(my_list3)', globals=globals(), number=1000))
+# task_2_3
+'''
+0.0015107999999999233
+0.009521299999999844
+0.11487730000000007
+'''
+# task_2_1
+'''
+0.0042977000000000015
+0.0386933
+0.5550214
+'''
+# task_2_2
+'''
+0.0009389000000000064
+0.0011957000000000079
+0.03301849999999999
+'''
+# Эффективнее всего поиск медианы из task_2_2
