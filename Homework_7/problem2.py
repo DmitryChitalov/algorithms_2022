@@ -27,7 +27,6 @@ def off(arr):                                                   # работае
 def imp(arr):                                                   # третий вариант
     return median(arr)
 
-
 print(n)
 print(nom(n))
 print(off(n))
