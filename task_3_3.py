@@ -28,7 +28,7 @@ print(timeit("get_el_from_lst(lst_test)", globals=globals()))
 print(timeit("get_el_from_deq(deq_test)", globals=globals()))
 
 """
-1.5871612
-1.4988796
-Элементы из дека можно получить быстрее
+1.0776244000000001
+1.1385243
+Элементы из списка можно получить быстрее
 """
