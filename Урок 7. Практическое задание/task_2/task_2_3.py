@@ -16,7 +16,6 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
-
 from random import randint
 from timeit import timeit
 from statistics import median
