@@ -31,33 +31,32 @@
 Это файл для пятого скрипта
 """
 from collections import namedtuple
-from recordclass import recordclass
 from memory_profiler import profile
 
 
 @profile
 def profits_1():
-    companies = []
+    companies = {}
     total_profit = 0
-    company = namedtuple('company', ['name', 'q1', 'q2', 'q3', 'q4', 'year'])
-    num = int(input('Введите количество предприятий для расчета прибыли: '))
+    num = 1000
     for i in range(num):
-        name = input('Введите название предприятия: ')
-        income = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала)').split(' ')
-        year = int(income[0]) + int(income[1]) + int(income[2]) + int(income[3])
-        total_profit += year
-        companies.append(company(name=name, q1=income[0], q2=income[1], q3=income[2], q4=income[3], year=year))
+        name = f'Предприятие_{i}'
+        income = f'{10 * i}  {10 * i} {10 * i} {10 * i}'.split()
+        year = [int(income[0]), int(income[1]), int(income[2]), int(income[3])]
+        year_total = int(income[0]) + int(income[1]) + int(income[2]) + int(income[3])
+        total_profit += year_total
+        companies[name] = year
 
     avg_profit = total_profit/num
     print(f'Средняя годовая прибыль всех предприятий: {avg_profit}')
 
     above_avg = []
     below_avg = []
-    for company in companies:
-        if company.year > avg_profit:
-            above_avg.append(company.name)
+    for company, year in companies.items():
+        if sum(year) > avg_profit:
+            above_avg.append(company)
         else:
-            below_avg.append(company.name)
+            below_avg.append(company)
     print('Предприятия, с прибылью выше среднего значения: ', ','.join(above_avg))
     print('Предприятия, с прибылью ниже среднего значения: ', ','.join(below_avg))
 
@@ -65,12 +64,12 @@ def profits_1():
 @profile
 def profits_2():
     companies = []
+    num = 10000
     total_profit = 0
-    company = recordclass('company', ('name', 'q1', 'q2', 'q3', 'q4', 'year'))
-    num = int(input('Введите количество предприятий для расчета прибыли: '))
+    company = namedtuple('company', ('name', 'q1', 'q2', 'q3', 'q4', 'year'))
     for i in range(num):
-        name = input('Введите название предприятия: ')
-        income = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала)').split(' ')
+        name = f'Предприятие_{i}'
+        income = f'{10 * i}  {10 * i} {10 * i} {10 * i}'.split()
         year = int(income[0]) + int(income[1]) + int(income[2]) + int(income[3])
         total_profit += year
         companies.append(company(name=name, q1=income[0], q2=income[1], q3=income[2], q4=income[3], year=year))
@@ -92,4 +91,4 @@ def profits_2():
 profits_1()
 profits_2()
 
-# Во втором случае заменил NamedTuple на recordclass
+# Во втором случае заменил dict на NamedTuple

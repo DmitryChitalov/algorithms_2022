@@ -33,7 +33,7 @@
 # Факториал
 from memory_profiler import profile
 
-number = 15
+number = 10000
 
 
 @profile

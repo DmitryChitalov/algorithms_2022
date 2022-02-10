@@ -36,33 +36,40 @@ from collections import namedtuple
 
 @profile
 def top3_1():
-    data = {'Gazprom': 20000, 'Sberbank': 15000, 'Yandex': 12000, 'Lukoil': 17500, 'MVideo': 7000, 'FIVE': 12000}
-    dict_to_sort = data.copy()
+    data = {}
+    for i in range(5000):
+        name = f'Предприятие_{i}'
+        income = i * 100
+        data[name] = income
     new_dict = {}
     for i in range(3):
-        lst = [(k, v) for k, v in dict_to_sort.items()]
+        lst = [(k, v) for k, v in data.items()]
         maxi = lst[0]
         for j in range(len(lst)-1):
             if maxi[1] < lst[j+1][1]:
                 maxi = lst[j+1]
         new_dict[maxi[0]] = maxi[1]
-        del dict_to_sort[maxi[0]]
+        del data[maxi[0]]
     return new_dict
 
 
 @profile
 def top3_2():
-    company = namedtuple('company',('x y'))
-    companies = (company(x='Gazprom', y=20000), company(x='Sberbank', y=15000),company(x='Yandex', y=12000), company(x='Lukoil', y=17500), company(x='MVideo', y=7000), company(x='FIVE', y=12000))
+    companies = []
+    company = namedtuple('company','name income')
+    for i in range(5000):
+        name = f'Предприятие_{i}'
+        income = i * 100
+        companies.append(company(name=name, income=income))
     new_dict = {}
-    for _ in range(3):
-        lst = [(k, v) for k, v in companies.items()]
+    for i in range(3):
+        lst = [(name, int(income)) for name, income in companies]
         maxi = lst[0]
-        for j in range(len(lst) - 1):
-            if maxi[1] < lst[j + 1][1]:
-                maxi = lst[j + 1]
-        new_dict[maxi[0]] = maxi[1]
-        del lst[maxi[0]]
+        for j in range(len(lst)):
+            if maxi > lst[j - 1]:
+                maxi = lst[j - 1]
+        new_dict[i] = maxi
+        del maxi
     del lst
     return new_dict
 
