@@ -17,3 +17,32 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+dictionary_1 = {"alpha": 15000, "beta": 1234, "delta": 123642, "gamma": 21, "thetta": 56}
+
+# # первое решение O(n^2)
+i = 0  # O(1)
+list_company = []  # O(1)
+while i < 3:  # O(n)
+    b = 0  # O(1)
+    a = str  # O(1)
+    for key, values in dictionary_1.items():  # O(n)
+        if values > b:  # O(1)
+            b = values  # O(1)
+            a = key  # O(1)
+    dictionary_1.pop(a)  # O(1)
+    list_company.append(a)  # O(1)
+    i += 1  # O(1)
+
+print(list_company)
+
+# второе решение
+list_d = list(dictionary_1.items())  # O(1)
+print(list_d)  # O(1)
+list_d.sort(key=lambda k: k[1])  # n log(n)
+list_d.reverse()  # O(1)?
+a = 0  # O(1)
+for i in list_d:  # O(n)
+    print(i[0], ':', i[1])  # O(1)
+    a += 1  # O(1)
+    if a == 3:  # O(1)
+        break
