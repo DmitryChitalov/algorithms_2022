@@ -15,3 +15,31 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+def get_min1(li):
+    '''O(n^2) квадратичная сложность'''
+    res_min = li[0]                # O(1)
+    for i in li:                # O(n)
+        for j in li:            # O(n)
+            if i < j:            # O(1)
+                if i < res_min: # O(1)
+                    res_min = i # O(1)
+            else:
+                if j < res_min: # O(1)
+                    res_min = j    # O(1)
+    return res_min
+
+
+print(get_min1([2, 4, 5, 2, 1, 15]))
+
+
+
+def get_min2(li):
+    '''Линейная сложность O(n) 
+    Перебираем весь список и находим наименьшее'''
+    res_min = li[0]            # O(1)
+    for i in li[1:]:        # O(n)
+        if res_min > i:        # O(1)
+            res_min = i     # O(1)
+    return res_min            # O(1)
+
+print(get_min2([2, 4, 5, 2, 1, 15]))
