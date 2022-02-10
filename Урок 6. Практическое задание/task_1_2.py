@@ -54,14 +54,16 @@ from memory_profiler import profile
 #     42     38.6 MiB     -3.9 MiB           1       return new_arr[:10]
 
 
-@profile
+#@profile
 def func_2(nums):
     new_arr = filter(lambda i: nums[i] % 2 == 0, range(len(nums)))
-    return [next(new_arr) for _ in range(10)]
+    print(type(new_arr))
+    return (next(new_arr) for _ in range(10))
 
 
 if __name__ == '__main__':
-    print(func_2(nums=range(1, 1000000)))
+    print(type(func_2(nums=range(1, 1000000))))
+    [print(el) for el in dir(filter) if el == '__next__']
 
 
 # Line #    Mem usage    Increment  Occurrences   Line Contents
@@ -73,5 +75,11 @@ if __name__ == '__main__':
 
 #  Задание 1 из урока 4 курса "Алгоритмы".
 #  Немного изменен вывод на первые 10 чисел.
-#  Применена функция filter для генерации массива и функция next для получения чисел из объекта генератора.
+#  Применена функция filter для генерации массива и функция next для получения чисел из массива.
 #  Результат 38.6 MiB против 19.4 MiB с использованием filter.
+
+#  Интересный момент в описании функции https://docs.python.org/3/library/functions.html#filter
+#  Note that filter(function, iterable) is equivalent to the generator expression
+#  (item for item in iterable if function(item)) if function is not None and
+#  (item for item in iterable if item) if function is None.
+#  Поддерживает метод __next__, но при этом объект <class 'filter'>, а не <class 'generator'>.
