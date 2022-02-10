@@ -50,10 +50,13 @@ def memoize(f):
     def decorate(*args):
 
         if args in cache:
+            print(f'args = {args}')
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(f'args = {args}, cache = {cache}')
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +83,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# Добавил print для каждого шага
+
+# Данные на каждом шаге добавляются в кэш, но не используются. Мемоизация тут не имеет смысла,
+# она не у коряет рекурсию. Рекурсия выполняется только один раз, остальные данные берутся из кэша.
