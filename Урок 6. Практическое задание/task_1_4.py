@@ -30,3 +30,30 @@
 
 Это файл для четвертого скрипта
 """
+import sys
+
+from memory_profiler import profile
+from functools import reduce
+
+
+@profile
+def recursive(n):
+    def nat_summ(n):
+        if n == 0:
+            return 0
+        return n + nat_summ(n - 1)
+    return nat_summ(n)
+
+@profile
+def reduce(n):
+    return sum(range(n + 1))
+
+n = 1001
+print(f'По формуле: {n * (n + 1) / 2} \n' \
+        f'Рекурсивная функция: {recursive(n)} \n' \
+        f'Циклом: {reduce(n)}')
+
+"""
+Рекурсия заменена на встроенную функцию sum
+
+"""

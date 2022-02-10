@@ -30,3 +30,29 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import profile
+
+
+@profile
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@profile
+def func_2(nums):
+    return (num for num in nums if num % 2 == 0)
+
+
+func_1(range(100000))
+
+func_2(range(100000))
+
+
+"""
+Вместо создания нового списка и перебора исходного можно просто создать генератор.
+
+"""

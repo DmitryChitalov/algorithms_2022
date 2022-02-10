@@ -30,3 +30,43 @@
 
 Это файл для третьего скрипта
 """
+from random import randint
+from memory_profiler import profile
+from numpy import array
+
+@profile
+def func_1(nums):
+    return [num for num in range(0, len(nums), 2)]
+
+@profile
+def func_2(nums):
+    return (num for num in range(0, len(nums), 2))
+
+
+nums = range(1_000_000)
+func_1(nums)
+func_2(nums)
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+     5     30.8 MiB     30.8 MiB           1   @profile
+     6                                         def func_1(nums):
+     7     49.8 MiB -37868.0 MiB      500003       return [num for num in range(0, len(nums), 2)]
+
+
+Filename: d:\Programming\GB\algorithms_6\3.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+     9     32.0 MiB     32.0 MiB           1   @profile
+    10                                         def func_2(nums):
+    11     32.0 MiB      0.0 MiB           1       return (num for num in range(0, len(nums), 2))
+
+
+Функция func_2 оптимизирована по сравнению с func_1 по использованию памяти.
+Что сделано: вместо lc используется генератор, который не считает весь массив, а только по требованию.
+
+"""
+
+
