@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +40,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return max(a for a in array if array.count(a) == max(map(array.count, array)))
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+
+print(timeit('func_1()', globals=globals(), number=1000))
+print(timeit('func_2()', globals=globals(), number=1000))
+print(timeit('func_3()', globals=globals(), number=1000))
+
+# 0.0009030000001075678
+# 0.0011655999987851828
+# 0.004825199997867458
+
+# Первая функция самая быстрая
