@@ -28,3 +28,27 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict, namedtuple
+from random import randint
+
+# генератор для заполнения - списка, но не 'GE' из-за необходимости повторного использования
+gen = [(f'cmp_{i}', randint(100, 1000), randint(50, 500), randint(100, 5000), randint(10, 1000)) for i in range(1, 11)]
+
+print('Решение с использованием defaultdict')
+# Заполняем defaultdict со структурой: {'cmp_1': {1: 161, 2: 159, 3: 3602, 4: 723},}
+profs = defaultdict(lambda: defaultdict(int), {i[0]: {1: i[1], 2: i[2], 3: i[3], 4: i[4]} for i in gen})
+print(profs)
+average = sum([sum(profs[x].values()) for x in profs]) / len(profs)
+print(f'Средняя годовая прибыль предприятий: {average}')
+print(f'Предприятия, с прибылью выше среднего значения: {[i for i in profs if sum(profs[i].values()) > average]}')
+print(f'Предприятия, с прибылью ниже среднего значения: {[i for i in profs if sum(profs[i].values()) < average]}')
+
+print('\nРешение с использованием namedtuple')
+Profit = namedtuple('Profit', 'name quart1 quart2 quart3 quart4')
+profits = [Profit(*i) for i in gen]
+print(profits)
+average = sum([sum(x[1:]) for x in profits]) / len(profits)
+print(f'Средняя годовая прибыль предприятий: {average}')
+print(f'Предприятия, с прибылью выше среднего значения: {[x.name for x in profits if sum(x[1:]) > average]}')
+print(f'Предприятия, с прибылью ниже среднего значения: {[x.name for x in profits if sum(x[1:]) < average]}')
+
