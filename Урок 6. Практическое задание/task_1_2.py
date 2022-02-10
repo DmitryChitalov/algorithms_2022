@@ -30,3 +30,33 @@
 
 Это файл для второго скрипта
 """
+
+import numpy as np
+
+from memory_profiler import profile
+from random import randint
+
+
+def get_min(lst):
+
+    min_value = lst[0]
+    for n in lst:
+        if n < min_value:
+            min_value = n
+    return min_value
+
+
+@profile
+def min1():
+    lst = np.random.randint(2, size=100000)
+    print(get_min(lst))
+
+
+@profile
+def min2():
+    lst = [randint(0, 100) for _ in range(100000)]
+    print(get_min(lst))
+
+
+min1()
+min2()
