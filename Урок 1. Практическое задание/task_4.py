@@ -51,12 +51,12 @@ def ask_activate():
     else:
         return False                                                            #O(1)
 
-# T(n) =  O(1)
+# Вриант решения 1: T(n) =  O(1)
 def solution_1(user_name):
     result = users_base.get(user_name)      #O(1)
     return result                           #O(1)
 
-# T(n) =  O(n)
+# Вариант решения 2: T(n) =  O(n)
 def solution_2(user_name):
     for key, value in users_base.items():    # O(n)
         if key == user_name:                 # O(1)
