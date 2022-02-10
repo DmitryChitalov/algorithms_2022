@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def get_num(prompt):
+    try:
+        result = float(input(prompt))
+    except ValueError:
+        print('Неверное число, повторите ввод')
+        return get_num(prompt)
+    return result
+
+
+def calc_recursive():
+    operations = ['+', '-', '*', '/', '0']
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        return
+    if operation not in operations:
+        print('Неверная операция')
+        return calc_recursive()
+    x = get_num('Введите первое число: ')
+    y = get_num('Введите второе число: ')
+    if operation == '+':
+        print(x+y)
+    elif operation == '-':
+        print(x-y)
+    elif operation == '*':
+        print(x*y)
+    elif operation == '/':
+        if y == 0:
+            print('Деление на 0')
+        else:
+            print(x/y)
+    return calc_recursive()
+
+
+if __name__ == '__main__':
+    calc_recursive()

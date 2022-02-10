@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii_table(code):
+    if code == 127:
+        print('127 - DEL')
+        return
+    __end = '\n' if (code - 1) % 10 == 0 else ''
+    print(f'{code} - {chr(code)} ', end=__end)
+    return print_ascii_table(code + 1)
+
+
+if __name__ == '__main__':
+    print_ascii_table(32)

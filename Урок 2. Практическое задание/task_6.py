@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def guess_the_number(x, counter=1):
+    # print(x)
+    num = int(input('Введи число: '))
+    if num > x:
+        print('Число должно быть меньше')
+    elif num < x:
+        print('Число должно быть больше')
+    else:
+        print(f'Вы угадали загаданное число за {counter} попыток')
+        return
+    counter += 1
+    if counter > 10:
+        print('Попытки закончились')
+        return
+    guess_the_number(x, counter)
+
+
+guess_the_number(random.randint(1, 100))
