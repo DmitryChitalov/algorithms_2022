@@ -7,3 +7,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def guess_the_num(num, tr=1):
+    if tr > 10:
+        print('Неудача!')
+        return
+    try:
+        x = int(input(f'{tr}я Попытка. Попробуйте угадать число'))
+        if x == num:
+            print('Победа!')
+            return
+        print('Загаданное число', 'меньше' if x > num else 'больше')
+        guess_the_num(num, tr + 1)
+
+    except ValueError:
+        print('Это не число... Но как попытку засчитаем')
+        guess_the_num(num, tr + 1)
+
+
+guess_the_num(randint(1, 100))

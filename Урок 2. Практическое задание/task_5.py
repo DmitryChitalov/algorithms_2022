@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def code_symbol(n=32):
+    if n > 127:
+        return
+    print(n, ' - ', chr(n), end=' ' if (n + 9) % 10 != 0 else '\n')
+    code_symbol(n + 1)
+
+
+code_symbol()

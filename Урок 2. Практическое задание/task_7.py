@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def get_sum(n):
+    if n == 1:
+        return 1
+    return n + get_sum(n - 1)
+
+
+x = 5
+
+if get_sum(x) == x * (x + 1) / 2:
+    print('true')
+else:
+    print('false')
