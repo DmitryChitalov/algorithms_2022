@@ -24,3 +24,22 @@ reduce
 __mul__
 __add__
 """
+
+from collections import defaultdict
+
+lst = defaultdict()
+
+first_num = input('Введите первое число: ')
+second_num = input('Введите второе число: ')
+
+num_1 = list(first_num)
+num_2 = list(second_num)
+
+lst['Первое число'] = num_1
+lst['Второе число'] = num_2
+result_sum = (hex(int(first_num, 16) + int(second_num, 16))[2:]).upper()
+result_mult = (hex(int(first_num, 16) * int(second_num, 16))[2:]).upper()
+lst['Сумма чисел'] = list(result_sum)
+lst['Произведение'] = list(result_mult)
+
+print(lst)
