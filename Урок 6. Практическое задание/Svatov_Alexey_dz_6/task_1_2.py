@@ -30,3 +30,69 @@
 
 Это файл для второго скрипта
 """
+
+# basics_Урок 3. task_5
+
+from random import shuffle
+from memory_profiler import profile
+from numpy import array
+
+
+@profile
+def get_jokes(n=10000):
+    """Create n-jokes from 3 lists and return list of jokes"""
+    list_jokes = []
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"] * n
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"] * n
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"] * n
+    shuffle(nouns)
+    shuffle(adverbs)
+    shuffle(adjectives)
+    for noun, adverb, adjective in zip(nouns[:n], adverbs[:n], adjectives[:n]):
+        list_jokes.append(' '.join([noun, adverb, adjective]))
+    return list_jokes
+
+
+@profile
+def get_jokes_v2(n=10000):
+    """Create n-jokes from 3 lists and return list of jokes"""
+    list_jokes = []
+    nouns = array(["автомобиль", "лес", "огонь", "город", "дом"] * n)
+    adverbs = array(["сегодня", "вчера", "завтра", "позавчера", "ночью"] * n)
+    adjectives = array(["веселый", "яркий", "зеленый", "утопичный", "мягкий"] * n)
+    shuffle(nouns)
+    shuffle(adverbs)
+    shuffle(adjectives)
+    for noun, adverb, adjective in zip(nouns[:n], adverbs[:n], adjectives[:n]):
+        list_jokes.append(' '.join([noun, adverb, adjective]))
+    return array(list_jokes)
+
+
+@profile
+def get_jokes_v3(n=10000):
+    """Create n-jokes from 3 lists and return list of jokes"""
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"] * n
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"] * n
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"] * n
+    shuffle(nouns)
+    shuffle(adverbs)
+    shuffle(adjectives)
+    return [f'{noun} {adverb} {adjective}' for noun, adverb, adjective in zip(nouns[:n], adverbs[:n], adjectives[:n])]
+
+
+get_jokes()
+get_jokes_v2()
+get_jokes_v3()
+
+"""
+Исходное решение модифицировано для большего удобства работы и наглядности: убран print результата функции, 
+                                                                            n не вводится отдельно и равен 10000,
+                                                                            размеры списов умножаются на n.
+                                                                            
+В v2 применён array из numpy, но такой подход требует большего объёма памяти, чем первоначальное решение.
+В v3 применена f-строка и lc.
+В итоге разница между результатом выполнения функции и стартом:
+    v1: 35.9 - 33.3 = 2.6
+    v2: 41.3 - 34.9 = 6.4
+    v3: 36.0 - 34.9 = 1.1
+"""

@@ -31,7 +31,7 @@
 Это файл для первого скрипта
 """
 
-# Урок 4. task_1.
+# algorithms_Урок 4. task_1.
 
 from memory_profiler import profile
 
