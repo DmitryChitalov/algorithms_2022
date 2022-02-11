@@ -30,3 +30,36 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import profile
+from random import randint
+from numpy import array
+from timeit import timeit
+
+@profile
+def func_1():
+    numbers = [randint(-100, 100) for number in range(50)]
+    res = [number for number in numbers if number % 3 == 0 and number > 0 and number % 4 != 0]
+    del numbers
+    return res
+print(f'Время работы первой функции: ', timeit('func_1()', globals=globals(), number=1))
+
+
+
+
+@profile
+def func_numpy():
+    numbers = [randint(-100, 100) for number in range(50)]
+    res = array([number for number in numbers if number % 3 == 0 and number > 0 and number % 4 != 0])
+    del numbers
+    return res
+print(f'Время работы второй функции: ', timeit('func_numpy()', globals=globals(), number=1))
+
+func_1()
+func_numpy()
+
+
+"""
+numpy значительно ускоряет работу функции
+Время работы первой функции:  0.3358205999999999
+Время работы второй функции:  0.0291446999999998
+"""

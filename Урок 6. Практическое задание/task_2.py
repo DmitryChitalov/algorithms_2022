@@ -9,3 +9,22 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+@profile
+def factorial(n):
+    if n == 1:
+        return n
+    factorial(n - 1)
+factorial(10)
+
+@profile
+def solution_func(n):
+    return factorial(n)
+solution_func(10)
+
+"""
+При рекурсии профилировщик делает замеры при каждом вызове рекурсии,
+если обернуть эту функцию и сделать ее замер,то профилировщик памяти сделает замер одтн раз
+"""
