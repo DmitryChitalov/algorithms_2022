@@ -9,3 +9,32 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
+
+import memory_profiler
+from memory_profiler import profile
+
+
+@profile
+def rev_digit(num, res=''):
+    if num == 0:
+        return print(res)
+    else:
+        print(num % 10, end='')
+        rev_digit(num // 10)
+
+
+rev_digit(120300040)
+
+# Проблема заключается в том, что профилировщик вызывается столько же раз, сколько выполняется рекурсия.
+# В конкретном примере, с числом 120300040 замерщик вызывается 9 раз, по количеству цифр.
+# Чтобы сократить количество расчетов, можно использовать декоратор и обернуть функцию, что позволит замерить
+# ее результат в целом, а не пошаговое исполнение
+
+
+@memory_profiler.profile
+def wrapper(recursive_func, arg):
+    result = recursive_func(arg)
+    return result
+
+
+print(wrapper(rev_digit, 120300040))
