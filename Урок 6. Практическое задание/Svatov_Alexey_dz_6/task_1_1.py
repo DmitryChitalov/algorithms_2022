@@ -30,3 +30,44 @@
 
 Это файл для первого скрипта
 """
+
+# Урок 4. task_1.
+
+from memory_profiler import profile
+
+
+@profile
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@profile
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+@profile
+def func_2_v2(nums):
+    return (i for i in range(len(nums)) if nums[i] % 2 == 0)
+
+
+@profile
+def func_2_v3(nums):
+    return filter(lambda num: num % 2 == 0, nums)
+
+
+nums_old = [i for i in range(1000000)]
+
+func_1(nums_old)
+func_2(nums_old)
+func_2_v2(nums_old)
+func_2_v3(nums_old)
+
+"""
+В func_2_v2 вместо lc использован генератор, который оптимальнее, чем lc.
+В func_2_v3 использована функция filter, которая также показывает лучший результат (по памяти), чем иные варианты.
+"""
