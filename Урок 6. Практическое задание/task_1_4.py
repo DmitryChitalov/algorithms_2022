@@ -30,3 +30,35 @@
 
 Это файл для четвертого скрипта
 """
+from timeit import timeit
+
+from memory_profiler import profile
+from numpy import array
+
+numbers_list = [4, 5, 8, 45, 9, 34, 65, 8, 12, 3, 4, 6, 78, 12312, 544, 8, 4, 5, 4, 5, 45, 4, 845, 9, 889, 1, 5, 35, 4]
+
+
+@profile
+def original_func():
+    result = []
+    for number in numbers_list:
+        if numbers_list.count(number) == 1:
+            result.append(number)
+    return result
+
+
+print(f'Время работы исходного варианта = ',
+      timeit('original_func()', globals=globals(), number=1))
+
+
+@profile
+def array_numpy_func():
+    return array(number for number in numbers_list if numbers_list.count(number) == 1)
+
+
+print(f'Время работы оптимизированного оптимизированного варианта скрипта = ',
+      timeit('array_numpy_func()', globals=globals(), number=1))
+
+# numpy в разы ускоряет работу кода:
+# original_func() - 0.09053338699999991
+# array_numpy_func() - 0.0004316189999999942

@@ -30,3 +30,54 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+from timeit import timeit
+
+
+# исходный вариант
+num_gen = [x for x in range(100)]
+
+
+@profile
+def first_iteration(n):
+    if len(n) == 0:
+        return None
+    result = n[0]
+    for i in range(len(n)):
+        if n[i] < result:
+            result = n[i]
+    return result
+
+
+print(f'Время работы исходного варианта = ',
+      timeit('first_iteration(num_gen)', globals=globals(), number=1))
+
+# Оптимизация
+del num_gen
+num_gen_2 = (x for x in range(100))
+
+
+@profile
+def second_iteration(n):
+    res = next(n)
+    for i in n:
+        if i < res:
+            res = i
+    return res
+
+
+print(f'Время работы оптимизированного оптимизированного варианта скрипта = ',
+      timeit('second_iteration(num_gen_2)', globals=globals(), number=1))
+
+"""
+Итог:
+    Вместо списка создал генератор.
+            1) Время работы значительно уменьшилось:
+                Время работы исходного скрипта =  171.9503764
+                Время работы оптимизированного скрипта =  5.681598
+            2) Экономия памяти 57.7 MiB в исходном варианте
+                против 19.2 MiB
+    Если массив будет большой и будет необходимость часто обращаться к массиву и брать
+    из него элементы по индексам, то можно использовать array из NumPy.
+"""
