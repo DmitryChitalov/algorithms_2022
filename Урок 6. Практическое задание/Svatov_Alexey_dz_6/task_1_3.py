@@ -30,3 +30,29 @@
 
 Это файл для третьего скрипта
 """
+
+# basics_Урок 5. task_4
+
+from random import randint
+from memory_profiler import profile
+
+
+@profile
+def more_than_left(lst):
+    result = [num for i, num in enumerate(lst) if lst[i - 1] < num and i > 0]
+    return result
+
+
+@profile
+def more_than_left_v2(lst):
+    return (num for i, num in enumerate(lst) if lst[i - 1] < num and i > 0)
+
+
+nums_list = [randint(0, 101) for i in range(100000)]
+
+more_than_left(nums_list)
+more_than_left_v2(nums_list)
+
+"""
+Вместо lc использован генератор.
+"""
