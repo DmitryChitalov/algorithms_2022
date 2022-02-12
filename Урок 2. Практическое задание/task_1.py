@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def arithmetic_operations():
+
+
+    def division(x, y):
+        try:
+            result = x / y
+        except ZeroDivisionError:
+            pass
+        else:
+            return result
+
+
+    operator = input()
+    first_argument = int(input())
+    second_argument = int(input())
+    dict_in_func = {'+': first_argument + second_argument, '-': first_argument - second_argument,
+                    '*': first_argument * second_argument, '/': division(first_argument, second_argument)}
+    if operator == '0':
+        return 'Выход'
+    elif operator == '/' and second_argument == 0:
+        print("Деление на 0 невозможно")
+        arithmetic_operations()
+    elif operator in list(dict_in_func.keys()) and second_argument != 0:
+        print(dict_in_func.get(operator))
+        arithmetic_operations()
+    elif operator in ['-', '+', '*'] and second_argument == 0:
+        print(dict_in_func.get(operator))
+        arithmetic_operations()
+    else:
+        print("Введены неверные символы. Введите , на выбор: 0,-,+,*,/")
+        arithmetic_operations()
+
+
+arithmetic_operations()
+

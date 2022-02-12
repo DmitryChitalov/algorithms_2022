@@ -19,3 +19,24 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_code_and_character_output_program(number_of_current_character, current_number_items_in_row):
+    if number_of_current_character < 128:
+        if current_number_items_in_row < 10:
+            print(f' {number_of_current_character} это {chr(number_of_current_character)}', end='    ')
+            return ascii_code_and_character_output_program(number_of_current_character + 1,
+                                                           current_number_items_in_row + 1)
+        elif current_number_items_in_row == 10:
+            print(f' {number_of_current_character} это {chr(number_of_current_character)}', '\n')
+            return ascii_code_and_character_output_program(number_of_current_character + 1,
+                                                           1)
+        else:
+            pass
+
+
+number_of_initial_character = int(input("Введите номер начального символа таблицы ascii:  "))
+
+
+print(ascii_code_and_character_output_program(number_of_initial_character, 1))
+

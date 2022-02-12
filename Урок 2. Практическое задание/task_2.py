@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def counting_even_and_odd_digits(natural_number, count_an_even_number, count_odd_number):
+    member = count_an_even_number + count_odd_number
+    if len(natural_number) > member:
+        if int(natural_number[member]) % 2 == 0:
+            count_an_even_number += 1
+        else:
+            count_odd_number += 1
+    else:
+        print(f"Количество четных и нечетных цифр в числе: {count_an_even_number, count_odd_number}")
+        return "Выход"
+    counting_even_and_odd_digits(natural_number, count_an_even_number, count_odd_number)
+
+
+instance_of_natural_number = input()
+
+
+counting_even_and_odd_digits(instance_of_natural_number, 0, 0)
+
