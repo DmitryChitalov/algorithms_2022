@@ -1,54 +1,65 @@
-class NoDgt(Exception):
-    def __init__(self, txt):
-        self.txt = txt
+class Node:
+    def __init__(self, prob, symbol, left=None, right=None):
+        self.prob = prob
+        self.symbol = symbol
+        self.left = left
+        self.right = right
+        self.code = ''
 
-class BinaryTree:
-    def __init__(self, root_obj):
-        self.root = root_obj
-        self.lc = None
-        self.rc = None
-
-    def insert(self, new_node):
-        if self.lc is None:
-            if self.rc is not None:
-                if new_node <= self.rc:
-                    self.lc = BinaryTree(new_node)
-                else:
-                    self.lc = self.rc
-                    self.rc = BinaryTree(new_node)
-            else:
-                self.rc = BinaryTree(new_node)
+def calc_prob(file):
+    symbols = dict()
+    for el in file:
+        if symbols.get(el) is None:
+            symbols[el] = 1
         else:
-            if self.rc is not None:
-                if new_node <= self.rc:
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.lc = self.lc
-                    self.lc = tree_obj
-                else:
-                    self.lc = self.rc
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.rc = self.rc
-                    self.rc = tree_obj
-            else:
-                self.rc = BinaryTree(new_node)
+            symbols[el] += 1
+    return symbols
 
-    def get_right_child(self):
-        return self.rc
+codes = dict()
+def calc_codes(node, val=''):
+    new_val = val + str(node.code)
+    if node.left:
+        calc_codes(node.left, new_val)
+    if node.right:
+        calc_codes(node.right, new_val)
+    else:
+        codes[node.symbol] = new_val
+    return codes
 
-    def get_left_child(self):
-        return self.lc
+def out_enc(file, coding):
+    enc_out = []
+    for c in file:
+        print(coding[c], end='')
+        enc_out.append(coding[c])
 
-    def set_root_val(self, obj):
-        self.root = obj
+    string = ''.join([str(i) for i in enc_out])
+    return string
 
-    def get_root_val(self):
-        try:
-            if self.root is not None:
-                return self.root
-            else:
-                raise NoDgt('')
-        except NoDgt:
-            return None
+def haffman_coding(file):
+    symbol_with_probs = calc_prob(file)
+    symbols = symbol_with_probs.keys()
+    probs = symbol_with_probs.values()
+    print('Symbols: ', symbols)
+    print('Probs: ', probs)
 
-# Трудно дорабатывать изначально не очень удобное решение, тут легче с нуля написать,
-# но Вы скажете, мол, в задании по-другому написано было сделать
+    nodes = []
+    for symbol in symbols:
+        nodes.append(Node(symbol_with_probs.get(symbol), symbol))
+
+    while len(nodes) > 1:
+        nodes = sorted(nodes, key=lambda x: x.prob)
+        right = nodes[0]
+        left = nodes[1]
+        left.code = 0
+        right.code = 1
+        NewNode = Node(left.prob + right.prob, left.symbol + right.symbol, left, right)
+        nodes.remove(left)
+        nodes.remove(right)
+        nodes.append(NewNode)
+
+    huffman_enc = calc_codes(nodes[0])
+    print(huffman_enc)
+    enc_out = out_enc(file, huffman_enc)
+    print(enc_out)
+    return
+haffman_coding('ABCD')
