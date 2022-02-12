@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    math_sign = input("Input math sign: +, -, *, / or 0 for exit: ")
+
+    if math_sign == 0:
+        return "Exit"
+
+    if math_sign in ["+", "-", "*", "/"]:
+        num1 = int(input("Input the first number: "))
+        num2 = int(input("Input the second number: "))
+
+        if math_sign == "+":
+            result = num1 + num2
+            print(f"Your result is: {result}")
+            return calculator()
+
+        elif math_sign == "-":
+            result = num1 - num2
+            print(f"Your result is: {result}")
+            return calculator()
+
+        elif math_sign == "*":
+            result = num1 * num2
+            print(f"Your result is: {result}")
+            return calculator()
+
+        elif math_sign == "/":
+            try:
+                result = num1 / num2
+            except ZeroDivisionError:
+                print(f"You cannot divide by zero.")
+            else:
+                print(f"Your result is: {result}")
+            finally:
+                return calculator()
+
+    else:
+        print("Unknown sign.")
+        return calculator()
+
+
+calculator()
