@@ -9,3 +9,36 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
+from memory_profiler import profile
+
+# @profile
+# def table(start=32):
+#     stop = 128
+#     if start < stop:
+#         print(f"{start} - {chr(start)}", end=' ')
+#         if start % 10 == 1:
+#             print()
+#         return table(start + 1)
+#
+#
+# table()
+
+# при попытке замера памяти с использованием рекурсии замер происходит при каждом вызове рекурсии,чтобы избежать
+# повторных замеров нужно добавить еще одну функцию и в ней вызвать измеряемую
+
+
+def table(start=32):
+    stop = 128
+    if start < stop:
+        print(f"{start} - {chr(start)}", end=' ')
+        if start % 10 == 1:
+            print()
+        return table(start + 1)
+
+
+@profile
+def shell():
+    table()
+
+
+shell()
