@@ -10,3 +10,12 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def rec_sum(n, val) -> float:
+    if n == 0:
+        return 0
+    else:
+        return (-0.5) ** (val - n) + rec_sum(n - 1, val)
+
+number = int(input('Введите количество элементов: '))
+print(f'Количество элементов - {number}, их сумма - {rec_sum(number,number)}')

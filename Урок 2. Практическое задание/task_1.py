@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc():
+    operators = ['+', '-', '/', '*', '0']
+    operator = input('Введите требуемую операцию: +, -, /, *, или 0 - для выхода из расчета: ')
+
+    if operator not in operators:
+        print('Вы ввели недопустимую операцию - повторите ввод: ')
+        calc()
+
+    if operator == '0':
+        print("Спасибо, вы вышли")
+        return
+
+    try:
+        x = int(input('Введите первый операнд x: '))
+        y = int(input('Введите второй операнд y: '))
+
+    except ValueError:
+        print('Ошибка ввода операции!')
+        calc()
+
+    if operator == '+':
+        print(f'x + y = {x + y}')
+        calc()
+    elif operator == '-':
+        print(f'x - y = {x -y}')
+        calc()
+    elif operator == '*':
+        print(f'x * y = {x * y}')
+        calc()
+    elif operator == '/':
+        try:
+            print(f'Ваш результат: {x // y}')
+            return calc()
+        except ZeroDivisionError:
+            print('Деление на 0 запрещено!')
+            calc()
+calc()
+
+
