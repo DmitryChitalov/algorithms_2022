@@ -30,3 +30,34 @@
 
 Это файл для четвертого скрипта
 """
+# Курс основ, урок 6, задание 2.
+# Из списка найти элементы кратные 3 , положительные , не кратные 4
+from memory_profiler import profile
+from random import randint
+from numpy import array
+
+
+@profile
+def original():
+    numbers = [randint(-200, 200) for i in range(10000)]
+    res = [num for num in numbers if num > 0 and num % 3 == 0 and num % 4 != 0]
+    del numbers
+    return res
+
+
+@profile
+def optimized():
+    numbers = array([randint(-200, 200) for i in range(10000)])
+    res = array([num for num in numbers if num > 0 and num % 3 == 0 and num % 4 != 0])
+    del numbers
+    return res
+
+
+print(original())
+print(optimized())
+
+"""
+Помогло изпользование NumPy
+До:    31.0 MiB      0.2 MiB       10003       numbers = [randint(-200, 200) for i in range(10000)]
+После: 31.0 MiB      0.0 MiB       10003       numbers = array([randint(-200, 200) for i in range(10000)])
+"""

@@ -30,3 +30,54 @@
 
 Это файл для пятого скрипта
 """
+# Курс основ, урок 3, задание 3.
+from memory_profiler import profile
+import random
+from pympler.asizeof import asizeof
+
+
+@profile
+def original(number: int) -> list:
+    nouns = ("автомобиль", "лес", "огонь", "город", "дом")
+    adverbs = ("сегодня", "вчера", "завтра", "позавчера", "ночью")
+    adjectives = ("веселый", "яркий", "зеленый", "утопичный", "мягкий")
+    result = []
+    i = 0
+    while i != number:
+        joke = ' '.join((random.choice(nouns), random.choice(adverbs), random.choice(adjectives)))
+        result.append(joke)
+        i += 1
+    del nouns
+    del adverbs
+    del adjectives
+    del i
+    return result
+
+
+nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+
+
+@profile
+def optimize(num):
+    jokes = []
+    for i in range(num):
+        cur_noun = random.choice(nouns)
+        cur_adverb = random.choice(adverbs)
+        cur_adjective = random.choice(adjectives)
+    jokes.append(f'{cur_noun} {cur_adverb} {cur_adjective}')
+    return jokes
+
+
+if __name__ == '__main__':
+    print(asizeof(original(5)))
+    del original
+    print(asizeof(optimize(5)))
+    del optimize
+
+"""
+Помогло изпользование генератора
+До:    704
+После: 224
+"""

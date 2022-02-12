@@ -30,3 +30,30 @@
 
 Это файл для второго скрипта
 """
+# Курс алгоритмы, урок 4, задание 1.
+
+from memory_profiler import profile
+from random import randint
+
+
+# Исходная функция возвращает список
+@profile
+def original(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+# Оптимизированна функция возвращает генератор
+@profile
+def optimized(nums):
+    return (i for i, x in enumerate(nums) if x % 2 == 0)
+
+
+my_nums = [randint(1, 10000) for my_num in range(100000)]
+original(my_nums)
+optimized(my_nums)
+
+"""
+С использованием генератора память используемая функцией уменьшается
+До:    24.8 MiB      1.5 MiB      100003       return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+После: 23.0 MiB      0.0 MiB           1       return (i for i, x in enumerate(nums) if x % 2 == 0)
+"""

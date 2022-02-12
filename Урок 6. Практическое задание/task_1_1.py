@@ -30,3 +30,49 @@
 
 Это файл для первого скрипта
 """
+# Курс алгоритмы, урок 4, задание 4.
+
+
+from memory_profiler import profile
+from random import randint
+import numpy as np
+
+
+# array = [1, 3, 1, 3, 4, 5, 1]
+
+@profile
+def original():
+    array = [randint(0, 100000) for i in range(10000)]
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+@profile
+def optimized():
+    array_np = np.array([randint(0, 100000) for i in range(10000)])
+    u, c = np.unique(array_np, return_counts=True)
+    m_idx = c.argmax()
+    num = u[m_idx]
+    m = c[m_idx]
+
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+if __name__ == "__main__":
+    print(original())
+    print(optimized())
+
+
+"""
+Помогло изпользование NumPy
+До:    30.6 MiB      0.3 MiB       10003       array = [randint(0, 100000) for i in range(10000)]
+После: 30.6 MiB      0.0 MiB       10003       array_np = np.array([randint(0, 100000) for i in range(10000)]
+"""
