@@ -30,3 +30,31 @@
 
 Это файл для четвертого скрипта
 """
+# Курс Алгоритмы и структуры данных, Урок 2, задание 7
+from memory_profiler import profile
+
+
+@profile
+def wrapper(number):
+    def equality(n, i=0, c=0):
+        b = n-i
+        i += 1
+        if i > n:
+            return c
+        return equality(n, i, b + c)
+    return equality(number)
+
+
+@profile
+def equality_optimized(n):
+    a = 0
+    for i in range(n):
+        a += i+1
+    return a
+
+
+num = 500
+print(equality_optimized(num) == num * (num + 1) / 2)
+print(wrapper(num) == num*(num+1)/2)
+print('\nВывод: также как и в предыдущих заданиях, добился оптимизации памяти \n'
+      'превратив рекурсию в цикл и убрав ненужные детали')

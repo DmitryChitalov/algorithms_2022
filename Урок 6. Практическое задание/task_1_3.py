@@ -30,3 +30,41 @@
 
 Это файл для третьего скрипта
 """
+# Курс Алгоритмы и структуры данных, Урок 2, задание 2
+from memory_profiler import profile
+
+
+@profile
+def wrapper(num):
+    def even_odd_count(number, even=0, odd=0):
+        if number == 0:
+            return f'Количество четных чисел: {even}, нечетных: {odd}'
+        a = number % 10
+        if a % 2 == 0:
+            even += 1
+            return even_odd_count(number//10, even, odd)
+        elif a % 2 != 0:
+            odd += 1
+            return even_odd_count(number//10, even, odd)
+    return even_odd_count(num)
+
+
+@profile
+def even_odd_count_optimized(number):
+    even = 0
+    odd = 0
+    for i in range(number):
+        if number == 0:
+            return f'Количество четных чисел: {even}, нечетных: {odd}'
+        a = number % 10
+        if a % 2 == 0:
+            even += 1
+        elif a % 2 != 0:
+            odd += 1
+        number //= 10
+
+
+print(even_odd_count_optimized(9**1000))
+print(wrapper(9**1000))
+print('\nВывод: также как и в двух прошлых заданиях, добился оптимизации памяти \n'
+      'превратив рекурсию в цикл и убрав ненужные детали')

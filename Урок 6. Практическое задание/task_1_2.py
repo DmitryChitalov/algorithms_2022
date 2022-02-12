@@ -30,3 +30,33 @@
 
 Это файл для второго скрипта
 """
+# Курс Алгоритмы и структуры данных, Урок 2, задание 4
+from memory_profiler import profile
+
+
+@profile
+def wrapper(num):
+    def div_sum(number, total=1.0, a=1.0):
+        if number == 1:
+            return total
+        b = a / -2
+        return div_sum(number-1, b+total, b)
+    return div_sum(num)
+
+
+@profile
+def div_sum_optimized(number):
+    a = 1.0
+    total = 1.0
+    for i in range(number):
+        if number == 1:
+            return total
+        total += a / -2
+        a /= -2
+        number -= 1
+
+
+print(div_sum_optimized(9*100))
+print(wrapper(9*100))
+print('\nВывод: также как и в первом задании, добился оптимизации памяти \n'
+      'превратив рекурсию в цикл и убрав ненужные детали')
