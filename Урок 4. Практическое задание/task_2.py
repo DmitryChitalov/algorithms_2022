@@ -31,17 +31,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=100000))
 
 
 def memoize(f):
@@ -69,14 +69,22 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=100000))
+
+# Если смотреть по замерам времени,то в оптимизированной функции есть смысл,
+# но если разобрать, то это немного ощибочные выводы, если запустить код на одну реализацию
+# (number=1), возьмём к примеру результат для num_1000 = randint(1000000, 10000000)
+# Не оптимизированная функция: 1.1808000000002039e-05, Оптимизированная функция: 1.87989999999999e-05
+# как видно, всё не так и радостно во второй функции, если запускаем на много реализаций, тогда после первого
+# заполнения cache потом уже не требуется выполнять рекурсию, а можно брать все из cache
+# отсюда такие показатели, надо подходить из условий решаемых задач

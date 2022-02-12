@@ -9,9 +9,10 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from collections import Counter
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
-
 
 def func_1():
     m = 0
@@ -36,6 +37,17 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    c = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {c[0][0]}, ' \
+           f'оно появилось в массиве {c[0][1]} раз(а)'
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", setup="from __main__ import func_1, array", number=100000)) # 0.7538682790000001
+print(timeit("func_2()", setup="from __main__ import func_2, array", number=100000)) # 0.641662067
+print(timeit("func_3()", setup="from __main__ import func_3, array", number=100000)) # 1.875220693
+
+# Ускорить задачу увы не получилось func_3() код компактный, но самый затратный по времени

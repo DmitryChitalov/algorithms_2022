@@ -14,10 +14,24 @@
 
 from timeit import timeit
 
-
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+num = [i for i in range(100000)]
+
+print(timeit("func_1(num)", setup="from __main__ import func_1, num", number=100000))   # 0.47962897399999993
+print(timeit("func_2(num)", setup="from __main__ import func_2, num", number=100000))   # 0.19993132299999994
+
+# как видно из замеров func_2 ,быстрее почти в 2 раза, но в итоге хорошо, если выиграем 20 %
+# во func_2 мы не создаём пустой массив и не добавляем каждый раз в конец новый элемент (тем самым его расширяя)
+# а используем list comprehension, такой подход более быстрый
+# протестил на указанных параметрах в функциях, получились вот такие времена: func_1 - 2505.039266155,
+# func_2 - 1277.1508753540002 при таких больших входных данных прослеживается разница по времени ~ 2 раза
