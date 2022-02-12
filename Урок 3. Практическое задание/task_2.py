@@ -22,3 +22,63 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+
+import hashlib
+import json
+import os
+from uuid import uuid4
+
+
+def add_users(user, password, name_file="base_users.json"):
+    try:
+        with open(name_file, "r+", encoding="UTF-8") as file_json:
+            base = {}
+            if os.stat(file_json.name).st_size != 0:
+                # file_json.seek(0)
+                base = json.loads(file_json.read())
+                check_pass = base.get(user, False)
+                if check_pass:
+                    print(f"Пользователь {user} уже добавлен")
+                    return
+                else:
+                    print(f"Пользователь {user} добавлен")
+            salt = uuid4().hex
+            hash_ = hashlib.sha256(password.encode() + salt.encode()).hexdigest()
+            base.update({user: (hash_, salt)})
+            file_json.seek(0)
+            json.dump(base, file_json, indent="\t")
+
+    except FileNotFoundError:
+        open(name_file, "w", encoding="UTF-8").close()
+        add_users(user, password)
+
+
+def asked_password(user, password):
+    with open("base_users.json", "r", encoding="UTF-8") as file_json:
+
+        if os.stat(file_json.name).st_size != 0:
+            base = json.load(file_json)
+            check_pass = base.get(user, False)
+            if not check_pass:
+                print(f"Пользователя {user} нет в базе")
+                # add_users(user, password)
+            else:
+                hash_ = hashlib.sha256(password.encode() + check_pass[1].encode()).hexdigest()
+                if check_pass[0] == hash_:
+                    print(f"Пользователь {user} успешно авторизован")
+                else:
+                    print(f"Пользователь {user}, введен неверный пароль")
+                print(f'Текущий хэш {hash_}, хеш из базы {check_pass[0]}')
+
+
+for i in range(5):
+    add_users(f"user{i}", f"password{i}")
+
+
+asked_password("user1", "password1")
+asked_password("user4", "password4")
+asked_password("user6", "password1")
+asked_password("user2", "password3")
+add_users("user5", "password5")
+

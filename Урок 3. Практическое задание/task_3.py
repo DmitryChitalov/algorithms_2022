@@ -22,3 +22,15 @@
 р
 а
 """
+
+
+from itertools import combinations
+from hashlib import md5
+
+
+def small_str_count(word):
+    return {(word[i:j], md5(word[i:j].encode()).hexdigest()) for i, j in combinations(range(len(word)), 2)}
+
+
+small_str = small_str_count("Папа")
+print(len(small_str), small_str)
