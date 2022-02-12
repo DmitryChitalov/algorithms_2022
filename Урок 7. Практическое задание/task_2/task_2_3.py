@@ -15,3 +15,24 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+if __name__ == "__main__":
+    data = [randint(-100, 100) for i in range(11)]
+    print(timeit("median(data[:])", number=1000, globals=globals()))
+    data = [randint(-100, 100) for i in range(101)]
+    print(timeit("median(data[:])", number=1000, globals=globals()))
+    data = [randint(-100, 100) for i in range(1001)]
+    print(timeit("median(data[:])", number=1000, globals=globals()))
+
+
+"""
+0.0016741999999999868
+0.00827349999999999
+0.13156179999999998
+
+Встроенный поиск медианы с использованием sorted() оказался самым эффективным
+"""
