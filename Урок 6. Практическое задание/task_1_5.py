@@ -30,3 +30,63 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
+class ComplexNumbers:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def __add__(self, other):
+        print(f'Сложение комплексных чисел')
+        return f'z = {self.a + other.a} + {self.b + other.b} * i'
+
+    def __mul__(self, other):
+        print(f'Умножение комплексных чисел')
+        return f'z = {self.a * other.a - self.b * other.b}*{self.b * other.a + self.a * other.b} * i'
+
+
+@memory
+class ComplexNumbersTwo:
+    __slots__ = ('a', 'b')
+
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def __add__(self, other):
+        print(f'Сложение комплексных чисел')
+        return f'z = {self.a + other.a} + {self.b + other.b} * i'
+
+    def __mul__(self, other):
+        print(f'Умножение комплексных чисел')
+        return f'z = {self.a * other.a - self.b * other.b}*{self.b * other.a + self.a * other.b} * i'
+
+
+a = ComplexNumbers(1, -2)
+b = ComplexNumbers(3, 4)
+print(a + b)
+print(a * b)
+
+
+a = ComplexNumbersTwo(1, -2)
+b = ComplexNumbersTwo(3, 4)
+print(a + b)
+print(a * b)
+
+"""Использование слотов, существенно влияет на память. 
+Потребление памяти заметно меньше."""

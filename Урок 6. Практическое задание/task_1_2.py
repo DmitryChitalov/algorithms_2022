@@ -30,3 +30,54 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+"""Курс "Алгоритмы и структуры данных на Python" Урок №2 Задание №2 """
+
+
+@memory
+def my_func(j):
+    def counting_numbers(i, even=0, odd=0):
+        if i == 0:
+            return even, odd
+        else:
+            num_i = i % 10
+            i //= 10
+            if num_i % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+        return counting_numbers(i, even, odd)
+
+    return counting_numbers(j)
+
+
+@memory
+def counting_numbers_2(i, even=0, odd=0):
+    while i > 0:
+        if i % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        i = i // 10
+    print(f'\nКоличество четных цифр: {even}\nКоличество нечетных цифр: {odd}\n')
+
+
+i = int(input('Введите число: '))
+print(f'\nКоличество четных и нечетных цифр в числе равно: {my_func(i)}\n')
+counting_numbers_2(i)
+
+"""Заменила рекурсию на цикл, потребление памяти существенно снизилось. """

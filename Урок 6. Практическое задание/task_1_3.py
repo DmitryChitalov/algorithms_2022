@@ -30,3 +30,43 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import memory_usage
+from functools import reduce
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+"""Курс "Алгоритмы и структуры данных на Python" Урок №1 Задание №2 """
+
+
+@memory
+def min_num(n):
+    low = n[0]
+    for i in n:
+        if i < low:
+            low = i
+    return low
+
+
+@memory
+def min_num_2(numb):
+    print(reduce(lambda x, y: x if x < y else y, numb))
+
+
+numbers = [3, 5, 7, 9, 1, 0]
+print(min_num(numbers))
+min_num_2(numbers)
+
+
+"""Оптимизировано за счет использования lambda-функции и функции reduce, 
+что существенно сокращает потребление памяти"""
