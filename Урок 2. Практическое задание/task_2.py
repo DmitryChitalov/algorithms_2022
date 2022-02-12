@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def get_ev_od(numbers, even = 0, odd = 0):
+    """Простая рекурсия"""
+    # базовый случай!!!
+    if numbers == 0:
+        return even, odd
+    else:
+        # шаг рекурсии
+        if numbers % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return get_ev_od(numbers // 10, even, odd)
+
+
+print(get_ev_od(34560))

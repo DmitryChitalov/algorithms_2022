@@ -10,3 +10,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+def get_sum_number(count, summ_number = 0, number = 1):
+    # базовый случай!!!
+    if count == 0:
+        return summ_number
+    else:
+        # шаг рекурсии
+        return get_sum_number( count - 1, summ_number + number, number/(-2))
+
+count = int(input('Введите количество элементов: '))
+print(get_sum_number(count))

@@ -22,3 +22,15 @@
 р
 а
 """
+def unique_str(string):
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            if not string[i:j+1] == string:
+                uni_str.add(hash(string[i:j+1]))
+    return f'{string} - {len(uni_str)} уникальных подстрок'
+
+uni_str = ''
+uni_str = set(uni_str)
+
+string = 'papa'
+print(unique_str(string))

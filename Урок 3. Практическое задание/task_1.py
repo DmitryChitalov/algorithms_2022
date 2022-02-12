@@ -23,3 +23,116 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+import random
+
+
+def check_time(func):
+    def wrap(*args):
+        time_start = time.time()
+        ret = func(*args)
+        time_end = time.time()
+        print(func.__name__, time_end - time_start)
+        return ret
+
+    return wrap
+
+
+ex_list = []
+ex_dict = {}
+
+
+#Сложность O(n)
+@check_time
+def fill_list():
+    for i in range(10):                                 # O(n)
+        ex_list.append(i+1)                             # O(1)
+
+#Сложность O(n)
+@check_time
+def fill_list_2():
+    for i in range(10):                                 # O(n)
+        ex_list.insert(0, i)                            # O(1)
+
+#Сложность O(n)
+@check_time
+def fill_dict():
+    for i in range(10):                                 # O(n)
+        ex_dict.setdefault(i+1, chr(97+i))              # O(1)
+
+fill_list_2()
+ex_list.clear()
+
+fill_list()
+
+fill_dict()
+
+'''
+Заполнение списка через append составило - 5.7220458984375e-06
+Заполнение списка через insert составило - 1.9073486328125e-06
+Заполнение соваря через setdefault составило - 5.0067901611328125e-06
+Наиболее быстрый способ это заполнение списка через insert
+И в целом заполнение Словаря более длительный процесс в связи с созданием ХЕШ-значения KEYs
+'''
+
+
+n = random.randint(1,9)
+
+@check_time
+def input_list():
+    ex_list[n] = n+n            # O(1)
+
+
+@check_time
+def input_dict():
+    ex_dict[n] = n+n            # O(1)
+
+input_list()
+input_dict()
+
+"""
+Вставка элемента в словарь и лист:
+Вставка элемента в список через присвоение значения определенному элементу составило 9.5367431640625e-07
+Вставка элемента в словарь через присвоение значения определенному элементу составило 9.5367431640625e-07
+ИТОГ: Вставка элемента по индексу для List and Dictionary идентичны и занимают одинаковое время на исполнение
+"""
+
+@check_time
+def pop_list():
+    ex_list.pop(n)              # O(n)
+
+@check_time
+def pop_dict():
+    ex_dict.pop(n)              # O(1)
+
+
+
+pop_list()
+pop_dict()
+
+"""
+Удаление элемента из Списка и Словаря:
+Удаление элемента списка через POP составило 2.1457672119140625e-06
+Удаление элемента словаря через POP составило 1.1920928955078125e-06
+ИТОГ: Удаление элемента происходит быстрее в Словаре, 
+так как поиск элемента оптимизирован балгодаря ХЕШу ключей.
+"""
+
+
+@check_time
+def clear_list():
+    ex_list.clear()         # O(1)
+
+@check_time
+def clear_dict():
+    ex_dict.clear()         # O(1)
+
+clear_list()
+clear_dict()
+
+"""
+Очистка Списка и Словаря:
+Очистка списка составило 9.5367431640625e-07
+Очистка словаря составило 9.5367431640625e-07
+ИТОГ: Очистка для List and Dictionary идентичны и занимают одинаковое время на исполнение
+"""
