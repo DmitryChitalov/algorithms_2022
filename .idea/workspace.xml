@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< d477f8edf9ee19d380c72ef6a83da425395ba38b
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Урок 7. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 7. Практическое задание/task_1.py" afterDir="false" />
+    </list>
+>>>>>>> DZ_7.1
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +43,7 @@
     <option name="width" value="1555" />
     <option name="height" value="981" />
   </component>
+  <component name="ProjectId" id="251ZFVOvAyyPbg7SnyhrdioQ4IW" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -61,7 +68,13 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="I:/Курсы GeekBrains. 2022/Алгоритмы и структуры данных на Python/Урок_3/Урок 3. Пример практического задания" />
   </component>
   <component name="RunDashboard">
@@ -76,6 +89,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
