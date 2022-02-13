@@ -30,40 +30,30 @@
 
 Это файл для пятого скрипта
 """
-# Курс Алгоритмы и структуры данных, Урок 2, задание 5
+# Курс Основы языка Python, Урок 3, задание 3+4
+from collections import defaultdict
 from memory_profiler import profile
+name_surname_list = ['Виктория Яковлева', 'Мария Давыдова', 'Александра Маслова', 'Полина Гальцева',
+                     'София Никитина', 'Сергей Носков', 'Степан Максимов', 'Илья Борисов',
+                     'Матвей Максимов', 'Лев Ширяев']*1000
 
 
 @profile
-def wrapper(ascii_v, num):
-    def ascii_range(ascii_val, number):
-        a = chr(ascii_val)
-        if number == ascii_val:
-            print(a)
-            return
-        print(a, end=' ')
-        if ascii_val % 10 == 0:
-            print('\n')
-        return ascii_range(ascii_val + 1, number)
-    return ascii_range(ascii_v, num)
+def thesaurus_adv(n_s_list):
+    names_surnames = {}
+    for n_s in n_s_list:
+        names_surnames.setdefault(n_s.split()[1][0], {}).setdefault(n_s.split()[0][0], []).append(n_s)
+    return names_surnames
 
 
 @profile
-def ascii_range_optimized(ascii_val, number):
-    for i in range(ascii_val, number+1):
-        a = chr(i)
-        if number == i:
-            print(a)
-            return
-        print(a, end=' ')
-        if i % 10 == 0:
-            print('\n')
+def thesaurus_adv_optimized(n_s_list):
+    names_surnames = defaultdict(dict)
+    for n_s in n_s_list:
+        names_surnames[n_s.split()[1][0]].setdefault(n_s.split()[0][0], []).append(n_s)
+    return names_surnames
 
 
-ascii_value = int(input('Введите номер символа с которого начать: '))
-n = int(input('Введите номер символа которым закончить: '))
-ascii_range_optimized(ascii_value, n)
-wrapper(ascii_value, n)
-print('\nВывод: также как и в предыдущих заданиях, добился оптимизации памяти превратив рекурсию в цикл \n'
-      'и убрав ненужные детали, в том числе улучшил сам код из дз чтобы самому можно было указать в \n'
-      'каком диапазоне выдавать ASCII-символы, от 0 до 100 уже видна небольшая разница в потреблении памяти')
+print(thesaurus_adv_optimized(name_surname_list))
+print(thesaurus_adv(name_surname_list))
+print('\nВывод: оптимизировал добавив defaultdict вместо dict и тем самым убрал один setdefault')

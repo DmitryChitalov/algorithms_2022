@@ -30,41 +30,32 @@
 
 Это файл для третьего скрипта
 """
-# Курс Алгоритмы и структуры данных, Урок 2, задание 2
+# Курс Основы языка Python, урок 5, задание 5
 from memory_profiler import profile
+from random import randint
 
 
 @profile
-def wrapper(num):
-    def even_odd_count(number, even=0, odd=0):
-        if number == 0:
-            return f'Количество четных чисел: {even}, нечетных: {odd}'
-        a = number % 10
-        if a % 2 == 0:
-            even += 1
-            return even_odd_count(number//10, even, odd)
-        elif a % 2 != 0:
-            odd += 1
-            return even_odd_count(number//10, even, odd)
-    return even_odd_count(num)
+def unique(src):
+    unique_src = set()
+    each = set()
+    for i in src:
+        if i not in each:
+            unique_src.add(i)
+        else:
+            unique_src.discard(i)
+        each.add(i)
+    unique_src_sort = [el for el in src if el in unique_src]
+    return unique_src_sort
 
 
 @profile
-def even_odd_count_optimized(number):
-    even = 0
-    odd = 0
-    for i in range(number):
-        if number == 0:
-            return f'Количество четных чисел: {even}, нечетных: {odd}'
-        a = number % 10
-        if a % 2 == 0:
-            even += 1
-        elif a % 2 != 0:
-            odd += 1
-        number //= 10
+def unique_optimized(src):
+    unique_src = [i for i in src if src.count(i) == 1]
+    return unique_src
 
 
-print(even_odd_count_optimized(9**1000))
-print(wrapper(9**1000))
-print('\nВывод: также как и в двух прошлых заданиях, добился оптимизации памяти \n'
-      'превратив рекурсию в цикл и убрав ненужные детали')
+print(unique_optimized([randint(1, 10000) for i in range(10000)]))
+print(unique([randint(1, 10000) for v in range(10000)]))
+
+print('\nВывод: оптимизировал превратив весь неоптимизированный код в один LC')
