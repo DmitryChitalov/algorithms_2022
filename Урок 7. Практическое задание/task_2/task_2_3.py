@@ -15,3 +15,101 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+
+from random import randint
+from statistics import median
+import numpy
+import timeit
+
+
+def get_median_3(m):
+    """
+    С использованием встроенной функции из модуля statistics.
+    """
+    n = [randint(-100, 100) for _ in range(2 * m + 1)]
+    return f'Медиана: {median(n)}\n' \
+           f'в массиве: {n}'
+
+
+if __name__ == '__main__':
+    print(get_median_3(5))
+    print(timeit.timeit(stmt="get_median_3(5)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_3(50)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_3(500)", globals=globals(), number=1000))
+
+# Медиана: 33
+# в массиве: [62, 33, 97, 87, -57, -93, -10, 5, 6, 78, 67]
+# 0.007906699999999996
+# 0.0675829
+# 0.6568498
+
+
+# еще вариант (исходя из 2 * m + 1 и индексации списка с 0)
+def get_median_4(m):
+    """
+    С сортировкой.
+    """
+    n = [randint(-100, 100) for _ in range(2 * m + 1)]
+    n_median = sorted(n)
+    return f'Медиана: {n_median[m]}\n' \
+           f'в массиве: {n}'
+
+
+if __name__ == '__main__':
+    print(get_median_4(5))
+    print(timeit.timeit(stmt="get_median_4(5)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_4(50)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_4(500)", globals=globals(), number=1000))
+
+# Медиана: -25
+# в массиве: [-96, 10, -25, -64, -69, 84, -100, -33, 41, 28, 47]
+# sorted: [-100, -96, -69, -64, -33, -25, 10, 28, 41, 47, 84]
+# 0.008533699999999977
+# 0.06940079999999993
+# 0.705854
+
+
+def get_median_5(m):
+    """
+    С использованием встроенной функции из модуля numpy.
+    """
+    n = [randint(-100, 100) for _ in range(2 * m + 1)]
+    return f'Медиана: {numpy.median(n)}\n' \
+           f'в массиве: {n}'
+
+
+if __name__ == '__main__':
+    print(get_median_5(5))
+    print(timeit.timeit(stmt="get_median_5(5)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_5(50)", globals=globals(), number=1000))
+    print(timeit.timeit(stmt="get_median_5(500)", globals=globals(), number=1000))
+
+# Медиана: -31.0
+# в массиве: [-31, 61, -85, 0, -48, -43, -73, 23, 44, -92, -31]
+# 0.027360700000000016
+# 0.08613239999999989
+# 0.6728078
+
+
+# Общий итог по скорости:
+
+# C сортировкой Шелла:
+# 11 элементов: 0.0128881
+# 101 элементов: 0.1448699
+# 1001 элементов: 2.2143148
+
+# Без сортировки:
+# 11 элементов: 0.010852899999999999
+# 101 элемент: 0.0758405
+# 1001 элемент: 0.6877006
+
+# С функцией median из модуля statistics:
+# 11 элементов: 0.007906699999999996
+# 101 элементов: 0.0675829
+# 1001 элементов: 0.6568498
+
+# Встроенные инструменты в модуль statistics и numpy работают быстро.
+# Эффективность алгоритма Шелла сильно зависит от числа элементов массива.
+# Вариант, который назван "без сортировки", работает как встроенные функции.
+# Его не сам придумал, только под свой код оптимизировал и, возможно, "без сортировки" означало что-то другое.
