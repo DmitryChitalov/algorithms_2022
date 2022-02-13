@@ -1,59 +1,20 @@
 """
-Задание 7. На закрепление навыков работы с деком
-В рассмотренном на уроке листинге есть один недостаток
-Приведенный код способен "обработать" только строку без пробелов,
-например, 'топот'
-Но могут быть и такие палиндромы, как 'молоко делили ледоколом'
-Вам нужно доработать программу так, чтобы она могла выполнить
-проверку на палиндром и в таких строках (включающих пробелы)
-Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
---код с нуля писать не нужно, требуется доработать пример с урока
+Задание 7.	Напишите программу, доказывающую или проверяющую, что для множества
+натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2,
+где n - любое натуральное число.
+Пример:
+для n = 5
+1+2+3+4+5 = 5(5+1)/2
+Нужно написать рекурсивную ф-цию только для левой части выражения!
+Результат нужно сверить с правой частью.
+Правой части выражения в рекурсивной ф-ции быть не должно!
+Решите через рекурсию. В задании нельзя применять циклы.
 """
 
 
-class DequeClass:
-
-    def __init__(self):
-        self.elems = []
-
-    def is_empty(self):
-        return self.elems == []
-
-    def add_to_front(self, elem):
-        self.elems.append(elem)
-
-    def add_to_rear(self, elem):
-        self.elems.insert(0, elem)
-
-    def remove_from_front(self):
-        return self.elems.pop()
-
-    def remove_from_rear(self):
-        return self.elems.pop(0)
-
-    def size(self):
-        return len(self.elems)
+def check(n):
+    return 0 if n == 0 else n + check(n-1)
 
 
-if __name__ == '__main__':
-
-    dc_obj = DequeClass()
-
-    def pal_checker(string):
-        dc_obj = DequeClass()
-
-        for el in string.replace(' ',''):
-            dc_obj.add_to_rear(el)
-
-        still_equal = True
-
-        while dc_obj.size() > 1 and still_equal:
-            first = dc_obj.remove_from_front()
-            last = dc_obj.remove_from_rear()
-            if first != last:
-                still_equal = False
-
-        return still_equal
-
-
-    print(pal_checker("молоко делили ледоколом"))
+n = int(input('Введите кол-во натуральных чисел: '))
+print(f'{int(n*(n+1)/2)} = {check(n)}, формула верна')
