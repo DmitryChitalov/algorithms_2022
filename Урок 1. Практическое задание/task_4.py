@@ -22,3 +22,27 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = [
+    {'login' : 'user1',
+     'password' : 'upass1',
+     'is_activated' : 1
+     },
+    {'login' : 'user2',
+     'password' : 'upass2',
+     'is_activated' : 1
+     },
+    {'login' : 'user3',
+     'password' : 'upass3',
+     'is_activated' : 0
+     }
+]
+def find_activ_users (lst):
+    act_lst=[]
+    for usr in lst:
+        if usr['is_activated'] == 1:
+            act_lst.append(usr)
+    return act_lst
+
+
+print(find_activ_users(users))
