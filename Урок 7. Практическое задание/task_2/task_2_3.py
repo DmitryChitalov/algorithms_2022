@@ -15,3 +15,23 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+def arr_median(arr: list) -> int:
+    return median(arr)
+
+
+
+if __name__ == "__main__":
+    for m in (10, 100, 1000):
+        arr = [randint(-10000, 100000) for _ in range(2 * m + 1)]
+        print(f'On number {m}: {timeit("arr_median(arr[:])", globals=globals(), number=1000)}s')
+
+    """
+    Результаты:
+        On number 10: 0.0010035000000000044s
+        On number 100: 0.010396299999999997s
+        On number 1000: 0.19333280000000003s
+    """
