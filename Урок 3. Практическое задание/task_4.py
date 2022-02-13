@@ -15,3 +15,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+import uuid
+
+# Вариант решение через функцию
+cache_dict = {}
+salt = str(uuid.uuid4())
+
+def cache_url(url):
+    if url in cache_dict.keys():
+        print(f'{url} уже имеется в кэше, Хэш страницы: {cache_dict[url]}')
+    else:
+        cache_dict[url] = hashlib.sha512(url.encode() + salt.encode()).hexdigest()
+        print(f'Для страницы {url} записан хэш {cache_dict[url]}')
+    return cache_dict
+
+cache_url('gb.ru')
+cache_url('gb.ru')
+cache_url('youtube.com')
+
+
