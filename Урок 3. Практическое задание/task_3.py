@@ -22,3 +22,20 @@
 р
 а
 """
+
+import hashlib
+
+processing_str = 'papa'
+
+check = set()
+i = len(processing_str)
+
+while i:
+
+    for j in range(i):
+        substr = processing_str[j:i].encode('utf-8')
+        if len(substr) != len(processing_str):
+            check.add(hashlib.sha256(substr).hexdigest())
+    i -= 1
+else:
+    print(len(check))

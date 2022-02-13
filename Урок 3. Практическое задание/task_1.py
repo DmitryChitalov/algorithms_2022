@@ -28,3 +28,88 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+
+def time_check(func):
+    def deco(*args):
+        start = time()
+        func(*args)
+        print(time()-start)
+    return deco
+
+
+"""--------------a--------------
+    На выборке в 1000000 элементов получено, что формирование словаря
+    происходит медленнее. Это связано с тем, что при его формировании 
+    осуществляется предворительное хэширование ключей"""
+
+
+@time_check
+def list_append(obj, n):            # 0(1)
+    for n in range(n):
+        obj.append(n)
+
+
+@time_check
+def dict_append(obj, n):            # O(1)
+    for n in range(n):
+        obj[n] = None
+
+
+"""--------------b--------------
+    Выборка элемента происходит с относительно одинаковой скоростью,
+    но в списке немного, но все же, быстрее. Предположу, что это связанов
+    все с тем же процессом хэширования, но уже не ключей словаря, а значения
+    для поиска - n_get (для данного примера)"""
+
+
+@time_check
+def list_get(obj, n):               # O(1)
+    print(obj[n])
+
+
+@time_check
+def dict_get(obj, key):             # O(1)
+    print(obj.get(key))
+
+
+"""--------------c--------------
+    Удаление элемента в словаре осуществляется значительно бысрее.
+    на 1000000 элементов почти в 160 раз! Это связано с тем, что 
+    не приходится перераспределять массив элементов в памяти (случай 
+    для списка) и пересчитывать индексы оставшихся элементов"""
+
+
+@time_check
+def list_del(obj, n):               # O(N)
+    obj.pop(n)
+
+
+@time_check
+def dict_del(obj, key):             # O(1)
+    obj.pop(key)
+
+
+if __name__ == '__main__':
+
+    test_list = []
+    test_dict = {}
+    n_app = 1000000
+
+    print('Задание а')
+    list_append(test_list, n_app)
+    dict_append(test_dict, n_app)
+    print()
+
+    n_get = int(n_app / 2)
+    print('Задание b')
+    list_get(test_list, n_get)
+    dict_get(test_dict, n_get)
+    print()
+
+    n_del = int(n_app - (n_app / 3))
+    print('Задание c')
+    list_del(test_list, n_del)
+    dict_del(test_dict, n_del)
