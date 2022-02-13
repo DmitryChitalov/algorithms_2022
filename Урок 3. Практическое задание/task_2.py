@@ -22,3 +22,41 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import mysql.connector
+import hashlib
+
+
+def pass_add(data):
+    user_data = input('Введите пароль: ')
+    user_data_hash = hashlib.sha512(data + user_data.encode('utf-8')).hexdigest()
+    cursor.execute(f"INSERT INTO passwords(password_hash) VALUES ('{user_data_hash}')")
+    connect.commit()
+    cursor.execute(f"SELECT password_hash FROM passwords WHERE password_hash = '{user_data_hash}'")
+    print('В базе данных хранится хэш: ', cursor.fetchone()[0])
+
+
+def pass_check(data):
+    user_data = input('Ещё раз введите пароль: ')
+    user_data_hash = hashlib.sha512(data + user_data.encode('utf-8')).hexdigest()
+    cursor.execute("SELECT password_hash FROM passwords")
+    if user_data_hash == cursor.fetchone()[0]:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Что-то пошло не так')
+
+
+connect = mysql.connector.connect(user='root',
+                                  password='WWtT#@pGS8Fm5qj',
+                                  host='127.0.0.1',
+                                  database='py_algorithms')
+
+cursor = connect.cursor()
+
+cursor.execute("SELECT salt FROM salt")
+salt = cursor.fetchone()[0].encode('utf-8')
+
+pass_add(salt)
+pass_check(salt)
+
+connect.close()
