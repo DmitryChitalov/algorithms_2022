@@ -9,3 +9,28 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
+from memory_profiler import profile
+
+
+def summary(cnt, _sum=0, num=1.0):
+    if cnt == 1:
+        _sum += num
+        print(f'сумма - {_sum}')
+    else:
+        _sum += num
+        num = -num / 2
+        cnt -= 1
+        return summary(cnt, _sum, num)
+
+
+@profile
+def call_func(cnt):
+    return summary(cnt)
+
+
+call_func(500)
+
+'''
+Если замерять функцию с рекурсией, то замеряться будет каждый вызов.
+Я решил эту проблему обернув функцию, вызывающую функцию с рекурсией.
+'''

@@ -30,3 +30,41 @@
 
 Это файл для второго скрипта
 """
+# lesson 4 task 1
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@memory
+def func_2(nums):
+    return list(filter(lambda i: i % 2 == 0, nums))
+
+
+num = list(range(1000000))
+func_1(num)
+func_2(num)
+'''
+Я использовал filter
+Выполнение заняло 20.09765625 Mib
+Выполнение заняло 3.12890625 Mib
+'''

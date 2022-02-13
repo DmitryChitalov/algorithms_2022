@@ -30,3 +30,61 @@
 
 Это файл для четвертого скрипта
 """
+# lesson 2 task 2
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+def count_func(num, cnt_1=0, cnt_2=0):
+    if num < 10:
+        if num % 2 == 0:
+            cnt_1 += 1
+        else:
+            cnt_2 += 1
+        return f'Количество четных и нечетных цифр в числе равно: {cnt_1, cnt_2}'
+    else:
+        n = num % 10
+        if n % 2 == 0:
+            cnt_1 += 1
+        else:
+            cnt_2 += 1
+        return count_func(num//10, cnt_1, cnt_2)
+
+
+@ memory
+def count_func_opt(num):
+    cnt_1, cnt_2 = 0, 0
+    while num:
+        n = num % 10
+        if n % 2 == 0:
+            cnt_1 += 1
+        else:
+            cnt_2 += 1
+        num //= 10
+    return f'Количество четных и нечетных цифр в числе равно: {cnt_1, cnt_2}'
+
+
+@memory
+def func_call(num):
+    return count_func(num)
+
+
+d = int('123456789' * 100)
+func_call(d)
+count_func_opt(d)
+'''
+Я заменил рекурсию на цикл
+Выполнение заняло 1.4375 Mib
+Выполнение заняло 0.0 Mib
+'''

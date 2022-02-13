@@ -30,3 +30,53 @@
 
 Это файл для первого скрипта
 """
+# lesson 2 task 4
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+def summary(cnt, _sum=0, num=1.0):
+    if cnt == 1:
+        _sum += num
+        print(f'сумма - {_sum}')
+    else:
+        _sum += num
+        num = -num / 2
+        cnt -= 1
+        return summary(cnt, _sum, num)
+
+
+@memory
+def summary2(cnt):
+    res = 0
+    num = 1.0
+    while cnt:
+        res += num
+        num = -num/2
+        cnt -= 1
+    print(f'сумма - {res}')
+
+
+@memory
+def call_func(n):
+    summary(n)
+
+
+call_func(900)
+summary2(900)
+'''
+Я заменил рекурсию на цикл
+Выполнение заняло 1.2421875 Mib
+Выполнение заняло 0.0 Mib
+'''

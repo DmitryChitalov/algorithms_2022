@@ -30,3 +30,40 @@
 
 Это файл для третьего скрипта
 """
+# lesson 4 task 3
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+@memory
+def revers_4_opt(enter_num):
+    yield ''.join(reversed(str(enter_num)))
+
+
+num = ('123456789' * 10000)
+revers_4(num)
+revers_4_opt(num)
+'''
+Я использовал yield.
+yield не хранит в памяти результат, а выдаёт его при запросе вроде:
+for i in revers_4_opt(num):
+    print(i)
+Выполнение заняло 0.03515625 Mib
+Выполнение заняло 0.0 Mib
+'''
