@@ -2,7 +2,7 @@
 Задание 1.
 
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы
+курсов Алгоритмы и Основы Python
 
 На каждый скрипт нужно два решения - исходное и оптимизированное.
 
@@ -29,4 +29,51 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+"""
+from json import loads, dumps
+from itertools import combinations
+from pympler import asizeof
+from yaml import load, dump, FullLoader
+
+
+"""-------------------------------------------------------------
+1.5 Для ОПТИМИЗАЦИИ используем сериализацию в формат json и yaml
+----------------------------------------------------------------"""
+
+
+# Курс 'Алгоритмы'. Вебинар 3.
+# 3. # Определить количество различных (уникальных) подстрок с использованием хеш-функции.
+# Дана строка S длиной N, состоящая только из строчных латинских букв. # Подсказка: вы должны в цикле для каждой
+# подстроки вычислить хеш. Все хеши записываем во множество. Оно отсечет дубли. Экономия на размере хранимых данных
+# (для длинных строк) и скорость доступа вместе с уникальностью элементов, которые даёт множество, сделают решение
+# коротким и эффективным.
+# Пример: 'рара' - 6 уникальных подстрок: pap pa ap apa p a
+
+# Немного переделал функцию: Вход: предложение; выход - словарь: ключ - слово из предложения, значение: список
+# уникальных подстрок. Список, потому что JSON не поддерживает множество
+def get_unique_substrings(unique, s):
+    words = s.split()
+    for w in words:
+        unique.setdefault(w, list({w[i:j] for i, j in combinations(range(len(w) + 1), 2) if (i, j) != (0, len(w))}))
+    return unique
+
+
+sentence = 'Careful examination of the particulars will show that there is no incomprehensibility or' \
+           ' difficulty in them which has not a counterpart in nature.'
+unique_subs = get_unique_substrings({}, sentence)
+json_subs = dumps(unique_subs)
+yaml_subs = dump(unique_subs)
+json_ret = loads(json_subs)
+yaml_ret = load(yaml_subs, Loader=FullLoader)
+# print(unique_subs)
+print(f'{asizeof.asizeof(unique_subs)=} ')
+print(f'{asizeof.asizeof(json_subs)=}')
+print(f'{asizeof.asizeof(yaml_subs)=}')
+
+"""
+Результаты тестов показали, что и YAML, и JSON дают приличную экономию памяти
+
+Размер исходного словаря unique_subs: 36008 
+Размер словаря, переруженного в JSON:  5192
+Размер словаря, переруженного в YAML:  4552
 """
