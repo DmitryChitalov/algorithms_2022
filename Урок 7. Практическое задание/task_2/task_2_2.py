@@ -18,23 +18,26 @@ from timeit import timeit
 
 
 def get_median(array):
-    m = (len(array) - 1) // 2
-    while m > 0:
+    n = (len(array) - 1) // 2
+    while n > 0:
         array.remove(max(array))
-        m -= 1
+        n -= 1
     return max(array)
 
 
 if __name__ == "__main__":
-    data = [randint(-100, 100) for i in range(11)]
+    m = 10
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("get_median(data[:])", number=1000, globals=globals()))
-    data = [randint(-100, 100) for i in range(101)]
+    m = 100
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("get_median(data[:])", number=1000, globals=globals()))
-    data = [randint(-100, 100) for i in range(1001)]
+    m = 1000
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("get_median(data[:])", number=1000, globals=globals()))
 
 """
-0.012486999999999998
-0.2260848
-12.3108064
+0.0150145
+0.7421613
+54.3577522
 """

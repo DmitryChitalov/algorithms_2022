@@ -31,16 +31,20 @@ def shell_sort_median(array):
 
 
 if __name__ == "__main__":
-    data = [randint(-100, 100) for i in range(11)]
+    m = 10
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
-    data = [randint(-100, 100) for i in range(101)]
+    m = 100
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
-    data = [randint(-100, 100) for i in range(1001)]
+    m = 1000
+    data = [randint(-100, 100) for i in range(m*2+1)]
     print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
 
 
 """
-0.020138099999999992
-0.3376353
-4.5529373
+0.032452499999999995
+0.6619172
+10.861606400000001
 """
+

@@ -45,41 +45,22 @@ def optimized_bubble(array):
 
 
 if __name__ == "__main__":
-    my_list = [randint(-1000, 1000) for i in range(10)]
-    print(timeit("bubble_sort(my_list[:])", number=1000, globals=globals()))
-    print(timeit("optimized_bubble(my_list[:])", number=1000, globals=globals()))
-
-    my_list = [randint(-1000, 1000) for i in range(100)]
-    print(timeit("bubble_sort(my_list[:])", number=1000, globals=globals()))
-    print(timeit("optimized_bubble(my_list[:])", number=1000, globals=globals()))
-
-    my_list = [randint(-1000, 1000) for i in range(1000)]
-    print(timeit("bubble_sort(my_list[:])", number=1000, globals=globals()))
-    print(timeit("optimized_bubble(my_list[:])", number=1000, globals=globals()))
-
+    for n in (10, 100, 1000):
+        my_list = [randint(-100, 100) for i in range(n)]
+        print(f"Длинна массива: {n}")
+        print(timeit("bubble_sort(my_list[:])", number=1000, globals=globals()))
+        print(timeit("optimized_bubble(my_list[:])", number=1000, globals=globals()))
 """
-0.03875980000000001
-0.033959500000000004
-1.4342278
-0.8415855000000001
-193.30284129999998
-167.85086629999998
+Длинна массива: 10
+0.005991645157337189
+0.005505552049726248
+Длинна массива: 100
+0.4978366787545383
+0.4470277149230242
+Длинна массива: 1000
+58.72050487762317
+63.25626200437546
 
-0.029741099999999993
-0.02981220000000001
-1.9181064
-1.7198732999999997
-187.06778640000002
-80.78145699999996
-
-
-0.02284590000000003
-0.026988000000000012
-1.546474
-1.4816313
-199.648535
-129.8136095
-
-Выйгрыш в производительности оптимизированного алгоритма зависит от исходных данных.
-В самом худшем случае, когда массив отсортирован в обратном порядке выйгрыша от оптимизации не будет.
+Выйгрыш в производительности оптимизированного алгоритма зависит от того, насколько отсортированным 
+будет исходный массив, на коротких массивах вероятность выше.
 """
