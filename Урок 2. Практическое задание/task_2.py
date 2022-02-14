@@ -23,10 +23,13 @@ def recur_method(numb, even = 0, odd = 0):
     if len(numb) == 0:
         return print(f'Количество четных цифр - {even}, количество нечетных цифр - {odd}')
     else:
-        if int(numb[0]) % 2 == 0: even += 1
-        else: odd += 1
+        if int(numb[0]) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
         numb = numb[1:]
         return recur_method(numb, even, odd)
+
 try:
     num = int(input("Введите натуральное число: "))
 except ValueError:
