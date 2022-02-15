@@ -24,8 +24,9 @@ def median_(array):
     return median(array)
 
 
-# замеры для 11 элементов
-array = [randint(1, 1000) for i in range(11)]
+# замеры для m = 10
+m = 10
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
@@ -33,8 +34,9 @@ print(
         globals=globals(),
         number=1000))
 
-# замеры для 101 элемента
-array = [randint(1, 1000) for i in range(101)]
+# замеры для m = 100
+m = 100
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
@@ -42,8 +44,9 @@ print(
         globals=globals(),
         number=1000))
 
-# замеры для 1001 элемента
-array = [randint(1, 1000) for i in range(1001)]
+# замеры для m = 1000
+m = 1000
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
@@ -53,9 +56,9 @@ print(
 
 
 '''
-0.0008967000000000142
-0.004483199999999993
-0.1049823
+0.0011191999999999869
+0.0091609
+0.24528759999999997
 '''
 
 '''

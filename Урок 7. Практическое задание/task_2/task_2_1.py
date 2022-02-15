@@ -30,38 +30,41 @@ def shell_sort(array):
                 j -= step
             array[j] = temp
         step //= 2
-    return array[n // 2 + 1]
+    return array
 
 
-# замеры для 11 элементов
-array = [randint(1, 1000) for i in range(11)]
+# замеры для m = 10
+m = 10
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
-        "shell_sort(array[:])",
+        "shell_sort(array[:])[m]",
         globals=globals(),
         number=1000))
 
-# замеры для 101 элемента
-array = [randint(1, 1000) for i in range(101)]
+# замеры для m = 100
+m = 100
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
-        "shell_sort(array[:])",
+        "shell_sort(array[:])[m]",
         globals=globals(),
         number=1000))
 
-# замеры для 1001 элемента
-array = [randint(1, 1000) for i in range(1001)]
+# замеры для m = 1000
+m = 1000
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
-        "shell_sort(array[:])",
+        "shell_sort(array[:])[m]",
         globals=globals(),
         number=1000))
 
 '''
-0.0060826999999999964
-0.12475929999999999
-2.5855697
+0.014035800000000001
+0.30291500000000005
+5.763194800000001
 '''

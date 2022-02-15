@@ -45,9 +45,9 @@ def bubble_sort_flag(lst_obj):
 
 
 orig_list = [randint(-100, 100) for _ in range(10)]
-print(orig_list)
-print(bubble_sort(orig_list[:]))
-print(bubble_sort_flag(orig_list[:]))
+# print(orig_list)
+# print(bubble_sort(orig_list[:]))
+# print(bubble_sort_flag(orig_list[:]))
 
 # замеры 10
 print(
@@ -61,15 +61,15 @@ print(
         globals=globals(),
         number=1000))
 
-# 0.010982200000000011
-# 0.010848699999999989
-# время одинаковое, для небольших массивов флаг нецелесообразен
+# 0.009038999999999991
+# 0.006439400000000012
+# Время с флагом меньше
 
 
 orig_list = [randint(-100, 100) for _ in range(100)]
-print(orig_list)
-print(bubble_sort(orig_list[:]))
-print(bubble_sort_flag(orig_list[:]))
+# print(orig_list)
+# print(bubble_sort(orig_list[:]))
+# print(bubble_sort_flag(orig_list[:]))
 
 # замеры 100
 print(
@@ -83,14 +83,14 @@ print(
         globals=globals(),
         number=1000))
 
-# 0.7188112
-# 0.4879337
-# время для функции с флагом меньше, но не очень значительно
+0.6721391
+0.6794568000000001
+# время почти одинаковое
 
 orig_list = [randint(-100, 100) for _ in range(1000)]
-print(orig_list)
-print(bubble_sort(orig_list[:]))
-print(bubble_sort_flag(orig_list[:]))
+# print(orig_list)
+# print(bubble_sort(orig_list[:]))
+# print(bubble_sort_flag(orig_list[:]))
 
 # замеры 1000
 print(
@@ -104,6 +104,10 @@ print(
         globals=globals(),
         number=1000))
 
-# 51.1065022
-# 44.0766894
-# время для функции с флагом меньше, но не очень значительно
+# 53.6677983
+# 55.7160957
+# время с флагом даже больше
+
+# Эффективность использования флага зависит от того, насколько велика вероятность получить случайный массив
+# сразу в отсортированном виде. Чем меньше длина массива тем такая вероятность выше, соответственно флаг более
+# эффективен для массивов небольшой длины.

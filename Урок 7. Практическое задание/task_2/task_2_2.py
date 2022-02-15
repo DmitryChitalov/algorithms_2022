@@ -25,8 +25,9 @@ def max_del(array):
     return max(array)
 
 
-# замеры для 11 элементов
-array = [randint(1, 1000) for i in range(11)]
+# замеры для m = 10
+m = 10
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
@@ -34,8 +35,9 @@ print(
         globals=globals(),
         number=1000))
 
-# замеры для 101 элемента
-array = [randint(1, 1000) for i in range(101)]
+# замеры для m = 100
+m = 100
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
@@ -43,17 +45,17 @@ print(
         globals=globals(),
         number=1000))
 
-# замеры для 1001 элемента
-array = [randint(1, 1000) for i in range(1001)]
+# замеры для m = 1000
+m = 1000
+array = [randint(0, 100) for i in range(2 * m + 1)]
 
 print(
     timeit(
         "max_del(array[:])",
         globals=globals(),
         number=1000))
-
 '''
-0.0033955999999999986
-0.0960338
-7.976641800000001
+0.006817799999999999
+0.3348047
+21.2727815
 '''
