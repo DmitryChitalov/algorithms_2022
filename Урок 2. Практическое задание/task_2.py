@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def recursive_counter(number, even=0, odd=0):
+    if number <= 0:
+        return even, odd
+    reduced_number, last_digit = divmod(number, 10)
+    if last_digit % 2 == 0:
+        return recursive_counter(reduced_number, even + 1, odd)
+    else:
+        return recursive_counter(reduced_number, even, odd + 1)
+
+
+number = int(input("Введите число: "))
+even, odd = recursive_counter(number)
+print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+
