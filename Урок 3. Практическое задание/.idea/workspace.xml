@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3c21ce6-2915-4322-87b0-881dd4f7051d" name="Default Changelist" comment="Subject line (try to keep under 50 characters)&#10;&#10;Multi-line description of commit,&#10;feel free to be detailed.&#10;&#10;[Ticket: X]">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Урок 1. Пример практического задания.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Урок 1. Пример практического задания.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

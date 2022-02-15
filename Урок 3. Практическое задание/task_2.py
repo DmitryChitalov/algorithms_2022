@@ -65,19 +65,22 @@ def check_user(login, passwd):
                    WHERE login = ?""", (login,))
     res = cur.fetchone()
     conn.close()
-    salt = res[1]
-    passwd_2 = input(f'В базе хранится хеш {res[1]}\n'
-                     f'Введите пароль еще раз для проверки: ')
-    if passwd == passwd_2:
-        enter_passwd = hashlib.sha256(
-            passwd_2.encode('utf-8') + salt.encode('utf-8')
-        ).hexdigest()
-        if res[0] == enter_passwd:
-            print('Пароль введен верно')
+    try:
+        salt = res[1]
+        passwd_2 = input(f'В базе хранится хеш {res[1]}\n'
+                         f'Введите пароль еще раз для проверки: ')
+        if passwd == passwd_2:
+            enter_passwd = hashlib.sha256(
+                passwd_2.encode('utf-8') + salt.encode('utf-8')
+            ).hexdigest()
+            if res[0] == enter_passwd:
+                print('Пароль введен верно')
+            else:
+                print('Неверный пароль')
         else:
             print('Неверный пароль')
-    else:
-        print('Неверный пароль')
+    except TypeError:
+        print('Такого пользователя не существует!')
 
 
 if __name__ == '__main__':
@@ -95,3 +98,8 @@ if __name__ == '__main__':
             break
         else:
             break
+
+"""Добавил к изначальному варианту блок try except для функции check_user,
+так, как sql запрос может вернуть NULL значение или NoneType для питона, забыл
+ про эту особенность, исправляюсь, писал Вам в телеграмме про это, 
+ надеюсь ничего страшного?"""
