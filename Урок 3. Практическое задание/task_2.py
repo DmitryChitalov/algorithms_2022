@@ -48,7 +48,7 @@ f1dcaeeafeb855965535d77c55782349444b
 
 
 
-# Хранение в БД
+# Хранение в БД, SQLITE
 
 from hashlib import sha256
 from os.path import join, dirname
