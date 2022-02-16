@@ -15,3 +15,38 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+m = int(input('Длина массива будет равна 2m+1, введите m: '))
+arr = [randint(-100, 100) for _ in range(2*m+1)]
+
+
+def stat_median(arry):
+    return f'Список: {arry}, его медиана: {median(arry)}'
+
+
+print(stat_median(arr))
+
+m = 10
+arr_10 = [randint(-100, 100) for _ in range(2*m+1)]
+print(f'\n10 элементов: {timeit("stat_median(arr_10[:])",globals=globals(),number=1000)}')
+
+m = 100
+arr_100 = [randint(-100, 100) for _ in range(2*m+1)]
+print(f'100 элементов: {timeit("stat_median(arr_100[:])",globals=globals(),number=1000)}')
+
+m = 1000
+arr_1000 = [randint(-100, 100) for _ in range(2*m+1)]
+print(f'1000 элементов: {timeit("stat_median(arr_1000[:])",globals=globals(),number=1000)}')
+
+"""
+10 элементов: 0.0033642000000000394
+100 элементов: 0.02589649999999999
+1000 элементов: 0.2912517000000001
+"""
+print('\nВывод: самым быстрейшим способом по поиску медианы оказалась импортированная функция median, она выигрывает\n'
+      'у двух других способов и при маленьком кол-ве элементов, и при большом. Сравнивая между собой\n'
+      'два других способа, можно сказать, что способ без сортировки быстрее при маленьком кол-ве данных,\n'
+      'чем с сортировкой, но намного медленнее при большом кол-ве')
