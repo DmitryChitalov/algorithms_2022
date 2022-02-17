@@ -9,3 +9,24 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
+from memory_profiler import profile
+
+
+@profile
+def ascii_table():
+    def ascii_symbol(begin=32, count=0, end=127):
+        if begin <= end:
+            if count == 10:
+                print("\n", "-" * 70)
+                count = 0
+            print(f"{begin} - {chr(begin)}", end="|")
+            ascii_symbol(begin + 1, count + 1)
+    return ascii_symbol()
+
+
+ascii_table()
+
+"""
+Каждый шаг рекурсии обсчитывается профилировщиком по отдельности, из-за этого расходуется больше ресурсов.
+Чтобы решить эту проблему достаточно обернуть рекурсию функцией.
+"""
