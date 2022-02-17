@@ -30,3 +30,40 @@
 
 Это файл для первого скрипта
 """
+from hashlib import sha256
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
+def uniq_hashes(in_str):
+    uniq_hash = set(sha256(in_str[i:j + 1].encode()).hexdigest()
+                    for i in range(len(in_str)) for j in range(i + 1, (len(in_str) + 1)))
+    return uniq_hash
+
+
+@memory
+def uniq_hashes2(in_str):
+    yield set(sha256(in_str[i:j + 1].encode()).hexdigest()
+              for i in range(len(in_str)) for j in range(i + 1, (len(in_str) + 1)))
+
+
+a = input("Введите строку строчными латинскими буквами: ")
+print(f'Количество подстрок: {len(uniq_hashes(a))}')
+print(f'Количество подстрок: {len(list(uniq_hashes2(a))[0])}')
+
+"""
+оптимизация позволила улучшить показатели по памяти в ~ 1000 раз 
+"""
