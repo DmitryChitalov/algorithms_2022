@@ -11,7 +11,6 @@ class MyNode:
 
 
 def haffman_tree(s):
-
     count_s = Counter(s)
 
     sorted_s = deque(sorted(count_s.items(), key=lambda item: item[1]))
@@ -37,7 +36,6 @@ code_table = dict()
 
 
 def haffman_code(tree, path=''):
-
     if not isinstance(tree, MyNode):
         code_table[tree] = path
 
