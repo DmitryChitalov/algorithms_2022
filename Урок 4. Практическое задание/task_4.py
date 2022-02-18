@@ -40,45 +40,23 @@ def func_2():
 
 
 def func_3():
-    count = Counter(array)
-    res = count.most_common(1)
-    res = res[0]
-    num, quantity = res
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {quantity} раз(а)'
+    val = max(array,key=array.count)
+    return f'Чаще всего встречается число {val}, ' \
+           f'оно появилось в массиве {array.count(val)} раз(а)'
 
-
-def func_4():
-    di = OrderedDict()
-    for i in array:
-        if di.get(i):
-            di[i] += 1
-        else:
-            di[i] = 1
-    max = 0
-    di = {v:k for k,v in di.items()}
-    for k, v in di.items():
-        if max< k:
-            max=k
-
-    return f'Чаще всего встречается число {di[max]}, ' \
-           f'оно появилось в массиве {max} раз(а)'
 
 
 print(timeit('func_1()', globals=globals()))
 print(timeit('func_2()', globals=globals()))
 print(timeit('func_3()', globals=globals()))
-print(timeit('func_4()', globals=globals()))
+
 print(func_1())
 print(func_2())
 print(func_3())
-print(func_4())
 
 
-'''
-быстрее всего срабатывает func_1() т.к. в ней всего 1 цикл
-func_2() кроме цикла нагружена append что замедляет ее быстродействие
-func_3() самая долгая т.к. происходит создание новой коллекции и встроеной
-     функции нахождения часто встречающегося
-func_4() самая долгая т.к. в ней есть и dict_comprehension и 2 цикла
+'''Самые быстрые это встроенные функции, они быстрее  циклов
+1.2470711779997146 цикл
+1.4442878269996982 цикл
+1.0807000609997885 встроенная функция
 '''

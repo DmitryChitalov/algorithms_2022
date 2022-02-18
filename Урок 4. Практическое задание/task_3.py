@@ -11,8 +11,9 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
+
 from timeit import Timer, timeit
-from collections import deque
+
 
 res_recurs = timeit('''
 digit = 6456486
@@ -45,25 +46,18 @@ def revers_3(digit):
     return revers_num
 ''', number=10000)
 
-res_decue = timeit('''
+res_bulitin = timeit('''
 digit = 6456486
 def revers_4(digit):
-    dec = deque()
-    digit = str(digit)
-    for i in digit:
-        dec.appendleft(i)
-    return ''.join(dec)
+    return ''.join(reversed(list(str(digit))))
 ''', number=10000)
 
 print(f'получение обратных чисел:\nрекурсивное {res_recurs}\n\
 цикл while {res_while}\nсрез {res_slice}\n\
-deque {res_decue}')
-
-'''рекурсивное 0.0008742350000829902
-цикл while 0.0004850730001635384
-срез 0.00046118199861666653
-deque 0.00046681300045747776
-
-Использование рекурсии самое долгое, а остальные примерно равны по времени
-т.к. везде используется цикл
+через встроенную {res_bulitin}')
+'''
+цикл while самый быстрый т.к. в нем есть только деление
+рекурсивная самая долгая из за использования стека и многократного вызова самой себя
+срез и через встроенные функции работают дольше т.к. в них 
+производиться перевод в str и в list
 '''
