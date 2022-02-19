@@ -24,8 +24,10 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if self.root <= new_node:
+            raise ValueError
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -39,8 +41,10 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if self.root >= new_node:
+            raise ValueError
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -69,14 +73,32 @@ class BinaryTree:
         return self.root
 
 
+# try:
 r = BinaryTree(8)
-print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+try:
+    r.insert_left(10)
+except ValueError:
+    print(f'Ошибка значения узла, метод "левый", а значение больше {r.get_root_val()}')
 print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
+try:
+    print(r.get_left_child().get_root_val())
+except AttributeError:
+    print(f'Ошибка доступа к атрибуту объекта, т.к. узел = {r.get_left_child()}')
+try:
+    r.insert_right(7)
+except ValueError:
+    print(f'Ошибка значения узла, метод "правый", а значение меньше {r.get_root_val()}')
 print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+try:
+    print(r.get_right_child().get_root_val())
+except AttributeError:
+    print(f'Ошибка доступа к атрибуту объекта, т.к. узел = {r.get_right_child()}')
+try:
+    r.get_right_child().set_root_val(16)
+except AttributeError:
+    print('Ошибка вставки значения, узел не существует')
+try:
+    print(r.get_right_child().get_root_val())
+except AttributeError:
+    print('Ошибка получения значения, узел не существует')
