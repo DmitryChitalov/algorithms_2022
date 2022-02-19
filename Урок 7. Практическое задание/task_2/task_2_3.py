@@ -15,3 +15,29 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+x = 10
+orig_array = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(orig_array[:])", globals=globals(), number=100))
+
+x = 100
+orig_array = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(orig_array[:])", globals=globals(), number=100))
+
+x = 1000
+orig_array = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(orig_array[:])", globals=globals(), number=100))
+
+
+"""
+0.00016700000000000048
+0.0012120999999999937
+0.021626599999999996
+
+Вывод: встроенная функция поиска медианы оказалась самая быстрая на всех массивах,
+Гномья сортировка показала тоже не плохие рехультаты,
+Результаты поиска медианы в массиве без сортировки, имеют место быть если масив небольшой.
+"""
