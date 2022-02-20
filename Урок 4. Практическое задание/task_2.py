@@ -78,5 +78,9 @@ print(
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
+
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Мемоизация не имеет смысла, т.к. обертываемая функция будет вызвана всего один раз.
+
