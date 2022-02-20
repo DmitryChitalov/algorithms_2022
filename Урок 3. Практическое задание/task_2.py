@@ -49,6 +49,7 @@ def reg (con):
     vel = (login, reg_hash)
     cursorObj = con.cursor()
     cursorObj.execute ("INSERT INTO user_info (user_login, user_password) VALUES (?, ?)" , vel)
+    con.commit()
 
 
 def log_in(con):
@@ -66,6 +67,5 @@ def log_in(con):
 
 con = sql_connection()
 # create_table(con)
-reg (con)
-print("Введите логин и пароль еще раз для проверки")
+# reg (con)
 log_in(con)
