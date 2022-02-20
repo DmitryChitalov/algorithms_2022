@@ -24,3 +24,14 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+lst = defaultdict()
+first_number = input('Введите шестнадцатиричное число: ')
+second_number = input('Введите шестнадцатиричное число: ')
+
+lst['first number'] = list(first_number.upper())
+lst['second number'] = list(second_number.upper())
+lst['sum_lst'] = list(hex(int(first_number, 16) + int(second_number, 16))[2:].upper())
+lst['multiplication_lst'] = list(hex(int(first_number, 16) * int(second_number, 16))[2:].upper())
+print(lst)
