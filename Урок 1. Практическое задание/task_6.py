@@ -16,3 +16,48 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+class TaskBoard:
+    def __init__(self):
+        self.elems = []
+
+    def el_insert(self, el):
+        self.elems.insert(0, el)
+
+    def el_size(self):
+        return len(self.elems)
+
+    def el_pop(self):
+        return self.elems.pop()
+
+    def el_remove(self, other, el):
+        other.elems.insert(0, el.el_pop())
+
+
+main = TaskBoard()  # Основные задачи
+improvement = TaskBoard()  # Задачи на доработку
+
+main.el_insert('Задача №1')
+main.el_insert('Задача №2')
+
+print(main.el_size())
+print(improvement.el_size())
+
+improvement.el_insert('Задача №3')
+improvement.el_insert('Задача №4')
+
+print(main.el_size())
+print(improvement.el_size())
+
+main.el_remove(improvement, main)
+
+print(main.el_size())
+print(improvement.el_size())
+
+print(improvement.el_pop())
+main.el_remove(improvement, main)
+
+print(main.el_size())
+print(improvement.el_size())
+
+

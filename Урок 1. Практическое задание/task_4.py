@@ -20,3 +20,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+# O(n) - Линейная
+def authorization_one(user, password):
+    for k, v in my_dict.items():
+        if k == user:
+            if v['password'] == password and v['activation']:
+                return 'Учетная запись активирована.'
+            elif v['password'] == password and not v['activation']:
+                return 'Учетная запись не активирована. Необходимо пройти активацию.'
+            elif v['password'] != password:
+                return 'Введен неверный пароль.'
+    return 'Такого пользователя не существует'
+
+
+# O(1) - Константная
+def authorization_two(user, password):
+    if my_dict.get(user):
+        if my_dict[user]['password'] == password and my_dict[user]['activation']:
+            return 'Учетная запись активирована.'
+        elif my_dict[user]['password'] == password and not my_dict[user]['activation']:
+            return 'Учетная запись не активирована. Необходимо пройти активацию.'
+        elif my_dict[user]['password'] != password:
+            return 'Введен неверный пароль.'
+    return 'Такого пользователя не существует'
+
+
+my_dict = {
+    'lolo': {'password': '123456', 'activation': True},
+    'toto': {'password': '123789', 'activation': False},
+    'wewe': {'password': '456987', 'activation': True},
+    'lili': {'password': '789654', 'activation': False},
+    'jiji': {'password': '147852', 'activation': True}
+}
+print('\nРешение №2 будет более быстрым, т.к. имеет константную сложность.\n')
+print(authorization_one('lolo', '123456'))
+print(authorization_one('toto', '123789'))
+print(authorization_one('wewe', '123456'))
+print(authorization_one('coco', '123456'))
+print(f'\n{"*" * 50}\n')
+print(authorization_two('lolo', '123456'))
+print(authorization_two('toto', '123789'))
+print(authorization_two('wewe', '123456'))
+print(authorization_two('coco', '123456'))

@@ -14,6 +14,31 @@
 -- нельзя использовать встроенные функции min() и sort()
 """
 
+
+# O(n) - линейная
+def min_one(el):
+    n_min = el[0]
+    for i in el:
+        if i < n_min:
+            n_min = i
+    return n_min
+
+
+# O(n^2) - квадратичная
+def min_two(el):
+    for i in el:
+        n_min = True
+        for j in el:
+            if i > j:
+                n_min = False
+        if n_min:
+            return i
+
+
+numb = [3, 5, 7, 9, 1, 0, -1]
+print(min_one(numb))
+print(min_two(numb))
+
 """O(n^2) - квадратичная"""
 
 from functools import reduce

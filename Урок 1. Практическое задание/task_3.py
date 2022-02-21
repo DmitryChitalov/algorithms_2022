@@ -16,8 +16,24 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
-from collections import Counter
-import heapq
+
+
+# O(N log N) - Линейно-Логарифмическая
+def company_one_res(el):
+    res = list(el.items())  # O(N) - Линейная
+    res.sort(key=lambda v: v[1], reverse=True)  # O(N log N) - Линейно-Логарифмическая
+    for v in range(3):  # O(1) - Константная
+        return dict(res[:3])  # O(1) - Константная
+
+
+# O(N) - Линейная
+def company_two_res(el):
+    res = list(el.items())  # O(N) - Линейная
+    for v in range(3):  # O(1) - Константная
+        for i in range(v + 1, len(res)):  # O(N) - Линейная
+            if res[i][1] > res[v][1]:  # O(1) - Константная
+                res[i], res[v] = res[v], res[i]  # O(1) - Константная
+    return dict(res[0:3])  # O(1) - Константная
 
 
 storage = {
@@ -28,19 +44,7 @@ storage = {
     'Дикси': 900,
     'METRO': 3000,
     'Перекресток': 1450
-}
+    }
 
-
-# O(N log N) - Линейно-логарифмическая
-# 1 вариант
-print(sorted(storage, key=storage.get, reverse=True)[:3])
-
-# 2 вариант
-print(dict(Counter(storage).most_common(3)))
-
-# O(log N) - Логарифмическая
-print(heapq.nlargest(3, storage, key=storage.get))
-
-
-
-
+print(company_one_res(storage))
+print(company_two_res(storage))
