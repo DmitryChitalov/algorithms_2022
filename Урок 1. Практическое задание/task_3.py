@@ -46,5 +46,6 @@ storage = {
     'Перекресток': 1450
     }
 
+
 print(company_one_res(storage))
 print(company_two_res(storage))

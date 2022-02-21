@@ -54,12 +54,16 @@ my_dict = {
     'lili': {'password': '789654', 'activation': False},
     'jiji': {'password': '147852', 'activation': True}
 }
+
 print('\nРешение №2 будет более быстрым, т.к. имеет константную сложность.\n')
+
 print(authorization_one('lolo', '123456'))
 print(authorization_one('toto', '123789'))
 print(authorization_one('wewe', '123456'))
 print(authorization_one('coco', '123456'))
+
 print(f'\n{"*" * 50}\n')
+
 print(authorization_two('lolo', '123456'))
 print(authorization_two('toto', '123789'))
 print(authorization_two('wewe', '123456'))

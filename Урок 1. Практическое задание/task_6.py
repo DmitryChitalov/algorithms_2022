@@ -40,24 +40,23 @@ improvement = TaskBoard()  # Задачи на доработку
 main.el_insert('Задача №1')
 main.el_insert('Задача №2')
 
-print(main.el_size())
-print(improvement.el_size())
+print(main.el_size())  # Проверяем сколько задач в основном списке
+print(improvement.el_size())  # Проверяем сколько задач в списке на доработку
 
-improvement.el_insert('Задача №3')
+improvement.el_insert('Задача №3')  # Добавляем задачи на доработку
 improvement.el_insert('Задача №4')
 
-print(main.el_size())
-print(improvement.el_size())
+print(main.el_size())  # Проверяем сколько задач в основном списке
+print(improvement.el_size())   # Проверяем сколько задач в списке на доработку
 
-main.el_remove(improvement, main)
+main.el_remove(improvement, main)  # Переносим задачу из основного списка на доработку
 
-print(main.el_size())
-print(improvement.el_size())
+print(main.el_size())  # Проверяем сколько задач в основном списке
+print(improvement.el_size())   # Проверяем сколько задач в списке на доработку
 
-print(improvement.el_pop())
-main.el_remove(improvement, main)
+main.el_remove(improvement, main)  # Переносим задачу из основного списка на доработку
 
-print(main.el_size())
-print(improvement.el_size())
+print(main.el_size())  # Проверяем сколько задач в основном списке
+print(improvement.el_size())   # Проверяем сколько задач в списке на доработку
 
 
