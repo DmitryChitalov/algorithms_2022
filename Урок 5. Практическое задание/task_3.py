@@ -25,3 +25,72 @@ appendleft, popleft, extendleft дека и соответствующих им 
 для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
 (append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+
+from collections import deque
+from timeit import timeit
+
+
+def output(data):
+    print(data[data.find(".")+1:data.find("(")], end=': ')
+    print(f'{data[data.find("test"):data.find(".")]}',
+          timeit(f'{data}', globals=globals(), number=1000))
+
+
+if __name__ == '__main__':
+
+    test_list = []
+    test_deque = deque()
+
+    n = [i for i in range(100)]
+
+    """1 часть"""
+
+    print('1 часть')
+    output("""for i in n:
+                test_list.append(i)""")         # append: test_list 0.021547515999827738
+    output("""for i in n:
+                test_deque.append(i)""")        # append: test_deque 0.015791098999670794
+    output('test_list.pop()')                   # pop: test_list 9.318800039181951e-05
+    output('test_deque.pop()')                  # pop: test_deque 8.602799971413333e-05
+    output('test_list.extend(n)')               # extend: test_list 0.0011420630003158294
+    output('test_deque.extend(n)')               # extend: test_list 0.000888282999767398
+
+    """
+    По операциям 1 части задания особой разницы в скорости выполнения не выявлено.
+    Это объяснимо тем, что в этих операциях обе структуры идентичны. Единственно,
+    операция extend у дека работает чуть-чуть быстрее. Видимо это связано с несколько
+    иным процессом формирования индексов
+    """
+
+    """2 часть"""
+
+    print('2 часть')
+    output("""for i in n:
+                test_list.insert(0, i)""")      # insert: test_list 45.648187101000076
+    output("""for i in n:
+                test_deque.appendleft(n)""")    # appendleft: test_deque 0.010974553000323795
+    output('test_list.pop(0)')                  # pop: test_list 0.44451719400012735
+    output('test_deque.popleft()')              # popleft: test_deque 8.78490000104648e-05
+    output("""for i in n:
+                test_list.insert(0, i)""")      # test_list 63.997972278999896
+    output('test_deque.extendleft(n)')          # extendleft: 0.0016368179999517452
+
+    """
+    По операциям 2 части видно, что операции добавления "слева" для списка даются
+    очень тяжело. Результаты замеров разнятся на порядки. Причина - пересчет
+    индексов. Также, у списка нет аналога метода extendleft дека
+    """
+
+    """3 часть"""
+
+    print('3 часть')
+    output("""for i in n: 
+                test_list[i]""")               # 0.0061287230000743875
+    output("""for i in n:      
+                test_deque[i]""")              # 0.0067439300000842195
+
+    """
+    В выборке список несколько быстрее, так как список это структура предназначенная
+    для произвольного доступа к данным, а дэк - это структура для выполнения 
+    последовательностей операций чтения и записи с начала и конца массивов данных
+    """

@@ -28,3 +28,47 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import defaultdict
+
+
+def calc_av(data):
+    n = len(data) * 4
+    total = 0
+
+    for item in data.values():
+        total += sum(item)
+
+    return total / n
+
+
+def dict_fill():
+    i = int(input('Введите количество предприятий для расчета прибыли: '))
+    for _ in range(i):
+        name = input('Введите название предприятия: ')
+        val = input('через пробел введите прибыль данного предприятия\n'
+                    'за каждый квартал(Всего 4 квартала): ')
+        val = [int(item) for item in val.split(' ')]
+        companies[name] = val
+
+
+def output(data, target):
+    print(f'Средняя годовая прибыль всех предприятий: {target}')
+    print(f'Предприятия, с прибылью выше среднего значения:', end=' ')
+    for name, val in data:
+        if sum(val) >= target:
+            print(name, end=' ')
+    print()
+    print(f'Предприятия, с прибылью ниже среднего значения:', end=' ')
+    for name, val in data:
+        print(name)
+        if sum(val) < target:
+            print(name, end=' ')
+    print()
+
+
+if __name__ == '__main__':
+
+    companies = defaultdict(list)
+    dict_fill()
+    output(companies.items(), calc_av(companies))
