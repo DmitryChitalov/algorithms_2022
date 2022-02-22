@@ -7,3 +7,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+from random import randint
+
+
+def generator(number=randint(0, 100), i=0):
+    if i < 10:
+        num = int(input('Введите число от 0 до 100: '))
+        print(f'Осталось попыток: {10 - i}')
+        if num == number:
+            return print('Вы угадали число!')
+        elif num < number:
+            return print('Загаданное число больше, чем ваше'), generator(number, i + 1)
+        else:
+            return print('Загаданное число меньше, чем ваше'), generator(number, i + 1)
+    else:
+        return print('Вы не отгадали число!')
+
+
+generator()
