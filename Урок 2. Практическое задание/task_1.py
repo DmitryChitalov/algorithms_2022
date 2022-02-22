@@ -27,3 +27,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calculate_tools():
+    sign = (input('Введите операцию (+, -, *, / или 0 для выхода): '))
+    if sign != '0' and sign in '+-*/':
+        num1 = int(input('Введите первое число: '))
+        num2 = int(input('Введите второе число: '))
+        if sign == '/' and num2 == 0 :
+            print(f"Вы ввели ноль при делении, на ноль делить нельзя!!!")
+            return calculate_tools()
+        if znak == '+':
+            print(f"Ваш результат {num1 + num2}")
+        elif znak == '-':
+            print(f"Ваш результат {num1 - num2}")
+        elif znak == '*':
+            print(f"Ваш результат {num1 * num2}")
+        else:
+            print(f"Ваш результат {num1 / num2}")
+        return calculate_tools()
+    elif sign == "0":
+        return f"Вы ввели 0. Выход из программы."
+    else:
+        print(f"Вы ввели неверный знак")
+        return calculate_tools()
+
+print(calculate_tools())
+
+
+
