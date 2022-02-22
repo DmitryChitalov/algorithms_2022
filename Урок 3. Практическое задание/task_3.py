@@ -22,3 +22,20 @@
 р
 а
 """
+
+import hashlib
+
+def check_str(string):
+    """
+    Функция подсчета уникальных подстрок.
+    В вычисление хеша подставляется slice с минимальной разницей в единицу,
+    посколько полное слово получать не нужно.
+    """
+    sub_s = set()
+    for i in range(len(string)):
+        for y in range(len(string) - 1, i, -1):
+            sub_s.add(hashlib.sha256(string[i:y].encode()).hexdigest)
+    return f'Количество уникальных подстрок: {len(sub_s)}'
+
+
+print(check_str("Papa"))
