@@ -30,3 +30,35 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import profile
+
+"""Задание 4_1 курс Алгоритмы"""
+
+
+@profile
+def func_1(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+
+@profile
+def func_2(nums):
+    new_arr = filter(lambda x: x % 2 == 0, nums)
+    return new_arr
+
+
+if __name__ == '__main__':
+
+    a = func_1(list(range(1000000)))
+
+    b = list(func_2(list(range(1000000))))
+
+    if a == b:
+        print('OK')
+
+    """
+    Использована функция filter. На миллионном списке 
+    первая функция заняла 3.90234375 Mib, тогда как вторая
+    0,0. Также отмечается ускорение выполнения по времени
+    """

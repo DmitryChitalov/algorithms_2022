@@ -30,3 +30,47 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import memory_usage
+from numpy import array
+
+"""Задание 4_1 с курса Алгоритмы"""
+
+
+def deco(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(*args)
+        stop = memory_usage()
+        mem_diff = stop[0] - start[0]
+        return res, mem_diff
+    return wrapper
+
+
+@deco
+def func_1():
+    n = [i for i in range(1000000)]
+    new_arr = (i for i in n if i % 2 == 0)
+    return new_arr
+
+
+@deco
+def func_2():
+    n = array([i for i in range(1000000)])
+    new_arr = array([i for i in n if i % 2 == 0])
+    return new_arr
+
+
+if __name__ == '__main__':
+    res, mem = func_1()
+    print(f'Использовано памяти: {mem}')
+
+    res_arr, mem_arr = func_2()
+    print(f'Использовано памяти: {mem_arr}')
+
+    """
+    Для оптимизации применен метод array модуля NumPy. 
+    За счет более оптимального алгоритма работы с памятью
+    данный метод позволил сократит объем занимаемой ОЗУ с
+    38.99609375 до 7.60546875 Mib
+    """

@@ -30,3 +30,42 @@
 
 Это файл для пятого скрипта
 """
+
+from pympler import asizeof
+
+
+class Road1:
+    __slots__ = ['_length', '_width']
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def mass_of_road(self, thick):
+        mass = (self._length * self._width * thick * 25) / 1000
+        return mass
+
+
+class Road2:
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def mass_of_road(self, thick):
+        mass = (self._length * self._width * thick * 25) / 1000
+        return mass
+
+
+if __name__ == '__main__':
+    road_mass_1 = Road1(5000, 20)
+    print(asizeof.asizeof(road_mass_1))
+
+    road_mass_2 = Road2(5000, 20)
+    print(asizeof.asizeof(road_mass_2))
+
+    """
+    Применение в качестве базовой структуры список вместо словаря
+    получилось добиться снижения размера объекта класса с 328 байт
+    до 112 байт
+    """
