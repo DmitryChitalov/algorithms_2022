@@ -16,3 +16,31 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from numpy import median
+
+
+def numpy_median(lst_obj):
+    return median(lst_obj[:])
+
+
+m = 10
+orig_list_10 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: {timeit("numpy_median(orig_list_10[:])", globals=globals(), number=1000)}')
+
+m = 100
+orig_list_100 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: {timeit("numpy_median(orig_list_100[:])", globals=globals(), number=1000)}')
+
+m = 1000
+orig_list_1000 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: {timeit("numpy_median(orig_list_1000[:])", globals=globals(), number=1000)}')
+
+"""
+При m = 10: 0.046043
+При m = 100: 0.0632346
+При m = 1000: 0.258984
+Встроенная функция оказалась самой эффективной.
+"""
