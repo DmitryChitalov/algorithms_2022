@@ -24,3 +24,90 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+from functools import reduce
+
+# 1.Решение через collections
+hex_line = '0123456789ABCDEF'
+test = defaultdict(list)
+
+
+def collect(array, val):
+    for el in val:
+        if el in hex_line:
+            test[val].append(el)
+        else:
+            return exit('Введено неверное значение')
+    return array
+
+
+def to_hex(dec):
+    result = ''
+    while dec != 0:
+        dec, val = divmod(dec, 16)
+        result = hex_line[val] + result
+    return result
+
+
+def reduce_sum(p_el, el):
+    return to_hex(int(p_el, 16) + int(el, 16))
+
+
+def reduce_mul(p_el, el):
+    return to_hex(int(p_el, 16) * int(el, 16))
+
+
+val1 = input('Введите первое 16-чное число: ').upper()
+collect(test, val1)
+sign = input('Введите математический знак (* или +): ')
+val2 = input('Введите второе 16-чное число: ').upper()
+collect(test, val2)
+
+if sign == '+':
+    result = reduce(reduce_sum, test)
+elif sign == '*':
+    result = reduce(reduce_mul, test)
+else:
+    exit('Был введен некорректный математический знак!')
+collect(test, result)
+print(test[result])
+
+
+# 2. Решение через ООП
+class HexValue:
+    def __init__(self, in_val):
+        self.__hex_line = '0123456789ABCDEF'
+        self.value = self.__input_convert(in_val)
+        self.dec_value = int(in_val, 16)
+
+    def __add__(self, other):
+        return self.__to_hex(self.dec_value + other.dec_value)
+
+    def __mul__(self, other):
+        return self.__to_hex(self.dec_value * other.dec_value)
+
+    def __to_hex(self, dec):
+        result = []
+        while dec != 0:
+            dec, val = divmod(dec, 16)
+            result.insert(0, self.__hex_line[val])
+        return result
+
+    def __input_convert(self, in_val):
+        result = []
+        for el in in_val.upper():
+            if el not in self.__hex_line:
+                return exit('Введено неверное значение')
+            result.append(el)
+        return result
+
+
+val1 = HexValue(input('Введите первое 16-чное число: '))
+sign = input('Введите математический знак (* или +): ')
+val2 = HexValue(input('Введите второе 16-чное число: '))
+if sign == '+':
+    print(val1 + val2)
+elif sign == '*':
+    print(val1 * val2)
+else:
+    print('Был введен некорректный математический знак!')
