@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+
+def hash_func(s):
+    hash_set = set()
+    for n in range(len(s)):
+        for i in range(len(s)):
+            if s[n:i + 1] != s and s[n:i + 1] != '':
+                hash_set.add(hashlib.sha256(s[n:i + 1].encode()).hexdigest())
+    return hash_set
+
+
+print(hash_func('papa'))
