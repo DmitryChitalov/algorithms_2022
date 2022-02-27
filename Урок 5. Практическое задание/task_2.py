@@ -24,3 +24,20 @@ reduce
 __mul__
 __add__
 """
+class HexadecimalCalc:
+    def __init__(self, h):
+        self.hexadecimal = h
+
+    def __add__(self, other):
+        add = str(hex(int(self.hexadecimal, 16) + int(other.hexadecimal, 16)))
+        return add[2:].upper()
+
+    def __mul__(self, other):
+        mul = str(hex(int(self.hexadecimal, 16) * int(other.hexadecimal, 16)))
+        return mul[2:].upper()
+
+
+first_hexadec = HexadecimalCalc('a2')
+second_hexadec = HexadecimalCalc('c4f')
+print(first_hexadec + second_hexadec)
+print(first_hexadec * second_hexadec)
