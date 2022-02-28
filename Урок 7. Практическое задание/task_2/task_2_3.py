@@ -16,3 +16,37 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from numpy import median
+from random import randint
+from timeit import timeit
+
+orig_list_11 = [randint(-100, 100) for _ in range(11)]
+orig_list_101 = [randint(-100, 100) for _ in range(101)]
+
+print(
+    timeit(
+        "median(orig_list_11[:])",
+        globals=globals(),
+        number=1000))
+
+print(
+    timeit(
+        "median(orig_list_101[:])",
+        globals=globals(),
+        number=1000))
+
+print(
+    timeit(
+        "median([randint(-100, 100) for _ in range(1001)])",
+        globals=globals(),
+        number=1000))
+
+"""
+По сравнению с остальными вариантами - неоспаримый лидер.
+На массиве в 1001 элемент поиск занял 1,57 секунды. Аналитика
+проведена по массивам в 1001 элемент как более показательная.
+На массиве 101 время работы функции mediana из task_2_2
+не превышало 0,6-0,8 секунды, тогда как функция из task_2_1 уже тут
+перевалила за 1,1.
+"""
