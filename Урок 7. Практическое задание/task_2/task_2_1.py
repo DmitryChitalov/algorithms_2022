@@ -20,7 +20,7 @@ from random import randint
 from timeit import timeit
 
 
-def gnome(data):
+def gnome(data, m):
     i, j, size = 1, 2, len(data)
     while i < size:
         if data[i - 1] <= data[i]:
@@ -30,37 +30,25 @@ def gnome(data):
             i -= 1
             if i == 0:
                 i, j = j, j + 1
-    return data, data[int((size - 1)/2)]
+    return data, data[m]
 
 
 if __name__ == "__main__":
 
-    orig_list_11 = [randint(-100, 100) for _ in range(11)]
-
-    print(
-        timeit(
-            "gnome(orig_list_11[:])",
-            globals=globals(),
-            number=1000))
-
-    orig_list_101 = [randint(-100, 100) for _ in range(101)]
-
-    print(
-        timeit(
-            "gnome(orig_list_101[:])",
-            globals=globals(),
-            number=1000))
-
-    orig_list_1001 = [randint(-100, 100) for _ in range(1001)]
-
-    print(
-        timeit(
-            "gnome(orig_list_1001[:])",
-            globals=globals(),
-            number=1000))
+    for m in [5, 50, 500]:
+        orig_list_11 = [randint(-100, 100) for _ in range(2*m + 1)]
+        print(
+            timeit(
+                "gnome(orig_list_11[:], m)",
+                globals=globals(),
+                number=1000))
 
     """
-    На массиве из 1001 элемента время составило 112.62 секунды и
-    это с учетом некоторойоптимизации алгоритма. А чем больше массив 
+    Листинг вывода:
+    0.01876744899982441
+    1.1987720910001372
+    111.73710173700056
+    На массиве из 1001 элемента время составило 111.73 секунды и
+    это с учетом некоторой оптимизации алгоритма. А чем больше массив 
     - тем хуже.
     """

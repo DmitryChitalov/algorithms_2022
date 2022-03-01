@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="lesson6 - Memmory profiler">
-      <change beforePath="$PROJECT_DIR$/.idea/algorithms_2022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/algorithms_2022.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="lesson7 - Sorters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 7. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 7. Практическое задание/task_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +137,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_2_2">
+  <component name="RunManager" selected="Python.task_2_1">
     <configuration name="task_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -228,10 +224,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_2_2" />
         <item itemvalue="Python.task_2_1" />
-        <item itemvalue="Python.task_2_3" />
         <item itemvalue="Python.task_1" />
+        <item itemvalue="Python.task_2_2" />
+        <item itemvalue="Python.task_2_3" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +243,14 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
     </task>
+    <task id="LOCAL-00001" summary="lesson7 - Sorters">
+      <created>1646063854536</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646063854536</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -283,6 +287,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lesson7 - Sorters" />
+    <option name="LAST_COMMIT_MESSAGE" value="lesson7 - Sorters" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
