@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="hw8">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/algorithms_2022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/algorithms_2022.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="hw6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,6 +204,14 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
     </task>
+    <task id="LOCAL-00001" summary="hw6">
+      <created>1646585590393</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646585590393</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -259,6 +261,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="hw6" />
+    <option name="LAST_COMMIT_MESSAGE" value="hw6" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
