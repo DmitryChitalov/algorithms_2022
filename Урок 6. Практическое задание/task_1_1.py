@@ -30,3 +30,22 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+from random import randint
+
+@profile
+# Исходная функция (урок 4, задание 1):
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+# Оптимизирую. Возвращается генератор вместо списка
+@profile
+def optimized(nums):
+    return (i for i, x in enumerate(nums) if x % 2 == 0)
+
+
+my_nums = [randint(1, 10000) for my_num in range(100000)]
+func_2(my_nums)
+optimized(my_nums)
