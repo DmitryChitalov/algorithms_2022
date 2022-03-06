@@ -56,7 +56,7 @@ def thesaurus(*args):
         names.setdefault(key, []).append(value)
     return names
 
-
+# Оптимизация: использовал filter и lambda, благодаря чему снизилось потребление памяти
 @memory
 def optimized(*args):
     names = {}
