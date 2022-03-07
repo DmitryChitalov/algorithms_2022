@@ -30,3 +30,40 @@
 
 Это файл для четвертого скрипта
 """
+import numpy
+from memory_profiler import profile
+
+@profile
+def func():
+    arr = [i for i in range(1, 1000000, 2)]
+    return arr
+
+# Вариант оптимизации через numpy
+@profile
+def new_func():
+    arr = numpy.arange(1, 1000000, 2)
+    return arr
+
+
+if __name__ == '__main__':
+    func()
+    new_func()
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     36     39.9 MiB     39.9 MiB           1   @profile
+#     37                                         def func():
+#     38     59.2 MiB  -3478.1 MiB      500003       arr = [i for i in range(1, 1000000, 2)]
+#     39     59.2 MiB      0.0 MiB           1       return arr
+#
+#
+
+#
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     42     40.2 MiB     40.2 MiB           1   @profile
+#     43                                         def new_func():
+#     44     42.1 MiB      1.9 MiB           1       arr = numpy.arange(1, 1000000, 2)
+#     45     42.1 MiB      0.0 MiB           1       return arr
+
+#numpy показывает существенное снижение использования памяти на больших объемах данных

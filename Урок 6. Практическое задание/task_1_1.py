@@ -30,3 +30,42 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+
+def mem(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(args[0])
+        stop = memory_usage()
+        memory = stop[0] - start[0]
+        return res, memory
+    return wrapper
+
+@mem
+def get_profit_1(dictionary: dict):
+    res = []  # O(1)
+    for i in dictionary.items():  # O(n)
+        res.append(i)  # O(1)
+    res.sort(key=lambda x: (x[1], x[0]), reverse=True)  # O(NlogN)
+    return res[0:3]
+
+@mem
+def new_get_profit(dictionary: dict):
+    c_data = dictionary.copy()
+    res = []
+    for i in range(3):
+        res.append(max(c_data, key=c_data.get))
+        yield c_data.pop(res[i])
+    del c_data
+    del res
+
+if __name__ == '__main__':
+    test_dict = {i: i ** 3 for i in range(10000)}
+    f_1, res_1 = get_profit_1(test_dict)
+    g_1, res_2 = new_get_profit(test_dict)
+    print(f' оригинальное решение заняло: {res_1} mib')
+    print(f' отимизированное решение заняло: {res_2} mib')
+
+ # оригинальное решение заняло: 0.8203125 mib
+ # отимизированное решение заняло: 0.0 mib
+# yield не хранит рез
