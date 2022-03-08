@@ -9,3 +9,25 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+
+@profile
+def factorial(n):
+    if n == 1:
+        return n
+    factorial(n - 1)
+
+
+factorial(10)
+
+
+@profile
+def solution_func(n):
+    return factorial(n)
+
+
+solution_func(10)
+
+
+# Оптимизация: профилировщик делает замер единожды, вместо замера при каждом вызове
