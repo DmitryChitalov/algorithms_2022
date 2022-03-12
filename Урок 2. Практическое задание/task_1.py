@@ -16,14 +16,45 @@
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. В задании нельзя применять циклы.
-
-Пример:
-Введите операцию (+, -, *, / или 0 для выхода): +
-Введите первое число: 214
-Введите второе число: 234
-Ваш результат 448
-Введите операцию (+, -, *, / или 0 для выхода): -
-Введите первое число: вп
-Вы вместо трехзначного числа ввели строку (((. Исправьтесь
-Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    str_equation = input('Введите уравнение типа x + y (0 для выхода): ')
+    list_equation = str_equation.split(' ')
+    if list_equation[0] == '0' and len(list_equation) == 1:
+        print('Конец')
+    else:
+        try:
+            x = float(list_equation[0])
+            y = float(list_equation[2])
+            operand = list_equation[1]
+        except (ValueError, IndexError):
+            print('Некорректное уравнение!')
+            return calc()
+
+        if operand == '+':
+            print(x + y)
+            return calc()
+        elif operand == '-':
+            print(x - y)
+            return calc()
+        elif operand == '*':
+            print(x * y)
+            return calc()
+        elif operand == '/':
+            try:
+                result = x / y
+            except ZeroDivisionError:
+                print('Деление на ноль!')
+                return calc()
+            else:
+                print(result)
+                return calc()
+        else:
+            print('Неверный знак!')
+            return calc()
+
+
+if __name__ == '__main__':
+    calc()

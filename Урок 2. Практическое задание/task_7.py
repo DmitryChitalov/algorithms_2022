@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def proof(n):
+    if n == 1:
+        return n
+    return proof(n - 1) + n
+
+
+n = int(input('Введите n: '))
+
+if proof(n) == n * (n + 1) / 2:
+    print(f'{True}\n{proof(n)} = {n} * ({n} + 1) / 2')
+else:
+    print(False)

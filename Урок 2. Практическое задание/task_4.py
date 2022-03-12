@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_digit(n, count=0, num=1.0, sum_n=0.0):
+    if count == n:
+        return f'Сумма из {n} элементов = {sum_n}'
+    return sum_digit(n, count + 1, num / -2, sum_n + num)
+
+
+try:
+    print(sum_digit(int(input('Введите кол-во элементов: '))))
+except ValueError:
+    print('Нужно число!')
