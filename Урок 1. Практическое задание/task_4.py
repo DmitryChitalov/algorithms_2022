@@ -16,9 +16,56 @@
 А если нет, то польз-лю нужно предложить ее пройти.
 
 Приложение должно давать ответы на эти вопросы
- и быть реализовано в виде функции.
+и быть реализовано в виде функции.
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, применить словарь.
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Вариант 1 O(n)
+users_ = {'user_1': {'login': 'user', 'password': 'passw', 'activation': True},
+          'user_2': {'login': 'user2', 'password': 'passw2', 'activation': False}
+          }
+
+
+def login(users, name, password):
+    for k in users.keys():                                                      # O(n)
+        if users[k]['login'] == name and users[k]['password'] == password:      # O(1)
+            if users[k]['activation']:                                          # O(1)
+                return f'OK'                                                    # O(1)
+            return f'Пройдите активацию'                                        # O(1)
+
+    return f'Такого пльзователя нет'                                            # O(1)
+
+
+print(login(users_, 'user2', 'passw2'))
+
+print('*' * 30)
+
+# Вариант 2 O(1) - Предпочтительнее второй вариант, так как константная сложность самая минимальная по времени выполнения
+account = {
+    'login': 'user',
+    'password': 'passw',
+    'activation': True
+}
+
+user_ = {
+    'login': 'user',
+    'password': 'passw',
+    'activation': True
+}
+
+
+def login_1(user):
+    if user['activation']:                                                                 # O(1)
+        if user['login'] == account['login'] and user['password'] == account['password']:  # O(1)
+            return 'ОК'                                                                    # O(1)
+        else:
+            return 'Неверный логин или пароль'                                             # O(1)
+    else:
+        return 'Пройдите активацию'                                                        # O(1)
+
+
+print(login_1(user_))
+
