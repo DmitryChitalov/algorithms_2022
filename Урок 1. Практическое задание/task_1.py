@@ -37,10 +37,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(n+1).
+    Сложность: O(n).
     """
     for j in range(len(lst_obj)):          # O(n)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(n+1)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
             return False                   # O(1)
     return True                            # O(1)
 
