@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_n(n: int):
+    if n == 0:
+        return 0
+    return n + sum_n(n-1)
+
+
+if __name__ == "__main__":
+    tst = [n for n in range(1, 100)]
+    for ts in tst:
+        res1 = sum_n(ts)
+        res2 = ts*(ts+1)/2
+        print(f'Для числа {ts}, сумма = {res1}, результат по формуле {res2} и они {"не "if res1 != res2 else ""}равны.')

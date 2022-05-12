@@ -7,3 +7,36 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def guess_number(numb: int, n=10):
+    if n == 10:
+        print("Я загадал число от 0 до 100, попробуйте отгадать: ", end="")
+    if n < 1:
+        print()
+        print(f'Я загадывал число {numb}, к сожалению вы не смогли отгадать за 10 попыток')
+        return
+    a = input()
+    if not(a.isdigit()):
+        print("Можно вводить только числа от 0 до 100, попробуйте еще раз: ", end="")
+        guess_number(numb, n=n-1)
+        return
+    a = int(a)
+    if 0 > a or a > 100:
+        print("Можно вводить только числа от 0 до 100, попробуйте еще раз: ", end="")
+        guess_number(numb, n=n-1)
+        return
+    if a == numb:
+        print("Вы отгадали!")
+        return
+    elif a > numb and n != 1:
+        print(f"Я загадал число меньше {a}, попробуйте еще раз: ", end="")
+    elif a < numb and n != 1:
+        print(f"Я загадал число больше {a}, попробуйте еще раз: ", end="")
+    guess_number(numb, n=n-1)
+
+
+if __name__ == "__main__":
+    guess_number(randint(0, 100))
+
