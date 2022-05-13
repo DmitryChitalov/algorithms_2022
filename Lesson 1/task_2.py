@@ -15,3 +15,31 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+from random import sample, randint
+
+
+# Сложность O(n**2)
+def min_element_1(lst_obj):
+    min_num = lst_obj[0]  # O(1)
+    for i in lst_obj:  # O(n)
+        for j in lst_obj:  # O(n)
+            if i < j and i < min_num:  # O(1)
+                min_num = i  # O(1)
+    return min_num  # O(1)
+
+
+# Сложность O(n)
+def min_element_2(lst_obj):
+    min_num = lst_obj[0]  # O(1)
+    for i in lst_obj:  # O(n)
+        if i < min_num:  # O(1)
+            min_num = i  # O(1)
+    return min_num  # O(1)
+
+
+num_list = sample(range(-100, 100), randint(20, 40))
+
+print(num_list)
+print(min_element_1(num_list))
+print(min_element_2(num_list))
