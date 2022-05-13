@@ -17,3 +17,28 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+# Решение №1. Общая сложность O(n**2)
+def max_profit_1(dict_obj):
+    top_three_profit = {}  # O(1)
+    sort_val_obj = sorted(dict_obj.values())[-3:]  # O(n log n)
+    for element_lst in sort_val_obj:  # O(n)
+        for k, v in dict_obj.items():  # O(n)
+            if v == element_lst:  # O(1)
+                top_three_profit[k] = v  # O(1)
+    return top_three_profit  # O(1)
+
+
+# Решение №2. Общая сложность O(n log n)
+def max_profit_2(dict_obj):
+    sort_tuple_obj = sorted(dict_obj.items(), key=lambda x: x[1])[-3:]  # O(n log n)
+    return dict(sort_tuple_obj)  # O(1)
+
+
+list_company = {'company_1': 45400000, 'company_2': 900000, 'company_3': 1000000, 'company_4': 100000,
+                'company_5': 200000, 'company_6': 1500000, 'company_7': 50000, 'company_8': 5000000}
+
+print(max_profit_1(list_company))
+print(max_profit_2(list_company))
+
+# Вывод: второе решение лучше по сравнению с первым, так как имеет более читабельный код и меньшую сложность.
