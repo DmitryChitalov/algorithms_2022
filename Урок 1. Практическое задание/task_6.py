@@ -17,3 +17,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class TaskBoard:
+    def __init__(self):
+        self.unsolved = []
+        self.revision = []
+        self.solved = []
+
+    def to_queue(self, item):
+        self.unsolved.insert(0, item)
+
+    def base_queue(self):
+        inp = input(f'Отправить задачу {self.unsolved[-1]} на доработку? Если да, нажмите "y".'
+                    'Иначе нажмите любую другую клавишу и задача будет выполнена. ')
+        if inp.lower() == 'y':
+            self.revision.insert(0, self.unsolved.pop())
+        else:
+            self.solved.append(self.unsolved.pop())
+
+    def revision_queue(self):
+        self.solved.append(self.revision.pop())
+
+    def solved_task(self):
+        return self.solved
+
+    def unsolved_task(self):
+        return self.unsolved
+
+    def revision_task(self):
+        return self.revision
+
+
+if __name__ == '__main__':
+    tb = TaskBoard()
+
+    for task in range(1, 10):
+        tb.to_queue(f'Задача {task}. №:{task}')
+
+    print(tb.unsolved_task())
+    tb.base_queue()
+    print(tb.unsolved_task())
+    tb.base_queue()
+    tb.revision_queue()
+    print(tb.solved_task())
