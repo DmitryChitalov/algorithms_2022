@@ -15,3 +15,42 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def find_min_n(source_list: list) -> int:
+    """
+    Функция, возвращающая минимальный элемент списка со сложностью О(n)
+    На каждом шаге еще одна операция сравнения и в общем случае еще одна операция
+    присваивания, то есть общая сложность будет O(3n). Верно ли такое рассуждение?
+    """
+
+    min_ = source_list[0]  # O(2)
+    for item in source_list[1:]:  # O(n)
+        if item < min_:  # O(1)
+            min_ = item  # O(1)
+
+    return min_  # O(1)
+
+
+def find_min_n2(source_list: list) -> int:
+    """
+    Функция, возвращающая минимальный элемент списка со сложностью О(n**2)
+    "Странный" код, чтобы получить квадратичную сложность.
+    """
+
+    min_ = 0  # O(1)
+    for i in range(len(source_list)):  # O(n)
+        item = source_list[i]  # O(1)
+        for other in source_list[:i] + source_list[i:]:  # O(n)
+            if other < item:  # O(1)
+                break  # O(1)
+        else:
+            min_ = item  # O(1)
+
+    return min_  # O(1)
+
+
+if __name__ == '__main__':
+    test_list = [4, -2, 6, -8, 5]
+    print(find_min_n(test_list))
+    print(find_min_n2(test_list))
