@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc(op, a, b: str):
+    cs = {"+": summ, "-": subb, "/": divv, "*": mull}
+    if op == "0":
+        return None
+    if op in cs:
+        a = input("Введите первое число:")
+        if not(a.isdigit()):
+            print("Вы вместо числа ввели строку (((. Исправьтесь")
+            calc('', '', '')
+            return None
+        b = input("Введите второе число:")
+        if not (b.isdigit()):
+            print("Вы вместо числа ввели строку (((. Исправьтесь")
+            calc('', '', '')
+            return None
+        print(cs[op](int(a), int(b)))
+    op = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    calc(op, a, b)
+
+
+def summ(a, b: int):
+    return a + b
+
+
+def subb(a, b: int):
+    return a - b
+
+
+def divv(a, b: int):
+    if b != 0:
+        return a / b
+    else:
+        return "Нельзя делить на ноль"
+
+
+def mull(a, b: int):
+    return a * b
+
+
+if __name__ == "__main__":
+    calc('', '', '')

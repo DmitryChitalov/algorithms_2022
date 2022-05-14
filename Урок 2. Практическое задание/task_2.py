@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def digits(num: int):
+    if num == 0:
+        return 0, 0
+    nc = 0
+    ch = 0
+    last = num % 10
+    head = num // 10
+    if last % 2 == 1:
+        nc = 1
+    elif last != 0:
+        ch = 1
+    sub_res = digits(head)
+    return sub_res[0] + ch, sub_res[1] + nc
+
+
+if __name__ == "__main__":
+    tst = [123, 122, 111, 222, 1000, 0, 2000]
+    for ts in tst:
+        print(f"Количество четных и нечетных цифр в числе {ts} равно: {digits(ts)}")

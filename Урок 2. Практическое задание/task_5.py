@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def get_ascii_table(start, stop: int, n=1):
+    if start > stop:
+        return ""
+    sub_res = f'{start} - {chr(start)} '
+    if n % 10 == 0:
+        sub_res = f'{sub_res}\n'
+    return f'{sub_res}{get_ascii_table(start + 1, stop, n=n+1)}'
+
+
+if __name__ == "__main__":
+    print(get_ascii_table(32, 127))
