@@ -17,3 +17,85 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+"""
+Хранить задачи мы будем в виде словаря, где ключ это уникальное имя/id задачи, значение - список, первым элементом 
+которого идет принадлежность к очереди, вторым (остальными) описание задачи.
+Считаю, что нецелесообразно делать двер раздельные очереди, для новых заданий, и заданий на доработку, т.к. есть 
+риск всегда что-то из вида упустить. Импортом/экспортом заданий принебрег
+"""
+
+
+class TaskBoard:
+    def __init__(self):
+        self.queue = []    # Очередь из заданий в работе / доработке
+        self.done = []  # Список (очередь) решенных задач
+        self.task_dict = {}     # Словарь, в котором мы храним задачи
+
+    def create_task(self):
+        task_name = input('Введите имя задачи: ')
+        if task_name in self.queue or task_name in self.done:
+            task_name = input('Задача с таким иминем уже существует! Введите новое имя задачи')
+        task_status = 'new'
+        task_description = input('Введите описание задачи: ')
+        print(task_name, task_description, task_status)
+        self.task_dict[task_name] = [task_status, task_description]     # Создаем и сохраняем задание
+        self.queue.insert(0, task_name)        # помещаем задание в очередь на выполнение
+        self.start()
+
+    def grade_task(self):    # Просмотр задачи, и принятие решения, задача выполненна, или отпраляеться на доработку
+        print(f'Задача {self.queue[-1]},'
+              f'Описание задачи: {self.task_dict[self.queue[-1]][1]}')
+        new_status = input('Что делать с задачей?\n'
+                           'Отправить на доработку - введите 1.\n'
+                           'Задача выполненна - введите 2.'
+                           'Введите число: ')
+        if new_status == '1':
+            # меняем статус задачи
+            self.task_dict[self.queue[-1]][1] = 'revision'
+            # т.к. ТЗ не оговаривалось, помещаем задание на доработку в конец списка
+            self.queue.insert(0, self.queue.pop())
+        elif new_status == '2':
+            self.task_dict[self.queue[-1]][1] = 'done'
+            self.done.insert(0, self.queue.pop())
+        else:
+            print('Ошибка пользовательского ввода!')
+        self.start()
+
+    def show_tasks(self):
+        print(f'Очередь задачь к выполнению:\n'
+              f'{self.queue}\n')
+        self.start()
+
+    def show_done_tasks(self):
+        print(f'Список выполненных задач:\n'
+              f'{self.done}')
+        self.start()
+
+    def start(self):
+        print('Доска задач приветствует тебя!')
+        user_input = input('Меню:\n'
+                            'Просмотреть задачи - 1\n'
+                            'Просмотреть выполненные задачи - 2\n'
+                            'Создать задачу - 3\n'
+                           'Просмотр и оценка активной задачи - 4\n'
+                           'Выход - 5\n'
+                           'Введите пункт меню: ')
+        if user_input == '1':
+            self.show_tasks()
+        elif user_input == '2':
+            self.show_done_tasks()
+        elif user_input == '3':
+            self.create_task()
+        elif user_input == '4':
+            self.grade_task()
+        elif user_input == '5':
+            exit(0)
+        else:
+            print('Ошибка пользовательского ввода!')
+            self.start()
+
+
+if __name__ == '__main__':
+    my_tasks = TaskBoard()
+    my_tasks.start()
