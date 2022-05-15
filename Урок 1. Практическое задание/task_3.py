@@ -39,7 +39,7 @@ def find_max_profitable_2(companies_list: dict, max_count=3) -> list:
 
     max_profitable = []  # O(1)
 
-    for _ in range(max_count):  # O(max_count) *
+    for _ in range(max_count):  # O(3)
         company_with_maximum_profit = max(companies_list, key=companies_list.get)  # O(n)
         companies_list.pop(company_with_maximum_profit, None)  # O(1)
         max_profitable.append(company_with_maximum_profit)  # O(1)

@@ -24,7 +24,7 @@ def find_min_n(source_list: list) -> int:
     присваивания, то есть общая сложность будет O(3n). Верно ли такое рассуждение?
     """
 
-    min_ = source_list[0]  # O(2)
+    min_ = source_list[0]  # O(1)
     for item in source_list[1:]:  # O(n)
         if item < min_:  # O(1)
             min_ = item  # O(1)
