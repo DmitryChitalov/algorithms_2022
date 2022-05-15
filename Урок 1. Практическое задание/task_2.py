@@ -20,7 +20,7 @@
 def get_min_number(lst):
     min_number = lst[0]                                     # O(1)
     for i in lst:                                           # O(n)
-        if i < min_number:                                  # O(len(i)
+        if i < min_number:                                  # O(1)
             min_number = i                                  # O(1)
     return min_number                                       # O(1)
 
