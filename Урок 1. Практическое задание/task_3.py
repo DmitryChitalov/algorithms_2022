@@ -31,7 +31,7 @@ def by_value(item):
 max_profit = {}                                                              # O(1)
 i = 0                                                                        # O(1)
 for key, val in sorted(profit_company.items(), key=by_value, reverse=True):  # O(n + n log n)
-    if i < 3:                                                                # O(len(i))
+    if i < 3:                                                                # O(1)
         max_profit.setdefault(key, val)                                      # O(1)
     i += 1                                                                   # O(1)
 print(max_profit)                                                            # O(1)
