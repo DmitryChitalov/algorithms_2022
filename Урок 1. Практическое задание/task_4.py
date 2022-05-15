@@ -22,3 +22,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def check_if_authorized(users_list: dict, checking_username: str) -> bool:
+    """
+    Функция проверки активации со сложностью O(n)
+    """
+
+    for username, (_, is_authorized) in users_list.items():  # O(n)
+        if username == checking_username:  # O(1)
+            return is_authorized  # O(1)
+
+
+def check_if_authorized_2(users_list: dict, checking_username: str) -> bool:
+    """
+    Функция проверки активации со сложностью O(1)
+    Решение эффективнее, т.к. O(1) < O(n) (взятие элемента по ключу словаря эффективнее перебора всех ключей)
+    """
+
+    user = users_list.get(checking_username)  # O(1)
+    return user[1]  # O(1) + O(1)
+
+
+if __name__ == '__main__':
+    users = {
+        'Taras': ('123456', True),
+        'Alex': ('2', False)
+    }
+
+    print(check_if_authorized(users, 'Taras'))
+    print(check_if_authorized(users, 'Alex'))
+    print(check_if_authorized_2(users, 'Taras'))
+    print(check_if_authorized_2(users, 'Alex'))

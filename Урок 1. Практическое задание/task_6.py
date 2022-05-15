@@ -17,3 +17,51 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class Board():
+
+    def __init__(self):
+        self.columns = {
+            'basic': [],
+            'remake': [],
+            'done': []
+        }
+
+    def add_task(self, column, task):
+        """Добавить задачу в колонку"""
+        self.columns[column].insert(0, task)
+
+    def get_task(self, column):
+        """Забрать задачу из колонки"""
+        return self.columns[column].pop()
+
+    @property
+    def get_columns(self):
+        """Посмотреть состояние доски"""
+        return self.columns
+
+
+if __name__ == '__main__':
+    my_board = Board()
+
+    task_1 = 'Первая фича'
+    task_2 = 'Вторая фича'
+    task_3 = 'Третья фича'
+
+    my_board.add_task('basic', task_1)
+    my_board.add_task('basic', task_2)
+    my_board.add_task('basic', task_3)
+    print(my_board.get_columns)
+
+    moving_task = my_board.get_task('basic')
+    my_board.add_task('remake', moving_task)
+    print(my_board.get_columns)
+
+    moving_task = my_board.get_task('basic')
+    my_board.add_task('done', moving_task)
+    print(my_board.get_columns)
+
+    moving_task = my_board.get_task('remake')
+    my_board.add_task('done', moving_task)
+    print(my_board.get_columns)
