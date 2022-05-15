@@ -27,3 +27,45 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# def calc_cycle():
+#     while True:
+#         operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+#         if operator == '0':
+#             break
+#         try:
+#             a = int(input('Введите первое число:  '))
+#             b = int(input('Введите второе число:  '))
+#             result = eval(f'{a}{operator}{b}')
+#             print(f'Ваш результат {result}')
+#         except ZeroDivisionError:
+#             print('На 0 делить нельзя')
+#         except ValueError:
+#             print('Вы ввели не число')
+
+
+def calc_recursion():
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator == '0':
+        return
+
+    try:
+        a = int(input('Введите первое число:  '))
+        b = int(input('Введите второе число:  '))
+        result = eval(f'{a}{operator}{b}')
+        print(f'Ваш результат {result}')
+    except ZeroDivisionError:
+        print('На 0 делить нельзя')
+    except ValueError:
+        print('Вы ввели не число')
+
+    if operator == '0':
+        return
+    else:
+        calc_recursion()
+
+
+if __name__ == '__main__':
+    # calc_cycle()
+    calc_recursion()

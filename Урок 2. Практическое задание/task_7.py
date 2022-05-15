@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def get_summ(current, summ=0):
+    if current == 0:
+        return summ
+    else:
+        summ += current
+        current -= 1
+        return get_summ(current, summ)
+
+
+if __name__ == '__main__':
+    n = random.randint(1, 100)
+    assert get_summ(n) == n * (n + 1) / 2
+    print(f'Для {n} равенство работает')
