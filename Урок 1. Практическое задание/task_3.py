@@ -46,7 +46,7 @@ while len(max_profit_2) < 3:                                                # O(
     max_value = 0                                                           # O(1)
     key_max_value = 0                                                       # O(1)
     for key, value in profit_company.items():                               # O(n)
-        if max_value < value:                                               # O(len(max_value))
+        if max_value < value:                                               # O(1)
             max_value = value                                               # O(1)
             key_max_value = key                                             # O(1)
     profit_company.pop(key_max_value)                                       # O(1)
