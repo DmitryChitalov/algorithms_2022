@@ -26,13 +26,13 @@
 
 def authentication_1(login, pas):
     """
-    Сложность: O(n)
+    Сложность: O(len(users1))
     :param login: str
     :param pas: str
     """
-    if login in users1 and pas == str(users1[login][0]):                                     # O(len(users1))
+    if login in users1 and pas == str(users1[login][0]):                                     # O(n)
         for key, val in users1.items():                                                      # O(n)
-            if key == login and val[1] == 1:                                                 # O(len(users1))
+            if key == login and val[1] == 1:                                                 # O(1)
                 print('Добро пожаловать')                                                    # O(1)
                 break                                                                        # O(1)
             elif key == login and val[1] == 0:                                               # O(len(users1))
