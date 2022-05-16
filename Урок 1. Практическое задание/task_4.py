@@ -37,7 +37,7 @@ def auth_1(users_dict):
     password = input('Введите пароль: ')
     try:
         assert password == users_dict.get(login)[0]
-        if users_dict.get(login)[1]:    # 0(2)
+        if users_dict.get(login)[1]:  # 0(1)
             print('Аутентификация пройдена')
             return users_dict
         else:
@@ -58,6 +58,7 @@ def auth_1(users_dict):
         print('Ошибка аутентификации: неверный логин')
         return users_dict
 
+
 """
 Вариант 2: Храним логин и пароль в словаре, за хранение данных об активированных аккаунтах у нас будет отвечать
 множество. Активация будет проводиться путем добавления логина в множество.
@@ -68,7 +69,7 @@ def auth_2(users_dict, users_set):
     login = input('Введите имя пользователя: ')
     password = input('Введите пароль: ')
     try:
-        assert password == users_dict.get(login)    # O(1)
+        assert password == users_dict.get(login)  # O(1)
         if users_dict[login] in users_set:
             print('Аутентификация пройдена')
             return users_set
@@ -77,7 +78,7 @@ def auth_2(users_dict, users_set):
                               'Активировать -  [y]es\n'
                               'Отмена - введите любой символ: ')
             if usr_answr == 'y':
-                users_set.add(login)    # O(1)
+                users_set.add(login)  # O(1)
                 print('Аутентификация пройдена')
                 return users_set
             else:
@@ -93,8 +94,7 @@ def auth_2(users_dict, users_set):
 
 """
 Итак, по производительности у нас получились 2 крайне похожих варианта - если отбросить одинаковые операции в двух
-функциях, и оценивать только индивидуальные: вариант 1 - О(3), вариант 2 О(2). Т.е. итоговая разница составляет всего
-О(1)!.
+функциях, и оценивать только индивидуальные: вариант 1 - О(1), вариант 2 О(1). Т.е. по сложности функции одинаковы!.
 """
 # Использование варианта 1:
 # users_1 = {'superman111': ('qwerty', True), 'batman': ('1111222', False), 'iron_m@n': ('123456', True)}

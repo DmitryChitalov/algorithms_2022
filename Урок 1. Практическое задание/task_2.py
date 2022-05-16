@@ -16,22 +16,20 @@
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
 
-def first(arr, min_num=None):
+
+def first(arr):
     """
-    Рекуссия O(n^2), или как как придумать проблемму из ничего)
+    исправляюсь на сложность O(n^2)
     :param arr:
-    :param min_num:
     :return:
     """
-    if min_num is None:
-        min_num = arr.pop()
-    current = arr.pop()
-    if current < min_num:
-        min_num = current
-    if arr:
-        return first(arr, min_num)
-    return min_num
-
+    for i in arr:
+        is_min = True
+        for j in arr:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
 
 
 def second(user_list):
