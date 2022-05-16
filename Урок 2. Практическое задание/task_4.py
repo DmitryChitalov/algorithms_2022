@@ -10,3 +10,13 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def total(n, *, num=1, amount=0):
+    if n == 0:
+        return f'Сумма - {amount}'
+    return total(n-1, num=-num / 2, amount=amount + num)
+
+
+print(total(int(input('Введите количество элементов: '))))
+print(total(3))

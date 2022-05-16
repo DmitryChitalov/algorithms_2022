@@ -13,3 +13,13 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def prove_equality(n, *, total=0, counter=1):
+    if total == n * (n + 1) / 2:
+        return 'Доказано, что 1+2+...+n = n(n+1)/2'
+    return prove_equality(n, total=total + counter, counter=counter + 1)
+
+
+print(prove_equality(randint(1, 100)))
