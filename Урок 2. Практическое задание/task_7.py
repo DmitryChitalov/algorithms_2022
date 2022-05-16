@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def prove_equality(n, *, total=0):
+    if n == 0:
+        return total
+    return prove_equality(n-1, total=total + n)
+
+
+num = 5
+print(prove_equality(num) == num * (num + 1) / 2)
