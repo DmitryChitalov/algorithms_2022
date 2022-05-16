@@ -15,3 +15,38 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def first(arr):
+    """
+    исправляюсь на сложность O(n^2)
+    :param arr:
+    :return:
+    """
+    for i in arr:
+        is_min = True
+        for j in arr:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+def second(user_list):
+    """
+    Сложность этого алгоритма O(2n) (O(n) - на переборку и столько же на range(len(user_list)))
+    :param user_list:
+    :return:
+    """
+    min_num = user_list[0]
+    for i in range(len(user_list)):
+        if user_list[i] < min_num:
+            min_num = user_list[i]
+    return min_num
+
+
+list_1 = [10, 0, 2, 56, 3, -5, -78]
+list_2 = [10, 0, 2, 56, 3, -5, -78]
+
+print('Работа первой функции -> ', first(list_1))
+print('Работа второй функции -> ', second(list_2))

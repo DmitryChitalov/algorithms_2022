@@ -22,3 +22,87 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# !!!! Для оценки разницы производительности, буду оценивать только разные вырожения в двух вариантах,
+# одинаковые игнорирую
+
+"""
+Вариант 1: храним данные в словаре, ключ - логин, значение - кортеж, в котором первым элементом идет пароль,
+вторым бинарная отметка об аутентификации
+"""
+
+
+def auth_1(users_dict):
+    login = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    try:
+        assert password == users_dict.get(login)[0]
+        if users_dict.get(login)[1]:  # 0(1)
+            print('Аутентификация пройдена')
+            return users_dict
+        else:
+            usr_answr = input('Учетная запись не активированна!\n'
+                              'Активировать -  [y]es\n'
+                              'Отмена - введите любой символ: ')
+            if usr_answr == 'y':
+                users_dict[login] = (password, True)  # O(1)
+                print('Аутентификация пройдена')
+                return users_dict
+            else:
+                print('Аутентификация не пройдена: учетная запись не активирована')
+                return users_dict
+    except (AssertionError):
+        print('Ошибка аутентификации: неверный пароль')
+        return
+    except (TypeError):
+        print('Ошибка аутентификации: неверный логин')
+        return users_dict
+
+
+"""
+Вариант 2: Храним логин и пароль в словаре, за хранение данных об активированных аккаунтах у нас будет отвечать
+множество. Активация будет проводиться путем добавления логина в множество.
+"""
+
+
+def auth_2(users_dict, users_set):
+    login = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    try:
+        assert password == users_dict.get(login)  # O(1)
+        if users_dict[login] in users_set:
+            print('Аутентификация пройдена')
+            return users_set
+        else:
+            usr_answr = input('Учетная запись не активированна!\n'
+                              'Активировать -  [y]es\n'
+                              'Отмена - введите любой символ: ')
+            if usr_answr == 'y':
+                users_set.add(login)  # O(1)
+                print('Аутентификация пройдена')
+                return users_set
+            else:
+                print('Аутентификация не пройдена: учетная запись не активирована')
+                return users_set
+    except (AssertionError):
+        print('Ошибка аутентификации: неверный пароль')
+        return
+    except (TypeError):
+        print('Ошибка аутентификации: неверный логин')
+        return users_set
+
+
+"""
+Итак, по производительности у нас получились 2 крайне похожих варианта - если отбросить одинаковые операции в двух
+функциях, и оценивать только индивидуальные: вариант 1 - О(1), вариант 2 О(1). Т.е. по сложности функции одинаковы!.
+"""
+# Использование варианта 1:
+# users_1 = {'superman111': ('qwerty', True), 'batman': ('1111222', False), 'iron_m@n': ('123456', True)}
+# users_1 = auth_1(users_1)
+# print(users_1)
+
+# Использование варианта 2:
+users_2 = {'superman111': 'qwerty', 'batman': '1111222', 'iron_m@n': '123456'}
+activated_set = set(['superman111', 'iron_m@n'])
+activated_set = auth_2(users_2, activated_set)
+print(activated_set)
