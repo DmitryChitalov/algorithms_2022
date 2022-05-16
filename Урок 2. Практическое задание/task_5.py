@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii_table(*, num=32, counter=1):
+    if num == 127:
+        print(f'127 - {chr(127)}')
+        return
+    if counter == 10:
+        print(f'{num} - {chr(num)}')
+        return print_ascii_table(num=num + 1, counter=1)
+    print(f'{num} - {chr(num)}', end=' ')
+    return print_ascii_table(num=num + 1, counter=counter + 1)
+
+
+print_ascii_table()
