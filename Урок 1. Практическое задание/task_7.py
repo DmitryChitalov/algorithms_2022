@@ -44,16 +44,17 @@ def pal_checker(string):
     for el in set([_ for _ in string]):
         dc_obj.add_to_front(el)
 
-    wasOdd = False
+    # FIX
+    was_odd = False
     while dc_obj.size() > 0:
         first = dc_obj.remove_from_front()
         s = list(filter(lambda x: x == first, string))
         if s and len(s) % 2:
-            if wasOdd:
+            if was_odd:
                 return False
             else:
-                wasOdd = True
-    return wasOdd
+                was_odd = True
+    return was_odd
 
 
 print("%s[0]: %s" % ("pal_checker", pal_checker("молоко делили ледоколом")))
@@ -64,16 +65,17 @@ print("%s[4]: %s" % ("pal_checker", pal_checker("утро во рту")))
 print("%s[5]: %s" % ("pal_checker", pal_checker("коса в киеве и квасок")))
 
 
+# PEP Fix
 def solver(__string):
     chars = set([_ for _ in __string])
-    wasOdd = False
+    was_odd = False
     for char in chars:
         s = list(filter(lambda x: x == char, __string))
         if s and len(s) % 2:
-            if wasOdd:
+            if was_odd:
                 return False
             else:
-                wasOdd = True
+                was_odd = True
     return True
 
 

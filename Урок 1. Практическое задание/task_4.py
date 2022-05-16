@@ -63,6 +63,18 @@ def check_login_2(login: str, password: str, database: list) -> int:
 
     return 0  # O(1)
 
+# O(1)
+def check_login3(user_name: str, user_password: str, users: list) -> int:
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activated']:
+            return 1
+        elif users[user_name]['password'] == user_password and not users[user_name]['activated']:
+            return 3
+        elif users[user_name]['password'] != user_password:
+            return 0
+    else:
+        return 0
+
 
 def result_message(reason):
     if reason == 0:
@@ -92,6 +104,13 @@ def run_application():
             'activated': False
         }
     ]
+    # FIX
+    users2 = {
+        'masteryoda': {
+            'password': '123123',
+            'activated': True
+        }
+    }
     #################
     print("Аутентификация метод 1:")
     print(result_message(check_login_1(input("Введите логин: "), input("Введите пароль: "), users)))
@@ -99,6 +118,11 @@ def run_application():
     #################
     print("Аутентификация метод 2:")
     result = check_login_2(input("Введите логин: "), input("Введите пароль: "), users)
+    print(result_message(result))
+
+    #################
+    print("Аутентификация метод 3:")
+    result = check_login3(input("Введите логин: "), input("Введите пароль: "), users2)
     print(result_message(result))
 
 
