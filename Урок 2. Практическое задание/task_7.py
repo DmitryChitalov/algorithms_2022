@@ -16,10 +16,11 @@
 from random import randint
 
 
-def prove_equality(n, *, total=0, counter=1):
-    if total == n * (n + 1) / 2:
-        return 'Доказано, что 1+2+...+n = n(n+1)/2'
-    return prove_equality(n, total=total + counter, counter=counter + 1)
+def prove_equality(n, *, total=0):
+    if n == 0:
+        return total
+    return prove_equality(n-1, total=total + n)
 
 
-print(prove_equality(randint(1, 100)))
+num = 5
+print(prove_equality(num) == num * (num + 1) / 2)
