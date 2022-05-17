@@ -19,3 +19,31 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def mad_ascii(step=10, start=32, stop=127, elem_count=0, output_str=''):
+    """
+    Данная функция не только корректно (на мой скромный взгляд) позволяет решить задачу, но и позволяет гибко
+    настроить свою работу.
+    :param step: Количество выводимых элементов в строке
+    :param start: начальный элемент
+    :param stop: конечный элемент
+    :param elem_count: счетчик количества элементов в строке
+    :param output_str: переменная, в которую помещаем промежуточные строки для вывода в консоль
+    :return:
+    """
+    if start <= stop:
+        if elem_count < step:
+            mad_ascii(step, start + 1, stop, elem_count + 1,
+                      output_str + str(start) + ' ' + '-' + ' ' + chr(start) + ' ')
+        else:
+            print(output_str)
+            elem_count = 0
+            output_str = ''
+            mad_ascii(step, start, stop, elem_count, output_str)
+    else:
+        print(output_str)
+
+
+if __name__ == '__main__':
+    mad_ascii()

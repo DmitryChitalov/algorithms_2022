@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def theorem(n, start=1, sum_numbers=0):
+    if n >= start:
+        sum_numbers += start
+        theorem(n, start + 1, sum_numbers)
+    else:
+        try:
+            assert sum_numbers == n * (n + 1) / 2
+            print('Эврика! Теорема верна!')
+        except AssertionError:
+            print('Облом, теорема не подтвердилась...')
+
+
+if __name__ == '__main__':
+    a = int(input('Введите количество элементов для проверки теоремы: '))
+    theorem(a)
