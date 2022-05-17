@@ -22,3 +22,53 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def login(users_dict: dict, user_login: str, user_password: str) -> str:  # O(n)
+    for k, v in users_dict.items():  # O(n)
+        if k == user_login:  # O(1)
+            if v[0] == user_password:  # O(1)
+                if v[1]:  # O(1)
+                    return "Успешный вход!"  # O(1)
+                else:
+                    return "Вам необходимо пройти активацию учетной записи!"  # O(1)
+            else:
+                return "Неверный пароль!"  # O(1)
+
+    return "Пользователя с таким именем не существует!"  # O(1)
+
+
+def login1(users_dict: dict, user_login: str, user_password: str) -> str:  # O(1)
+    if v := users_dict.get(user_login):  # O(1)
+        if v[0] == user_password:  # O(1)
+            if v[1]:  # O(1)
+                return "Успешный вход!"  # O(1)
+            else:
+                return "Вам необходимо пройти активацию учетной записи!"  # O(1)
+        else:
+            return "Неверный пароль!"  # O(1)
+    else:
+        return "Пользователя с таким именем не существует!"  # O(1)
+
+
+if __name__ == '__main__':
+    base_dict = {
+        'ammy': ['pwd', True],
+        'mary': ['pdw', False],
+        'admin': ['qwerty', True],
+        'sam': ['qazw', False]
+    }
+
+    print(login(base_dict, 'ammy', 'pwd1'))
+    print(login(base_dict, 'ammy', 'pwd'))
+    print(login(base_dict, 'mary', 'pdw'))
+    print(login(base_dict, 'mary1', 'pdw'))
+
+    print(login1(base_dict, 'ammy', 'pwd1'))
+    print(login1(base_dict, 'ammy', 'pwd'))
+    print(login1(base_dict, 'mary', 'pdw'))
+    print(login1(base_dict, 'mary1', 'pdw'))
+
+"""
+    Второй подход эффективней, так как не требует перебора всех элементов словаря.
+"""
