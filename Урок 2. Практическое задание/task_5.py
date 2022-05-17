@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_print(num_iter=32, position=0):
+    result = ''
+    if num_iter == 128:
+        return result
+
+    if position == 10:
+        result = result + '\n'
+        position = 0
+
+    result = result + ' ' + str(num_iter) + ' - ' + chr(num_iter) + ascii_print(num_iter + 1, position + 1)
+
+    return result
+
+
+if __name__ == '__main__':
+    print(ascii_print())

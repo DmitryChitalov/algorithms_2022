@@ -13,3 +13,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def get_series(n):
+    if n == 1:
+        return 1
+    return n + get_series(n - 1)
+
+
+def proof(n):
+    sum_series = get_series(n)
+    result_calculation = (n * (n + 1) / 2)
+
+    if sum_series == result_calculation:
+        print(f'Для n = {n} - теорема доказана')
+    else:
+        print(f'Для n = {n} - теорема не верна')
+
+    print(f'Сумма ряда: {sum_series}\nРезультат формулы: {result_calculation:.0f}')
+
+
+if __name__ == '__main__':
+    proof(100)
