@@ -1,6 +1,5 @@
 """
-Задание 3.	Сформировать из введенного числа
-обратное по порядку входящих в него
+Задание 3.	Сформировать из введенного числа обратное по порядку входящих в него
 цифр и вывести на экран. Например, если введено число 3486,
 то надо вывести число 6843.
 
@@ -17,4 +16,38 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
+"""
+
+class MyApp:
+
+    def __init__(self):
+        self.number = 0
+        self.new_value = ''
+
+    def process(self):
+        # Can be better with try/except, too lazy
+        self.number = int(input('Введите число, которое требуется перевернуть:'))
+
+        self.get_numbers()
+
+    def get_numbers(self):
+        char = self.number % 10
+        self.new_value += str(char)
+
+        self.number = self.number // 10
+        if self.number > 0:
+            self.get_numbers()
+        else:
+            self.result()
+
+    def result(self):
+        print('Перевернутое число: %s' % (self.new_value))
+
+
+app = MyApp()
+app.process()
+
+"""
+    Введите число, которое требуется перевернуть:90909090
+    Перевернутое число: 09090909
 """
