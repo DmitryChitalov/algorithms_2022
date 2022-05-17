@@ -22,3 +22,44 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def check_1(user, password, users: dict[str, tuple[str, bool]]) -> bool:
+    # Сложность O(1)
+    authentification = users.get(user)  # O(1)
+    if authentification:  # O(1)
+        if (password == authentification[0]):  # O(1)
+            if authentification[1]:  # O(1)
+                print('Вход выполнен')
+                return True  # O(1)
+            else:
+                print('Ваша учётная запись неактивна')
+                return False  # O(1)
+    print('Неверный логин/пароль')
+    return False  # O(1)
+
+
+def check_n(user, password, users: dict[str, tuple[str, bool]]) -> bool:
+    #Сложность O(N)
+    for user_s in users: # O(N)
+        if user == user_s: # O(1)
+            if password == users[user_s][0]: # O(1)
+                if users[user_s][1]: # O(1)
+                    print('Вход выполнен')
+                    return True  # O(1)
+                else:
+                    print('Ваша учётная запись неактивна')
+                    return False  # O(1)
+    print('Неверный логин/пароль')
+    return False  # O(1)
+
+
+users = {
+    'admin': ('pass', True),
+    'user_1': ('pass1', False),
+    'user_2': ('pass1', True)
+}
+print(check_1('user_1', 'pass1', users))
+print(check_1('admin', 'pass', users))
+print(check_n('user_1', 'pass1', users))
+print(check_n('admin', 'pass', users))
