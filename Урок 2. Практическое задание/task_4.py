@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_series_numbers(n, begin_series_numbers=1):
+    """
+    Функция находит сумму n элементов следующего ряда чисел: 1 -0.5 0.25 -0.125 ...
+    """
+    if n > 1:
+        return begin_series_numbers + sum_series_numbers(n - 1, begin_series_numbers / -2)
+    return begin_series_numbers
+
+
+quantity = int(input('Введите количество элементов: '))
+print(f'Количество элементов - {quantity}, их сумма - {sum_series_numbers(quantity)}')
