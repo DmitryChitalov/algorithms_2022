@@ -22,3 +22,19 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def users1(listUsers):
+    # данное решение эффективнее, потому что сложность O(N)
+
+    for user in listUsers:                                                                                     # O(N)
+        if user['активация'] is False:                                                                         # O(1)
+            print "Уважаемый пользователь, ваша учетная запись не активирована, пожалуйте активируйте ее..."   # O(1)
+            
+            
+def users2(listUsers): 
+
+    for user in listUsers:                                                                 # O(N)
+        for key, value in user.items():                                                    # O(N)
+            if key == 'активация' and value is False:                                      # O(len(n) + len(1))  
+                print 'Уважаемый пользователь , пожалуйста активируйте свою запись'        # O(1)
