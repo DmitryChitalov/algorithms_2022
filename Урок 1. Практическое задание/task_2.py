@@ -27,7 +27,7 @@ def list_variant_2(user_list):
 
     us_el = user_list[0]  # O(1)
     for i in range(len(user_list)):  # O(n)
-        if user_list[i] < us_ell:  # O(1)
+        if user_list[i] < us_el:  # O(1)
             us_el = user_list[i]  # O(1)
     return us_el  # O(1)
 
