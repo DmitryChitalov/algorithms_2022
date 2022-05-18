@@ -25,7 +25,7 @@ for el in user_list:                                                            
             print(k, ':', v)                                                         # O(1)
 
 
-# Сложность - O(n)
+# Сложность - O(1)
 
 # 2 способ
 user_list = sorted(companies, key=companies.get, reverse=True)[:3]    # O(n*log n)
