@@ -17,3 +17,19 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+# 1 способ
+user_list = sorted(list(companies.values()), reverse=True)[:3]                     # O(n)
+for el in user_list:                                                               # O(1)
+    for k, v in companies.items():                                                   # O(n)
+        if v == el:
+            print(k, ':', v)                                                         # O(1)
+
+
+# Сложность - O(n)
+
+# 2 способ
+user_list = sorted(companies, key=companies.get, reverse=True)[:3]    # O(n*log n)
+for i in user_list:                                                   # O(1)
+    print(i, ':', companies.get(i))                                          # O(1)
+
+# Сложность -  O (n *log n)
