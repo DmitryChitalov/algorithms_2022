@@ -11,6 +11,7 @@
 
 from random import sample
 
+
 ##############################################################################
 def check_1(lst_obj):
     """Функция должна создать множество из списка.
@@ -21,6 +22,7 @@ def check_1(lst_obj):
     lst_to_set = set(lst_obj)  # О(n)
     return lst_to_set  # О(1)
 
+
 ##############################################################################
 def check_2(lst_obj):
     """Функция должная вернуть True, если все элементы списка различаются.
@@ -30,10 +32,11 @@ def check_2(lst_obj):
     в оставшихся справа элементах
     Сложность: Квадротичная. О(n)*О(n)+О(1)+О(1)
     """
-    for j in range(len(lst_obj)):          # О(n)
-        if lst_obj[j] in lst_obj[j+1:]:    # О(n)
-            return False                   # О(1)
-    return True                            # О(1)
+    for j in range(len(lst_obj)):  # О(n)
+        if lst_obj[j] in lst_obj[j + 1:]:  # О(n)
+            return False  # О(1)
+    return True  # О(1)
+
 
 ##############################################################################
 def check_3(lst_obj):
@@ -43,12 +46,13 @@ def check_3(lst_obj):
     Если присутствуют дубли, они будут находиться рядом.
     Сложность: Линейно-логарифмическая О(1)+O(n log n)+О(n)*О(n)+О(1)+О(1)
     """
-    lst_copy = list(lst_obj)                 # О(1)
-    lst_copy.sort()                          # O(n log n)
-    for i in range(len(lst_obj) - 1):        # О(n)
-        if lst_copy[i] == lst_copy[i+1]:     # О(n)
-            return False                     # О(1)
-    return True                              # О(1)
+    lst_copy = list(lst_obj)  # О(1)
+    lst_copy.sort()  # O(n log n)
+    for i in range(len(lst_obj) - 1):  # О(n)
+        if lst_copy[i] == lst_copy[i + 1]:  # О(n)
+            return False  # О(1)
+    return True  # О(1)
+
 
 for j in (50, 500, 1000, 5000, 10000):
     # Из 100000 чисел возьмем 'j' случайно выбранных
