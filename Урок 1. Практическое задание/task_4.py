@@ -22,3 +22,28 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+def check_authorization(users_list: dict, check_username: str) -> bool: # O(N)
+
+    for username, (_, authorized) in users_list.items():  # O(N)
+        if username == check_username:  # O(1)
+            return authorized  # O(1)
+
+
+def check_authorization_2(users_list: dict, check_username: str) -> bool: # O(1)
+
+    user = users_list.get(check_username)  # O(1)
+    return user[1]  # O(1)
+
+
+if __name__ == '__main__':
+    users = {
+        'Alexandr': ('123456', True),
+        'Maxim': ('thrw', False),
+        'Sascha': ('8764', True),
+        'Olga': ('srghtrh', False),
+    }
+
+    print(check_authorization(users, 'Alexandr'))
+    print(check_authorization(users, 'Maxim'))
+    print(check_authorization_2(users, 'Sascha'))
+    print(check_authorization_2(users, 'Olga'))
