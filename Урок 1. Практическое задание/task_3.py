@@ -17,3 +17,37 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def companies1(listCompanies):
+
+    topCompany = []                                  # O(len(1))
+    
+    for i in range(3):                               # O(N)
+        company = max(listCompanies.values())        # O(N)
+        
+        for key, value in listCompanies.items():     # O(N)
+            if value == company:                     # O(N)
+                topCompany.append(key)               # O(1)
+                
+                del listCompanies[key]               # O(1)
+                
+    return topCompany                                # O(1)
+    
+    
+def companies2(listCompanies):
+
+    topCompany = []                                  # O(len(1))
+    
+    for key1, value1 in listCompanies.items():       # O(N)
+        maxi = True                                  # O(1)
+        
+        for key2, value2 in listCompanies.items():   # O(N)
+            if value1 < value2:                      # O(len(n))
+                maxi = False                         # O(1)
+                
+        if maxi:                                     # O(1)
+            topCompany.append(key1)                  # O(1)
+            
+            del listCompanies[key1]                  # O(1)
+
+    return topCompany                                # O(1)
