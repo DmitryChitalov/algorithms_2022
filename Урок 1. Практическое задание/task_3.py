@@ -29,7 +29,7 @@ for el in user_list:                                                            
 
 # 2 способ
 user_list = sorted(companies, key=companies.get, reverse=True)[:3]    # O(n*log n)
-for i in user_list:                                                   # O(1)
+for i in user_list:                                                   # O(n)
     print(i, ':', companies.get(i))                                          # O(1)
 
 # Сложность -  O (n *log n)
