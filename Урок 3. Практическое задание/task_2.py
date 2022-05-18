@@ -22,3 +22,72 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import hashlib
+import sqlite3
+from uuid import uuid4
+
+"""
+Создание таблицы:
+CREATE TABLE passwords (
+	hash TEXT NOT NULL,
+	salt TEXT NOT NULL
+);
+"""
+
+
+def db_save_password(hash, salt):
+    conn = sqlite3.connect('passwords.sqlite')
+    cursor = conn.cursor()
+    cursor.execute(f"""
+        INSERT INTO passwords (hash, salt)
+        VALUES ('{hash}', '{salt}')
+    """)
+    conn.commit()
+    conn.close()
+
+
+def db_get_password():
+    conn = sqlite3.connect('passwords.sqlite')
+    cursor = conn.cursor()
+    cursor.execute(f"""
+        SELECT hash, salt
+        FROM passwords
+        LIMIT 1 
+    """)
+    password_hash, salt = cursor.fetchone()
+    conn.close()
+    return password_hash, salt
+
+
+def db_remove_password():
+    conn = sqlite3.connect('passwords.sqlite')
+    cursor = conn.cursor()
+    cursor.execute(f"""
+        DELETE
+        FROM passwords
+    """)
+    conn.commit()
+    conn.close()
+
+
+def create_password():
+    password_string = input('Придумайте новый пароль: ')
+    salt = uuid4().hex
+    password_hash = hashlib.sha256(salt.encode() + password_string.encode()).hexdigest()
+    print(password_hash)
+    db_save_password(password_hash, salt)
+
+
+def check_password():
+    entered_password_string = input('Введите ваш пароль: ')
+    password_hash, salt = db_get_password()
+    entered_password_hash = hashlib.sha256(salt.encode() + entered_password_string.encode()).hexdigest()
+    print(entered_password_hash)
+    return entered_password_hash == password_hash
+
+
+if __name__ == '__main__':
+    create_password()
+    print(check_password())
+    db_remove_password()
