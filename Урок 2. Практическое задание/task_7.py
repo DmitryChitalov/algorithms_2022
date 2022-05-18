@@ -12,3 +12,15 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+#######################################################
+def check_set(num_, sum_l=0, sum_r=0):
+    while num_ < 1:
+
+        return sum_l, sum_l == sum_r * (sum_r + 1) / 2
+    else:
+        return check_set(num_ - 1, sum_l + num_, sum_r + 1)
+
+
+print(check_set(6))

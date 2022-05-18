@@ -7,3 +7,24 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+######################################################################
+import random
+
+rand_num = random.randint(0, 100)
+
+
+def game_num(attempts_num=10):
+    if attempts_num < 1:
+        return f"Вы проиграли. Сгенерированное число: {rand_num}"
+    user_num = int(input("Введите число: "))
+    if user_num == rand_num:
+        return "Вы победили!"
+    elif user_num > rand_num:
+        print("Ваше число больше.")
+        return game_num(attempts_num - 1)
+    else:
+        print("Ваше число меньше.")
+        return game_num(attempts_num - 1)
+
+
+print(game_num())

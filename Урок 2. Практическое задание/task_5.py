@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+#####################################################
+def get_list(lst_obj):
+    if lst_obj[0] == lst_obj[len(lst_obj) - 1]:
+        return True
+    print(f'{lst_obj[0]} - {chr(lst_obj[0])}', end=' ')
+    if (lst_obj[0] - 31) % 10 == 0:
+        print('\n')
+    get_list(lst_obj[1:])
+
+
+print(get_list(list(range(32, 128))))
