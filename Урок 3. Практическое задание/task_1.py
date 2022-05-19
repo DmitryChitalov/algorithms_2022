@@ -23,3 +23,34 @@ b) выполните со списком и словарем операции: 
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+#######################################################################
+
+
+def speed_timer(func):
+    import time
+
+    def wrapper(arg):
+        start_st = time.time()
+        func(arg)
+        end_st = time.time()
+        print(f'[*] Время выполнения: {(end_st - start_st):.2f} сек.')
+
+    return wrapper
+
+
+@speed_timer
+def list_crt(n):
+    a = [i ** 2 for i in range(n)]
+
+
+list_crt(10000000)
+
+
+@speed_timer
+def dict_crt(n):
+    b = {i: i ** 2 for i in range(n)}
+
+
+dict_crt(10000000)
