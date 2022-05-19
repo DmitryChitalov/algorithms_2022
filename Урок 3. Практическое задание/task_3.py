@@ -22,21 +22,3 @@
 р
 а
 """
-
-import hashlib
-
-
-def sub_string(user_string):
-    orig_hash = hashlib.sha1(user_string.encode('utf-8')).hexdigest()
-    temp_set = set()
-    for i in range(len(user_string)):
-        for j in range(len(user_string)):
-            temp_hash = hashlib.sha1(user_string[i:j + 1].encode('utf-8')).hexdigest()
-            # Отсекаем пустую строку и оригинальную строку (условие задания это позволяет):
-            temp_set.add(temp_hash) if orig_hash != temp_hash and len(user_string[i:j + 1]) > 0 else None
-    return temp_set
-
-
-input_string = input('Введите строку: ')
-a = sub_string(input_string)
-print(f'Количество уникальных подстрок в строке {input_string} составляет {len(a)} шт.')
