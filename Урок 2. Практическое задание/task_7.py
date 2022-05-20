@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def expression_proof(number, counter=0, summ=0):
+
+    if counter == number:
+        return summ
+
+    counter += 1
+    summ += counter
+
+    return expression_proof(number=number, counter=counter, summ=summ)
+
+
+if __name__ == '__main__':
+
+    num = 8
+    expression = num * (num + 1)/2
+    print('{} = {}'.format(expression_proof(number=num), expression))
