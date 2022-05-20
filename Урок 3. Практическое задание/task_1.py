@@ -28,3 +28,89 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import perf_counter
+
+
+# Декоратор
+def count_time(func):
+    start = perf_counter()
+    func()
+    stop = perf_counter()
+    print(stop - start)
+    return func
+
+
+# Вариант "a"
+print('Время заполнения списка: ', end='')
+
+
+@count_time
+def list_completion():
+    lst_test = []
+    for i in range(1000001):
+        lst_test.append(i)  # O(1)
+    return lst_test
+
+
+print('Время заполнения словаря: ', end='')
+
+
+@count_time
+def dict_completion():
+    dict_test = {}
+    for i in range(1000001):
+        dict_test[i] = i  # O(1)
+    return dict_test
+
+
+"""
+Заполнение словаря по времени почти одинаково со списком (если смотреть по замерам времени, то бывает, что
+словарь заполняется немного дольше, а бывает список заполняется дольше. 
+"""
+
+# Вариант "b"
+lst_test = list_completion()
+print('Время получения элемента из списка: ', end='')
+
+
+@count_time
+def lst_receiving():
+    return lst_test[100000]  # O(1)
+
+
+dict_test = dict_completion()
+print('Время получения элемента из словаря: ', end='')
+
+
+@count_time
+def dict_receiving():
+    return dict_test[100000]  # O(1)
+
+
+"""
+Время получения элемента из списка и из словаря практически одинаковы. 
+Связано с тем, что в списках обращение по индексу а в словаре по ключу.
+"""
+
+# Вариант "с"
+print('Время удаления элемента из списка: ', end='')
+
+
+@count_time
+def del_el_lst():
+    return lst_test.pop(1)  # O(n) - если удалять не последний элемент, O(1) - если удалять последний элемент
+
+
+print('Время удаления элемента из словаря: ', end='')
+
+
+@count_time
+def del_el_dict():
+    del dict_test[1]  # O(1)
+
+
+"""
+Удаление из списка по времени дольше чем удаление из словаря. 
+Так как в списке при удалении элемента происходит пересчет индексов.
+"""
