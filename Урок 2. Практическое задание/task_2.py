@@ -17,3 +17,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def evenAndOdd(number, even=0, odd=0):
+
+    if number == 0:
+        return even, odd
+
+    else:
+        current_number = number % 10       # число с которым работаем
+        number = number // 10  # оставшееся число
+
+        if current_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+        return evenAndOdd(number=number, even=even, odd=odd)
+        
+if __name__ = '__main__':        
+try:
+        enterNumber = int(raw_input('Введите число: '))
+        print 'Количесво четных чисел и количество не четных чисел - {}'.format(evenAndOdd(enterNumber))
+    except ValueError:
+        print 'Ошибка! Была введена строка вместо числа...'
