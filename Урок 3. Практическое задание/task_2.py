@@ -28,11 +28,9 @@ f1dcaeeafeb855965535d77c55782349444b
 Алгоритм создает БД mysql с единственной таблицей users, в которой 3 колонки: id, login, password_hash.
 При создании хеша пароля, "солил" при помощи логина.
 """
+
 from mysql.connector import connect, Error
 import hashlib
-
-login_db = input('Database login: ')
-password_db = input('Database password: ')
 
 
 def query_mysql_select(query_script):
@@ -55,6 +53,11 @@ def query_mysql_transact(query_script):
                 connection.commit()
     except Error as e:
         print(e)
+
+
+def find_hash(login, password):
+    user_hash = hashlib.sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    return user_hash
 
 
 def create_db():
@@ -82,7 +85,7 @@ def create_user():
     print('Создание пользователя')
     login = input('Введите логин: ')
     password = input('Введите пароль: ')
-    user_hash = hashlib.sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    user_hash = find_hash(login, password)
     query_insert = f"INSERT INTO test_hm.users (login, password_hash) VALUES ('{login}', '{user_hash}')"
     query_mysql_transact([query_insert])
 
@@ -93,7 +96,7 @@ def autorize():
     query_select = f"SELECT password_hash FROM test_hm.users WHERE login = '{login}'"
     from_db_hash = query_mysql_select(query_select)
     password = input('Введите пароль: ')
-    user_hash = hashlib.sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    user_hash = find_hash(login, password)
     print('Авторизация пройденна !') if from_db_hash[0][0] == user_hash else \
         print('Непраильное имя пользователя или пароль!')
 
