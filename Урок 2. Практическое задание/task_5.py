@@ -19,3 +19,22 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def char_symbol(number=32, answer_str='', counter=0):
+    
+    if number == 128:
+        return answer_str
+
+    if counter % 10 == 0:
+        answer_str += '\n'
+
+    answer_str += ' {} - '.format(number) + chr(number)
+
+    number += 1
+    counter += 1
+
+    return char_symbol(number=number, answer_str=answer_str, counter=counter)
+
+if __name__ == '__main__':
+       answer = char_symbol()
+    print str(answer)
