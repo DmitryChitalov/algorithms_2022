@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse_number(a=None, result=''):
+    if a == 0:
+        print(f'Перевернутое число: {result}')
+    elif a is None:
+        try:
+            a = abs(int(input('Введите число:')))
+        except ValueError:
+            print('Это не число. Все снова.')
+        return reverse_number(a)
+    else:
+        remainder, digit = divmod(a, 10)
+        return reverse_number(remainder, f'{result}{digit}')
+
+
+if __name__ == '__main__':
+    reverse_number()

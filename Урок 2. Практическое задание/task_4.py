@@ -10,3 +10,21 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def some_sum(n, s=1, result=0):
+    if n > 0:
+        result += s
+        n -= 1
+        s /= -2
+        return some_sum(n, s, result)
+    else:
+        return result
+
+
+if __name__ == '__main__':
+    try:
+        number = int(input('Введите количество элементов:'))
+        print(f'Количество элементов - {number}, их сумма - {some_sum(number)}')
+    except ValueError:
+        print('Это не число!')
