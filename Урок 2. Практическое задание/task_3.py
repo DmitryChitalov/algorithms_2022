@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def writeback(number, num_str=''):
+
+    if number is 0:
+        return num_str
+    else:
+
+        part_num = number % 10
+        num_str += '{}'.format(part_num)
+        number = number // 10
+
+        return writeback(number=number, num_str=num_str)
+        
+        
+if __name__ = '__main__':
+
+    number = int(input('Введите число, которе требуется перевернуть: '))
+    print 'Перевернутое число: {}'.format(writeback(number=number))
