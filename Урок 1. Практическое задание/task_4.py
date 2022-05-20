@@ -22,3 +22,66 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+auth_data = {"login": 'admin', "password": 'admin', "is_active": False} #O(1)
+
+
+def auth_one(auth_data):
+    
+    
+    login = input("Введите логин: ") #O(1)
+    password = input("Введите пароль: ") #O(1)
+    
+    if(login == auth_data['login'] and password == auth_data['password']): #2O(1)
+        if(auth_data['is_active'] == True): #O(1)
+            
+            print('Вы успешно авторизовались') #O(1)
+            return True #O(1)
+        else:
+            
+            print('Ваш аккаунт необходимо активировать') #O(1)
+            
+            activate = input("Активировать аккаунт (д/н)?") #O(1)
+            
+            if activate == 'д': #O(1)
+                auth_data['is_active'] = True #O(1)
+                auth_one(auth_data) #O(2^n)
+            else: #O(1)
+                print('Всего хорошего') #O(1)
+                
+    else: #O(1)
+        print('За вами выехали') #O(1)
+        
+        
+def auth_two(auth_data): #O(1)
+    
+    
+    login = input("Введите логин: ") #O(1)
+    password = input("Введите пароль: ") #O(1)
+    
+    if(login == auth_data['login'] and password == auth_data['password']): #2O(1)
+        if(auth_data['is_active'] == True): #O(1)
+            
+            print('Вы успешно авторизовались') #O(1)
+            return True #O(1)
+        else: #O(1)
+            
+            print('Ваш аккаунт необходимо активировать') #O(1)
+            
+            activate = input("Активировать аккаунт (д/н)?") #O(1)
+            
+            if activate == 'д': #O(1)
+                auth_data['is_active'] = True #O(1)
+                login = input("Введите логин: ") #O(1)
+                password = input("Введите пароль: ") #O(1)
+                if(login == auth_data['login'] and password == auth_data['password']): #2O(1)
+                    print('Вы успешно авторизовались') #O(1)
+            else: #O(1)
+                print('Всего хорошего') #O(1)
+                
+    else: #O(1)
+        print('За вами выехали') #O(1)
+
+#auth_one(auth_data) #O(n^2)
+auth_two(auth_data) #O(1)
