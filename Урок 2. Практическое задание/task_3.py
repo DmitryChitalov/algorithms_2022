@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def revers_number(number):
+    step_number = number % 10
+    tmp_number = number // 10
+    if tmp_number == 0:
+        return str(step_number)
+    else:
+        return str(step_number) + str(revers_number(tmp_number))
+
+
+if __name__ == '__main__':
+    user_number = int(input('Введите число для реверса: '))
+    print(f'Реверс числа {user_number}: {revers_number(user_number)}')

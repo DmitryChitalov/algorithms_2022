@@ -7,3 +7,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+
+def my_game(number, count=1):
+    answer = int(input("Введите число от 0 до 100: "))
+    if count == 10 or answer == number:
+        if answer == number:
+            print(f"Вы отгадали! Загаданное число {number}")
+        else:
+            print(f"У вас закончились попытки! Загаданное число: {number}")
+    else:
+        if answer > number:
+            print(f"Загаданное число меньше {answer}")
+        else:
+            print(f"Загаданное число больше {answer}")
+        my_game(number, count + 1)
+
+
+if __name__ == '__main__':
+    my_number = random.randint(0, 100)
+    my_game(my_number, 1)

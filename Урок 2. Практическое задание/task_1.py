@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    user_input = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if user_input == '0':
+        return print('Выход')
+    else:
+        if user_input in ['+', '-', '*', '/']:
+            try:
+                num_1 = int(input('Введите первое число: '))
+                num_2 = int(input('Введите второе число: '))
+                if user_input == '+':
+                    total = num_1 + num_2
+                    print(f'Ваш результат: {total}')
+                    return calc()
+                elif user_input == '-':
+                    total = num_1 - num_2
+                    print(f'Ваш результат: {total}')
+                    return calc()
+                elif user_input == '*':
+                    total = num_1 * num_2
+                    print(f'Ваш результат: {total}')
+                    return calc()
+                elif user_input == '/':
+                    try:
+                        total = num_1 / num_2
+                    except ZeroDivisionError:
+                        print('Деление на 0 невозможно')
+                    else:
+                        print(f'Ваш результат {total}')
+                    finally:
+                        return calc()
+            except ValueError:
+                print('Вы ввели строку вместо числа (((. Исправьтесь')
+                return calc()
+        else:
+            print('Введен неверный символ, попробуйте еще раз')
+            return calc()
+
+
+if __name__ == '__main__':
+    calc()

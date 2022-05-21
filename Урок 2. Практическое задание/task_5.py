@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_code(i):
+    if i == 128:
+        return True
+    print(f'{i} - {chr(i)}', end=' ')
+    if (i - 31) % 10 == 0:
+        print('\n')
+    table_code(i + 1)
+
+if __name__ == '__main__':
+    table_code(32)
