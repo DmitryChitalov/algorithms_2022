@@ -11,6 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +36,23 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def my_revers(enter_num):
+    return ''.join(list(reversed(str(enter_num))))
+
+
+if __name__ == '__main__':
+    num = 1000
+    print(f'Замер функции revers: {timeit("revers(num)", globals=globals())}')  # 0.72
+    print(f'Замер функции revers_2: {timeit("revers_2(num)", globals=globals())}')  # 0.48
+    print(f'Замер функции revers_3: {timeit("revers_3(num)", globals=globals())}')  # 0.23
+
+    print(f'Замер функции my_revers: {timeit("my_revers(num)", globals=globals())}')  # 0.44
+
+"""
+Выводы: самый эффективный способ revers_3 - в нем минимальное количество операций - переводим в строку и берем срез
+всего две операции. Самый медленный revers так как в нем имеем рекурсию и много вычислений, revers_2 на втором месте т.к. 
+в нем такой же алгоритм как в revers но с циклом вместо рекурсии - это значительно быстрее. Мой алгоритм на втором месте
+т.к. он использует встроенную функцию, но т.к. имеем много преобразований он проигрывает  revers_3
+"""
