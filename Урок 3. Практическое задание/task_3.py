@@ -22,3 +22,14 @@
 р
 а
 """
+
+from hashlib import sha256
+
+hash_substring = set()
+substring = 'papa'
+for i in range(len(substring)):
+    for j in range(i + 1, len(substring) + 1):
+        if substring[i:j] != substring:
+            hash_substring.add(sha256(substring[i:j].encode()).hexdigest())
+
+print(f'Количество элементов в множестве: {len(hash_substring)}')
