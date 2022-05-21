@@ -24,8 +24,9 @@ b) выполните со списком и словарем операции: 
 И примените ее к своим функциям!
 """
 
-
 #######################################################################
+# а)
+import random
 
 
 def speed_timer(func):
@@ -35,22 +36,68 @@ def speed_timer(func):
         start_st = time.time()
         func(arg)
         end_st = time.time()
-        print(f'[*] Время выполнения: {(end_st - start_st):.2f} сек.')
+        print(f'[*] Время выполнения {func.__name__}: {(end_st - start_st)} сек.')
 
     return wrapper
 
 
 @speed_timer
 def list_crt(n):
-    a = [i ** 2 for i in range(n)]
+    a = []  # O(1)
+    for i in range(n):  # O(n)
+        a.append(i)  # O(1)
 
 
-list_crt(10000000)
+list_crt(10000)
 
 
 @speed_timer
 def dict_crt(n):
-    b = {i: i ** 2 for i in range(n)}
+    b = {}  # O(1)
+    for i in range(n):  # O(n)
+        b[i] = i  # O(1)
 
 
-dict_crt(10000000)
+dict_crt(10000)
+
+'''
+Cложность в O-нотации у обоих функций линейная O(n).
+Сложность заполнения у обоих функций константная.
+Список заполняется быстрее, чем словарь, скорее всего это 
+связано с созданием ключей(вычисления хэша).
+'''
+
+print('==================================')
+
+
+#######################################################################
+# b)
+@speed_timer
+def list_get(n):
+    a = [i ** 2 for i in range(n)]  # O(n)
+    el = random.randint(1, n - 1)  # O(n)
+    if a[el] in a:  # O(n)
+        print(True)  # O(1)
+        print(a.pop(el))  # O(1)
+
+
+list_get(10000)
+
+
+@speed_timer
+def dict_get(n):
+    b = {i: i ** 2 for i in range(n)}  # O(n)
+    el = random.randint(1, n - 1)  # O(n)
+    print(el, b[el])  # O(1)
+    del b[el]  # O(1)
+
+
+dict_get(10000)
+
+'''
+Cложность  O-нотации у обоих функций линейная O(n).
+При поиске в списке O-нотация: O(n). При удалении элемента в списке
+O-нотация: O(1).
+При поиске и удалении элемента в словаре O-нотация: O(1). Так как происходит
+обращение по ключю.
+'''

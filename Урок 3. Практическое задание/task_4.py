@@ -14,3 +14,28 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+############################################################################
+from uuid import uuid4
+import hashlib
+
+url_cash = {}
+salt = uuid4().hex
+
+
+def url_to_cash(url):
+    print(f'Записываем хэш в кэш {url}')
+    obj = hashlib.sha256(salt.encode('utf-8') + url.encode('utf-8'))
+    return obj
+
+
+def url_from_cash(url):
+    print(f'Получаем хэш из кэша {url}')
+    if url not in url_cash:
+        url_cash[url] = url_to_cash(url)
+
+    return url_cash[url]
+
+
+print(url_from_cash('gb.ru'))
+print()
+print(url_from_cash('gb.ru'))
