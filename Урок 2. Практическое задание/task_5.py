@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_number(char=32):
+    if char == 128: return ''
+    result = f'{char}:{chr(char)}'
+    if char % 10 == 1:
+        result += '\n'
+    else:
+        result += '\t'
+    result += print_number(char + 1)
+    return result
+
+
+print(print_number())

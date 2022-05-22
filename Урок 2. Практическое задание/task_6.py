@@ -1,3 +1,5 @@
+import random
+
 """
 Задание 6.	В программе генерируется случайное целое число от 0 до 100.
 Пользователь должен его отгадать не более чем за 10 попыток. После каждой
@@ -7,3 +9,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+# При необходимости можно задавать загаданное число вручную
+def game(count_of_try=10, number=None):
+    if not number:
+        number = random.randint(0, 100)
+    if count_of_try == 0:
+        print('Простите, попытки кончились')
+        return
+    number_try = int(input('Введите число:'))
+    if number_try == number:
+        print('Вы угадали')
+        return
+    elif number_try > number:
+        print(f'Загаданное число меньше{number}')
+    elif number_try < number:
+        print(f'Загаданное число больше{number}')
+    game(count_of_try - 1, number)
+
+
+game()
