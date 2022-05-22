@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_digit(number_in: int|str, first=True) -> int | str:
+    if type(number_in) is str:
+        number=int(number_in)
+    else:
+        number=number_in
+    new_number = number // 10
+    if number == 0 & new_number == 0:
+        return 0
+    number_for_check = number % 10 % 2
+    result = count_digit(new_number,False)+number_for_check
+    if not first :
+        return result
+    else:
+        return f'Чётных цифр:{len(number_in)-result}, нечётных цифр:{result}'
+print(count_digit(input('Ввдеите число:')))

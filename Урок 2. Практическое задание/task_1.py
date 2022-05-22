@@ -21,9 +21,46 @@
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
 Введите второе число: 234
-Ваш результат 448
-Введите операцию (+, -, *, / или 0 для выхода): -
+Ваш зультат 448
+Введите ореперацию (+, -, *, / или 0 для выхода): -
 Введите первое число: вп
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operation():
+    oper = input('Введите ореперацию (+, -, *, / или 0 для выхода): ')
+    make_operation = True
+    if oper == '0':
+        print('До свидания и спасибо за рыбу')
+        return
+    numbers = []
+    for i in range(2):
+        number = input(f'Введие число №{i + 1}: ')
+        if number.isdigit():
+            numbers.append(int(number))
+        else:
+            print('Вы ввели не число, попробуйте ещё раз')
+            make_operation = False
+    if make_operation:
+        if oper == '+':
+            print('Ваш результат:', end='')
+            print(numbers[0] + numbers[1])
+        if oper == '-':
+            print('Ваш результат:', end='')
+            print(numbers[0] - numbers[1])
+        if oper == '*':
+            print('Ваш результат:', end='')
+            print(numbers[0] * numbers[1])
+        if oper == '/':
+            if numbers[1] == 0:
+                print('Делить на ноль нельзя. Сохраняйте спокойствие, сейчас вы будете аннигилированы')
+            else:
+                print('Ваш результат:', end='')
+                print(numbers[0] + numbers[1])
+    operation()
+    pass
+
+
+operation()

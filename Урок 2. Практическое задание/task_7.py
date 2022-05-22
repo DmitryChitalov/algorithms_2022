@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def natural_sum(n: int):
+    if n == 0:
+        return 0
+    else:
+        return natural_sum(n - 1) + n
+
+
+def check_theorema(n: int):
+    if natural_sum(n) == n * (n + 1) / 2:
+        return 'Всё сходится'
+    else:
+        return 'Не сходится. Странно.'
+
+
+print(check_theorema(5))

@@ -18,3 +18,16 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse(number_in: str) -> str | None:
+    number = int(number_in)
+    new_number = number // 10
+    number_for_check = number % 10
+    if number == 0 & new_number == 0:
+        return ''
+    result = str(number_for_check) + reverse(str(new_number))
+    return result
+
+
+print(reverse(input('Ввдеите число:')))
