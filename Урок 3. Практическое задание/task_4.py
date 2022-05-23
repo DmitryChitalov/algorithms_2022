@@ -15,3 +15,29 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+from uuid import uuid4
+
+
+def check_url_hash(cache=None):
+
+    if not cache:
+        cache = dict()
+
+    url = input('Введите url-адрес: ')
+    url_hash = cache.get(url, None)
+
+    if url_hash:
+        print(f'Взять из кэша: {url_hash}')
+    else:
+        salt = uuid4().hex
+        url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache[url] = url_hash
+        print(f'Захэширован: {url_hash}')
+
+    return check_url_hash(cache)
+
+
+if __name__ == '__main__':
+    check_url_hash()
