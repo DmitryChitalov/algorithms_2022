@@ -22,3 +22,25 @@
 р
 а
 """
+
+def uniqueSubstrings():
+
+    strExample = 'pineapple'
+    
+    listStr = ['pineappl', 'ineapple', 'neapple', 'pineapp',
+               'eapple', 'pineap', 'apple', 'pinea', 'pple',
+               'pine', 'pin', 'eap', 'ple', 'pi', 'ne', 'ap',
+               'pl', 'p', 'i', 'n', 'e', 'a', 'p', 'p', 'l', 'e']
+
+    answerList = set()
+
+    for elem in listStr:
+        hesh = hashlib.sha256(elem.encode('utf8')).hexdigest()
+        answerList.add(hesh)
+
+    print 'Количество уникальных элементов: ' + str(len(answerList))
+
+
+if name == 'main':
+    uniqueSubstrings()
+
