@@ -22,3 +22,25 @@
 р
 а
 """
+
+import hashlib
+
+
+def count(string):
+    list_1 = []
+    for i in range(len(string) + 1):
+        for j in range(i, len(string) + 1):
+            list_1.append(string[j - i:j])
+
+    list_1 = [item for item in list_1 if item != '' and item != string]
+
+    result = set()
+    for substring in list_1:
+        substring_hash = hashlib.sha256(substring.encode()).hexdigest()
+        result.add(substring_hash)
+
+    return len(result)
+
+
+if __name__ == '__main__':
+    print(count('papa'))
