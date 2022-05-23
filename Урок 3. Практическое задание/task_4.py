@@ -48,3 +48,5 @@ test.insert_to_cache('google.com')
 print(test.get_cache('google.com'))
 test2 = UrlHasher()
 print(test2.get_cache())
+
+
