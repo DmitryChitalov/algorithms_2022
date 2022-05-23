@@ -26,9 +26,9 @@ def set_numbers(number):
 
 def result(number):
     if sum_numbers(number) == set_numbers(number):
-        return f'При number = {number} равенство: 1+2+...+n = n(n+1)/2 - выполняется'
+        return f'При n = {number} равенство: 1+2+...+n = n(n+1)/2 - выполняется'
     else:
-        return f'При number = {number} равенство: 1+2+...+n = n(n+1)/2 - не выполняется'
+        return f'При n = {number} равенство: 1+2+...+n = n(n+1)/2 - не выполняется'
 
 
 number_num = int(input('Введите количество чисел: '))
