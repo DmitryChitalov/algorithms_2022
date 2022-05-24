@@ -13,6 +13,19 @@
 """
 
 
+"""
+---Что сделал и выводы---
+Эффективная реализация в плане временных затрат, функция - revers_3. 
+Так как срезы работают быстрее чем остальные представленные решения.
+
+Функция revers_4 (Свой вариант решения) немного медленнее чем revers_3. Но имеет лучшую читабельность кода.
+"""
+from timeit import timeit  # Импорт timeit
+from random import randint
+
+rand_num = randint(10000, 1000000)
+
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -35,3 +48,36 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):  # Свой вариант решения
+    return ''.join(reversed(str(enter_num)))
+
+
+print('Время выполнения функции revers')
+print(
+    timeit(
+        "revers(rand_num)",
+        setup='from __main__ import revers, rand_num',
+        number=10000))
+
+print('Время выполнения функции revers_2')
+print(
+    timeit(
+        "revers_2(rand_num)",
+        setup='from __main__ import revers_2, rand_num',
+        number=10000))
+
+print('Время выполнения функции revers_3')
+print(
+    timeit(
+        "revers_3(rand_num)",
+        setup='from __main__ import revers_3, rand_num',
+        number=10000))
+
+print('Время выполнения функции revers_4')
+print(
+    timeit(
+        "revers_4(rand_num)",
+        setup='from __main__ import revers_4, rand_num',
+        number=10000))
