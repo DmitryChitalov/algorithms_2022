@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symb_ascii(string='', num=32):
+    """
+    вывод символов ascii
+    """
+    if num > 127:
+        print(string)
+        return ''
+    string += f'{num} - {chr(num)}  '
+    if not (num - 31) % 10:
+        print(string)
+        string = ''
+    return symb_ascii(string, num + 1)
+
+
+symb_ascii()

@@ -27,3 +27,38 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calc():
+    """
+    Рекурсивное вычисление
+    """
+    list_symb = ['+', '-', '*', '/', '0']
+    symb = input("Введите операцию(+, -, *, / или 0 для выхода): ")
+    if symb not in list_symb:
+        print('Вы ввели неверный знак операции. Попробуйте еще раз')
+        rec_calc()
+    if symb == '0':
+        print("Вы вышли из вычислений")
+        return
+    try:
+        first = int(input('Введите первое число: '))
+        second = int(input('Введите второе число: '))
+    except ValueError:
+        print('Вы ввели не число. Попробуйте еще раз')
+    else:
+        if symb == '+':
+            print(f'{first} + {second} = {first + second}')
+        elif symb == '-':
+            print(f'{first} - {second} = {first - second}')
+        elif symb == '*':
+            print(f'{first} * {second} = {first * second}')
+        elif symb == '/' and second:
+            print(f'{first} / {second} = {first / second}')
+        else:
+            print('На ноль делить нельзя. Попробуйте еще раз')
+    finally:
+        rec_calc()
+
+
+rec_calc()
