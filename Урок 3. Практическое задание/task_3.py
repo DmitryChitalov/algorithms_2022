@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+def func(s):
+    n = len(s)
+    my_set = set()
+    for i in range(n):
+        for j in range(i + 1, n + 1):
+            if s[i:j] != s:
+                my_set.add(hashlib.sha256(s[i:j].encode('utf-8')).hexdigest())
+    return len(my_set)
+
+
+print(func('papa'))  # 6
+print(func('name'))  # 9
