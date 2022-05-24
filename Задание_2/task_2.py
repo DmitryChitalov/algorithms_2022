@@ -17,15 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
 def recurs(value):
     if value == 0:
         return [0, 0]
     else:
-        digit = value%10
+        digit = value % 10
         res = recurs(value // 10)
-        if digit%2 == 0:
+        if digit % 2 == 0:
             return [res[0] + 1, res[1]]
         else:
             return [res[0], res[1] + 1]
+
 
 recurs(2012135)

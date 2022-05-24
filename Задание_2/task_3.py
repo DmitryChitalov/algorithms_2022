@@ -18,13 +18,37 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
-def recurs(value, res):
+'''
+Условие задачи:
+"Сформировать из введенного числа обратное по порядку входящих в него цифр и вывести на экран."
+я понял как:
+"Сформировать из введенного числа обратное по порядку входящих в него цифр ЧИСЛО и вывести на экран."
+'''
+
+
+def recurs_n(value, res):
     if value == 0:
         return res
     else:
-        digit = value%10
-        res = res*10 + digit
-        value = value//10
-        return recurs(value, res)
+        digit = value % 10
+        res = res * 10 + digit
+        value = value // 10
+        return recurs_n(value, res)
 
-print(recurs(5190, 0))
+
+print(recurs_n(230, 0))
+
+
+# Решение для
+# Сформировать из введенного числа обратную по порядку входящих в него цифр СТРОКУ и вывести на экран.
+
+def recurs_s(value, res):
+    if value == 0:
+        if res == '':
+            res = '0'
+        return res
+    else:
+        return recurs_s(value // 10, res + str(value % 10))
+
+
+print(recurs_s(230, ''))
