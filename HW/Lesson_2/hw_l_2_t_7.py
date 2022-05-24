@@ -17,7 +17,8 @@
 
 def aprv_set(num, left_sum=0, f_num=0):
     if num == 0:
-        return left_sum == f_num * (f_num + 1) / 2
+        if left_sum == f_num * (f_num + 1) / 2:
+            return 'Совпадает'
     left_sum += num
 
     return aprv_set(num - 1, left_sum, f_num + 1)
