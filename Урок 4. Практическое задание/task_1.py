@@ -24,13 +24,13 @@ def func_1(nums):
     return new_arr
 
 
-lst_obj = [1, 2, 3, 4]
+lst_obj = [1, 2, 3, 4, 5, 6]
 print(timeit("func_1(lst_obj)", globals=globals(), number=1000))
 
 
 def func_2(nums):
     new_arr = []
-    for i in range(0, len(nums), 2):
+    for i in range(1, len(nums), 2):
         new_arr.append(i)
     return new_arr
 
@@ -44,6 +44,11 @@ def func_3(nums):
 
 
 print(timeit("func_3(lst_obj)", globals=globals(), number=1000))
+
+
+print(func_1(lst_obj))
+print(func_2(lst_obj))
+print(func_3(lst_obj))
 
 """
 Аналитика:

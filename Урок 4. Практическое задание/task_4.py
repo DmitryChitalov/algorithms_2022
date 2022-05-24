@@ -44,14 +44,19 @@ def func_3():
     return f'Чаще всего встречается число {res[1]}, ' \
            f'оно появилось в массиве {res[0]} раз(а)'
 
+def func_4():
+    res = max(item for item in array if array.count(item) == max(map(array.count, array)))
+    return f'Чаще всего встречается число {res}, ' \
+           f'оно появилось в массиве {max(map(array.count, array))} раз(а)'
 
 print(func_1.__name__, timeit("func_1()", globals=globals(), number=1000))
 print(func_2.__name__, timeit("func_2()", globals=globals(), number=1000))
 print(func_3.__name__, timeit("func_3()", globals=globals(), number=1000))
+print(func_4.__name__, timeit("func_3()", globals=globals(), number=1000))
 print(func_1())
 print(func_2())
 print(func_3())
-
+print(func_4())
 """
 Аналитика:
 Написал код в одну строку для нахождения числа,
