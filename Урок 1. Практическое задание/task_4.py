@@ -22,3 +22,45 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def autorization1(users):  # O(n)
+    for user in users:  # O(n)
+        if user['activation']:  # O(1)
+            print(f'Позьзователь {user["name"]} допушен к ресурсу')  # O(1)
+        else:  # O(1)
+            print(f'Позьзователь {user["name"]} должен активировать учетную запись')  # O(1)
+
+
+def autorization2(users):  # O(n^2)
+    for user in users:  # O(n)
+        for item in user.values():  # O(n)
+            if item == True:  # O(1)
+                print(f'Позьзователь {user["name"]} допушен к ресурсу')  # O(1)
+            elif item == False:  # O(1)
+                print(f'Позьзователь {user["name"]} должен активировать учетную запись')  # O(1)
+
+
+my_users = [
+    {
+        'name': 'Andrew',
+        'login': 'login',
+        'password': 'pass',
+        'activation': False
+    },
+    {
+        'name': 'Ivan',
+        'login': 'login',
+        'password': 'pass',
+        'activation': True
+    },
+    {
+        'name': 'Vlad',
+        'login': 'login',
+        'password': 'pass',
+        'activation': True
+    }
+]
+
+autorization1(my_users)
+autorization2(my_users)
