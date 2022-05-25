@@ -28,63 +28,81 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+# а)
+
 import time
 
-def stopwatch(func):
-    def wrapper(args=None):
-        start = time.time()
-        obj = func(args)
-        end = time.time()
-        print(f"Время операции {func} - {end - start} сек")
-        return obj
+def profiler(func):
+    def wrapper(*args):
+        now = time.time()
+        result = func(*args)
+        print((time.time() - now) * 10000)
+        return result
 
     return wrapper
 
 
-# а) заполнение списка и словаря
-@stopwatch
-def list_complation(*args):
-    lst = [i for i in range(10 ** 7)]
-    return lst
+@profiler
+def list_generator(n):  # O(n)
+    return [i for i in range(0, n)]  # O(n)
 
 
-@stopwatch
-def dict_complation(*args):
-    dict = {i: i for i in range(10 ** 7)}
-    return dict
+@profiler
+def dict_generator(n):  # O(n)
+    return {i: None for i in range(0, n)}  # O(n)
 
 
-# b) получение элемента списка и словаря
+print('a:')
+print('Списки:')
+lst1 = list_generator(10000000)
+lst2 = list_generator(10000000)
+lst3 = list_generator(10000000)
 
-@stopwatch
-def take_el_from_list(lst):
-    return lst[9999998]
-
-
-@stopwatch
-def take_el_from_dict(dc):
-    return dc[9999999]
-
-
-# c) удаление элемента списка и словаря
-
-@stopwatch
-def delete_el_from_list(lst: list):
-    lst.pop(9999999)
-    return lst
+print('Словари:')
+dct1 = dict_generator(10000000)
+dct2 = dict_generator(10000000)
+dct3 = dict_generator(10000000)
 
 
-@stopwatch
-def delete_el_from_dict(dc: dict):
-    dc.pop(9999999)
-    return dc
+# Из-за хэширования ключей словарь заполняется дольше
+
+# b)
+
+@profiler
+def get_list_item(lst: list, el):  # O(n)
+    for itm in lst:  # O(n)
+        if itm == el:  # O(1)
+            return itm  # O(1)
 
 
-test_lst = list_complation()
-test_dict = dict_complation()
+@profiler
+def get_dict_item(dct: dict, el):  # O(1)
+    return dct[el]  # O(1)
 
-take_el_from_list(test_lst)
-take_el_from_dict(test_dict)
 
-test_lst = delete_el_from_list(test_lst)
-test_dict = delete_el_from_dict(test_dict)
+print('b:')
+list_element = get_list_item(lst1, 1000000)
+dict_element = get_dict_item(dct1, 1000000)
+
+# Время поиска элемента в списке линейно зависят от n, а в словаре константно.
+# Поиск в списке требует времени, а в словаре мгновенно
+
+# c)
+
+@profiler
+def del_list_item(lst: list, el):  # O(n)
+    lst.remove(el)  # O(n)
+
+
+@profiler
+def del_dict_item(dct: dict, el):  # O(1)
+    del dct[el]  # O(1)
+
+
+print('c:')
+del_list_item(lst1, 1000000)
+del_dict_item(dct1, 1000000)
+
+
+# Время поиска элемента в списке линейно зависят от n, а в словаре константно.
+# Поиск в списке требует времени, а в словаре мгновенно
