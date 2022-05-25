@@ -37,5 +37,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    elemList = []
+    for elem in array:
+        elemList.append(array.count(elem))
+        return f'Чаще всего встречается число {elem}, ' \
+               f'оно появилось в массиве {max(elemList)} раз(а)'
+
+
+print(timeit("func_1()", setup="from __main__ import func_1", number=1000))
+print(timeit("func_2()", setup="from __main__ import func_2", number=1000))
+print(timeit("func_3()", setup="from __main__ import func_3", number=1000))
+
+"""
+Результат:
+
+0.000795760000073642
+0.0010890170001403021
+0.00046327299969561864
+
+Самая быстрая функция - func_3()
+"""
