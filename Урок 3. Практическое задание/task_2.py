@@ -23,30 +23,51 @@ f1dcaeeafeb855965535d77c55782349444b
 п.с. статья на Хабре - python db-api
 """
 
-import uuid
+
 import hashlib
 import json
+import socket
 
+class Auth:
 
-def hash_password(password):
-    salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
+    def __init__(self):
+        self.data = {}
+        self.tries = 0
+        self.load()
 
+    def load(self):
+        with open('task_2.json', mode='r') as file:
+            # try
+            self.data = json.loads(file.readline())
+        self.info()
 
-def check_password(hashed_password, user_password):
-    password, salt = hashed_password.split(':')
-    return password == hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()
+    def info(self):
+        print(f"Users: {len(self.data['users'])}")
 
+    def save(self):
+        # try
+        with open('task_2.json', mode='w') as file:
+            file.write(json.dumps(self.data))
 
-new_pass = input('Введите пароль: ')
-hashed_password = hash_password(new_pass)
-print('Строка для сохранения в файле: ' + hashed_password)
-with open('hash.json', 'w') as f:
-    json.dump(hashed_password, f)
-    print(f"Хеш пароля записан в файл {f.name}")
-old_pass = input('Введите пароль еще раз для проверки: ')
+    @property
+    def users(self):
+        return self.data['users']
 
-if check_password(hashed_password, old_pass):
-    print('Вы ввели правильный пароль')
-else:
-    print('Извините, но пароли не совпадают')
+    def check_auth(self, username: str, passwd: str) -> int:
+        return self.users.get(username) \
+               and self.users[username]['pass'] == \
+               sha256(passwd.encode() + self.users[username]['salt'].encode()).hexdigest()
+
+    def request(self):
+        if self.tries > 2:
+            exit('Banned by fail2ban, local: %s' % (socket.gethostbyname(socket.gethostname())))
+
+        if self.check_auth(input('Введите логин: '), input('Введите пароль: ')):
+            print('Вы ввели правильный пароль')
+        else:
+            self.tries += 1
+            print('Вы ввели не правильный пароль (%i/3)' % (self.tries))
+
+        self.request()
+
+Auth().request() 
