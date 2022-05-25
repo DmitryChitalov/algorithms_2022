@@ -12,8 +12,13 @@
 П.С. задание не такое простое, как кажется
 """
 
+
 from timeit import timeit
 from random import randint
+
+Owner
+@DmitryChitalov DmitryChitalov 2 days ago
+выполнено
 
 
 def recursive_reverse(number):
@@ -79,4 +84,7 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=10000)) 
+
+# мемоизация в данном случае не актуальна, вероятность совпадения чисел "крайне мала"
+# Использование словаря поможет сократить время работы мемоизации 
