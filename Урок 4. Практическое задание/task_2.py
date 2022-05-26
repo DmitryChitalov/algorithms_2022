@@ -48,12 +48,12 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +80,10 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Кеш хранит пары ключ-значение, где ключ - часть исходного числа, значение - она же перевернутая.
+Вызывая функцию 10000 раз, кеш наполняется в 1 раз, а в 9999 раз используется (т.к. входное число то же самое).
+В итоге, делить надо только при первом проходе, в остальные проходы просто брать по ключу из словаря.
+Потому получается гораздо быстрее.
+"""
