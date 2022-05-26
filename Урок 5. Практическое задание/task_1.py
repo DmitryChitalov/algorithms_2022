@@ -28,3 +28,34 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+from decimal import Decimal, InvalidOperation
+
+Profit = namedtuple('Profit', 'name q1 q2 q3 q4 total')
+result_list = []
+
+try:
+    cnt = int(input('Введите количество предприятий для расчета прибыли:'))
+except ValueError as err:
+    raise ValueError('Вы ввели не целое число!')
+else:
+    for _ in range(cnt):
+        name = input('Введите название предприятия:')
+        profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала):')
+        try:
+            profit = tuple(map(Decimal, profit.split()))
+        except InvalidOperation as err:
+            raise ValueError('Прибыль может быть только вещественным или целым числом!')
+        if len(profit) != 4:
+            raise ValueError(f'Введено значений: {len(profit)}, а необходимо 4!')
+        result_list.append(Profit(name, *profit, sum(profit)))
+
+    total_avg = sum((x.total for x in result_list)) / len(result_list)
+    orgs_more = (x.name for x in result_list if x.total > total_avg)
+    orgs_less = (x.name for x in result_list if x.total < total_avg)
+
+    print(f'Средняя годовая прибыль всех предприятий: {total_avg:.2f}')
+    print('Предприятия, с прибылью выше среднего значения:', ', '.join(orgs_more))
+    print('Предприятия, с прибылью ниже среднего значения:', ', '.join(orgs_less))
+

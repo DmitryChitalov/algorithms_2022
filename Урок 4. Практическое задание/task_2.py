@@ -48,12 +48,12 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,4 +79,29 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+"""
+Мемоизация в данном случае дает прирост только потому, что функция выполняется много раз с одним и тем же числом и после 
+первого выполнения в кэше есть уже все нужные данные. 
+В примере ниже число каждый раз разное и прироста производительности нет (есть даже замедление, которое скорее всего
+связано со скоростью добавления ключей в словарь)
+"""
+
+
+print('Оптимизированная функция recursive_reverse_mem. Каждый раз новое число')
+print(
+    timeit(
+        'recursive_reverse_mem(randint(10000, 1000000))',
+        setup='from __main__ import recursive_reverse_mem, randint',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(randint(1000000, 10000000))',
+        setup='from __main__ import recursive_reverse_mem, randint',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(randint(100000000, 10000000000000))',
+        setup='from __main__ import recursive_reverse_mem, randint',
         number=10000))
