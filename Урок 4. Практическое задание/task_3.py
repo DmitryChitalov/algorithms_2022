@@ -35,3 +35,20 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    list_1 = list(str(enter_num))
+    list_1.reverse()
+    revers_num = "".join(list_1)
+    return revers_num
+
+
+num = 87648
+print(timeit("revers(num,0)", globals=globals()))  # 1.4761770000004617
+print(timeit("revers_2(num,0)", globals=globals()))  # 1.0722294999995938
+print(timeit("revers_3(num)", globals=globals()))  # 0.3501461999994717
+print(timeit("revers_4(num)", globals=globals()))  # 0.5816566000003149
+
+# В revers_3 срез строки. Это самый быстрый способ, т.к. сложность О(1)
+# В моем варианте эффективность получается за счет встроенных функций.
