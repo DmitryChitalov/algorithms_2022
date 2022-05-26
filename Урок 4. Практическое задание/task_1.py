@@ -12,21 +12,9 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
-from time import perf_counter
+from timeit import timeit
 
 
-def decorator_func(func):
-    def wrapper(*args):
-        start = perf_counter()
-        result = func(*args)
-        end = perf_counter()
-        print(f'Время выполнения: {end - start}')
-        return result
-
-    return wrapper
-
-
-@decorator_func
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
@@ -34,15 +22,15 @@ def func_1(nums):
             new_arr.append(i)
     return new_arr
 
-
 # использование comprehensions уменьшает время работы
-@decorator_func
+
 def func_2(nums):
-    new_arr = []
-    [new_arr.append(i) for i in range(len(nums)) if nums[i] % 2 == 0]
-    return new_arr
+    return [x for x in nums if x % 2 == 0]
 
 
-nums_mass = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(func_1(nums_mass))  # ->Время выполнения: 6.300047971308231e-06 [0, 2, 4, 6, 8]
-print(func_2(nums_mass))  # ->Время выполнения: 4.500034265220165e-06 [0, 2, 4, 6, 8]
+num = tuple(range(10000))
+
+print(timeit('func_1(num)', globals=globals(), number=1000)) # 0.9581132000312209
+print(timeit('func_2(num)', globals=globals(), number=1000)) # 0.5056927000405267
+
+
