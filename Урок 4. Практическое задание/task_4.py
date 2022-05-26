@@ -37,16 +37,16 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
-
 def func_3():
     return max(array, key=lambda i: array.count(i))
 
-# print(func_1())
-# print(func_2())
-#print(func_3())
+if __name__ == '__main__':
+    print(func_1())
+    print(func_2())
+    print(func_3())
 
-print(timeit("func_1", globals=globals())) 
-print(timeit("func_2", globals=globals())) 
-print(timeit("func_3", globals=globals())) 
+    print(f'Замер функции func_1: {timeit("func_1()", number=10000, globals=globals())}')  # 0.01
+    print(f'Замер функции func_2: {timeit("func_2()", number=10000, globals=globals())}')  # 0.014
+    print(f'Замер функции func_3: {timeit("func_2()", number=10000, globals=globals())}')  # 0.013
 
 # Задачу удалось написать в одну строку, но к сожалению скорость улучшить не получилось.
