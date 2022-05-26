@@ -37,5 +37,15 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    num = max(array, key=lambda x: array.count(x))
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
+
+
+print(timeit("func_1", globals=globals()))  # 0.03171569999994972
+print(timeit("func_2", globals=globals()))  # 0.02477889999954641
+print(timeit("func_3", globals=globals()))  # 0.023863800000071933
+
+''' Моя функция самая быстрая, т.к. в ней используются max() и count(). 
+    Это встроеные функции, поэтому они работают быстрее циклов. '''
