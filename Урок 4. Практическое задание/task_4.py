@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -36,6 +39,21 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def my_func():
+    return  f'Чаще всего встречается число {max(array,key=lambda x : array.count(x))}'
 
-print(func_1())
-print(func_2())
+if __name__ == '__main__':
+    print(func_1())
+    print(func_2())
+    print(my_func())
+
+    print(f'Замер функции func_1: {timeit("func_1()", number=10000, globals=globals())}')  # 0.01
+    print(f'Замер функции func_2: {timeit("func_2()", number=10000, globals=globals())}')  # 0.014
+    print(f'Замер функции my_func: {timeit("func_2()", number=10000, globals=globals())}')  # 0.013
+
+    """
+    В задаче требуется найти число которое встречается наиболшее количество раз. В задании не требуется указывать
+    сколько раз оно встречается. Поэтому удалось решить задачу используя встроенную функцию max. Но все равно 
+    первый алгоритм работает быстрее
+    
+    """
