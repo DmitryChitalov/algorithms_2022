@@ -28,3 +28,56 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+from collections import defaultdict
+from statistics import mean
+
+"""
+Может быть и не самое оптимальное решение, с точки зрения оптимизации, но вот захотелось мне совместить в одном
+задании использование двух коллекций - именнованных кортежей и defaultdic. (да и вроде как в задании о 
+производительности не слова...
+"""
+
+company_number = input('Введите количество организаций: ')
+company_dict = defaultdict(str)
+temp_tuple = namedtuple('company', 'company_name company_money_int company_avr company_money_year')
+for n in range(int(company_number)):
+    company_name = input('Введите имя компании: ')
+    # Запрашиваем строку из поквартальных прибылей
+    company_money = input('Через пробел введите прибыль данного предприятия '
+                          'за каждый квартал(Всего 4 квартала): ')
+    # Преобразовываем строку в список с типом элемента float (хотя к денежкам лучше применять decimal)
+    company_money_int = [float(el) for el in company_money.split(' ')]
+    # Вычисляем среднемесячную прибыль компании
+    company_avr = mean(company_money_int)
+    # Вычисляем годовую прибыль компании
+    company_money_year = sum(company_money_int)
+    # Формируем именнованый кортеж с полученными значениями
+    temp_1 = temp_tuple(
+        company_name=company_name, company_money_int=company_money_int,
+        company_avr=company_avr, company_money_year=company_money_year)
+    # Сохраняем в дефульто-словарь, где ключ - имя компании
+    company_dict[company_name] = temp_1
+# опционально проверяем получившийся словарь:
+print(company_dict)
+# Расчет среднегодовой прибыли:
+money_year = float()
+money_year = mean([company_dict[key].company_money_year for key in company_dict])
+print(f'Среднегодовая прибыль компаний составит  - {money_year}')
+# Оценка прибыльности компаний:
+company_max = []
+company_min = []
+for key in company_dict:
+    if company_dict[key].company_money_year >= money_year:
+        company_max.append(company_dict[key].company_name)
+    else:
+        company_min.append(company_dict[key].company_name)
+print(f'Предприятия, с прибылью выше среднего значения: {company_max}')
+print(f'Предприятия, с прибылью ниже среднего значения: {company_min}')
+
+"""
+Да, данное решение нетакое изящное, и в некоторых моментах потеряны все преимущества от использование специальных 
+коллекций но:
+1) задание позволило опробовать и обкатать новые знания
+2) "я художник, я так вижу!" )))))))))
+"""
