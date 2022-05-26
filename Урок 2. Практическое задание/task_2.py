@@ -17,3 +17,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def user_func():
+
+    def check(num, even_nums=0, odd_nums=0):
+
+        if num // 1 == 0:
+            return even_nums, odd_nums
+
+        if (num % 10) % 2 == 0:
+            even_nums += 1
+        else:
+            odd_nums += 1
+        num //= 10
+        return check(num, even_nums, odd_nums)
+
+    try:
+        user_num = int(input('Введите натуральное число: '))
+        even, odd = check(user_num)
+        print(f"Четных - {even}, нечетных - {odd}")
+    except ValueError:
+        print('Вы ввели строку')
+        return user_func()
+
+user_func()

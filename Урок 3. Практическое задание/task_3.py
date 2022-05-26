@@ -22,3 +22,11 @@
 р
 а
 """
+import hashlib
+
+my_str = 'panama'
+my_set = set()
+for i in range(len(my_str)):
+    my_set.add(hashlib.sha256(my_str[i:].encode()).hexdigest())
+    my_set.add(hashlib.sha256((my_str[0:len(my_str)-i]).encode()).hexdigest())
+print(f"Уникальных подстрок - {len(my_set)}")
