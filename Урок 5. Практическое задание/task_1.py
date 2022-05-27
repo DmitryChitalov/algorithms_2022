@@ -28,3 +28,32 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import OrderedDict
+# from functools import reduce
+
+
+def calc_profit_enterprises():
+    less_average_profit = []
+    more_average_profit = []
+    count_sum = 0
+    dict_enterprises = OrderedDict()
+    num_enterprises = int(input('Введите количество предприятий для расчета прибыли: '))
+    for i in range(num_enterprises):
+        name_company = input(f'Введите название {i + 1} предприятия: ')
+        profit_company = input('Через пробел введите прибыль данного предприятия '
+                               'за каждый квартал(Всего 4 квартала): ')
+        profit_year = sum([int(el) for el in profit_company.split(' ')])
+        dict_enterprises[name_company] = profit_year
+        count_sum += profit_year
+    all_average_profit = count_sum / num_enterprises
+    for k, v in dict_enterprises.items():
+        if float(v) > all_average_profit:
+            more_average_profit.append(k)
+        elif float(v) <= all_average_profit:
+            less_average_profit.append(k)
+    return f'Средняя годовая прибыль всех предприятий: {all_average_profit}\n' \
+           f'Предприятия, с прибылью выше среднего значения: {", ".join(more_average_profit)}\n' \
+           f'Предприятия, с прибылью ниже среднего значения: {", ".join(less_average_profit)}'
+
+
+print(calc_profit_enterprises())
