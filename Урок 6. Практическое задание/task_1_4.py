@@ -30,3 +30,46 @@
 
 Это файл для четвертого скрипта
 """
+
+# Задача про нечетные числа от 1 до n
+
+import typing
+
+from memory_profiler import memory_usage
+
+
+def memory_using(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@memory_using
+def odd_nums(number: int) -> typing.Generator:
+    """Генератор, возвращающий по очереди нечетные целые числа от 1 до number (включительно)"""
+
+    for number in range(1, number + 1, 2):
+        yield number
+
+
+@memory_using
+def odd_nums_list(number: int) -> list:
+    return [x for x in range(1, number + 1, 2)]
+
+
+if __name__ == '__main__':
+    number = 1000
+
+    _, mem_diff = odd_nums_list(number)
+    print(f"Выполнение заняло {mem_diff} Mib")  # 0.01171875 Mib
+
+    generator, mem_diff = odd_nums(number)
+    for i in generator:
+        print(i)
+    print(f"Выполнение заняло {mem_diff} Mib")  # 0.00390625 Mib
+    # Использование генераторов вместо списков значительно экономит память

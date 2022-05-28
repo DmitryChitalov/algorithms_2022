@@ -30,3 +30,55 @@
 
 Это файл для первого скрипта
 """
+
+from pympler import asizeof
+
+
+# Задача про сложение 16-тиричных чисел
+class Hex():
+
+    def __init__(self, digits):
+        self.digits = digits
+
+    @staticmethod
+    def hex_to_dec(digits_string):
+        return int(''.join(digits_string), 16)
+
+    def __add__(self, other):
+        sum_dec = self.hex_to_dec(self.digits) + self.hex_to_dec(other.digits)
+        return hex(sum_dec).replace('0x', '').upper()
+
+    def __mul__(self, other):
+        sum_dec = self.hex_to_dec(self.digits) * self.hex_to_dec(other.digits)
+        return hex(sum_dec).replace('0x', '').upper()
+
+
+class HexSlots():  # оптимизация по хранению
+    __slots__ = ['digits']
+
+    def __init__(self, digits):
+        self.digits = digits
+
+    @staticmethod
+    def hex_to_dec(digits_string):
+        return int(''.join(digits_string), 16)
+
+    def __add__(self, other):
+        sum_dec = self.hex_to_dec(self.digits) + self.hex_to_dec(other.digits)
+        return hex(sum_dec).replace('0x', '').upper()
+
+    def __mul__(self, other):
+        sum_dec = self.hex_to_dec(self.digits) * self.hex_to_dec(other.digits)
+        return hex(sum_dec).replace('0x', '').upper()
+
+
+if __name__ == '__main__':
+    hex_1 = Hex(input('Первое число: ').split())
+    hex_2 = Hex(input('Второе число: ').split())
+    print(f'Сумма: {(hex_1 + hex_2)}')
+    print(f'Произведение: {(hex_1 * hex_2)}')
+    hex_3 = HexSlots(input('Третье число: ').split())
+
+    print(asizeof.asizeof(hex_1))  # 416
+    print(asizeof.asizeof(hex_3))  # 248
+    # Хранение свойств объекта в кортеже, а не словаре, оптимизирует использование памяти

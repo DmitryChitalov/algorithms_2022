@@ -30,3 +30,23 @@
 
 Это файл для второго скрипта
 """
+
+# Задача про индексы четных элементов
+
+from memory_profiler import profile
+
+@profile
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+@profile
+def func_3(nums):
+    return list(filter(lambda x: x if x % 2 == 0 else None, nums))
+
+
+if __name__ == '__main__':
+    nums = list(range(1000000))
+    func_2(nums)    # 4.8 MiB
+    func_3(nums)    # 3.9 MiB
+    # Использование функции filter вместо list comprehention оптимизирует использование памяти
