@@ -30,3 +30,37 @@
 
 Это файл для третьего скрипта
 """
+
+# Задача про элемент списка, встречающийся чаще всего
+
+import random
+
+from memory_profiler import profile
+from numpy import array
+from sys import getsizeof
+
+
+@profile
+def func_3(array):
+    counters = {}
+    for i in array:
+        if i in counters:
+            counters[i] += 1
+        else:
+            counters[i] = 1
+
+    max_item = max(counters, key=counters.get)
+
+    return f'Чаще всего встречается число {max_item}, ' \
+           f'оно появилось в массиве {counters[max_item]} раз(а)'
+
+
+if __name__ == '__main__':
+
+    my_list = [random.randint(1, 100) for _ in range(1000000)]
+    my_range = array(my_list)
+    func_3(my_list)
+    func_3(my_range)
+    print(getsizeof(my_list))   # 8697456
+    print(getsizeof(my_range))  # 8000112
+    # Храние большого списка в numpy.ndarray экономит используемую память
