@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check(number):
+    if number == 1:
+        return number
+    else:
+        return check(number - 1) + number
+
+
+if __name__ == '__main__':
+    user_number = int(input("Введите число: "))
+    if check(user_number) == user_number * (user_number + 1) / 2:
+        print('Равенство верно')
