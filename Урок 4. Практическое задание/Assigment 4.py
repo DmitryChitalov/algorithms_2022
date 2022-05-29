@@ -1,11 +1,8 @@
 """
 Задание 4.
-
 Приведены два алгоритма. В них определяется число,
 которое встречается в массиве чаще всего.
-
 Сделайте профилировку каждого алгоритма через timeit
-
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
@@ -37,18 +34,16 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
-
-# достигнуто ускорение за счёт использования comprehensions
 def func_3():
-    new_array = []
-    [new_array.append(array.count(i)) for i in array]
-    elem = array[new_array.index(max(new_array))]
-    return elem
+    return max(array, key=lambda i: array.count(i))
 
+if __name__ == '__main__':
+    print(func_1())
+    print(func_2())
+    print(func_3())
 
-# print(func_1())
-# print(func_2())
-#print(func_3())
-print(timeit("func_1", globals=globals())) #->0.03182100004050881
-print(timeit("func_2", globals=globals())) #->0.028320999932475388
-print(timeit("func_3", globals=globals())) #->0.026120899943634868
+    print(f'Замер функции func_1: {timeit("func_1()", number=10000, globals=globals())}')  # 0.01
+    print(f'Замер функции func_2: {timeit("func_2()", number=10000, globals=globals())}')  # 0.014
+    print(f'Замер функции func_3: {timeit("func_2()", number=10000, globals=globals())}')  # 0.013
+
+# Задачу удалось написать в одну строку, но к сожалению скорость улучшить не получилось.
