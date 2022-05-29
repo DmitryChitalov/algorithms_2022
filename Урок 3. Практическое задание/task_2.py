@@ -22,3 +22,52 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+
+import hashlib
+import json
+import socket
+
+class Auth:
+
+    def __init__(self):
+        self.data = {}
+        self.tries = 0
+        self.load()
+
+    def load(self):
+        with open('task_2.json', mode='r') as file:
+            # try
+            self.data = json.loads(file.readline())
+        self.info()
+
+    def info(self):
+        print(f"Users: {len(self.data['users'])}")
+
+    def save(self):
+        # try
+        with open('task_2.json', mode='w') as file:
+            file.write(json.dumps(self.data))
+
+    @property
+    def users(self):
+        return self.data['users']
+
+    def check_auth(self, username: str, passwd: str) -> int:
+        return self.users.get(username) \
+               and self.users[username]['pass'] == \
+               sha256(passwd.encode() + self.users[username]['salt'].encode()).hexdigest()
+
+    def request(self):
+        if self.tries > 2:
+            exit('Banned by fail2ban, local: %s' % (socket.gethostbyname(socket.gethostname())))
+
+        if self.check_auth(input('Введите логин: '), input('Введите пароль: ')):
+            print('Вы ввели правильный пароль')
+        else:
+            self.tries += 1
+            print('Вы ввели не правильный пароль (%i/3)' % (self.tries))
+
+        self.request()
+
+Auth().request() 

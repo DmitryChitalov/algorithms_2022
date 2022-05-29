@@ -22,3 +22,37 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Cложность = O(1)
+def variant_1(users, user, password):
+    lst = users.get(user)
+    if not lst:
+        return 'Пользователь не найден. Зарегистрироваться?'
+    if not lst[1]:
+        return 'Учетная запись заблокирована'
+    if lst[0] == password:
+        return 'Авторизация прошла успешно'
+    else:
+        return 'Ошибка пароля. Попробуйте еще раз'
+
+
+# Cложность = O(n)
+def variant_2(users, user, password):
+    for key, value in users.items():
+        if key == user:
+            if not value[1]:
+                return 'Учетная запись заблокирована'
+            if value[0] == password:
+                return 'Авторизация прошла успешно'
+            else:
+                return 'Ошибка пароля. Попробуйте еще раз'
+    return 'Пользователь не найден. Зарегистрироваться?'
+
+users_inf = {'Anatoly': ['12345', True],
+              'Aleksandr': ['3456', True],
+              'Roman': ['7890', False],
+              'Sergey': ['1234', True],
+              'Oleg': ['1234', False]}
+
+print(valid_user(users_inf, 'Sergey', '1234'))
+print(valid_user1(users_inf, 'Oleg', '1234'))
