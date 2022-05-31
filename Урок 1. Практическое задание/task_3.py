@@ -17,3 +17,27 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+# Алгоритм 1
+def get_company_income(comp):                       # O(1)
+    return comp['income']                           # O(1)
+
+
+def high_income_1(lst):                             # O(n)
+    lst_copy = lst.copy()                           # O(n)
+    high_comp = []                                  # O(1)
+    i = 0
+    while i < 3:                                    # O(n)
+        a = max(lst_copy, key=get_company_income)   # O(n)
+        high_comp.append(a)                         # O(1)
+        lst_copy.remove(a)                          # O(n)
+        i += 1                                      # O(1)
+    return high_comp                                # O(1)
+
+
+company = [{'name_comp': 'Lucoil', 'income': 106400000000}, {'name_comp': 'Toyota', 'income': 291560000000},
+           {'name_comp': 'Apple', 'income': 365820000000}, {'name_comp': 'Alibaba', 'income': 125170000000},
+           {'name_comp': 'Volkswagen', 'income': 303720000000}]
+
+print('Вариант 1, сложность O(n^2): ', high_income_1(company))
+
+# реализовать больше вариантов не смогла. Есть идеи, но недостаточно времени.
