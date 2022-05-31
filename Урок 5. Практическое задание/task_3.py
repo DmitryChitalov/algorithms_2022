@@ -61,7 +61,7 @@ def comparison_deque_getElement():
     my_deque = deque([4, 5])
     elem = my_deque[0]
 
-if name == 'main':
+if __name__ == '__main__':
     print '1) Сравниваем append, pop, extend: '
     print timeit('comparison_list_append()', setup='from main import comparison_list_append', number=10000)
     print timeit('comparison_list_pop()', setup='from main import comparison_list_pop', number=10000)
