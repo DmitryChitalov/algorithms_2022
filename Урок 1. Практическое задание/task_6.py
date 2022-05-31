@@ -17,3 +17,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class TaskBoard:
+    def __init__(self):
+        self.elems = []
+
+    def __str__(self):
+        if not self.elems:
+            return 'Все задания выполнены.'
+        else:
+            return f'Список дел: {self.elems}.'
+
+    def is_empty(self):
+        return self.elems == []
+
+    def add_task(self, task):
+        self.elems.insert(0, task)
+
+    def del_task(self):
+        if self.elems:
+            task = self.elems.pop()
+            print(f'Задание "{task}" выполнено.')
+        else:
+            print('Заданий больше нет, можешь погулять с друзьями =)')
+
+    def size(self):
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+    to_do_list = TaskBoard()
+    to_do_list.add_task('Сдать д/з')
+    to_do_list.add_task('Пропылесосить')
+    print(to_do_list)
+    to_do_list.del_task()
+    to_do_list.add_task('Помыть машину')
+    to_do_list.del_task()
+    to_do_list.del_task()
+    print(to_do_list)
+    to_do_list.add_task('Пройти стажировку')
+    print(to_do_list)
+    to_do_list.del_task()
+    to_do_list.del_task()
+    print(to_do_list)

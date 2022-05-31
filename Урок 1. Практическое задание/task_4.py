@@ -22,3 +22,22 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Алгоритм 1
+def access(res):                  # O(1)
+    if res['aut'] == 'No':        # O(1)
+        print(f'Пользователь {res["login"]} не допущен к ресурсу. Необходимо активировать учетную запись.')
+    else:
+        print(f'Пользователь {res["login"]} допущен к ресурсу.')
+
+
+user_1 = {'login': 'Dog', 'pass': 111, 'aut': 'No'}
+user_2 = {'login': 'Cat', 'pass': 222, 'aut': 'No'}
+user_3 = {'login': 'Frog', 'pass': 333, 'aut': 'Yes'}
+user_4 = {'login': 'Parrot', 'pass': 444, 'aut': 'No'}
+user_5 = {'login': 'Pig', 'pass': 555, 'aut': 'No'}
+user_6 = {'login': 'Cow', 'pass': 666, 'aut': 'Yes'}
+
+access(user_1)
+access(user_3)
+print('Алгоритм 1: Сложность O(1)')
