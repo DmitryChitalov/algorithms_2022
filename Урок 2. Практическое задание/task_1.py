@@ -27,3 +27,57 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+from functools import reduce
+
+
+def get_number(description):
+    try:
+        operator = int(input(description))
+    except ValueError:
+        print('Это не число.')
+        operator = get_number(description)
+    return operator
+
+
+def get_operation():
+    current_operations = ('+', '-', '*', '/', '0')
+    try:
+        operation = input('Введите оперцию(+, -, *, / или 0 для выхода): ')
+        if operation not in current_operations:
+            raise ValueError
+    except ValueError:
+        print('Вы ввели неверный код операции. Попробуйте снова.')
+        operation = get_operation()
+    return operation
+
+
+def calc():
+    operands = []
+    operands.append(get_operation())
+    if operands[0] == '0':
+        print('Программа завершена пользователем')
+        return
+    operands.append(get_number('Введите первое число: '))
+    operands.append(get_number('Введите второе число: '))
+
+    operation = operands[0]
+    if operation == '+':
+        print(f'Ваш результат {reduce(lambda x, y: x + y, operands[1:])}')
+    elif operation == '-':
+        print(f'Ваш результат {reduce(lambda x, y: x - y, operands[1:])}')
+    elif operation == '*':
+        print(f'Ваш результат {reduce(lambda x, y: x * y, operands[1:])}')
+    elif operation == '/':
+        try:
+
+            print(f'Ваш результат {reduce(lambda x, y: x / y, operands[1:])}')
+        except ZeroDivisionError:
+            print('Деление на 0.')
+    else:
+        print(f'Неверная операция {operation}')
+
+    calc()
+
+
+if __name__ == '__main__':
+    calc()
