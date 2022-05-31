@@ -30,3 +30,64 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+from time import perf_counter
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        start = perf_counter()
+        res = func(*args, **kwargs)
+        stop = perf_counter()
+        m2 = memory_usage()
+        mem_dif = m2[0] - m1[0]
+        print(f'Функция {func.__name__}, выполнение заняло: {mem_dif} Mib, время выполнения: {stop - start}')
+        return res
+
+    return wrapper
+
+
+@memory
+def second(user_list):
+    """
+    функция из первого ДЗ на поиск минимального числа
+    """
+    min_num = user_list[0]
+    for i in range(len(user_list)):
+        if user_list[i] < min_num:
+            min_num = user_list[i]
+    return min_num
+
+
+def help_func(user_list):
+    for el in user_list:
+        yield el
+
+
+@memory
+def second_opt(user_list):
+    """
+    Оптимизируем данную функцию с помощью генератора, добавиви вспомогательную функцию help_func
+    суть которой - из принимаемого списка сделать генератор
+    """
+    my_generator = help_func(user_list)
+    min_num = next(my_generator)
+    for el in my_generator:
+        if el < min_num:
+            min_num = el
+    return min_num
+
+
+a = second(list(range(10000000)))
+b = second_opt(list(range(10000000)))
+
+"""
+Итак, приступим: для начала выбирем совсем простенькое задание, и для практики применим к нему самый очевидный вариант
+оптимизации - генератор! В декоратор, который замеряет количество затраченной памяти, я, для себя лично, добавил и 
+замер скорости исполнения функции. Мои результаты:
+Функция second, выполнение заняло: 0.00390625 Mib, время выполнения: 0.3357047999743372
+Функция second_opt, выполнение заняло: 0.0 Mib, время выполнения: 0.43160430004354566
+Как видим, значение занимаемой памяти настолько мизерное, что у нас вывело 0.0 Mib, из чего делаем вывод, что 
+оптимизация генератором явно удалась) 
+"""

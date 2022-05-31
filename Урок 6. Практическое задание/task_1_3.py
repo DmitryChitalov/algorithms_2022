@@ -30,3 +30,110 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import memory_usage
+from time import perf_counter
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        start = perf_counter()
+        res = func(*args, **kwargs)
+        stop = perf_counter()
+        m2 = memory_usage()
+        mem_dif = m2[0] - m1[0]
+        print(f'Функция {func.__name__}, выполнение заняло: {mem_dif} Mib, время выполнения: {stop - start}')
+        return res
+
+    return wrapper
+
+
+"""
+Оригинальная функция из второго ДЗ, где я обленился, и использовал при решении метод конкантенации
+Что ж, настало время перейти на f-строку!
+"""
+
+
+def mad_ascii(step=10, start=32, stop=127, elem_count=0, output_str=''):
+    """
+    Данная функция не только корректно (на мой скромный взгляд) позволяет решить задачу, но и позволяет гибко
+    настроить свою работу.
+    :param step: Количество выводимых элементов в строке
+    :param start: начальный элемент
+    :param stop: конечный элемент
+    :param elem_count: счетчик количества элементов в строке
+    :param output_str: переменная, в которую помещаем промежуточные строки для вывода в консоль
+    :return:
+    """
+    if start <= stop:
+        if elem_count < step:
+            mad_ascii(step, start + 1, stop, elem_count + 1,
+                      output_str + str(start) + ' ' + '-' + ' ' + chr(start) + ' ')
+        else:
+            print(output_str)
+            elem_count = 0
+            output_str = ''
+            mad_ascii(step, start, stop, elem_count, output_str)
+    else:
+        print(output_str)
+
+
+def mad_ascii_opt(step=10, start=32, stop=127, elem_count=0, output_str=''):
+    if start <= stop:
+        if elem_count < step:
+            mad_ascii_opt(step, start + 1, stop, elem_count + 1,
+                          f'{output_str} {str(start)} - {chr(start)}')
+        else:
+            print(output_str)
+            elem_count = 0
+            output_str = ''
+            mad_ascii_opt(step, start, stop, elem_count, output_str)
+    else:
+        print(output_str)
+
+
+@memory
+def start_measure_1():
+    mad_ascii()
+
+
+@memory
+def start_measure_2():
+    mad_ascii_opt()
+
+
+if __name__ == '__main__':
+    start_measure_1()
+    start_measure_2()
+
+"""
+К результату:
+32 -   33 - ! 34 - " 35 - # 36 - $ 37 - % 38 - & 39 - ' 40 - ( 41 - ) 
+42 - * 43 - + 44 - , 45 - - 46 - . 47 - / 48 - 0 49 - 1 50 - 2 51 - 3 
+52 - 4 53 - 5 54 - 6 55 - 7 56 - 8 57 - 9 58 - : 59 - ; 60 - < 61 - = 
+62 - > 63 - ? 64 - @ 65 - A 66 - B 67 - C 68 - D 69 - E 70 - F 71 - G 
+72 - H 73 - I 74 - J 75 - K 76 - L 77 - M 78 - N 79 - O 80 - P 81 - Q 
+82 - R 83 - S 84 - T 85 - U 86 - V 87 - W 88 - X 89 - Y 90 - Z 91 - [ 
+92 - \ 93 - ] 94 - ^ 95 - _ 96 - ` 97 - a 98 - b 99 - c 100 - d 101 - e 
+102 - f 103 - g 104 - h 105 - i 106 - j 107 - k 108 - l 109 - m 110 - n 111 - o 
+112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y 
+122 - z 123 - { 124 - | 125 - } 126 - ~ 127 -  
+Функция start_measure_1, выполнение заняло: 0.07421875 Mib, время выполнения: 0.0003424000460654497
+ 32 -   33 - ! 34 - " 35 - # 36 - $ 37 - % 38 - & 39 - ' 40 - ( 41 - )
+ 42 - * 43 - + 44 - , 45 - - 46 - . 47 - / 48 - 0 49 - 1 50 - 2 51 - 3
+ 52 - 4 53 - 5 54 - 6 55 - 7 56 - 8 57 - 9 58 - : 59 - ; 60 - < 61 - =
+ 62 - > 63 - ? 64 - @ 65 - A 66 - B 67 - C 68 - D 69 - E 70 - F 71 - G
+ 72 - H 73 - I 74 - J 75 - K 76 - L 77 - M 78 - N 79 - O 80 - P 81 - Q
+ 82 - R 83 - S 84 - T 85 - U 86 - V 87 - W 88 - X 89 - Y 90 - Z 91 - [
+ 92 - \ 93 - ] 94 - ^ 95 - _ 96 - ` 97 - a 98 - b 99 - c 100 - d 101 - e
+ 102 - f 103 - g 104 - h 105 - i 106 - j 107 - k 108 - l 109 - m 110 - n 111 - o
+ 112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y
+ 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
+Функция start_measure_2, выполнение заняло: 0.01953125 Mib, время выполнения: 0.0003933999687433243
+
+В своей практике я практически всегда стараюсь использовать f-строки, т.к. считаю этот метод самым удобным и наглядным,
+и тут, конечно я в этом полностью убедился: f-строки почти в 4 раза вышли быстрее, при этом ну очень незначительно 
+уступая в скорости! F-строка - наше все) 
+Ну и как вишенка на торте, копирую решение данной задачи в 6 часть этого ДЗ, т.к. здесь наглядно показал, как измерить 
+потребеление памяти функции, в которой используеться рекурсия
+"""
