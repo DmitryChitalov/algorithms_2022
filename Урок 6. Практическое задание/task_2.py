@@ -9,3 +9,27 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+
+@profile
+def some_sum_profile(n):
+    def some_sum(n, s=1, result=0):
+        if n > 0:
+            result += s
+            n -= 1
+            s /= -2
+            return some_sum(n, s, result)
+        else:
+            return result
+
+    return some_sum(n)
+
+
+if __name__ == '__main__':
+    some_sum_profile(985)
+
+"""
+В случае профилирования рекурсивной функции при каждом ее вызове срабатывает профилирование и выводится новая таблица.
+Можно обернуть эту функцию другой функцией и профилировать ее.
+"""

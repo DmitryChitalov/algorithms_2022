@@ -22,3 +22,41 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+from uuid import uuid4
+import sqlite3
+import hashlib
+
+conn = sqlite3.connect('task2.db')
+cursor = conn.cursor()
+cursor.execute('CREATE TABLE IF NOT EXISTS passwords (pwd_hash varchar(500))')
+cursor.execute('CREATE TABLE IF NOT EXISTS salt (salt varchar(500))')
+
+if salt := tuple(cursor.execute(f"SELECT salt FROM salt limit 1")):
+    salt = salt[0][0]
+else:
+    salt = uuid4().hex
+    cursor.execute(f"INSERT INTO salt VALUES ('{salt}')")
+    conn.commit()
+
+print('Соль:', salt)
+
+if password := input('Введите пароль:'):
+    hashed_string = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    if tuple(cursor.execute(f"SELECT pwd_hash FROM passwords where pwd_hash = '{hashed_string}'")):
+        print('Вы ввели правильный пароль, который уже есть в БД.', hashed_string)
+    else:
+        print(hashed_string)
+        if password := input('Введите пароль еще раз для проверки:'):
+            if hashlib.sha256(salt.encode() + password.encode()).hexdigest() == hashed_string:
+                print('Проверка успешна, пароль записан в БД.', hashed_string)
+                cursor.execute(f"INSERT INTO passwords VALUES ('{hashed_string}')")
+                conn.commit()
+            else:
+                print('ОШИБКА! Вы ввели неправильный пароль!')
+        else:
+            print('Вы не ввели пароль для проверки!')
+else:
+    print('Пароль не может быть пустым!')
+
+conn.close()
