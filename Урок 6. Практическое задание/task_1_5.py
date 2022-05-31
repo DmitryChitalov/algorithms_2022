@@ -30,3 +30,51 @@
 
 Это файл для пятого скрипта
 """
+# Исходное задание
+# Представлен список чисел. Определить элементы списка, не имеющие повторений.
+# Сформировать из этих элементов список с сохранением порядка их следования в исходном списке, например:
+# src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+# result = [23, 1, 3, 10, 4, 11]
+
+
+
+from memory_profiler import memory_usage
+
+
+def decor_mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        func()
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return  mem_diff
+    return wrapper
+
+@decor_mem_usage
+def func():
+    src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+    result = []
+    for element in src:
+        if src.count(element) == 1:
+            result.append(element)
+
+    print(*result)
+
+
+@decor_mem_usage
+def func_new():
+    src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+    result = list(filter(lambda x: src.count(x)==1 ,src))
+    print(*result)
+
+if __name__ == '__main__':
+
+    mem_diff = func()
+    print(mem_diff) #0.0039
+
+    mem_diff = func_new()
+    print(mem_diff) #0.0
+
+"""
+Оптимизацию провели с помощью функции filter(). Использование данной функции дает существенную экономию памяти 
+"""

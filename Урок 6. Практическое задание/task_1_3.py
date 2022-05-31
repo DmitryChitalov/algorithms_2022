@@ -30,3 +30,56 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+Исходное задание: 
+
+Написать функцию num_translate(), переводящую числительные от 0 до 10 c английского на русский язык. Например:
+num_translate("one")
+"один"
+num_translate("eight")
+"восемь"
+Если перевод сделать невозможно, вернуть None. Подумайте, как и где лучше хранить информацию, необходимую для
+перевода: какой тип данных выбрать, в теле функции или снаружи.
+"""
+
+from memory_profiler import memory_usage
+from collections import namedtuple
+
+
+def decor_mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor_mem_usage
+def num_translate(str_num):
+    my_dict = {'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять'
+        , 'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
+    return my_dict.get(str_num)
+
+
+@decor_mem_usage
+def num_translate_new(str_num):
+    Numbers = namedtuple('Numbers', 'one two three four five six seven eight nine ten')
+    my_dict = Numbers('один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять', 'десять')
+    return getattr(my_dict, str_num, None)
+
+
+if __name__ == '__main__':
+    value, mem_dif = num_translate('two')
+    print(mem_dif)  # 0.004
+
+    value, mem_dif = num_translate_new('two')
+    print(mem_dif)  # 0.0
+
+"""
+Для оптимизации использован именованный кортеж. Использование именованных кортежей существенно сокращает память по отно
+шению к словарям
+"""
