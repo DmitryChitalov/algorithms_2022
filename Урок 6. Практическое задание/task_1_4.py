@@ -30,3 +30,82 @@
 
 Это файл для четвертого скрипта
 """
+import numpy as np
+
+"""
+Исходная задача:
+
+
+Есть два списка:
+tutors = [
+    'Иван', 'Анастасия', 'Петр', 'Сергей',
+    'Дмитрий', 'Борис', 'Елена'
+]
+klasses = [
+    '9А', '7В', '9Б', '9В', '8Б', '10А', '10Б', '9А'
+]
+Необходимо реализовать генератор, возвращающий кортежи вида (<tutor>, <klass>), например:
+('Иван', '9А')
+('Анастасия', '7В')
+...
+Количество генерируемых кортежей не должно быть больше длины списка tutors. Если в списке klasses меньше элементов,
+чем в списке tutors, необходимо вывести последние кортежи в виде: (<tutor>, None), например:
+('Станислав', None)
+Доказать, что вы создали именно генератор. Проверить его работу вплоть до истощения.
+Подумать, в каких ситуациях генератор даст эффект.
+"""
+
+from memory_profiler import memory_usage
+import numpy
+import itertools as it
+
+
+def decor_mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        func()
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return mem_diff
+
+    return wrapper
+
+
+@decor_mem_usage
+def my_func():
+    tutors = [
+        'Иван', 'Анастасия', 'Петр', 'Сергей',
+        'Дмитрий', 'Борис', 'Елена', 'Валерий', 'Виталий'
+    ]
+
+    klasses = [
+        '9А', '7В', '9Б', '9В', '8Б', '10А', '10Б', '9А'
+    ]
+    gen = ((tutor, klass) for tutor, klass in it.zip_longest(tutors, klasses))
+    for i in range(0, len(tutors)):
+        print(next(gen))
+
+
+@decor_mem_usage
+def my_func_new():
+    tutors = np.array(['Иван', 'Анастасия', 'Петр', 'Сергей',
+                       'Дмитрий', 'Борис', 'Елена', 'Валерий', 'Виталий']
+                      )
+    klasses = np.array(
+        ['9А', '7В', '9Б', '9В', '8Б', '10А', '10Б', '9А']
+    )
+    gen = ((tutor, klass) for tutor, klass in it.zip_longest(tutors, klasses))
+    for i in range(0, len(tutors)):
+        print(next(gen))
+
+
+if __name__ == '__main__':
+    mem_diff = my_func()
+    print(mem_diff)  # 0.066
+
+    mem_diff = my_func_new()
+    print(mem_diff)  # 0.027
+
+    """
+    В данном примере оптимизация памяти проведена с использованием numpay array 
+    """
