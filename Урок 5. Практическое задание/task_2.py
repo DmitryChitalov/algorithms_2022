@@ -24,3 +24,17 @@ reduce
 __mul__
 __add__
 """
+
+import collections
+import functools
+
+# Variant 1
+defdict = collections.defaultdict(str)
+defdict[0] = str(input(f"Введите число 1: "))
+defdict[1] = str(input(f"Введите число 2: "))
+dict_sum = int(defdict[0], 16) + int(defdict[1], 16)
+print(dict_sum)
+
+# Variant 2
+dict_sum = functools.reduce(lambda a, b: a * b, (int(i, 16) for i in defdict.values()))
+print(dict_sum)
