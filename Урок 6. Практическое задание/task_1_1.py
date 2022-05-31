@@ -30,3 +30,63 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+
+
+# Урок 1. Задание 3.
+
+@profile
+def get_companies(companies_dict: dict):  # O(n log n)
+
+    lst = sorted([[v, k] for k, v in companies_dict.items()], reverse=True)  # проход по словарю O(n)
+    # добавление в список O(1)
+    # сортировка списка O(n log n)
+    print(lst[:3])  # срез O(n)
+
+
+@profile
+def get_companies_mem(companies_dict: dict):  # O(n log n)
+
+    lst = tuple(sorted([(v, k) for k, v in companies_dict.items()], reverse=True))  # проход по словарю O(n)
+    # добавление в список O(1)
+    # сортировка списка O(n log n)
+    print(lst[:3])  # срез O(n)
+
+
+if __name__ == '__main__':
+    companies = {x: x*1000000 for x in range(300000)}
+
+    get_companies(companies)
+    get_companies_mem(companies)
+
+"""
+Здесь поменял списки на кортежи. 
+В итоге lst стал занимать меньше места.
+
+[[299999000000, 299999], [299998000000, 299998], [299997000000, 299997]]
+Filename: C:\DEV\Python\algorithms_2022\Урок 6. Практическое задание\task_1_1.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    38     45.0 MiB      0.0 MiB   @profile
+    39                             def get_companies(companies_dict: dict):  # O(n log n)
+    40                             
+    41     71.1 MiB     26.0 MiB       lst = sorted([[v, k] for k, v in companies_dict.items()], reverse=True)  # проход по словарю O(n)
+    42                                 # добавление в список O(1)
+    43                                 # сортировка списка O(n log n)
+    44     71.0 MiB     -0.1 MiB       print(lst[:3])  # срез O(n)
+
+
+((299999000000, 299999), (299998000000, 299998), (299997000000, 299997))
+Filename: C:\DEV\Python\algorithms_2022\Урок 6. Практическое задание\task_1_1.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    47     47.9 MiB      0.0 MiB   @profile
+    48                             def get_companies_mem(companies_dict: dict):  # O(n log n)
+    49                             
+    50     66.5 MiB     18.6 MiB       lst = tuple(sorted([(v, k) for k, v in companies_dict.items()], reverse=True))  # проход по словарю O(n)
+    51                                 # добавление в список O(1)
+    52                                 # сортировка списка O(n log n)
+    53     66.5 MiB     -0.1 MiB       print(lst[:3])  # срез O(n)
+"""
