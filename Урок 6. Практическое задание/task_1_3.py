@@ -30,3 +30,27 @@
 
 Это файл для третьего скрипта
 """
+from pympler import asizeof
+from numpy import array
+
+
+# Алгоритмы, ДЗ-4, task_4
+def func_3(inp_arr):
+    my_dict = {}
+    for i in inp_arr:
+        my_dict.setdefault(i, 0)
+        my_dict[i] += 1
+    max_val = max(list(my_dict.items()), key=lambda j: j[1])
+    return f'Чаще всего встречается число {max_val[0]}, ' \
+           f'оно появилось в массиве {max_val[1]} раз(а)'
+
+
+arr = [1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1]
+print(func_3(arr))
+print(asizeof.asizeof(arr))     # 408
+
+arr1 = array([1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1])
+print(func_3(arr1))
+print(asizeof.asizeof(arr1))    # 240
+
+# При применении numpy.array для хранения массива, занимаемый им объем памяти уменьшился почти в два раза

@@ -30,3 +30,42 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+@decor
+# Алгоритмы, ДЗ-4, task_1
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+massive = list(range(100000))
+result, mem_diff = func_2(massive)
+print(result)
+print(f"Выполнение заняло {mem_diff} Mib")  # 2.55859375 Mib
+
+
+# Используем генератор для оптимизации памяти
+@decor
+def func_2(nums):
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            yield i
+
+
+my_gen, mem_diff = func_2(list(range(1000000)))
+print(f"Выполнение заняло {mem_diff} Mib")  # 0.0078125 Mib
+
+# При использовании генератора памяти расходуется значительно меньше
