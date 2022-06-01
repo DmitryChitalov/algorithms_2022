@@ -16,3 +16,51 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+def test(l_input):
+    left_list = []
+    right_list = []
+    mid = median(l_input)
+    m = len(l_input) // 2
+    for el in l_input:
+        if el < mid:
+            left_list.append(el)
+        elif el > mid:
+            right_list.append(el)
+    while len(left_list) < m:
+        left_list.append(mid)
+    while len(right_list) < m:
+        right_list.append(mid)
+    return left_list, mid, right_list
+
+
+m = 10
+list_for_test = [randint(0, 1000) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "test(list_for_test[:])",
+        globals=globals(),
+        number=1000))
+m = 100
+list_for_test = [randint(0, 1000) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "test(list_for_test[:])",
+        globals=globals(),
+        number=1000))
+m = 1000
+list_for_test = [randint(0, 1000) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "test(list_for_test[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+Лучше всего работает встроенная функция median.
+В 2_1 выполняется сортировка и на выходе мы имеем еще и отсортированный лист
+"""
