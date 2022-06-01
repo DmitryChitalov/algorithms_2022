@@ -29,4 +29,42 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для третьего скрипта
+Урок 9 задание 4
+"""
+from memory_profiler import profile
+
+
+# Исходный вариант определения класса
+class Car:
+    def __init__(self):
+        self.speed = 0
+        self.color = ''
+        self.name = ''
+
+
+# Вариант определения класса с использованием __slots__
+class CarSlots:
+    __slots__ = 'speed', 'color', 'name'
+
+    def __init__(self):
+        self.speed = 0
+        self.color = ''
+        self.name = ''
+
+
+@profile
+def cars_10000():
+    return [Car() for i in range(10000)]
+
+
+@profile
+def cars_slots_10000():
+    return [CarSlots() for i in range(10000)]
+
+
+cars = cars_10000()
+cars_slots = cars_slots_10000()
+
+"""
+Использование __slots__ уменьшает размер экземпляра класса
 """

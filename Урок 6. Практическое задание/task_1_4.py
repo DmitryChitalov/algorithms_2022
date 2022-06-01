@@ -29,4 +29,34 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+
+Урок 5 задание 3
+"""
+from memory_profiler import profile
+import numpy as np
+from random import randint
+from timeit import timeit
+
+
+# Вариант с list
+@profile
+def list_append():
+    my_list = []
+    for i in range(100000):
+        my_list.append(randint(1, 1000))
+
+
+# Вариант с numpy array
+@profile
+def array_append():
+    my_array = np.array([])
+    for i in range(100000):
+        np.append(my_array, randint(1, 1000))
+
+
+print(timeit("list_append()", setup="from __main__ import list_append", number=1))
+print(timeit("array_append()", setup="from __main__ import array_append", number=1))
+
+"""
+Массивы numpy занимают меньше места в памяти, но при этом заполняются медленнее, чем списки
 """
