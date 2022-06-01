@@ -30,3 +30,36 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+
+@profile
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+@profile
+def new_func(n):
+    new_list = filter(lambda x: x % 2 == 0, range(len(n)))
+    return new_list
+
+if __name__ == '__main__':
+    a = list(range(100000))
+    func_2(a)
+    new_func(a)
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     35     32.0 MiB     32.0 MiB           1   @profile
+#     36                                         def func_2(nums):
+#     37     33.8 MiB  -2515.8 MiB      100003       new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+#     38     33.8 MiB      0.0 MiB           1       return new_arr
+
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     40     32.2 MiB     32.2 MiB           1   @profile
+#     41                                         def new_func(n):
+#     42     32.2 MiB      0.0 MiB           1       new_list = filter(lambda x: x % 2 == 0, range(len(n)))
+#     43     32.2 MiB      0.0 MiB           1       return new_list
+
+

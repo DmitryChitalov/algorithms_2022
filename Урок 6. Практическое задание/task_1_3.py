@@ -30,3 +30,42 @@
 
 Это файл для третьего скрипта
 """
+from sys import getsizeof
+from collections import namedtuple
+
+def num_translate(eng_num):
+    vocablurary = {
+        "one": "один",
+        "two": "два",
+        "three": "три",
+        "four": "четыре",
+        "five": "пять",
+        "six": "шесть",
+        "seven": "семь",
+        "eight": "восемь",
+        "nine": "девять",
+        "ten": "десять",
+    }
+    print(f'Размер словаря {getsizeof(num_translate)}')
+
+    print(f'{vocablurary.get(eng_num, "такого слова нет")}')
+
+
+def new_func(number):
+    translate_ = namedtuple('translate_', 'one, two, three, four, five,'
+                                          'six, seven, eight, nine, ten')
+    trl = translate_(one='один', two='два', three='три',
+                     four='четыре', five='пять', six='шесть', seven='семь',
+                     eight='восемь', nine='девять', ten='десять')
+    print(f' Размер именованого кортежа {getsizeof(trl)}')
+    return f'{getattr(trl, number.lower(), "Такой цыфры нет")}'
+
+
+if __name__ == '__main__':
+    num_translate('six')
+    print(new_func('six'))
+#
+# Размер словаря 136
+# шесть
+#  Размер именованого кортежа 120
+# шесть
