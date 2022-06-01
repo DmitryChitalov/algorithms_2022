@@ -15,3 +15,28 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# общая мложность функции O(n)
+def find_min(lst):
+    minimum = lst[0]  # O(1)
+    for i in range(1, len(lst)):  # O(n)
+        if lst[i] < minimum:  # O(1)
+            minimum = lst[i]  # O(1)
+    return minimum  # O(1)
+
+
+# общая мложность функции O(n^2)
+def find_minimum(lst):
+    for i in range(0, len(lst) - 1):  # O(n)
+        for j in range(i + 1, len(lst)):  # O(n)
+            if lst[j] < lst[i]:  # O(1)
+                lst[i], lst[j] = lst[j], lst[i]  # O(1)
+    return lst[0]  # O(1)
+
+
+# задаем список
+mas = [3, 5, 67, -65, 34, -21]
+
+print(find_min(mas))
+print(find_minimum(mas))

@@ -22,3 +22,37 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# общая мложность функции O(1)
+def valid_user(users, user, password):
+    lst = users.get(user)
+    if not lst:
+        return 'Такой пользователь отсутствует в базе. Хотите зарегистрироваться?'
+    if not lst[1]:
+        return 'Учетная запись заблокирована'
+    if lst[0] == password:
+        return 'Вы успешно вошли в систему'
+    else:
+        return 'Неправильный пароль. Попробуйте еще раз'
+
+
+# общая мложность функции O(n)
+def valid_user1(users, user, password):
+    for key, value in users.items():
+        if key == user:
+            if not value[1]:
+                return 'Учетная запись заблокирована'
+            if value[0] == password:
+                return 'Вы успешно вошли в систему'
+            else:
+                return 'Неправильный пароль. Попробуйте еще раз'
+    return 'Такой пользователь отсутствует в базе. Хотите зарегистрироваться?'
+
+users_dict = {'Sergey': ['12345', True],
+              'Fedor': ['fg34h23', True],
+              'Victor': ['cm34332k', False],
+              'Timofey': ['de4lsk64', True],
+              'Leonid': ['ke3kfk4', False]}
+
+print(valid_user(users_dict, 'Timofey', 'de4lsk64'))
+print(valid_user1(users_dict, 'Leonid', 'ke3kfk4'))
