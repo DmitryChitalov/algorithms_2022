@@ -15,3 +15,27 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+lst_obj = [15, 16, 12, 10, 7]
+
+# квадратичная O(n^2)
+def min_el_2 (lst):
+
+    for i in lst:
+        m = False
+        for j in lst:
+            if i > j:
+                m = True
+        if m == False:
+            return i
+
+# линейная o(n)
+def min_el (lst):
+    m = lst[0]
+    for i in lst:
+        if i < m:
+            m = i
+    return m
+
+print ('Минимальный элемент списка:', min_el_2 (lst_obj))
+print ('Минимальный элемент списка:', min_el(lst_obj))

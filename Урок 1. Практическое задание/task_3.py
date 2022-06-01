@@ -17,3 +17,19 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+# квадратичная O(n^2)
+company = { 'alfa' : 10000, 'beta' : 5000, 'gamma' : 7000, 'delta' : 8000, 'omega': 12000}
+sort_val = sorted(company.values())
+sort_val = sort_val [-3:]
+max = {}
+for i in sort_val:
+    for k in company.keys():
+        if company[k] == i:
+            max[k] = company[k]
+print(max)
+
+
+# линейно-логарифмическая O(n Log n)
+list_f_d = list(company.items())
+list_f_d.sort (key = lambda x : x[1])
+print(list_f_d [-3:])
