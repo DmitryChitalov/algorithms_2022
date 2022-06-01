@@ -1,3 +1,4 @@
+from memory_profiler import profile
 """
 Задание 1.
 
@@ -29,4 +30,45 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для второго скрипта
+"""
+
+
+@profile
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+    return new_arr
+
+
+@profile
+def new_func(n):
+    new_list = filter(lambda x: x % 2 == 0, range(len(n)))
+    return new_list
+
+
+if __name__ == '__main__':
+    a = list(range(1000000))
+
+    b, c = func_2(a), new_func(a)
+    print([*c] == b)
+
+""" 
+Оригинальная функция:
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    36     57.8 MiB     57.8 MiB           1   @profile
+    37                                         def func_2(nums):
+    38     78.2 MiB  -7794.5 MiB     1000003       new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+    39     78.2 MiB      0.0 MiB           1       return new_arr
+
+Новый вариант:
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    41     78.2 MiB     78.2 MiB           1   @profile
+    42                                         def new_func(n):
+    43     78.2 MiB      0.0 MiB           1       new_list = filter(lambda x: x % 2 == 0, n)
+    44     78.2 MiB      0.0 MiB           1       return new_list
+
+
+Для оптимизации использовал функцию filter удалось существенно снизить затраты
+по памяти
 """
