@@ -30,3 +30,31 @@
 
 Это файл для первого скрипта
 """
+# Курс Алгоритмы и структуры данных, Урок 2, задание 3
+from memory_profiler import profile
+
+
+@profile
+def wrapper(num, reverse_l):
+    def reverse(number, reverse_list):
+        if number == 0:
+            return ''.join(map(str, reverse_list))
+        a = number % 10
+        reverse_list.append(a)
+        return reverse(number//10, reverse_list)
+    return reverse(num, reverse_l)
+
+
+@profile
+def reverse_optimized(num):
+    reversed_number = ''
+    for i in range(num):
+        if num == 0:
+            return reversed_number
+        reversed_number += str(num % 10)
+        num //= 10
+
+
+print(reverse_optimized(9**1000))
+print(wrapper(9**1000, []))
+print('\nВывод: добился оптимизации памяти превратив рекурсию в цикл и убрав ненужные детали')

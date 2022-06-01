@@ -30,3 +30,32 @@
 
 Это файл для третьего скрипта
 """
+# Курс Основы языка Python, урок 5, задание 5
+from memory_profiler import profile
+from random import randint
+
+
+@profile
+def unique(src):
+    unique_src = set()
+    each = set()
+    for i in src:
+        if i not in each:
+            unique_src.add(i)
+        else:
+            unique_src.discard(i)
+        each.add(i)
+    unique_src_sort = [el for el in src if el in unique_src]
+    return unique_src_sort
+
+
+@profile
+def unique_optimized(src):
+    unique_src = [i for i in src if src.count(i) == 1]
+    return unique_src
+
+
+print(unique_optimized([randint(1, 10000) for i in range(10000)]))
+print(unique([randint(1, 10000) for v in range(10000)]))
+
+print('\nВывод: оптимизировал превратив весь неоптимизированный код в один LC')

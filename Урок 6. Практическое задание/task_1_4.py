@@ -30,3 +30,73 @@
 
 Это файл для четвертого скрипта
 """
+# Курс Алгоритмы и структуры данных, Урок 5, задание 1
+from collections import namedtuple
+from statistics import mean
+from memory_profiler import profile
+from random import choice, randint
+from string import ascii_letters
+from recordclass import recordclass
+
+companies_quarters_namedtuple = namedtuple('Company', 'company_name quarters')
+companies_quarters_recordclass = recordclass('Company', 'company_name quarters')
+
+
+@profile
+def companies_info():
+    quarter_list = []
+    companies_list = []
+    less_than_avg_companies = []
+    more_than_avg_companies = []
+    try:
+        number = 10000
+    except ValueError:
+        print('You have to enter a number, not a string')
+        return
+    for i in range(number):
+        company_name = ''.join(choice(ascii_letters) for i in range(12))
+        quarters = f'{randint(1, 1000000)} {randint(1, 1000000)} {randint(1, 1000000)} {randint(1, 1000000)}'
+        i = companies_quarters_namedtuple(company_name, quarters)
+        quarter_list.extend(i.quarters.split())
+        companies_list.append(i)
+    avg_total_quarters = mean(map(int, quarter_list))
+    print(f'Average profit of each company: {avg_total_quarters}')
+    for v in range(len(companies_list)):
+        if sum(map(int, companies_list[v].quarters.split())) < avg_total_quarters:
+            less_than_avg_companies.append(companies_list[v].company_name)
+        else:
+            more_than_avg_companies.append(companies_list[v].company_name)
+    print(f'Companies with above-average profits: {more_than_avg_companies}\n'
+          f'Companies with below-average profits: {less_than_avg_companies}')
+
+
+@profile
+def companies_info_opt():
+    avg_total_quarters = 0
+    companies_list = []
+    less_than_avg_companies = []
+    more_than_avg_companies = []
+    try:
+        number = 10000
+    except ValueError:
+        print('You have to enter a number, not a string')
+        return
+    for i in range(number):
+        company_name = ''.join(choice(ascii_letters) for i in range(12))
+        quarters = f'{randint(1, 1000000)} {randint(1, 1000000)} {randint(1, 1000000)} {randint(1, 1000000)}'
+        i = companies_quarters_recordclass(company_name, quarters.split())
+        companies_list.append(i)
+        avg_total_quarters += mean(map(int, i.quarters))
+    print(f'Average profit of each company: {avg_total_quarters}')
+    for v in range(len(companies_list)):
+        if sum(map(int, companies_list[v].quarters)) < avg_total_quarters:
+            less_than_avg_companies.append(companies_list[v].company_name)
+        else:
+            more_than_avg_companies.append(companies_list[v].company_name)
+    print(f'Companies with above-average profits: {more_than_avg_companies}\n'
+          f'Companies with below-average profits: {less_than_avg_companies}')
+
+
+companies_info()
+companies_info_opt()
+print('\nВывод: оптимизировал код сменив namedtuple на recordclass')
