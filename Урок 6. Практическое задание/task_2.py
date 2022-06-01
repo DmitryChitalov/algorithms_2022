@@ -9,3 +9,22 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+
+@profile
+def my_func(j):
+    def palindrome(i):
+        if len(i) <= 1:
+            return True
+        else:
+            return i[0] == i[-1] and palindrome(i[1:-1])
+    return palindrome(j)
+
+
+print(my_func('топот'))
+
+
+"""Для того чтоб не выводилось много таблиц с замером памяти, 
+небходимо обернуть рекурсивную функцию еще одной функцией 
+для вывода единственной общей таблицы """

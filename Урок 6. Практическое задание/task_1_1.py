@@ -30,3 +30,67 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+import time
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+"""Курс "Основы языка Python" Урок №9 Задача №1 """
+
+
+@memory
+class TrafficLight:
+
+    def __init__(self):
+        self.__color_red = 'red'
+        self.__color_yellow = 'yellow'
+        self.__color_green = 'green'
+
+    def running(self):
+        # while True:
+        print(f'\033[31m{self.__color_red}')
+        time.sleep(7)
+        print(f'\033[33m{self.__color_yellow}')
+        time.sleep(2)
+        print(f'\033[32m{self.__color_green}')
+        time.sleep(5)
+
+
+result = TrafficLight()
+result.running()
+
+
+@memory
+class TrafficLight:
+    __slots__ = ('__color_red', '__color_yellow', '__color_green')
+
+    def __init__(self):
+        self.__color_red = 'red'
+        self.__color_yellow = 'yellow'
+        self.__color_green = 'green'
+
+    def running(self):
+        # while True:
+        print(f'\033[31m{self.__color_red}')
+        time.sleep(7)
+        print(f'\033[33m{self.__color_yellow}')
+        time.sleep(2)
+        print(f'\033[32m{self.__color_green}')
+        time.sleep(5)
+
+
+result = TrafficLight()
+result.running()
+
+"""Задала ограниченный набор атрибутов класса, что существенно сократило размер объекта"""
