@@ -30,3 +30,55 @@
 
 Это файл для второго скрипта
 """
+
+from numpy import array
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# ДЗ 2, Задание 5 из Основ. Вывести из списка цены на товары в формате "x руб. yy коп."
+# Без оптимизации:
+
+prices = [56.4, 23.57, 24, 67.89, 1.2, 123.68, 90, 34.3, 46.50, 80.01, 90.00, 68, 0, 100, 56.4, 23.57, 24,
+          67.89, 1.2, 123.68, 90, 34.3, 46.50, 80.01, 90.00, 68, 0, 100]
+
+
+@memory
+def get_price(prices):
+    for i in prices:
+        rub = int(i)
+        kop = int(round((i % 1 * 100), 2))
+        print(f'{rub} руб. {kop if kop >= 10 else str(0) + str(kop)} коп.')
+
+
+print(get_price(prices))
+
+# С оптимизацией:
+
+prices_arr = array([56.4, 23.57, 24, 67.89, 1.2, 123.68, 90, 34.3, 46.50, 80.01, 90.00, 68, 0, 100, 56.4, 23.57, 24,
+                    67.89, 1.2, 123.68, 90, 34.3, 46.50, 80.01, 90.00, 68, 0, 100])
+
+
+@memory
+def get_price_arr(prices_arr):
+    for i in prices:
+        rub = int(i)
+        kop = int(round((i % 1 * 100), 2))
+        print(f'{rub} руб. {kop if kop >= 10 else str(0) + str(kop)} коп.')
+
+
+print(get_price_arr(prices_arr))
+
+# До оптимизации: 0.0117 MiB, после оптимизации: 0.0 MiB.
+# Что изменил: Использовал array из NumPy вместо стандартного списка

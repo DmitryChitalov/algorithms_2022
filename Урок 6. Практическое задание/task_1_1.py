@@ -30,3 +30,45 @@
 
 Это файл для первого скрипта
 """
+
+from pympler import asizeof
+
+# ДЗ 9, Задание 2 из Основ. Реализовать класс Дорога и посчитать массу асфальта по длине и ширине дороги.
+# Без оптимизации:
+
+class Road:
+    def __init__(self, _length, _width):
+        self._length = _length
+        self._width = _width
+
+    def mass(self):
+        self.weight = 25
+        self.thickness = 5
+        print(f"{self._length * self._width * self.weight * self.thickness / 1000} тонн")
+
+
+example = Road(20, 5000)
+example.mass()
+print(asizeof.asizeof(example))
+
+# С оптимизацией:
+
+class Road:
+    __slots__ = ['_length', '_width', 'weight', 'thickness']
+    def __init__(self, _length, _width):
+        self._length = _length
+        self._width = _width
+
+    def mass(self):
+        self.weight = 25
+        self.thickness = 5
+        print(f"{self._length * self._width * self.weight * self.thickness / 1000} тонн")
+
+
+example = Road(20, 5000)
+example.mass()
+print(asizeof.asizeof(example))
+
+# До оптимизации: 512, после оптимизации: 192.
+# Что изменил: Использовал конструкцию slots в классе, а значит атрибуты хранились не в динамическом словаре,
+# а в списке, который занимает меньше памяти, т.к. не хэш-таблица
