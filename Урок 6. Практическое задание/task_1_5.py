@@ -30,3 +30,49 @@
 
 Это файл для пятого скрипта
 """
+# lesson 2 task 5
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+def func(num):
+    if (num - 31) % 10 == 0:
+        print('\n')
+    if not num == 128:
+        print(f'{num} - {chr(num)} ', end='')
+        return func(num + 1)
+
+
+@memory
+def func_opt():
+    num = 32
+    while num != 128:
+        if (num - 31) % 10 == 0:
+            print('\n')
+        print(f'{num} - {chr(num)} ', end='')
+        num += 1
+
+
+@memory
+def func_call(num):
+    func(num)
+
+
+func_call(32)
+func_opt()
+'''
+Я заменил рекурсию на цикл
+Выполнение заняло 0.078125 Mib
+Выполнение заняло 0.0 Mib
+'''
