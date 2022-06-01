@@ -30,3 +30,54 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+
+"""Задание 1_3 курс Алгоритмы"""
+
+
+def deco(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(args[0])
+        stop = memory_usage()
+        mem_diff = stop[0] - start[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@deco
+def best_of_1(data_in):
+    data = data_in.copy()
+    best_of = []
+    for i in range(3):
+        best_of.append(max(data, key=data.get))
+        data.pop(best_of[i])
+    return best_of
+
+
+@deco
+def best_of_2(data_in):
+    data = data_in.copy()
+    best_of = []
+    for i in range(3):
+        best_of.append(max(data, key=data.get))
+        yield data.pop(best_of[i])
+
+
+if __name__ == '__main__':
+    storage = {i: i ** 2 for i in range(10000)}
+
+    res_func, mem_func = best_of_1(storage)
+    print(f'Использовано памяти: {mem_func}')
+
+    res_gen, mem_gen = best_of_2(storage)
+    print(f'Использовано памяти: {mem_gen}')
+
+    """
+    Для оптимизации применено постороение функции как 
+    генератора. В результате занимаемое пространство памяти 
+    сократилось с 0,03125 до 0,0 Mib - практически не занимает 
+    места
+    """
