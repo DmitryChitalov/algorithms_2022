@@ -30,3 +30,64 @@
 
 Это файл для третьего скрипта
 """
+
+from memory_profiler import memory_usage
+
+"""
+Изначальный вариант взял из курса основ.
+обособить каждое целое число кавычками 
+(добавить кавычку до и кавычку после элемента списка, являющегося числом) 
+и дополнить нулём до двух целочисленных разрядов
+Входные данные я изменил, чтобы принцип оптимизации был нагляднее
+Урок 2, task 2
+"""
+
+def dec(func):
+    def wrapper():
+        start = memory_usage()
+        res = func()
+        print(f'Заняло пямяти = {memory_usage()[0] - start[0]}')
+        return res
+
+    return wrapper
+
+
+@dec
+def default():
+    my_list = [str(x) for x in range(50000)]
+    my_list_act = my_list.copy()
+    for number in my_list_act:
+        if number.isdigit():
+            idx = (my_list_act.index(number))
+            my_list_act[idx] = number.zfill(2)
+            my_list_act[idx] = '"' + my_list_act[idx] + '"'
+        elif number[0] == '+' or number[0] == '-':
+            idx = (my_list_act.index(number))
+            my_list_act[idx] = number.zfill(3)
+            my_list_act[idx] = '"' + my_list_act[idx] + '"'
+    return my_list_act
+
+
+@dec
+def optimize():
+    my_list = (str(x) for x in range(50000))
+    for i in my_list:
+        if i.isdigit():
+            print(f'"{i.zfill(2)}"', end=' ')
+        elif i[0] == '+' or i[0] == '-':
+            print(f'"{i.zfill(3)}"', end=' ')
+        else:
+            print(i, end=' ')
+    print()
+
+
+# print(*default())
+# optimize()
+
+"""
+Вывод:
+    Дефолтный скрипт - Заняло пямяти = 4.02734375
+    Оптимизированный скрипт - Заняло пямяти = 0.00390625
+    Заменил список на генератор. Также не создавал копию списка
+    Значительно выиграл по памяти и по времени выполнения кода.
+"""

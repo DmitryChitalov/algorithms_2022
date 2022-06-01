@@ -30,3 +30,66 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import memory_usage
+from numpy import array
+
+"""
+Изначальный вариант взял из текущего курса.
+Задача: алгоритм нахождения i-го простого числа. Нужно решить с помощью
+решета Эратосфена
+Урок 4, task 5
+"""
+
+
+def dec(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(*args)
+        return f'Заняло пямяти = {memory_usage()[0] - start[0]}'
+
+    return wrapper
+
+@dec
+def eratosphen_default(n):
+    elems = 8000
+    nums = [x for x in range(elems + 1)]
+    nums[1] = 0
+    i = 2
+    while i <= elems ** 0.5:
+        if nums[i] != 0:
+            j = i ** 2
+            while j <= elems:
+                nums[j] = 0
+                j += i
+        i += 1
+    nums = [x for x in nums if x != 0]
+    return nums[n - 1]
+
+
+@dec
+def eratosphen_optimize(n):
+    elems = 8000
+    nums = array([x for x in range(elems + 1)])
+    nums[1] = 0
+    i = 2
+    while i <= elems ** 0.5:
+        if nums[i] != 0:
+            j = i ** 2
+            while j <= elems:
+                nums[j] = 0
+                j += i
+        i += 1
+    nums = [x for x in nums if x != 0]
+    return nums[n - 1]
+
+
+# print(eratosphen_default(10))
+# print(eratosphen_optimize(10))
+
+"""
+Выводы:
+        Дефолтный вариант - 0.375 MiB
+        Оптимизированный вариант - 0.0 MiB
+        Вместо обычного списка использовал array from NumPy тем самым экономим на использовании памяти,
+        т.к array требует ее гораздо меньше.
+"""
