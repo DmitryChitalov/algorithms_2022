@@ -22,3 +22,42 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+users = {'Lev': (678, False),
+         'Anton': (999, False),
+         'Andreu': (712, True)}
+
+def check_user_1():
+    name = input('Введите имя: ')
+
+    for account, data in users.items():                     # O(n)
+        password = int(input('Введите пароль: '))
+        if account == name and data[1]:                     # O(1)
+            if data[0] == password:                         # O(1)
+                print(f'Добро пожаловать, {name}')
+            else:
+                print('Неверный пароль')
+        elif not data[1]:                                   # O(1)
+            print('Этот аккаунт не активен!')
+        else:
+            print('Аккаунт не зарегестрирован')
+
+
+
+def check_user_2():                                       # O(1)
+    name = input('Введите имя: ')
+
+    if users.get(name) is not None:                         # O(1)
+        password = int(input('Введите пароль: '))
+        if not users[name][1]:                              # O(1)
+            print('Этот аккаунт не активен!')
+        elif users[name][0] == password:                    # O(1)
+            print(f'Добро пожаловать, {name}')
+        else:
+            print('Неверный пароль!')
+
+    else:
+        print('Аккаунт не зарегестрирован')
+
+
+check_user_1()
+check_user_2()

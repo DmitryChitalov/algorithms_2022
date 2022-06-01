@@ -17,3 +17,25 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {'Сбер': 25000, 'Адидас': 32000, 'Найк': 30000, 'Газпром': 13020}
+
+
+def money_count_1(data_in):                                                         # O(n)
+    data = data_in.copy()                                                       # O(n)
+    money_count_1 = []
+    for i in range(3):                                                          # O(1)
+        money_count_1.append(max(data, key=data.get))                                 # O(n)
+        data.pop(money_count_1[i])                                                    # O(1)
+    return money_count_1                                                              # O(1)
+
+
+def money_count_2(data_in):                                                         # O(n*log n)
+    data = data_in.copy()                                                       # O(n)
+    data_in = sorted(data.items(), key=lambda x: x[1], reverse=True)[:3]        # O(n*Log n)
+    return data_in                                                              # O(1)
+
+
+print(money_count_1(company))
+print(money_count_2(company))
+
+
