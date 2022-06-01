@@ -30,3 +30,52 @@
 
 Это файл для первого скрипта
 """
+###########################################################################
+"""Профилирование времени и памяти"""
+
+from memory_profiler import memory_usage
+# from recordclass import recordclass
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor
+def check_max_profit_1(dct_obj):
+    # Функция должна обеспечивать поиск трех компаний с наибольшей годовой прибылью.
+
+    sorted_dict = {}
+    for i in sorted(dct_obj.values(), reverse=True)[:3]:
+        for k in dct_obj:
+            if dct_obj[k] == i:
+                sorted_dict[k] = dct_obj[k]
+    return sorted_dict
+
+
+@decor
+def check_max_profit_up(dct_obj):
+    # Функция должна обеспечивать поиск трех компаний с наибольшей годовой прибылью.
+
+    sorted_dict = {}
+    for i in sorted(dct_obj.values(), reverse=True)[:3]:
+        for k in dct_obj:
+            if dct_obj[k] == i:
+                sorted_dict[k] = dct_obj[k]
+    return sorted_dict
+
+
+if __name__ == '__main__':
+    profit_dict = {x: x for x in range(1000000)}
+
+    res, mem_diff = check_max_profit_1(profit_dict)
+    print(f"Выполнение заняло {mem_diff} Mib")
+    del profit_dict
+

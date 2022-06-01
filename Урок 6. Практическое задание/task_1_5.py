@@ -28,5 +28,51 @@
 отговорки. Примеров оптимизации мы перечислили много: переход с массивов на
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
-Это файл для пятого скрипта
+Это файл для пятого скрипта:
 """
+#################################################################################
+"""
+Задание №2. Из курса основ Python.
+Реализовать класс Road (дорога).
+определить атрибуты: length (длина), width (ширина);
+значения атрибутов должны передаваться при создании экземпляра класса;
+атрибуты сделать защищёнными;
+определить метод расчёта массы асфальта, необходимого для покрытия всей дороги;
+использовать формулу: длина*ширина*масса асфальта для покрытия одного кв. метра дороги асфальтом,
+толщиной в 1 см*число см толщины полотна; проверить работу метода.
+"""
+
+
+from pympler import asizeof
+
+# решение исходное:
+class Road:
+
+    def __init__(self, _length, _width):
+        self._length = _length
+        self._width = _width
+
+    def mass(self, mass_as):
+        return self._length * self._width * mass_as
+
+
+road_obj = Road(20, 5000)
+print(road_obj.mass(125))
+print(asizeof.asizeof((road_obj)))
+
+
+# решение оптимизированное:
+class Road:
+    __slots__ = ['_length', '_width']
+
+    def __init__(self, _length, _width):
+        self._length = _length
+        self._width = _width
+
+    def mass(self, mass_as):
+        return self._length * self._width * mass_as
+
+
+road_obj = Road(20, 5000)
+print(road_obj.mass(125))
+print(asizeof.asizeof((road_obj)))

@@ -30,3 +30,40 @@
 
 Это файл для третьего скрипта
 """
+##############################################################################
+from memory_profiler import profile
+import random
+
+@profile
+def check_min_1(lst_obj):
+    """Функция должна обеспечивать поиск минимального значения для списка.
+
+    Алгоритм 1:
+    Сложность: O(n^2) - квадратичная.
+    """
+    for i in range(len(lst_obj)):
+        min = i
+        for j in range(len(lst_obj)):
+            if lst_obj[j] < lst_obj[min]:
+                min = j
+    return lst_obj[min]
+
+##############################################################################
+@profile
+def check_min_2(lst_obj):
+    """Функция должна обеспечивать поиск минимального значения для списка.
+
+    Алгоритм 2:
+    Сложность: O(n) - линейная.
+    """
+    min_obj = lst_obj[0]
+    for obj in lst_obj:
+        if obj < min_obj:
+            min_obj = obj
+    return min_obj
+
+
+lst = random.sample(range(-10000, 10000), 1000)
+
+print(check_min_1(lst))
+print(check_min_2(lst))

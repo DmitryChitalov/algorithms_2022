@@ -30,3 +30,37 @@
 
 Это файл для второго скрипта
 """
+####################################################################################
+from memory_profiler import memory_usage
+
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor
+def thesaurus(*names):
+
+    name_list = {}
+    for el in names:
+        if el[0] not in name_list:
+            name_list[el[0]] = [el]
+        else:
+            name_list[el[0]].append(el)
+
+    return name_list
+
+
+if __name__ == '__main__':
+    names = ('Иван', 'Мария', 'Петр', 'Илья')
+
+    res, mem_diff = thesaurus(names)
+    print(f"Выполнение заняло {mem_diff} Mib")
