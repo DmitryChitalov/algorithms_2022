@@ -30,3 +30,59 @@
 
 Это файл для третьего скрипта
 """
+
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# Курс алгоритмы, урок 2, задание 3
+# Сформировать из введенного числа обратное по порядку входящих в него цифр и вывести на экран.
+
+
+number = 12000563045497631575434545313212165454132120000000000000999999999999999999999999999999113130
+
+
+@memory
+def initial_version(n):
+    return reverse_number(n)
+
+
+def reverse_number(number, reverse=''):
+    reverse = reverse + str(number - (number // 10) * 10)
+    if number < 10:
+        return reverse
+    else:
+        return reverse_number(number // 10, reverse)
+
+
+print(initial_version(number))
+
+
+@memory
+def optimized_version(number):
+    res = ''
+    for i in str(number):
+        res = i + res
+    return res
+
+
+print(optimized_version(number))
+
+# Выполнение initial_version заняло 0.125 Mib
+# при использовании рекурсии в памяти сохраняются аргументы, после каждого вызова функции
+# Выполнение optimized_version заняло 0.0 Mib
+# использование цикла занимает меньше памяти
+
+

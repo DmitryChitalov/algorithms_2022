@@ -9,3 +9,35 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+
+@profile
+def print_ascii(val=32):
+    if val > 127:
+        return
+    print(val, ' - ', chr(val), end=' ' if (val + 9) % 10 != 0 else '\n')
+    print_ascii(val + 1)
+
+
+print_ascii()
+
+
+def print_ascii_2(val=32):
+    if val > 127:
+        return
+    print(val, ' - ', chr(val), end=' ' if (val + 9) % 10 != 0 else '\n')
+    print_ascii(val + 1)
+
+
+@profile
+def ascii_2():
+    return print_ascii_2()
+
+
+print(ascii_2())
+
+# при выполнении профилирования памяти в скрипте с рекурсией, происходят замеры для каждого вызова функции
+# для того чтобы замер проводился однократно, необходимо создать отдельную функцию с декоратором,
+# которая будет вызывать функцию с рекурсией

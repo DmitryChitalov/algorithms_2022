@@ -30,3 +30,56 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+# Курс основ, урок 1, задание 2
+# Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7. Например, число «19 ^ 3 = 6859» будем
+# включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7. Внимание: использовать только арифметические операции!
+# К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого списка, сумма цифр которых делится
+# нацело на 7.
+
+
+def sum_digits(value):
+    res = 0
+    while value != 0:
+        res += value % 10
+        value //= 10
+    return res
+
+
+@memory
+def initial_version():
+    arr = [i ** 3 for i in range(1, 10000001, 2)]
+    res1 = sum(filter(lambda num: sum_digits(num) % 7 == 0, arr))
+    res2 = sum(filter(lambda num: sum_digits(num + 17) % 7 == 0, arr))
+    print(res1)
+    print(res2)
+
+
+initial_version()
+
+
+@memory
+def optimized_version():
+    print(sum(filter(lambda j: sum(map(int, str(j))) % 7 == 0, [i ** 3 for i in range(1, 10000001, 2)])))
+    print(sum(filter(lambda j: sum(map(int, str(j + 17))) % 7 == 0, [i ** 3 for i in range(1, 10000001, 2)])))
+
+
+optimized_version()
+
+# Выполнение initial_version заняло 0.50390625 Mib
+# Выполнение optimized_version заняло 0.0859375 Mib - использование функции map экономит память
+
