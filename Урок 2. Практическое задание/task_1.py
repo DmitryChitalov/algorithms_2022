@@ -15,7 +15,7 @@
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
-Решите через рекурсию. В задании нельзя применять циклы.
+Решите через рекурсию. Решение через цикл не принимается.
 
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def num_str(obj):
+    """Проверка типа значения"""
+    if int(obj) or '0':
+        return obj
+    else:
+        print('Значение не верно, необходимо ввести число.')
+
+
+def counting():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        return print('Завершение рекурсии.')
+    if operation == '+' or operation == '-' or operation == '*' or operation == '/':
+        num_1 = input('Введите первое число: ')
+        if num_str(num_1) != num_1:
+            return counting()
+        num_2 = input('Введите второе число: ')
+        if num_str(num_2) != num_2:
+            return counting()
+        if operation == '+':
+            print('Ваш результат: ', int(num_1) + int(num_2))
+            return counting()
+        elif operation == '-':
+            print('Ваш результат: ', int(num_1) - int(num_2))
+            return counting()
+        elif operation == '*':
+            print('Ваш результат: ', int(num_1) * int(num_2))
+            return counting()
+        elif operation == '/':
+            if num_2 == '0':
+                print('На 0 делить нельзя!')
+                return counting()
+            else:
+                print('Ваш результат: ', int(num_1) / int(num_2))
+                return counting()
+    else:
+        print('Знак операции введен неверно. Исправьте!')
+        return counting()
+
+
+counting()
