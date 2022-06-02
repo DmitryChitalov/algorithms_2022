@@ -15,7 +15,22 @@
 112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y
 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
 
-Решите через рекурсию. В задании нельзя применять циклы.
+Решите через рекурсию. Решение через цикл не принимается.
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii(num_min, num_max, position):
+    if num_min <= num_max:
+        position += 1
+        if position % 10 == 0:
+            print("%4d - %s" % (num_min, chr(num_min)), end='\n')
+        else:
+            print("%4d - %s" % (num_min, chr(num_min)), end='')
+        return table_ascii(num_min + 1, num_max, position)
+    else:
+        return ''
+
+
+table_ascii(32, 127, 0)    # (от какого символа, до какого символа, позиция (чтобы выводилось 10 символов в строке))
