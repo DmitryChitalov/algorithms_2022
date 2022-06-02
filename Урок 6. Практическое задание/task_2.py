@@ -9,3 +9,24 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение.
 """
+from memory_profiler import profile
+
+
+@profile
+def wrapper(inp_num):
+    def revers_num(num_1, num_2=""):
+        while num_1 < 10:
+            return num_2 + str(num_1)
+        else:
+            return revers_num(num_1=num_1 // 10, num_2=num_2 + str(num_1 % 10))
+
+    return revers_num(inp_num)
+
+
+print(wrapper(12361800))
+
+"""
+Аналитика:
+Для рекурсии делаем "обертку" и профилируем
+саму обертку.
+"""

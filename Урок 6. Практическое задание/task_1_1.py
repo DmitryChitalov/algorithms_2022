@@ -31,51 +31,51 @@
 Это файл для первого скрипта
 """
 ###########################################################################
-"""Профилирование времени и памяти"""
+"""
+Задание 4.	Из курса Алгоритмы и структуры данных Python.
+Найти сумму n элементов следующего ряда чисел:
+1 -0.5 0.25 -0.125 ...
+Количество элементов (n) вводится с клавиатуры.
 
-from memory_profiler import memory_usage
-# from recordclass import recordclass
+Пример:
+Введите количество элементов: 3
+Количество элементов - 3, их сумма - 0.75
 
-
-def decor(func):
-    def wrapper(*args, **kwargs):
-        m1 = memory_usage()
-        res = func(args[0])
-        m2 = memory_usage()
-        mem_diff = m2[0] - m1[0]
-        return res, mem_diff
-
-    return wrapper
-
-
-@decor
-def check_max_profit_1(dct_obj):
-    # Функция должна обеспечивать поиск трех компаний с наибольшей годовой прибылью.
-
-    sorted_dict = {}
-    for i in sorted(dct_obj.values(), reverse=True)[:3]:
-        for k in dct_obj:
-            if dct_obj[k] == i:
-                sorted_dict[k] = dct_obj[k]
-    return sorted_dict
+Решите через рекурсию. Решение через цикл не принимается.
+Нужно обойтисть без создания массива!
+"""
+# решение исходное:
+from memory_profiler import profile
 
 
-@decor
-def check_max_profit_up(dct_obj):
-    # Функция должна обеспечивать поиск трех компаний с наибольшей годовой прибылью.
+@profile
+def get_sum(nums, st_num=1, res=0):
+    while nums == 0:
+        return res
+    else:
+        return get_sum(nums - 1, res=res + st_num, st_num=st_num / -2)
 
-    sorted_dict = {}
-    for i in sorted(dct_obj.values(), reverse=True)[:3]:
-        for k in dct_obj:
-            if dct_obj[k] == i:
-                sorted_dict[k] = dct_obj[k]
-    return sorted_dict
+
+# решение оптимизированное:
+@profile
+def get_sum_cycle(nums, st_num=1, res=0):
+    while nums > 0:
+        nums -= 1
+        res += st_num
+        st_num /= -2
+    else:
+        return res
 
 
 if __name__ == '__main__':
-    profit_dict = {x: x for x in range(1000000)}
+    n = int(input('Введите количество элементов: '))
 
-    res, mem_diff = check_max_profit_1(profit_dict)
-    print(f"Выполнение заняло {mem_diff} Mib")
-    del profit_dict
+    print(f'Количество элементов - {n}, их сумма = {get_sum(n)}')
+    print(f'Количество элементов - {n}, их сумма = {get_sum_cycle(n)}')
 
+"""
+Аналитика:
+Использовал цикл вместо рекурсии.
+В результате сократилось время выполнения решения, а также нужно меньше памяти.
+Так как рекурсия использует стек, для хранения вызовов.
+"""

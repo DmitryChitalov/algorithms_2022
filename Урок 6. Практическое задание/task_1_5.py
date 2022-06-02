@@ -41,9 +41,8 @@
 использовать формулу: длина*ширина*масса асфальта для покрытия одного кв. метра дороги асфальтом,
 толщиной в 1 см*число см толщины полотна; проверить работу метода.
 """
-
-
 from pympler import asizeof
+
 
 # решение исходное:
 class Road:
@@ -58,7 +57,7 @@ class Road:
 
 road_obj = Road(20, 5000)
 print(road_obj.mass(125))
-print(asizeof.asizeof((road_obj)))
+print(asizeof.asizeof(road_obj))
 
 
 # решение оптимизированное:
@@ -75,4 +74,11 @@ class Road:
 
 road_obj = Road(20, 5000)
 print(road_obj.mass(125))
-print(asizeof.asizeof((road_obj)))
+print(asizeof.asizeof(road_obj))
+
+"""
+Аналитика:
+Использовал слоты для сохранения атрибутов в менее затратном по памяти
+контейнере – списке, кортеже.
+В результате сократилось в три раза использование памяти.
+"""
