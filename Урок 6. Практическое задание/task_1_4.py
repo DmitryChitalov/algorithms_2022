@@ -29,4 +29,37 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+
+Алгоритмы. Д/р №2, задание №3
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(mem_diff)
+        return res
+    return wrapper
+
+
+@decor
+def start_reverse(num):
+    def reverse(num, *, rnum=''):
+        if num == 0:
+            return f'Перевернутое число: {rnum}'
+        return reverse(num // 10, rnum=rnum + str(num % 10))
+
+
+@decor
+def reverse_1(num):
+    return str(num)[::-1]
+
+
+start_reverse(153218640165764563167864513387464685654131552)  # 0.003
+reverse_1(153218640165764563167864513387464685654131552)  # 0.0
+
+# Использование среза позволило, свести потребление памяти до нуля

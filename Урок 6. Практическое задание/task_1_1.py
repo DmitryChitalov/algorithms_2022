@@ -29,4 +29,49 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+
+Алгоритмы. Д/р №2, задание №2
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(mem_diff)
+        return res
+    return wrapper
+
+
+def counting(num, *, even=0, odd=0):
+    if num == 0:
+        return f'Количество четных: {even}, Количество нечетных: {odd}'
+    if num % 10 % 2 == 0:
+        return counting(num // 10, odd=odd, even=even + 1)
+    if num % 10 % 2 == 1:
+        return counting(num // 10, even=even, odd=odd + 1)
+
+
+@decor
+def counting_2(num):
+    even, odd = 0, 0
+    for i in str(num):
+        if int(i) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return f'Количество четных: {even}, Количество нечетных: {odd}'
+
+
+@decor
+def start_counting():
+    counting(3456018645612818496412861204846315351467418663676741896453221837)
+
+
+start_counting()  # 0.035 MiB
+counting_2(3456018645612818496412861204846315351467418663676741896453221837)  # 0.0 MiB
+
+# Использование цикла в функции снизило потребление памяти
