@@ -30,3 +30,66 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+from timeit import timeit
+
+
+@profile
+def array_func(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.insert(-1, i)
+    return new_arr
+
+
+def gen_return(nums):
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            yield i
+
+
+# Generator
+@profile
+def generator_func(nums):
+    return gen_return(nums)
+
+
+length = list(range(0, 40000))
+array_func(length)
+generator_func(length)
+
+
+""""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    36     20.9 MiB     20.9 MiB           1   @profile
+    37                                         def array_func(nums):
+    38     20.9 MiB      0.0 MiB           1       new_arr = []
+    39     22.0 MiB      0.0 MiB       40001       for i in range(len(nums)):
+    40     22.0 MiB      0.6 MiB       40000           if nums[i] % 2 == 0:
+    41     22.0 MiB      0.4 MiB       20000               new_arr.insert(-1, i)
+    42     22.0 MiB      0.0 MiB           1       return new_arr
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    51     21.5 MiB     21.5 MiB           1   @profile
+    52                                         def generator_func(nums):
+    53     21.5 MiB      0.0 MiB           1       return gen_return(nums)
+"""
+
+# print(
+#     timeit(
+#         "array_func(list(range(0, 40000)))",
+#         setup='from __main__ import array_func',
+#         number=1000))
+# print(
+#     timeit(
+#         "generator_func(list(range(0, 40000)))",
+#         setup='from __main__ import generator_func',
+#         number=1000))
+
+"""
+4.3674467
+0.6844390999999996
+"""

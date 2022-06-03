@@ -30,3 +30,57 @@
 
 Это файл для четвертого скрипта
 """
+from pympler import asizeof
+
+
+class PlateStack:
+    __slots__ = ['stack', 'idx']
+
+    MAX_STACK = 2
+
+    def __init__(self):
+        self.stack = [[]]
+        self.idx = 0
+
+    def __str__(self):
+        return str(self.stack)
+
+    def add(self, plate):
+        """ Добавляем тарелку """
+        if len(self.stack[self.idx]) >= self.MAX_STACK:
+            self.idx = self.idx + 1
+            self.stack.append([])
+
+        self.stack[self.idx].append(plate)
+
+    def is_empty(self):
+        return self.stack == [[]]
+
+    # FIX
+    def delete(self):
+        """ Удаляем тарелку """
+        if len(self.stack[self.idx]) > 0:
+            self.stack[self.idx].pop()
+            if len(self.stack[self.idx]) <= 0:
+                self.idx -= 1
+                self.stack.pop()
+
+    def clear(self):
+        """ Чистим всё """
+        self.stack = [[]]
+        self.idx = 0
+
+    def stack_size(self):
+        """Общее количество тарелок"""
+        elem_sum = 0
+        for stack in self.stack:
+            elem_sum += len(stack)
+        return elem_sum
+
+
+plate = PlateStack()
+# print(plate.__sizeof__()) # -> 32
+# print(asizeof.asizeof(plate)) # -> 408
+
+# Slots
+print(asizeof.asizeof(plate))  # -> 192

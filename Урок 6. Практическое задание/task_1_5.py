@@ -30,3 +30,15 @@
 
 Это файл для пятого скрипта
 """
+import numpy as np
+from pympler import asizeof
+
+# В прошлых заданиях нашёл момент, и применил numpy, хотя бы так
+my_list = [x ** 3 for x in range(1, 1000, 2)]
+my_list2 = np.array([x ** 3 for x in range(1, 1000, 2)])
+
+print(my_list)
+print(my_list2)
+
+print(asizeof.asizeof(my_list))  # -> 20216
+print(asizeof.asizeof(my_list2))  # -> 2128
