@@ -18,3 +18,42 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+"""
+Доработка помогает в том случае, если список передаваемый функции будет отсортированным.
+По отсортированному списку нужен будет только один проход, что позволяет сэкономить время 
+если список оказался отсортированным.
+Нет смысла тратить время если список уже отсортирован.
+0.07740910002030432 сек. - не сортированный список из 1000 элементов
+0.0002383999526500702 сек. - сортированный список из 1000 элементов
+"""
+
+from timeit import timeit
+from random import randint
+
+random_list = [randint(-100, 100) for _ in range(1000)]
+
+
+def bubble_sort_decrease(lst):
+    n = 1
+    mark = False
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                mark = True
+        if mark is False:
+            return lst
+        n += 1
+    return lst
+
+
+print(F'Не сортированный список:\n{random_list}')
+
+print(F'Сортировка пузырьком:\n{bubble_sort_decrease(random_list[:])}')
+print(f"Время сортировки пузырьком не сортированного списка: "
+      f"{timeit(f'bubble_sort_decrease(random_list[:])', globals=globals(), number=1)} сек.")
+
+sort_list = sorted(random_list, reverse=True)
+print(f"Время доработанной сортировки пузырьком сортированного списка: "
+      f"{timeit(f'bubble_sort_decrease(sort_list)', globals=globals(), number=1)} сек.")
