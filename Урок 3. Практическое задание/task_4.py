@@ -15,3 +15,24 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cache = dict()
+
+
+# В качестве соли используется строка, которая состоит из четных символов исходной строки
+
+def url_cache(url: str) -> str:
+    if cache.get(url):
+        return cache.get(url)
+    else:
+        url_hash = hashlib.sha512(url[1::2].encode() + url.encode()).hexdigest()
+        cache[url] = url_hash
+        return url_hash
+
+
+if __name__ == '__main__':
+    while new_url := input('Введите url, или Enter для завершения:'):
+        print("Хэш url'а:", url_cache(new_url))
+        print('Кэш:', cache)
