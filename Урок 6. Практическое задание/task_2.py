@@ -9,3 +9,33 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+
+@profile
+def start_reverse(num):
+    def reverse(num, *, rnum=''):
+        if num == 0:
+            return f'Перевернутое число: {rnum}'
+        return reverse(num // 10, rnum=rnum + str(num % 10))
+
+
+def reverse_2(num, *, rnum=''):
+    if num == 0:
+        return f'Перевернутое число: {rnum}'
+    return reverse_2(num // 10, rnum=rnum + str(num % 10))
+
+
+@profile
+def start_reverse_2():
+    reverse_2(153115461864615311546186461531154618646)
+
+
+start_reverse(153115461864615311546186461531154618646)
+start_reverse_2()
+
+'''
+Было обнаружено два способа адекватного вывода профилирования рекурсии.
+1) Функция с рекурсией помещается в другую функцию.
+2) Вызов функции с рекурсией помещается в другую функцию.
+'''
