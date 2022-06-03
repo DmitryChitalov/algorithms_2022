@@ -15,3 +15,52 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+######################################################################
+# Решение задачи с помощью встроенной функции поиска медианы:
+
+import random
+from timeit import timeit
+import statistics
+
+
+def select_median_3(lst_obj):
+    return statistics.median(lst_obj)
+
+
+m = 6
+orig_lst = [random.randint(-100, 100) for _ in range(2 * m + 1)]
+# замеры 10
+print('select_median_3_10: ',
+      timeit(
+          "select_median_3(orig_lst[:])",
+          globals=globals(),
+          number=1000))
+
+orig_lst = [random.randint(-100, 100) for _ in range(2 * m * 10 + 1)]
+# замеры 100
+print('select_median_3_100: ',
+      timeit(
+          "select_median_3(orig_lst[:])",
+          globals=globals(),
+          number=1000))
+
+orig_lst = [random.randint(-100, 100) for _ in range(2 * m * 100 + 1)]
+# замеры 1000
+print('select_median_3_1000: ',
+      timeit(
+          "select_median_3(orig_lst[:])",
+          globals=globals(),
+          number=1000))
+"""
+Сделал замеры времени реализаций.
+
+select_median_3_10:  0.001264730999537278
+select_median_3_100:  0.008052894001593813
+select_median_3_1000:  0.2024890310021874
+
+Аналитика:
+Встроенная функция поиска медианы самая быстрая.
+Алгоритм нахождения медианы медиан хорошо справляется
+с решением задачи и имеет линейную сложность.
+Гномья сортировка уступает обоим алгоритмам.
+"""
