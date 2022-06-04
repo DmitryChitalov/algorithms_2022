@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def equal_checking(n=5):
+    if n == 0:
+        return 0
+    else:
+        return n + equal_checking(n - 1)
+
+def test_func(n):
+    if equal_checking(n) == n*(n+1) / 2:
+        print(f'Равенство верно: {equal_checking(n)} = {int(n*(n+1)/2)}')
+
+test_func(5)

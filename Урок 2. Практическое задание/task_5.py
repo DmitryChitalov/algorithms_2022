@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+from sys import exit
+
+def symbols_table(n, number):
+    if number == 128:
+      exit()
+
+    elif n == 10:
+        n = 0
+        print('')
+        return symbols_table(n, number)
+    else:
+        print(f'{number} - {chr(number)}', end=" ")
+        return symbols_table(n + 1, number + 1)
+
+if __name__=='__main__':
+
+    symbols_table(0, 32)
