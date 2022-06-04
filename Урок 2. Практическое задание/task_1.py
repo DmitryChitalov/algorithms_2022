@@ -27,3 +27,67 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+# Решение через цикл
+def calc_cycle():
+    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    while operation_type != '0':
+        try:
+            if operation_type in '+-*/':
+                num_1 = int(input("Введите первое число: "))
+                num_2 = int(input("Введите второе число: "))
+                if operation_type == '+':
+                    res = num_1 + num_2
+                    print(f"Ваш результат {res}")
+                    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+                elif operation_type == '-':
+                    res = num_1 - num_2
+                    print(f"Ваш результат {res}")
+                    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+                elif operation_type == '*':
+                    res = num_1 * num_2
+                    print(f"Ваш результат {res}")
+                    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+                elif operation_type == '/':
+                    try:
+                        res = num_1 / num_2
+                    except ZeroDivisionError:
+                        print("Деление на 0 невозможно")
+                    else:
+                        print(f"Ваш результат {res}")
+                    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+            else:
+                print("не верный знак")
+                operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        except ValueError:
+            print("Вы вместо числа ввели строку.")
+    print('Цикл окончен')
+# calc_cycle()
+
+
+# Решение через рекурсию
+def calc_recursion():
+    operation_type = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation_type == '0':
+        return print("Выход")
+    if operation_type not in "+-*/":
+        print("Введен неверный символ, попробуйте еще раз")
+        return calc_recursion()
+    else:
+        try:
+            num_1 = int(input("Введите первое число: "))
+            num_2 = int(input("Введите второе число: "))
+        except ValueError:
+            print("Вы вместо числа ввели строку. Исправьтесь")
+            return calc_recursion()
+        res = 0
+        if operation_type == '+': res = num_1 + num_2
+        elif operation_type == '-': res = num_1 - num_2
+        elif operation_type == '*': res = num_1 * num_2
+        elif operation_type == '/':
+            try: res = num_1 / num_2
+            except ZeroDivisionError:
+                print("Деление на 0 невозможно")
+
+        print(f"Ваш результат {res}")
+        return calc_recursion()
+calc_recursion()

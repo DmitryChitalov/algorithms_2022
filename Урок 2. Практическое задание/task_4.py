@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def recur_method(n_count, i = 0, numb = 1,  common_sum = 0):
+    if i == n_count:
+        print(f"Количество элементов - {n_count}, их сумма - {common_sum}")
+    elif i < n_count:
+        return recur_method( n_count, i + 1, numb / 2 * -1, common_sum+numb)
+
+
+try:
+    N_COUNT = int(input("Введите количество элементов: "))
+    recur_method(N_COUNT)
+except ValueError:
+    print("Вы вместо числа ввели строку. Исправьтесь")
