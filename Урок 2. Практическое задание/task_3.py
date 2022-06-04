@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def inverting_the_order_of_the_list_items(list_new, len_of_initial_list):
+    if len(list_new) < 2 * len_of_initial_list:
+        list_new.insert(len_of_initial_list, (list_new[len(list_new) - len_of_initial_list]))
+        return inverting_the_order_of_the_list_items(list_new, len_of_initial_list)
+    elif len(list_new) == 2 * len_of_initial_list:
+        return "".join(list_new[len_of_initial_list:])
+    else:
+        pass
+
+
+list_based_on_the_entered_line_number_one = list(input())
+
+
+print(inverting_the_order_of_the_list_items(list_based_on_the_entered_line_number_one,
+                                            len(list_based_on_the_entered_line_number_one)))
+
