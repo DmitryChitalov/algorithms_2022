@@ -15,7 +15,7 @@
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
-Решите через рекурсию. В задании нельзя применять циклы.
+Решите через рекурсию. Решение через цикл не принимается.
 
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
@@ -27,3 +27,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc_num():
+    type_of_operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if type_of_operation == '0':
+        return print("Выход")
+    if type_of_operation not in "+-*/":
+        print("Введен неверный символ, попробуйте еще раз")
+        return calc_num()
+    else:
+        try:
+            num_1 = int(input("Введите первое число: "))
+            num_2 = int(input("Введите второе число: "))
+        except ValueError:
+            print("Вы вместо числа ввели строку. Исправьтесь")
+            return calc_num()
+        res = 0
+        if type_of_operation == '+': res = num_1 + num_2
+        elif type_of_operation == '-': res = num_1 - num_2
+        elif type_of_operation == '*': res = num_1 * num_2
+        elif type_of_operation == '/':
+            try: res = num_1 / num_2
+            except ZeroDivisionError:
+                print("Деление на 0 невозможно")
+
+        print(f"Ваш результат {res}")
+        return calc_num()
+
+
+calc_num()
