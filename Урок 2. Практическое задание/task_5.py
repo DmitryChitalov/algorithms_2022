@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def func(num):
+    if (num - 31) % 10 == 0:
+        print('\n')
+    if not num == 128:
+        print(f'{num} - {chr(num)} ', end='')
+        return func(num + 1)
+
+
+func(32)

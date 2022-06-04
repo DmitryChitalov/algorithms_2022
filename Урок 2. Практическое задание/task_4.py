@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def summary(cnt, _sum=0, num=1.0):
+    if cnt == 1:
+        _sum += num
+        return f'сумма - {_sum}'
+    else:
+        _sum += num
+        num = -num / 2
+        cnt -= 1
+        return summary(cnt, _sum, num)
+
+
+print(summary(int(input('Введите количество элементов: '))))

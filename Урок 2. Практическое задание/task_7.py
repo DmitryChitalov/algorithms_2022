@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def rec_func(num, _sum=0):
+    if num <= 1:
+        _sum += num
+        return _sum
+    else:
+        _sum += num
+        return rec_func(num - 1, _sum)
+
+
+number = 11
+numb = number*(number+1)/2
+rec = rec_func(number)
+if rec == numb:
+    print(f'{rec} == {numb}')
+else:
+    print(f'{rec} != {numb}')

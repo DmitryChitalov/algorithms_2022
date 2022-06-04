@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def count_func(num, cnt=0, zero='', r_num=''):
+    if num < 10:
+        n = num % 10
+        r_num += str(n)
+        return f'Перевернутое число: {r_num + zero}'
+    else:
+        n = num % 10
+        if n == 0 and cnt == 0:
+            zero = str(n)
+        else:
+            r_num += str(n)
+        cnt += 1
+        return count_func(num // 10, cnt, zero, r_num)
+
+
+print(count_func(int(input("Введите число, которое требуется перевернуть: "))))

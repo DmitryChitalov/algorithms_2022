@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def int_inp():
+    return int(input('Insert the number: '))
+
+
+def my_func():
+    try:
+        val_1 = int_inp()
+        sign = input('Insert +, -, *, / or 0 (for exit): ')
+        if sign != '+' and sign != '-' and sign != '*' and sign != '/' and sign != '0':
+            raise ValueError
+        elif sign == '0':
+            print('Bye bye!')
+        else:
+            val_2 = int_inp()
+            if sign == '+':
+                print(f'{val_1} {sign} {val_2} = {val_1 + val_2}')
+            elif sign == '-':
+                print(f'{val_1} {sign} {val_2} = {val_1 - val_2}')
+            elif sign == '/':
+                print(f'{val_1} {sign} {val_2} = {val_1 / val_2}')
+            elif sign == '*':
+                print(f'{val_1} {sign} {val_2} = {val_1 * val_2}')
+            return my_func()
+    except ValueError:
+        print(f'Oops, you enter wrong value. Try again!', '...', sep='\n')
+    except ZeroDivisionError as f:
+        print(f'You can`t {f}. Try again!', '...', sep='\n')
+
+
+my_func()
