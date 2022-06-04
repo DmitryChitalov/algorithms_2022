@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_numb(numb, rez=None):
+    """Подсчет четных и нечетных цифр введенного натурального числа."""
+    if rez is None:
+        rez = [0, 0]
+    if numb == 0:
+        return f'Количество четных и нечетных цифр в числе равно: \n' \
+               f'четных: {rez[0]}\n' \
+               f'нечетных: {rez[1]}'
+    rez[0 if (numb % 10) % 2 == 0 else 1] += 1
+    return count_numb(numb // 10, rez)
+
+
+while True:
+    answer = int(input('Для выхода введите 0\nВведите число: '))
+    if answer == 0:
+        print('exit program')
+        break
+    else:
+        print(count_numb(answer))

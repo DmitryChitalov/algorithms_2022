@@ -1,3 +1,4 @@
+import operator
 """
 Задание 1.	Написать программу, которая будет складывать, вычитать,
 умножать или делить два числа. Числа и знак операции вводятся пользователем.
@@ -27,3 +28,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def math_recur():
+    """Калькулятор"""
+    operations = {'+': operator.add,
+                  '-': operator.sub,
+                  '*': operator.mul,
+                  '/': operator.floordiv}
+
+    op = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if op == '0':
+        return print('Exit program')
+    if operations.get(op):
+        try:
+            x = int(input('Введите первое число: '))
+            y = int(input('Введите второе число: '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        else:
+            try:
+                print(operations[op](x, y))
+            except ZeroDivisionError:
+                print('Делить на 0 нельзя!')
+    else:
+        print('Введен не оператор')
+    math_recur()
+
+
+math_recur()
