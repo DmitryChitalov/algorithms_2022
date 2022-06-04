@@ -12,6 +12,11 @@
 протестируйте на реальных данных - на клиентском коде
 """
 
+"""
+Сделал методы _insert_left и _insert_right приватными.
+Добавил публичный метод insert_child, который в зависимости от значения пользуется одним из приватных
+"""
+
 
 class BinaryTree:
     def __init__(self, root_obj):
@@ -23,7 +28,7 @@ class BinaryTree:
         self.right_child = None
 
     # добавить левого потомка
-    def insert_left(self, new_node):
+    def _insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -38,7 +43,7 @@ class BinaryTree:
             self.left_child = tree_obj
 
     # добавить правого потомка
-    def insert_right(self, new_node):
+    def _insert_right(self, new_node):
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -51,6 +56,13 @@ class BinaryTree:
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.right_child = self.right_child
             self.right_child = tree_obj
+
+    # интерфейс добавления потомка
+    def insert_child(self, new_node):
+        if new_node < self.root:
+            self._insert_left(new_node)
+        else:
+            self._insert_right(new_node)
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -71,11 +83,11 @@ class BinaryTree:
 
 r = BinaryTree(8)
 print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
+print(r.get_right_child())
+r.insert_child(40)
+print(r.get_right_child())
+print(r.get_right_child().get_root_val())
+r.insert_child(12)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
