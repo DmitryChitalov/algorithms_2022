@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def task_7(n=int(input("Введите число ")), i=0, summ=0):
+    if n < 0:
+        return print("Введите натуральное число"), task_7(n=int(input("Введите число ")), i=0, summ=0)
+    elif n == i:
+        summ += i
+        if summ == n * (n + 1) / 2:
+            return print(True)
+        elif summ != n * (n + 1) / 2:
+            return print(False)
+    elif i != n:
+        summ += i
+        i += 1
+        return task_7(n, i, summ)
+
+
+if __name__ == "__main__":
+    task_7()
+

@@ -10,3 +10,23 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+lst = [1, -0.5, 0.25, -0.125]
+
+
+def task_4(n=int(input("Введите количество элементов: ")), summ_lst=0):
+    if n == 1:
+        summ_lst += lst[n - 1]
+        return print(summ_lst)
+    elif n > 0:
+        summ_lst += lst[n - 1]
+        n -= 1
+        return task_4(n, summ_lst)
+
+
+if __name__ == "__main__":
+    task_4()
+
+
+
+

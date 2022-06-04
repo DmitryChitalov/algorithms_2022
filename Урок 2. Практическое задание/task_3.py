@@ -18,3 +18,23 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+# делю нацело на 10 остаток от деления в новое число
+num_rev = []
+
+
+def task3(num=input("Введите число ")):
+    num = int(num)
+    if num // 10 == 0 and num % 10 == 0:
+        return print("".join(num_rev))
+    else:
+        try:
+            num_rev.append(str(num % 10))
+        except Exception as e:
+            return print("ошибка: ", e)
+        return task3(str(num // 10))
+
+
+if __name__ == "__main__":
+    task3()

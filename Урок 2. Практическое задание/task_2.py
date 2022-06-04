@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def task_2(num=input("Введите число: "), i=0, x=0, y=0):
+    if int(num) // 10**i == 0:
+        return print(x, y)
+    else:
+        if (int(num) // 10**i) % 2 == 1:
+            return task_2(num, i+1, x+1, y)
+        elif (int(num) // 10**i) % 2 == 0:
+            return task_2(num, i+1, x, y+1)
+
+
+if __name__ == "__main__":
+    task_2()
