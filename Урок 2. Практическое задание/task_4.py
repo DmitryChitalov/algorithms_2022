@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def summ_numb(x, tn=1, summ=0):
+    if x != 0:
+        summ = summ + tn
+        tn = tn * -1 / 2
+        x -= 1
+        return summ_numb(x, tn, summ)
+    else:
+        return summ
+
+a = input('Введите кол-во элементов ряда: ')
+print (summ_numb(int(a)))

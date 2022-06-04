@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def rec (number, c):
+    if c != 0:
+        a = int (input ('Введите число от 0 до 100: '))
+        if a > number:
+            с = int(c) - 1
+            print(f'Загаданное число меньше, осталось попыток: {с} ')
+            return rec(number, int(c) - 1 )
+        elif a < number:
+            с = int(c) - 1
+            print(f'Загаданное число больше, осталось попыток: {с} ')
+            return rec(number, int(c) - 1 )
+        elif a == number:
+            print('Верно!')
+
+    else:
+        print(f'Число не отградано, было загадано число {number} ')
+
+x = input ('Загадайте число: ')
+y = input('Задайте число попыток: ')
+rec(int(x), int(y))

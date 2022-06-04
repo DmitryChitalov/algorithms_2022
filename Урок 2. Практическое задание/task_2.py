@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def chet_nechet (number, chet = 0, nechet = 0):
+    if number != 0:
+        ost = number % 10
+
+        if ost % 2 == 0:
+            chet = chet + 1
+        else:
+            nechet = nechet + 1
+        number = number // 10
+        print(number,chet,nechet)
+        return chet_nechet(number,chet,nechet)
+
+    else:
+        print(f'четных чисел {chet}, нечетных чисел {nechet}')
+
+
+chet_nechet(13578)
