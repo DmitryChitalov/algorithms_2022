@@ -28,3 +28,27 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+sum_firm = int(input('Введите количество предприятий для расчета прибыли: '))
+list_of_firm = []
+profit = 0
+cash_firm = namedtuple('cash_firm', ['name', 'quad', 'sum_quad'])
+
+for num in range(sum_firm):
+    name = input('Введите название предприятия: ')
+    quad = (input('Через пробел введите прибыль данного предприятия за каждый квартал (Всего 4 квартала): ')).split(' ')
+    sum_quad = sum(int(n) for n in quad)
+
+    firm = cash_firm(name=name, quad=quad, sum_quad=sum_quad)
+    list_of_firm.append(firm)
+    profit += sum_quad
+
+print(f'Средняя годовая прибыль всех предприятий: {profit / sum_firm}')
+
+for firm in list_of_firm:
+    if firm.sum_quad > profit / sum_firm:
+        print(f'Предприятие, с прибылью выше среднего значения: {firm.name}')
+
+    if firm.sum_quad < profit / sum_firm:
+        print(f'Предприятие, с прибылью ниже среднего значения: {firm.name}')
