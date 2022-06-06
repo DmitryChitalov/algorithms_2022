@@ -20,12 +20,12 @@ import random
 from timeit import timeit
 
 
-def select_median(lst_obj):
+def select_median(lst_obj, m):
     lst_obj = gnome_sort(lst_obj)
     if len(lst_obj) % 2 == 1:
-        return lst_obj[len(lst_obj) // 2]
+        return lst_obj[m]
     else:
-        return 0.5 * (lst_obj[len(lst_obj) // 2 - 1] + lst_obj[len(lst_obj) // 2])
+        return 0.5 * (lst_obj[m - 1] + lst_obj[m])
 
 
 def gnome_sort(lst_obj):
@@ -48,7 +48,7 @@ orig_lst = [random.randint(-100, 100) for _ in range(2 * m + 1)]
 # замеры 10
 print('select_median_10: ',
       timeit(
-          "select_median(orig_lst[:])",
+          "select_median(orig_lst[:], m)",
           globals=globals(),
           number=1000))
 
@@ -56,7 +56,7 @@ orig_lst = [random.randint(-100, 100) for _ in range(2 * m * 10 + 1)]
 # замеры 100
 print('select_median_100: ',
       timeit(
-          "select_median(orig_lst[:])",
+          "select_median(orig_lst[:], m)",
           globals=globals(),
           number=1000))
 
@@ -64,7 +64,7 @@ orig_lst = [random.randint(-100, 100) for _ in range(2 * m * 100 + 1)]
 # замеры 1000
 print('select_median_1000: ',
       timeit(
-          "select_median(orig_lst[:])",
+          "select_median(orig_lst[:], m)",
           globals=globals(),
           number=1000))
 """
