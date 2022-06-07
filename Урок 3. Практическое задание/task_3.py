@@ -22,3 +22,19 @@
 р
 а
 """
+
+import hashlib
+
+#Функция для подсчета кол-ва уникальных подстрок в строке
+def unique_substring(str):
+    unique_hashes = set()
+    for i in range(0, len(str)):
+        for j in range(i + 1, len(str) + 1):
+            sub_str = str[i:j]
+            unique_hashes.add(hashlib.sha256(sub_str.encode()).hexdigest())
+    print(f'Кол-во уникальных подстрок в строке "{str}" :  {len(unique_hashes)-1}')
+
+unique_substring('papa')
+unique_substring('parapam')
+unique_substring('rampa')
+
