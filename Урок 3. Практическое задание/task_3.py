@@ -22,3 +22,14 @@
 р
 а
 """
+from hashlib import sha256
+from pprint import pprint
+papa_set = set()
+papa_str = 'papa'
+for i in range(len(papa_str)):
+    for v in range(i+1, len(papa_str)+1):
+        if papa_str[i:v] != papa_str:
+            papa_hash = sha256(papa_str[i:v].encode('utf-8')).hexdigest()
+            papa_set.add(papa_hash)
+pprint(papa_set)
+print(f'\nДлина множества: {len(papa_set)}')
