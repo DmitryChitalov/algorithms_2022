@@ -22,3 +22,23 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+
+
+def registration():
+    login = input('Придумайте логин: ')
+    password = input('Придумайте пароль: ')
+    key = hashlib.sha256(password.encode('utf-8') + login.encode('utf-8')).hexdigest()
+    with open('passwords.csv', 'a', encoding='utf-8') as file:
+        file.write(f'{key} {login}\n')
+        print(f'В базе данных хранится строка: {key}')
+    with open('passwords.csv', 'r', encoding='utf-8') as file:
+        r_password = input('Подтвердите пароль: ')
+        r_key = hashlib.sha256(r_password.encode('utf-8') + login.encode('utf-8')).hexdigest()
+        for i in [i.split() for i in file.readlines()]:
+            if i[0] == r_key:
+                return 'Вы ввели правильный пароль'
+        return 'Вы ввели неправильный пароль'
+
+
+print(registration())

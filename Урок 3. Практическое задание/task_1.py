@@ -28,3 +28,79 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+def get_time(func):
+    def wrapper(*args):
+        start = time()
+        result = func(*args)
+        print(time() - start)
+        return result
+
+    return wrapper
+
+
+# a)
+
+
+@get_time
+def list_completion(lst):  # O(n), время выполнения 4.87
+    for i in range(1, 100000001):  # O(n)
+        lst.append(i)  # O(1)
+    return lst
+
+
+@get_time
+def dict_completion(dct):  # O(n), время выполнения 7.53
+    for k in range(1, 100000001):  # O(n)
+        dct[k] = k  # O(1)
+    return dct
+
+
+some_lst = []
+some_dct = dict()
+list_completion(some_lst)
+dict_completion(some_dct)
+
+# Список заполняется быстрее, скорее всего это связано с тем, что для него нужно меньше места в ОП.
+
+
+# b)
+
+
+@get_time
+def get_list_element(lst, ind):
+    return lst[ind]  # O(1)
+
+
+@get_time
+def get_dict_element(dct, key):
+    return dct[key]  # O(1)
+
+
+get_list_element(some_lst, 99995999)  # время 0.0
+get_dict_element(some_dct, 99995999)  # время 0.0
+
+# Здесь сложно сравнить, везде констанстная сложность,
+# время может быть в теории разное, но на практике разницы я не вижу
+
+# c)
+
+
+@get_time
+def del_list_element(lst, ind=-1):
+    lst.pop(ind)  # O(1), если значение по умолчанию будет -1. O(n) в ином случае
+
+
+@get_time
+def del_dict_element(dct, k):
+    dct.pop(k)  # O(1)
+
+
+del_list_element(some_lst, 99959999)  # время 0.0
+del_dict_element(some_dct, 99959999)  # время 0.0
+
+
+# В теории быстрее выполняется функция со словарем, потому что сложность алгоритма O(1),
+# но опять же на практике разницы во времени, по крайней мере, на моём ПК нет
