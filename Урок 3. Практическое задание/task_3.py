@@ -22,3 +22,21 @@
 р
 а
 """
+
+
+def substrings(string):
+    letters_list = []
+    for el in string:
+        letters_list.append(el)
+    for i in range(len(letters_list)):
+        for j in range(i, len(letters_list)):
+            subs = ''
+            for k in range(i, j+1):
+                subs += letters_list[k]
+            if subs != string:
+                my_set.add(hash(subs))
+
+
+my_set = set()
+substrings('papa')
+print(len(my_set))
