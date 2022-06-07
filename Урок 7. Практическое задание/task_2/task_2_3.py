@@ -16,3 +16,26 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+m = 5
+m_list = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(int(median(m_list)))
+print(int(median(m_list)))
+print(timeit('median(m_list)', globals=globals(), number=1000))  # 0.0004
+m = 50
+m_list2 = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(timeit('median(m_list2)', globals=globals(), number=1000))  # 0.003
+m = 500
+m_list3 = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(timeit('median(m_list3)', globals=globals(), number=1000))  # 0.06
+
+'''
+ТОП-3
+1 место: поиск при помощи встроенной функции
+2 место: сортировка кучей, так как на больших массивах работает быстрее, чем способ без сортировки
+3 место: без сортировки
+'''

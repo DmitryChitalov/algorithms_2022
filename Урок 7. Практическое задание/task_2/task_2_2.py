@@ -14,3 +14,23 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def search_median(arr):
+    for i in range(len(arr) // 2):
+        arr.remove(max(arr))
+    return max(arr)
+
+
+m = 5
+m_list = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(timeit('search_median(m_list[:])', globals=globals(), number=1000))  # 0.01
+m = 50
+m_list2 = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(timeit('search_median(m_list2[:])', globals=globals(), number=1000))  # 0.05
+m = 500
+m_list3 = [randint(-1000, 1000) for _ in range(2*m+1)]
+print(timeit('search_median(m_list3[:])', globals=globals(), number=1000))  # 4.64
