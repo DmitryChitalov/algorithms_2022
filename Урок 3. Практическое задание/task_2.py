@@ -21,4 +21,23 @@ f1dcaeeafeb855965535d77c55782349444b
 или, если вы уже знаете, как Python взаимодействует с базами данных,
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
+
 """
+import hashlib
+
+
+password = input('Введите пароль: ')
+salt = 'my_salt'
+res = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+print(f'Хэш пароля:{res}')
+
+with open('password.json', 'w')as f:
+    f.write(f'user_1 - {res}')
+
+with open('password.json', 'r')as f:
+    pass_check = input('Введите пароль еще раз для проверки: ')
+    user_pass = f.read()
+    if user_pass[9:] == hashlib.sha256(salt.encode() + pass_check.encode('utf-8')).hexdigest():
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели неправильный пароль')
