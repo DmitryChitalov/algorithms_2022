@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+test_str = "papa"
+ryt = set()
+ryt_hash = set()
+
+for i in range(len(test_str)):
+       for j in range(i + 1, len(test_str) + 1):
+              res_dub = test_str[i: j]
+              ryt.add(res_dub)
+              res_byb = hashlib.sha256(test_str[i: j].encode('utf-8')).hexdigest()
+              ryt_hash.add(res_byb)
+print(ryt)
+print(ryt_hash)

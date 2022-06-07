@@ -28,3 +28,82 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+# *************************************************************
+# # Общая сложность O(N) - линейная
+
+list_dz = [i for i in range(10)]
+print(list_dz)
+
+# ************************************************************
+# Общая сложность O(N) - линейная
+def list_dz1():
+    new_list = []
+    for i in range(100): # O(N)
+        new_list.append(i) # O(1)
+        return new_list
+
+print(list_dz1())
+
+# ************************************************************
+# Общая сложность O(N) - линейная
+list = []
+for i in range(10): # O(N)
+    list.append(i)# O(1)
+
+    print(list)
+
+# ************************************************************
+# Общая сложность O(N) - линейная
+
+list1 = ['jery', 'ron', 'terry', 'bob', 'any']
+list2 = [32, 21, 56,33, 41]
+
+dict_dz = {}
+for i in range(len(list1)): # O(N)
+     dict_dz[list1[i]] = list2[i] # O(N)
+print(dict_dz)
+
+# Копирование словаря для проведения дальнейших манипуляций.
+dict_dz1 = dict_dz
+print(dict_dz1)
+# Добавление элемента словаря c замером вермени
+startTime = time.time()
+
+dict_dz1["kerry"]="29"
+print(dict_dz1)
+
+endTime = time.time()
+totalTime = endTime - startTime
+print("Время на выполнение кода = ", totalTime)
+
+# Удалаение элемента словаря c замером вермени
+startTime = time.time()
+
+del dict_dz1["kerry"]
+print(dict_dz1)
+
+endTime = time.time()
+totalTime = endTime - startTime
+print("Время на выполнение кода = ", totalTime)
+# ************************************************************
+# Добавление элемента в список с замером времени
+startTime = time.time()
+
+list_dz.append('Andrey')
+print(list_dz)
+
+endTime = time.time()
+totalTime = endTime - startTime
+print("Время на выполнение кода = ", totalTime)
+#***********************************************************
+# Удаоение элемента в список с замером времени
+startTime = time.time()
+
+list_dz.remove('Andrey')
+print(list_dz)
+
+endTime = time.time()
+totalTime = endTime - startTime
+print("Время на выполнение кода = ", totalTime)
