@@ -15,3 +15,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+
+url_salt = 'my_salt'
+cache_dict = {}
+
+
+def check_address(url_address):
+    if url_address in cache_dict.keys():
+        print(f'Хэш данной страницы: {cache_dict[url_address]}')
+    else:
+        cache_dict[url_address] = hashlib.sha512(url_address.encode() + url_salt.encode()).hexdigest()
+        print(f'Для новой страницы: {url_address} был записан хэш: {cache_dict[url_address]}')
+    return cache_dict
+
+
+check_address('gb.ru')
+check_address('gb.ru')
+check_address('vk.com')
+check_address('vk.com')
