@@ -22,3 +22,21 @@
 р
 а
 """
+import hashlib
+
+
+def hash_func():
+    hash_set = set()
+    el_set = set()
+    str = 'papa'
+    for i in range(len(str)):
+        for j in range(len(str), i, - 1):
+            hash_str = hashlib.sha256(str[i:j].encode()).hexdigest()
+            if str != str[i:j]:
+                el_set.add(str[i:j])
+                hash_set.add(hash_str)
+    print(el_set)
+    print(f'{str} - {len(el_set)} уникальных подстрок')
+
+
+hash_func()
