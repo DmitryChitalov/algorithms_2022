@@ -28,3 +28,70 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def time_decor(func):
+    def wrapped(arg):
+        start_time = time.time()
+        func(arg)
+        end_time = time.time()
+        print(f'Время выполнения операции: {end_time - start_time} с.')
+    return wrapped
+
+
+@time_decor
+def completion_list(num_max):   # O(n)
+    obj_list = []   # O(1)
+    for i in range(0, num_max):    # O(n)
+        obj_list.append(i)      # O(1)
+
+
+@time_decor
+def completion_dict(num_max):   # O(n)
+    obj_dict = {}   # O(1)
+    for i in range(0, num_max):    # O(n)
+        obj_dict[i] = i     # O(1)
+
+
+completion_list(100000)
+completion_dict(100000)
+print('Сложность функций одинаковая. Список заполняется быстрее словаря, т.к. у значений словаря генерируется хеш.')
+print('-----------------------------------')
+
+
+@time_decor
+def getting_list(num_max):  # O(n)
+    num_list = [i for i in range(0, num_max)]   # O(n)
+    print(num_list.pop(99999))    # O(1)
+
+
+@time_decor
+def getting_dict(num_max):  # O(n)
+    num_dict = {i: i for i in range(0, num_max)}  # O(n)
+    print(num_dict[99999])  # O(1)
+
+
+getting_list(100000)
+getting_dict(100000)
+print('Сложность функций одинаковая. Поиск по списку работает быстрее поиска по словарю.')
+print('-----------------------------------')
+
+
+@time_decor
+def del_list(num_del):  # O(n)
+    num_list = [i for i in range(0, 100000)]  # O(n)
+    num_list.remove(num_del)      # O(1)
+
+
+@time_decor
+def del_dict(num_del):  # O(n)
+    num_dict = {i: i for i in range(0, 100000)}  # O(n)
+    del num_dict[num_del]      # O(1)
+
+
+del_list(99998)
+del_dict(99998)
+print('Сложность функций одинаковая. Удаление элемента из списка работает быстрее, чем удаление элемента из словаря.')
+print('-----------------------------------')
