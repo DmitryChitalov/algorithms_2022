@@ -29,19 +29,27 @@ from uuid import uuid4
 import hashlib
 
 
+def hash_pass(password):
+    pass_hash = hashlib.sha256(salt.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    return pass_hash
+
+
+def read_file(ch_pass, check):
+    with open('pass_hash.csv', 'r', encoding='utf-8') as f:
+        if check == 'read_file':
+            print(f'В базе данных хранится строка: {f.read()}.')
+        else:
+            if f.read() == ch_pass:
+                print('Вы ввели правильный пароль.')
+            else:
+                print('Вы ввели неверный пароль.')
+
+
 salt = uuid4().hex
 user_pass = input('Введите пароль: ')
-pass_hash = hashlib.sha256(salt.encode('utf-8') + user_pass.encode('utf-8')).hexdigest()
-with open('pass_hash.csv', 'w', encoding='utf-8') as file:  # не могу вставить сюда чтение из файла
-    # (даже с r+, не выводит строку). Поэтому для чтения файла пришлось заново открыть этот файл
-    file.write(pass_hash)
-with open('pass_hash.csv', 'r', encoding='utf-8') as file:
-    str_file = file.read()
-    print(f'В базе данных хранится строка: {str_file}.')
+with open('pass_hash.csv', 'w', encoding='utf-8') as file:
+    file.write(hash_pass(user_pass))
+read_file(hash_pass(user_pass), 'read_file')
 check_pass = input('Введите пароль еще раз для проверки: ')
-check_hash = hashlib.sha256(salt.encode('utf-8') + check_pass.encode('utf-8')).hexdigest()
-with open('pass_hash.csv', 'r', encoding='utf-8') as file:
-    if file.read() == check_hash:
-        print('Вы ввели правильный пароль.')
-    else:
-        print('Вы ввели неверный пароль.')
+hash_pass(check_pass)
+read_file(hash_pass(check_pass), '')
