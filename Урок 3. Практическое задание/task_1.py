@@ -28,3 +28,78 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+obj_list = []
+obj_dict = {}
+
+
+def time_decor(func):
+    def wrapped(arg):
+        start_time = time.time()
+        func(arg)
+        end_time = time.time()
+        print(f'Время выполнения {func.__name__}: {end_time - start_time} с.')
+    return wrapped
+
+
+@time_decor
+def completion_list(num_max):  # O(n)
+    """Функция заполнения списка"""
+    for i in range(0, num_max):  # O(n)
+        obj_list.append(i)  # O(1)
+
+
+@time_decor
+def completion_dict(num_max):  # O(n)
+    """Функция заполнения словаря"""
+    for i in range(0, num_max):  # O(n)
+        obj_dict[i] = i  # O(1)
+
+
+completion_list(1000000)
+completion_dict(1000000)
+print('Сложность функций одинаковая. Список заполняется быстрее словаря, т.к. у ключей словаря генерируется хеш.')
+print('-----------------------------------')
+
+
+@time_decor
+def getting_list(num_search):  # O(n)
+    """Функция поиска значения по списку"""
+    for i in obj_list:  # O(n)
+        if i == num_search:  # O(1)
+            print(obj_list[num_search])  # O(1)
+
+
+@time_decor
+def getting_dict(num_search):  # O(1)
+    """Функция поиска значения по ключу словаря"""
+    print(obj_dict[num_search])  # O(1)
+
+
+getting_list(999995)
+getting_dict(999995)
+print('Сложность функций разная: поиск по списку - O(n), по словарю - O(1). \n'
+      'Поиск по словарю работает быстрее поиска по списку, т.к. поиск идет по хешу ключей.')
+print('-----------------------------------')
+
+
+@time_decor
+def del_list(num_del):  # O(n)
+    """Функция удаления значения из списка"""
+    obj_list.remove(num_del)  # O(n)
+
+
+@time_decor
+def del_dict(num_del):  # O(1)
+    """Функция удаления значения из словаря"""
+    obj_dict.pop(num_del)  # O(1)
+
+
+del_list(999984)
+del_dict(999984)
+print('Сложность функций разная: удаление из списка - O(n), из словаря - O(1). \n'
+      'Удаление элемента из словаря работает быстрее, чем удаление элемента из списка, '
+      'т.к. поиск и удаление элемента идет по хешу ключей.')
+print('-----------------------------------')

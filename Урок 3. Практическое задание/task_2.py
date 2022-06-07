@@ -21,4 +21,35 @@ f1dcaeeafeb855965535d77c55782349444b
 или, если вы уже знаете, как Python взаимодействует с базами данных,
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
+
 """
+
+
+from uuid import uuid4
+import hashlib
+
+
+def hash_pass(password):
+    pass_hash = hashlib.sha256(salt.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    return pass_hash
+
+
+def read_file(ch_pass, check):
+    with open('pass_hash.csv', 'r', encoding='utf-8') as f:
+        if check == 'read_file':
+            print(f'В базе данных хранится строка: {f.read()}.')
+        else:
+            if f.read() == ch_pass:
+                print('Вы ввели правильный пароль.')
+            else:
+                print('Вы ввели неверный пароль.')
+
+
+salt = uuid4().hex
+user_pass = input('Введите пароль: ')
+with open('pass_hash.csv', 'w', encoding='utf-8') as file:
+    file.write(hash_pass(user_pass))
+read_file(hash_pass(user_pass), 'read_file')
+check_pass = input('Введите пароль еще раз для проверки: ')
+hash_pass(check_pass)
+read_file(hash_pass(check_pass), '')
