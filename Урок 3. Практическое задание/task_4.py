@@ -15,3 +15,31 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import requests
+import hashlib
+
+# url = 'https://www.google.com'
+hash_table = {}
+while True:
+    url = input('Введите URL или 0 - для выхода: ')
+    try:
+        url = int(url)
+        if url == 0:
+            break
+    except ValueError:
+        pass
+    try:
+        r = requests.get(url)
+    except requests.exceptions.MissingSchema:
+        print('Введенная строка не является url')
+        break
+    if r.status_code == 200:
+        if url not in hash_table:
+            salt = hashlib.sha256(url.encode()).hexdigest()  # У меня скромная фантазия
+            hash_url = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
+            hash_table.setdefault(url, hash_url)
+        else:
+            print(hash_table[url])
+    else:
+        print('URL не действителен')
