@@ -23,10 +23,7 @@ from timeit import timeit
 
 def select_median(lst_obj, m):
     lst_obj = gnome_sort(lst_obj)
-    if len(lst_obj) % 2 == 1:
-        return lst_obj[m]
-    else:
-        return 0.5 * (lst_obj[m - 1] + lst_obj[m])
+    return lst_obj[m]
 
 
 def gnome_sort(lst_obj):
@@ -46,6 +43,8 @@ def gnome_sort(lst_obj):
 
 m = 6
 orig_lst = [random.randint(-100, 100) for _ in range(2 * m + 1)]
+select_median(orig_lst, m)
+
 # замеры 10
 print('select_median_10: ',
       timeit(
@@ -68,6 +67,7 @@ print('select_median_1000: ',
           "select_median(orig_lst[:], m)",
           globals=globals(),
           number=1000))
+
 """
 Это алгоритм нахождения медианы с помощью Гномьй сортировки.
 Сделал замеры времени реализаций.
