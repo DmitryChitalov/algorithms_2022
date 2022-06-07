@@ -16,3 +16,24 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from statistics import median
+from random import randrange
+from timeit import timeit
+
+m = int(input('Введите m (от 0 до 9):'))
+
+arr = [randrange(100) for x in range(2 * m + 1)]
+
+print(arr)
+print('Медиана', median(arr))
+
+print('10: ', timeit('median([randrange(100) for x in range(10)])', globals=globals(), number=100))
+# 0.0010120999068021774
+print('100: ', timeit('median([randrange(100) for x in range(10)])', globals=globals(), number=100))
+# 0.0007323999889194965
+print('1000: ', timeit('median([randrange(100) for x in range(10)])', globals=globals(), number=100))
+# 0.0006258999928832054
+
+Итог: Способы с предварительной сортировкой и без нее - медленные и деградируют по мере увеличения 
+количества элементов. А встроенная функция работает одинаково быстро на любых объемах.
