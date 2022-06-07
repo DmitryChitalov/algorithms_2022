@@ -22,3 +22,20 @@
 р
 а
 """
+
+import hashlib
+
+
+def unique_substrings(basic_str):
+    unique_hash = set()
+    for i in range(0, len(basic_str)):
+        for j in range(i + 1, len(basic_str) + 1):
+            if basic_str[i:j] == basic_str:
+                continue
+            unique_hash.add(hashlib.sha256(basic_str[i:j].encode('utf-8')).hexdigest())
+            print(basic_str[i:j])
+    print(f'{basic_str} - {len(unique_hash)} уникальных подстрок.')
+
+
+str_s = input('Введите строку, состоящую только из строчных латинских букв: ')
+unique_substrings(str_s)
