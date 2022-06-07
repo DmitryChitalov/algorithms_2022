@@ -42,3 +42,10 @@ print(my_list2)
 
 print(asizeof.asizeof(my_list))  # -> 20216
 print(asizeof.asizeof(my_list2))  # -> 2128
+
+
+"""
+    Аналитика:
+        Мы применили array из numpy, что позволило сократить размер потребляемой памяти массивом
+        с 20216 байтов до 2128 байтов
+"""
