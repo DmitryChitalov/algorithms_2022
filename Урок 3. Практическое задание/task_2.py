@@ -1,24 +1,82 @@
 """
 Задание 2.
 
-Ваша программа должна запрашивать пароль
-Для этого пароля вам нужно вычислить хеш, используя алгоритм sha256
-Для генерации хеша обязательно нужно использовать криптографическую соль
-Обязательно выведите созданный хеш
+Приведен код, который формирует из введенного числа
+обратное по порядку входящих в него цифр.
+Задача решена через рекурсию
+Выполнена попытка оптимизировать решение мемоизацией
+Сделаны замеры обеих реализаций.
 
-Далее программа должна запросить пароль повторно и вновь вычислить хеш
-Вам нужно проверить, совпадает ли пароль с исходным
-Для проверки необходимо сравнить хеши паролей
+Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
 
-ПРИМЕР:
-Введите пароль: 123
-В базе данных хранится строка: 555a3581d37993843efd4eba1921
-f1dcaeeafeb855965535d77c55782349444b
-Введите пароль еще раз для проверки: 123
-Вы ввели правильный пароль
-
-Важно: для хранения хеша и соли воспользуйтесь или файлом (CSV, JSON)
-или, если вы уже знаете, как Python взаимодействует с базами данных,
-воспользуйтесь базой данный sqlite, postgres и т.д.
-п.с. статья на Хабре - python db-api
+П.С. задание не такое простое, как кажется
 """
+
+from timeit import timeit
+from random import randint
+
+
+def recursive_reverse(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+
+
+num_100 = randint(10000, 1000000)
+num_1000 = randint(1000000, 10000000)
+num_10000 = randint(100000000, 10000000000000)
+
+print('Не оптимизированная функция recursive_reverse')
+print(
+    timeit(
+        "recursive_reverse(num_100)",
+        setup='from __main__ import recursive_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse(num_1000)",
+        setup='from __main__ import recursive_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse(num_10000)",
+        setup='from __main__ import recursive_reverse, num_10000',
+        number=10000))
+
+
+def memoize(f):
+    cache = {}
+
+    def decorate(*args):
+
+        if args in cache:
+            return cache[args]
+        else:
+            cache[args] = f(*args)
+            return cache[args]
+    return decorate
+
+
+@memoize
+def recursive_reverse_mem(number):
+    if number == 0:
+        return ''
+    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+
+
+print('Оптимизированная функция recursive_reverse_mem')
+print(
+    timeit(
+        'recursive_reverse_mem(num_100)',
+        setup='from __main__ import recursive_reverse_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_1000)',
+        setup='from __main__ import recursive_reverse_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_10000)',
+        setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
