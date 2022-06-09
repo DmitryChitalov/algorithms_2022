@@ -14,19 +14,7 @@
 через ООП или предложить иной подход к решению.
 """
 
-# beep boop beer!
-# 0011 1110 1011 0001 0010 1010 1100 1111 1000 1001
-"""
-'b'	00
-'e'	11
-'p'	101
-' '	011
-'o'	010
-'r'	1000
-'!'	1001
-"""
-
-from collections import Counter, defaultdict
+from collections import Counter
 
 
 class Node:
