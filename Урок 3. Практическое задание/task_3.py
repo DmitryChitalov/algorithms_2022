@@ -22,3 +22,19 @@
 р
 а
 """
+
+import hashlib
+
+
+def subs(s):
+    my_set = set()
+    for i in range(0, len(s)):
+        for j in range(i, len(s)):
+            sub_str = s[i:j + 1]
+            if sub_str != s:
+                my_set.add(hashlib.sha1(sub_str.encode()).hexdigest())
+    return len(my_set)
+
+
+if __name__ == '__main__':
+    print('Количество подстрок:', subs('papa'))
