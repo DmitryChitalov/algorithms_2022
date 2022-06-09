@@ -13,6 +13,12 @@
 """
 
 
+# raise MyException("My hovercraft is full of eels")
+
+class TreeInsertError(Exception):
+    pass
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -24,6 +30,10 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+
+        if new_node >= self.root:
+            raise TreeInsertError(f"Вставка в левый узел {self.root} большего значения {new_node}!")
+
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -31,14 +41,23 @@ class BinaryTree:
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
         else:
+
+            if new_node > self.right_child or new_node <= self.left_child:
+                raise TreeInsertError(f"Новый узел {new_node} нарушает бинарную структуру дерева!")
+
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.left_child = self.left_child
+            tree_obj.right_child = self.right_child
             self.left_child = tree_obj
 
     # добавить правого потомка
     def insert_right(self, new_node):
+
+        if new_node < self.root:
+            raise TreeInsertError(f"Вставка в правый узел {self.root} меньшего значения {new_node}!")
+
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -46,11 +65,17 @@ class BinaryTree:
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
+
+            if new_node > self.right_child or new_node <= self.left_child:
+                raise TreeInsertError(f"Новый узел {new_node} нарушает бинарную структуру дерева!")
+
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.right_child = self.right_child
+            tree_obj.left_child = self.left_child
             self.right_child = tree_obj
+
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -67,6 +92,7 @@ class BinaryTree:
     # метод доступа к корню
     def get_root_val(self):
         return self.root
+
 
 
 r = BinaryTree(8)
