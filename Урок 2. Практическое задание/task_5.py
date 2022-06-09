@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def symbols(value=32, i=0):
+    if value <= 127 and i <= 9:
+        print(value, '-', chr(value), end=' ')
+        value += 1
+        i += 1
+        symbols(value, i)
+    if i == 9:
+        print('\n')
+        value += 1
+        i = 0
+        return symbols(value, i)
+
+
+print(symbols())

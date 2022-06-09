@@ -17,3 +17,20 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+companies_dict = {'Apple': 86754, 'Samsung': 56789, 'Acer': 23685, 'Lenovo': 87257, 'Asus': 87643}
+
+def max_profit(dict_1):  # O(N)
+    new_dict = dict_1.copy()  # O(N)
+    list_3 = []  # O(1)
+    i = 0  # O(1)
+    while i < 3:  # O(1)
+        list_3.append(max(new_dict.items(), key=lambda x: x[1]))  # O(N)
+        new_dict.pop(list_3[i][0])  # O(1)
+        i += 1  # O(1)
+    return list_3  # O(1)
+
+
+[print(*i, sep=': ') for i in max_profit(companies_dict)]
+
+companies_3 = sorted(companies_dict.items(), key=lambda x: x[1], reverse=True)[:3]  # O(N log N)
+[print(*i, sep=': ') for i in companies_3]

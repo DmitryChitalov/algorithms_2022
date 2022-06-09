@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def sum_numbers(number):
+    if number > 1:
+        return number + sum_numbers(number - 1)
+    return number
+
+
+def set_numbers(number):
+    return int((number * (number + 1)) / 2)
+
+
+def result(number):
+    if sum_numbers(number) == set_numbers(number):
+        return f'При n = {number} равенство: 1+2+...+n = n(n+1)/2 - выполняется'
+    else:
+        return f'При n = {number} равенство: 1+2+...+n = n(n+1)/2 - не выполняется'
+
+
+number_num = int(input('Введите количество чисел: '))
+print(result(number_num))
