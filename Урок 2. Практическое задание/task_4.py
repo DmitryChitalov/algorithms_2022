@@ -10,3 +10,13 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def find_sum(elems_def):
+    if elems_def == 1:
+        return elems_def
+    else:
+        return 1 + find_sum(elems_def - 1) * (1/2 * -1)
+
+
+elems_def = int(input('Введите количество элементов: '))
+print(find_sum(elems_def))

@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+
+def guess_x(x, count = 0):
+    y = int(input("Отгадайте число от 0 до 100. Введите цифру:  "))
+    if y == x:
+        print("Вы угадали число")
+    else:
+        if count == 9:
+            print(f'Лимит попыток исчерпан. Загаданное число {x}')
+        else:
+            if y > x:
+                print("Искомое число меньше"), guess_x(x, count + 1)
+            elif y < x:
+                print("Искомое число больше"), guess_x(x, count + 1)
+
+
+guess_x(random.randint(0, 100))

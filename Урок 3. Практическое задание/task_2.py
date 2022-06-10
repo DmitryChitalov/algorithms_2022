@@ -22,3 +22,50 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+
+import hashlib
+import mysql.connector
+
+
+# DROP DATABASE IF EXISTS python;
+# CREATE DATABASE python;
+# USE python;
+#
+# DROP TABLE IF EXISTS users;
+# CREATE TABLE users (
+# 	user_name VARCHAR(255) NOT NULL PRIMARY KEY,
+#   pass_word VARCHAR(255) NOT NULL);
+
+connection = mysql.connector.connect(
+    host='127.0.0.1',
+    user='root',
+    password='master',
+    database='python')
+
+my_cur = connection.cursor()
+
+def insert_password():
+    user_name = input('Введите логин: ')
+    pass_word = input('Введите пароль: ')
+    my_cur.execute(f"INSERT INTO users values ('{user_name}',"
+                   f"'{hashlib.sha256(user_name.encode() + pass_word.encode()).hexdigest()}')")
+    connection.commit()
+    print("Данные добавлены в базу данных")
+
+
+insert_password()
+
+
+def req_pass_word():
+    user_name = input('Введите логин: ')
+    pass_word = input('Введите пароль: ')
+    pass_word_hash = hashlib.sha256(user_name.encode() + pass_word.encode()).hexdigest()
+    my_cur.execute(f'SELECT pass_word FROM users where user_name = "{user_name}"')
+    if my_cur.fetchone()[-1] == pass_word_hash:
+        print('Пароли совпадают')
+    else:
+        print('Пароли не совпадают')
+
+
+req_pass_word()
