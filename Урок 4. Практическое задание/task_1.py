@@ -12,10 +12,35 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
+from timeit import timeit
 
-def func_1(nums):
+
+def func_1(nums_list):
     new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
+    for i in range(len(nums_list)):
+        if nums_list[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+    return new_arr
+
+
+n = [i for i in range(1000)]
+print(timeit(stmt='func_1(n)', setup='from __main__ import func_1, n',
+             number=10000))
+print(timeit(stmt='func_2(n)', setup='from __main__ import func_2, n',
+             number=10000))
+
+"""
+    В целях оптимизации времени выполнения я перенес логику функции в 
+list comprehension, несмотря на то, что сложность по сути одинакова как для
+изначального варианта func_1, так и для func_2, последний выполняется 
+практически в двое быстрее изначального, так, как более оптимизирован из 
+коробки и относится к встроенному функционалу языка.
+результаты:
+func_1 1.3690789000247605
+func_2 0.766372
+"""
