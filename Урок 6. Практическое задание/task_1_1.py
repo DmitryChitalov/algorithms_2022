@@ -30,3 +30,74 @@
 
 Это файл для первого скрипта
 """
+"""
+Курс основы. 
+Создать список, состоящий из кубов нечётных чисел от 1 до 1000 (куб X - третья степень числа X):
+Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7. Например, число «19 ^ 3 = 6859» 
+будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7. Внимание: использовать только арифметические 
+операции! К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого списка, сумма цифр которых 
+делится нацело на 7. 
+"""
+from memory_profiler import profile
+
+
+def sum_list(numbers):
+    total = 0
+    for number in numbers:
+        result = 0
+        number_for_sum = number
+        while number:
+            result += number % 10
+            number //= 10
+        if result % 7 == 0:
+            total += number_for_sum
+    return total
+
+
+def sum_list17(numbers):
+    total = 0
+    for number in numbers:
+        result = 0
+        number_tasc_c = number + 17
+        number_for_sum = number_tasc_c
+        while number_tasc_c:
+            result += number_tasc_c % 10
+            number_tasc_c //= 10
+        if result % 7 == 0:
+            total += number_for_sum
+    return total
+
+
+# Старое решение через создание списков
+@profile
+def task_1():
+    numbers_a = [number ** 3 for number in range(100000) if number % 2 > 0]
+    numbers_b = [number + 17 for number in numbers_a if number]
+    print('сумма задание А: ', sum_list(numbers_a))
+    print('сумма задание Б: ', sum_list(numbers_b))
+    print('сумма задание С: ', sum_list17(numbers_a))
+
+
+# Новое решение с использованием генераторов, позволило освободить немного памяти
+@profile
+def task_2():
+    def numbers_a():
+        for number in range(100000):
+            if number % 2 > 0:
+                yield number ** 3
+
+    def numbers_b():
+        for number in numbers_a():
+            if number:
+                yield number + 17
+
+    numbers_a_t2 = numbers_a()
+    numbers_b_t2 = numbers_b()
+    numbers_c_t2 = numbers_a()
+    print('сумма задание А: ', sum_list(numbers_a_t2))
+    print('сумма задание Б: ', sum_list(numbers_b_t2))
+    print('сумма задание С: ', sum_list17(numbers_c_t2))
+
+
+task_1()
+task_2()

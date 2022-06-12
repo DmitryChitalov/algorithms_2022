@@ -9,3 +9,33 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+"""
+Курс алгоритмы.	
+Подсчитать четные и нечетные цифры введенного натурального числа.
+Например, если введено число 34560, то у него 3 четные цифры
+(4, 6 и 0) и 2 нечетные (3 и 5).
+"""
+from memory_profiler import profile
+
+
+def even_odd(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        tmp_number = number % 10
+        number = number // 10
+        if tmp_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd(number, even, odd)
+
+
+@profile()
+def one_table_result():
+    user_number = 12345
+    print(f'Количество четных и нечетных цифр в числе {user_number}: {even_odd(user_number)}')
+
+
+one_table_result()
+# вызовем рекурсивную функцию в другой функции, тогда таблица профилирования будет одна

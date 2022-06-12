@@ -30,3 +30,66 @@
 
 Это файл для второго скрипта
 """
+"""
+Курс основы. 
+Реализовать класс Road (дорога).
+    определить атрибуты: length (длина), width (ширина);
+    значения атрибутов должны передаваться при создании экземпляра класса;
+    атрибуты сделать защищёнными;
+    определить метод расчёта массы асфальта, необходимого для покрытия всей дороги;
+    использовать формулу: длина * ширина * масса асфальта для покрытия одного кв. метра дороги асфальтом, 
+    толщиной в 1 см * число см толщины полотна;
+    проверить работу метода.
+Например: 20 м*5000 м*25 кг*5 см = 12500 т. 
+"""
+from memory_profiler import profile
+
+
+# Старое решение, использование динамического словаря
+class Road:
+    unit_weight = 25
+    depth = 5
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def road_weight(self):
+        return int(self._length * self._width * self.unit_weight * self.depth / 1000)
+
+
+# Новое решение, использование слотов
+class NewRoad:
+    unit_weight = 25
+    depth = 5
+    __slots__ = ['length', 'width']
+
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def new_road_weight(self):
+        return int(self.length * self.width * self.unit_weight * self.depth / 1000)
+
+
+# Старое решение
+@profile
+def old_task():
+    road_1 = Road(20, 5000)
+    print(road_1.road_weight())
+    road_2 = Road(10, 8000)
+    print(road_2.road_weight())
+
+
+# Новое решение, использование слотов позволяет сохранить атрибуты в менее затратном по памяти контейнере – списке,
+# но в профилировании не будет заметен результат
+@profile
+def new_task():
+    road_1 = NewRoad(20, 5000)
+    print(road_1.new_road_weight())
+    road_2 = NewRoad(10, 8000)
+    print(road_2.new_road_weight())
+
+
+old_task()
+new_task()

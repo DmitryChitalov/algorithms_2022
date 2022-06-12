@@ -30,3 +30,46 @@
 
 Это файл для четвертого скрипта
 """
+"""
+Курс основы. 
+Представлен список чисел. Определить элементы списка, не имеющие повторений.
+Сформировать из этих элементов список с сохранением порядка их следования в исходном
+списке 
+"""
+from numpy import array
+from memory_profiler import profile
+from random import randint
+
+
+# старое решение с использованием списка
+@profile
+def old_task():
+    src = [randint(-100, 100) for _ in range(50000)]
+    unique_num = set()
+    tmp = set()
+    for num in src:
+        if num not in tmp:
+            unique_num.add(num)
+        else:
+            unique_num.discard(num)
+        tmp.add(num)
+    return [num for num in src if num in unique_num]
+
+
+# новое решение с использованием массива из модуля numpy
+@profile
+def new_task():
+    src = array([randint(-100, 100) for _ in range(50000)])
+    unique_num = set()
+    tmp = set()
+    for num in src:
+        if num not in tmp:
+            unique_num.add(num)
+        else:
+            unique_num.discard(num)
+        tmp.add(num)
+    return [num for num in src if num in unique_num]
+
+
+old_task()
+new_task()
