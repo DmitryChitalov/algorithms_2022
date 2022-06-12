@@ -30,3 +30,43 @@
 
 Это файл для пятого скрипта
 """
+"""
+Курс алгоритмы.
+Реализуйте два алгоритма.
+Оба должны обеспечивать поиск минимального значения для списка.
+Сложность первого алгоритма должна быть O(n^2) - квадратичная.
+Сложность второго алгоритма должна быть O(n) - линейная.
+Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
+-- нельзя использовать встроенные функции min() и sort()
+-- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
+-- проставьте сложности каждого выражения в двух ваших алгоритмах
+"""
+from memory_profiler import profile
+from random import randint
+
+
+# старое решение
+@profile
+def old_task():
+    user_list = [randint(0, 10000) for _ in range(50000)]
+    min_el = user_list[0]
+    for el in user_list:
+        if min_el > el:
+            min_el = el
+    return min_el
+
+
+# новое решение, удалим ссылку на большой список
+@profile
+def new_task():
+    user_list = [randint(0, 10000) for _ in range(50000)]
+    min_el = user_list[0]
+    for el in user_list:
+        if min_el > el:
+            min_el = el
+    del user_list
+    return min_el
+
+
+print(old_task())
+print(new_task())
