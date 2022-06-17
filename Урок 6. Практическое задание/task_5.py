@@ -1,21 +1,14 @@
 """
 Задание 1.
-
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы Python
-
+курсов Алгоритмы и Основы
 На каждый скрипт нужно два решения - исходное и оптимизированное.
-
 Вы берете исходное, пишете что это за задание и с какого оно курса.
 Далее выполняете профилирование скрипта средствами memory_profiler
-
 Вы оптимизируете исходное решение.
 Далее выполняете профилирование скрипта средствами memory_profiler
-
 Вам нужно написать аналитику, что вы сделали для оптимизации памяти и
 чего добились.
-
-
 ВНИМАНИЕ:
 1) скрипты для оптимизации нужно брать только из сделанных вами ДЗ
 курсов Алгоритмы и Основы
@@ -27,6 +20,57 @@
 5) не нужно писать преподавателю '''я не могу найти что оптимизировать''', это
 отговорки. Примеров оптимизации мы перечислили много: переход с массивов на
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
+Это файл для пятого скрипта
+"""
 
-Это файл для третьего скрипта
+
+from memory_profiler import profile
+import random
+from pympler.asizeof import asizeof
+
+
+@profile
+def original(number: int) -> list:
+    nouns = ("автомобиль", "лес", "огонь", "город", "дом")
+    adverbs = ("сегодня", "вчера", "завтра", "позавчера", "ночью")
+    adjectives = ("веселый", "яркий", "зеленый", "утопичный", "мягкий")
+    result = []
+    i = 0
+    while i != number:
+        joke = ' '.join((random.choice(nouns), random.choice(adverbs), random.choice(adjectives)))
+        result.append(joke)
+        i += 1
+    del nouns
+    del adverbs
+    del adjectives
+    del i
+    return result
+
+
+nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+
+
+@profile
+def optimize(num):
+    jokes = []
+    for i in range(num):
+        cur_noun = random.choice(nouns)
+        cur_adverb = random.choice(adverbs)
+        cur_adjective = random.choice(adjectives)
+    jokes.append(f'{cur_noun} {cur_adverb} {cur_adjective}')
+    return jokes
+
+
+if __name__ == '__main__':
+    print(asizeof(original(5)))
+    del original
+    print(asizeof(optimize(5)))
+    del optimize
+
+"""
+Помогло изпользование генератора
+До:    704
+После: 224
 """
