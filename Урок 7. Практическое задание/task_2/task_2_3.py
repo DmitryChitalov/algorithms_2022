@@ -16,3 +16,52 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+from task_2_1 import shell_sort_median
+from task_2_2 import get_median
+
+
+if __name__ == "__main__":
+    for m in (10, 100, 1000):
+        print(f"m={m}")
+        data = [randint(-100, 100) for i in range(m*2+1)]
+        print("Сортировка Шелла")
+        print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
+        print("Удаление m максимальных элементов")
+        print(timeit("get_median(data[:])", number=1000, globals=globals()))
+        print("statistics.median")
+        print(timeit("median(data[:])", number=1000, globals=globals()))
+        print("-"*10)
+"""
+m=10
+Сортировка Шелла
+0.042845599999999984
+Удаление m максимальных элементов
+0.014855000000000007
+statistics.median
+0.002200300000000044
+----------
+m=100
+Сортировка Шелла
+0.7387330999999999
+Удаление m максимальных элементов
+0.5484461
+statistics.median
+0.01413360000000008
+----------
+m=1000
+Сортировка Шелла
+11.4559268
+Удаление m максимальных элементов
+52.4770518
+statistics.median
+0.3068950999999913
+----------
+
+Поиск медианы statistics median основанный на испольховании встроенной функции sorted() оказался самым эффективным.
+Сортировка Шелла уступает по эффективности сортировке Timsort, которая используется в sorted().
+Поиск медианы с удалением m самых больших элементов массива хорошо работает на коротких массивах, 
+но на длинных работает медленне всего из-за сложности O(n*2)
+"""

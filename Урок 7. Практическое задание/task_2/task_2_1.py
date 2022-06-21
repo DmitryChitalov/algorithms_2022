@@ -15,3 +15,37 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def shell_sort_median(array):
+    inc = len(array) // 2
+    while inc:
+        for i, el in enumerate(array):
+            while i >= inc and array[i - inc] > el:
+                array[i] = array[i - inc]
+                i -= inc
+            array[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return array[(len(array) - 1) // 2]
+
+
+if __name__ == "__main__":
+    m = 10
+    data = [randint(-100, 100) for i in range(m*2+1)]
+    print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
+    m = 100
+    data = [randint(-100, 100) for i in range(m*2+1)]
+    print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
+    m = 1000
+    data = [randint(-100, 100) for i in range(m*2+1)]
+    print(timeit("shell_sort_median(data[:])", number=1000, globals=globals()))
+
+
+"""
+0.032452499999999995
+0.6619172
+10.861606400000001
+"""
+
