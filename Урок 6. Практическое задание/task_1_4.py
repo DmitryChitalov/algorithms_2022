@@ -1,3 +1,6 @@
+from sys import getsizeof
+from collections import namedtuple
+
 """
 Задание 1.
 
@@ -29,4 +32,45 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+"""
+
+
+def num_translate_adv(num_trl):
+    """Перевод цифр с eng на ru"""
+    trl_dict = {'one': 'один',
+                'two': 'два',
+                'three': 'три',
+                'four': 'четыре',
+                'five': 'пять',
+                'six': 'шесть',
+                'seven': 'семь',
+                'eight': 'восемь',
+                'nine': 'девять',
+                'ten': 'десять'}
+    print(f'Размер словаря {getsizeof(trl_dict)}')
+
+    if num_trl.istitle():
+        print(trl_dict.get(num_trl.lower(), 'Такого числа нет').capitalize())
+    else:
+        print(trl_dict.get(num_trl, 'Такого числа нет'))
+
+
+def new_func(number):
+    translate_ = namedtuple('translate_', 'one, two, three, four, five,'
+                                          'six, seven, eight, nine, ten')
+    trl = translate_(one='один', two='два', three='три',
+                     four='четыре', five='пять', six='шесть', seven='семь',
+                     eight='восемь', nine='девять', ten='десять')
+    print(f' Размер именованого кортежа {getsizeof(trl)}')
+    return f'{getattr(trl, number.lower(), "Такой цыфры нет")}'
+
+
+if __name__ == '__main__':
+    num_translate_adv('two')
+    print(new_func('two'))
+
+"""
+Размер словаря 360b
+Размер именованого кортежа 120b
+Обьем сократился в трое, что на огромных данных с играет свою роль
 """

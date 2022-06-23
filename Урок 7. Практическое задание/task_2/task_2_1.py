@@ -1,3 +1,5 @@
+from random import randint
+from timeit import timeit
 """
 Задание 2. Массив размером 2m + 1, где m – натуральное число,
 заполнен случайным образом. Найдите в массиве медиану.
@@ -14,4 +16,39 @@
 Кучей)
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
+"""
+
+def gnome_sort(lst_obj):
+    """
+    Гномья сортировка
+    """
+    i = 1
+    while i < len(lst_obj):
+        if not i or lst_obj[i - 1] <= lst_obj[i]:
+            i += 1
+        else:
+            lst_obj[i], lst_obj[i - 1] = lst_obj[i - 1], lst_obj[i]
+            i -= 1
+    return lst_obj[m]
+
+
+m = 10
+orig_list_10 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: '
+      f'{timeit("gnome_sort(orig_list_10[:])", globals=globals(), number=100)}')
+
+m = 100
+orig_list_100 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: '
+      f'{timeit("gnome_sort(orig_list_100[:])", globals=globals(), number=100)}')
+
+m = 1000
+orig_list_1000 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'При m = {m}: '
+      f'{timeit("gnome_sort(orig_list_1000[:])", globals=globals(), number=100)}')
+
+"""
+При m = 10: 0.008606299990788102
+При m = 100: 0.6022442998364568
+При m = 1000: 53.170982300071046
 """

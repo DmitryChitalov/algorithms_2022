@@ -22,3 +22,58 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'vasya_puplin': ['7397bkc2bJFq6GHv37', 'active'],
+    'human_12': ['76YHgft^2ldj10', 'active'],
+    'pinguin_76': ['incyw72', 'not active']
+}
+
+
+def check_user_1(data):
+    """
+    Проверка пользователей
+    сложность О(1)
+    """
+    login = input('Login: ')
+    try:
+        if data[login]:  # O(1)
+            passwd = input('Password: ')  # O(1)
+            if passwd == data[login][0] and data[login][1] == 'active':  # O(1)
+                print(f'С возвращением {login}')
+            else:
+                print(f'{login}, ваш аккаунт не активирован, '
+                      f'проверьте вашу почту')
+    except KeyError:
+        print(f'Такого аккаунта не существует!')
+
+
+def check_user_2(data):
+    """
+    Проверка пользователей
+    сложность O(n)
+    """
+    while True:  # O(1)
+        login = input('Login: ')  # O(1)
+        if login in data.keys():  # O(n)
+            passwd = input('Password: ')
+            if passwd == data[login][0] and data[login][1] == 'active':  # O(1)
+                print(f'С возвращением {login}')
+                break
+            elif passwd != data[login][0]:  # O(1)
+                print('Неверный пароль')
+            else:
+                print(f'{login}, ваш аккаунт не активирован, '
+                      f'проверьте вашу почту')
+                break
+        else:
+            print('Такого аккаунта не существует!')
+
+
+"""
+check_user_1 будет более лучшим решением, поскольку в нем отсутсутвуют
+циклы, переборы и любые сложные команды(По поводу try-except не уверен
+"""
+if __name__ == '__main__':
+    #check_user_1(users)
+    check_user_2(users)
