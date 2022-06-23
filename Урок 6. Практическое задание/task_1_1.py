@@ -1,3 +1,4 @@
+from memory_profiler import memory_usage
 """
 Задание 1.
 
@@ -30,3 +31,50 @@
 
 Это файл для первого скрипта
 """
+
+
+def mem(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(args[0])
+        stop = memory_usage()
+        memory = stop[0] - start[0]
+        return res, memory
+    return wrapper
+
+
+@mem
+def best_of_three_1(data):
+    """
+    Поиск трех самых прибыльных компаний из словаря
+    сложность O(n*log n)
+    """
+    return sorted(data.items(), key=lambda x: x[1], reverse=True)[:3]
+
+
+@mem
+def new_gen_func(data):
+    c_data = data.copy()
+    res = []
+    for i in range(3):
+        res.append(max(c_data, key=c_data.get))
+        yield c_data.pop(res[i])
+    del c_data
+    del res
+
+
+if __name__ == '__main__':
+    test_dict = {i: i ** 3 for i in range(10000)}
+    f_1, res_1 = best_of_three_1(test_dict)
+    g_1, res_2 = new_gen_func(test_dict)
+    print(f' оригинальное решение заняло: {res_1} mib')
+    print(f' отимизированное решение заняло: {res_2} mib')
+
+"""
+оригинальное решение заняло: 0.57421875 mib
+отимизированное решение заняло: 0.0 mib
+
+Пожертвовав скоростью написания(колличеством кода) и заменив логику функции, на
+генератор удалось добиться существенного снижения затрат памяти
+"""
+

@@ -1,3 +1,5 @@
+import numpy
+from memory_profiler import profile
 """
 Задание 1.
 
@@ -29,4 +31,27 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+"""
+
+
+@profile
+def func():
+    arr = [i for i in range(1, 1000000, 2)]
+    return arr
+
+
+# Вариант оптимизации через numpy
+@profile
+def new_func():
+    arr = numpy.arange(1, 1000000, 2)
+    return arr
+
+
+if __name__ == '__main__':
+    func()
+    new_func()
+
+"""
+Вывод:
+При работе с большими массивами numpy показывает минимальные затраты памяти
 """
