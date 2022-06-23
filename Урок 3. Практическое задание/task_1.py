@@ -1,3 +1,4 @@
+import time
 """
 Задание 1.
 
@@ -28,3 +29,82 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+def func_time(func):
+    """Время выполнения функции"""
+    def wrapper(*args):
+        start_ = time.time()
+        res = func(*args)
+        end_ = time.time()
+        print(f'Время выполнения {func.__name__}: {end_ - start_}')
+        return res
+    return wrapper
+
+
+# a) заполнение списка, оцените сложность в O-нотации.
+@func_time
+def list_gen(val):
+    """Наполнение списка"""
+    list_ = [i for i in range(val)]  # O(n)
+    return list_  # O(1)
+
+
+@func_time
+def dict_gen(val):
+    """Наполнение словаря"""
+    dict_ = {i: i for i in range(val)}  # O(n)
+    return dict_  # O(1)
+
+
+"""Сложность в данном примере одинакова, однако список наполняется быстрее
+за счет того, что не генерирует хеш, в отличии от словаря."""
+
+
+# b) получение элемента списка и словаря, оцените сложность в O-нотации
+@func_time
+def read_list(lst):
+    """чтение элементов списка"""
+    for i in lst:  # O(n)
+        print(i, end=' ')  # O(1)
+
+
+@func_time
+def read_dict(dct):
+    """Чтение словаря"""
+    for k in dct:  # O(n)
+        print(dct[k], end=' ')  # O(1)
+
+
+"""Сложность функций чтения одинакова, однако словарь считывается быстрее"""
+
+
+# c) удаление элемента списка и словаря, оцените сложность в O-нотации
+@func_time
+def pop_list(lst):
+    """Удаление элементов списка"""
+    for i in range(len(lst)):  # O(n)
+        lst.pop()  # O(1)
+
+
+@func_time
+def pop_dict(dct):
+    """Удаление елементов из словаря по одному"""
+    try:
+        for k in dct:  # O(n)
+            del dct[k]  # O(1)
+    except RuntimeError:
+        print('В словре не осталось елементов')
+
+
+"""Удаление элементов словаря проходит быстрее чем у списков"""
+
+if __name__ == '__main__':
+    list_gen(1000000)
+    dict_gen(1000000)
+    lst_1 = list_gen(10000)
+    dct_1 = dict_gen(10000)
+    read_list(lst_1)
+    read_dict(dct_1)
+    pop_list(lst_1)
+    pop_dict(dct_1)
