@@ -1,3 +1,5 @@
+from collections import namedtuple
+from statistics import mean
 """
 Задание 1.
 
@@ -28,3 +30,41 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+
+def count_sum(count_company=int(input('Введите колличество предприятий: '))):
+    """Расчет прибыли предприятий и сравнение между собой"""
+    company = namedtuple('company', 'name first second third four total')
+    company_list = []
+    avg = []
+    up_avg = []
+    down_avg = []
+    for i in range(count_company):
+        name = input('Введите имя компании: ')
+        profit = [int(i) for i in input(
+            'через пробел введите прибыль данного предприятия '
+            'за каждый квартал(Всего 4 квартала): ').split(' ')]
+        try:
+            new = company(
+                name=name,
+                first=profit[0],
+                second=profit[1],
+                third=profit[2],
+                four=profit[3],
+                total=sum(profit)
+            )
+        except IndexError:
+            return f'Вы указали прибыль не за все кварталы (4)'
+        company_list.append(new)
+        avg.append(sum(profit))
+    for i in range(len(company_list)):
+        if company_list[i].total > mean(avg):
+            up_avg.append(company_list[i].name)
+        else:
+            down_avg.append(company_list[i].name)
+    return f'Предприятия, с прибылью выше среднего значения: {up_avg}\n' \
+           f'Предприятия, с прибылью ниже среднего значения: {down_avg}'
+
+
+if __name__ == '__main__':
+    print(count_sum())

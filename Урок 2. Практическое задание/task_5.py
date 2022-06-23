@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_tab(start=32, end=127):
+    """Выводит на экран коды и символы таблицы ASCII, начиная с символа
+       под номером 32 и заканчивая 127-м включительно."""
+    if start > end:
+        return print('\nend program')
+    print(f'{start} - {chr(start)}', end='\n') if start % 10 == 1 \
+        else print(f'{start} - {chr(start)} ', end='')
+    return ascii_tab(start + 1)
+
+
+ascii_tab()

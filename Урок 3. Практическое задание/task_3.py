@@ -1,3 +1,4 @@
+import hashlib
 """
 Задание 3.
 Определить количество различных (уникальных) подстрок
@@ -22,3 +23,20 @@
 р
 а
 """
+
+
+def unique_str(str_):
+    """Определяет количество различных (уникальных) подстрок
+       с использованием хеш-функции"""
+    uniq = set()
+
+    for i in range(len(str_)):
+        for s in range(i + 1, len(str_) + 1):
+            if str_[i:s] != str_:
+                uniq.add(hashlib.sha256(str_[i:s].encode()).hexdigest())
+    return f' колличество уникальных подстрок {len(uniq)}'
+
+
+if __name__ == '__main__':
+    print(unique_str('рара'))
+    print(unique_str('param'))
