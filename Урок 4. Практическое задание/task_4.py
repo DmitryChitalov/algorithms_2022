@@ -1,3 +1,5 @@
+from collections import Counter
+from timeit import timeit
 """
 Задание 4.
 
@@ -37,5 +39,39 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3(arr):
+    count_max = Counter(arr).most_common()
+    return f'Чаще всего встречается число {count_max[0][0]}, ' \
+           f'оно появилось в массиве {count_max[0][1]} раз(а)'
+
+
+def func_4(arr):
+    new_arr = [arr.count(i) for i in arr]
+
+    return f'Чаще всего встречается число ' \
+           f'{arr[new_arr.index(max(new_arr))]}, ' \
+           f'оно появилось в массиве {max(new_arr)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3(array))
+print(func_4(array))
+
+print(timeit(stmt='func_1()', number=1000, globals=globals()))
+print(timeit(stmt='func_2()', number=1000, globals=globals()))
+print(timeit(stmt='func_3(array)', number=1000, globals=globals()))
+print(timeit(stmt='func_4(array)', number=1000, globals=globals()))
+
+"""
+Результаты:
+func_1 0.0019342000014148653
+func_2 0.002612499985843897
+func_3 0.0034590999712236226
+func_4 0.0026227000053040683
+
+Выаод:
+Исходя из результатов замера, наилучшей скорость выполнения обладает func_1
+Предложенное мною решение func_3 при помощи класса Counter выполняется дольше 
+всех, однако самое компактное. Ускорить работу не получилось.
+"""

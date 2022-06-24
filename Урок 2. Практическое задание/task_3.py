@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def revers_int(numb):
+    """Реверс числа"""
+    return '' if numb == 0 else str(numb % 10) + revers_int(numb // 10)
+
+
+while True:
+    answer = int(input('Для выхода введите 0\nВведите число: '))
+    if answer == 0:
+        print('exit program')
+        break
+    else:
+        print(revers_int(answer))

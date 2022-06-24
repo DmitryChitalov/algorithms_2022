@@ -17,3 +17,59 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {'Компания 1': 10000000,
+           'Компания 2': 15000000,
+           'Компания 3': 9500000,
+           'Компания 4': 12000000,
+           'Компания 5': 7300000}
+
+
+def best_of_three_1(data):
+    """
+    Поиск трех самых прибыльных компаний из словаря
+    сложность O(n*log n)
+    """
+    return sorted(data.items(), key=lambda x: x[1], reverse=True)[:3]
+    # O(n*log n)
+
+
+def best_of_three_2(data):
+    """
+    Поиск трех самых прибыльных компаний из словаря
+    сложность О(n)
+    """
+    best = []                                       # O(1)
+    c_data = data.copy()                            # O(n)
+
+    for i in range(3):                              # O(1)
+        max_val = max(c_data, key=data.get)         # O(n)
+        best.append((max_val, c_data[max_val]))     # O(1)
+        c_data.pop(best[i][0])                      # O(1)
+    return best                                     # O(1)
+
+
+def best_of_three_3(data):
+    """
+    Поиск трех самых прибыльных компаний из словаря
+    сложность O(n*log n)
+    """
+    best = []                                       # O(1)
+
+    for k, v in data.items():                       # O(n)
+        best.append((k, v))                         # O(1)
+    best.sort(key=lambda x: x[1], reverse=True)     # O(n*log n)
+    return best[:3]                                 # O(1)
+
+
+"""
+Первый и третий алгоритмы не отличаются по сложности, но сильно разнятся
+по количеству и красоте кода, второй алгоритм имеет сложность О(n),
+как по мне второй вариант best_of_three_2 имеет самую низкую сложность и
+будет лучше
+"""
+if __name__ == '__main__':
+    print(best_of_three_1(company))
+    print(company)
+    print(best_of_three_2(company))
+    print(company)
+    print(best_of_three_3(company))
