@@ -1,0 +1,57 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="5">
+            <item index="0" class="java.lang.String" itemvalue="Django" />
+            <item index="1" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="2" class="java.lang.String" itemvalue="djangorestframework" />
+            <item index="3" class="java.lang.String" itemvalue="redis" />
+            <item index="4" class="java.lang.String" itemvalue="Pillow" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPropertyDefinitionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyTypedDictInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="basketapp.models.Basket.objects" />
+          <option value="mainapp.models.Products.objects" />
+          <option value="mainapp.models.ProductCategory.objects" />
+          <option value="django.forms.TextField" />
+          <option value="authapp.models.UserProfile.objects" />
+          <option value="django.db.models.fields.related.ForeignKey.price" />
+          <option value="ordersapp.models.Order.orderitem" />
+          <option value="ordersapp.models.Order.objects" />
+          <option value="ordersapp.views.OrderReadView.make_order" />
+          <option value="ordersapp.views.OrderCreateView.user" />
+          <option value="ordersapp.models.OrderItem.objects" />
+          <option value="ordersapp.models.Order.forms" />
+          <option value="django.db.models.fields.related.ForeignKey.quantity" />
+          <option value="django.db.models.fields.related.ForeignKey.save" />
+          <option value="django.db.models.fields.related.ForeignKey.username" />
+          <option value="django.db.models.fields.PositiveIntegerField.__sub__" />
+          <option value="django.db.models.fields.related.ForeignKey.basket" />
+          <option value="str.fromstring" />
+          <option value="onlyone.mainapp.urls.*" />
+          <option value="mainapp.models.SW.objects" />
+          <option value="mainapp.models.SWCategory.objects" />
+          <option value="mainapp.models.Photo.objects" />
+          <option value="mainapp.models.SwVideo.objects" />
+          <option value="mainapp.models.SearchModel.objects" />
+          <option value="mediapp.models.SwVideo.objects" />
+          <option value="mediapp.models.Photo.objects" />
+          <option value="mediapp.models.UnknownVideos.objects" />
+          <option value="mediapp.models.VideoTags.objects" />
+          <option value="babesapp.models.Babes.objects" />
+          <option value="django.db.models.fields.PositiveIntegerField.__mul__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
