@@ -23,17 +23,47 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-autentification = (
-    {'login': 'batman', 'password': 'Whereisth#trigger?', 'active': True},
-    {'login': 'hatman', 'password': 'Wouldy0ulik#sometea?', 'active': True},
-    {'login': 'T1000', 'password': 'Illbback!', 'active': False}
-)
+autentification = {
+    'Batman': ('Whereisth#trigger?', True),
+    'Jack': ('fghbjnm,mknjh5678212', True),
+    'Hatman': ('Wouldy0ulik#sometea?', True),
+    'Paule': ('cvbnm,lk45678uhn', True),
+    'Raule': ('Cheeese456789kjhg!', False),
+    'T1000': ('Illbback!', False),
+}
 
 """First decision"""
 
-log_name = 'hatman'
-password = 'Wouldy0ulik#sometea?'
 
-def check_autentification(log_name, password):
-    if log_name in [x for x in autentification.login]:
-        print(a)
+def check_autentification_1(authent_dict, login: str, password: str):
+    if login in [x for x in authent_dict.keys()]:
+        if password == authent_dict[login][0]:
+            if authent_dict[login][1] == True:
+                return f'Success! "{login}", welcome back!'
+            else:
+                return f'We truly sorry,"{login}", but it seems that your account is not active! ' \
+                       f'Would you like us to send activation letter? yes/no'
+        return f'Wrong password for "{login}"'
+    return f'No such account with name "{login}"'
+
+"""
+print(check_autentification_1(autentification, 'Hatman', 'Wouldy0ulik#sometea?'))
+print()
+print(check_autentification_1(autentification, 'T1000', 'Illbback!'))
+print()
+print(check_autentification_1(autentification, 'Batman', 'Wouldy0ulik#sometea?'))
+print()
+print(check_autentification_1(autentification, 'Gremlin', 'Needsomefood!!!!!!!'))
+print()
+"""
+
+
+def check_autentification_2(authent_dict: dict, login: str, password: str):
+    """Записить с бинарной сортировкой"""
+    #            return f'We truly sorry,"{login}", but it seems that your account is not active! ' \
+    #                   f'Would you like us to send activation letter? yes/no'
+    #    return f'Wrong password for "{login}"'
+    #return f'No such account with name "{login}"'
+
+
+check_autentification_2(autentification, 'gremlin', 'Needsomefood!!!!!!!')
