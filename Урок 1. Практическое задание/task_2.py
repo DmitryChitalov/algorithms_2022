@@ -15,3 +15,22 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def min_val_n2(lst):
+    """Общая сложность O(N^2)"""
+    while len(lst) > 1:           # O(N)
+        if lst[0] <= lst[1]:      # O(1)
+            del lst[1]            # O(N)
+        else:                     # O(1)
+            del lst[0]            # O(N)
+    return lst[0]                 # O(1)
+
+
+def min_val_n(lst):
+    """Общая сложность O(N)"""
+    res = lst[0]                  # O(1)
+    for el in lst:                # O(N)
+        if el < res:              # O(1)
+            res = el              # O(1)
+    return res                    # O(1)
