@@ -22,3 +22,18 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+autentification = (
+    {'login': 'batman', 'password': 'Whereisth#trigger?', 'active': True},
+    {'login': 'hatman', 'password': 'Wouldy0ulik#sometea?', 'active': True},
+    {'login': 'T1000', 'password': 'Illbback!', 'active': False}
+)
+
+"""First decision"""
+
+log_name = 'hatman'
+password = 'Wouldy0ulik#sometea?'
+
+def check_autentification(log_name, password):
+    if log_name in [x for x in autentification.login]:
+        print(a)
