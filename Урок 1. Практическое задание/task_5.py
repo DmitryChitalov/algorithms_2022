@@ -19,30 +19,59 @@
 """
 
 class StackofPlates:
-    def __init__(self):
-        self.plates = []
+    """Общий родительский класс для всех стопок с тарелками"""
+    name: str = None
 
-    def is_empty(self):
-        return self.plates == []
+    def __init__(self, name: str, number):
+        self.stack = []
+        self.max_stack = 10
+        self.list_of_plates = []
+        self.name = name
+        self.number = number
+
+    def __str__(self):
+        return f"Stack_{self.number}"
+    __repr__ = __str__
+
+
+    def add_to_list(self, stackname):
+        self.list_of_plates.append(stackname)
 
     def push_in(self, plate):
-        if self.stack_size() < 10:
-            self.plates.append(plate)
+        self.stack.append(plate)
 
     def pop_out(self):
-        return self.plates.pop()
-
-    def get_val(self):
-        return self.plates[len(self.plates) - 1]
+        return self.stack.pop()
 
     def stack_size(self):
-        return len(self.plates)
+        return len(self.stack)
 
 
-def plates_stack(hight_of_stack: int, number_of_plates: int):
-    stack = StackofPlates()
-    while number_of_plates > 0:
-        stack.push_in(1)
-        number_of_plates -= 1
+def adding_plates(plate_stack, number):
+    now_stack_num = int(plate_stack.__str__()[-1])
+    while plate_stack.stack_size + number < plate_stack.max_stack:
+        plate_stack.push_in(1)
+        number -= 1
+        if number == 0:
+            break
+    next_stack_num = StackofPlates('stack',now_stack_num+1)
+    StackofPlates.add_to_list(next_stack_num)
+
+stack_1 = StackofPlates('stack', 1)
+adding_plates(stack_1, 15)
 
 
+"""class Student:
+    name: str = None
+
+    def __init__(self, name: str):
+        self.name = name
+
+    def __str__(self):
+        return "Студент: " + self.name
+
+    __repr__ = __str__
+
+
+students = [Student(f"Студент_{i}") for i in range(20)]
+print(students)"""
