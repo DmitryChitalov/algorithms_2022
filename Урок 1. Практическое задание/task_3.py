@@ -17,3 +17,16 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+my_dict = {'Firm1': 10000, 'Firm2': 20000, 'Firm3': 25000, 'Firm4': 6000, 'Firm5': 200, 'Firm6': 50000}
+# 1 - O(n log n)
+res = sorted(my_dict.items(), reverse=True, key=lambda x: x[1])[:3]                 # O(n log n)
+for i in range(len(res)):                                                           # O(n)
+    print(f'{i+1} - Фирма {res[i][0]} имеет годовую прибыль {res[i][1]} $')         # O(1)
+# 2 O(n^2)
+for i in range(3):                                                                  # O(n)
+    a = max(my_dict, key=my_dict.get)                                               # O(n)
+    print(f'{i+1} - Фирма {a} имеет годовую прибыль {my_dict[a]}')                  # O(1)
+    my_dict.pop(a)                                                                  # O(1)
+
+# Встроенные методы словарей наиболее эффективны.
+
