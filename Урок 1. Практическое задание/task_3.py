@@ -32,8 +32,9 @@ def first_way(companies: dict) -> list:
     И возвращает три компании с наибольшей прибылью. Требование сортировки прибыли в ТЗ отсутствует
     PS: Можно было бы и в 1 строчку, но это совсем уже не читаемо.
     Сложность: N^2"""
-    top_income = sorted(list(companies.values()), reverse=True)[:3]  #Сортировка O(log N) #Срез O(b-a)
-    return [key for key, value in companies.items() if value in top_income]  #Перебор значений словаря O(n) #Проверка на входимость O(n)
+    top_income = sorted(list(companies.values()), reverse=True)[:3]  # Сортировка O(log N) #Срез O(b-a)
+    return [key for key, value in companies.items() if value in top_income]  # Перебор значений словаря O(n) #Проверка на входимость O(n)
+
 
 print(*first_way(companies_year_income))
 
@@ -44,19 +45,19 @@ def second_way(companies: dict):
     если значение больше хотя бы одного максимального, то значение заменяет его, а другие значения смешаются на 1
     И возвращает три компании с наибольшей прибылью, отсортированные по убыванию величины дохода.
     Сложность: O(N)"""
-    first, second, third = '', '', ''  #Присваивание 0(1)
-    max_1, max_2, max_3 = 0, 0, 0  #Присваивание 0(1)
-    for key, value in companies.items():  #Перебор 0(N)
-        if value > max_1:  #Сравнение элемента O(1)
-            max_1, max_2, max_3 = value, max_1, max_2  #Присваивание 0(1)
-            first, second, third = key, first, second  #Присваивание 0(1)
-        elif value > max_2:  #Сравнение элемента O(1)
-            max_2, max_3 = value, max_2  #Присваивание 0(1)
-            second, third = key, second  #Присваивание 0(1)
-        elif value > max_3:  #Сравнение элемента O(1)
-            max_3 = value  #Присваивание 0(1)
-            third = key  #Присваивание 0(1)
-    return first, second, third  #0(1)
+    first, second, third = '', '', ''  # Присваивание 0(1)
+    max_1, max_2, max_3 = 0, 0, 0  # Присваивание 0(1)
+    for key, value in companies.items():  # Перебор 0(N)
+        if value > max_1:  # Сравнение элемента O(1)
+            max_1, max_2, max_3 = value, max_1, max_2  # Присваивание 0(1)
+            first, second, third = key, first, second  # Присваивание 0(1)
+        elif value > max_2:  # Сравнение элемента O(1)
+            max_2, max_3 = value, max_2  # Присваивание 0(1)
+            second, third = key, second  # Присваивание 0(1)
+        elif value > max_3:  # Сравнение элемента O(1)
+            max_3 = value  # Присваивание 0(1)
+            third = key  # Присваивание 0(1)
+    return first, second, third  # 0(1)
 
 
 print(*second_way(companies_year_income))
@@ -68,16 +69,22 @@ def third_way(companies: dict):
     ключа по индексу макимального значения. И возвращает три компании с наибольшей прибылью,
     отсортированные по убыванию величины дохода.
     Сложность: O(3N)"""
-    keys = list(companies.keys())  #Создание списка O(N)
-    values = list(companies.values())  #Создание списка O(N)
-    max_key = []  #Создание списка O(N)
-    while len(max_key) < 3:  #Сравнение элемента O(1)
-        for i in range(len(values)):  #Перебор O(N)
-            if values[i] == max(values):  #Сравнение элемента O(1)
-                max_key.append(keys[i])  #O(1)
-                values[i] = 0  #Присвоение O(1)
+    keys = list(companies.keys())  # Создание списка O(N)
+    values = list(companies.values())  # Создание списка O(N)
+    max_key = []  # Создание списка O(N)
+    while len(max_key) < 3:  # Сравнение элемента O(1)
+        for i in range(len(values)):  # Перебор O(N)
+            if values[i] == max(values):  # Сравнение элемента O(1)
+                max_key.append(keys[i])  # O(1)
+                values[i] = 0  # Присвоение O(1)
                 break
-    return max_key  #O(1)
+    return max_key  # O(1)
 
 
 print(*third_way(companies_year_income))
+
+"""
+ВЫВОД: Функция second_way со сложностью O(N) является наиболее эффективным, 
+так как обладает наименьшей сложностью, 
+кроме того ее совсем несложно поддерживать при текущем ТЗ
+"""
