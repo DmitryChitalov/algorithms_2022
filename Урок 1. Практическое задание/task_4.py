@@ -35,7 +35,10 @@ autentification = {
 """First decision"""
 
 
-def check_autentification_1(authent_dict, login: str, password: str):
+def check_autentification_1(authent_dict: dict, login: str, password: str):
+    """Функция принимает в себя словарь, логин и пароль.
+    Проверяет вхождение логина в ключи словаря. В случае успеха сравнивает пароль и проверяет атктивность аккаунта
+    И возвращает инфомрационное сообщение"""
     if login in [x for x in authent_dict.keys()]:  # Перебор O(N)
         if password == authent_dict[login][0]:  # Сравнение элемента O(1)
             if authent_dict[login][1] is True:  # Сравнение элемента O(1)
@@ -56,6 +59,10 @@ def check_autentification_1(authent_dict, login: str, password: str):
 # print(check_autentification_1(autentification, 'Gremlin', 'Needsomefood!!!!!!!'))
 # print()
 
+
+"""Second decision"""
+
+
 autentification_2 = [
                     ['Batman', 'Whereisth#trigger?', True],
                     ['Jack', 'fghbjnm,mknjh5678212', True],
@@ -70,8 +77,9 @@ def check_autentification_2(authent_list: list, login: str, password: str):
     """
     Функция принимает в себя вложенный список, логин и пароль.
     Сравнивает первую букву логина с средней буквой первого элемента в списке. Сокращает список на половину -1 элемент.
+    Проверяет вхождение логина в list comprehension из первых значений вложенного списка если их пароль соответствует
 
-    PS: Тут с идеями плохо и реализация кошмарная. Рубить список пополам рисковано, но это выход.
+    PS: Тут с идеями плохо и реализация кошмарная. Рубить список пополам рисковано.
     Хватило только фантазии частично ускорить процесс для случаев когда логин скорее всего есть в списке
     и мы может ускорить процесс сортировкой списка и обрезав его половину. Но это далеко не бинарный поиск"""
     sort_list = sorted(authent_list)  # Сортировка O(log N) #Присвоение O(1)
@@ -80,9 +88,9 @@ def check_autentification_2(authent_list: list, login: str, password: str):
         authent_list = sort_list[(len(sort_list) // 2)+1:]  # Срез O(b-a)
     else:
         authent_list = sort_list[:(len(sort_list) // 2)+1]  # Срез O(b-a)
-    if login in [x[0] for x in authent_list if password in x and x[2] is True]:  # 2Перебора O(2N)
+    if login in [x[0] for x in authent_list if password in x and x[2] is True]:  # Перебор O(2N)
         return f'Success! "{login}", welcome back!'  # O(1)
-    elif login in [x[0] for x in authent_list if password in x and x[2] is False]:  # 2Перебора O(2N)
+    elif login in [x[0] for x in authent_list if password in x and x[2] is False]:  # Перебор O(2N)
         return f'We truly sorry,"{login}", but it seems that your account is not active! ' \
                f'Would you like us to send activation letter? yes/no'  # O(1)
     else:
