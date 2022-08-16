@@ -17,3 +17,39 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+inf_company = {
+    'coca colla': 500,
+    'adidas': 300,
+    'nike': 245,
+    'mail.ru': 600,
+    'google.com': 1000,
+    'apple': 20000
+}
+
+
+def find_max_income_1(inf_company):
+    """ Общая сложность O(N*lon N)"""
+    inf_company_lst = list(inf_company.items())  # O(n)
+    inf_company_lst.sort(reverse=True, key=lambda x: x[1])  # O(n log n)
+
+    return inf_company_lst[:3]  # O(1)
+
+
+def find_max_income_2(inf_company):
+    """Общая сложность O(N)"""
+    tmp_list = {}
+    for _ in range(3):  # O(1)
+        maxi = max(inf_company.items(), key=lambda x: x[1])  # O(n)
+        tmp_list[maxi[0]] = maxi[1]
+        inf_company.pop(maxi[0])
+
+    return tmp_list
+
+
+print(find_max_income_1(inf_company))
+print(find_max_income_2(inf_company))
+
+"""
+Написал, два алгоритма по нахождению 3 максимальных и оценил сложность, сравнивал сложность с таблицей, и можно сделать вывод, что встроенные функции работают быстрее.
+Если сравнивать эти две функции то быстрее будет работать функция с линейной общей сложностью, по сравнению с линейно-логарифмической. Это станет заметно если мы будем маштобировать данные, на коротких участках это не так заметно
+"""
