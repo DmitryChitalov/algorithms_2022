@@ -22,3 +22,40 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def password_verification(login, password):         # итог: константная
+    if dict_obj[login][0] == password:              # константная
+        return True                                 # константная
+    return False                                    # константная
+
+
+def active_verification(login):                     # итог: константная
+    if dict_obj[login][1]:                          # константная
+        return True                                 # константная
+    return False                                    # константная
+
+
+# Вариант-1
+def authentification(login, password):                                              # итог: константная
+    if dict_obj.get(login):                                                         # константная
+        if password_verification(login, password) and active_verification(login):   # константная
+            return 'Success!'                                                       # константная
+        elif not password_verification(login, password):                            # константная
+            return 'Incorrect password'                                             # константная
+        elif not active_verification(login):                                        # константная
+            return 'Please, complete the activation'                                # константная
+    return 'User doesn\'t exist'                                                    # константная
+
+
+# Вариант-2
+def authentification(login, password):                                                  # итог: линейная
+    for key in dict_obj.keys():                                                         # линейная
+        if key == login:                                                                # константная
+            if password_verification(login, password) and active_verification(login):   # константная
+                return 'Success!'                                                       # константная
+            elif not password_verification(login, password):                            # константная
+                return 'Incorrect password'                                             # константная
+            elif not active_verification(login):                                        # константная
+                return 'Please, complete the activation'                                # константная
+    return 'User doesn\'t exist'                                                        # константная
