@@ -17,3 +17,25 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def max_value_1(companies):
+    max_value_companies = []
+    sorted_dict = {k: companies[k]
+                   for k in sorted(companies, key=companies.get, reverse=True)}
+    for companie in sorted_dict.keys():
+        max_value_companies.append(companie)
+        if len(max_value_companies) == 3:
+            break
+    return max_value_companies
+
+
+companies = {'ООО "АРКТИК СПГ 2"': 131109602000,
+             'ООО "ИМПУЛЬС"': 1264936766000,
+             'ООО " МАГНИТ "': 136945040000,
+             'ООО "МАРТИН"': 283081969000,
+             'ООО "ОЙЛ ТЕХНОЛОДЖИС"': 115185032000,
+             'АО "НИПИГАЗПЕРЕРАБОТКА"': 258608635000,
+             'ООО "РН-РАЗВЕДКА И ДОБЫЧА"': 108736741000,
+             'КИТ ФИНАНС ТРЕЙД (ООО)': 153774300000}
+
+print(max_value_1(companies))
