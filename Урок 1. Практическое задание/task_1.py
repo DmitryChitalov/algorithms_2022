@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: Линейная.
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # Линейная
+    return lst_to_set  # Линейная
 
 
 ##############################################################################
@@ -37,12 +37,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: Квадратичная.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # Линейная
+        if lst_obj[j] in lst_obj[j+1:]:    # Линейная
+            return False                   # Константная
+    return True                            # Константная
 
 
 ##############################################################################
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: Линейно-логарифмическая
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # Линейная
+    lst_copy.sort()                          # Линейно-логарифмическая
+    for i in range(len(lst_obj) - 1):        # Линейная
+        if lst_copy[i] == lst_copy[i+1]:     # Константная
+            return False                     # Константная
+    return True                              # Константная
 
 
 for j in (50, 500, 1000, 5000, 10000):
