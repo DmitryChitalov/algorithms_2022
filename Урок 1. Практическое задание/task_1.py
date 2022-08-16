@@ -24,7 +24,7 @@ def check_1(lst_obj):
 
     Сложность: линейная
     """
-    lst_to_set = set(lst_obj)  # линейная
+    lst_to_set = set(lst_obj)   # линейная
     return lst_to_set  # константная
 
 

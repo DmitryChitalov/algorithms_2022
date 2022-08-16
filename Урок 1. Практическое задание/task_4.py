@@ -37,7 +37,7 @@ def active_verification(login):                     # итог: констант
 
 
 # Вариант-1
-def authentification(login, password):                                              # итог: константная
+def authentification_1(login, password):                                              # итог: константная
     if dict_obj.get(login):                                                         # константная
         if password_verification(login, password) and active_verification(login):   # константная
             return 'Success!'                                                       # константная
@@ -49,7 +49,7 @@ def authentification(login, password):                                          
 
 
 # Вариант-2
-def authentification(login, password):                                                  # итог: линейная
+def authentification_2(login, password):                                                  # итог: линейная
     for key in dict_obj.keys():                                                         # линейная
         if key == login:                                                                # константная
             if password_verification(login, password) and active_verification(login):   # константная

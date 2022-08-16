@@ -23,15 +23,15 @@ def searching_max_annual_profit(dict_obj):                              # ито
 
 
 # Вариант-2
-def searching_max_annual_profit(dict_obj):          # итог: линейная
+def searching_max_annual_profit(dict_obj):         # итог: линейная
     result_list = []
-    for i in range(3):                              # константная
+    for i in range(3):                             # константная
         max_profit = 0
-        for key, val in dict_obj.items():           # линейная
+        for key, val in dict_obj.items():          # линейная
             if val > max_profit:                    
                 max_profit = val
                 company = key
-        result_list.append((company, max_profit))   # константная
-        del dict_obj[company]                       # константная
+        result_list.append((company, max_profit))  # константная
+        del dict_obj[company]                      # константная
     return result_list
 

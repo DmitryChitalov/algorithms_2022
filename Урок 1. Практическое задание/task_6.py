@@ -52,4 +52,3 @@ class TaskBoardClass():
 
     def __str__(self):
         return f'Основная: {self.basic}\nНа доработке: {self.mod}\nВыполненные: {self.comp}'
-

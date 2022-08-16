@@ -31,4 +31,3 @@ def pal_checker(string):
             still_equal = False
 
     return still_equal
-

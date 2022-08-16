@@ -60,4 +60,3 @@ class StacksPlatesClass():
     def __str__(self):
         # переопределение вывода стопок с тарелками
         return f'{self.stacks}'
-
