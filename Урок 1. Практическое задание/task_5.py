@@ -44,6 +44,10 @@ class StackofPlates:
         return len(self.stack)
 
 
+if __name__ == '__main__':
+    stack = StackofPlates
+
+
 list_of_stacks = []
 
 
