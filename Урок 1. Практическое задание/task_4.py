@@ -22,3 +22,45 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {'Stepan': {'password': 'qwerty123', 'is_activated': False},
+         'Alice': {'password': 'jnsSD!icvh3334', 'is_activated': True},
+         'Bob': {'password': '%&DSDB*3g2', 'is_activated': True},
+         'Gulbakhtim': {'password': '_)*jdn27', 'is_activated': False},
+         'Satoshi': {'password': ':Jdjbdfy%^gs2', 'is_activated': True}}
+
+
+def auth_a(login):  # O(1)
+    if users[login]['is_activated']:
+        return f'You have successfully logged in as {login}'
+    else:
+        print(f'Your account {login} is not activated yet')
+        activation = input('Do you want to activate it? Y/N: ').lower()
+        if activation == 'y':
+            users[login]['is_activated'] = True
+            return f'Account {login} is successfully activated'
+        else:
+            return f'okay :('
+
+def auth_b(login): # O(n)
+    for k, v in users.items():
+        if login == k and v['is_activated'] == False:
+            print(f'Your account {login} is not activated yet')
+            activation = input('Do you want to activate it? Y/N: ').lower()
+            if activation == 'y':
+                users[login]['is_activated'] = True
+                return f'Account {login} is successfully activated'
+            else:
+                return f'okay :('
+        else:
+            return f'You have successfully logged in as {login}'
+
+
+print(auth_a('Stepan'))
+print('*' * 40)
+print(auth_a('Alice'))
+print('*' * 40)
+print(auth_b('Stepan'))
+print('*' * 40)
+print(auth_b('Alice'))
+
