@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +12,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -142,7 +141,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_6">
+  <component name="RunManager" selected="Python.task_5">
     <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -250,8 +249,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_6" />
         <item itemvalue="Python.task_5" />
+        <item itemvalue="Python.task_6" />
         <item itemvalue="Python.task_4" />
         <item itemvalue="Python.task_3" />
         <item itemvalue="Python.task_2" />
@@ -298,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660615928313</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Выполнено задание 6, есть понимание как выполнить задание 5">
+      <created>1660635058130</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660635058130</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -329,10 +335,18 @@
     <MESSAGE value="Подготовлены заготовки для 2-3 задания" />
     <MESSAGE value="Выполнены задание 1-3" />
     <MESSAGE value="Выполнены задание 1-4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Выполнены задание 1-4" />
+    <MESSAGE value="Выполнено задание 6, есть понимание как выполнить задание 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Выполнено задание 6, есть понимание как выполнить задание 5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
