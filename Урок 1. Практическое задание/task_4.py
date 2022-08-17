@@ -22,3 +22,63 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def authentication_0(db_users, current_user):
+    """
+    Принимает словарь с заведенными учетными записями, список с данными пользователя и сравнивает данные.
+    В случае успешной аутентификации возвращает True
+    В случае несовпадения данных возвращает соответствующее исключение.
+    @param db_users: Dictionary
+    @param current_user: List
+    @return: Boolean or ValueError
+    Сложность: O(n) - Линейная.
+    """
+    _user_name, _user_hash = current_user[0], current_user[1]  # O(1)
+    password_error = ValueError('Неверный пароль.')  # O(1)
+    login_error = ValueError('Учетная запись не найдена.')  # O(1)
+    confirm_error = ValueError(f'{_user_name}, вам необходимо подтвердить данные вашей учетной записи.')  # O(1)
+    for db_user in db_users.values():  # O(n)
+        if db_user[0] == _user_name:  # O(1)
+            if db_user[1] == _user_hash:  # O(1)
+                return True if db_user[2] else confirm_error
+            else:  # O(1)
+                return password_error  # O(1)
+    else:  # O(1)
+        return login_error  # O(1)
+
+
+def authentication_1(db_users, current_user):
+    """
+    Принимает словарь с заведенными учетными записями, список с данными пользователя и сравнивает данные.
+    В случае успешной аутентификации возвращает True
+    В случае несовпадения данных возвращает соответствующее исключение.
+    @param db_users: Dictionary
+    @param current_user: List
+    @return: Boolean or ValueError
+    Сложность: O(n**2) - Квадратичная
+    """
+    _user_name, _user_hash = current_user[0], current_user[1]  # O(1)
+    for db_user in db_users.values():  # O(n)
+        for user_data in db_user:  # O(n)
+            if user_data == _user_name:  # O(1)
+                if db_user[1] == _user_hash:  # O(1)
+                    return True if db_user[2] else ValueError(
+                        f'{_user_name}, вам необходимо подтвердить данные вашей учетной записи.')  # O(1)
+                return ValueError('Неверный пароль.')  # O(1)
+    return ValueError('Учетная запись не найдена.')  # O(1)
+
+
+if __name__ == '__main__':
+    users = {
+        1: ['br14', '827ccb0eea8a706c4c34a16891f84e7b', True],
+        2: ['tombs2', 'ea2b2676c28c0db26d39331a336c6b92', True],
+        3: ['cow3', '9bc65c2abec141778ffaa729489f3e87', False],
+        4: ['OtrSetNpul', 'cdcd267dd9829fbb9070142d231d16b0', True],
+        5: ['Sigon32', 'a67e565b11cd18f7a922b58f5476b569', True],
+        6: ['hesoyam', 'cafc7170ed01c2f5c972cac7cde6e932', False]
+    }
+
+    our_user = ['hesoyam', 'cafc7170ed01c2f5c972cac7cde6e932']  # предполагается что на вход идет уже хеш
+    print(authentication_0(users, our_user))
+    print(authentication_1(users, our_user))
