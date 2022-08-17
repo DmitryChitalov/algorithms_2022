@@ -18,7 +18,7 @@
 в массив стопок (lst = [[], [], [], [],....]).
 """
 
-class plates_stacks:
+class PlatesStacks:
 
     max_stack_size = 5
 
@@ -42,7 +42,7 @@ class plates_stacks:
             return self.lst[len(self.lst) - 1].pop()
 
 
-some_plates = plates_stacks()
+some_plates = PlatesStacks()
 
 some_plates.plus_plates('small_plate')
 some_plates.plus_plates('big_plate')

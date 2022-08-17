@@ -30,7 +30,7 @@ our_users = {'user1': ['12345', True], 'user2': ['1234', False]}
 
 
 def prove_user(username, password):                         # O(1)
-    if username in our_users:                               # O(1)
+    if our_users.get(username):                             # O(1)
         if password == our_users[username][0]:              # O(1)
             if our_users[username][1]:                      # O(1)
                 print('Access granted')                     # O(1)

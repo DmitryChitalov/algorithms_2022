@@ -19,7 +19,7 @@
 """
 
 
-class tasks_desk:
+class TasksDesk:
 
     def __init__(self):
         self.lst = []
@@ -33,9 +33,9 @@ class tasks_desk:
     def minus_task(self):
         return self.lst.pop()
 
-todo_tasks = tasks_desk()
-done_tasks = tasks_desk()
-redo_tasks = tasks_desk()
+todo_tasks = TasksDesk()
+done_tasks = TasksDesk()
+redo_tasks = TasksDesk()
 
 todo_tasks.plus_task('wash_dishes')
 todo_tasks.plus_task('find_job')

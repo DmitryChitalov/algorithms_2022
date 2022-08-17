@@ -23,7 +23,7 @@ our_dict = {'company_1': 10000, 'company_2': 2000, 'company_3': 5000, 'company_4
 def biggest_value_in_dict(dict):                                                 # O(n)
     new_list = []                                                                # O(1)
     for i in range(3):                                                           # O(1)
-        richest_company, biggest_value = list(dict.items())[0]                   # O(1)
+        richest_company, biggest_value = list(dict.items())[0]                   # O(n)
         for item in dict:                                                        # O(n)
             if dict[item] > biggest_value:                                       # O(1)
                 biggest_value = dict[item]                                       # O(1)
