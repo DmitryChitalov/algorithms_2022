@@ -17,3 +17,41 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class TasksDesk:
+
+    def __init__(self):
+        self.lst = []
+
+    def plus_task(self, task):
+        self.lst.insert(0, task)
+
+    def show_tasks(self):
+        print(self.lst)
+
+    def minus_task(self):
+        return self.lst.pop()
+
+todo_tasks = TasksDesk()
+done_tasks = TasksDesk()
+redo_tasks = TasksDesk()
+
+todo_tasks.plus_task('wash_dishes')
+todo_tasks.plus_task('find_job')
+todo_tasks.plus_task('find_meaning_of_life')
+todo_tasks.plus_task('make_more_lists')
+
+todo_tasks.show_tasks()
+
+done_tasks.plus_task(todo_tasks.minus_task())
+done_tasks.plus_task(todo_tasks.minus_task())
+
+todo_tasks.show_tasks()
+done_tasks.show_tasks()
+
+redo_tasks.plus_task(done_tasks.minus_task())
+
+
+done_tasks.show_tasks()
+redo_tasks.show_tasks()
