@@ -82,3 +82,32 @@ if __name__ == '__main__':
     our_user = ['hesoyam', 'cafc7170ed01c2f5c972cac7cde6e932']  # предполагается что на вход идет уже хеш
     print(authentication_0(users, our_user))
     print(authentication_1(users, our_user))
+
+
+# revision
+def authentication_2(db_users, current_user, current_password):
+    """
+    Принимает словарь с заведенными учетными записями, id пользователя, пароль и сравнивает данные.
+    В случае успешной аутентификации возвращает True
+    @param db_users: Dictionary
+    @param current_user: List
+    @param current_password: String
+    @return: ValueError
+    Сложность: O(1) - Константная
+    """
+    password_error = ValueError('Неверный пароль.')  # O(1)
+    login_error = ValueError('Учетная запись не найдена.')  # O(1)
+    confirm_error = ValueError(
+        f'{db_users[current_user][0]}, вам необходимо подтвердить данные вашей учетной записи.')  # O(1)
+    if db_users.get(current_user):  # O(1)
+        if db_users[current_user][1] == current_password:  # O(1)
+            return True if db_users[current_user][2] else confirm_error  # O(1)
+        else:
+            return password_error  # O(1)
+    else:
+        return login_error  # O(1)
+
+
+if __name__ == '__main__':
+    our_user_2, user_2_password = 6, 'cafc7170ed01c2f5c972cac7cde6e932'
+    print(authentication_2(users, our_user_2, user_2_password))

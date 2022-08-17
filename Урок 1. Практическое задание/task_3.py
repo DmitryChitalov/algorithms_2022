@@ -37,10 +37,10 @@ def top_3_company_0(company_dict, top_3_list=[]):
 def top_3_company_1(company_dict, top_3_list=[]):
     """
     Функция принимает словарь и возвращает три значения с наибольшим ключом.
-    Сложность O(n**4)
+    Сложность O(n**3)
     """
     company_list = list(company_dict)
-    while len(top_3_list) != 3:  # O(n)
+    while len(top_3_list) != 3:  # O(1)
         for profit in company_list:  # O(n)
             if profit == max(company_list):  # O(n)
                 top_3_list.append(company_dict.get(profit))  # O(1)
