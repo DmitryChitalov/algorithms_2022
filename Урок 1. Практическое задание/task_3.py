@@ -17,7 +17,7 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-def top_three_O_n_sq(firms, top_size=3):  # O(n^2)
+def top_three_on_sq(firms, top_size=3):  # O(n^2)
     top, f = [], firms.copy()
     if len(f) <= top_size:
         return f
@@ -29,7 +29,7 @@ def top_three_O_n_sq(firms, top_size=3):  # O(n^2)
             del f[k]
     return top
 
-def top_three_O_n(firms, top_size=3):  # O(n)
+def top_three_on(firms, top_size=3):  # O(n log n)
     return sorted(firms.items(), key=lambda kv: kv[1])[::-1][:top_size]
 
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                  'Space-X': 400_000,
                  'Bugulma': 900_000}
 
-    print(top_three_O_n_sq(companies))
-    print(top_three_O_n(companies))
+    print(top_three_on_sq(companies))
+    print(top_three_on(companies))
 
     

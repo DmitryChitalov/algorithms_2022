@@ -41,6 +41,14 @@ class StackTask:
             else:
                 self.add_next_pile()
 
+    def drop_stack(self):
+        """ обнулить стэк """
+        self.stacks = [[]]
+
+    def take_plate_from_current(self):
+        """ снять одну тарелку с последней стопки """
+        self.stacks[-1].pop()
+
     def show_stacks(self):
         return [s for s in self.stacks]
 
@@ -50,4 +58,13 @@ user_plates = int(input('Сколько тарелок разложить по �
 
 plates.add_to_pile(user_plates)
 print(plates.show_stacks())
+
+print(plates.current_pile())
+plates.take_plate_from_current()
+print(plates.current_pile())
+
+plates.drop_stack()
+print(plates.show_stacks())
+
+
 

@@ -30,7 +30,7 @@ users = {'Stepan': {'password': 'qwerty123', 'is_activated': False},
          'Satoshi': {'password': ':Jdjbdfy%^gs2', 'is_activated': True}}
 
 
-def auth_O_1(login):  # O(1)
+def auth_a(login):  # O(1)
     if users[login]['is_activated']:
         return f'You have successfully logged in as {login}'
     else:
@@ -42,7 +42,7 @@ def auth_O_1(login):  # O(1)
         else:
             return f'okay :('
 
-def auth_O_n(login): # O(n)
+def auth_b(login): # O(n)
     for k, v in users.items():
         if login == k and v['is_activated'] == False:
             print(f'Your account {login} is not activated yet')
@@ -56,11 +56,11 @@ def auth_O_n(login): # O(n)
             return f'You have successfully logged in as {login}'
 
 
-print(auth_O_1('Stepan'))
+print(auth_a('Stepan'))
 print('*' * 40)
-print(auth_O_1('Alice'))
+print(auth_a('Alice'))
 print('*' * 40)
-print(auth_O_n('Stepan'))
+print(auth_b('Stepan'))
 print('*' * 40)
-print(auth_O_n('Alice'))
+print(auth_b('Alice'))
 

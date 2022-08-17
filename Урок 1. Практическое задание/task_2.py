@@ -17,13 +17,13 @@
 """
 
 
-def min_O_n(l):  # O(n)
+def min_on(l):  # O(n)
     m = l[0]
     for i in l:
         m = i if i < m else m
     return m
 
-def min_O_n_square(l):  # O(n^2)
+def min_on_square(l):  # O(n^2)
     for i in l:
         m = i
         for j in l:
@@ -33,6 +33,6 @@ def min_O_n_square(l):  # O(n^2)
 
 if __name__ == '__main__':
     ar = [43, 10, 2, 6, 13, 0, 29]
-    print(min_O_n(ar))
-    print(min_O_n_square(ar))
+    print(min_On(ar))
+    print(min_On_square(ar))
 
