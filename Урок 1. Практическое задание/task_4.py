@@ -22,3 +22,78 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+"""
+Вариант 1
+
+В концепции заложена модель о нахождении зарегистрированных пользователей только в одном из словарей
+- если зарегистрированный пользователь не активировал учетную запись он находится в словаре regist_users
+- если зарегистрированный пользователь активировал учетную запись он находится в словаре active_users
+- если пользователь не зарегистрировал учетную запись он не находится ни в одном словаре
+
+Оценка сложностей алгоритмов сделана с учетом того, что мы не знаем размер этих словарей, конкретный ограниченный набор
+пользователей в словарях создан только для целей тестирования, а не для оценки сложности алгоритма
+
+"""
+
+regist_users = {'vasya_petrov': 'pass1', 'petya_popov': 'pass2', 'victor_ivanov': 'pass3'}
+active_users = {'andrej_sidorov': 'pass4', 'arkadij_nikolaev': 'pass5'}
+
+
+def check_user1(login):
+    """
+
+    Сложность: O(n**2).
+    """
+    user_to_check = login  # O(1)
+    for i in regist_users.keys():  # O(n)
+        if i == user_to_check:  # O(1)
+            return 'Вам необходимо активировать запись'  # O(1)
+        else:
+            for j in active_users.keys():  # O(n)
+                if j == user_to_check:  # O(1)
+                    return 'Ваша учетная запись активирована'  # O(1)
+                else:
+                    return 'Пользователь не найден'  # O(1)
+
+
+print(check_user1('vasya_petrov'))
+print(check_user1('andrej_sidorov'))
+print(check_user1('andrej_ivanov'))
+
+"""
+Вариант 2
+В концепции заложена модель о нахождении флагов активации зарегистрированных пользователей  в словаре active_flag
+- если пользователь не зарегистрировал учетную запись, он не находится в словаре active_flag
+
+Оценка сложностей алгоритмов сделана с учетом того, что мы не знаем размер этих словарей,
+конкретный ограниченный набор пользователей в словарях создан только для целей тестирования,
+ а не для оценки сложности алгоритма
+
+"""
+
+users = {'vasya_petrov': 'pass1', 'petya_popov': 'pass2', 'victor_ivanov': 'pass3',
+         'andrej_sidorov': 'pass4', 'arkadij_nikolaev': 'pass5'}
+active_flag = {'vasya_petrov': 1, 'petya_popov': 0, 'victor_ivanov': 1,
+               'andrej_sidorov': 0, 'arkadij_nikolaev': 1}
+
+
+def check_user2(login):
+    """
+
+    Сложность: O(n).
+    """
+    user_to_check = login  # O(1)
+    for key, value in active_flag.items():  # O(n)
+        if key == user_to_check and value == 1:  # O(1)
+            return 'Ваша запись активирована'  # O(1)
+        elif key == user_to_check and value == 0:  # O(1)
+            return 'Вашу учетную запись нужно активировать'  # O(1)
+        else:
+            continue  # O(1)
+    return 'Пользователь не найден'  # O(1)
+
+
+print(check_user2('vasya_petrov'))
+print(check_user2('petya_popov'))
+print(check_user2('andrej_ivanov'))

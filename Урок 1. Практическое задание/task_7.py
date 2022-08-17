@@ -13,3 +13,51 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 --код с нуля писать не нужно, требуется доработать пример с урока
 """
+
+
+class DequeClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def add_to_front(self, elem):
+        self.elems.append(elem)
+
+    def add_to_rear(self, elem):
+        self.elems.insert(0, elem)
+
+    def remove_from_front(self):
+        return self.elems.pop()
+
+    def remove_from_rear(self):
+        return self.elems.pop(0)
+
+    def size(self):
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+    dc_obj = DequeClass()
+
+
+def pal_checker(string):
+    dc_obj1 = DequeClass()
+
+    for el in string.replace(" ", "").lower():
+        dc_obj1.add_to_rear(el)
+
+    still_equal = True
+
+    while dc_obj1.size() > 1 and still_equal:
+        first = dc_obj1.remove_from_front()
+        last = dc_obj1.remove_from_rear()
+        if first != last:
+            still_equal = False
+
+    return still_equal
+
+
+print(pal_checker("мо   локо    дел  или  ледо   колом"))
+print(pal_checker("А роза упала на лапу Азора"))

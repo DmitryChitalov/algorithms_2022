@@ -15,3 +15,35 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def check_min1(lst_obj):
+    """
+
+    Сложность: квадратичная.
+    """
+    lst_min = lst_obj[0]  # константная
+    lst_min_cur = lst_min  # константная
+    for i in lst_obj:  # линейная
+        for j in range(len(lst_obj)):  # линейная
+            if i > lst_obj[j]:  # константная
+                lst_min_cur = lst_obj[j]  # константная
+        if lst_min > lst_min_cur:  # константная
+            lst_min = lst_min_cur  # константная
+    return lst_min
+
+
+def check_min2(lst_obj):
+    """
+
+    Сложность: линейная.
+    """
+    lst_min = lst_obj[0]  # константная
+    for j in range(len(lst_obj)):  # линейная
+        if lst_obj[j] < lst_min:  # константная
+            lst_min = lst_obj[j]  # константная
+    return lst_min
+
+
+print(check_min1([18000, 15000, 12900, 5500]))
+print(check_min2([18000, 15000, 12900, 5500]))
