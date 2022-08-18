@@ -23,4 +23,5 @@ def count(num: int, list_of_numbers: list, result: float = 0, iter_number: int =
         result += list_of_numbers[0]
         print(f'Количество элементов - {iter_number}, их сумма - {result}')
 
+
 count(int(input('Сколько чисел будет в последовательности? ')), list(map(float, input('Введите числа: ').split())))
