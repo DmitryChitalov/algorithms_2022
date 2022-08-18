@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def change_numbers(number: int, ost: str = ''):
+    ost = ost
+    if len(str(number)) > 1:
+        last = str(number % 10)
+        ost += last
+        change_numbers(number // 10, ost)
+    else:
+        ost += str(number)
+        print(f'Перевернутое число: {ost}')
+
+
+# change_numbers(1234567890)
+change_numbers(int(input('Введите число: ')))
