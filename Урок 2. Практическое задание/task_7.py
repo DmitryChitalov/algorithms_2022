@@ -13,3 +13,13 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_nums_ser(n):
+    if n == 1:
+        return 1
+    return n + sum_nums_ser(n - 1)
+
+
+def proof(n):
+    return sum_nums_ser(n) == n * (n + 1) / 2

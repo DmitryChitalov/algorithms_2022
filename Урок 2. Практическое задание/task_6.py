@@ -7,3 +7,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+from random import randint
+
+
+def guess_number(number, i=1):
+    if i > 10:
+        return f'Вы проиграли. Я загадал - {number}'
+    answer = int(input('Введите число: '))
+    if number == answer:
+        return f'Вы правы. Я загадал - {number}'
+    elif number > answer:
+        print('Больше')
+    else:
+        print('Меньше')
+    return guess_number(number, i + 1)
