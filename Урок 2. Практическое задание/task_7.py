@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_n(num, sm=0):
+    if num > 0:
+        sm += num
+        num -= 1
+        total = sum_n(num, sm)
+    else:
+        return sm
+    return total
+
+
+n = int(input('Введите натуральное число: '))
+
+print(sum_n(n) == n*(n+1)/2)

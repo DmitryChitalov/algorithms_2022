@@ -10,3 +10,22 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_elem(n, n_print=0, sum_el=0, el=1, sign=True):
+    n_print += 1
+    if sign is True:
+        sum_el += el
+        sign = False
+    else:
+        sum_el -= el
+        sign = True
+    n -= 1
+    if n == 0:
+        print(f'Количество элементов - {n_print}, их сумма - {sum_el}')
+        return None
+    el /= 2
+    sum_elem(n, n_print, sum_el, el, sign)
+
+
+sum_elem(int(input('Введите количество элементов: ')))
