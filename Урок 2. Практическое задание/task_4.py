@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def count(num: int, list_of_numbers: list, result: float = 0, iter_number: int = 1):
+    iter_number = iter_number
+    if num > 1:
+        result += list_of_numbers[0]
+        num -= 1
+        iter_number += 1
+        count(num, list_of_numbers[1:], result, iter_number)
+    else:
+        result += list_of_numbers[0]
+        print(f'Количество элементов - {iter_number}, их сумма - {result}')
+
+count(int(input('Сколько чисел будет в последовательности? ')), list(map(float, input('Введите числа: ').split())))
