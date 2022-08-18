@@ -18,3 +18,13 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+#3
+def revers(a):
+    while a > 0:
+        b = int(a % 10)
+        a = int(a // 10)
+        return f"{b}{revers(a)}"
+    return f""
+
+a = int(input("Введите число - "))
+print(revers(a))
