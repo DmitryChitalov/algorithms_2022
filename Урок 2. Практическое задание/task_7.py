@@ -25,7 +25,9 @@ def check_number(n: int, result: int = 0, step: int = 1):
         step += 1
         check_number(n, result, step)
     else:
-        print(result == n*(n+1)/2)
-
+        if result == n*(n+1)/2:
+            print('Равенство выполняется')
+        else:
+            print('Равенство не выполняется')
 
 check_number(10)
