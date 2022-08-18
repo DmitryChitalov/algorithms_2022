@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def is_dig(string):
+    str_1 = string
+    if str_1[0].isdigit() or str_1[0] == '-' or str_1[0] == '+':
+        if str_1[0] == '-' or str_1[0] == '+':
+            str_1 = string[1:]
+        if str_1.count('.') == 0:
+            return int(string)
+        if str_1.count('.') == 1 and str_1.replace('.', '').isdigit():
+            return float(string)
+    print('Нужно вводить только числа!')
+    return False
+
+
+def calc():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == '0':
+        return None
+    elif action in ('+', '-', '*', '/'):
+        a = input('Введите первое число: ')
+        n1 = is_dig(a)
+        if n1 is not False:
+            b = input('Введите второе число: ')
+            n2 = is_dig(b)
+            if n2 is not False:
+                if action == '+':
+                    print('Ваш результат:', n1 + n2)
+                elif action == '-':
+                    print('Ваш результат:', n1 - n2)
+                elif action == '*':
+                    print('Ваш результат:', n1 * n2)
+                else:
+                    if n2 == 0:
+                        print('Деление на ноль не допускается!')
+                    else:
+                        print('Ваш результат:', n1 / n2)
+    else:
+        print('Недопустимая операция!')
+    calc()
+
+
+calc()

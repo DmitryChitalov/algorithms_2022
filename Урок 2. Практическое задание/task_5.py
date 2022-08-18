@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii(n=32, step=0):
+    if step == 9:
+        print(f'{n} - {chr(n)}')
+        step = 0
+    else:
+        print(f'{n} - {chr(n)}', end=' ')
+        step += 1
+    n += 1
+    if n == 128:
+        return None
+    print_ascii(n, step)
+
+
+print_ascii()
