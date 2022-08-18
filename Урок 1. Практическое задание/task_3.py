@@ -17,3 +17,40 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def func1(dict_obj):
+
+    """
+    Сложность алгоритма: O((n log n)
+    """
+    sorted_obj = {}                                              # O(n)
+    sorted_keys = sorted(dict_obj, key=dict_obj.get, reverse=1)  # O(n log n)
+    idx = 0                                                      # O(1)
+    for i in sorted_keys:                                        # O(n)
+        sorted_obj[i] = dict_obj[i]                              # O(1)
+        idx += 1                                                 # O(1)
+        if idx > 2:                                              # O(1)
+            break                                                # O(1)
+    return sorted_obj                                            # O(1)
+
+
+def func2(dict_obj):
+    """
+    Сложность алгоритма: O(n)
+    """
+    lst_obj = []                                    # O(n)
+    for i in dict_obj:                              # O(n)
+        lst_obj.append(dict_obj[i])                 # O(1)
+    max_income = []                                 # O(n)
+    top3_income = {}                                # O(n)
+    for i in lst_obj:                               # O(n)
+        max_income.append(max(lst_obj))             # O(1)
+        lst_obj.remove(max(lst_obj))                # O(1)
+    for i in dict_obj:                              # O(n)
+        if dict_obj[i] in max_income:               # O(n)?
+            top3_income.setdefault(i, dict_obj[i])  # O(1)
+    return top3_income                              # O(1)
+
+"""func2 эфективнее за счет использования более простых циклов в отличии от сортировки"""
+
+
