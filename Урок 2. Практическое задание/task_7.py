@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+#7
+def proverka(n:int,b=0):
+    if n != 0:
+        b = b + n
+        return proverka(n-1,b)
+    else:
+        return b
+a = 5
+right = a *(a +1)/2
+b = proverka(a)
+if right == b:
+    print(f'{float(right)} = {float(b)}')

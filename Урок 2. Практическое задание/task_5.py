@@ -19,3 +19,12 @@
 
 Допускается исп-е встроенных ф-ций
 """
+#5
+def chars(i=31, count=0):
+    if i in range(31, 128):
+        i += 1
+        count+=1
+        if count % 10 == 0:
+            return f'{i} - {chr(i)}\n {chars(i, count)}'
+        return f'{i} - {chr(i)} {chars(i, count)}'
+print(chars())

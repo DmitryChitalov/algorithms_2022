@@ -22,3 +22,34 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+# не справился, но пытался
+def zadolbalo(name):
+    d = {}
+    with open("text.txt") as file:
+        for line in file:
+            key, *value = line.strip().split(',')
+            d[key] = value
+        name = name.lower()
+        print(type(d), d, name)
+        if name not in d:
+            return 'Асталависта'
+            # print(d[key][1])
+        a = d.get(name)
+        if a[1] == 'True':
+            return 'Авторизован'
+        else:
+            print('Ваша запись не подтверждена')
+            question = input("Введите с клавиатуры Y или N - ")
+        if question == 'Y':
+            a[1] = 'True'
+        else:
+            print('GoAWAY')
+    print(d)
+    with open('text.txt', 'w') as f:
+        for key, value in d.items():
+            f.write(f'{key},{value}\n')
+
+    return 'ok'
+
+
+print(zadolbalo('name2'))

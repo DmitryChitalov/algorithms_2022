@@ -17,3 +17,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+#2
+def nums(num: int, count1=0, count2=0):
+    b = num % 10
+    if (b % 2) == 0:
+        count1 += 1
+    else:
+        count2 += 1
+    num = num // 10
+    if num == 0:
+        return count1, count2
+    return nums(num, count1, count2)
+
+print(nums(123))

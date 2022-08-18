@@ -10,3 +10,20 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+#4
+def sum_el(n:float, b = 2,sum = 0):
+    n = float(n)
+    if n == 0:
+        return sum
+    if n % 2 != 0:
+        b = b / 2
+    else:
+        b = -b / 2
+    sum += b
+    # print(b)
+    n -= 1
+    b = abs(b)
+    return sum_el(n, b, sum)
+
+a = (input('- '))
+print(sum_el(a))
