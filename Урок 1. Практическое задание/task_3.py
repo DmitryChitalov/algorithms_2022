@@ -1,9 +1,9 @@
 """
 Задание 3.
 
-Для этой задачи:
+Для этой задачи
 1) придумайте 2-3 решения (обязательно с различной сложностью)
-2) оцените сложность каждого выражения в этих решениях
+2) оцените сложность каждого выражения в этих решениях в нотации О-большое
 3) оцените итоговую сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -17,3 +17,23 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def search_max_profit(dict_obj):                                                  # итог: O(n)
+    start_dict = dict_obj                                                         # O(n)
+    final_dict = {}                                                               # O(1)
+    for i in range(0, 3):                                                         # O(1)
+        max_val = max(start_dict.values())                                        # O(n)
+        final_dict.update({k: v for k, v in start_dict.items() if v == max_val})  # O(n)
+        k1 = [k for k, v in start_dict.items() if v == max_val]                   # O(n)
+        del start_dict[k1[0]]                                                     # O(n)
+    return final_dict
+
+
+def search_max_profit_2(dict_obj):                                    # итог: O(n log n)
+    return sorted(dict_obj.items(), key=(lambda item: item[1]))[-3:]  # O(n log n)
+
+
+"""
+Вывод:
+первый вариант более оптимален, т.к. сложность алгоритма меньше, чем у второго варианта 
+"""
