@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+
+def random_game(attemp: int = 0, number: int = 0):
+    if number == 0:
+        number = random.randint(0, 100)
+    if attemp < 10:
+        answer = int(input(f'Попробуй угадать загаданное число: '))
+        attemp += 1
+        if number == answer:
+            print("Отлично! Ты победил!")
+        elif number > answer:
+            print(f'Не повезло. Загаданное число больше, что ты предполагал. Осталось {10 - attemp} попыток.')
+            random_game(attemp, number)
+        else:
+            print(f'Не повезло. Загаданное число меньше, что ты предполагал. Осталось {10 - attemp} попыток.')
+            random_game(attemp, number)
+    else:
+        print(f'Жаль, но ты не угадал. Загаданное число - {number}')
+
+
+random_game()
