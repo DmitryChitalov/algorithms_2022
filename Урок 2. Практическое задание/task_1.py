@@ -27,3 +27,24 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if oper == '0':
+        exit('Калькулятор прекратил работу')
+    elif oper not in ['+', '-', '*', '/']:
+        print('Вы вместо арифметической операции ввели другой символ. Исправьтесь')
+        return calculator()
+    num_1 = input('Введите первое число: ')
+    if not num_1.isdigit():
+        print(f'Вы вместо {len(num_1)}-значного числа ввели строку {num_1}. Исправьтесь')
+        return calculator()
+    num_2 = input('Введите второе число: ')
+    if not num_2.isdigit():
+        print(f'Вы вместо {len(num_2)}-значного числа ввели строку {num_2}. Исправьтесь')
+        return calculator()
+    if oper == '/' and num_2 == 0:
+        raise ZeroDivisionError
+    print(f'Ваш результат: {eval(f"{num_1}{oper}{num_2}")}')
+    return calculator()

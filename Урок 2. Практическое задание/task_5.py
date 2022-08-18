@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def char_ascii(n=32):
+    if n > 127:
+        return ''
+    elif n % 10 == 1 or n == 127:
+        print(f'{n:3} - {chr(n)}', end='\n')
+    else:
+        print(f'{n:3} - {chr(n)}', end=' ')
+    return char_ascii(n + 1)
