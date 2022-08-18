@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def get_reverse_dig(num, rev_str=' '):
+    str_num = str(rev_str)
+    rev_str = str_num + str(num % 10)
+    if num // 10 == 0:
+        print(f'Перевернутое число: {rev_str}')
+    else:
+        return get_reverse_dig(num // 10, rev_str)
+
+
+get_reverse_dig(int(input('Введите число:  ')))

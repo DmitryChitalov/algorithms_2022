@@ -27,3 +27,60 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def get_count():
+    oper = input('Введите операцию (+, -, *, / или 0 для выхода):  ')
+
+    if oper == '0':
+        print("Спасибо за внимание")
+        return
+    elif oper == "+":
+        try:
+            first_num = int(input('Введите первое число  '))
+            second_num = int(input('Введите второе число  '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        else:
+            print(f'Сумма чисел равна: {first_num + second_num}')
+        finally:
+            get_count()
+    elif oper == "-":
+        try:
+            first_num = int(input('Введите первое число  '))
+            second_num = int(input('Введите второе число  '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        else:
+            print(f'Разность чисел равна: {first_num - second_num}')
+        finally:
+            get_count()
+    elif oper == "*":
+        try:
+            first_num = int(input('Введите первое число  '))
+            second_num = int(input('Введите второе число  '))
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        else:
+            print(f'Произведение чисел равно: {first_num * second_num}')
+        finally:
+            get_count()
+    elif oper == "/":
+        try:
+            first_num = int(input('Введите первое число  '))
+            second_num = int(input('Введите второе число  '))
+            res = first_num / second_num
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        except ZeroDivisionError:
+            print('На 0 делить нельзя. Исправьтесь')
+        else:
+            print(f'Частное чисел равно: {res}')
+        finally:
+            get_count()
+    else:
+        print("Вы ввели неверную операцию. Введите операцию (+, -, *, / или 0 для выхода)")
+        return get_count()
+
+
+get_count()

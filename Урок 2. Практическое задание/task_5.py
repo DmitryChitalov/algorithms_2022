@@ -19,3 +19,22 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii(start=32, next_str1=42, end=127):
+    new_start = start
+    next_str = next_str1
+    new_end = end
+    print("%4d - %s" % (new_start, chr(new_start)), end='')
+    new_start += 1
+    if new_start > new_end:
+        return
+    if new_start == next_str:
+        next_str += 10
+        print('\n')
+        print_ascii(new_start, next_str)
+    else:
+        print_ascii(new_start, next_str, new_end)
+
+
+print_ascii()
