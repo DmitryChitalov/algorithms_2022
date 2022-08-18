@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def get_count_dig(num, ev_start=0, od_start=0):
+    ev = ev_start
+    od = od_start
+    if num % 10 == 1 or num % 10 == 3 or num % 10 == 5 or num % 10 == 7 or num % 10 == 9:
+        od += 1
+    else:
+        ev += 1
+    if num // 10 == 0:
+        print(f'Четных цифр в числе: {ev} , нечетных цифр в числе: {od}')
+    else:
+
+        return get_count_dig(num // 10, ev, od)
+
+
+get_count_dig(int(input('Введите число:  ')))

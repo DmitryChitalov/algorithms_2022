@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def get_proof_form(num):
+    num_cur = num
+    if num_cur == 1:
+        return num_cur
+    else:
+        return num_cur + get_proof_form(num_cur - 1)
+
+
+first_num = int(input("Введите натуральное число:  "))
+first_sum = int(first_num * (first_num + 1) / 2)
+last_sum = get_proof_form(first_num)
+if first_sum == last_sum:
+    print(f"Все сходится: {first_sum} = {last_sum}")
+else:
+    print(f"Что-то не так: {first_sum} не равно {last_sum}")
