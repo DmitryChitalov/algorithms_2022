@@ -27,3 +27,24 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+# 1
+
+def calc_v1():
+    true_list = ['0', '+', '-', '*', '/']
+    znak = input('Введите знак операции - ')
+    if znak == '0':
+        return f'Программа завершена'
+    elif znak not in true_list:
+        print("Знак может быть одним из '0', '+', '-', '*', '/'")
+        return f' {calc_v1()}'
+    else:
+        num1 = int(input("Число 1 - "))
+        num2 = int(input("Число 2 - "))
+        if znak == '/' and num2 ==0:
+            print("На ноль делить нельзя")
+            return f' {calc_v1()}'
+        c = str(num1)+znak+str(num2)
+        print(eval(c))
+        return f' {calc_v1()}'
+
+print(calc_v1())
