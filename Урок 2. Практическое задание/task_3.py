@@ -21,14 +21,15 @@
 
 
 def change_numbers(number: int, ost: str = ''):
-    ost = ost
+    """Функция принимает в себя число, а также пустую по умолчанию строку.
+    Отделяет последнюю цифру числа в отдельную строку и рекурсивно вызывает сама себя"""
     if len(str(number)) > 1:
         last = str(number % 10)
         ost += last
         change_numbers(number // 10, ost)
     else:
         ost += str(number)
-        print(f'Перевернутое число: {ost}')
+        print(f'Перевернутое число: {int(ost)}')
 
 
 # change_numbers(1234567890)

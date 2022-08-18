@@ -13,7 +13,8 @@
 
 
 def count(num: int, list_of_numbers: list, result: float = 0, iter_number: int = 1):
-    iter_number = iter_number
+    """Функция принимает в себя количество чисел и числовой ряд. А также будущий результат сложения
+    и количество итераций для упрощенного расчета длинны числа"""
     if num > 1:
         result += list_of_numbers[0]
         num -= 1

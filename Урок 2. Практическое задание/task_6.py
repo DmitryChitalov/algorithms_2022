@@ -11,20 +11,23 @@
 import random
 
 
-def random_game(attemp: int = 0, number: int = 0):
+def random_game(attempt: int = 0, number: int = 0):
+    """Функция по дефолту принимает в себя нулевые значения попыток пользователя и загаданного числа
+    генерирует случайное число, и дает возможность угадать его пользователю. В случае неудачи сравнивает
+     загаданное число с предполгагаемым и прелагает попробовать еще раз, но не более 10 раз"""
     if number == 0:
         number = random.randint(0, 100)
-    if attemp < 10:
+    if attempt < 10:
         answer = int(input(f'Попробуй угадать загаданное число: '))
-        attemp += 1
+        attempt += 1
         if number == answer:
             print("Отлично! Ты победил!")
         elif number > answer:
-            print(f'Не повезло. Загаданное число больше, что ты предполагал. Осталось {10 - attemp} попыток.')
-            random_game(attemp, number)
+            print(f'Не повезло. Загаданное число больше, что ты предполагал. Осталось {10 - attempt} попыток.')
+            random_game(attempt, number)
         else:
-            print(f'Не повезло. Загаданное число меньше, что ты предполагал. Осталось {10 - attemp} попыток.')
-            random_game(attemp, number)
+            print(f'Не повезло. Загаданное число меньше, что ты предполагал. Осталось {10 - attempt} попыток.')
+            random_game(attempt, number)
     else:
         print(f'Жаль, но ты не угадал. Загаданное число - {number}')
 
