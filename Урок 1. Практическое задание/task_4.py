@@ -22,3 +22,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users_db_dict = {
+    "alex": ["qwe123", True],
+    "timur": ["qwe143423", True],
+    "elena": ["qwe123423", False],
+    "user1977": ["qwe32432123", False],
+    "admin": ["qwefrfd123", True]
+}
+
+users_db_list = [
+    ["alex", "qwe123", True],
+    ["timur", "qwe143423", True],
+    ["elena", "qwe123423", False],
+    ["user1977", "qwe32432123", False],
+    ["admin", "qwefrfd123", True]
+]
+
+answer = {True: "Вход разрешен", False: "Требуется активация", "No": "Пользователь не найден"}
+
+
+def user_validation1(user_name: str):          # O(1)
+    try:                                            # O(1)
+        res = answer[users_db_dict[user_name][1]]   # O(1)
+    except KeyError:                                # O(1)
+        res = answer["No"]                          # O(1)
+    return res                                      # O(1)
+
+
+def user_validation2(user_name: str):     # O(n)
+    res = "No"                                # O(1)
+    for user in users_db_list:                # O(n)
+        if user[0] == user_name:              # O(1)
+            res = user[2]                     # O(1)
+    return answer[res]                        # O(1)
+
+
+if __name__ == "__main__":
+    users = ["alex", "elena", "el"]
+    for i in users:
+        print(f'Пользователь {i} - {user_validation1(i)}')
+    print("----------------------------------------------------------------")
+    for i in users:
+        print(f'Пользователь {i} - {user_validation2(i)}')
+# Эффективнее использовать словари, т.к. поиск в словаре имеет сложность O(1)
