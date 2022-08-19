@@ -22,3 +22,23 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+users = {'user1': {'pass': 'userone', 'registration': True},
+         'user2': {'pass': 'usertwo', 'registration': True},
+         'user3': {'pass': 'userthree', 'registration': False}}
+
+#сложность: O(n)
+def authorization(users, u_name, u_pass):
+    if users.get(u_name):                                                               #O(1)
+        if users[u_name]['pass'] == u_pass and users[u_name]['registration']:           #O(n)
+            return "Доступ пользователю разрешен"                                       #O(1)
+        elif users[u_name]['pass'] == u_pass and not users[u_name]['registration']:     #O(n)
+            return "Пользователь не найден, пройдите регистрацию"                       #O(1)
+        elif users[u_name]['pass'] != u_pass:                                           #O(n)
+            return "Неверный пароль у пользователя "                                    #O(1)
+    else:
+        return "Нет такого пользователя"                                                #O(1)
+
+print(authorization(users, 'user1', 'usertwo'))
+print(authorization(users, 'user6', 'usertwo'))
+print(authorization(users, 'user2', 'usertwo'))
+print(authorization(users, 'user3', 'userthree'))
