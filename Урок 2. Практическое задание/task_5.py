@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def chars_tabl (begin_char = 32, end_char = 127, row_count = 10):
+    if begin_char <= end_char:
+        if row_count:
+            row_count -= 1
+            print(f'{begin_char} - {chr(begin_char)}', end=' ')
+        else:
+            print()
+            print(f'{begin_char} - {chr(begin_char)}', end=' ')
+            row_count = 9
+        chars_tabl(begin_char + 1, end_char, row_count)
+
+chars_tabl()

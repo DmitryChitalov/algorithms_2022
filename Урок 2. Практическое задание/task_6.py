@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+rand_number = random.randrange(0, 100)
+
+def rand_game(number, try_qnt = 10):
+    if try_qnt:
+        user_number = int(input('Попробуйте угадать число: '))
+        if number != user_number:
+            if user_number > number:
+                print('Введённое Вами число больше заданного')
+            else:
+                print('Введённое Вами число меньше заданного')
+            rand_game(number, try_qnt - 1)
+        else:
+            print('Вы угадали!')
+    else:
+        print('У Вас не получилось угадать число. Не расстраивайтесь. Может что-нибудь другое в жизни получится.')
+
+
+rand_game(rand_number)

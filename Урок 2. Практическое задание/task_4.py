@@ -10,3 +10,13 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_of_div_2_res(div_qnt, begin_num = 1):
+    if div_qnt:
+        return begin_num + sum_of_div_2_res(div_qnt - 1, begin_num/-2)
+    else:
+        return 0
+
+a = input('Введите количество элементов: ')
+print(f'Количество элементов - {a}, их сумма - {sum_of_div_2_res(int(a))}')
+
