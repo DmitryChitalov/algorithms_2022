@@ -18,6 +18,7 @@
 в массив стопок (lst = [[], [], [], [],....]).
 """
 
+
 class StackClass:
     def __init__(self):
         self.elems = [[],[],[],[],[]]
