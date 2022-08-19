@@ -22,3 +22,75 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'user1': {
+        'pass': 'qwerty',
+        'activated': False
+    },
+    'Mark': {
+        'pass': '123',
+        'activated': True
+    },
+    'username': {
+        'pass': 'password',
+        'activated': True
+    }
+}
+
+
+##########################################################################################
+
+def check_lin(user_dict, username, password):
+    """Линейная сложность"""
+    for user, attribute in user_dict.items():                   # O(n) - линейная
+        if user == username and attribute['pass'] == password:  # O(1) - константная
+            if attribute['activated'] is True:                  # O(1) - константная
+                return True                                     # O(1) - константная
+            else:
+                return False                                    # O(1) - константная
+    return 'Error'                                              # O(1) - константная
+
+
+def auth_lin(user_list, user, passwd):
+    """Линейная сложность"""
+    status = check_lin(user_list, user, passwd)  # O(n) - линейная
+    if status == 'Error':                        # O(1) - константная
+        return 'Wrong credentials'               # O(1) - константная
+    elif status is False:                        # O(1) - константная
+        return 'Please activate your account'    # O(1) - константная
+    else:
+        return 'User is logged in'               # O(1) - константная
+
+
+##########################################################################################
+
+
+def check_const(user_dict, user, passwd):
+    """Константная сложность"""
+    if user_dict.get(user) and user_dict[user]['pass'] == passwd:    # O(1) - константная
+        if user_dict[user]['activated'] is True:                     # O(1) - константная
+            return True                                              # O(1) - константная
+        else:
+            return False                                             # O(1) - константная
+    return 'Error'                                                   # O(1) - константная
+
+
+def auth_nlog(user_list, user, passwd):
+    """Константная сложность"""
+    status = check_const(user_list, user, passwd)  # O(1) - константная
+    if status == 'Error':                          # O(1) - константная
+        return 'Wrong credentials'                 # O(1) - константная
+    elif status is False:                          # O(1) - константная
+        return 'Please activate your account'      # O(1) - константная
+    else:
+        return 'User is logged in'                 # O(1) - константная
+
+
+##########################################################################################
+
+print(auth_lin(users, 'username', 'password'))
+print(auth_nlog(users, 'username', 'password'))
+
+"""Вывод: алгоритм auth_lin() более оптимальный, 
+т.к. имеет меньшую алгоритмическую сложность"""
