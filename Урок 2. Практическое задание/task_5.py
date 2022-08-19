@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+# number_from/number_to - номера символов от\до, которые будем выводить
+def get_ascii(number_from, number_to, result='', count=0):  # снова решил сделать через count
+    if number_from == number_to + 1:
+        return result
+    count += 1
+    if count % 10 == 0:  # каждые 10 шагов делаем \n
+        result += f'{number_from} - {chr(number_from)} \n'
+    else:
+        result += f'{number_from} - {chr(number_from)} '
+    number_from += 1
+    return get_ascii(number_from, number_to, result, count)
+
+
+print(get_ascii(32, 127))
