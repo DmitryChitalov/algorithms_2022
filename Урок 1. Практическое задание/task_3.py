@@ -17,3 +17,48 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+companies = [
+    ('Ашан', 278.8),
+    ('Леруа Мерлен Восток', 456.6),
+    ('Эппл Рус', 386),
+    ('JT Group', 345.5),
+    ('Тойота Мотор/Toyota Motor', 332),
+    ('Рено Россия, Автоваз', 456.3),
+    ('ИКЕА Дом', 299.2),
+    ('Фольксваген Груп Рус', 517),
+    ('Philip Morris International', 392.2),
+    ('Самсунг Электроникс Рус Компани', 288.7)
+]
+
+
+def method_1(storage):                   # O(n) - линейная
+    lst = storage[:]                     # O(n) - линейная
+    result_list = []                     # O(1) - константная
+    for j in range(3):                   # O(3) - константная
+        max_elem = lst[0]                # O(1) - константная
+        max_index = 0                    # O(1) - константная
+        for i in range(1, len(lst)):     # O(n) - линейная
+            if lst[i][1] > max_elem[1]:  # O(1) - константная
+                max_elem = lst[i]        # O(1) - константная
+                max_index = i            # O(1) - константная
+        temp = lst.pop(max_index)        # O(n) - линейная
+        result_list.append(temp)         # O(1) - константная
+    return result_list                   # O(1) - константная
+
+
+def method_2(storage):                                                   # O(n**2) - квадратичная
+    for i in range(1, len(storage)):                                     # O(n) - линейная
+        for j in range(i, 0, -1):                                        # O(n) - линейная
+            if storage[j][1] < storage[j - 1][1]:                        # O(1) - константная
+                storage[j], storage[j - 1] = storage[j - 1], storage[j]  # O(1) - константная
+            else:
+                break                                                    # O(1) - константная
+    return storage[:-4:-1]                                               # O(3) - линейная
+
+
+print(method_1(companies))
+print(method_2(companies))
+
+"""Вывод: первый алгоритм более оптимальный, 
+т.к. имеет меньшую алгоритмическую сложность"""
