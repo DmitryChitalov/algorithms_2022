@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_output(chr_number=32, last_chr_number=127, chr_on_string=1):
+    if chr_number == last_chr_number:
+        return f'{chr_number} - {chr(chr_number)}'
+    if chr_on_string <= 10:
+        return f'{chr_number} - {chr(chr_number)} ' + str(ascii_output(chr_number + 1, chr_on_string=chr_on_string + 1))
+    chr_on_string = 1
+    return f'\n{chr_number} - {chr(chr_number)} ' + str(ascii_output(chr_number + 1, chr_on_string=chr_on_string + 1))
+
+
+if __name__ == '__main__':
+    print(ascii_output())
