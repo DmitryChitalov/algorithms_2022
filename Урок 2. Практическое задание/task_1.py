@@ -27,3 +27,31 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def recur_calc ():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation not in ('+', '*', '-', '/', '0'):
+        print('Введён неверный символ.')
+        recur_calc()
+    elif operation == '0':
+        return 0
+    else:
+        a = input('Введите первое число: ')
+        b = input('Введите второе число: ')
+        if operation == '+':
+            print(f'Ваш результат {int(a) + int(b)}')
+        elif operation == '-':
+            print(f'Ваш результат {int(a) - int(b)}')
+        elif operation == '*':
+            print(f'Ваш результат {int(a) * int(b)}')
+        elif operation == '/':
+            if b == '0':
+                print('На ноль делить нельзя.')
+                recur_calc()
+                return 0
+            else:
+                print(f'Ваш результат {int(a) / int(b)}')
+
+        recur_calc()
+
+recur_calc()

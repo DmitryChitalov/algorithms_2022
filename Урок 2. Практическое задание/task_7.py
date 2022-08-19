@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def recurs_sum(qnt):
+    if qnt:
+        return qnt + recurs_sum(qnt - 1)
+    else:
+        return 0
+
+n = int(input('Введите число: '))
+
+if recurs_sum(n) == n * (n+1)/2:
+    print('Проверено. Выполняется.')
+
