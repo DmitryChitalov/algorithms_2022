@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_num_sequence(number):
+    if number == 0:
+        return 0
+    return number + sum_num_sequence(number - 1)
+
+
+def num_is_task():
+    n = int(input('Введите число для проверки: '))
+    task_num = n * (n + 1) / 2
+    return sum_num_sequence(n) == task_num
+
+
+print(num_is_task())

@@ -18,3 +18,29 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def integer_reverse_a(number):
+    """Вариант решения 1"""
+    if number == 0:
+        return ''
+    return str(number % 10) + integer_reverse_a(number // 10)
+
+
+def integer_reverse_b(number, rev_int=''):
+    """Вариант решения 2"""
+    if number == 0:
+        return rev_int
+    rev_int += str(number % 10)
+    return integer_reverse_b(number // 10, rev_int)
+
+
+def integer_reverse_user_interface():
+    """Ввод - Вывод"""
+    number_to_reverse = int(input('Введите число, которое требуется перевернуть: '))
+    return f'Перевернутое число, вариант 1: {integer_reverse_a(number_to_reverse)}\n' \
+           f'Перевернутое число, вариант 2: {integer_reverse_b(number_to_reverse)}'
+
+
+if __name__ == '__main__':
+    print(integer_reverse_user_interface())
