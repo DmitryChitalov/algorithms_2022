@@ -31,15 +31,15 @@ def check_login1(database):
     """
     Сложность: O(n)
     """
-    while True:                                                         # O(n)
+    while True:                                                         # O(N)
         print('LOGIN:')                                                 # O(1)
         login = input()                                                 # O(1)
         print('PASSWORD')                                               # O(1)
         password = input()                                              # O(1)
-        if not login in database:                                       # O(1)
+        if not login in database:                                       # O(N) размер database неизвестен
             print('неверный логин')                                     # O(1)
             continue                                                    # O(1)
-        elif not password in database[f'{login}']:                      # O(1)
+        elif not password in database[f'{login}']:                      # O(N) размер
             print('неверный пароль')                                    # O(1)
             continue                                                    # O(1)
         elif database[f'{login}'] == [f'{password}', False]:            # O(1)
