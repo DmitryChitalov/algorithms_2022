@@ -15,3 +15,33 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def quadratic_search_min(lst_obj):
+    """
+    Функция возвращает минимальное значение из списка
+    Сложность алгоритма: O(n^2)
+
+    """
+
+    n = 0                             # O(1)
+    while n < len(lst_obj):           # O(n)
+        min_value = lst_obj[n]        # O(1)
+        for i in lst_obj:             # O(n)
+            if i < min_value:         # O(1)
+                min_value = i         # O(1)
+        n += 1                        # O(1)
+    return min_value                  # O(1)
+
+
+def linear_search_min (lst_obj):
+    """
+    Функция возвращает минимальное значение из списка
+    Сложность алгоритма: O(n)
+
+    """
+    min_value = lst_obj[0]        # O(1)
+    for i in lst_obj:             # O(n)
+        if i < min_value:         # O(1)
+            min_value = i         # O(1)
+    return min_value              # O(1)

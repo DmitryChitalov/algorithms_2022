@@ -22,3 +22,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+users = {'user1':['1', True], 'user2':['2', False], 'user3':['3', False]}
+
+
+def check_login1(database):
+    """
+    Сложность: O(n)
+    """
+    while True:                                                         # O(N)
+        print('LOGIN:')                                                 # O(1)
+        login = input()                                                 # O(1)
+        print('PASSWORD')                                               # O(1)
+        password = input()                                              # O(1)
+        if not login in database:                                       # O(N) размер database неизвестен
+            print('неверный логин')                                     # O(1)
+            continue                                                    # O(1)
+        elif not password in database[f'{login}']:                      # O(N) размер
+            print('неверный пароль')                                    # O(1)
+            continue                                                    # O(1)
+        elif database[f'{login}'] == [f'{password}', False]:            # O(1)
+            return print('необходимо активировать учетную запись')      # O(1)
+        else:                                                           # O(1)
+            return print('добро пожаловать')                            # O(1)
+
+
+def check_login2(database, login, password):
+    """
+    Сложность: O(1)
+    :param database:
+    :param login:
+    :param password:
+    :return:
+    """
+    if not login in database:                                           # O(1)
+        return print('неверный логин')                                  # O(1)
+    elif not password in database[f'{login}']:                          # O(1)
+        return print('неверный пароль')                                 # O(1)
+    elif database[f'{login}'] == [f'{password}', False]:                # O(1)
+        return print('необходимо активировать учетную запись')          # O(1)
+    else:                                                               # O(1)
+       return print('добро пожаловать')
+       # O(1)
+"""из-за отсутствия цикла в check_login2, алгоритм эфективнее """
