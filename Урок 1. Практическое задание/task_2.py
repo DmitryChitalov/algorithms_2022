@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+value_lst = [210, 111, 12, -1, -847, 48, 980, -985]
+
+
+def lst_min_square(lst):  # O(N)+O(1)+O(N^2)+O(1) ==> O(N^2)
+    lst_copy = lst[:]  # O(N)
+    n = 0  # O(1)
+    for i in lst:  # O(N)
+        if lst[n] < i:
+            lst_copy.remove(i)  # O(N)
+        elif lst[n] > i:
+            del lst_copy[0]  # O(N)
+            n = n+1  # O(N)
+    return lst_copy[0]  # O(1)
+
+
+def lst_min_lin(lst):  # O(1) + O(N) + O(1) ==> O(N)
+    res = lst[0]  # O(1)
+    for i in lst:  # O(N)
+        if res > i:
+            res = i
+    return res  # O(1)
+
+
+print(lst_min_lin(value_lst))
+print(lst_min_square(value_lst))
+
