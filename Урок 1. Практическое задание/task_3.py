@@ -17,7 +17,6 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
-
 profit_company = {'Nike': 1000, 'Adidas': 4000, 'Puma': 2000, 'TH': 5000, 'UA': 3000}
 print(len(profit_company))
 
