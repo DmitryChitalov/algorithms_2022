@@ -10,3 +10,8 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_eclectic(n, s=1, x=0):
+    return x if n == 0 else sum_eclectic(n - 1, s / -2, x + s)
+
+print(sum_eclectic(3))

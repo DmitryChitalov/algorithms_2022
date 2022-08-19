@@ -18,3 +18,10 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def flip_number(n, s=''):
+    if n == 0:
+        return s
+    return flip_number(n // 10, s + str(n % 10))
+
+print(flip_number(1230900))
