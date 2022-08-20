@@ -7,3 +7,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def game(n, attempts=10):
+    if attempts == 0:
+        print(f'Вы проиграли! Правильное число - {n}')
+    else:
+        try:
+            num = int(input(f'Введите число (попыток - {attempts}):'))
+        except ValueError:
+            print('Это не число. Все снова.')
+            return game(n)
+        if num == n:
+            print('Вы выиграли!')
+        else:
+            print('А вот и нет!')
+            attempts -= 1
+            return game(n, attempts)
+
+
+if __name__ == '__main__':
+    a = randint(0, 100)
+    print(a)
+    game(a)
