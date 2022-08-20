@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii(code=32):
+    sep = ' '
+    if code == 127:
+        return f'{code} - {chr(127)}'
+    if code % 10 == 1:
+        sep = '\n'
+    return f'{code} - {chr(code)}' + sep + table_ascii(code + 1)
+
+
+if __name__ == '__main__':
+    print(table_ascii())
