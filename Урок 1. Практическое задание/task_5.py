@@ -17,3 +17,40 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+class Stack:
+    def __init__(self, max_size):
+        self.stack = [[]]
+        self.max_size = max_size
+
+    def push(self, el):
+        if len(self.stack[len(self.stack)-1]) < self.max_size:
+            self.stack[len(self.stack)-1].append(el)
+        else:
+            self.stack.append([])
+            self.stack[len(self.stack)-1].append(el)
+
+    def pop(self):
+        result = self.stack[len(self.stack)-1].pop()
+        if len(self.stack[len(self.stack)-1]) == 0:
+            self.stack.pop()
+        return result
+
+
+if __name__ == '__main__':
+    stack1 = Stack(3)
+    stack1.push('dish')
+    stack1.push('dish')
+    stack1.push('dish')
+    print('Добавили три тарелки', stack1.stack)
+    stack1.push('dish')
+    print('Добавили еще одну', stack1.stack)
+    stack1.push('dish')
+    stack1.push('dish')
+    stack1.push('dish')
+    print('Добавили еще три', stack1.stack)
+    stack1.pop()
+    print('Убрали одну',stack1.stack)
+    stack1.pop()
+    print('Убрали еще одну', stack1.stack)

@@ -15,3 +15,22 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def list_min1(lst):
+
+    for i in range(len(lst)-1):                  # O(n)
+        for j in range(len(lst)-i-1):            # O(n)
+            if a[j] > a[j+1]:                    # O(1)
+                a[j], a[j+1] = a[j+1], a[j]      # O(1)
+    return list[0]                               # O(1)
+
+###################################################
+
+def list_min2(lst):
+
+    min = lst[0]          # O(1)
+    for i in lst:         # O(n)
+        if i < min:       # O(1)
+            min = i       # O(1)
+    return min            # O(1)
+

@@ -17,3 +17,54 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def push(self, task):
+        self.queue.append(task)
+
+    def pop(self):
+        if len(self.queue) == 0:
+            print('Очередь пуста')
+        return self.queue.pop(0)
+
+
+class TaskBoard:
+    def __init__(self):
+        self.current = Queue()
+        self.revision = Queue()
+        self.solved = []
+
+    def add_task(self, task):
+        self.current.push(task)
+
+    def resolve(self):
+        self.solved.append(self.current.pop())
+
+    def to_revision(self):
+        self.revision.push(self.current.pop())
+
+    def resolve_from_revision(self):
+        self.solved.append(self.revision.pop())
+
+    def show(self):
+        print('Текущие:',self.current.queue, 'На доработке:', self.revision.queue, 'Решенные:', self.solved)
+        print('----------------------------')
+
+if __name__ == '__main__':
+    tasks = TaskBoard()
+    tasks.add_task('task1')
+    tasks.add_task('task2')
+    tasks.add_task('task3')
+    print('Добавили три задачи')
+    tasks.show()
+    tasks.resolve()
+    tasks.to_revision()
+    print('Решили одну и отправили на доработку еще одну')
+    tasks.show()
+    tasks.resolve_from_revision()
+    print('Решили задачу из списка "На доработке"')
+    tasks.show()
