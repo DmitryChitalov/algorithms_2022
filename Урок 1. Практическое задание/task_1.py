@@ -40,7 +40,7 @@ def check_2(lst_obj):
     Сложность: квадратичная.
     """
     for j in range(len(lst_obj)):          # линейная
-        if lst_obj[j] in lst_obj[j+1:]:    # линейная, вложенная в линейную - квадратичная
+        if lst_obj[j] in lst_obj[j+1:]:    # линейная (срез O(n) + in O(n) = O(n)
             return False                   # константная
     return True                            # константная
 
