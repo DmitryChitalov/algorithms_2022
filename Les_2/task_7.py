@@ -15,14 +15,16 @@
 """
 
 
-def formula_sum(num):
-    return num * (num + 1) / 2
-
-
 def summa(N):
     if N == 1:
         return 1
     return N + summa(N - 1)
 
 
-print(formula_sum(5) == summa(5))
+def checking(N):
+    sum = N * (N + 1) / 2
+    return sum == summa(N)
+
+
+number = int(input('Для скольких членов ряда проверить? '))
+print(checking(number))
