@@ -17,7 +17,7 @@ for name in names:
 print(dict_companies)
 
 
-# рекурсия, сложность линейная
+# сложность линейная
 def three_max_1(**dict_comp):  # O(N)
     """
     :param dict_comp: dict
@@ -30,7 +30,7 @@ def three_max_1(**dict_comp):  # O(N)
         max_val = max(dict_comp.items(), key=lambda x: x[1])  # O(N)
         del dict_comp[max_val[0]]  # O(1)
         print(max_val)  # O(1)
-        return three_max_1(**dict_comp)  # O(N)
+        return three_max_1(**dict_comp)
 
 
 three_max_1(**dict_companies)
