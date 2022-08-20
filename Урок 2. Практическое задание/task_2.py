@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+x = int(input('Введите число: '))
+
+
+def odd_and_even(n, odd=0, even=0):
+    last_digit = n % 10  # извлекаем последнее число
+    if last_digit % 2 == 0:  # проверяем четное или нечетное
+        even += 1
+    else:
+        odd += 1
+    rest = n // 10  # удаляем цифру которую проверядли
+    if rest == 0:  # когда цифры заканчиваются то показываем пезультат
+        print(f'Odd: {odd}, Even: {even}')
+        return
+    odd_and_even(rest, odd, even)
+
+
+odd_and_even(x)

@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+x = int(input('Введите число: '))
+
+
+def reverse(val, dig=""):
+    last_digit = val % 10  # берем последнюю цифру
+    dig += str(last_digit)  # добавляем ее в строку на первое место
+    is_empty = val // 10  # убираем
+    if is_empty == 0:
+        print(int(dig))
+        return
+    reverse(is_empty, dig)
+
+
+print(reverse(x))
+

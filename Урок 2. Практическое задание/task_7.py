@@ -13,3 +13,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+num = int(input('Введите число: '))
+
+
+def right_side():
+    global num
+    res = num*(num+1)/2
+    return int(res)
+
+
+def left_side(num, i=0, sum=0):
+    if num == i:
+        return sum
+    else:
+        i += 1
+        sum += i
+        return left_side(num, i, sum)
+
+
+print(f'Равенство-{right_side() == left_side(num)}')
+print(right_side())
+print(left_side(num))

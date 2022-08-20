@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def prnt_ascii(code=32, str_end=0):
+    if code <= 127 and str_end <= 9:
+        print(code, '-', chr(code), end=' ')
+        code += 1
+        str_end += 1
+        prnt_ascii(code, str_end)
+    if str_end == 9:
+        print(code, '-', chr(code), end='\n')
+        code += 1
+        str_end = 0
+        prnt_ascii(code, str_end)
+
+
+prnt_ascii()
