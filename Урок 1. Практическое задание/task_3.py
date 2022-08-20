@@ -17,3 +17,29 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+# O(N) - линейная
+def search_lin(dict_in):
+    company = {}                                                            # О(1) - константная
+    company.update(dict_in)                                                 # O(N) - линейная
+    list_out = [company.popitem(), company.popitem(), company.popitem()]    # О(1) - константная
+    for idx in range(3):                                                    # О(1) - константная
+        for item in company.items():                                        # O(N) - линейная
+            if item[1] > list_out[idx][1]:                                  # О(1) - константная
+                list_out[idx] = item                                        # О(1) - константная
+        if list_out[idx][0] in company:                                     # О(1) - константная
+            del company[list_out[idx][0]]                                   # О(1) - константная
+    return list_out                                                         # О(1) - константная
+
+
+# O(NlogN) - линейно-логарифмическая
+def search_lin_log(dict_in):
+    list_out = list(dict_in.items())                    # O(N) - линейная
+    list_out.sort(key=lambda el: el[1], reverse=True)   # O(NlogN) - линейно-логарифмическая
+    return list_out[:3]                                 # О(1) - константная
+
+
+if __name__ == '__main__':
+    storage = {'comp_1': 10000, 'comp_2': 1000, 'comp_3': 20000, 'comp_4': 15000, 'comp_5': 9000, 'comp_6': 25000}
+    print(search_lin(storage))
+    print(search_lin_log(storage))
