@@ -18,12 +18,13 @@
 
 lst = [1, 4, 2, 6, 9, 3, 2, 5, 11, -1, 14, 1, 12, 13]
 
-
 """
 O(n)
 """
 
 print(lst)
+
+
 def find_min(randList: list):
     min = randList[0]
     for i in randList:
@@ -34,9 +35,6 @@ def find_min(randList: list):
 
 print(find_min(lst))
 
-
-
-
 """
 O(n^2)
 """
@@ -44,7 +42,7 @@ print(lst)
 
 
 def sort_find_min(randList: list):
-    for i in range(len(lst)-1):
+    for i in range(len(lst) - 1):
         for j in range(len(lst) - i - 1):
             if lst[j] > lst[j + 1]:
                 tmp = lst[j]
@@ -54,10 +52,3 @@ def sort_find_min(randList: list):
 
 sort_find_min(lst)
 print(lst[0])
-
-
-
-
-
-
-
