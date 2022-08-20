@@ -17,3 +17,44 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+import random
+
+class Queue:
+    def __init__(self):
+        self.number = 1
+        self.queue_base = []
+        self.queue_modify = []
+        self.queue_complete = []
+        
+    def queue_add(self):
+        self.queue_base.append(self.number)
+        self.number += 1
+        if (len(self.queue_base) > 3):
+            if(random.random() < 0.5):
+                self.queue_modify.append(self.queue_base.pop(0))
+                
+                if(len(self.queue_modify) > 3):
+                    self.queue_complete.append(self.queue_modify.pop(0))
+                
+            else:
+                self.queue_complete.append(self.queue_base.pop(0))
+                
+        print("base:", self.queue_base)
+        print("modify:", self.queue_modify)
+        print("complete:", self.queue_complete)
+        
+        
+a = Queue()
+
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
+a.queue_add()
