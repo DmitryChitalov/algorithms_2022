@@ -55,3 +55,26 @@ users = {'Ivan': {'password': 5243, 'act': 'activated'},
 
 print(registration(users))
 
+
+# константная
+def authorization(users, user_name, user_password):
+    if users.get(user_name):                                            # O(1) - Константная
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:                     # O(1) - Константная
+            return "Здравствуйте! Вы допущены к ресурсу"
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:                 # O(1) - Константная
+            return "Учетная запись не активна! Пройдите активацию!"     # O(1) - Константная
+        elif users[user_name]['password'] != user_password:             # O(1) - Константная
+            return "Пароль не верный"                                   # O(1) - Константная
+    else:
+        return "Данного пользователя не существует"
+
+
+my_users = {'Ivan': {'password': '1234', 'activation': True},
+            'Misha': {'password': 'qwert', 'activation': False},
+            'Dima': {'password': '1453', 'activation': True},
+            'Anton': {'password': '2407', 'activation': False}}
+
+print(authorization(my_users, 'Ivan', '1234'))
+print(authorization(my_users, 'user6', '1111'))

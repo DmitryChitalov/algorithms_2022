@@ -21,7 +21,7 @@
 
 class StackOfPlates:
     def __init__(self):
-        self.stack = []
+        self.stack = [[]]
         self.amount_of_ones = 0
 
     def is_empty(self):
@@ -30,26 +30,25 @@ class StackOfPlates:
     def stack_size(self):
         return len(self.stack)
 
-    def push_and_delete(self, item):
-        for value in item.split(' '):
-            if value[0] == 0:
-                continue
-            elif value[0] == '+':
-                self.amount_of_ones += int(value[1:])
-            elif value[0] == '-':
-                self.amount_of_ones -= int(value[1:])
-        val = ''
-        for iterate in range(1, self.amount_of_ones + 1):
-            if len(val) == 5:
-                self.stack.append(int(val))
-                val = ''
-            val += '1'
-            if iterate == self.amount_of_ones:
-                self.stack.append(int(val))
+    def push_in(self, item):
+        self.stack[self.amount_of_ones].append(item)
+        if len(self.stack[self.amount_of_ones]) == 5:
+            self.stack.append([])
+            self.amount_of_ones += 1
+
+    def pop(self):
+        if len(self.stack) > 1 and self.stack[self.amount_of_ones] == []:
+            self.stack.pop()
+            self.amount_of_ones -= 1
+        return self.stack[self.amount_of_ones].pop()
 
 
-s = StackOfPlates()
-
-s.push_and_delete('+6 +3 0 -4 +1')
-print(s.stack_size())
-print(s.stack)
+plates = StackOfPlates()
+plates.push_in('Plate1')
+plates.push_in('Plate2')
+plates.push_in('Plate3')
+plates.push_in('Plate4')
+plates.push_in('Plate5')
+print(plates.pop())
+print(plates.stack_size())
+print(plates.stack)
