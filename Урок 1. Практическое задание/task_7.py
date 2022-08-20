@@ -41,7 +41,7 @@ class DequeClass:
 def pal_checker(string):
     dc_obj = DequeClass()
 
-    new_string = ''.join(string.split(' '))
+    new_string = string.replace(' ', '')
 
     for el in new_string:
         dc_obj.add_to_rear(el)

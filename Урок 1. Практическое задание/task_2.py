@@ -20,7 +20,7 @@ def min_squre(list_in):
     copy_list = []                                     # О(1) - константная
     copy_list.extend(list_in)                          # O(N) - линейная
 
-    for _ in range(len(copy_list)):                    # O(N**2) - квадратичная
+    for _ in range(len(copy_list)):                    # O(N) - линейная
         for idx in range(len(copy_list) - 1):          # O(N) - линейная
             if copy_list[idx] > copy_list[idx + 1]:    # О(1) - константная
                 buf = copy_list[idx]                   # О(1) - константная
