@@ -17,3 +17,23 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {'ALLPE': 222000, 'SUMSUNG': 1000000, 'XIAMI': 40400, 'MI': 3300000, 'NOKIA': 230, 'SONY': 1900}
+
+
+def line_realise(obj_dict: dict):
+    summ = []
+    res = {}
+    for key, item in obj_dict.items():
+        summ.append(item)
+    summ.sort()
+    for key, item in obj_dict.items():
+        if obj_dict.get(key) == summ[-1]:
+            res[key] = summ[-1]
+        elif obj_dict.get(key) == summ[-2]:
+            res[key] = summ[-2]
+        elif obj_dict.get(key) == summ[-3]:
+            res[key] = summ[-3]
+    return res
+
+
+print(line_realise(company))
