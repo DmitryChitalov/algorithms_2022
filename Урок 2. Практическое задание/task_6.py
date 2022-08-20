@@ -7,3 +7,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def quess_number(number=randint(0, 100), step=0):
+    if step == 10:
+        return print(f'Вы проиграли, загаданное число: {number}')
+    step += 1
+    quess = int(input(f'Попытка №{step}  Угадайте число: '))
+    if quess == number:
+        return print(f'Вы угадали с {step} попытки')
+    elif quess > number:
+        print('Загаданное число меньше')
+    else:
+        print('Загаданное число больше')
+    return quess_number(number, step)
+
+
+quess_number()
+

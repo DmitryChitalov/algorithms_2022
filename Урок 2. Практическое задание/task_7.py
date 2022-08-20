@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_natural_numbers(number, sum_numbers=0):
+    if number == 0:
+        return sum_numbers
+    sum_numbers = sum_numbers + number
+    number -= 1
+    return sum_natural_numbers(number, sum_numbers)
+
+
+print(int(5*(5+1)/2), '=', sum_natural_numbers(5))
+print(int(166*(166+1)/2), '=', sum_natural_numbers(166))
+

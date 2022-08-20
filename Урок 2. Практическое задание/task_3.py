@@ -18,3 +18,22 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse_numb(number, reversed_number=0, zero=0):
+    if number == 0:
+        return print(str(reversed_number // 10).zfill(len(str(reversed_number))+(zero - 1)))
+    else:
+        num = number % 10
+        if (num == 0) and reversed_number == 0:
+            zero += 1
+        reversed_number = reversed_number + num * (10 ** len(str(number)))
+        number = number // 10
+        return reverse_numb(number, reversed_number, zero)
+
+
+reverse_numb(830022047700000000)
+
+
+
+

@@ -19,3 +19,22 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def code_symbol(n=32, idx=1):
+    if n > 127:
+        return 0
+    if idx < 10:
+        print(f'{n} - {chr(n)} ', end=' ')
+        n += 1
+        idx += 1
+        return code_symbol(n, idx)
+    else:
+        print(f'{n} - {chr(n)} ')
+        n += 1
+        idx = 1
+        return code_symbol(n, idx)
+
+
+code_symbol()
+
