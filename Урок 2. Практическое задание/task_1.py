@@ -29,7 +29,7 @@
 """
 
 
-def arithmetics():
+def calculator():
     """Функция запускается пользователем, предлагает ввести математическикий оператор и его аргументы.
      Проверяет корректность данных и возвращает результат операции. Во всех случаях кроме ввода 0
      функция начинает свою реализацию снова"""
@@ -37,7 +37,7 @@ def arithmetics():
     available_operations = ['0', '+', '-', '*', '/']
     if operation not in available_operations:
         print('Ой, вы ввели неправильную операцию, попробуйте снова')
-        arithmetics()
+        calculator()
     if operation == '0':
         print('Всего хорошего, до свидания!')
         exit()
@@ -56,11 +56,11 @@ def arithmetics():
                     print(first / second)
                 except ZeroDivisionError:
                     print('Делить на 0 недопустимо. Попробуем еще раз')
-            arithmetics()
+            calculator()
         except ValueError:
             print(f'Вместо числа вы ввели строку (((  '
                   f'Давайте попробуем начать сначала')
-            arithmetics()
+            calculator()
 
 
-arithmetics()
+calculator()

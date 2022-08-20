@@ -21,13 +21,12 @@ def check_number(n: int, result: int = 0, step: int = 1):
     1+2+...+n = n(n+1)/2 каждую рекурсию величина шага увеличивается на 1, а результирующая переменная на величину шага
     По достижении равенства между шагом и числом n функция сравнивает равенство формулы"""
     if step <= n:
-        result += step
-        step += 1
-        check_number(n, result, step)
-    else:
-        if result == n*(n+1)/2:
-            print('Равенство выполняется')
-        else:
-            print('Равенство не выполняется')
+        result += n
+        n -= 1
+        return check_number(n, result, step)
+    return result
 
-check_number(10)
+
+number = 5
+print(check_number(number) == number*(number+1)/2)  # Оператор сравнения вынесен из функции
+

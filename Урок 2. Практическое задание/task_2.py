@@ -35,7 +35,7 @@ def check_numbers(number: int, odd_digits: int = 0, even_digits: int = 0):
             even_digits += 1
         else:
             odd_digits += 1
-        print(f'Количество четных цифр: {even_digits}, Количество нечетных цифр: {odd_digits}')
+        print(f'Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})')
 
 
 check_numbers(int(input('Введите число: ')))
