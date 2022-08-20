@@ -27,3 +27,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def user_calc():
+    act = ['+', '-', '*', '/']
+    val = input("Введите операцию (+, -, *, / или 0 для выхода)")
+    if val == '0':
+        return print('пока')
+    elif val in act:
+        try:
+            val_1 = float(input("Введите 1 число: "))
+            val_2 = float(input("Введите 2 число: "))
+        except ValueError:
+            print('Введено не число. Повторите')
+            user_calc()
+
+        if val == '+':
+            result = val_1 + val_2
+        elif val == '-':
+            result = val_1 - val_2
+        elif val == '*':
+            result = val_1 * val_2
+        elif val == '/' and val_2 != 0:
+            result = val_1 / val_2
+        else:
+            print('деление на 0 невозможно'), user_calc()
+        return print(f'Реультат: {result}'), user_calc()
+
+    else:
+        print(f"{val} не является арифметическим действием")
+        user_calc()
+
+
+user_calc()

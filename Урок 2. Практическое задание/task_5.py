@@ -16,6 +16,17 @@
 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
 
 Решите через рекурсию. В задании нельзя применять циклы.
-
 Допускается исп-е встроенных ф-ций
 """
+
+
+def val_symbol(ascii_val=32):
+    if ascii_val == 128:
+        return True
+    print(f' {ascii_val} - {chr(ascii_val)} ', end='')
+    if (ascii_val - 31) % 10 == 0:
+        print('\n')
+    val_symbol(ascii_val + 1)
+
+
+val_symbol()
