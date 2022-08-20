@@ -31,4 +31,4 @@ def count_even_odd(num):
 
 
 if __name__ == '__main__':
-    print(count_even_odd(440))
+    print(count_even_odd(123))
