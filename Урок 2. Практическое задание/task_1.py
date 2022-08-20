@@ -27,3 +27,56 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+
+    listSymbol = ['+', '-', '*', '/', '0']
+
+    operation = str(input('Введите операцию("+", "-", "*", "/" или 0 для выхода): ')) 
+
+    if operation not in listSymbol:
+        print 'Ошибка! Вы ввели не корректную операцию! Попробуйте снова...'
+        calculator()
+
+    if operation == '0':
+        print 'Спасибо что воспользовались нашей программой, хорошего дня!'
+        return
+
+    number1 = int(input('Введите первое число: '))
+    number2 = int(input('Введите второе число: '))
+
+    if operation == '+':
+        answer = number1 + number2
+
+        print 'Ваш результат {}: '.format(answer)
+
+        calculator()
+
+    elif operation == '-':
+        answer = number1 - number2
+
+        print 'Ваш результат {}: '.format(answer)
+
+        calculator()
+
+    elif operation == '*':
+        answer = number1 * number2
+
+        print 'Ваш результат {}: '.format(answer)
+
+        calculator()
+
+    elif operation == '/':
+        try:
+            answer = number1 / number2
+
+        except ZeroDivisionError:
+            print 'Ошибка! Деление на ноль невозможно! Будьте внимательны...'
+
+        else:
+            print 'Ваш результат {}: '.format(answer)
+
+        calculator()
+        
+if __name__ == '__main__':
+    calculator()
