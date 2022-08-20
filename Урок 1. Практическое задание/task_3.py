@@ -18,15 +18,62 @@
 """
 
 
-def max_value_1(companies):
+def get_max_value_1(companies):
+    """Функция должна вернуть 3 компании с максимальной годовой выручкой
+
+    Алгоритм 1:
+    Сортируем словарь по значению, проходимся по словарю и добавляем ключи в список
+    Выводим срез из трех первых компаний
+
+    Сложность: O(N log N)
+    """
     max_value_companies = []
     sorted_dict = {k: companies[k]
-                   for k in sorted(companies, key=companies.get, reverse=True)}
-    for companie in sorted_dict.keys():
-        max_value_companies.append(companie)
-        if len(max_value_companies) == 3:
-            break
+                   for k in sorted(companies, key=companies.get, reverse=True)}  # O(n) + O(n*log*n)
+    for companie in sorted_dict.keys():  # O(n)
+        max_value_companies.append(companie)  # O(1)
+
+    return max_value_companies[0:3]
+
+
+def get_max_value_2(dict_obj):
+    """Функция должна вернуть 3 компании с максимальной годовой выручкой
+
+    Алгоритм 2:
+    Проходимся по значениям и добавляем их в отдельный список, сортируем список по значениям в обратной последовательности
+    Запускаем цикл на 3 итерации и добавляем ключи в список первых трех компаний
+    Выводим список
+
+    Сложность: O(n*log*n)
+    """
+    value_list = []
+    for v in dict_obj.values():  # O(n)
+        value_list.append(v)
+    value_list.sort(reverse=True)  # O(n*log*n)
+
+    max_value_companies = []
+    for i in range(3):  # O(n)
+        max_value_companies.append(list(dict_obj.keys())[
+            list(dict_obj.values()).index(value_list[i])])  # O(1)
+
     return max_value_companies
+
+
+def get_max_value_3(dict_obj):
+    """Функция должна вернуть минимальное значение списка
+
+    Алгоритм 3:
+    В цикле на 3 итерации выбираем максимальное значение, добавляем его в список, удаляем его
+
+    Сложность: O(n)
+    """
+    top_companies = []
+    for i in range(3):  # O(1)
+        max_value = max(dict_obj.items(), key=lambda x: x[1])  # O(n)
+        top_companies.append(max_value[0])
+        dict_obj.pop(max_value[0])
+
+    return top_companies
 
 
 companies = {'ООО "АРКТИК СПГ 2"': 131109602000,
@@ -38,4 +85,12 @@ companies = {'ООО "АРКТИК СПГ 2"': 131109602000,
              'ООО "РН-РАЗВЕДКА И ДОБЫЧА"': 108736741000,
              'КИТ ФИНАНС ТРЕЙД (ООО)': 153774300000}
 
-print(max_value_1(companies))
+print(get_max_value_1(companies))
+print(get_max_value_2(companies))
+print(get_max_value_3(companies))
+
+
+"""
+Написано 3 функции, у двух сложность схожа, 3-й алгоритм имеет наименьшую сложность, 
+соответственно он эфективней, хотя при маленьких данных это не заметно
+"""

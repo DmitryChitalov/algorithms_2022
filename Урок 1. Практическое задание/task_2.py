@@ -1,3 +1,4 @@
+
 """
 Задание 2.
 
@@ -24,7 +25,7 @@ def min_value_list_1(list_obj):
     """Функция должна вернуть минимальное значение списка
 
     Алгоритм 1:
-    Проходимся по списку и для каждого элемента проверяем,
+    Используем 2 цикла
 
 
     Сложность: Квадратичная (O(n**2))
@@ -59,7 +60,6 @@ def min_value_list_2(list_obj):
 for j in (0, 20):
     lst = sample(range(1, 500), j)
 
-print(lst)
 print(min(lst))  # Для проверки
 print(min_value_list_1(lst))
 print(min_value_list_2(lst))
