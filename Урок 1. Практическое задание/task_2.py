@@ -15,3 +15,31 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+def find_min_1(lst_obj):
+    """Функция должная вернуть минимальное значение для списка.
+
+    Сложность: O(N^2)
+    """
+    n = len(lst_obj)
+    for i in range(n):
+       for j in range(n-i-1):
+           if lst_obj[j] > lst_obj[j+1]:
+               lst_obj[j], lst_obj[j+1] = lst_obj[j+1], lst_obj[j]
+
+    return lst_obj[0]
+
+def find_min_2(lst_obj):
+    """Функция должная вернуть минимальное значение для списка.
+
+    Сложность: O(N)
+    """
+    min_item = lst_obj[0]
+    for item in lst_obj:
+        if item < min_item:
+            min_item = item
+
+    return min_item
+
+lst_obj = [0, -5,  3, 10, 3, -13]
+print(find_min_1(lst_obj))
+print(find_min_2(lst_obj))
