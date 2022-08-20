@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_n(num):
+    if num == 1:
+        return 1
+    return num + sum_n(num - 1)
+
+
+if __name__ == '__main__':
+    print(sum_n(5))
+    print(sum_n(5) == 5 * (5 + 1) / 2)
