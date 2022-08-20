@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def numbers(value, even=0, odd=0):
+    if value == 0:
+        return print(f'Чётные цифры - {even}, Нечётные - {odd}')
+    else:
+        tmp = value % 10
+        if tmp % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        numbers(value//10, even, odd)
+
+
+numbers(int(input('Введите число: ')))

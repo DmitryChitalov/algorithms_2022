@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def make_sum_el(n, res=1, tmp=1, total=0):
+    if res == 1:
+        total = n
+    if n == 0:
+        return print(f'Количество элементов - {total}, их сумма - {res} ')
+    tmp_value = tmp/-2
+    res = res+tmp
+    print(res, tmp, n, total)
+    make_sum_el(n-1, res, tmp_value, total)
+
+
+make_sum_el(n=int(input('Введите количество элементов: ')))

@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def checking(value):
+    if ((value*(value+1))/2) == (summary(value)):
+        print("формула работает")
+    else:
+        print("формула не работает")
+
+def summary(n):
+    if n == 1:
+        return n
+    else:
+        return n +summary(n-1)
+
+
+a = int(input('Введите число:'))
+checking(a)
