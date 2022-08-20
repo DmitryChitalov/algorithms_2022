@@ -15,3 +15,28 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# Линейная
+def min_el(my_list):
+    minm = my_list[0]
+    for i in my_list:
+        minm = minm if minm < i + 1 else minm
+    return minm
+
+
+print(min_el([6, 8]))
+
+
+# Квадратичная
+def min_element(lst):
+    for elm in lst:
+        is_min = True
+        for elm2 in lst:
+            if elm > elm2:
+                is_min = False
+        if is_min:
+            return elm
+
+
+print(min_element([10, 20, 300, -1, -5, 1]))
