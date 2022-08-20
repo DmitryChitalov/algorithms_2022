@@ -16,4 +16,24 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+data = {'Auro': 7000000, 'Bio': 12000000, 'Kaida': 15000000, 'Pokio': 1500000, 'Simq': 3400000}
 
+"""Cложность данного алгоритма - O(n^2)"""
+def more_income(item):
+    list_values = sorted(list(item.values()), reverse=True,)[:3]       #O(n)
+    a = {}                                                             #O(1)
+    for i in  list_values:                                             #O(n)
+        for (k, v) in item.items():                                    #O(n)
+            if v == i:                                                 # O(len(list_value))
+                a.setdefault(k, v)                                     #O(1)
+    return a                                                           #O(1)
+#
+print(more_income(data))
+
+"""Cложность данного алгоритма - O(n)"""
+def more_income1(item):
+    item = sorted(((v, k) for k, v in item.items()), reverse=True)[:3]
+    return item
+
+
+print(more_income1(data))
