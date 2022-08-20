@@ -22,3 +22,48 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'user1': {'password': '1111', 'status': 'active'},
+    'user2': {'password': '2222', 'status': 'notactive'},
+    'user3': {'password': '3333', 'status': 'notactive'},
+    'user4': {'password': '4444', 'status': 'active'}
+}
+
+
+def autentification_1(users_dict, user, password):  # O(n) - общая
+    if user in users.keys():  # O(n)
+        if password == users_dict[user]['password']:  # O(1)
+            if users_dict[user]['status'] == 'active':  # O(1)
+                print('Вход выполнен!')  # O(1)
+            else:
+                print('Для входа, активируйте учетную запись!')  # O(1)
+        else:
+            print('Неверные имя пользователя или пароль!')  # O(1)
+    else:
+        print('Неверные имя пльзователя или пороль!')  # O(1)
+
+
+#################################################
+# во втором способе сложность O(1) за счёт поиска данных в словаре методом get а не перебором в цикле
+
+def autentification_2(users_dict, user, password):  # O(1) - общая
+    if users_dict.get(user) != None:  # O(1)
+        if password == users_dict[user]['password']:  # O(1)
+            if users_dict[user]['status'] == 'active':  # O(1)
+                print('Вход выполнен!')  # O(1)
+            else:
+                print('Для входа, активируйте учетную запись!')  # O(1)
+        else:
+            print('Неверные имя пользователя или пароль!')  # O(1)
+    else:
+        print('Неверные имя пльзователя или пороль!')  # O(1)
+
+
+autentification_1(users, 'user1', '1111')
+autentification_1(users, 'user3', '3333')
+autentification_1(users, 'user3', '2222')
+print('--------------------------------------')
+autentification_2(users, 'user1', '1111')
+autentification_2(users, 'user3', '3333')
+autentification_2(users, 'user3', '2222')
