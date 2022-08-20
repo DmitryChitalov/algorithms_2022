@@ -29,4 +29,3 @@ def check_number(n: int, result: int = 0, step: int = 1):
 
 number = 5
 print(check_number(number) == number*(number+1)/2)  # Оператор сравнения вынесен из функции
-
