@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: линейная.
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n) - линейная
+    return lst_to_set  # O(1) - константная
 
 
 ##############################################################################
@@ -37,12 +37,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: квадратичная.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(n) - линейная
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n^2) - квадратичная
+            return False                   # О(1) - константная
+    return True                            # О(1) - константная
 
 
 ##############################################################################
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: линейно-логарифмическая
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n) - линейная
+    lst_copy.sort()                          # O(n log n) - линейно-логарифмическая
+    for i in range(len(lst_obj) - 1):        # O(n) - линейная
+        if lst_copy[i] == lst_copy[i+1]:     # О(1) - константная
+            return False                     # О(1) - константная
+    return True                              # О(1) - константная
 
 
 for j in (50, 500, 1000, 5000, 10000):
