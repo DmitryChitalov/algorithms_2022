@@ -92,5 +92,5 @@ def auth_nlog(user_list, user, passwd):
 print(auth_lin(users, 'username', 'password'))
 print(auth_nlog(users, 'username', 'password'))
 
-"""Вывод: алгоритм auth_lin() более оптимальный, 
+"""Вывод: алгоритм auth_const() более оптимальный, 
 т.к. имеет меньшую алгоритмическую сложность"""
