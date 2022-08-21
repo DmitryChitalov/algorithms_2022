@@ -22,3 +22,40 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+# Сложность О(n) линейная
+def authorization_f(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return 'Welcome'
+            elif value['password'] == user_password and not value['activation']:
+                return 'Activate your account'
+            elif value['password'] != user_password:
+                return 'Wrong password'
+
+    return 'Account not found'
+
+
+# Сложность О(1) константная
+def authorization_s(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'Welcome'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'Activate your account'
+        elif users[user_name]['password'] != user_password:
+            return 'Wrong password'
+    else:
+        return 'Account not found'
+
+
+users = {'user1': {'password': '1111', 'activation': True},
+         'user2': {'password': '2222', 'activation': False},
+         'user3': {'password': '3333', 'activation': True},
+         'user4': {'password': '4444', 'activation': False}
+         }
+
+print(authorization_f(users, 'user2', '2222'))
+print(authorization_s(users, 'user1', '1111'))

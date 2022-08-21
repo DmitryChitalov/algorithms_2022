@@ -17,3 +17,40 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+profit_company = {'Apple': 10000, 'Microsoft': 4043040, 'Huawei': 212000, 'HP': 50000, 'Xerox': 30000}
+
+# 1: сложность линейно-логарифмическая
+
+
+def by_value(item):
+    return item[1]                                                          # константная
+
+
+max_profit = {}                                                             # константная
+i = 0                                                                       # константная
+for k, v in sorted(profit_company.items(), key=by_value, reverse=True):     # линейно-логарифмическая
+    if i < 3:                                                               # линейная
+        max_profit.setdefault(k, v)                                         # константная
+    i = i + 1                                                               # константная
+print(max_profit)                                                           # константная
+
+
+# 2: Сложность квадратичная
+
+global max_value                                                            # константная
+global key_max_value                                                        # константная
+
+max_profit_2 = {}                                                           # константная
+while len(max_profit_2) < 3:                                                # линейная
+    max_value = 0                                                           # константная
+    for key, value in profit_company.items():                               # линейная
+        if max_value < value:                                               # линейная
+            max_value = value                                               # константная
+            key_max_value = key                                             # константная
+    max_value = profit_company.pop(key_max_value)                           # константная
+    max_profit_2.setdefault(key_max_value, max_value)                       # константная
+
+print(max_profit_2)
+
+# Вывод: Первый способ выполняется быстрее так как самым "тяжелым" алгоритмом,
+# является функция со сложностью линейно-логарифмической
