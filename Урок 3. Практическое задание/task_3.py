@@ -22,3 +22,18 @@
 р
 а
 """
+
+import random
+import hashlib
+
+letters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c',
+           'v', 'b', 'n', 'm']
+n = 10
+s = ''.join([random.choice(letters) for x in range(n)])
+set_s = set([s[i:j + i + 1] for i in range(len(s)) for j in range(len(s) + 1)])
+print(len(set_s))
+res = []
+for i in set_s:
+    h = hashlib.sha256(i.encode())
+    res.append(h)
+print(len(res))
