@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def get_number(number):
+    length_number = len(str(number))
+    print(length_number)
+    even_numbers = 0
+    odd_numbers = 0
+    if length_number == 1:  # базовый случай
+        if number % 2 == 0:
+            even_numbers += 1
+        else:
+            odd_numbers += 1
+        print(f'Количество четных и нечетных цифр в числе равно: ({even_numbers}, {odd_numbers})')
+        return
+    elif number % 2 == 0:
+        even_numbers += 1
+        number = number // 10
+    else:
+        odd_numbers += 1
+        number = number // 10
+    get_number(number)
+
+
+get_number(345620)

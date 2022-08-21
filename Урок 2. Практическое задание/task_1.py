@@ -38,7 +38,7 @@ def calculate():
         calculate()
     elif operation == '0':
         print('Вы нажали кнопку выхода')
-        return
+        return 'Bye'
     else:
         try:
             first_number = int(input('Введите первое число: '))
