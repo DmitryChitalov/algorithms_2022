@@ -15,3 +15,28 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# сложность O(n) линейная
+def min_number(nums):
+    min_number = nums[0]                                     # O(1) константная
+    for i in nums:                                           # O(n) линейная
+        if i < min_number:                                  # O(len(i)) линейная
+            min_number = i                                  # O(1) константная
+    return min_number                                       # O(1) константная
+
+
+# Сложность O(n**2)
+def min_number_2(nums):
+    min_number_2 = nums[0]                                   # O(1) константная
+    for i in nums:                                           # O(n) линейная
+        for j in range(nums.index(i) + 1, len(nums) - 1, 1):  # O(n) линейная
+            if min_number_2 > nums[j]:                       # O(len(lst[j]) линейная
+                min_number_2 = nums[j]                       # O(1) константная
+    return min_number_2                                     # O(1) константная
+
+
+lst_numbers = [10, 4, 13, 44, 85, 50, 3, 4, 23, 10]
+
+print(min_number(lst_numbers))
+
+print(min_number_2(lst_numbers))
