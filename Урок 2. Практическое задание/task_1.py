@@ -27,3 +27,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc(sign='', num_1='', num_2=''):
+    if sign == '':
+        sign = input('Введите знак операции (+, -, *, /) или 0 для выхода: ')
+        if sign == '0':
+            return
+        else:
+            calc(sign)
+    else:
+        if sign in ['+', '-', '*', '/']:
+            if num_1 == '':
+                try:
+                    num_1 = int(input("Введите первое число: "))
+                except ValueError:
+                    print("Введено не число")
+                    return calc(sign)
+
+            if num_2 == '':
+                try:
+                    num_2 = int(input("Введите второе число: "))
+                except ValueError:
+                    print("Введено не число")
+                    return calc(sign, num_1)
+
+            calculations = {
+                '+': lambda x, y: x + y,
+                '-': lambda x, y: x - y,
+                '*': lambda x, y: x * y,
+                '/': lambda x, y: x / y
+            }
+
+            try:
+                print(calculations[sign](num_1, num_2))
+            except ZeroDivisionError:
+                print('На ноль делить нельзя')
+                return calc(sign, num_1)
+
+            return calc()
+
+        else:
+            print('Введен неверный знак операции')
+            return calc()
+
+
+if __name__ == '__main__':
+    calc()
