@@ -57,13 +57,12 @@ def filling_dict(end_num):
 
 
 print('Реализация первого задания')
-out_list = filling_list(10000000)
-out_dict = filling_dict(10000000)
-#print(out_list)
-#print(out_dict)
+task1_list = filling_list(10000000)
+task1_dict = filling_dict(10000000)
 
 
 """Реализация второго задания"""
+
 
 @check_time
 def get_list_elem(list_n, index):
@@ -77,18 +76,21 @@ def get_dict_elem(dict_n, key):
 
 print('Реализация второго задания')
 
-print(get_list_elem(out_list, 50000))
-print(get_dict_elem(out_dict, '50000'))
-
+print(get_list_elem(task1_list, 50000))
+print(get_dict_elem(task1_dict, '50000'))
 
 print('Реализация третьего задания')
+
+
 @check_time
 def del_list_elem(list_n: list, pattern):
     list_n.remove(pattern)
+
 
 @check_time
 def del_dict_elem(dict_n: list, pattern):
     dict_n.pop(pattern)
 
-del_list_elem(out_list, 50000)
-del_dict_elem(out_dict, '50000')
+
+del_list_elem(task1_list, 50000)
+del_dict_elem(task1_dict, '50000')
