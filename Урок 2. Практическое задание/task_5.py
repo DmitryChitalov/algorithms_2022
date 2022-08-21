@@ -19,3 +19,12 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def value(assi_num = 32):
+    if assi_num == 128:
+        return True
+    print(f"{assi_num} - {chr(assi_num)}", end='')
+    if (assi_num - 31) % 10 == 0:
+        print('\n')
+    value(assi_num + 1)
+
+print(value())

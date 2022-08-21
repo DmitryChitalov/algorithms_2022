@@ -27,3 +27,51 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    menuselection = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if menuselection == '0':
+        return "Выход"
+
+    else:
+        if menuselection in "+-*/":
+            try:
+                num1 = int(input("Введите первое число: "))
+                num2 = int(input("Введите второе число: "))
+
+                if menuselection == '+':
+                    answer = num1 + num2
+                    print(f"Ваш результат {answer}")
+                    return calc()
+
+                elif menuselection == '-':
+                    answer = num1 - num2
+                    print(f"Ваш результат {answer}")
+                    return calc()
+
+                elif menuselection == '*':
+                    answer = num1 * num2
+                    print(f"Ваш результат {answer}")
+                    return calc()
+
+                elif menuselection == '/':
+                    try:
+                        answer = num1 / num2
+                    except ZeroDivisionError:
+                        print("Деление на 0 невозможно")
+                    else:
+                        print(f"Ваш результат {answer}")
+                    finally:
+                        return calc()
+
+            except ValueError:
+                print("Вы вместо трехзначного числа ввели строку. Исправьтесь")
+                return calc()
+
+        else:
+            print("Введен неверный символ, попробуйте еще раз")
+            return calc()
+
+print(calc())
