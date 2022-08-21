@@ -17,3 +17,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def counter(number):
+    if number <= 9:
+        if number % 2:
+            return (0, 1)
+        else:
+            return (1, 0)
+    else:
+        even, odd = counter(number // 10)
+        if (number % 10) % 2:
+            odd = odd + 1
+        else:
+            even = even + 1
+    return even, odd
+
+
+if __name__ == '__main__':
+    number = float(input('Введите число:'))
+    print('Количество четных и нечетных цифр в числе равно:',counter(number))

@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def num_check(number):
+    if not number // 10:
+        return number
+    return str(number % 10) + str(num_check(number // 10))
+
+
+def convert():
+    number = int(input('Введите число, которое требуется перевернуть: '))
+    print('Перевернутое число:',num_check(number))
+
+
+if __name__ == '__main__':
+    convert()

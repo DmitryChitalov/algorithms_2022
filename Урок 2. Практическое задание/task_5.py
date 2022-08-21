@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ASCII_table(n=32, index=1):
+    if n > 127:
+        return 0
+    if index < 10:
+        print(f'{n} - {chr(n)} ', end=' ')
+        n += 1
+        index += 1
+        return ASCII_table(n, index)
+    else:
+        print(f'{n} - {chr(n)} ')
+        n += 1
+        index = 1
+        return ASCII_table(n, index)
+
+
+ASCII_table()

@@ -10,3 +10,22 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_def(n):
+    if n == 1:
+        return 1
+    elif n % 2:
+        element = 1
+    else:
+        element = -1
+    return element / 2 ** (n - 1) + sum_def(n - 1)
+
+
+def main():
+    n = int(input('Введите количество элементов: '))
+    print(f'Количество элементов - {n}, их сумма - {sum_def(n)}')
+
+
+if __name__ == '__main__':
+    main()
