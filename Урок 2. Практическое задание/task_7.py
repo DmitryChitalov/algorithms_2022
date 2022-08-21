@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def equality(n, m=1, numbers_sum=0):
+    if m > n:
+        return numbers_sum == n * (n + 1) / 2
+
+    numbers_sum += m
+    return equality(n, m + 1, numbers_sum)
+
+
+print(equality(5))
