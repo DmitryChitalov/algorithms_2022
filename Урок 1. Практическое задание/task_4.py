@@ -76,7 +76,7 @@ def check_const(user_dict, user, passwd):
     return 'Error'                                                   # O(1) - константная
 
 
-def auth_nlog(user_list, user, passwd):
+def auth_const(user_list, user, passwd):
     """Константная сложность"""
     status = check_const(user_list, user, passwd)  # O(1) - константная
     if status == 'Error':                          # O(1) - константная
@@ -90,7 +90,7 @@ def auth_nlog(user_list, user, passwd):
 ##########################################################################################
 
 print(auth_lin(users, 'username', 'password'))
-print(auth_nlog(users, 'username', 'password'))
+print(auth_const(users, 'username', 'password'))
 
-"""Вывод: алгоритм auth_lin() более оптимальный, 
+"""Вывод: алгоритм auth_const() более оптимальный, 
 т.к. имеет меньшую алгоритмическую сложность"""
