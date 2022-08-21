@@ -16,8 +16,7 @@
 # O(n log n)  линейно-логарифмическое
 # O(n**2) квадратичное
 # O(1) + O(1) + O(1) константаное
-# O(1) константаное
-# O(1) константаное
+
 
 from random import sample
 
@@ -62,7 +61,7 @@ def check_3(lst_obj):
 
     Сложность: # O(n log n)  линейно-логарифмическое
     """
-    lst_copy = list(lst_obj)                 # O(1) константаное
+    lst_copy = list(lst_obj)                 # Список с (n) количеством элементов O(n) линейное
     lst_copy.sort()                          # O(n log n)  линейно-логарифмическое
     for i in range(len(lst_obj) - 1):        # O(n) линейное
         if lst_copy[i] == lst_copy[i+1]:     # O(1) константаное
@@ -78,3 +77,4 @@ for j in (50, 500, 1000, 5000, 10000):
 print(check_1(lst))
 print(check_2(lst))
 print(check_3(lst))
+

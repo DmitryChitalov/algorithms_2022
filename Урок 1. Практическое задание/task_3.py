@@ -43,7 +43,7 @@ print(golden_company)
 
 # 2 Вариант
 
-for el in range(3):                             # O(n) линейное
+for el in range(3):                             # O(1) константаное
     for i in data_base:                         # O(n) линейное
         x = i                                   # O(1) константаное
         if i[1] <= x[1]:                        # O(1) константаное
