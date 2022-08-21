@@ -37,10 +37,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(n) линейное.
+    Сложность: O(n^2) квадратичная.
     """
-    for j in range(len(lst_obj)):          # O(1) константаня
-        if lst_obj[j] in lst_obj[j+1:]:    # !!! O(1) + O(n) линейное
+    for j in range(len(lst_obj)):          # O(n) линейная
+        if lst_obj[j] in lst_obj[j+1:]:    # O(1) + O(n) линейное
             return False                   # O(1) константаня
     return True                            # O(1) константаня
 
@@ -57,7 +57,7 @@ def check_3(lst_obj):
     """
     lst_copy = list(lst_obj)                 # O(n) линейное
     lst_copy.sort()                          # O(n log n)  линейно-логарифмическое
-    for i in range(len(lst_obj) - 1):        # O(1) константаное
+    for i in range(len(lst_obj) - 1):        # O(n) линейное
         if lst_copy[i] == lst_copy[i+1]:     # O(1) + O(1) + O(1) константаное
             return False                     # O(1) константаное
     return True                              # O(1) константаное

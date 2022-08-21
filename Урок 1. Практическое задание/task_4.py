@@ -39,12 +39,12 @@ def authorisation_1(login: str, password: str):
     :param login: логин
     :param password: пароль
     :return: True или False
-    сложность : O(1) константная
+    сложность : O(n ^ 2) линейное
     """
     # проверка на существование пользователя
     if login in users.keys():  # O(n)
         # проверка на совпдение пароля
-        if password == users[login]['password']:  # O(1)
+        if password in users[login].values():  # O(n)
             #  проверка на октивацию
             if users[login]['activated']:  # O(1)
                 print("Complete")  # O(1)
@@ -153,20 +153,21 @@ def authorisation_3(login: str, password: str):
 """
 
 # тесты первой функции
-print(authorisation_1.__name__)
-print(authorisation_1("donttouchme@gmail.com", '123456789a'))
-print(authorisation_1("frankghalager@gmail.com", 'booze4life'))
-print(authorisation_1("luizaservantes@gmail.com", 't1estpasssword123'))
-print(authorisation_1("wrong@gmail.com", 't1estpasssword123'))
-# тесты второй функции
-print(authorisation_2.__name__)
-print(authorisation_2("donttouchme@gmail.com", '123456789a'))
-print(authorisation_2("frankghalager@gmail.com", 'booze4life'))
-print(authorisation_2("luizaservantes@gmail.com", 't1estpasssword123'))
-print(authorisation_2("wrong@gmail.com", 't1estpasssword123'))
-# # тесты третей функции
-print(authorisation_3.__name__)
-print(authorisation_3("donttouchme@gmail.com", '123456789a'))
-print(authorisation_3("frankghalager@gmail.com", 'booze4life'))
-print(authorisation_3("luizaservantes@gmail.com", 't1estpasssword123'))
-print(authorisation_3("wrong@gmail.com", 't1estpasssword123'))
+if __name__ == '__main__':
+    print(authorisation_1.__name__)
+    print(authorisation_1("donttouchme@gmail.com", '123456789a'))
+    print(authorisation_1("frankghalager@gmail.com", 'booze4life'))
+    print(authorisation_1("luizaservantes@gmail.com", 't1estpasssword123'))
+    print(authorisation_1("wrong@gmail.com", 't1estpasssword123'))
+    # тесты второй функции
+    print(authorisation_2.__name__)
+    print(authorisation_2("donttouchme@gmail.com", '123456789a'))
+    print(authorisation_2("frankghalager@gmail.com", 'booze4life'))
+    print(authorisation_2("luizaservantes@gmail.com", 't1estpasssword123'))
+    print(authorisation_2("wrong@gmail.com", 't1estpasssword123'))
+    # # тесты третей функции
+    print(authorisation_3.__name__)
+    print(authorisation_3("donttouchme@gmail.com", '123456789a'))
+    print(authorisation_3("frankghalager@gmail.com", 'booze4life'))
+    print(authorisation_3("luizaservantes@gmail.com", 't1estpasssword123'))
+    print(authorisation_3("wrong@gmail.com", 't1estpasssword123'))
