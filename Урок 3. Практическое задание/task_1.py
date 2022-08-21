@@ -28,3 +28,55 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def check_time(in_func):
+    def time_counter(*args, **kwargs):
+        start = time.perf_counter()
+        result = in_func(*args, **kwargs)
+        end_time = time.perf_counter()
+        print(f'Время работы функции {in_func.__name__} составило {end_time-start:.6f} секунд')
+        return result
+    return time_counter
+
+
+"""Реализация первого задания"""
+
+
+@check_time
+def filling_list(end_num):
+    out_list = [x for x in range(1, end_num)]
+    return out_list
+
+
+@check_time
+def filling_dict(end_num):
+    out_dict = dict((str(x), x) for x in range(1, end_num))
+    return out_dict
+
+
+print('Реализация первого задания')
+out_list = filling_list(10000000)
+out_dict = filling_dict(10000000)
+#print(out_list)
+#print(out_dict)
+
+
+"""Реализация второго задания"""
+
+@check_time
+def get_list_elem(list, index):
+    return list[index]
+
+
+@check_time
+def get_dict_elem(dict, key):
+    return dict[key]
+
+
+print('Реализация второго задания')
+
+print(get_list_elem(out_list, 50000))
+print(get_dict_elem(out_dict, '50000'))
+
