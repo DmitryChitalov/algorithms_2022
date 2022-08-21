@@ -52,7 +52,7 @@ def get_max_value_2(dict_obj):
     value_list.sort(reverse=True)  # O(n*log*n)
 
     max_value_companies = []
-    for i in range(3):  # O(n)
+    for i in range(3):  # O(1)
         max_value_companies.append(list(dict_obj.keys())[
             list(dict_obj.values()).index(value_list[i])])  # O(1)
 

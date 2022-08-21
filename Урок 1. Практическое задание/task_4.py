@@ -39,14 +39,15 @@ def user_auth_1(users, user_name, password):
 
     Сложность: O(1)
     """
-    if user_name in users:  # O(1)
-        # O(1)
-        if password == users[user_name]['password'] and users[user_name]['activity'] == 'yes':
+    if users.get(user_name):  # O(1)
+        user = users.get(user_name)
+       # O(1)
+        if password == user['password'] and user['activity'] == 'yes':
             return f'Добрый день {user_name}, доступ разрешен'  # O(1)
         # O(1)
-        elif password == users[user_name]['password'] and users[user_name]['activity'] == 'no':
+        elif password == user['password'] and user['activity'] == 'no':
             return f'{user_name} вам необходимо завершить активацию'  # O(1)
-        elif password != users[user_name]['password']:  # O(1)
+        elif password != user['password']:  # O(1)
             return f'Неверный пароль, повторите еще раз'  # O(1)
     else:  # O(1)
         return 'Неверное имя пользователя'  # O(1)
@@ -83,5 +84,5 @@ print((user_auth_2(users, 'user_4', 'dasd324d')))
 print((user_auth_2(users, 'user_5', 'qwerty')))
 
 """
-Написано 2 функции, 1-й алгоритм имеет наименьшую сложность, так как поиск по ключу в словаре имеет констатный тип
+Написано 2 функции, 1-й алгоритм имеет наименьшую сложность, так как метод get в словаре имеет констатный тип
 """
