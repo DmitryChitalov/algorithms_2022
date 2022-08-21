@@ -22,3 +22,39 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+def authorization(users, user_name, password): # Сложность О(N)
+    for key, value in users.items(): # Сложность О(N)
+        # print(key)
+        # print(value["password"])
+        if key == user_name: # Сложность О(1)
+            print("Есть такой юзер")
+            if value["password"] == password and value["activation"] == True: # Сложность О(1)
+                return "Доступ разрешен, учетная запись активирована" # Сложность О(1)
+            elif value["password"] != password: # Сложность О(1)
+                return "Не верный пароль" # Сложность О(1)
+            elif value["password"] == password and value["activation"] == False: # Сложность О(1)
+                return "Доступ разрешен, просим пройти активацию учетной записи" # Сложность О(1)
+
+    return "Пользователь не найден" # Сложность О(1)
+
+
+def authorization1(users, user_name, password): # Сложность О(1)
+
+    if users.get(user_name): # Сложность О(1)
+        if users[user_name]["password"] == password and users[user_name]["activation"] == True: # Сложность О(1)
+            return "Добро пожаловать" # Сложность О(1)
+        elif users[user_name]["password"] != password: # Сложность О(1)
+            return "Не верный пароль" # Сложность О(1)
+        elif users[user_name]["password"] == password and users[user_name]["activation"] == False: # Сложность О(1)
+            return "Доступ разрешен, просим пройти активацию учетной записи" # Сложность О(1)
+
+    return "Пользователь не найден" # Сложность О(1)
+
+
+users_list = {"user_1": {"password": 111, "activation": True},
+              "user_2": {"password": 222, "activation": False},
+              "user_3": {"password": 333, "activation": False}
+              }
+
+print(authorization1(users_list, 'user_1', 111))
