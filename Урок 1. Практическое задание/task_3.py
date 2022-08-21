@@ -29,16 +29,13 @@ def by_value(item):
 max_profit = {}                                                             # константная
 i = 0                                                                       # константная
 for k, v in sorted(profit_company.items(), key=by_value, reverse=True):     # линейно-логарифмическая
-    if i < 3:                                                               # линейная
+    if i < 3:                                                               # константная
         max_profit.setdefault(k, v)                                         # константная
     i = i + 1                                                               # константная
 print(max_profit)                                                           # константная
 
 
 # 2: Сложность квадратичная
-
-global max_value                                                            # константная
-global key_max_value                                                        # константная
 
 max_profit_2 = {}                                                           # константная
 while len(max_profit_2) < 3:                                                # линейная
