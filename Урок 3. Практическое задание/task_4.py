@@ -24,12 +24,14 @@ class UrlCache:
         self.cache_dict = {}
         self.salt = 'UrlCache'
 
-    def add_url_to_cache(self, new_url):
+    def add_url_to_cache(self, new_url: str):
+        """Функция принимает в себя url и добавляет его хеш в словарь с другими хешами"""
         new_record = {new_url: hashlib.sha512(new_url.encode() + self.salt.encode()).hexdigest()}
         self.cache_dict.update(new_record)
         return f'Сайт {new_url} добавлен в кеш'
 
-    def check_cache(self, pattern):
+    def check_cache(self, pattern: str):
+        """Функция проверяет наличие хеша url в словаре с другими хешами"""
         if pattern in self.cache_dict:
             return f'Хеш {pattern}: {self.cache_dict[pattern]}'
         else:
