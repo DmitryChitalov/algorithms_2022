@@ -22,3 +22,32 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+# словарь по типу {ключ-логин: значения в виде списка [пароль, активирован/не активирован]}
+users = {'Amelia': ['parollen', 'activated'], 'Varvara': ['123', 'not_activated']}
+
+
+# вариант 1 без цикла, обращаемся напрямую по ключу-юзеру к значению
+def check_activated(some_dict, user):  # сложность O(1) - линейная
+    if some_dict.get(user)[1] == 'activated':  # .get O(1) + сравнение "==" O(1) = O(1)
+        return f'{user}! You are welcome!'
+    else:
+        return f'{user}! Your login is not activated!'
+
+
+# вариант 2, мудренный с циклом
+def check_activated_2(some_dict, user):  # сложность O(n) - линейная
+    status = ''
+    for i in some_dict:  # O(n)
+        if i == user:  # O(1)
+            status = some_dict.get(i)[1]  # O(1) + O(1)
+    if status == 'activated':  # O(1)
+        return f'{user}! You are welcome!'
+    else:
+        return f'{user}! Your login is not activated!'
+
+
+print(check_activated(users, 'Amelia'))
+print(check_activated(users, 'Varvara'))
+
+print(check_activated_2(users, 'Amelia'))
+print(check_activated_2(users, 'Varvara'))

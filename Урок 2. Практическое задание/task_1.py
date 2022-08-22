@@ -27,3 +27,47 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# так как нельзя использовать циклы, то я решил использовать отдельные функции для получения знака действия и чисел
+def get_action():  # функция для получения знака действия
+    action = input('Укажите операцию +, -, *, / или 0 для выхода: ')
+    if action != '+' and action != '-' and action != '*' and action != '/' and action != '0':
+        print('Вы ввели неверный знак: ')
+        return get_action()
+    else:
+        return action
+
+
+def get_num():  # функция для получения чисел
+    num = input('Введите число: ')
+    if not num.isdigit():
+        print('Введите число, а не строку!')
+        return get_num()
+    if len(num) != 3:  # в примере есть упоминание, что число должно быть трехзначным, на всякий случай реализовал
+        print('Введите трехзначное число!')
+        return get_num()
+    return num
+
+
+def calc():  # собственно сам калькулятор.
+    action = get_action()
+    if action == '0':
+        return 'Вы вышли из программы.'
+    num_1 = int(get_num())
+    num_2 = int(get_num())
+    if action == '+':
+        print(f'Ваш результат: {num_1 + num_2}')
+    if action == '*':
+        print(f'Ваш результат: {num_1 * num_2}')
+    if action == '-':
+        print(f'Ваш результат: {num_1 - num_2}')
+    if action == "/" and num_2 == 000:
+        print('Деление на ноль! Попробуйте сначала!')
+        return calc()
+    if action == '/':
+        print(f'Ваш результат: {num_1 / num_2}')
+    return calc()
+
+
+print(calc())
