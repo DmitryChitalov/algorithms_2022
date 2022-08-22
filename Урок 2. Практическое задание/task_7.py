@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def v7(num):
+    if num == 1:
+        return 1
+    return num + v7(num - 1)
+
+def compare():
+    x = int(input('Введите число: \n'))
+    return v7(x), v7(x) == int(x * (x + 1) / 2)
+
+print(compare())
