@@ -28,3 +28,120 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+number = 1000
+
+
+def timer_wrapper(myfunc):
+    def wrap(*args):
+        start = time.perf_counter_ns()
+        result = myfunc(*args)
+        print(f'{myfunc.__name__} took {time.perf_counter_ns() - start} ns')
+        return result
+    return wrap
+
+
+# a
+
+
+@timer_wrapper
+def fill_list(my_list, n):                      # O(n)
+    for i in range(0, n):                       # O(n)
+        my_list.append(i)                       # O(1)
+    return my_list                              # O(1)
+
+
+@timer_wrapper
+def fill_dict(my_dict, n):                      # O(n)
+    for i in range(0, n):                       # O(n)
+        my_dict.setdefault(i)                   # O(1)
+    return my_dict                              # O(1)
+
+
+some_list = []
+fill_list(some_list, number)
+# print(some_list)
+some_dict = {}
+fill_dict(some_dict, number)
+# print(some_dict)
+
+
+"""
+Делаем аналитику. 
+Функции по заполнению словаря и списка имеют одинаковую сложность в О-нотации. 
+Однако, как показали замеры времени с помощью функции-декоратора, список заполняется примерно в 1,5 раза быстрее.
+По-видимому это связано с тем, что при заполнении словаря рассчитывается хэш каждого элемента.
+"""
+
+# b
+
+
+@timer_wrapper
+def el_from_list(my_list, el):                  # O(n)
+    for i in my_list:                           # O(n)
+        if i == el:                             # O(1)
+            return i                            # O(1)
+
+
+@timer_wrapper
+def el_from_dict_get(my_dict, el):              # O(1)
+    return my_dict.get(el)                      # O(1)
+
+
+@timer_wrapper
+def el_from_dict(my_dict, el):                  # O(n)
+    for i in my_dict:                           # O(n)
+        if i == el:                             # O(1)
+            return i                            # O(1)
+
+
+el_from_list(some_list, number - 1)
+el_from_dict_get(some_dict, number - 1)
+el_from_dict(some_dict, number - 1)
+
+"""
+Делаем аналитику. 
+Получение элемента из словаря и списка с помощью перебора имеет одинаковую сложность в О нотации  - линейную.
+Получение элемента происходит примерно с одинаковой скоростью.
+Однако у словаря есть функция get. Её сложность в О нотации - константная.
+Получение элемента с её помощью из словаря происходит значительно быстрее, чем ранее описанными способами.
+Скорость не меняется независимо от количества элементов в словаре.
+По-видимому это связано с тем, что метод get осуществляет поиск по хэшу.
+"""
+
+
+# с
+
+
+@timer_wrapper
+def del_from_list(my_list, el):                     # O(n)
+    for i in range(len(my_list)):                   # O(n)
+        if my_list[i] == el:                        # O(1)
+            my_list.pop(i)                          # O(1)
+    return my_list                                  # O(1)
+
+
+@timer_wrapper
+def del_from_list_remove(my_list, el):              # O(n)
+    my_list.remove(el)                              # O(n)
+    return my_list                                  # O(1)
+
+
+@timer_wrapper
+def del_from_dict(my_dict, el):                     # O(1)
+    my_dict.pop(el)                                 # O(1)
+    return my_dict                                  # O(1)
+
+
+del_from_list(some_list, number - 1)
+del_from_list_remove(some_list, number - 2)
+del_from_dict(some_dict, number - 1)
+
+
+"""
+Делаем аналитику.
+Удаление элемента списка с помощью специального метода remove работает быстрее, чем с помощью перебора,
+хотя они имеют одинаковую сложность в О нотации: линейную.
+Специальный метод словаря pop работает быстрее, чем remove списка. Его сложность в О нотации - константная.
+По-видимому это связано с тем, что метод словаря pop осуществляет поиск по хэшу.
+"""

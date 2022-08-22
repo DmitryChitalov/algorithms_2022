@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+
+some_str = 'papap'
+
+def uniq_substrings(my_str):
+    str_set = set()
+    for i in range(0, len(my_str)):
+        for j in range(len(my_str), i, -1):
+            res = hashlib.sha256(my_str[i: j].encode()).hexdigest()
+            str_set.add(res)
+    str_set.remove(hashlib.sha256(my_str.encode()).hexdigest())
+    return len(str_set)
+
+print(uniq_substrings(some_str))
