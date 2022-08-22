@@ -22,3 +22,18 @@
 р
 а
 """
+
+from hashlib import sha256
+
+set_hash = set()
+s = input('Введите строку: ')
+for i in range(len(s)):
+    for j in range(i+1, len(s)+1):
+        if j != len(s):
+            set_hash.add(sha256(s[i:j].encode('utf-8')).hexdigest())
+        else:
+            if i > 0:
+                set_hash.add(sha256(s[i:].encode('utf-8')).hexdigest())
+
+print(set_hash)
+# print(*enumerate(set_hash, 1), sep='\n')
