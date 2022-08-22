@@ -17,3 +17,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def input_number():
+    try:
+        number = int(input("Введите натуральное число: "))
+    except ValueError:
+        print("Вы вместо числа ввели строку. Исправьтесь!")
+        return input_number()
+    return number
+
+
+def even_odd_digits(number, even=0, odd=0):
+    """Рекурсивная функция"""
+    # все цифры извлечены
+    if number == 0:
+        return even, odd
+    else:
+        current = number % 10
+        if not current % 2:
+            even += 1
+        else:
+            odd += 1
+        number = number // 10
+        return even_odd_digits(number, even, odd)
+
+
+if __name__ == "__main__":
+    number1 = input_number()
+    print(f"Количество четных и нечетных цифр в числе равно: {even_odd_digits(number1)}")

@@ -18,3 +18,26 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def input_number():
+    try:
+        number = int(input("Введите число, которое требуется перевернуть: "))
+    except ValueError:
+        print("Вы вместо числа ввели строку. Исправьтесь!")
+        return input_number()
+    return number
+
+
+def revers_of_number(number):
+    """Рекурсивная функция"""
+    quotient, remainder = divmod(number, 10)
+    if not quotient:
+        return str(remainder)
+    else:
+        return str(remainder) + str(revers_of_number(quotient))
+
+
+if __name__ == "__main__":
+    number1 = input_number()
+    print(f"Перевернутое число: {revers_of_number(number1)}")

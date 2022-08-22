@@ -7,3 +7,31 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def find_number(number, attemps=10, __count=0):
+    """
+    Рекурсивная функция
+
+    :param number: искомое число.
+    :param attemps:  количество попыток для поиска искомого числа. По умолчанию - 10.
+    :param __count: внутренний счётчик. Не модифицировать!
+    """
+    answer = int(input(f"Попытка № {__count + 1}. Введите число от до 100: "))
+    if __count < attemps - 1 and answer == number:
+        print(f"Вы угадали! Загаданное число {answer}")
+    elif __count == attemps - 1 and answer != number:
+        print(f"Количество попыток исчерпано! Искомое число: {number}")
+    else:
+        if answer < number:
+            print("Загаданное число меньше введённого!")
+        else:
+            print("Загаданное число больше введённого!")
+        find_number(number, attemps=10, __count=__count + 1)
+
+
+if __name__ == "__main__":
+    list_for_game = [x for x in range(101)]
+    random.shuffle(list_for_game)  # перемешиваем содержимое списка
+    find_number(random.choice(list_for_game))  # При помощи функции choice извлекаем случайный элемент списка.

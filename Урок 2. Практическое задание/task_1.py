@@ -27,3 +27,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def input_two_numbers():
+    try:
+        number1 = float(input("Введите первое число: "))
+        number2 = float(input("Введите второе число: "))
+    except ValueError:
+        print("Вы вместо числа вввели строку. Исправьтесь!")
+        return input_two_numbers()
+    return number1, number2
+
+
+def simple_calc():
+    """Рекурсия"""
+    entered = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if entered == "0":
+        print("Программа завершена.")
+        return
+    elif entered == "+":
+        number1, number2 = input_two_numbers()
+        print(f"Ваш результат {number1+number2}")
+        return simple_calc()
+    elif entered == "-":
+        number1, number2 = input_two_numbers()
+        print(f"Ваш результат {number1 - number2}")
+        return simple_calc()
+    elif entered == "*":
+        number1, number2 = input_two_numbers()
+        print(f"Ваш результат {number1 * number2}")
+        return simple_calc()
+    elif entered == "/":
+        number1, number2 = input_two_numbers()
+        try:
+            result = number1 / number2
+        except ZeroDivisionError:
+            print("На ноль делить нельзя!")
+        else:
+            print(f"Ваш результат {result}")
+        finally:
+            return simple_calc()
+    else:
+        print("Введён неверный знак операции! Повторите ввод!")
+        return simple_calc()
+
+
+if __name__ == "__main__":
+    simple_calc()
