@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec(numb):
+    sign =input("ВВедите действие")
+    if sign == '+':
+        numb = numb + int(input("Ведите число"))
+        print("Результат равен",numb)
+        return rec(numb)
+
+    if sign == '-':
+        numb = numb - int(input("Ведите число"))
+        print("Результат равен", numb)
+        return rec(numb)
+
+    if sign == '*':
+        numb = numb * int(input("Ведите число"))
+        print("Результат равен", numb)
+        return rec(numb)
+
+    if sign == '/':
+        numb2 = int(input("Введите число"))
+        if numb2 == 0:
+            print("На ноль делить нельзя!! До свидания")
+            return
+        numb = numb / numb2
+        print("Результат равен", numb)
+        return rec(numb)
+
+    if sign == '0':
+        return print("До свидания")
+
+rec(int(input("Введите число")))
