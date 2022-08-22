@@ -22,3 +22,61 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+account = {"Ivanov": ["pass", True], "Petrov": ["pass1", True], "Sidorov": ["pass2", False]}
+
+"""Вариант 1 Сложность О(n)"""
+"""authentication authorization accounting -> aaa"""
+
+
+def aaa(login, pasword):
+    if login in account.keys() and account.get(login)[0] == pasword and account.get(login)[1]:             # O(n)
+        print("Вы допущены к ресурсу")
+    elif login not in account:                                                                             # O(n)
+        login = input("Введите имя пользователя")
+        password = input("Введите пароль")
+        account[login] = [password, True]
+        print("Ваша учетная запись создана и вы можите поьзоваться ресурсами")
+        return 0
+    elif login in account.keys() and account.get(login)[0] != pasword:                                     # O(n)
+        print("Вы ввели не верные данные. Пароль не совпадает")
+        return 0
+    elif account.get(login)[0] == pasword and not account.get(login)[1]:                                   # O(1)
+        answ = input("Включить аккаунт. Y or N")
+        if answ == "Y":                                                                                    # O(1)
+            account[login][1] = True
+            print("Ваша учетная запись активирована и вы допщены к ресурсу")
+        else:
+            print("Ваша запись заблокирована и вы не захотели ее разблокировать")
+
+
+#login = input("ВВедите логин")
+#password = input("Введите пароль")
+#aaa(login, password)
+
+""" Вариант 2  Сложность O(1)"""
+
+def app():
+    login = input("Введите логин")
+    password = input("Введите пароль")
+    user = account.get(login)
+    if not user:                                                                        # O(1)
+        answ = input("Поьзователя не существует создать нового пользователя Y?")
+        if answ != "Y":                                                                 # O(1)
+            print("Вы не захотели создавать пользователя")
+            return
+
+    user = [password, True]
+    account[login] = user
+
+    if not user[1]:                                                                      # O(1)
+        answ = input("Включить аккаунт. Y or N")
+        if answ != "Y":                                                                  # O(1)
+            print("Ваша запись заблокирована и вы не захотели ее разблокировать")
+            return
+
+    account[login][1] = True
+    print("Ваша учетная запись активирована и вы допщены к ресурсу")
+
+app()
+
