@@ -19,3 +19,31 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def chr_row(start_ascii_val=32,
+            end_ascii_val=128,
+            length=10,
+            __count=0):
+    """
+    Рекурсивная функция
+
+    :param start_ascii_val: номер  символа таблицы ASCII. По умолчанию, 32. Не должен превышать 127.
+    :param end_ascii_val: номер символа таблицы ASCII. По умолчанию, 128. Не должен превышать start_ascii_val.
+    :param length: количество пар "код-символ" в каждой строке.
+    :param __count: внутренний счётчик! Не изменять!
+    """
+    if start_ascii_val == end_ascii_val:
+        return True
+    print(f' {start_ascii_val} - {chr(start_ascii_val)}', end=' ')
+    if __count == length - 1:
+        print('\n')
+        __count = -1
+    chr_row(start_ascii_val + 1, end_ascii_val, length, __count=__count + 1)
+
+
+if __name__ == "__main__":
+    chr_row()  # По умолчанию, chr_row(
+    print("\n" + "- * - * -" * 10 + "\n")
+    chr_row(65, 91, length=5)
+    print("\n" + "- * - * -" * 5 + "\n")
