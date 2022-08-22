@@ -15,12 +15,17 @@
 """
 
 
-def equality(n, m=1, numbers_sum=0):
-    if m > n:
-        return numbers_sum == n * (n + 1) / 2
+def row_sum(n):
+    if n == 1:
+        return n
+    else:
+        return row_sum(n - 1) + n
 
-    numbers_sum += m
-    return equality(n, m + 1, numbers_sum)
+
+def equality(n):
+    return row_sum(n) == n * (n + 1) / 2
 
 
-print(equality(5))
+if __name__ == '__main__':
+    print(equality(5))
+
