@@ -15,3 +15,31 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+from os import urandom
+from hashlib import pbkdf2_hmac
+
+
+class Cash:
+    def __init__(self):
+        self.urls = {}
+        self.salt = urandom(32)
+
+    def check_url(self, url):
+        rep_url = self.urls.get(url)
+        if rep_url is None:
+            self.urls.setdefault(url, pbkdf2_hmac('sha512', url.encode('utf-8'), self.salt, 1000))
+            return f'Добавлен хэш для {url}'
+        else:
+            return f'хэш {url} - {rep_url.hex()}'
+
+
+cash_obj = Cash()
+
+print(cash_obj.check_url('www.123.ru'))
+print(cash_obj.check_url('www.123.ru'))
+
+print(cash_obj.check_url('www.qwerty.ru'))
+print(cash_obj.check_url('www.qwerty.ru'))
+
+print(cash_obj.urls)

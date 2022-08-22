@@ -28,3 +28,109 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from random import randint
+import time
+
+
+def time_meas(func):
+
+    def wrap(*args):
+        start_time = time.time()
+        obj = func(*args)
+        run_time = round(time.time() - start_time, 4)
+        print(f'время выполнения {func} составляет {run_time}')
+        return obj
+
+    return wrap
+
+
+@time_meas
+def gen_list():
+    gen_obj = []
+    # gen_obj = [ for _ in range(10000000)]
+    for _ in range(10000000):
+        gen_obj.append(randint(0, 100))
+    return gen_obj
+
+
+@time_meas
+def gen_dict():
+    gen_obj = {}
+    # gen_obj = {i: randint(0, 100) for i in range(10000000)}
+    for i in range(10000000):
+        gen_obj.setdefault(i, randint(0, 100))
+    return gen_obj
+
+
+@time_meas
+def get_list(arg):
+    for i in range(len(arg)):
+        el = arg[i]
+    return el
+
+
+@time_meas
+def get_dct(arg):
+    for i in range(len(arg)):
+        val = arg[i]
+    return val
+
+
+@time_meas
+def del_lst(arg):
+    for i, el in enumerate(arg):
+        del arg[i]
+
+
+@time_meas
+def del_lst_pop(arg):
+    for _ in range(len(arg)):
+        arg.pop()
+
+
+@time_meas
+def del_dct(arg):
+    for key in arg.copy():
+        arg.pop(key)
+
+
+"""Блок А
+время выполнения <function gen_list at 0x0000025B2170E4D0> составляет 4.594
+время выполнения <function gen_dict at 0x0000025B2170CF70> составляет 4.7526
+
+При создании списка и словаря видим примерно одинаковое время, т.к. сложность создания и списка, и словаря равна 
+O(len(...)) => O(n)
+"""
+lst = gen_list()
+dct = gen_dict()
+
+
+"""Блок B
+время выполнения <function get_list at 0x00000217E129CA60> составляет 0.2343
+время выполнения <function get_dct at 0x00000217E129D120> составляет 0.3281
+
+При получении элементов списка и словаря видим примерно одинаковое время, т.к. это константная сложность O(1).
+У словаря время немного больше из-за более сложной структуры данных. 
+"""
+get_list(lst)
+get_dct(dct)
+
+
+"""Блок С
+время выполнения <function del_dct at 0x000001973B5BCD30> составляет 0.6305
+время выполнения <function del_lst_pop at 0x000001973B5BD000> составляет 0.3125
+время выполнения <function del_lst at 0x000001973B5BCC10> составляет 4.7889
+
+При удалении элементов списка c конца методом pop() получаем константную сложность O(1).
+При удалении элементов словаря по ключу получаем константную сложность O(1). Время больше чем при удалении элементов
+списка методом pop() из-за более сложной структуры данных.
+При удалении элементов списка по индексу сложность зависит от i. O(N) – в худшем случае(как раз наш случай, плюс
+перебор в цикле дают сложность O(n^2)), что и демонстрирует замер времени: на списке размером 100000 работает намного 
+дольше(4.7889 сек.), тогда как предыдущие замеры проводились на списке и словаре размером 10000000 работают около
+0.5 сек.
+"""
+
+del_dct(dct)
+del_lst_pop(lst)
+lst_1 = [i for i in range(100000)]
+del_lst(lst_1)
