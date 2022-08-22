@@ -10,3 +10,21 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def count(num: int, num_line: float = 1, iter_number: int = 1, sum_result = 0):
+    """Функция принимает в себя количество рекурсий, рекурсирвно умножает 1 на -0.5.
+     А также будущий результат сложения и количество итераций для упрощенного расчета длинны числа"""
+    if num > 1:
+        sum_result += num_line
+        num_line *= -0.5
+        num -= 1
+        iter_number += 1
+        count(num, num_line, iter_number, sum_result)
+    else:
+        sum_result += num_line
+        num_line *= -0.5
+        print(f'Количество элементов - {iter_number}, их сумма - {sum_result}')
+
+
+count(int(input('Сколько чисел будет в последовательности? ')))
