@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+def unig_str(text):
+    result = set()
+    for i in range(len(text)):
+        for x in range(len(text)):
+            if len(text[i:x]) > 0:
+                result.add(hashlib.sha256(text[i:x].encode('utf-8')))
+    return len(result)
+
+
+print(unig_str('pap'))
+print(unig_str('papa'))
+print(unig_str('amelia'))
