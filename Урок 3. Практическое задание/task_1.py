@@ -28,3 +28,43 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def time_measurement(func):
+    def wrapper(*args):
+        start = time.time()
+        start_func = func(*args)
+        end = time.time()
+        print(end - start)
+        return start_func
+    return wrapper
+
+# Блок А
+
+
+@time_measurement
+def append_list(n):
+    """
+    Функция для заполнения списка
+    Алгоритм: простой генератор списка
+    Сложность: O(n)
+    """
+    obj_list = [i for i in range(n)]  # O(n)
+    return obj_list
+
+
+@time_measurement
+def append_dict(n):
+    """
+     Функция для заполнения списка
+     Алгоритм: простой генератор списка
+     Сложность: O(n)
+     """
+    obj_dict = {x: x for x in range(n)}  # O(n)
+    return obj_dict
+
+
+append_list(10000000)
+append_dict(10000000)
