@@ -1,61 +1,35 @@
 """
-Задание 7. На закрепление навыков работы с деком
+Задание 7.	Напишите программу, доказывающую или проверяющую, что для множества
+натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2,
+где n - любое натуральное число.
 
-В рассмотренном на уроке листинге есть один недостаток
-Приведенный код способен "обработать" только строку без пробелов,
-например, 'топот'
+Пример:
+для n = 5
+1+2+3+4+5 = 5(5+1)/2
 
-Но могут быть и такие палиндромы, как 'молоко делили ледоколом'
+Нужно написать рекурсивную ф-цию только для левой части выражения!
+Результат нужно сверить с правой частью.
+Правой части выражения в рекурсивной ф-ции быть не должно!
 
-Вам нужно доработать программу так, чтобы она могла выполнить
-проверку на палиндром и в таких строках (включающих пробелы)
-
-Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
---код с нуля писать не нужно, требуется доработать пример с урока
+Решите через рекурсию. В задании нельзя применять циклы.
 """
 
 
-####################################################################
-class DequeClass:
-    def __init__(self):
-        self.elems = []
-
-    def is_empty(self):
-        return self.elems == []
-
-    def add_to_front(self, elem):
-        self.elems.append(elem)
-
-    def add_to_rear(self, elem):
-        self.elems.insert(0, elem)
-
-    def remove_from_front(self):
-        return self.elems.pop()
-
-    def remove_from_rear(self):
-        return self.elems.pop(0)
-
-    def size(self):
-        return len(self.elems)
+#####################################################################################
+def recur_metod(number):
+    """ Рекурсия """
+    # Базовый случай
+    if number == 1:
+        return number
+    else:
+        # Шаг рекурсии
+        return recur_metod(number - 1) + number
 
 
-def pal_checker(string):
-    string = string.replace(" ", "")
-    dc_obj = DequeClass()
-
-    for el in string:
-        dc_obj.add_to_rear(el)
-
-    still_equal = True
-
-    while dc_obj.size() > 1 and still_equal:
-        first = dc_obj.remove_from_front()
-        last = dc_obj.remove_from_rear()
-        if first != last:
-            still_equal = False
-
-    return still_equal
-
-
-if __name__ == '__main__':
-    print(pal_checker("молоко делили ледоколом"))
+try:
+    NUMBER = int(input("Введите число: "))
+    if recur_metod(NUMBER) == NUMBER * (NUMBER + 1) / 2:
+        print("Равеснтво верно")
+except ValueError:
+    print("Вы вместо числа ввели строку (((. "
+          "Исправьтесь. Введите число.")
