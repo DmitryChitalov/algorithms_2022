@@ -19,25 +19,28 @@
 """
 
 
-def get_number(number):
+def get_number(number, even=0, odd=0):
+    """
+    Функция для подсчета четных и не четных чисел в целом числе.
+
+    """
     length_number = len(str(number))
-    print(length_number)
-    even_numbers = 0
-    odd_numbers = 0
     if length_number == 1:  # базовый случай
         if number % 2 == 0:
-            even_numbers += 1
+            even += 1
         else:
-            odd_numbers += 1
-        print(f'Количество четных и нечетных цифр в числе равно: ({even_numbers}, {odd_numbers})')
-        return
+            odd += 1
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
     elif number % 2 == 0:
-        even_numbers += 1
+        even += 1
         number = number // 10
     else:
-        odd_numbers += 1
+        odd += 1
         number = number // 10
-    get_number(number)
+    return get_number(number, even, odd)
 
 
-get_number(345620)
+if __name__ == '__main__':
+    get_number(345620)
+    get_number(123)
+    get_number(6)

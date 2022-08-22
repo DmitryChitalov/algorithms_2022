@@ -30,15 +30,14 @@ def calculate():
     Функция калькулятор целых чисел.
 
     """
-    operation_list = ['+', '-', '*', '/', '0', 0]
+    operation_list = ['+', '-', '*', '/', '0']
     operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
 
     if operation not in operation_list:
         print('Введите корректные данные')
-        calculate()
-    elif operation == '0':
-        print('Вы нажали кнопку выхода')
-        return 'Bye'
+        return calculate()
+    elif operation == '0':  # базовый случай
+        return print('Вы нажали кнопку выхода')
     else:
         try:
             first_number = int(input('Введите первое число: '))
@@ -52,12 +51,13 @@ def calculate():
             try:
                 if operation == '/':
                     result = first_number / second_number
-            except Exception:
+            except ZeroDivisionError:
                 print('На ноль делить нельзя')
             print(f'Ваш результат: {int(result)}')
-        except Exception:
+        except ValueError:
             print('Вы ввели не целое число (((. Исправьтесь')
+    return calculate()
+
+
+if __name__ == '__main__':
     calculate()
-
-
-calculate()
