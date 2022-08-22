@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def row_sum(n):
+    if n == 1:
+        return n
+    else:
+        return row_sum(n - 1) + n
+
+
+def equality(n):
+    return row_sum(n) == n * (n + 1) / 2
+
+
+if __name__ == '__main__':
+    print(equality(5))
+
