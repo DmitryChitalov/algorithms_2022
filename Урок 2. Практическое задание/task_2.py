@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_and_odd(num, c_even=0, c_odd=0):
+
+    value = num % 10  # отсекаем последню цифру
+    if value % 2 == 0:  # если она ^ делится на 2 без остатка (чётная)
+        c_even += 1  # плюсуем к счётчику четных
+    else:
+        c_odd += 1  # а иначе плюсуем к нечётным
+    if num // 10 > 0:  # если что-то ещё осталось, то крутим барабан дальше
+        return even_and_odd(num // 10, c_even, c_odd)
+    else:
+        return f'Количество четных цифр: {c_even}, нечетных: {c_odd}'
+
+
+print(even_and_odd(123))
+print(even_and_odd(1468))
+print(even_and_odd(0))
+print(even_and_odd(1234567890))
+print(even_and_odd(22332233))
