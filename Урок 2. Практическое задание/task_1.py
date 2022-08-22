@@ -53,7 +53,8 @@ def calculate():
                     result = first_number / second_number
             except ZeroDivisionError:
                 print('На ноль делить нельзя')
-            print(f'Ваш результат: {int(result)}')
+                return calculate()
+            print(f'Ваш результат: {result}')
         except ValueError:
             print('Вы ввели не целое число (((. Исправьтесь')
     return calculate()
