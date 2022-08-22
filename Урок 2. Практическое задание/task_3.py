@@ -18,3 +18,16 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def v3(digit, result=''):
+
+    if digit // 10 == 0:
+        result += str(digit)
+        return result
+
+    lastnum = str(digit % 10)
+    nextnum = digit // 10
+    result += lastnum
+    return v3(nextnum, result)
+
+print(v3(1240))
