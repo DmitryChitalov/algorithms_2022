@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_table(number=32, counter=1):
+    if number > 127:
+        return
+
+    end_of_string = ' '
+    if (counter + 10) % 10 == 0:
+        end_of_string = '\n'
+
+    print(f'{number} - {chr(number)}{end_of_string}', end='')
+
+    return ascii_table(number + 1, counter + 1)
+
+
+ascii_table()
