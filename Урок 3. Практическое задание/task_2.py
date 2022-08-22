@@ -27,24 +27,24 @@ from hashlib import pbkdf2_hmac
 from binascii import hexlify
 import mysql.connector
 
+
+def to_hash(user_name, user_password):
+    obj = pbkdf2_hmac(hash_name='sha256',
+                      password=user_password.encode('utf-8'),
+                      salt=user_name.encode('utf-8'),
+                      iterations=100000)
+    return hexlify(obj)
+
+
 user_name = (input('Введите имя пользователя: '))
 user_password = (input('Введите пароль пользователя: '))
-
-obj = pbkdf2_hmac(hash_name='sha256',
-                         password=user_password.encode('utf-8'),
-                         salt=user_name.encode('utf-8'),
-                         iterations=100000)
-
-result = hexlify(obj)
+result = to_hash(user_name, user_password)
 print(result)
 
-
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="12345",
-  database="users_access"
-)
+mydb = mysql.connector.connect(host="localhost",
+                               user="root",
+                               password="12345",
+                               database="users_access")
 
 mycursor = mydb.cursor()
 
@@ -55,15 +55,10 @@ mycursor.execute(sql, val)
 mydb.commit()
 
 prove_password = (input('Введите пароль повторно: '))
-
-obj = pbkdf2_hmac(hash_name='sha256',
-                         password=prove_password.encode('utf-8'),
-                         salt=user_name.encode('utf-8'),
-                         iterations=100000)
-result = hexlify(obj)
+result = to_hash(user_name, prove_password)
 
 mycursor.execute(f"SELECT password_hash FROM passwords where username = '{user_name}'")
 if result == mycursor.fetchall()[0][0].encode('utf-8'):
-  print('Вы ввели правильный пароль')
+    print('Вы ввели правильный пароль')
 else:
-  print('Пароли не совпадают')
+    print('Пароли не совпадают')
