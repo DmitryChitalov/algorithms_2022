@@ -24,7 +24,7 @@ def check_1(lst_obj):
 
     Сложность: O(len(n)).
     """
-    lst_to_set = set(lst_obj)  # O(len(n))
+    lst_to_set = set(lst_obj)  # O(n)
     return lst_to_set  # О(1)
 
 
@@ -55,7 +55,7 @@ def check_3(lst_obj):
 
     Сложность: O(N log N)
     """
-    lst_copy = list(lst_obj)  # O(list(n))
+    lst_copy = list(lst_obj)  # O(n)
     lst_copy.sort()  # O(N log N)
     for i in range(len(lst_obj) - 1):  # O(n) + O(1) + O(1) = O(n)
         if lst_copy[i] == lst_copy[i + 1]:  # O(1) + O(1)
