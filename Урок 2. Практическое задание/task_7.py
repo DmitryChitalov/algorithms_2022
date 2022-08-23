@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def teorem(n, s = 0):
+    if n != 0:
+        s += n
+        n -= 1
+        return teorem(n, s)
+    return s
+m = int(input('Введите любое натуральное число: '))
+if teorem(m) == (m * (m + 1) / 2):
+    print(f'Сумма 1+2+...{m} равна {teorem(m)}, m*(m+1)/2={teorem(m)}. Теорема доказана')
+else:
+    print('Fals')

@@ -7,3 +7,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+import random
+
+def game(num=44, n=10):
+    if n > 0:
+        a = int(input('Введите число: '))
+        n -= 1
+        if a > num:
+            print('Слишком большое!')
+            return game(num, n)
+        elif a < num:
+            print('Слишком маленькое!')
+            return game(num, n)
+        else:
+            return 'Вы угадали!'
+    return num
+
+
+print(game(random.randint(0, 100)))

@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_tab(start=32, stop=127):
+    if start <= stop:
+        n = 10
+        while n > 0 and start <= stop:
+            print(f'{start}-{chr(start)}', end=' ')
+            n -= 1
+            start += 1
+        print('')
+        return ascii_tab(start)
+    return
+
+
+ascii_tab()
+
