@@ -27,3 +27,49 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def summation(first, second):
+    return first + second
+
+
+def division(first, second):
+    return first / second
+
+
+def multiplaction(first, second):
+    return first * second
+
+
+def denial(first, second):
+    return first - second
+
+
+def calculate():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == '0':
+        return print(f'Вы вышли с режима калькулятор')
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    if action == '-':
+        print(denial(a, b))
+        calculate()
+    elif action == '*':
+        print(multiplaction(a, b))
+        calculate()
+    elif action == '/':
+        if b == 0:
+            b = int(input('Упс, на 0 делить нельзя, введите другое число: '))
+            print(division(a, b))
+            calculate()
+        print(division(a, b))
+        calculate()
+    elif action == '+':
+        print(summation(a, b))
+        calculate()
+    else:
+        print('Вы ввели некорректные данные, попробуйте снова =))')
+        calculate()
+
+
+calculate()

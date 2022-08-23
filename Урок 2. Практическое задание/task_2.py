@@ -17,3 +17,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+numb = 1234567
+
+
+def check(num, sum_even, sum_uneven):
+    if num == 0:
+        return f'{sum_even} - четные цифры, {sum_uneven} - нечетные'
+    else:
+        number = num % 10
+        if number % 2 == 0:
+            sum_even += 1
+        else:
+            sum_uneven += 1
+        num = num // 10
+        return check(num, sum_even, sum_uneven)
+
+
+
+print(check(numb, 0, 0))
