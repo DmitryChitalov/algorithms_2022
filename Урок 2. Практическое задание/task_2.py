@@ -17,3 +17,12 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd_digits(number, even=0, odd=0):
+    if number == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even, odd}'
+    if number % 10 % 2 == 0:
+        return count_even_odd_digits(number // 10, even + 1, odd)
+    else:
+        return count_even_odd_digits(number // 10, even, odd + 1)

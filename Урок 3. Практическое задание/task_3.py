@@ -22,3 +22,16 @@
 р
 а
 """
+
+
+from hashlib import sha256
+
+word = input('Введите слово: ')
+
+my_set = set()
+
+for i in range(len(word)):
+    for j in range(i + 1, len(word) + 1):
+        if word[i:j] != word:
+            my_set.add(sha256(word[i:j].encode()).hexdigest())
+print(my_set)

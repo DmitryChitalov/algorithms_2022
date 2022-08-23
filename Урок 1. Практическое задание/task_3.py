@@ -17,3 +17,21 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+# Вариант-1
+def searching_max_annual_profit(dict_obj):                              # итог: линейно-логарифмическая
+    return sorted(dict_obj.items(), key=(lambda item: item[1]))[-3:]    # линейно-логарифмическая
+
+
+# Вариант-2
+def searching_max_annual_profit(dict_obj):         # итог: линейная
+    result_list = []
+    for i in range(3):                             # константная
+        max_profit = 0
+        for key, val in dict_obj.items():          # линейная
+            if val > max_profit:                    
+                max_profit = val
+                company = key
+        result_list.append((company, max_profit))  # константная
+        del dict_obj[company]                      # константная
+    return result_list
+

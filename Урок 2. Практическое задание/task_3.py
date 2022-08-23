@@ -18,3 +18,9 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse_number(number):
+    if number == 0:
+        return ''
+    return f'{number % 10}{reverse_number(number // 10)}'
