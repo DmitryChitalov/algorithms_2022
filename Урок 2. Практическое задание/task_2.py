@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def get_number(number, even=0, odd=0):
+    """
+    Функция для подсчета четных и не четных чисел в целом числе.
+
+    """
+    if number % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    if len(str(number)) == 1:  # базовый случай
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    number = number // 10
+    return get_number(number, even, odd)
+
+
+if __name__ == '__main__':
+    get_number(345620)
+    get_number(123)
+    get_number(6)

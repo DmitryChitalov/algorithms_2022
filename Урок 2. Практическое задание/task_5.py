@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def simbols_ascii(simbol=32):
+    print(f'{simbol} - {chr(simbol)}', end=' ')
+    if simbol == 127:
+        return f'{simbol} - {chr(127)}'
+    if simbol % 10 == 1:
+        print()
+    return simbols_ascii(simbol + 1)
+
+
+if __name__ == '__main__':
+    print(simbols_ascii())

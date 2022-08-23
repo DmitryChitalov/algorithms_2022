@@ -18,3 +18,27 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def flip_number(number, obj_list=None):
+    """
+    Функция переворачивает число.
+
+    """
+    if obj_list is None:  # сначала в аргументе сделал пустой список, но он не обнуляется, сделал так
+        obj_list = []
+    if len(str(number)) == 1:
+        obj_list.append(str(number))
+        number = ''.join(obj_list)
+        return print(number)
+    else:
+        x = number % 10
+        obj_list.append(str(x))
+        number = number // 10
+    return flip_number(number, obj_list)
+
+
+if __name__ == '__main__':
+    flip_number(25)
+    flip_number(255)
+    flip_number(1230)

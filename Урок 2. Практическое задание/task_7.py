@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def prove_equality(n, total=0):
+    if n < 1:
+        return total
+    else:
+        total += n
+    return prove_equality(n - 1, total)
+
+
+if __name__ == '__main__':
+    print(prove_equality(5))
+    print(prove_equality(5) == 5 * (5 + 1) / 2)

@@ -10,3 +10,19 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_elements(n):
+    if n == 1:
+        return 1
+    elif n % 2 == 0:
+        number = -1
+    else:
+        number = 1
+    return number / 2 ** (n - 1) + sum_elements(n - 1)
+
+
+if __name__ == '__main__':
+    print(sum_elements(3))
+    print(sum_elements(1))
+    print(sum_elements(5))
