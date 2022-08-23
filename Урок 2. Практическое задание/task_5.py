@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+count = 32
+
+
+def uncodding(number: int):
+    if number == 128:
+        return True
+    print(f'{number} - {chr(number)}', end=' ')
+    if (number - 31) % 10 == 0:
+        print('\n')
+    uncodding(number + 1)
+
+
+print(uncodding(count))

@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+number = int(input('Введите натуральное число от 1 до 100: '))
+
+
+def recursive_method(num):
+    if num == 1:
+        return num
+    else:
+        return recursive_method(num - 1) + num
+
+
+print(recursive_method(number) == number*(number + 1)/2)
