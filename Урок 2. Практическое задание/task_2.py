@@ -24,19 +24,13 @@ def get_number(number, even=0, odd=0):
     Функция для подсчета четных и не четных чисел в целом числе.
 
     """
-    length_number = len(str(number))
-    if length_number == 1:  # базовый случай
-        if number % 2 == 0:
-            even += 1
-        else:
-            odd += 1
-        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
-    elif number % 2 == 0:
+    if number % 2 == 0:
         even += 1
-        number = number // 10
     else:
         odd += 1
-        number = number // 10
+    if len(str(number)) == 1:  # базовый случай
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    number = number // 10
     return get_number(number, even, odd)
 
 
