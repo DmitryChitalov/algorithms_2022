@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    operation = input('Введите операцию (+, -, *, /  или 0 для выхода) ')
+
+    if operation == '0':
+        print(f'До новых встреч')
+        return
+    elif operation in '+-*/':
+        try:
+            f_num = int(input('Введите первое число '))
+            s_num = int(input('Введите второе число '))
+        except ValueError:
+            print('Вы ввели не корректные данные. Повторим')
+            return calc()
+        if operation == '+':
+            print(f'Результат сложения: {f_num + s_num}')
+            return calc()
+        elif operation == '-':
+            print(f'Результат разности: {f_num - s_num}')
+            return calc()
+        elif operation == '*':
+            print(f'Результат произведения: {f_num * s_num}')
+            return calc()
+        elif operation == '/':
+            try:
+                res = f_num / s_num
+            except ZeroDivisionError:
+                print(f'Деление на ноль запрещено!! Повторим.')
+            else:
+                print(f'Результат деления: {res}')
+            finally:
+                return calc()
+    else:
+        print('Вы ввели не корректный знак. Повторим.')
+        return calc()
+
+
+calc()

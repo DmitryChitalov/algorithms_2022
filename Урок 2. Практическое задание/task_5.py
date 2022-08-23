@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def output_code_ascii(ascii_code=32):
+    if ascii_code == 128:
+        return
+    print(f'{ascii_code} - {chr(ascii_code)}', end=' ')
+    if (ascii_code - 31) % 10 == 0:
+        print()
+    return output_code_ascii(ascii_code + 1)
+
+
+output_code_ascii()

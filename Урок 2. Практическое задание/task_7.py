@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def rec(num):
+    return num if num == 1 else num + rec(num - 1)
+
+
+try:
+    num = int(input('Введите число: '))
+except ValueError:
+    print('Были введены не корректные данные')
+else:
+    if rec(num) == num * (num + 1) // 2:
+        print('Равенство корректное')
