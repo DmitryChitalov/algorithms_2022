@@ -28,3 +28,84 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+from time import perf_counter
+
+
+def time_measure(func):
+
+    def time_wrapper(*args, **kwargs):
+        t_start = perf_counter()
+        res = func(*args, **kwargs)
+        t_diff = perf_counter() - t_start
+        print(f'Время выполнения функции {func.__name__}(): {t_diff}')
+        return res
+
+    return time_wrapper
+
+
+# a)
+@time_measure
+def fill_list(num):                  # O(N) - линейная
+    list_out = []                    # O(1) - константная
+    for item in range(num):          # O(N) - линейная
+        list_out.append(item)        # O(1) - константная
+    return list_out                  # O(1) - константная
+
+
+@time_measure
+def fill_dict(num):                  # O(N) - линейная
+    dict_out = {}                    # O(1) - константная
+    for item in range(num):          # O(N) - линейная
+        dict_out[item] = item        # O(1) - константная
+    return dict_out                  # O(1) - константная
+
+
+# b)
+@time_measure
+def get_list_item(list_in, idx):      # O(1) - константная
+    return list_in[idx]
+
+
+@time_measure
+def get_dict_item(dict_in, key):      # O(1) - константная
+    return dict_in[key]
+
+
+# c)
+@time_measure
+def pop_list(list_in, idx):           # O(N) - линейная
+    return list_in.pop(idx)
+
+
+@time_measure
+def pop_dict(dict_in, key):            # O(1) - константная
+    return dict_in.pop(key)
+
+
+if __name__ == '__main__':
+    print('Пункт а)')
+    test_list = fill_list(100)
+    test_dict = fill_dict(100)
+    print(test_list)
+    print(test_dict)
+    print('-'*100, '\n')
+    """
+        Сложность функций - линейная. Время выполнения приблизительно одинаково. 
+    """
+    print('Пункт b)')
+    print(get_list_item(test_list, 20))
+    print(get_dict_item(test_dict, 20))
+    print('-' * 100, '\n')
+    """
+        Сложность функций - константная. Функция взятия элемента по ключу выполняется быстрее. 
+    """
+    print('Пункт c)')
+    print(pop_list(test_list, 10))
+    print(pop_dict(test_dict, 10))
+    """
+        Сложность функции удаления элемента списка по индексу - линейная, словаря по ключу - константная. 
+        Удаление элемента списка по индексу выполняется медленнее, т.к. после удаления элемента производится 
+        пересчет индексов списка. 
+    """
