@@ -15,3 +15,24 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def check_min1(lst_obj):    # Линейная
+    m = lst_obj[0]
+    for i in range(1,len(lst_obj)):
+        if lst_obj[i] < m:
+            m = lst_obj[i]
+    return m
+
+
+print(check_min1([3,6,8,1]))
+
+
+def check_min2(lst_obj):    # Квадратичная
+    for i in lst_obj:
+        for j in lst_obj:
+            if i >= j:
+                i = j
+    return j
+
+
+print(check_min2([3,6,8,1]))
