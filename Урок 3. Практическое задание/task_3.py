@@ -22,3 +22,17 @@
 р
 а
 """
+
+from hashlib import sha256
+
+
+def substr_hash(string: str):
+    result = set()
+    for i in range(len(string)):
+        for el in range(i + 1, len(string) + 1):
+            if string[i:el] != string:
+                result.add(sha256(string[i:el].encode()).hexdigest())
+    return len(result)
+
+
+print(substr_hash('papa'))

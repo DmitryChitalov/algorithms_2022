@@ -22,3 +22,26 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import csv
+
+
+def passsw_hash(passw):
+    hash_passw = hashlib.sha256('salt'.encode('utf-8') + passw.encode('utf-8')).hexdigest()
+    return hash_passw
+
+
+def auth(passw_1=input('Введите пароль '), passw_2=input('Введите пароль ещё раз ')):
+    pas_1 = passsw_hash(passw_1)
+    pas_2 = passsw_hash(passw_2)
+    if pas_1 == pas_2:
+        with open('data.csv', 'w') as file:
+            write = csv.writer(file)
+            write.writerow([pas_2])
+        return 'Пароли совпадают'
+    else:
+        return 'Пароли не совпадают'
+
+
+print(auth())
+
