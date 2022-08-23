@@ -28,3 +28,106 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def timing(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        print(f'{func.__name__} running...')
+        result = func(*args, **kwargs)
+        stop = time.time()
+        print(stop - start)
+        return result
+
+    return wrapper
+
+
+num = 10 ** 8
+
+
+# a) ########################################
+
+
+@timing
+def fill_list(count):
+    """Заполнение списка. О(n)"""
+    result = []
+    for each in range(count):
+        result.append(each)
+    return result
+
+
+@timing
+def fill_dict(count):
+    """Заполнение словаря. O(n)"""
+    result = {}
+    for each in range(count):
+        result[each] = each
+    return result
+
+
+test_list = fill_list(num)
+print(len(test_list))
+print()
+
+test_dict = fill_dict(num)
+print(len(test_dict.keys()))
+print()
+
+"""
+Вывод. Заполнение словаря происходит быстрее, так как
+при добавлении в словарь значения так же вычисляется его хеш.
+"""
+
+
+# b) ########################################
+
+@timing
+def get_from_list(lst: list, index):
+    """Получение элемента из списка. О(1)"""
+    return lst[index]
+
+
+@timing
+def get_from_dict(dct: dict, elem):
+    """Получение элемента из словаря. О(1)"""
+    return dct[elem]
+
+
+print(get_from_list(test_list, 9999999))
+print()
+print(get_from_dict(test_dict, 9999999))
+print()
+
+"""
+Вывод. Получение элемента из списка по индексу происходит медленнее,
+так как процесс состоит из двух этапов: получение адреса из элемента массива,
+а потом получение значения по адресу.
+"""
+
+# c) ########################################
+
+
+@timing
+def del_from_list(lst: list, value):
+    """Удаление элемента из списка. O(n)"""
+    return lst.remove(value)
+
+
+@timing
+def del_from_dict(dct: dict, key):
+    """Удаление элемента из словаря. O(1)"""
+    return dct.pop(key)
+
+
+print(del_from_list(test_list, 10000000))
+print()
+print(del_from_dict(test_dict, 10000000))
+print()
+
+"""
+Вывод. Удаление элемента из списка происходит медленнее,
+так как происходит перебор всех элементов.
+"""
