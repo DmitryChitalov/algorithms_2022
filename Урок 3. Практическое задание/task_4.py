@@ -15,3 +15,15 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cache = {}
+
+
+def is_caching(url: str):
+    url_hash = hashlib.sha512(url.encode(encoding='utf-8')).hexdigest()
+    if cache.get(url_hash):
+        return url_hash
+    else:
+        cache[url_hash] = url
