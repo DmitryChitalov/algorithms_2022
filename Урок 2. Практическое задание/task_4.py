@@ -10,3 +10,19 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+n = int(input('Введите число: '))
+
+
+def sum_function(x, i=0, res=0, num=1):
+    if x != i:
+        res += num
+        num /= -2
+        i += 1
+        return sum_function(x, i, res, num)
+    if x == i:
+        return res
+
+
+print(sum_function(n))
+

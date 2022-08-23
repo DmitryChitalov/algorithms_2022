@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+n = random.randint(0, 100)
+
+
+def randomizer(number, attempts=10):
+    if attempts:
+        user_number = int(input('Угадайте волшебное число: '))
+        if number != user_number:
+            if user_number > number:
+                print('Введённое число больше волшебного')
+            else:
+                print('Введённое число меньше волшебного')
+            randomizer(number, attempts - 1)
+        else:
+            print('ЭТО ПОБЕДА!!! Может попробовать сегодня казино?)')
+    else:
+        print(f'Sorry( Это потеря потерь ((( Волшебное число было {n}')
+
+
+randomizer(n)
+

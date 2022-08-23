@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check(num, sm=0):
+    if num > 0:
+        sm += num
+        num -= 1
+        total = check(num, sm)
+    else:
+        return sm
+    return total
+
+
+n = int(input('Введите натуральное число: '))
+
+print(check(n) == n * (n + 1) / 2)
+
