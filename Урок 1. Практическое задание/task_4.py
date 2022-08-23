@@ -22,3 +22,60 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {'user1': ['1234', True], 'user2': ['5678', True], 'user3': ['8901', False], 'user4': ['2345', False],
+         'user5': ['6789', True]}
+
+
+def check_user():   # Линейная сложность
+    login = input('Логин: ')
+    password: str = input('Пароль: ')
+    if login not in users.keys():
+        print('Пользователь не найден')
+    elif password != users[login][0]:
+        print('Не верный пароль')
+    elif not users[login][1]:
+        print('Authentication needed')
+        a = 0
+        while a != 'y' or a != 'n':
+            a = input('Активировать учетную запись? y/n ')
+            if a == 'y':
+                users[login][1] = True
+                print('Учетная запись активирована. Вход выполнен')
+                break
+            else:
+                print('Учетная запись не активирована. Вход не выполнен')
+                break
+    else:
+        print('Вход выполнен')
+
+
+# check_user()
+
+def check_user2():  # Константная сложность
+    login = input('Логин: ')
+    password: str = input('Пароль: ')
+    i = users.get(login)
+    if i is None:
+        print('Такого пользователя нет')
+    elif i[0] != password:
+        print('Не верный пароль')
+    elif not i[1]:
+        print('Необходима аутентификация')
+        a = 0
+        while a != 'y' or a != 'n':
+            a = input('Активировать учетную запись? y/n ')
+            if a == 'y':
+                global users[login][1] = True
+                print('Учетная запись активирована. Вход выполнен')
+                break
+            else:
+                print('Учетная запись не активирована. Вход не выполнен')
+                break
+    else:
+        print('Вход выполнен')
+
+
+check_user2()
+
+# Второе решение предпочтительнее, так как проще
