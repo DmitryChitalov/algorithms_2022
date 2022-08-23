@@ -27,3 +27,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculation():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода)\n')
+    if operation == '0':
+        print('Выход из программы')
+        return 0
+    if not (operation == '+' or operation == '-' or operation == '/' or operation == '*' or operation == '0'):
+        print('Неверная операция')
+        return calculation()
+    a, b = input('Введите два числа через пробел\n').split()
+    if not (a.isdigit() and b.isdigit()):
+        print('Одно или оба введеных значения не являются числом!')
+        return calculation()
+    a, b = int(a), int(b)
+    if operation == '+':
+        result = a + b
+    elif operation == '-':
+        result = a - b
+    elif operation == '*':
+        result = a * b
+    elif operation == '/':
+        if b == 0:
+            print('На ноль делить нельзя!')
+            return calculation()
+        else:
+            result = a / b
+    print(f'Ваш результат {result}')
+    return calculation()
+
+
+calculation()
+
