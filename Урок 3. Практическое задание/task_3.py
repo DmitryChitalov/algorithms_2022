@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+
+def get_unique(word):
+    unique_words = set()
+    for i in range(len(word)):
+        for j in range(len(word), i, -1):
+            if len(word[i:j]) != len(word):
+                unique_words.add(hashlib.sha256(
+                    word[i:j].encode('utf-8')).hexdigest())
+            elif len(word) == 1:
+                return f'{word} имеет {len(word)} уникальную подстроку'
+    return f'{word} имеет {len(unique_words)} уникальных подстрок'
+
+
+print(get_unique('papap'))
