@@ -20,13 +20,14 @@
 Допускается исп-е встроенных ф-ций
 """
 
-def recFunction(code=32):
+
+def recfunction(code=32):
     if code == 128:
         return True
     print(f'{code} - {chr(code)}', end=' ')
     if code % 10 == 1:
         print('\n')
-    recFunction(code + 1)
+    recfunction(code + 1)
 
 
-recFunction()
+recfunction()

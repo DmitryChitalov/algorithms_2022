@@ -19,9 +19,11 @@
 1230 -> 0321
 """
 
+
 def rec(n):
     if n < 10: return n
     return str(n % 10) + str(rec(n // 10))
 
+
 x = int(input("Введите число: "))
-print (rec(x))
+print(rec(x))

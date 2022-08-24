@@ -13,8 +13,10 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
-def set_Function(number):
-    return number if number == 0 else set_Function(number - 1) + number
 
 
-print(set_Function(5))
+def setfunction(number):
+    return number if number == 0 else setfunction(number - 1) + number
+
+
+print(setfunction(5))
