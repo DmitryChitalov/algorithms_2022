@@ -17,3 +17,14 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def checking_numbers(numbers, even = 0, odd = 0):
+    if not numbers:
+        return f'Количество четных и нечетных цифр в числе  равно: ({even}, {odd})'
+    if numbers % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return checking_numbers(numbers // 10, even, odd)
+
+input_number = int(input('Введите число: '))
+print(checking_numbers(input_number))
