@@ -30,6 +30,9 @@ def mirror(n, b=0):
         return b
 
 
-m = 9352110561304502
+m = 2340000
 e = mirror(m)
-print(e)
+if len(str(e)) == len(str(m)):
+    print(e)
+else:
+    print(f'{e:0{len(str(m))}d}')
