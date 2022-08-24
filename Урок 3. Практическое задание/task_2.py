@@ -75,18 +75,20 @@ def check_login(login):
             sql_connection.close()
 
 
+def get_hash(login, passwd):
+    pass_encoded = (passwd + login).encode(encoding='utf-8')
+    return hashlib.sha256(pass_encoded).hexdigest()
+
+
 def check_passwd(passwd, login):
     try:
         sql_connection = sqlite3.Connection('database.db')
         cursor = sql_connection.cursor()
 
-        pass_encoded = (passwd + login).encode(encoding='utf-8')
-        pass_hash = hashlib.sha256(pass_encoded).hexdigest()
-
         cursor.execute('SELECT pass_hash FROM users WHERE login = ?', [login])
         db_hash = cursor.fetchone()[0]
 
-        if db_hash == pass_hash:
+        if db_hash == get_hash(login, passwd):
             return True
         return False
 
@@ -102,10 +104,8 @@ def add_user(login, passwd):
         sql_connection = sqlite3.Connection('database.db')
         cursor = sql_connection.cursor()
 
-        pass_encoded = (passwd + login).encode(encoding='utf-8')
-        pass_hash = hashlib.sha256(pass_encoded).hexdigest()
-
-        cursor.execute('INSERT INTO users (login, pass_hash) VALUES (?,?)', (login, pass_hash))
+        cursor.execute('INSERT INTO users (login, pass_hash) VALUES (?,?)',
+                       (login, get_hash(login, passwd)))
         sql_connection.commit()
 
     except sqlite3.Error:
