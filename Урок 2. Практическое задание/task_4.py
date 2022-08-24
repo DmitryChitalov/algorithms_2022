@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+def sum_el(n, counter=0, next_elem=1, r_sum=0):
+    if n == 0:
+        return f'Количество элементов - {counter}, их сумма - {r_sum}'
+
+    counter += 1
+    r_sum += next_elem
+    next_elem /= -2
+
+    return sum_el(n - 1, counter, next_elem, r_sum)
+
+
+print(sum_el(3))
