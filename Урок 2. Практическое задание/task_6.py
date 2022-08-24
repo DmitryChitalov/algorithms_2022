@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def search_num(n_num=1, num=0):
+    if n_num == 1:
+        num = randint(0, 100)
+        print(num)
+
+    a_num = input("Введите число: ")
+    a_number = int(a_num)
+
+    if n_num and a_number != num:
+        if int(a_number) > num:
+            print(f'загаданное число меньше, попыток {10 - n_num}')
+        elif int(a_number) < num:
+            print(f'загаданное число больше, попыток {10 - n_num}')
+    else:
+        return print("Вы выиграли")
+    search_num(n_num + 1, num)
+
+
+search_num()

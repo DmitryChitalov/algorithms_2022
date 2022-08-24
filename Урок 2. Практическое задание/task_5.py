@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def recfunction(code=32):
+    if code == 128:
+        return True
+    print(f'{code} - {chr(code)}', end=' ')
+    if code % 10 == 1:
+        print('\n')
+    recfunction(code + 1)
+
+
+recfunction()

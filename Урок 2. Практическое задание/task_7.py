@@ -13,3 +13,10 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def setfunction(number):
+    return number if number == 0 else setfunction(number - 1) + number
+
+
+print(setfunction(5))
