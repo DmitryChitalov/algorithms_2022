@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+x = set()
+a = 'papa'
+for i in range(len(a)+1):
+    for _ in range(i):
+        if a[_:i] != a:
+            password = a[_:i]
+            hash_object = hashlib.sha256(password.encode('utf-8'))
+            hex_dig = hash_object.hexdigest()
+            x.add(hex_dig)
+print(len(x))
+
