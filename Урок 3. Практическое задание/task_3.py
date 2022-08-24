@@ -22,3 +22,14 @@
 р
 а
 """
+
+import hashlib
+
+string = 'papa'
+hashes = set()
+for i in range(len(string)):
+    for j in range(i, len(string)):
+        substring = string[i:j + 1]
+        if substring != string:
+            hashes.add(hashlib.sha256(substring.encode(encoding='utf-8')).hexdigest())
+print(f'В строке "{string}" - {len(hashes)} уникальных подстрок')
