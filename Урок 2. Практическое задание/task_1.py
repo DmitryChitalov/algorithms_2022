@@ -27,3 +27,63 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def arythmetics():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '+':
+        num_1 = input('Введите первое число: ')
+        if num_1.isdigit():
+            num_2 = input('Введите второе число: ')
+            if num_2.isdigit():
+                return print(f'{int(num_1) + int(num_2)}'), arythmetics()
+            else:
+                return print(
+                    f'Второй ввод - не число, а что-то другое, точнее, {num_2}. Возврат к началу...'), arythmetics()
+        else:
+            return print(
+                f'Первый ввод - не число, а что-то другое, точнее, {num_1}. Возврат к началу...'), arythmetics()
+    elif sign == '-':
+        num_1 = input('Введите первое число: ')
+        if num_1.isdigit():
+            num_2 = input('Введите второе число: ')
+            if num_2.isdigit():
+                return print(f'{int(num_1) - int(num_2)}'), arythmetics()
+            else:
+                return print(
+                    f'Второй ввод - не число, а что-то другое, точнее, {num_2}. Возврат к началу...'), arythmetics()
+        else:
+            return print(
+                f'Первый ввод - не число, а что-то другое, точнее, {num_1}. Возврат к началу...'), arythmetics()
+    elif sign == '*':
+        num_1 = input('Введите первое число: ')
+        if num_1.isdigit():
+            num_2 = input('Введите второе число: ')
+            if num_2.isdigit():
+                return print(f'{int(num_1) * int(num_2)}'), arythmetics()
+            else:
+                return print(
+                    f'Второй ввод - не число, а что-то другое, точнее, {num_2}. Возврат к началу...'), arythmetics()
+        else:
+            return print(
+                f'Первый ввод - не число, а что-то другое, точнее, {num_1}. Возврат к началу...'), arythmetics()
+    elif sign == '/':
+        num_1 = input('Введите первое число: ')
+        if num_1.isdigit():
+            num_2 = input('Введите второе число: ')
+            if num_2.isdigit():
+                if num_2 != 0:
+                    return print(f'{int(num_1) // int(num_2)}, остаток от деления {int(num_1) % int(num_2)}'), arythmetics()
+                else:
+                    return print('На ноль делить нельзя! Возврат к началу...'), arythmetics()
+            else:
+                return print(
+                    f'Второй ввод - не число, а что-то другое, точнее, {num_2}. Возврат к началу...'), arythmetics()
+        else:
+            return print(
+                f'Первый ввод - не число, а что-то другое, точнее, {num_1}. Возврат к началу...'), arythmetics()
+    elif sign == '0':
+        return print('Завершение работы...')
+    else:
+        return print('Вы ввели что-то, отличное от +, -, *, / или 0! Возврат к началу...'), arythmetics()
+
+arythmetics()

@@ -10,3 +10,13 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+def array_summation(iter, n = 1, res = 0):
+    if iter > 0:
+        res += n
+        n *= (- 0.5)
+        iter -= 1
+        return array_summation(iter, n, res)
+    else:
+        return print(f'Сумма элементов ряда вида (-2)**(-n) равна {res}')
+
+array_summation(int(input('Введите количество элементов: ')))

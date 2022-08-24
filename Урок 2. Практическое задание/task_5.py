@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def ascii(count = 32):
+    if count != 128:
+        print(f'{count} - {chr(count)},', end = ' ')
+        if (count - 31) % 10 == 0:
+            print('\n')
+        return ascii(count + 1)
+    else:
+        return True
+
+ascii()

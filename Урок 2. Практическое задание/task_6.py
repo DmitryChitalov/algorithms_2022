@@ -7,3 +7,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+def guess_the_num(num = random.randint(0, 100), count = 0):
+    if count < 10:
+        a = int(input(f'Попробуйте угадать целое число от 1 до 100. У вас есть {10 - count} попыток! '))
+        if a < num:
+            count += 1
+            return print(f'Загаданное число больше, чем {a}!'), guess_the_num(num, count)
+        elif a > num:
+            count += 1
+            return print(f'Загаданное число меньше, чем {a}!'), guess_the_num(num, count)
+        else:
+            return print('Вы угадали число!')
+    else:
+        return print(f'Вы не угадали! Загаданное число - {num}!')
+
+guess_the_num()

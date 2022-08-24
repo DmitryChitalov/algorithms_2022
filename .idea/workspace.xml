@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/algorithms_2022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/algorithms_2022.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_7.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_7.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -142,18 +131,6 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -190,6 +167,29 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="lesson_2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
