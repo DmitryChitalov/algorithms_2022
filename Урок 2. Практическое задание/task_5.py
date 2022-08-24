@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def getAnsiByCode(n):
+    return chr(n)
+
+def getAnsiString(n,k):
+    if n == k:
+        return '{} - {}'.format(n, getAnsiByCode(n))
+    return '{} - {}'.format(n, getAnsiByCode(n)) + " " + getAnsiString(n + 1, k)
+
+def recurs(n):
+    if n == 122:
+        return getAnsiString(122,127)
+    return getAnsiString(n, n + 9) + "\n" + recurs(n + 10)
+
+
+print(recurs(32))

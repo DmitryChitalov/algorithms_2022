@@ -17,3 +17,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recur(numb, chet=0, nechet=0):
+    res = numb % 10
+    res %= 2
+    if res == 0:
+        chet += 1
+        res = numb // 10
+        if res == 0:
+            print("четных чисел = ", chet, "Не четных чисел = ", nechet)
+            return
+        recur(numb // 10, chet, nechet)
+    else:
+        nechet += 1
+        res = numb // 10
+        if res == 0:
+            print("четных чисел = ", chet, "Не четных чисел = ", nechet)
+            return
+        recur(numb // 10, chet, nechet)
+
+
+recur(int(input("Введите число")), 0, 0)

@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def recurs(numb, newstr: str):
+    if numb > 0:
+        newstr = newstr + str(numb % 10)
+        return recurs(numb // 10, newstr)
+    else:
+        return newstr
+
+
+print(recurs(1230, ''))

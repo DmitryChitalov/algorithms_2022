@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def recurs(n):
+    if n == 1:
+        return 1
+    else:
+        return recurs(n - 1) + n
+
+numb = int(input("Введите число"))
+
+if recurs(numb) ==(numb * (numb + 1)/2):
+    print("Равенство верно")
+else:
+    print("Равенство не верно")
+
