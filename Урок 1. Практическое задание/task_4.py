@@ -26,7 +26,7 @@
 
 def auth_checker_v1(log, passwd, data):  # Сложность - O(1)
     try:
-        if passwd in data[log] and data[log][1]:
+        if data[log][0] == passwd and data[log][1]:
             answer = 'Ok'
         else:
             answer = 'Account not activated'
@@ -69,4 +69,4 @@ if __name__ == '__main__':
         password = f'passwd_{num}'
         print(auth_checker_v2(login, password, profile_data))
 
-'Второе решение более удачное, т.к. не требует проверки на вхождение, а использует try:except'
+'Первое решение более удачное, т.к. не требует проверки на вхождение, а использует try:except'
