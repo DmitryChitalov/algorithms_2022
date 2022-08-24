@@ -15,3 +15,16 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+my_dict = {'papa': '1c014ef1420476c2bfd97af3f4b7568411972cebdca41a3b6b7c2dbfa765a9f3'}
+a = 'papa'
+if a in my_dict.keys():
+    print(f'Странице {a} соответсует хэш - {my_dict[a]}')
+else:
+    password = a
+    hash_object = hashlib.sha256(a.encode('utf-8') + password.encode('utf-8'))
+    hex_dig = hash_object.hexdigest()
+
+    my_dict[a] = hex_dig
+    print(f'Добавлен хэш страницы {a} - {hex_dig}')
