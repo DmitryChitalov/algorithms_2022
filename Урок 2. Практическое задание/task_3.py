@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def mirror(n, b=0):
+    if len(str(n)) != 1:
+        a = n % 10
+        b = b * 10 + a
+        n //= 10
+        return mirror(n, b)
+    else:
+        b = b * 10 + n
+        return b
+
+
+m = 2340000
+e = mirror(m)
+if len(str(e)) == len(str(m)):
+    print(e)
+else:
+    print(f'{e:0{len(str(m))}d}')

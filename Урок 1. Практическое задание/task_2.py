@@ -6,8 +6,24 @@
 Оба должны обеспечивать поиск минимального значения для списка.
 
 Сложность первого алгоритма должна быть O(n^2) - квадратичная.
+def min_el (list_1):
+    for i in range(len(list_1)):
+        for j in list([i+1):]:
+            if list_1[i]<j:
+                min_find = list_1[i]
+            else:
+                break
+        
+
+
 
 Сложность второго алгоритма должна быть O(n) - линейная.
+def min_el(list_1):
+    min_find = list_1[0]
+    for i in list_1: # O(N)
+        if i < min_findt: #O(1)
+            min_find = i #O(1)
+    return min_find
 
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
