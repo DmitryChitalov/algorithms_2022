@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def calc_numbers(number: int, even_num=0, odd_num=0):
+
+    if number == 0:
+        return f'Четных цифр: {even_num}, нечетных: {odd_num}'
+
+    else:
+        if (number % 10) % 2 == 0:
+            even_num += 1
+
+        else:
+            odd_num += 1
+
+    number = number // 10
+
+    return calc_numbers(number, even_num, odd_num)
+
+
+print(calc_numbers(1544))
+print(calc_numbers(1))

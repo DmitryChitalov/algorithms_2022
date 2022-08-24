@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def fanc(n):
+
+    def calc(n, total=0):
+        if n == 0:
+            return total
+        else:
+            return calc(n-1, total + n)
+
+    if calc(n) == n*(n+1)/2:
+        return True
+    else:
+        return False
+
+
+try:
+    n = int(input('Введите число: '))
+    print(fanc(n))
+except ValueError:
+    print("Вы вместо числа ввели строку. Исправьтесь")
