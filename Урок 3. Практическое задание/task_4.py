@@ -15,3 +15,30 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cache = dict()
+
+
+def set_url_hash(url2):
+    salt = "разная соль"
+    url_hash = hashlib.sha256(salt.encode() + url2.encode()).hexdigest()
+    return url_hash
+
+
+def get_url_cache(url3):
+    if url3 not in cache:
+        cache[url3] = set_url_hash(url3)
+    return cache[url3]
+
+
+url1 = input('Введите url   ')
+get_url_cache(url1)
+print(cache)
+url11 = input('Введите url   ')
+get_url_cache(url11)
+print(cache)
+url111 = input('Введите url   ')
+get_url_cache(url111)
+print(cache)

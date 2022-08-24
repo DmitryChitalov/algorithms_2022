@@ -28,3 +28,171 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+"""
+
+Задание a)
+
+для целей использования в следующем задании  созданных списка и словаря сохраняем их вне циклов 
+
+"""
+
+
+def fill_list():  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    test1_list = []
+    start_val = time.time()
+    for i in range(1, 20000):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        test1_list.append(i)  # O(1)
+        i += 1
+    end_val = time.time()
+    # print(test1_list)
+    return end_val - start_val, test1_list
+
+
+print('-----------------Время формирования списка----------------------')
+first_count, list_to_read = fill_list()
+print(first_count)
+sec_count, list_to_read = fill_list()
+print(sec_count)
+thrd_count, list_to_read = fill_list()
+print(thrd_count)
+
+
+def fill_dict():  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    test1_dict = {}
+    start_val = time.time()
+    for i in range(1, 20000):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        test1_dict[i] = i + 10  # O(1)
+        i += 1
+    end_val = time.time()
+    # print(test1_dict)
+    return end_val - start_val, test1_dict
+
+
+print('-----------------Время формирования словаря----------------------')
+first_count_dict, dict_to_read = fill_dict()
+print(first_count_dict)
+sec_count_dict, dict_to_read = fill_dict()
+print(sec_count_dict)
+thrd_count_dict, dict_to_read = fill_dict()
+print(thrd_count_dict)
+
+print(f'Среднее время формирования списка за 3 попытки: {(first_count + sec_count + thrd_count) / 3}')
+print(f'Среднее время формирования словаря за 3 попытки: {(first_count_dict + sec_count_dict + thrd_count_dict) / 3}')
+
+"""
+
+Вывод - сложность формирования списка в О-нотации такая же, как и сложность формирования словаря, но по замерам
+ тайминга время формирования сопоставимого по размеру словаря больше, чем время формирования списка. 
+ Увеличение времени при формировании словаря происходит из-за необходимости вычисления хэшей-каждого ключа 
+ (эта потеря времени, кстати, будет отыграна в обратную сторону в процессе получения элемента из словаря)   
+
+"""
+
+"""
+
+Задание b)
+
+для целей более точного тайминга внутри полученные внутри циклов значения списков и словарей 
+никак не используются (не делаем их вывод) 
+
+"""
+
+
+def read_list(list_1):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    start_val = time.time()
+    for i in range(len(list_1)):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        list_1[i]  # O(1)
+        i += 1
+    end_val = time.time()
+    return end_val - start_val
+
+
+print('-----------------Время получения элементов списка----------------------')
+first_count_lst = read_list(list_to_read)
+print(first_count_lst)
+sec_count_lst = read_list(list_to_read)
+print(sec_count_lst)
+thrd_count_lst = read_list(list_to_read)
+print(thrd_count_lst)
+
+print('-----------------Время получения элементов словаря----------------------')
+
+
+def read_dict(dict_1):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    start_val = time.time()
+    for item in dict_1.items():  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        item
+    end_val = time.time()
+    return end_val - start_val
+
+
+first_count_dict_r = read_dict(dict_to_read)
+print(first_count_dict_r)
+sec_count_dict_r = read_dict(dict_to_read)
+print(sec_count_dict_r)
+thrd_count_dict_r = read_dict(dict_to_read)
+print(thrd_count_dict_r)
+
+print(f'Среднее время получения элементов списка за 3 попытки: '
+      f'{(first_count_lst + sec_count_lst + thrd_count_lst) / 3}')
+print(f'Среднее время получения элементов словаря за 3 попытки:'
+      f' {(first_count_dict_r + sec_count_dict_r + thrd_count_dict_r) / 3}')
+
+"""
+
+Вывод - сложность получения элементов списка в О-нотации такая же, как и сложность получения элементов словаря,
+ но по замерам  тайминга время получения сопоставимого по размеру словаря меньше, чем время получения всех 
+ элементов списка. 
+ Уменьшение времени при получении словаря происходит из-за более быстрого обращения (по хэшу) 
+ к каждой паре "ключ-значение" 
+   
+
+"""
+
+"""
+
+Задание с)
+
+
+"""
+
+
+def del_list(list_2):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    start_val = time.time()
+    for i in range(len(list_2)):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        list_2.pop(0)  # O(1)
+        i += 1
+    end_val = time.time()
+    return end_val - start_val
+
+
+print('-----------------Время удаления----------------------')
+first_count_dlst = del_list(list_to_read)
+
+
+def del_dict(dict_2):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+    start_val = time.time()
+    for i in list(dict_2):  # O(1) - так как  тестовом примере мы знаем длину массива, в противном случае O(n)
+        dict_2.pop(i)  # O(1)
+    end_val = time.time()
+    return end_val - start_val
+
+
+first_count_dict_d = del_dict(dict_to_read)
+
+print(f'Время удаления элементов списка: {first_count_dlst}')
+print(f'Время удаления элементов словаря:{first_count_dict_d}')
+
+"""
+
+Вывод - сложность удаления элементов списка в О-нотации такая же, как и сложность удаления элементов словаря,
+ но по замерам  тайминга время удаления сопоставимого по размеру словаря меньше, чем время удаления всех 
+ элементов списка. 
+ Уменьшение времени при удалении словаря происходит из-за более быстрого обращения (по хэшу) 
+ к каждой удаляемой паре "ключ-значение" 
+
+
+"""
