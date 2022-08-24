@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_char(char_num=32, i=0):
+
+    if char_num > 127:
+        return True
+    print(f'{char_num} - {chr(char_num)}', end=' ')
+    i += 1
+    if i != 10:
+        pass
+    else:
+        print('\n')
+        i = 0
+
+    ascii_char(char_num+1,i)
+
+
+ascii_char()

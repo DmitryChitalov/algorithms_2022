@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def calc_sum(n, sum=0.0, num=1.0):
+
+    if n == 0:
+        return sum
+
+    else:
+        n -= 1
+        return calc_sum(n, sum+num, num / 2 * -1)
+
+
+print(calc_sum(3))
