@@ -47,19 +47,19 @@ def time_measure(func):
 
 # a)
 @time_measure
-def fill_list(num):                  # O(N) - линейная
-    list_out = []                    # O(1) - константная
-    for item in range(num):          # O(N) - линейная
+def fill_list(num):
+    list_out = []
+    for item in range(num):
         list_out.append(item)        # O(1) - константная
-    return list_out                  # O(1) - константная
+    return list_out
 
 
 @time_measure
-def fill_dict(num):                  # O(N) - линейная
-    dict_out = {}                    # O(1) - константная
-    for item in range(num):          # O(N) - линейная
+def fill_dict(num):
+    dict_out = {}
+    for item in range(num):
         dict_out[item] = item        # O(1) - константная
-    return dict_out                  # O(1) - константная
+    return dict_out
 
 
 # b)
@@ -92,14 +92,16 @@ if __name__ == '__main__':
     print(test_dict)
     print('-'*100, '\n')
     """
-        Сложность функций - линейная. Время выполнения приблизительно одинаково. 
+        Сложность функций - константная. Заполнение словаря выполняется быстрее, т.к. словарь представляет собой
+        хэш-таблицу. 
     """
     print('Пункт b)')
     print(get_list_item(test_list, 20))
     print(get_dict_item(test_dict, 20))
     print('-' * 100, '\n')
     """
-        Сложность функций - константная. Функция взятия элемента по ключу выполняется быстрее. 
+        Сложность функций - константная. Функция взятия элемента по ключу выполняется быстрее, т.к. словарь 
+        представляет собой хэш-таблицу. 
     """
     print('Пункт c)')
     print(pop_list(test_list, 10))
