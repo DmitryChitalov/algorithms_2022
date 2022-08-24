@@ -29,7 +29,13 @@ import json
 passwd = input('Задайте пароль   ')
 salt = "простая соль"
 
-pass_hash = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+
+def set_pass_hash(pass_1, salt_1):
+    passw_hash = hashlib.sha256(salt_1.encode() + pass_1.encode()).hexdigest()
+    return passw_hash
+
+
+pass_hash = set_pass_hash(passwd, salt)
 
 with open("pass_file.json", "w") as pass_file:
     json.dump(pass_hash, pass_file)
@@ -41,7 +47,7 @@ password_to_check = input('Введите пароль:  ')
 with open('pass_file.json', 'r') as openfile:
     pass_stored_hash = json.load(openfile)
 
-pass_to_check_hash = hashlib.sha256(salt.encode() + password_to_check.encode()).hexdigest()
+pass_to_check_hash = set_pass_hash(password_to_check, salt)
 
 print(f'Хэш пароля для проверки: {pass_to_check_hash}')
 
