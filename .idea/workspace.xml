@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="ДЗ1 Желонкина задачи 1,2,3,4">
       <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" afterDir="false" />
@@ -123,6 +126,10 @@
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
