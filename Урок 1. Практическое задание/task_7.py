@@ -53,5 +53,4 @@ def pal_checker(string):
 
     return still_equal
 
-
 print(pal_checker("молоко делили ледоколом"))

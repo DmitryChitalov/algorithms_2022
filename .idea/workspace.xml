@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="ДЗ1 Желонкина задачи 1,2,3,4">
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" afterDir="false" />
-    </list>
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="ДЗ1 Желонкина задачи 1,2,3,4,5,6,7" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -175,7 +173,28 @@
       <option name="project" value="LOCAL" />
       <updated>1661453427601</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ДЗ1 Желонкина задачи 1,2,3,4,5">
+      <created>1661453499218</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1661453499218</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ДЗ1 Желонкина задачи 1,2,3,4,5,6">
+      <created>1661453605899</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1661453605899</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ДЗ1 Желонкина задачи 1,2,3,4,5,6,7">
+      <created>1661453675186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1661453675186</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -217,7 +236,10 @@
     <MESSAGE value="ДЗ 1 задача 1" />
     <MESSAGE value="ДЗ1 Желонкина задачи 1,2,3" />
     <MESSAGE value="ДЗ1 Желонкина задачи 1,2,3,4" />
-    <option name="LAST_COMMIT_MESSAGE" value="ДЗ1 Желонкина задачи 1,2,3,4" />
+    <MESSAGE value="ДЗ1 Желонкина задачи 1,2,3,4,5" />
+    <MESSAGE value="ДЗ1 Желонкина задачи 1,2,3,4,5,6" />
+    <MESSAGE value="ДЗ1 Желонкина задачи 1,2,3,4,5,6,7" />
+    <option name="LAST_COMMIT_MESSAGE" value="ДЗ1 Желонкина задачи 1,2,3,4,5,6,7" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
