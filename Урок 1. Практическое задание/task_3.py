@@ -17,3 +17,29 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {
+    'gazprom': 1203,
+    'rosneft': 708,
+    'lukoil': 640,
+    'sber': 845,
+    'rosneft': 708,
+    'rjd': 156,
+    'rostec': 179,
+    'x5retail': 20,
+    'surgutneftegaz': 106,
+    'vtb': 202
+}
+# Сложность O(N) данное решение эффективней т.к. с ростом колличества элементов операции растут не так сильно как при n log n.
+dic = company   # O(1)
+for i in range(3):  # O(1)
+    big = max(dic.items(), key=lambda j: j[1])  # O(N)
+    del dic[big[0]] # O(1)
+    print(big[1]) # O(1)
+
+# Сложность O(n Log n)
+list2 = list(company.items()) # O(N)
+list2.sort(key=lambda i: i[1], reverse=True)  # O(n Log n)
+for i in range(3):  # O(1)
+    print(list2[i][0], list2[i][1]) # O(1)
+ 
+
