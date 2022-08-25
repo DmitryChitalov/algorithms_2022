@@ -22,3 +22,34 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Сложность 0(1) самый эффективный вариант.
+
+def auth1(userslist, login, pwd):
+    if userlist.get(login):    
+        if userslist[login]['password'] != pwd:                
+            return 'Ошибка ввода пароля! Попробуйте снова.'
+        elif users[login]['password'] == pwd \
+                and userslist[login]['on']:
+            return 'Сколько лет, сколько зим! Обязатнльно проверте входящие, возможно вас искали.'
+        elif users[login]['password'] = pwd \
+                and userslist[login]['off']:
+            return 'Вы не активировали учетную запись. Пожалуйста сделайте это.'
+    else:
+        return 'Вы не зарегистрованы, но только сегодя можете сделать это почти бесплатно!'
+   
+# Сложность 0(n).
+
+def auth2(userslist, login, pwd):
+    for key, value in userslist.items():    
+        if value['password'] != pwd:                
+            return 'Ошибка ввода пароля! Попробуйте снова.'
+        elif value['password'] == pwd \
+                and userslist[login]['on']:
+            return 'Сколько лет, сколько зим! Обязатнльно проверте входящие, возможно вас искали.'
+        elif value['password'] == pwd \
+                and userslist[login]['off']:
+            return 'Вы не активировали учетную запись. Пожалуйста сделайте это.'
+    
+    return 'Вы не зарегистрованы, но только сегодя можете сделать это почти бесплатно!'
+   
