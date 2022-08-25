@@ -22,3 +22,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+profiles = {
+    'User1': ['12344', False],
+    'Sorcer': ['qwerty', False],
+    'Bond': ['mypassword', True],
+    'Doomguy': ['iddqd', False],
+    'VVG81': ['180381', True],
+}
+
+#Решение №1. Сложность: O(2)
+def check_activation(name):
+    if profiles[name][1] == False: #O(1) + O(1)
+        print(f'{name}, вам необходимо пройти активацию')
+    else:
+        print(f'Добро пожаловать, {name}')
+
+check_activation('Sorcer')
+check_activation('Bond')
+
+#Решение №2. Сложность: O(n) + O(4)
+def check_activation_2(name):
+    for key in profiles.keys(): #O(n)
+        if key == name:                     #O(1) + O(1)
+            if profiles[name][1] == False:  # O(1) + O(1)
+                print(f'{name}, вам необходимо пройти активацию')
+            else:
+                print(f'Добро пожаловать, {name}')
+
+check_activation_2('Doomguy')
+check_activation_2('VVG81')
+
+# решение №1 более лаконичное и менее сложное.
