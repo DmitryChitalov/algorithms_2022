@@ -17,3 +17,15 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+class PlatesPack:
+    def __init__(self, limit):
+        self.plates = []
+        self.limit = limit
+          
+    def add(self, pl):
+        if len(self.plates[len(self.plates) - 1]) < self.limit:
+            self.plates[len(self.plates) - 1].append(pl)
+        else:
+            self.plates.append([])
+            self.plates[len(self.plates) - 1].append(pl)
+ 
