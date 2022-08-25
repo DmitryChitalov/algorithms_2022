@@ -26,10 +26,8 @@ def func_1(nums):
 
 
 def func_2(nums):
-    new_arr = []
     ind = [nums.index(num) for num in nums if num % 2 == 0]
-    new_arr.append(ind)
-    return new_arr[0]
+    return ind
 
 
 start_time = timeit.default_timer()
