@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+# сложность алгоритма O(n):
+def min_On(lst):
+    min_i = lst[0]  #O(1)
+    for i in lst:   #O(n)
+        if i < min_i:   #O(1)
+            min_i = i   #O(1)
+    return min_i    #O(1)
+
+# сложность алгоритма O(n**2):
+def min_sq(lst):
+    l = len(lst)    #O(1)
+    for i in range(l):  #O(n)
+       for j in range(l-i-1):   #O(n)
+           if lst[j] > lst[j+1]:    #O(1)
+               lst[j], lst[j+1] = lst[j+1], lst[j]  #O(1)
+
+    return lst[0]   #O(1)
+
+
+
+lst = [60, 8, -43, -8]
+print(min_On(lst))
+print(min_sq(lst))

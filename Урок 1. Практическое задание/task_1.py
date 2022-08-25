@@ -65,10 +65,4 @@ for j in (50, 500, 1000, 5000, 10000):
 print(check_1(lst))
 print(check_2(lst))
 print(check_3(lst))
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
+
