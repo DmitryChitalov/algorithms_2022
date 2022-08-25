@@ -35,9 +35,9 @@ def top3_v1(dictionary):
             if dictionary[k] == i:
                 sorted_dict[k] = dictionary[k]
                 break
-    print(f'Рэйтинг компаний по прибыли: {sorted_dict}')
+    return f'Рэйтинг компаний по прибыли: {sorted_dict}'
 
-top3_v1(companies_dict)
+print(top3_v1(companies_dict))
 
 #Решение №2 Сложность: O(1) + O(n log n) + O(n)
 def top3_v2(dictionary):
@@ -45,16 +45,16 @@ def top3_v2(dictionary):
     sorted_keys = sorted(dictionary, key=dictionary.get, reverse=True)[:3] #O(n log n)
     for k in sorted_keys: #O(n)
         sorted_dict[k] = dictionary[k]
-    print(f'Рэйтинг компаний по прибыли: {sorted_dict}')
+    return f'Рэйтинг компаний по прибыли: {sorted_dict}'
 
-top3_v2(companies_dict)
+print(top3_v2(companies_dict))
 
 #Решение №3 Сложность: O(n log n)
 def top3_v3(dictionary):
     sorted_tuples = sorted(dictionary.items(), key=lambda item: item[1], reverse=True)[:3]
-    print(f'Рэйтинг компаний по прибыли: {sorted_tuples}')
+    return f'Рэйтинг компаний по прибыли: {sorted_tuples}'
 
-top3_v3(companies_dict)
+print(top3_v3(companies_dict))
 
 #Решение №3 эффективнее так как его сложность самая низкая O(n log n), а в первом решении есть
 # квадратичная сложность O(n^2), а во втором есть ещё O(1) и O(n) помимо O(n log n). Кроме того,

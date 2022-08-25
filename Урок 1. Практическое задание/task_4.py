@@ -34,23 +34,23 @@ profiles = {
 #Решение №1. Сложность: O(2)
 def check_activation(name):
     if profiles[name][1] == False: #O(1) + O(1)
-        print(f'{name}, вам необходимо пройти активацию')
+        return (f'{name}, вам необходимо пройти активацию')
     else:
-        print(f'Добро пожаловать, {name}')
+        return (f'Добро пожаловать, {name}')
 
-check_activation('Sorcer')
-check_activation('Bond')
+print(check_activation('Sorcer'))
+print(check_activation('Bond'))
 
 #Решение №2. Сложность: O(n) + O(4)
 def check_activation_2(name):
     for key in profiles.keys(): #O(n)
         if key == name:                     #O(1) + O(1)
             if profiles[name][1] == False:  # O(1) + O(1)
-                print(f'{name}, вам необходимо пройти активацию')
+                return f'{name}, вам необходимо пройти активацию'
             else:
-                print(f'Добро пожаловать, {name}')
+                return f'Добро пожаловать, {name}'
 
-check_activation_2('Doomguy')
-check_activation_2('VVG81')
+print(check_activation_2('Doomguy'))
+print(check_activation_2('VVG81'))
 
 # решение №1 более лаконичное и менее сложное.
