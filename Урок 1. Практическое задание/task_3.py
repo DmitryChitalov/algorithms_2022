@@ -20,10 +20,10 @@
 profit = {'audi': 123456789, 'kia': 12345, 'volvo': 123456, 'VAZ': 1234, 'bmw': 1234567}
 
 # # решение 1:
-# def func(arr): # O(nlogn)
-#     res = sorted(profit, key=profit.get)[-3:] # O(n) = O(nlogn) + O(n) = O(nlogn)
-#     return res #O(1)
-# func(profit)
+def func(arr): # O(nlogn)
+    res = sorted(profit, key=profit.get)[-3:] # O(n) = O(nlogn) + O(n) = O(nlogn)
+    return res #O(1)
+func(profit)
 
 # решение 2:
 def func_2(arr): #O(1) + 3 x O(n) + O(1) + O(n) + 0(1) = 3O(n) = O(n)

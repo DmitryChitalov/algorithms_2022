@@ -35,9 +35,28 @@ def check(key, password):#O(n)
                       ' You can keep using our service!')
     else:
         print('Your login or password are incorrect! Please try again!')#O(1)
-# check('Tash', 'tash')
 
-def check_2(key, password):#O(1)
+# check('Masha', 'masha')
+
+def check_2(key, password): #О(n)
+    try:
+        for login, info in d.items(): #O(n)
+            lst = d[key] #O(1)
+            if key == login and password == lst[0]:  #О(1)
+                if lst[1] == 'activated': #О(1)
+                    return f'{key},your login and password are okay!' \ 
+                           f'You can keep using our service!' #О(1)
+                else:
+                    return f'{key}, your login and password are okay ' \   
+                           f'but you need to finish registration!'  #О(1)
+    except KeyError:
+        return 'Your login or password are incorrect! Please try again!' #О(1)
+    else:
+        return 'Your login or password are incorrect! Please try again!' #О(1)
+
+# check_2('Tash', 'ash')
+
+def check_3(key, password):#O(1)
     if d.get(key) and password == d[key][0]:#O(1)
         if d[key][1] == 'not activated':#O(1)
             print(f'{key},your login and password are okay but'#O(1)
@@ -48,11 +67,11 @@ def check_2(key, password):#O(1)
     else:
         print('Your login or password are incorrect! Please try again!')#O(1)
 
-# check_2('Ivan', 'Ivan')
+# check_3('Ivan', 'Ivan')
 
 
 
-"""Первое решение эффективнее, его сложность О(n), второе решение имеет сложность O(1)"""
+"""Первое и второе решения менее эффективны,их сложность О(n), третье решение имеет сложность O(1)"""
 
 
 
