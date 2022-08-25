@@ -36,10 +36,11 @@ class DequeClass:
         return len(self.elems)
 
 def pal_checker(string):
+    string = string.replace(' ', '') #доработал удалением пробелов в строке
     dc_obj = DequeClass()
 
     for el in string:
-        if el != ' ':   #доработал проверкой
+        #if el != ' ':   #доработал проверкой
             dc_obj.add_to_rear(el)
 
     still_equal = True
