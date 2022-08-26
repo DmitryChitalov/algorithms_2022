@@ -18,6 +18,7 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
 class TaskBoardClass:
     def __init__(self):
         self.todo = []
@@ -44,7 +45,7 @@ class TaskBoardClass:
         return f'Список задач на доработку обновлён: {self.rework}'
 
     def size(self):
-        return f'Задач в работе: {len(self.todo)+len(self.rework)}'
+        return f'Задач в работе: {len(self.todo) + len(self.rework)}'
 
 
 if __name__ == '__main__':
@@ -62,11 +63,3 @@ if __name__ == '__main__':
     print(TBC_homeworks.size())
     print(TBC_homeworks.from_queue('rework'))
     print(TBC_homeworks.size())
-
-
-
-
-
-
-
-

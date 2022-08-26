@@ -18,6 +18,7 @@
 в массив стопок (lst = [[], [], [], [],....]).
 """
 
+
 class PlatesClass:
     def __init__(self):
         self.stacks = 1
@@ -55,7 +56,6 @@ class PlatesClass:
 
 
 if __name__ == '__main__':
-
     PC_KAMOD = PlatesClass()
     print(PC_KAMOD.push_in(1))
     print(PC_KAMOD.push_in(2))

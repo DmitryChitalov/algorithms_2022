@@ -13,6 +13,8 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 --код с нуля писать не нужно, требуется доработать пример с урока
 """
+
+
 class DequeClass:
     def __init__(self):
         self.elems = []
@@ -35,13 +37,14 @@ class DequeClass:
     def size(self):
         return len(self.elems)
 
+
 def pal_checker(string):
-    string = string.replace(' ', '') #доработал удалением пробелов в строке
+    string = string.replace(' ', '')  # доработал удалением пробелов в строке
     dc_obj = DequeClass()
 
     for el in string:
-        #if el != ' ':   #доработал проверкой
-            dc_obj.add_to_rear(el)
+        # if el != ' ':   #доработал проверкой
+        dc_obj.add_to_rear(el)
 
     still_equal = True
 
@@ -52,5 +55,6 @@ def pal_checker(string):
             still_equal = False
 
     return still_equal
+
 
 print(pal_checker("молоко делили ледоколом"))
