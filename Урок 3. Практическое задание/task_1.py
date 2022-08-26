@@ -28,3 +28,136 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+from functools import wraps
+
+
+def time_measurement(count=1):
+    """
+    Замеряет время, необходимое для выполнения функции count раз.
+    """
+
+    def _time_measurement(callback):
+        @wraps(callback)
+        def wrapper(args):
+            lead_time = round(0, 20)
+            for attempt in range(count):
+                start = time()
+                callback(args)
+                stop = time()
+                lead_time += stop - start
+
+            return f'Время выполнения функции {callback.__name__} x{count} раз: {lead_time} секунд.'
+
+        return wrapper
+
+    return _time_measurement
+
+
+def args_to_string(callback):
+    def wrapper(args):
+        args = str(args)
+        return callback(args)
+
+    return wrapper
+
+
+# a)заполнение списка
+@args_to_string
+@time_measurement()
+def add_to_list(arg, lst=[]):
+    """
+    Распаковка элементов и добавление их в пустой список через цикл.
+    Сложность: O(n)
+    """
+    for elem in arg:  # O(n)
+        lst.append(elem)  # O(1)
+    return lst  # O(1)
+
+
+@args_to_string
+@time_measurement()
+def add_to_dict(arg, dct={}):
+    """
+    Распаковка элементов и добавление их в пустой словарь через цикл.
+    Сложность: O(n)
+    """
+    for elem in arg:  # O(n)
+        dct[elem] = elem  # O(1)
+    return dct  # O(1)
+
+
+if __name__ == '__main__':
+    """
+    Вывод:
+    Для данной реализации(!) заполнение словаря будет происходить быстрее из-за фильтрации коллизии: для любого целого,
+    положительного числа в словарь будет добавлено максимум 10 ключей.
+    В общем же случае - когда количество элементов для списка и словаря будет одинаковое, добавление в словарь будет 
+    происходить медленнее.
+    """
+
+    print(add_to_list(9 ** 1000))
+    print(add_to_dict(9 ** 1000))
+
+
+# b)
+
+@time_measurement(count=2000000)
+def get_from_list(index, lst=[1, 2, 3, 4, 5, 6, 7, 8, 9]):
+    """
+    Получение элемента из списка по индексу через цикл.
+    Сложность: O(n)
+    """
+    for elem in lst:  # O(n)
+        if index == elem:  # O(1)
+            return elem  # O(1)
+
+
+@time_measurement(count=2000000)
+def get_from_dict(key, dct={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}):
+    """
+    Получение элемента словаря по ключу через цикл.
+    Сложность: O(n)
+    """
+    for elem in dct.keys():  # O(n)
+        if key == elem:  # O(1)
+            return elem  # O(1)
+
+
+if __name__ == '__main__':
+    # Вывод: получение элемента со списка требует меньше времени на выполнение, видимо из-за реализации.
+
+    print(get_from_list(2))  # O(1)
+    print(get_from_dict(2))  # O(1)
+
+    # c)
+
+
+@time_measurement(count=2000000)
+def remove_from_list(char, lst=[1, 2, 3, 4, 5, 6, 7, 8, 9]):
+    """
+    Проходит по списку, и в случае совпадения char с элементом списка, удаляет элемент.
+    Сложность: O(n**2)
+    """
+    for elem in lst:  # O(n)
+        if char == elem:  # O(1)
+            return lst.remove(elem)  # O(n)
+
+
+@time_measurement(count=2000000)
+def remove_from_dict(char, dct={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}):
+    """
+    Проходит по словарю и, в случае если находится ключ равный char, удаляет соответствующий элемент.
+    Сложность: O(n)
+    """
+    for key in dct.keys():  # O(n)
+        if char == key:  # O(1)
+            return dct.pop(key)  # O(1)
+
+
+if __name__ == '__main__':
+    # Вывод. Удаление со списка происходит медленнее из-за сожности встроенной операции.
+    # Хотя при проходе на 2000000 итераций для данного случая словарь почему то отрабатывает медленнее.
+
+    print(remove_from_list(2))  # O(1)
+    print(remove_from_dict(2))  # O(1)

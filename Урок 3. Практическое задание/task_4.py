@@ -15,3 +15,29 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+
+class WebCache:
+    def __init__(self):
+        """
+        При создании обьекта задается соль.
+        """
+        self.cache = {}
+        self.hash_salt = '63479ad69a090b258277ec8fba6f99419a2ffb248981510657c944ccd1148e97'
+
+    def url_add(self, url):
+        """
+        Проверяет, есть хеш url-а в кеше, если нет - добавляет.
+        """
+        url_hash = hashlib.sha256((url + self.hash_salt).encode('utf-8')).hexdigest()
+        if url_hash in self.cache.values():
+            return f'Страница была найдена в кеше, хеш: {self.cache[url]}'
+        self.cache[url] = url_hash
+        return 'Страница была добавлена в кеш.'
+
+
+if __name__ == '__main__':
+    cash_db = WebCache()
+    print(cash_db.url_add('https://www.google.com/'))
+    print(cash_db.url_add('https://www.google.com/'))

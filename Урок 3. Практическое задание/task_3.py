@@ -22,3 +22,21 @@
 р
 а
 """
+import hashlib
+
+
+def unique_substrings(word, sub_dict={}, sub_list=[]):
+    """
+    Решение через словарь, т.к. подсказку увидел после написания кода =3
+    """
+    for index in range(1, len(word)):
+        sub_dict[hashlib.sha256(word[:index].encode('utf-8')).hexdigest()] = word[:index]
+    for index in range(0, len(word) - 1):
+        sub_dict[hashlib.sha256(word[:index:-1].encode('utf-8')).hexdigest()] = word[:index:-1]
+    for value in sub_dict.values():
+        sub_list.append(value)
+    return sub_list
+
+
+if __name__ == '__main__':
+    print(unique_substrings('papa'))
