@@ -18,3 +18,26 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+a = 10
+b = 1
+num = int(input("Введите  целое число"))
+digit = 0
+count = 0
+res = ''
+def rec():
+    global digit
+    global count
+    count += 1
+    if count <= len(str(num)):
+        global a
+        global b
+        digit = str(num % a // b)
+        a = a * 10
+        b = b * 10
+        global res
+        res = res + digit
+        return rec()
+    print(res)
+
+rec()
