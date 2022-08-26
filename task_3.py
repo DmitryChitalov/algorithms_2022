@@ -11,7 +11,9 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
-from timeit import timeit
+
+# from timeit import timeit
+from cProfile import run
 
 
 def revers(enter_num, revers_num=0):
@@ -51,10 +53,59 @@ my_num = 2130
 # print(revers_2(my_num))     # 312.0
 # print(revers_3(my_num))     # 0312
 # print(revers_4(my_num))     # 0312
-print(timeit("revers(my_num)", globals=globals(), number=1000))    # 0.002451399981509894
-print(timeit("revers_2(my_num)", globals=globals(), number=1000))  # 0.0019189000013284385
-print(timeit("revers_3(my_num)", globals=globals(), number=1000))  # 0.0007659000111743808
-print(timeit("revers_4(my_num)", globals=globals(), number=1000))  # 0.005181999993510544
+# print(timeit("revers(my_num)", globals=globals(), number=1000))    # 0.002451399981509894
+# print(timeit("revers_2(my_num)", globals=globals(), number=1000))  # 0.0019189000013284385
+# print(timeit("revers_3(my_num)", globals=globals(), number=1000))  # 0.0007659000111743808
+# print(timeit("revers_4(my_num)", globals=globals(), number=1000))  # 0.005181999993510544
+
+run('revers(my_num)')
+"""
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+      5/1    0.000    0.000    0.000    0.000 task_3.py:19(revers)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         4 function calls in 0.000 seconds
+
+"""
+
+run('revers_2(my_num)')
+"""
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 task_3.py:29(revers_2)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         4 function calls in 0.000 seconds
+"""
+
+run('revers_3(my_num)')
+"""
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 task_3.py:37(revers_3)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         11 function calls (8 primitive calls) in 0.000 seconds
+"""
+
+run('revers_4(my_num)')
+"""
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+      4/1    0.000    0.000    0.000    0.000 task_3.py:43(revers_4)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+"""
+
 
 """Даже если не брать в расчет то, что первые два алгоритма не корректно выдают результат, эффективней реализация 
  revers_3, так как:
