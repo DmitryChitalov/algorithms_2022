@@ -28,3 +28,115 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def times(func):
+    def wrapper(*args, **kargs):
+        start = time.perf_counter()
+        res = func(*args, **kargs)
+        end = time.perf_counter()
+        print(f'Функция выполнилась за {end - start}')
+
+    return wrapper
+
+
+@times
+def to_fill_list_1(items, count):
+    """Сложность функции O(n)"""
+    for i in range(count):  # Сложность O(n)
+        # Сложность O(1), так как мы вставляем в конец списка
+        items.append(i)
+
+
+@times
+def to_fill_list_2(items, count):
+    """Сложность функции O(n^2)"""
+    for i in range(count):  # Сложность O(n)
+        # так как мы вставляем в начало списка,
+        # и другие элементы сдвигаются на один вправо и
+        # следоватьльно сложность становиться становиться O(n)
+        items.insert(0, i)
+
+
+@times
+def to_fill_dict(items, count):
+    """Сложность функции O(n)"""
+    for i in range(count):  # Сложность O(n)
+        # Так как у нас добавление в словарь сложность O(1),
+        # а нам нужно добавить n элементов то сложность сразу становиться O(n)
+        items[i] = i
+
+
+items_lst = []  # Список для заполнения
+items_dict = {}  # Словарь для заполнения
+count = int(input('Введите количесво итераций для заполнения: '))
+
+# Задание a)
+to_fill_list_1(items_lst, count)
+to_fill_list_2(items_lst, count)
+to_fill_dict(items_dict, count)
+print('__' * 10)
+
+
+"""
+Можно сделать вывод, так как словари это хеш-таблицы, и при добавлении
+нового элемента имеют сложность O(1).
+Но если у нас n элементов нужно вставить,
+то сложность возврастает с константной до линейной
+"""
+
+
+# Задание b)
+
+@times
+def to_get_item_list(items):
+    """Сложность функции O(n)"""
+    for i in range(len(items)):  # Сложность O(n)
+        items[i] = 'update'  # изменение элемента из списка по индексу имеет O(1)
+
+
+@times
+def to_get_item_dict(items):
+    """Сложность функции O(n)"""
+    for i in items.keys():  # Сложность O(n)
+        items[i] = 'update'  # изменение элемента из словаря имеет O(1)
+
+
+to_get_item_list(items_lst)
+to_get_item_dict(items_dict)
+print('__' * 10)
+
+"""
+операции изменения по ключу так же работают быстрее у словарей чем у списков.
+словарь - хеш-таблица, и он знает где лежит каждая запись по ключу.
+"""
+
+
+# Задание c)
+
+@times
+def to_remove_item_list(items):
+    """Сложность функции O(n)"""
+    for i in range(len(items)):  # O(n)
+        items.pop()  # Сложность O(1) так как мы тут удаляем с конца.
+
+
+@times
+def to_remove_item_dict(items):
+    """Сложность функции O(n)"""
+    for k in list(items):  # O(n)
+        items.pop(k, None)  # Сложность O(1) так как мы тут удаляем по ключу.
+
+
+to_remove_item_list(items_lst)
+to_remove_item_dict(items_dict)
+
+
+"""
+судя по подсчетам time словарь быстрее работает чем список,
+так как является хеш таблицей, и требователен к ресурсам компьтера.
+подводя итог, на python 3.10 словарь быстрее работает и
+при создании, изменении, и удалении элементов
+ """
