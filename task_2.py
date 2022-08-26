@@ -1,50 +1,85 @@
 """
 Задание 2.
 
-Реализуйте два алгоритма.
+Приведен код, который формирует из введенного числа
+обратное по порядку входящих в него цифр.
+Задача решена через рекурсию
+Выполнена попытка оптимизировать решение мемоизацией
+Сделаны замеры обеих реализаций.
 
-Оба должны обеспечивать поиск минимального значения для списка.
+Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
 
-Сложность первого алгоритма должна быть O(n^2) - квадратичная.
-
-Сложность второго алгоритма должна быть O(n) - линейная.
-
-
-Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
--- нельзя использовать встроенные функции min() и sort()
--- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
--- проставьте сложности каждого выражения в двух ваших алгоритмах
+П.С. задание не такое простое, как кажется
 """
 
-
-###################################################################
-def get_min_number(lst):
-    """
-    Алгоритм 1
-    Сложность: O(n^2) - квадратичная
-    """
-    min_number = lst[0]                                      # O(1) - Константная
-    for i in lst:                                            # O(n) - Линейная
-        for j in range(lst.index(i) + 1, len(lst) - 1, 1):   # O(n) - Линейная
-            if min_number > lst[j]:                          # O(len(...)) - Линейная
-                min_number = lst[j]                          # O(1) - Константная
-    return min_number                                        # O(1) - Константная
+from timeit import timeit
+from random import randint
 
 
-#####################################################################
-def get_min_number_2(lst):
-    """
-    Алгоритм 2
-    Сложность: O(n) - Линейная
-    """
-    min_number_2 = lst[0]                                    # O(1) - Константная
-    for i in lst:                                            # O(n) - Линейная
-        if i < min_number_2:                                 # O(len(...)) - Линейная
-            min_number_2 = i                                 # O(1) - Константная
-    return min_number_2                                      # O(1) - Константная
+def recursive_reverse(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-first_list = [100, 50, 3, 4, 23, 10]
+num_100 = randint(10000, 1000000)
+num_1000 = randint(1000000, 10000000)
+num_10000 = randint(100000000, 10000000000000)
 
-print(get_min_number(first_list))
-print(get_min_number_2(first_list))
+print('Не оптимизированная функция recursive_reverse')
+print(
+    timeit(
+        "recursive_reverse(num_100)",
+        setup='from __main__ import recursive_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse(num_1000)",
+        setup='from __main__ import recursive_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse(num_10000)",
+        setup='from __main__ import recursive_reverse, num_10000',
+        number=10000))
+
+
+def memoize(f):
+    cache = {}
+
+    def decorate(*args):
+
+        if args in cache:
+            return cache[args]
+        else:
+            cache[args] = f(*args)
+            return cache[args]
+
+    return decorate
+
+
+@memoize
+def recursive_reverse_mem(number):
+    if number == 0:
+        return ''
+    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+
+
+print('Оптимизированная функция recursive_reverse_mem')
+print(
+    timeit(
+        'recursive_reverse_mem(num_100)',
+        setup='from __main__ import recursive_reverse_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_1000)',
+        setup='from __main__ import recursive_reverse_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_10000)',
+        setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+""" Мемоизация здесь не нужна, так как кеширование файлов влияет на результат замеров, поэтому замеры не верны """
