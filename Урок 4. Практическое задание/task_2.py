@@ -80,3 +80,15 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+print(recursive_reverse(num_100))
+print(recursive_reverse(num_1000))
+print(recursive_reverse(num_10000))
+
+print(recursive_reverse_mem(num_100))
+print(recursive_reverse_mem(num_1000))
+print(recursive_reverse_mem(num_10000))
+"""
+Функция после оптимизации дает неправильный результат, обрезает ноль
+"""
