@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+from random import randint
+
+
+def even_odd_counter(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        if number % 2 == 0:
+            return even_odd_counter(number // 10, even+1, odd)
+        else:
+            return even_odd_counter(number // 10, even, odd+1)
+
+
+if __name__ == '__main__':
+    for _ in range(10):
+        random_number = randint(100, 9999)
+        even_, odd_ = even_odd_counter(random_number)
+        print(f'В числе {random_number} {even_} четных и {odd_} нечетных')

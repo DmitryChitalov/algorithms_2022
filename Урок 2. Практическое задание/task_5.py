@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_rec(start=32, finish=127, counter=0):
+    if start <= finish:
+        if counter == 10:
+            print()
+            counter = 0
+        print(f'{start} - {chr(start)}', end=' ')
+        return ascii_rec(start + 1, finish, counter + 1)
+
+
+if __name__ == '__main__':
+    ascii_rec()
