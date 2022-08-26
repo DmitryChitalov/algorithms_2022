@@ -60,50 +60,56 @@ my_num = 2130
 
 run('revers(my_num)')
 """
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+8 function calls (4 primitive calls) in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.000    0.000 <string>:1(<module>)
       5/1    0.000    0.000    0.000    0.000 task_3.py:19(revers)
         1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
-
-         4 function calls in 0.000 seconds
-
 """
 
 run('revers_2(my_num)')
 """
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+4 function calls in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.000    0.000 <string>:1(<module>)
         1    0.000    0.000    0.000    0.000 task_3.py:29(revers_2)
         1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-
-
-         4 function calls in 0.000 seconds
 """
 
 run('revers_3(my_num)')
 """
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+4 function calls in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.000    0.000 <string>:1(<module>)
         1    0.000    0.000    0.000    0.000 task_3.py:37(revers_3)
         1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-
-
-         11 function calls (8 primitive calls) in 0.000 seconds
 """
 
 run('revers_4(my_num)')
 """
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+11 function calls (8 primitive calls) in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    0.000    0.000 <string>:1(<module>)
       4/1    0.000    0.000    0.000    0.000 task_3.py:43(revers_4)
         4    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
         1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-
 """
 
 
