@@ -10,6 +10,8 @@
 
 import random
 
+# Задание № 6
+
 
 def game(number, max_count):
     if max_count < 11:

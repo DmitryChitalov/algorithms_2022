@@ -14,6 +14,8 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 """
 
+# Задание № 7
+
 
 def func_equality(user_number, result=0, formula=0):
     if formula == 0:

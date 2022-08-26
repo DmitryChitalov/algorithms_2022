@@ -19,6 +19,8 @@
 1230 -> 0321
 """
 
+# Задание № 3
+
 
 def number(x, revers_num):
     if x == 0:
