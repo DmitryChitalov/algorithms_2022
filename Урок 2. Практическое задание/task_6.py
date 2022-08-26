@@ -15,18 +15,22 @@ def rec():
     global num
     global count
     count += 1
-    attempt = int(input("Введите число от 0 до 100 включительно"))
-    if count < 3:
-        if attempt != num:
-            if attempt > num:
-                print("Загаданное число меньше вашего предположения! Попробуйте еще!")
-            elif attempt < num:
-                print("Загаданное число больше вашего предположения! Попробуйте еще!")
-            return rec()
+    try:
+        attempt = int(input("Введите число от 0 до 100 включительно"))
+        if count < 10:
+            if attempt != num:
+                if attempt > num:
+                    print("Загаданное число меньше вашего предположения! Попробуйте еще!")
+                elif attempt < num:
+                    print("Загаданное число больше вашего предположения! Попробуйте еще!")
+                return rec()
+            else:
+                print("Ура! Вы угадали!")
         else:
-            print("Ура! Вы угадали!")
-    else:
-        print(f'Попытки исчерпаны, вы проиграли. Загаданное число: {num}')
+            print(f'Попытки исчерпаны, вы проиграли. Загаданное число: {num}')
+    except ValueError:
+        print('Вы вместо числа ввели строку ((( Исправьтесь!')
+        return rec()
 rec()
 
 
