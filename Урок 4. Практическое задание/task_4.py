@@ -37,5 +37,23 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+
+    my_list = {}
+    for i in array:
+        my_list[i] = array.count(i)
+    my_list = sorted(my_list.items(), key=lambda x: x[0])
+    return f'Чаще всего встречается число {my_list[0][0]}, ' \
+           f'оно появилось в массиве {my_list[0][1]} раз(а)'
+
+def func_4():
+    a = max({array.count(x): x for x in array}.items())
+    return f'{a[0]} - {a[1]}'
+
+#не ускорил
 print(func_1())
 print(func_2())
+print(func_4())
+print(timeit.timeit('func_1()', number=100000, globals=globals()))
+print(timeit.timeit('func_2()', number=100000, globals=globals()))
+print(timeit.timeit('func_4()', number=100000, globals=globals()))

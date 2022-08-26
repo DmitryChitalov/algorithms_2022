@@ -35,3 +35,20 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(enter_num):
+    my_list = [i for i in str(enter_num)]
+    my_list.reverse()
+    my_list = ''.join(my_list)
+    return my_list
+
+
+
+enter_num = int(input("Num - "))
+print(timeit.timeit('revers(enter_num)', number=10000, globals=globals()))
+print(timeit.timeit('revers_2(enter_num)', number=10000, globals=globals()))
+print(timeit.timeit('revers_3(enter_num)', number=10000, globals=globals()))
+print(timeit.timeit('revers_4(enter_num)', number=10000, globals=globals()))
+
+# Встроенные методы предсказуемо быстрее цикла и рекурсии.
+# Ну а наиболее эффективный способ показыыают замеры времени (срез)
