@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ans_out(start_ord: int = 32, end_ord: int = 127, result_l: list = [], iter_num: int = 1):
+    """Функция принимает в себя стартовое и конечное числа символа в кодировки ansii,
+    результирующий список и и число итераций. Результирующий список выводится по частям каждые 10 итераций"""
+    if iter_num != 10 and start_ord <= end_ord:
+        result_l.append(f'{start_ord} - {chr(start_ord)}')
+        ans_out(start_ord+1, end_ord, result_l, iter_num+1)
+    elif iter_num == 10 and start_ord <= end_ord:
+        result_l.append(f'{start_ord} - {chr(start_ord)}')
+        print(*result_l)
+        ans_out(start_ord + 1, end_ord, [], 1)
+
+
+ans_out()
