@@ -17,3 +17,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+a = 10
+b = 1
+num = int(input("Введите  целое число"))
+res = 0
+odd = 0
+even = 0
+count = 0
+def rec():
+    global res
+    global count
+    count += 1
+    if count <= len(str(num)):
+        global a
+        global b
+        res = num % a // b
+        a = a * 10
+        b = b * 10
+        if res % 2 == 1:
+            global odd
+            odd += 1
+        elif res % 2 == 0:
+            global even
+            even += 1
+        return rec()
+    print(f' Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+
+rec()
