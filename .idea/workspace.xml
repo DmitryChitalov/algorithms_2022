@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +148,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_4">
+  <component name="RunManager" selected="Python.task_2 (1)">
     <configuration name="task_1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,10 +256,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.task_2 (1)" />
         <item itemvalue="Python.task_4" />
         <item itemvalue="Python.task_3" />
         <item itemvalue="Python.task_1 (1)" />
-        <item itemvalue="Python.task_2 (1)" />
         <item itemvalue="Python.task_2" />
       </list>
     </recent_temporary>
@@ -398,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661133163986</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Сделал заготовки для 1-4 заданий">
+      <created>1661485805534</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1661485805534</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -441,7 +445,8 @@
     <MESSAGE value="Второе задание выполнено и оформлено" />
     <MESSAGE value="Третье задание выполнено и оформлено к сдаче" />
     <MESSAGE value="Задание 4 выполнено и оформлено к сдаче" />
-    <option name="LAST_COMMIT_MESSAGE" value="Задание 4 выполнено и оформлено к сдаче" />
+    <MESSAGE value="Сделал заготовки для 1-4 заданий" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал заготовки для 1-4 заданий" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -463,8 +468,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="38" />
+          <line>19</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

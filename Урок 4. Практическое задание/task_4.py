@@ -47,8 +47,8 @@ def func_3():
 print(func_1())
 print(func_2())
 print(func_3())
+print(timeit("func_1()", globals=globals(), number=1000000))
+print(timeit("func_1()", globals=globals(), number=1000000))
+print(timeit("func_1()", globals=globals(), number=1000000))
 
-
-print(timeit("func_1()", globals=globals(), number=100000))
-print(timeit("func_1()", globals=globals(), number=100000))
-print(timeit("func_1()", globals=globals(), number=100000))
+"""ОТВЕТ: Принципиальных изменений в скорости работы алгоритма мной не выявлено"""

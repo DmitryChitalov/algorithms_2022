@@ -48,7 +48,6 @@ print(revers(number))
 print(revers_2(number))
 print(revers_3(number))
 print(revers_4(number))
-
 """Судя по выводу результатов работы функций. Первая и вторая не выполняют поставленную задачу."""
 
 print(timeit("revers(number)", globals=globals(), number=100000))
@@ -56,4 +55,4 @@ print(timeit("revers_2(number)", globals=globals(), number=100000))
 print(timeit("revers_3(number)", globals=globals(), number=100000))
 print(timeit("revers_4(number)", globals=globals(), number=100000))
 
-"""Самый быстрый способ заключается в использовании срезов revers_3"""
+"""ОТВЕТ:Самый быстрый способ заключается в использовании срезов revers_3"""

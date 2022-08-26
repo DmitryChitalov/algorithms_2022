@@ -22,6 +22,7 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
+print(recursive_reverse(100))  # Возвращает 0010
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
@@ -42,6 +43,7 @@ print(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
         number=10000))
+
 
 
 def memoize(f):
@@ -81,7 +83,7 @@ print(
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
 
-
+print(recursive_reverse_mem(100))  # Возвращает 001
 print(recursive_reverse(num_100))
 print(recursive_reverse(num_1000))
 print(recursive_reverse(num_10000))
@@ -89,6 +91,8 @@ print(recursive_reverse(num_10000))
 print(recursive_reverse_mem(num_100))
 print(recursive_reverse_mem(num_1000))
 print(recursive_reverse_mem(num_10000))
+
 """
-Функция после оптимизации дает неправильный результат, обрезает ноль
+Буду честен: я понятия не имею почему мемоизация в данном случае не нужна =((((
+PS: Функция до оптимизации дает неправильный результат, добавляет ноль
 """
