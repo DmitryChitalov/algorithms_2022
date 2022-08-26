@@ -17,3 +17,32 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def profit_ent_1(ent):  # O(n^2)
+    profit_ent_s = {}  # O(1)
+    for i in sorted(ent.values())[-3:]:  # O(N log N)
+        for key, val in ent.items():  # O(n)
+            if val == i:  # O(1)
+                profit_ent_s[key] = val  # O(1)
+    return profit_ent_s  # O(1)
+
+
+def profit_ent_2(ent):  # O(N log N)
+    profit_ent_s = {}  # O(1)
+    profit_ent_s_ = sorted(ent, key=ent.get, reverse=True)[:3]  # O(N log N)
+    for i in profit_ent_s_:  # O(1)
+        profit_ent_s[i] = ent.get(i)  # O(1)
+    return profit_ent_s  # O(1)
+
+
+enterprises = {"Лукойл": 5195, "Газпром": 6322, "Роснефть": 5423, "Сбер": 3413, "РЖД": 2279, "Ростех": 1878,
+               "Магнит": 1554, "ВТБ": 1369, "ВТБ_1": 6322}
+
+print(profit_ent_1(enterprises))
+print(profit_ent_2(enterprises))
+
+"""
+Функция profit_ent_2 работает эффективнее функции profit_ent_1,
+т.к. реализована на принципе действия линейно-логарифмического алгоритма
+(в отличие от квадратичного).
+"""
