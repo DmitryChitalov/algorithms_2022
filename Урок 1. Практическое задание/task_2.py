@@ -15,3 +15,20 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def search_min_1(lst_obj):    # Общая сложность O(n**2)
+    min_num = 0               # O(1)
+    for i in lst_obj:         # O(n)
+        for j in lst_obj:     # O(n)
+            if j < i:         # O(1)
+                min_num = j   # O(1)
+    return min_num            # O(1)
+
+
+def search_min_2(lst_obj):    # Общая сложность O(n)
+    min_num = 0               # O(1)
+    for i in lst_obj:         # O(n)
+        if i < min_num:       # O(1)
+            min_num = i       # O(1)
+    return min_num            # O(1)
