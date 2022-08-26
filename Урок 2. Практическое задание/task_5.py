@@ -19,3 +19,23 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ascii(symbol_table):
+
+    if symbol_table < 128:
+
+        if (symbol_table - 32) % 10 == 0:
+            print('\n')
+            print(f'{symbol_table} - {chr(symbol_table)}', end='')
+        else:
+            print(f'{symbol_table} - {chr(symbol_table)}', end='')
+
+        return table_ascii(symbol_table + 1)
+
+    else:
+        pass
+
+
+table_ascii(32)
+
