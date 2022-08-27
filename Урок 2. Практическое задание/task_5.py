@@ -19,3 +19,30 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+#Решение №1
+import textwrap as w
+
+
+def ascii_func(n=32, t=f""):
+    if n > 127:
+        return w.fill(t, 71)[0:493] + w.fill(t, 79)[493:]
+    return ascii_func(n + 1, t + f'{n} - {chr(n)} ')
+
+print(ascii_func())
+
+
+print(f'\n{"*" * 80}\n')
+
+
+# Решение №2
+def ascii_func_b(n=32, *args):
+    if n > 127:
+        out = lambda at, s='', step_a=0, step_b=10: out(at, s + str(at[step_a:step_b]) + '\n', step_b,
+                                                        step_b + 10) if step_b != 110 else s
+        return out(args[0][::-1])
+    return ascii_func_b(n + 1, sum(args, [f'{n} - {chr(n)} ']))
+
+print(ascii_func_b())
+
