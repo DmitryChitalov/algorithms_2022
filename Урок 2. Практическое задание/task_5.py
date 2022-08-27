@@ -19,3 +19,34 @@
 
 Допускается исп-е встроенных ф-ций
 """
+from sys import setrecursionlimit
+
+setrecursionlimit(10000)
+COUNT = 0
+
+
+def character_output(my_num=32):
+    global COUNT
+    # базовый случай
+    if my_num == 128:
+        return ''
+    el_my_nam = chr(my_num)
+    COUNT += 1
+
+    # рекурсивный случай (вызов ф-ции из себя)
+    if COUNT == 1:
+        added_line_1 = '  '
+        added_line = ''
+    elif COUNT % 10 == 0:
+        added_line = '\r\n'
+        added_line_1 = ''
+    else:
+        added_line = ''
+        added_line_1 = ''
+    my_str = f'{added_line_1}{my_num} - {el_my_nam} {added_line} {character_output(my_num + 1)}'
+    my_num += 1
+    return my_str
+
+
+if __name__ == '__main__':
+    print(character_output())

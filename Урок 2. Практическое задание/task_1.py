@@ -27,3 +27,61 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+import sys
+
+
+class MyError(Exception):
+    ''' Handling my own mistakes '''
+
+    pass
+
+
+def calculator():
+    my_flag = True
+    while my_flag:
+        try:
+            operation_sign = input('Введите операцию (+, -, *, / или 0 для выхода): - ')
+            if operation_sign in {'+', '-', '*', '/', '0'}:
+                my_flag = False
+            else:
+                raise MyError("ошибка MyError")
+        except MyError:
+            print(" Таких знаков нет. Повторите ввод знака. ")
+
+    if operation_sign == '0':
+        sys.exit()
+
+    my_flag = True
+    while my_flag:
+        try:
+            first_number = int(input('Введите первое число: '))
+            my_flag = False
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+    my_flag = True
+    while my_flag:
+        try:
+            second_number = int(input('Введите второе число: '))
+            my_flag = False
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+
+    if operation_sign == '+':
+        result = first_number + second_number
+    elif operation_sign == '-':
+        result = first_number - second_number
+    elif operation_sign == '*':
+        result = first_number * second_number
+    else:
+        try:
+            result = first_number / second_number
+        except ZeroDivisionError:
+            result = 'Деление на 0 невозможно.'
+
+    print(f'Ваш результат: {result}')
+    calculator()
+    # Производит операции не над последовательностью чисел, а вызывает сам себя для следующих вычислений.
+
+
+if __name__ == '__main__':
+    calculator()

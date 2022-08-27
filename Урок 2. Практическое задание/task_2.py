@@ -17,3 +17,41 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+j = 0
+i = 0
+
+
+def enter_a_number():
+    my_flag = True
+    while my_flag:
+        try:
+            my_number = int(input('Введите число: '))
+            my_flag = False
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+    return my_number
+
+
+def even_odd(my_num):
+    global i, j
+
+    # базовый случай
+    if my_num == 0:
+        return 1, 0
+
+    # рекурсивный случай (вызов ф-ции из себя)
+    my_num_pop = my_num % 10
+    parity_check = my_num_pop % 2
+    my_num_whole = my_num // 10
+    if parity_check == 0 or my_num_pop == 0:
+        j += 1
+    else:
+        i += 1
+
+    even_odd(my_num_whole)
+    return j, i
+
+
+if __name__ == '__main__':
+    inp_nam = enter_a_number()
+    print(even_odd(inp_nam))

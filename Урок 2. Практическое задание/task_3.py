@@ -17,3 +17,31 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def enter_a_number():
+    my_flag = True
+    while my_flag:
+        try:
+            my_number = int(input('Введите число: '))
+            my_flag = False
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+    return my_number
+
+
+def reverse_number(my_num):
+    # базовый случай
+    my_num_cop = str(my_num)
+    if my_num_cop == '0':
+        return ''
+
+    # рекурсивный случай (вызов ф-ции из себя)
+    my_num_pop = my_num % 10
+    my_num_whole = my_num // 10
+    return str(my_num_pop) + str(reverse_number(my_num_whole))
+
+
+if __name__ == '__main__':
+    inp_nam = enter_a_number()
+    print('Перевернутое число: ', reverse_number(inp_nam))
