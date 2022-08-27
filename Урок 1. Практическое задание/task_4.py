@@ -22,3 +22,16 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+# Общая сложность O(n)
+def authorization_f(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['password'] == user_password \
+                    and not value['activation']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['passwoed'] != user_password:
+                return "Пароль не верный"
+
+    return "Данного пользователя не существует"
