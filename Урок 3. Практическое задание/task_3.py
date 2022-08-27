@@ -22,3 +22,20 @@
 р
 а
 """
+import hashlib
+
+word_set = set()
+hash_set = set()
+word = input('Input word: ')
+x = 1
+while x != len(word):
+    y = 0
+    while y != len(word):
+        string = word[y:y+x]
+        word_set.add(string)
+        hash_set.add(hashlib.sha256(string.encode()).hexdigest())
+        y += 1
+    x += 1
+
+print(word_set)
+print(hash_set)

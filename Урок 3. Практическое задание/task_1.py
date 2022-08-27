@@ -28,3 +28,60 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def process_time(func):
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        print(f'Result: {(time.perf_counter() - start)}')
+        return result
+    return wrapper
+
+
+@process_time
+def list_generator(n):  # Сложность O(n)
+    return [i for i in range(1, n + 1)]
+
+
+@process_time
+def dict_generator(n):  # Сложность O(n)
+    return {i: '1' for i in range(1, n + 1)}
+
+@process_time
+def elements_list(n, lst):  # O(n)
+    res = [i for i in lst if i == n]
+    return res
+
+
+@process_time
+def elements_dict(n, dct):  # O(n)
+    return dct[n]
+
+print(list_generator(100))
+print(dict_generator(100))
+print(elements_list(1, [1, 2, 3, 7, 0]))
+print(elements_dict(1, {1: '2', 3: '4', 5: '6'}))
+
+# Вывод: Заполнение словаерй происходит медлене так как при их создании хэшируются ключи.
+
+@process_time
+def pop_out_list(item, list):  # O(n)
+    list.remove(item)
+    return list
+
+
+@process_time
+def pop_out_dict(item, dict):  # O(1)
+    del dict[item]
+    return dict
+
+
+print(pop_out_list(1, [1, 2, 3, 7, 0]))
+print(pop_out_dict(1,  {1: '2', 3: '4', 5: '6'}))
+
+
+# Вывод: Удаление элементов из словаря словаерй происходит медленее из за ключей.
+
