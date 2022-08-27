@@ -9,12 +9,8 @@
 # """
 #
 from random import randint
-count = 0
 num = randint(0, 100)
-def rec():
-    global num
-    global count
-    count += 1
+def rec(count=1):
     try:
         attempt = int(input("Введите число от 0 до 100 включительно"))
         if count < 10:
@@ -23,14 +19,14 @@ def rec():
                     print("Загаданное число меньше вашего предположения! Попробуйте еще!")
                 elif attempt < num:
                     print("Загаданное число больше вашего предположения! Попробуйте еще!")
-                return rec()
+                return rec(count=count + 1)
             else:
                 print("Ура! Вы угадали!")
         else:
             print(f'Попытки исчерпаны, вы проиграли. Загаданное число: {num}')
     except ValueError:
         print('Вы вместо числа ввели строку ((( Исправьтесь!')
-        return rec()
+        return rec(count=count + 1)
 rec()
 
 
