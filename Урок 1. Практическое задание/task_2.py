@@ -18,19 +18,8 @@
 
 numbers = [10, 2, 3, 10, 566, 88, 99, 1000, ]
 
-
-# O(n) - линейная
-def min_number1(nums):
-    min_number = nums[0]
-    for num in nums:
-        if num < min_number:
-            min_number = num
-    return min_number
-
-
 # O(n^2) - квадратичная
-# Пузырьковая сортировка
-def min_number2(nums):
+def min_number1(nums):
     to_change = True
     while to_change:
         to_change = False
@@ -40,33 +29,15 @@ def min_number2(nums):
                 to_change = True
     return nums[0]
 
-
-# O(n^2) - квадратичная
-# Сортировка выборкой
-def min_number3(nums):
-    for i in range(len(nums)):
-        lowest_val_index = i
-        for j in range(i + 1, len(nums)):
-            if nums[j] < nums[lowest_val_index]:
-                lowest_val_index = j
-        nums[i], nums[lowest_val_index] = nums[lowest_val_index], nums[i]
-    return nums[0]
-
-
-# O(n^2) - квадратичная
-# Сортировка вставками
-def min_number4(nums):
-    for i in range(1, len(nums)):
-        num_to_insert = nums[i]
-        j = i - 1
-        while j >= 0 and nums[j] > num_to_insert:
-            nums[j + 1] = nums[j]
-            j -= 1
-        nums[j + 1] = num_to_insert
-    return nums[0]
+# O(n) - линейная
+def min_number2(nums):
+    min_number = nums[0]
+    for num in nums:
+        if num < min_number:
+            min_number = num
+    return min_number
 
 
 print(min_number1(numbers))
 print(min_number2(numbers))
-print(min_number3(numbers))
-print(min_number4(numbers))
+

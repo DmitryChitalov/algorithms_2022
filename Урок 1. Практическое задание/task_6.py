@@ -19,7 +19,7 @@
 """
 
 
-class TaskBoardClass:
+class TaskBoard:
     def __init__(self):
         self.todo = []
         self.done = []
@@ -49,17 +49,17 @@ class TaskBoardClass:
 
 
 if __name__ == '__main__':
-    TBC_homeworks = TaskBoardClass()
-    print(TBC_homeworks.to_queue('выбросить мусор'))
-    print(TBC_homeworks.to_queue('полить деревья'))
-    print(TBC_homeworks.to_queue('поиграть с детьми'))
-    print(TBC_homeworks.to_queue('наладить самокат'))
-    print(TBC_homeworks.is_empty())
-    print(TBC_homeworks.size())
-    print(TBC_homeworks.from_queue('todo'))
-    print(TBC_homeworks.from_queue('todo'))
-    print(TBC_homeworks.from_queue('todo'))
-    print(TBC_homeworks.to_rework())
-    print(TBC_homeworks.size())
-    print(TBC_homeworks.from_queue('rework'))
-    print(TBC_homeworks.size())
+    tb_homework = TaskBoard()
+    print(tb_homework.to_queue('выбросить мусор'))
+    print(tb_homework.to_queue('полить деревья'))
+    print(tb_homework.to_queue('поиграть с детьми'))
+    print(tb_homework.to_queue('наладить самокат'))
+    print(tb_homework.is_empty())
+    print(tb_homework.size())
+    print(tb_homework.from_queue('todo'))
+    print(tb_homework.from_queue('todo'))
+    print(tb_homework.from_queue('todo'))
+    print(tb_homework.to_rework())
+    print(tb_homework.size())
+    print(tb_homework.from_queue('rework'))
+    print(tb_homework.size())

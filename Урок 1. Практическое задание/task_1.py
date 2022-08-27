@@ -22,9 +22,9 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: 2, константная.
+    Сложность: O(n) линейная.
     """
-    lst_to_set = set(lst_obj)  # O(1)
+    lst_to_set = set(lst_obj)  # O(n)
     return lst_to_set  # O(1)
 
 
@@ -37,10 +37,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: 3n, линейная сложность
+    Сложность: O(n), линейная
     """
-    for j in range(len(lst_obj)):  # 3n
-        if lst_obj[j] in lst_obj[j + 1:]:  # O(O(1) + O(1)) = 0(2)
+    for j in range(len(lst_obj)):  # O(n)
+        if lst_obj[j] in lst_obj[j + 1:]:  # 0(n)
             return False  # O(1)
     return True  # O(1)
 
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: 1 + (N Log N) + 3n, линейно-логарифмическая
+    Сложность: (N Log N), линейно-логарифмическая
     """
-    lst_copy = list(lst_obj)  # O(1)
-    lst_copy.sort()  # 0(N Log N)
-    for i in range(len(lst_obj) - 1):  # 3n
-        if lst_copy[i] == lst_copy[i + 1]:  # O(O(1) + O(1)) = 0(2)
-            return False  # O(1)
-    return True  # O(1)
+    lst_copy = list(lst_obj)                # O(1)
+    lst_copy.sort()                         # 0(N Log N)
+    for i in range(len(lst_obj) - 1):       # O(n)
+        if lst_copy[i] == lst_copy[i + 1]:  # 0(1)
+            return False                    # O(1)
+    return True                             # O(1)
 
 
 for j in (50, 500, 1000, 5000, 10000):
