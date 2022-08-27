@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+
+a = input("Введите строку")
+dip = (set([(a[i:j + i +1],hashlib.sha256(str(a[i:j + i + 1]).encode('utf-8')).hexdigest()) for i in range(len(a)) for j in range(len(a) +1)]))
+print(dip)
+
+
+
+k = set()
+for i in range(len(a)):
+    for j in range(len(a) + 1):
+        k.add((a[i:j + i + 1],hashlib.sha256(str(a[i:j + i + 1]).encode('utf-8')).hexdigest()))
+
+print(k)
