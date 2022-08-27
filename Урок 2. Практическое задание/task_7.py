@@ -13,16 +13,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
-
+class MyException(Exception):
+    pass
 def rec(num, sum=0, right_part=0):
-    if right_part == 0:
-        right_part = int(num * (num + 1) / 2)
-        print(right_part)
-    if num >= 1:
-        sum += num
-        rec(num-1, sum=sum, right_part=right_part)
-    else:
-        print(sum == right_part)
+    try:
+        if int(num) < 1 and right_part == 0:
+            raise MyException("wrong symbol")
+        elif right_part == 0:
+            right_part = int(num * (num + 1) / 2)
+            # print(right_part)
+            rec(num, sum=0, right_part=right_part)
+        elif num >= 1:
+            sum += num
+            # print(sum)
+            rec(num-1, sum=sum, right_part=right_part)
+        else:
+            # print(sum)
+            print(sum == right_part)
+            return sum == right_part
+    except MyException as e:
+        print("Ошибка ввода! Требуется ввести число! Число должно быть натуральным!")
+    except ValueError:
+        print("Ошибка ввода! Требуется ввести число! Вы ввели не число!")
+rec('0')
 
-rec(5)
 

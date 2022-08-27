@@ -8,6 +8,8 @@
 # Решите через рекурсию. В задании нельзя применять циклы.
 # """
 #
+class MyException(Exception):
+    pass
 from random import randint
 num = randint(0, 100)
 def rec(count=1):
@@ -15,9 +17,11 @@ def rec(count=1):
         attempt = int(input("Введите число от 0 до 100 включительно"))
         if count < 10:
             if attempt != num:
+                if attempt < 0 or attempt > 100:
+                    raise MyException("Wrong range of numbers")
                 if attempt > num:
                     print("Загаданное число меньше вашего предположения! Попробуйте еще!")
-                elif attempt < num:
+                else:
                     print("Загаданное число больше вашего предположения! Попробуйте еще!")
                 return rec(count=count + 1)
             else:
@@ -25,7 +29,9 @@ def rec(count=1):
         else:
             print(f'Попытки исчерпаны, вы проиграли. Загаданное число: {num}')
     except ValueError:
-        print('Вы вместо числа ввели строку ((( Исправьтесь!')
+        print('Вместо числа вы ввели строку ((( Исправьтесь!')
+    except MyException:
+        print("Число должно быть в диапозоне от 0 до 100 включительно!")
         return rec(count=count + 1)
 rec()
 
