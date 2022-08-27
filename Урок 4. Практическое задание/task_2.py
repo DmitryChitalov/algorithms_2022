@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -81,8 +81,9 @@ print(
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
 
+
 """
-В функции recursive_reverse(number) ошибка - при number == 0 должно быть return ''.
+В функции recursive_reverse(number) была ошибка - при number == 0 должно быть return ''.
 
 Мемоизация не нужна, т.к. она работает при повторяющемся вызове функции с одним и тем же аргументом. В данном случае 
 происходит рекурсивный вызов функции каждый раз с разными аргументами.
