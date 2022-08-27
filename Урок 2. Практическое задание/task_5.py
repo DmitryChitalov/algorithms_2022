@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def show_ascii(n=32, count=0):
+    count += 1
+    if n > 127:  # Базовый случай
+        return
+    end = ' '
+    if count == 10:
+        end = '\n'
+        count = 0
+    print(f'{n} - {chr(n)}', end=end)
+    return show_ascii(n + 1, count)
+
+
+if __name__ == '__main__':
+    show_ascii()
