@@ -15,3 +15,36 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# O(N^2)квадратичная
+def min_lst(new_lst):
+    for k in new_lst:  # O(N)линейная
+        flag = 1  # O(1)константная
+        for n in new_lst:  # O(N)линейная
+            if n < k:  # O(1)константная
+                flag = 0  # O(1)константная
+                break  # O(1)константная
+        if flag == 1:  # O(1)константная
+            return k  # O(1)константная
+
+
+
+
+a = [11, 15, 45, 3, 26,  10, 90, 47, 2, 120, 32]
+print(min_lst(a))
+
+
+# O(N)
+def min_lst2(new_lst):
+    minim = new_lst.pop(0)  # O(1)
+    while len(new_lst) > 0:  # O(1)
+        if new_lst[0] > minim:  # O(1)
+            del new_lst[0]  # O(N)
+        else:
+            minim = new_lst.pop(0)  # O(1)
+
+    return minim  # O(1)
+
+
+a = [1, 15, 45, 3, -26,  0, 90, 47, -2, 120, 32]
+print(min_lst2(a))
