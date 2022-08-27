@@ -12,7 +12,7 @@
 П.С. задание не такое простое, как кажется
 """
 
-from timeit import timeit
+from timeit import timeit, default_timer
 from random import randint
 
 
@@ -80,3 +80,27 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+print('Оптимизированная функция recursive_reverse_mem - default_timer')
+start = default_timer()
+for i in range(10000):
+    recursive_reverse_mem(num_100)
+print(default_timer() - start)
+
+start = default_timer()
+for i in range(10000):
+    recursive_reverse_mem(num_100)
+print(default_timer() - start)
+
+start = default_timer()
+for i in range(10000):
+    recursive_reverse_mem(num_10000)
+print(default_timer() - start)
+
+"""
+Аналитика. 
+Функция timeit запускает код несколько раз, чтобы увеличить точность. 
+Прошлые запуски влияют на последующие: словарь со значениями уже составлен в первом запуске, последующие его используют. 
+Из-за того, что функция не отрабатывает полностью во время каждого замера результат занижен.
+
+"""
