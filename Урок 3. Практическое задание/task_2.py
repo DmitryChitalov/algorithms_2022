@@ -71,12 +71,12 @@ def log_in(login, passwd):
         return 'Такого пользователя не существует'
 
 
-login = input('Введите логин: ')  # будет служить нам в качестве соли
-passwd = input('Введите пароль: ')
+def enter_log_paswd():
+    login = input('Введите логин: ')  # будет служить нам в качестве соли
+    passwd = input('Введите пароль: ')
 
-print(register_user(login, passwd))
+    return login, passwd
 
-login = input('Введите логин: ')  # введем для проверки
-passwd = input('Введите пароль: ')
 
-print(log_in(login, passwd))
+print(register_user(*enter_log_paswd()))
+print(log_in(*enter_log_paswd()))
