@@ -18,3 +18,19 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+from random import randint
+
+
+def reverse_number_rec(number, reverse_data=1):  # Насколько вот это действие с reverse_data нормальное?
+    if reverse_data == 1:  # Если в функции аргументом задавать reverse_data = list() - он ругается.
+        reverse_data = list()
+    if number == 0:
+        return ''.join(map(str, reverse_data))
+    reverse_data.append(number % 10)
+    return reverse_number_rec(number // 10, reverse_data)
+
+
+if __name__ == '__main__':
+    for _ in range(10):
+        random_number = randint(100, 999)
+        print(f'{random_number} : {reverse_number_rec(random_number)}')

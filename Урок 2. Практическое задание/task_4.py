@@ -10,3 +10,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def subsequence(counter, a=1.0, summ=0):
+    if counter == 1:
+        return a
+    return a + subsequence(counter-1, a * (-0.5))
+
+
+if __name__ == '__main__':
+    try:
+        n = int(input('Введите n, до которого требуется найти сумму элементов последовательности\n'
+                      '1 -0.5 0.25 -0.125 ...\n'))
+        print(subsequence(n))
+    except ValueError:
+        print('Вы ввели не число')

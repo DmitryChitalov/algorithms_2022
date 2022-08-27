@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+from random import randint
+
+
+def min_v1(input_list):  # Сложность O(n)
+    min_ = input_list[0]  # 1
+    for el in input_list:  # n
+        if el < min_:  # 1
+            min_ = el  # 1
+    return min_  # 1
+
+
+def min_v2(input_list):  # O(n^2)
+    for i in input_list:  # n
+        marker = True  # 1
+        for j in input_list:  # n
+            if j < i:  # 1
+                marker = False  # 1
+        if marker:  # 1
+            return i  # 1
+
+
+if __name__ == '__main__':
+    lst = [randint(1, 100) for _ in range(10)]
+    print(f'10 случайных элементов: {lst}')
+    print(f'Минимальный элемент через встроенную функцию min: {min(lst)}')
+    print(f'Минимальный элемент через функцию min_v1: {min_v1(lst)}')
+    print(f'Минимальный элемент через функцию min_v2: {min_v2(lst)}')
