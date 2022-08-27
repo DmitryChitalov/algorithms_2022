@@ -22,3 +22,21 @@
 р
 а
 """
+
+import hashlib
+
+word_set = set()
+hash_set = set()
+word = input('Введите слово\n')
+x = 1
+while x != len(word):
+    y = 0
+    while y != len(word):
+        sstring = word[y:y+x]
+        word_set.add(sstring)
+        hash_set.add(hashlib.sha256(sstring.encode()).hexdigest())
+        y += 1
+    x += 1
+
+print(word_set)
+print(hash_set)
