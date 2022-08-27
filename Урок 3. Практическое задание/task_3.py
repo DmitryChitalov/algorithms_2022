@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+original_set = set()  # множество для хранения хешированных подстрок
+some_string = 'papa'
+for i in range(len(some_string)):
+    for j in range(i + 1, len(some_string) + 1):
+        # исключаем запись слова целиком во множество
+        if some_string[i:j] != some_string:  # записываем только подстроки
+            original_set.add(hashlib.sha256(some_string[i:j].encode()).hexdigest())
+            print(some_string[i:j], end=' ')  # вывод всех подстрок,
+            # включая дубли
+print(f'\n{original_set}')  # вывод элементов множеста
+print(f'Количество элементов во множестве: {len(original_set)}')

@@ -15,3 +15,24 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+# Модуль uuid применяется для генерации случайного числа.
+from uuid import uuid4
+
+salt = uuid4().hex  # salt = 'c179a94cdec14e4f8014780ec120b52b'
+cach_object = {}
+
+
+def get_page(url):
+    if cach_object.get(url):
+        print(f'Данный адрес: {url} присутствует в кэше')
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cach_object[url] = res
+        print(cach_object)
+
+
+get_page('https://test.ru/')
+get_page('https://test.ru/')
+get_page('https://test.ru/')
+get_page('https://test.ru/')
