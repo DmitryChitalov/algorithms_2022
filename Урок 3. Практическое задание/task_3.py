@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+def str_slices(str_in):
+    set_substr = set()
+    for left in range(len(str_in)):
+        for right in range(left + 1, len(str_in) + 1):
+            if str_in[left:right] != str_in:
+                set_substr.add(hashlib.sha256(str_in[left:right].encode()).hexdigest())
+    return set_substr
+
+
+if __name__ == '__main__':
+    str_to_slice = 'papa'
+    print(f'{str_to_slice} - {len(str_slices(str_to_slice))} уникальных подстрок')
