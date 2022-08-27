@@ -19,25 +19,13 @@
 1230 -> 0321
 """
 
-a = 10
-b = 1
 num = int(input("Введите  целое число"))
-digit = 0
-count = 0
-res = ''
-def rec():
-    global digit
-    global count
-    count += 1
-    if count <= len(str(num)):
-        global a
-        global b
+def rec(count=0, a=10, b=1, digit=0, res=''):
+    if count < len(str(num)):
         digit = str(num % a // b)
-        a = a * 10
-        b = b * 10
-        global res
         res = res + digit
-        return rec()
+        return rec(count=count + 1, a=a * 10, b=b * 10, res=res)
     print(res)
+    return res
 
 rec()
