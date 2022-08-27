@@ -28,3 +28,82 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def testtime(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        print(f'{func.__name__} Выполняется....')
+        result = func(*args, **kwargs)
+        stop = time.time()
+        print(stop - start)
+        return result
+
+    return wrapper
+
+
+@testtime
+def listing(count):  # Заполнение списка - сложность О(n)
+    result = []
+    for each in range(count):
+        result.append(each)
+    return result
+
+
+@testtime
+def dicting(count):  # Заполнение словаря - сложность O(n)
+    result = {}
+    for each in range(count):
+        result[each] = each
+    return result
+
+
+listtest = listing(10000000)
+print(len(listtest))
+print()
+
+dicttest = dicting(10000000)
+print(len(dicttest.keys()))
+print()
+
+
+# Вывод - заполнение словаря происходит медленее с вычислением хэша с возрастанием
+# линейной сложности
+
+
+@testtime
+def getlist(lst: list, index):  # Получение элемента из списка. О(1)
+    return lst[index]
+
+
+@testtime
+def getdict(dct: dict, elem):  # Получение элемента из словаря. О(1)
+    return dct[elem]
+
+
+print(getlist(listtest, 9995000))
+print()
+print(getdict(dicttest, 9995000))
+print()
+
+
+# Вывод - Получение элемента из списка по индексу происходит медленнее
+
+
+@testtime
+def dellist(lst: list, value):  # Удаление элемента из списка. O(n)
+    return lst.remove(value)
+
+
+@testtime
+def deldict(dct: dict, key):  # Удаление элемента из словаря. O(1)
+    return dct.pop(key)
+
+
+print(dellist(listtest, 1000000))
+print()
+print(deldict(dicttest, 1000000))
+print()
+
+# Вывод - Удаление элемента из списка происходит медленнее, так как происходит перебор элементов.
