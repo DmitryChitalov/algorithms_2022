@@ -22,3 +22,43 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# O(N) линейная
+def autent(log, pas, base):
+    if log in base.keys():  # O(N) линейная
+        if (base[log][1] is True) and (pas == base[log][0]):  # O(1) константная
+            print('Все хорошо')  # O(1)
+        else:
+            print('Введите правильный пароль или активируйте учетную запись')  # O(1) константная
+    else:
+        print('Требуется регистрация')  # O(1) константная
+    return
+
+
+reg = {1: ['pass1', True],  # login:[password, activation]
+       2: ['pass2', False],
+       3: ['pass3', False],
+       4: ['pass4', True],
+       5: ['pass5', True]}
+autent(4, 'pass5', reg)
+
+
+# O(1) Константная
+def autent_3(log, pas, base):
+    if base.get(log, False) is False: # O(1) константная
+        print('Требуется регистрация')  # O(1) константная
+    else:
+        if (base[log][1] is True) and (pas == base[log][0]):  # O(1) константная
+            print('Все хорошо')  # O(1) константная
+        else:
+            print('Введите правильный пароль или активируйте учетную запись')  # O(1) константная
+    return
+
+
+reg = {1: ['pass1', True],  # login:[password, activation],
+       2: ['pass2', False],
+       3: ['pass3', False],
+       4: ['pass4', True],
+       5: ['pass5', True]}  # O(len(reg)) линейная
+autent_3(4, 'pass4', reg)
+# второе решение эффективнее потому, что не производится перебор всех ключей словаря при сравнении с введенным ключом.
