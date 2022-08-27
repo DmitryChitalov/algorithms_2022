@@ -28,3 +28,126 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+def time_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполнения функции {func.__name__} '
+              f'составило {end - start}')
+        return result
+
+    return timer
+
+
+@time_decorator
+def fill_list_append(some_list, number):
+    """Заполнение списка"""
+    for i in range(number):
+        some_list.append(i)  # Сложность операции O(1). Вставка в конец списка
+
+
+n = 10 ** 5
+print('_' * 80)
+original_list = []
+fill_list_append(original_list, n)
+print('_' * 80)
+
+
+@time_decorator
+def fill_list_insert(some_list, number):
+    """Заполнение списка"""
+    for i in range(number):
+        some_list.insert(0, i)  # Сложность операции O(n) (по документации)
+        # Вставка в начало списка
+
+
+original_list = []
+fill_list_insert(original_list, n)
+print('_' * 80)
+
+
+@time_decorator
+def fill_dict(some_dict, number):
+    """Заполняем словарь"""
+    for i in range(number):  # Операция заполнения словаря занимает
+        # меньше времени, так как он представляет из себя хеш-таблицу,
+        # а операция добавления нового элемента имеет сложность O(1).
+        some_dict[i] = i
+
+
+original_dict = {}
+fill_dict(original_dict, n)
+print('_' * 80)
+
+
+"""
+Время выполнения функции fill_list_append составило 0.00700068473815918
+________________________________________________________________________________
+Время выполнения функции fill_list_insert составило 2.9522950649261475
+________________________________________________________________________________
+Время выполнения функции fill_dict составило 0.010001182556152344
+"""
+
+
+# Операции удаления, получения по индексу и ключу
+@time_decorator
+def change_list(some_list):
+    """Выполняет операции по изменению списка"""
+    for j in range(10000):
+        some_list[j] = some_list[j + 1]  # изменяем 10000 элементов в списке
+        # Обращение по индексу с изменением элемента списка имеет сложность O(1).
+
+
+change_list(original_list)
+print('-' * 80)
+
+
+@time_decorator
+def change_dict(some_dict):
+    """Выполняет операции по изменению словаря"""
+
+    for j in range(10001, 20002):  # изменяем 10000 значений в словаре
+        some_dict[j] = 0  # имеет сложность O(1)
+
+
+change_dict(original_dict)
+print('_' * 80)
+
+
+"""
+Время выполнения функции change_list составило 0.33499979972839355
+--------------------------------------------------------------------------------
+Время выполнения функции change_dict составило 0.002000093460083008
+"""
+
+
+@time_decorator
+def dell_list(some_list):
+    """Выполняет операции по удалению элементов списка"""
+    for i in range(10000):  # удаляем 10000 элементов из списка
+        some_list.pop(i)  # удаление элемента не с конца списка имеет сложность O(n).
+
+
+dell_list(original_list)
+print('_' * 80)
+
+
+@time_decorator
+def dell_dict(some_dict):
+    """Выполняет операции по уаделнию ключей словаяр"""
+    for i in range(10000):  # удаляем 10000 ключей из словаря
+        some_dict.pop(i)  # имеет сложность O(1).
+
+
+dell_dict(original_dict)
+print('_' * 80)
+
+"""
+Время выполнения функции dell_list составило 0.33303308486938477
+________________________________________________________________________________
+Время выполнения функции dell_dict составило 0.0010004043579101562
+"""
