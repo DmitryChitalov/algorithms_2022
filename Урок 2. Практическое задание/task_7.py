@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def rec(num, sum=0, right_part=0):
+    if right_part == 0:
+        right_part = int(num * (num + 1) / 2)
+        print(right_part)
+    if num >= 1:
+        sum += num
+        rec(num-1, sum=sum, right_part=right_part)
+    else:
+        print(sum == right_part)
+
+rec(5)
+

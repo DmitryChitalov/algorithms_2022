@@ -11,15 +11,7 @@
 Нужно обойтисть без создания массива!
 """
 num = int(input("Введите  целое число"))
-
-def rec(num_1=1, num_2=0, count=0, res=1):
-    if count < num - 1:
-        num_2 = num_1 * (-0.5)
-        res = res + num_2
-        return rec(num_1=num_2, num_2=0, count=count + 1, res=res)
-    else:
-        print(res)
-        return res
-rec()
-
-
+def rec(a=.0, b=0, count=1, sum=.0):
+    return rec(a=1*(-0.5) ** (count - 1), sum=sum+a, count=count + 1, b=b)\
+        if count <= num + 1 else print(sum)
+rec(a=0, b=0, count=1, sum=0)
