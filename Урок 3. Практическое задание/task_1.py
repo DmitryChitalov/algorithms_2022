@@ -28,3 +28,97 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+
+# декоротор для замеров
+def time_measure(func):
+    def measure(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполнения: {end - start}')
+        print('_' * 30)
+        return result
+
+    return measure
+
+
+n = 10 ** 5  # количество операций для всех последующих функций
+
+# пункт A:
+print('Пункт A')
+
+
+@time_measure
+def list_fill(lst, n):
+    for i in range(n):
+        lst.append(i)
+
+
+some_lst = []
+list_fill(some_lst, n)
+
+
+@time_measure
+def dict_fill(dct, n):
+    for i in range(n):
+        dct[i] = i
+
+
+some_dct = {}
+dict_fill(some_dct, n)
+
+# Аналитика: сложность заполнения в обоих алгоритмов O(1), но замеры показывают большую длительность заполнения словаря,
+# это происходит из-за операций хеширования ключей при заполнении словаря, который представляет из сея хеш-таблицу.
+
+# -----------------------------------------------------
+
+# Пункт: B
+print('Пункт B')
+
+
+@time_measure
+def list_elem_from_index(lst, n):
+    for i in range(n):
+        lst[i] = 'x'
+
+
+list_elem_from_index(some_lst, n)
+
+
+@time_measure
+def dict_elem_from_key(dct, n):
+    for i in range(n):
+        dct[i] = 'x'
+
+
+dict_elem_from_key(some_dct, n)
+
+# В обоих алгоритмах поиск по индексу имеет сложность O(1), замеры показывают, что в большинстве случаев словарь
+# работает чуть медленнее, возможно также из-за хеширования
+
+# Пункт С:
+print('пункт С')
+
+
+@time_measure
+def list_elem_del(lst, n):
+    for i in range(5000):
+        lst.pop(i)
+
+
+list_elem_del(some_lst, n)
+
+
+@time_measure
+def dict_elem_del(dct, n):
+    for i in range(5000):
+        dct.pop(i)
+
+
+dict_elem_del(some_dct, n)
+
+# Аналитика, сложность в случае со списком O(n), в случае словаря O(1), удаление элементов из словаря должны происходить
+# гораздо быстрее, что и подтвердилось замерами.

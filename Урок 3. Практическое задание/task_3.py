@@ -22,3 +22,18 @@
 р
 а
 """
+import hashlib
+
+
+def uniqe_substrings():
+    temp_set = set()
+    string = input('Введите строку: ')
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            temp_string = string[i:j + 1]
+            temp_set.add(hashlib.sha256(temp_string.encode()).hexdigest())
+    print(
+        f'Количество уникальных подстрок: {len(temp_set) - 1}')  # -1 так как во множество попадает сама строка целиком
+
+
+uniqe_substrings()
