@@ -28,3 +28,68 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+
+# Первый вариант через namedtuple
+n = int(input('Введите кол-во предприятий: '))
+CompanyClass = namedtuple('Company', 'name first second third firth')
+companies = []
+
+for _ in range(n):
+    try:
+        companies.append(CompanyClass(
+                    name=input('Название компании '),
+                    first=float(input('Первая четверть: ')),
+                    second=float(input('Вторая четверть: ')),
+                    third=float(input('Третья четрветь: ')),
+                    firth=float(input('Четвертая четверть: '))
+                    ))
+    except:
+        print('Введены неверные данные. ')
+
+# Считаем среднюю прибыль
+avg_all = 0
+for i in companies:
+    avg_all += sum(i[1:])
+
+avg_all = avg_all / n
+print(f'Средняя прибыль всех компаний: {avg_all:.2f}')
+
+high_avg = [(x.name, sum(x[1:])) for x in companies if sum(x[1:]) > avg_all]
+print('Компании с доходом выше среднего', high_avg)
+
+low_avg = [(x.name, sum(x[1:])) for x in companies if sum(x[1:]) < avg_all]
+print('Компании с доходом ниже среднего', low_avg)
+
+
+# Второй вариант через словарь
+n = int(input('Введите кол-во предприятий: '))
+companies_dict = {}
+
+for _ in range(n):
+    _name = input('Введите название компании: ')
+    try:
+        companies_dict[_name] = [int(input('Первая четверть: ')),
+                                 int(input('Вторая четверть: ')),
+                                 int(input('Третья четрветь: ')),
+                                 int(input('Четрветая четрветь: '))]
+    except:
+        print('Введены неверные данные. ')
+
+avg_all = sum([sum(x) for x in companies_dict.values()]) / n
+print(f'Средняя прибыль всех компаний: {avg_all:.2f}')
+
+
+high_avg = []
+for k, v in companies_dict.items():
+    if sum(v) > avg_all:
+        high_avg.append((k, sum(v)))
+print('Компании с доходом выше среднего', high_avg)
+
+
+low_avg = []
+for k, v in companies_dict.items():
+    if sum(v) < avg_all:
+        low_avg.append((k, sum(v)))
+print('Компании с доходом ниже среднего', low_avg)
