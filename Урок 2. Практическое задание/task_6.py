@@ -10,8 +10,8 @@
 import random
 
 
-def recurs(num,i=10):
-    ans=int(input("Введите число"))
+def recurs(num, i=10):
+    ans = int(input("Введите число"))
     if i == 0:
         return print("Увы. Вы проиграли. Задуманное число ", num)
     if ans < num:
