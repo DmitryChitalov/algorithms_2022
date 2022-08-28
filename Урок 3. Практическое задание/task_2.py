@@ -22,3 +22,20 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+salt = 'my_salt'
+paswd = input('Введите пароль: ')
+paswd_2 = input('Повторите пароль: ')
+hesh_1 = hashlib.sha256(paswd.encode() + salt.encode()).hexdigest()
+hesh_2 = hashlib.sha256(paswd_2.encode() + salt.encode()).hexdigest()
+
+
+def checer(first, second):
+    if first == second:
+        return f'Пароль верный'
+    else:
+        return f'Пароли не совпадают'
+
+
+print(hesh_1, hesh_2)
+print(checer(hesh_1, hesh_2))

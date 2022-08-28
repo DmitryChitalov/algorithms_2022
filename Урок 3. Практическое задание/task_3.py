@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+
+str_set = set()
+example = 'papa'
+for i in range(len(example)):
+    for k in range(i + 1, len(example) + 1):
+        if example[i:k] != example:
+            str_set.add(hashlib.sha256(example[i:k].encode()).hexdigest())
+            print(example[i:k], end=' ')
+
+
+print(f'\nУ элемента {example} - {len(str_set)} уникальных чисел')

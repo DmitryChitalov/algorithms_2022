@@ -28,3 +28,71 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        res = function(*args)
+        print(time.perf_counter_ns() - start_time)
+        return res
+    return wrapped
+
+
+lst_out = []
+dct_out = {}
+
+
+@time_of_function
+def completion(n: int):
+    '''Функция создает список и словарь длинной в (n) элементов'''
+    for element in range(1, n + 1):
+        lst_out.append(element)
+
+    for element in range(1, n + 1):
+        dct_out.setdefault(element, element)
+
+    return lst_out, dct_out
+
+
+@time_of_function
+def get_list_el(lst, n):
+    '''Удобнее доставать элемент напрямую по lst[n], но тк нужно использовать цикл
+    то выбрал этот метод'''
+    if n > len(lst) - 1:
+        return f'Число не должно быть больше {len(lst) - 1}'
+    else:
+        for k in range(len(lst)):
+            if k == n:
+                return lst[k]
+
+
+@time_of_function
+def get_dct_el(dct, el):
+    ''' то же что и при взятия el из списка '''
+    for key in dct:
+        if el == key:
+            return dct[key]
+
+
+@time_of_function
+def del_el_list(lst: list, n):
+    ''' удаление элемента из списка, так же не вижу смысла для цего нужен цикл '''
+    for i in lst:
+        if i == n:
+            return lst.pop(lst.index(i))
+
+
+@time_of_function
+def del_el_dict(dct: dict, n):
+    ''' то же самое что и в предыдущих примерах '''
+    for key in dct:
+        if n == key:
+            return dct.pop(key)
+
+
+'''Везде будет линейная сложность, которая зависит от длинны объекта O(n) '''
+
+
+print(completion(10))
