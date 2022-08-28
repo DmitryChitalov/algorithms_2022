@@ -1,4 +1,4 @@
-"""
+"""###
 Задание 2.
 
 Реализуйте два алгоритма.
@@ -15,3 +15,27 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def get_my_min(lst):
+    my_min = lst[0]
+    for i in lst:
+        if i < my_min:
+            my_min = i
+    return my_min
+
+
+def get_my_min_2(lst):
+    my_min_2 = lst[0]
+    for i in lst:
+        for j in range(lst.index(i) + 1, len(lst) - 1, 1):
+            if my_min_2 > lst[j]:
+                my_min_2 = lst[j]
+    return my_min_2
+
+
+first_list = [100, 50, 3, 4, 23, 10]
+
+print(get_my_min(first_list))
+
+print(get_my_min_2(first_list))
