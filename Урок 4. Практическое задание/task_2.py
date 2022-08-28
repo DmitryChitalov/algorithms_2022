@@ -23,8 +23,10 @@ def recursive_reverse(number):
 
 
 num_100 = randint(10000, 1000000)
+
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
+print(num_10000)
 
 print('Не оптимизированная функция recursive_reverse')
 print(
@@ -48,7 +50,7 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
+        #if cache.get(args):
         if args in cache:
             return cache[args]
         else:
@@ -80,3 +82,33 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+время минимальное при мемоизации, тк. результат обработанного числа уже в кэше (после 1го прохождения)
+и повторно подаётся тоже самое число - результат берётся из кэша, сама функция ничего не делает.
+проверим время  при подаче разных значений в функции:
+"""
+
+rand_mass = [randint(1000, 100000) for i in range(100)]
+#print(rand_mass)
+
+
+def test_func():
+    for i in rand_mass:
+        recursive_reverse(i)
+
+
+def test_mem():
+    for i in rand_mass:
+        recursive_reverse_mem(i)
+
+
+print('время при подаче разных значений')
+print(timeit('test_func()', globals=globals(), number=1))
+print(timeit('test_mem()', globals=globals(), number=1))
+
+"""
+Вывод: мемоизация эффективна только если функция будет повторно обрабатывать 
+одно и то же число( либо список часто повторяющихся). При подаче разных значений,
+она затрачивает больше времени, чем обычная рекурсивная ф-ция
+"""
