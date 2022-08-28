@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -31,17 +31,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=2))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=2))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=2))
 
 
 def memoize(f):
@@ -57,7 +57,7 @@ def memoize(f):
     return decorate
 
 
-@memoize
+@ memoize
 def recursive_reverse_mem(number):
     if number == 0:
         return ''
@@ -69,14 +69,25 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=1000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=1000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=1000))
+
+# print(recursive_reverse(1000000))
+# print(recursive_reverse_mem(1000000))
+"""
+00000010 - recursive_reverse(1000000) - if number == 0: return str(number % 10) - неверно, функция должна возвращать ''
+0000001 - recursive_reverse_mem(1000000)
+
+Изначально видно что мемоизация дает огромный прирост на больших данных, но разобравшись что такое мемоизация, сделал выводы резльтата и уменьшил кол-во замеров,
+увидел, что первая(recursive_reverse) функция каждый раз выводит результат, при измерении, тогда как вторая(recursive_reverse_mem) выводит только один раз результат, 
+остальные, похоже, возвращают результат из кэша
+"""
