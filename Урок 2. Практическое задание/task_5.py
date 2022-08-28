@@ -19,3 +19,22 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def row_ascii(cur_ascii=32):
+    """
+    Вывод ascii символов по строчно 10 символов в строке с 32 по 127
+    :param cur_ascii: код текущего символа
+    :return: строка с кодом символа и самим символом
+    """
+    if cur_ascii == 128:
+        print('')
+        return print('Вывод символов завершен')
+    print(f'{cur_ascii} - {chr(cur_ascii)} ', end='')
+    if (cur_ascii - 31) % 10 == 0:
+        print('')
+    row_ascii(cur_ascii + 1)
+
+
+if __name__ == '__main__':
+    row_ascii()

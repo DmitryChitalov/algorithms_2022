@@ -13,3 +13,29 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_el(number):
+    """
+    Сумма последовательности 1+2+3+...n
+    :param number: Число последовательности n
+    :return: сумма элементов последовательности
+    """
+    if number == 1:
+        return number
+    else:
+        return number + sum_el(number - 1)
+
+
+if __name__ == '__main__':
+    try:
+        num = int(input('Введите натуральное число: '))
+    except ValueError:
+        print('Вы ошиблись и ввели не натуральное цисло')
+    else:
+        print('Проверка равентсва 1+2+...+n = n(n+1)/2')
+        res = sum_el(num)
+        if res == num * (num + 1) / 2:
+            print(f'Все верно 1+2+...+n равно {res} и n(n+1)/2 равно {int(num * (num + 1) / 2)}')
+        else:
+            print(f'Не верно 1+2+...+n равно {res}, а n(n+1)/2 равно {num * (num + 1) / 2}')

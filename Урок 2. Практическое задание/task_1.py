@@ -27,3 +27,54 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+class MyErr(Exception):
+    pass
+
+
+def my_calculate():
+    """
+    Реализация калькулятора с помощью рекурсии
+    :return: результат вычисления
+    """
+
+    try:
+        operation_calc = input('Введите знак операции для вычисления +, -, *, / или 0 для выхода: ')
+        if operation_calc not in '+-*/0':
+            raise MyErr("Вы не ввели знак операции или 0")
+    except MyErr as err:
+        print(err)
+        return my_calculate()
+    else:
+        if operation_calc == '0':
+            return print('Вы вышли из калькулятора')
+        else:
+            try:
+                num1 = int(input('Введите первое число: '))
+                num2 = int(input('Введите второе число: '))
+            except ValueError:
+                print('Вы ошиблись и ввели не целое цисло')
+            else:
+                if operation_calc == '+':
+                    res = num1 + num2
+                    print(f'Результат {num1} + {num2} = {res}')
+                elif operation_calc == '-':
+                    res = num1 - num2
+                    print(f'Результат {num1} - {num2} = {res}')
+                elif operation_calc == '*':
+                    res = num1 * num2
+                    print(f'Результат {num1} * {num2} = {res}')
+                elif operation_calc == '/':
+                    try:
+                        res = num1 / num2
+                    except ZeroDivisionError:
+                        print('Второе число 0, деление на 0 невозможно')
+                    else:
+                        print(f'Результат {num1} / {num2} = {res}')
+            finally:
+                return my_calculate()
+
+
+if __name__ == '__main__':
+    my_calculate()

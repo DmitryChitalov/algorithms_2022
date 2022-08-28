@@ -17,3 +17,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def culc_even_noteven(number, even=0, not_even=0):
+    """
+    Подсчет четных и не четных цифр в цисле
+    :param number: введенное цисло
+    :param even: количество четных
+    :param not_even: количество не четных
+    :return: строка с указанием сколько четных и не четных цифр
+    """
+    if number == 0:
+        return f'четных чисел {even}, не четных {not_even}'
+    else:
+        cur_number = number % 10
+        number = number // 10
+        if cur_number % 2 == 0:
+            even += 1
+        else:
+            not_even += 1
+        return culc_even_noteven(number, even, not_even)
+
+
+if __name__ == '__main__':
+    try:
+        num = int(input('Введите натуральное число: '))
+    except ValueError:
+        print('Вы ошиблись и ввели не натуральное цисло')
+    else:
+        print(f'В числе {num} {culc_even_noteven(num)}')
