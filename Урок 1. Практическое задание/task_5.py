@@ -42,12 +42,12 @@ class StackClass:
 class Stack:
     def __init__(self):
         self.stack = []
-        self.max = None
+        self.max_s = None
 
     def push(self, item):
         self.stack.append(item)
-        if len(self.stack) == 1 or item > self.max:
-            self.max = item
+        if len(self.stack) == 1 or item > self.max_s:
+            self.max_s = item
 
 
 if __name__ == '__main__':
