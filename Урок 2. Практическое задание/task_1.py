@@ -28,31 +28,6 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-# def rec():
-#     try:
-#         a = int(input("Введите число 1:"))
-#         b = int(input("Введите число 2:"))
-#         sign = input("Введите один знак операции с числами - '+', '-', '*' или '/',"
-#                  " для выхода из программы введите '0' :")
-#         if sign != '0':
-#             if sign == '+':
-#                 print(a + b)
-#             elif sign == '-':
-#                 print(a - b)
-#             elif sign == '*':
-#                 print(a * b)
-#             elif sign == '/':
-#                 if b != 0:
-#                     print(a / b)
-#                 else:
-#                     print("Число два не должно быть равно 0! На ноль делить нельзя!")
-#             else:
-#                 print("Ошибка! Введен неправильный знак операции!")
-#             return rec()
-#     except ValueError:
-#         print('Вы вместо числа ввели строку ((( Исправьтесь!')
-#         return rec()
-# rec()
 class MyException(Exception):
     pass
 
