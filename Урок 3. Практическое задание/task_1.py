@@ -34,33 +34,33 @@ diction = {}
 mas = []
 
 
-def countTime(funct):
-    def wraper():
+def count_time(funct):
+    def wrapper():
         begin = time.time()
         funct()
         print(time.time() - begin)
 
-    return wraper
+    return wrapper
 
 
 # А Заполнение элементами
-@countTime
-def fillList():
+@count_time
+def fill_list():
     for i in range(1, 1000000):  # O(n)
         mas.append(i)  # O(1)
     return
 
 
-@countTime
-def fillDic():
+@count_time
+def fill_dic():
     for i in range(1, 1000000):  # O(n)
         diction[i] = i  # O(1)
     return
 
 
 print("\nЗаполнение элементами")
-fillList()
-fillDic()
+fill_list()
+fill_dic()
 
 """
 При одинаковой сложности алгоритма  заполнение словаря происходит медленнее
@@ -75,16 +75,16 @@ fillDic()
 
 # B. Получение элемента
 
-@countTime
-def getElList():
+@count_time
+def get_el_list():
     for i in mas:  # O(n)
         i  # O(1)
         # print(i) # Не стал забивать выввод информацией
     return
 
 
-@countTime
-def getElDic():
+@count_time
+def get_el_dic():
     for i in diction:  # O(n)
         i  # O(1)
         # print(i) # Не стал забивать выввод информацией
@@ -92,8 +92,8 @@ def getElDic():
 
 
 print("\nПолучение элементов")
-getElList()
-getElDic()
+get_el_list()
+get_el_dic()
 
 """
 Получения элементов из словаря быстрее так как это хеш таблица
@@ -102,20 +102,20 @@ getElDic()
 
 # С. Удаление элемента
 
-@countTime
-def popElList():
+@count_time
+def pop_el_list():
     for i in range(len(mas)):
         mas.pop()
     return
 
 
-@countTime
-def popElDic():
+@count_time
+def pop_el_dic():
     for i in range(len(diction)):
         diction.popitem()
     return
 
 
 print("\nУдалание элемента")
-popElList()
-popElDic()
+pop_el_list()
+pop_el_dic()
