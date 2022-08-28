@@ -7,3 +7,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def recurs(num, i=10):
+    ans = int(input("Введите число"))
+    if i == 0:
+        return print("Увы. Вы проиграли. Задуманное число ", num)
+    if ans < num:
+        print("Загаданное число больше вашего")
+        i -= 1
+        return recurs(num,i)
+    elif ans > num:
+        print("Загаданное число меньше ва вашего")
+        return recurs(num, i)
+    else:
+        print("Вы угадали")
+        return
+
+
+num = random.randint(1, 100)
+print(num)
+recurs(num)

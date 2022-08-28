@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def get_ansi_string(n, k):
+    if n == k:
+        return '{} - {}'.format(n, chr(n))
+    return '{} - {}'.format(n, chr(n)) + " " + get_ansi_string(n + 1, k)
+
+
+def recurs(n):
+    if n == 122:
+        return get_ansi_string(122, 127)
+    return get_ansi_string(n, n + 9) + "\n" + recurs(n + 10)
+
+
+print(recurs(32))
