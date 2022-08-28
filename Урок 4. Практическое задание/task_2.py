@@ -80,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# Меморизация нужна если потребуется повторный вызов функции, т.к. при первом вызове заполняется кэш декоратора.
