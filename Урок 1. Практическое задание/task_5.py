@@ -27,5 +27,20 @@ class PlatesPack:
             self.plates[len(self.plates) - 1].append(pl)
         else:
             self.plates.append([])
-            self.plates[len(self.plates) - 1].append(pl)
- 
+            self.plates[len(self.plates) - 1].append(pl) 
+    
+    def delete (self)
+        result = self.plates[len(self.plates) - 1].pop()
+        if len(self.plates[len(self.plates) - 1]) == 0:
+            self.plates.pop()
+        return result
+    
+if __name__ == '__main__':
+    plate = PlatesPack(3)
+    plate.add('one')
+    plate.add('two')
+    plate.add('three')
+    plate.add('four')
+    plate.add('five')
+    print(plate)
+    print(plate.delete())
