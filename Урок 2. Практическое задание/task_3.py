@@ -20,7 +20,7 @@
 """
 
 
-def recurs(numb, newstr: str):
+def recurs(numb, newstr=''):
     if numb > 0:
         newstr = newstr + str(numb % 10)
         return recurs(numb // 10, newstr)
@@ -28,4 +28,4 @@ def recurs(numb, newstr: str):
         return newstr
 
 
-print(recurs(1230, ''))
+print(recurs(1230))
