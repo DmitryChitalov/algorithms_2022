@@ -30,7 +30,7 @@
 
 
 def rec(numb):
-    sign =input("ВВедите действие")
+    sign = input("ВВедите действие")
     if sign == '+':
         numb = numb + int(input("Ведите число"))
         print("Результат равен",numb)
