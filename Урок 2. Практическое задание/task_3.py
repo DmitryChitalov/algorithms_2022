@@ -18,3 +18,24 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def number_revers(number):
+    """
+    Реверс цифр натурального цисла
+    :param number: число
+    :return: строку с реверсным цислом
+    """
+    if number < 10:
+        return str(number)
+    else:
+        return str(number % 10) + str(number_revers(number // 10))
+
+
+if __name__ == '__main__':
+    try:
+        num = int(input('Введите натуральное число, которое требуется перевернуть: '))
+    except ValueError:
+        print('Вы ошиблись и ввели не натуральное цисло')
+    else:
+        print(f'Перевернутое число: {number_revers(num)}')
