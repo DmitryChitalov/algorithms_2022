@@ -22,3 +22,24 @@
 р
 а
 """
+
+import hashlib
+
+res_txt = set()
+
+
+def get_hash(s):
+    for i in range(1, len(s)+1):
+        if i == len(s):
+            return
+        res_txt.add(hash(s[:i]))
+        res_txt.add(hash(s[i:]))
+        get_hash(s[i:])
+
+
+def hash(s):
+    return hashlib.sha512(s.encode('utf-8')).hexdigest()
+
+
+get_hash('1234')
+print(res_txt)

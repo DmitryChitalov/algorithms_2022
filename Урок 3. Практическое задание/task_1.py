@@ -28,3 +28,73 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+def timing(f):
+    def wrap(*args, **kwargs):
+        start = time()
+        ret = f(*args, **kwargs)
+        end = time()
+        print('%s function took %s' % (f.__name__, (end-start)))
+        return ret
+    return wrap
+
+lst_test = []
+dct_test = {}
+@timing
+def lst_add(r):  # O(N)
+    for i in range(r):
+        lst_test.append(i)  # O(1)
+
+@timing
+def dct_add(r):  # O(N)
+    for i in range(r):
+        dct_test[i] = str(i)   # O(1)
+
+
+"""
+заполнение словаря дольше чем списка. т.к.в словарь подаётся два значения
+"""
+@timing
+def lst_listing():  # O(N)
+    for i in lst_test:  # O(N)
+        lst_test[i] = lst_test[i]*2  # O(n)
+
+
+@timing
+def dct_listing(): # O(N)
+    for k,v in dct_test.items():  # O(N)
+        dct_test[k] = 'v' # O(1)
+@timing
+def dct_listing2():  # O(N)
+    for k in range(len(dct_test)):  # O(N)
+        dct_test[k] = 'v'  # O (1)
+
+
+"""
+словарь  и список - примерно одно время исполнения, тк. у всех сложность в цикле становится О(N)
+"""
+@timing
+def lst_clear():  # O(N)
+    while len(lst_test) != 0:
+       lst_test.pop()  # O(1)
+
+@timing
+def dct_clear():  # O
+    while len(dct_test) != 0:
+         dct_test.popitem()  # O(1)
+
+
+"""
+словарь  и список - примерно одно время исполнения, тк. у всех сложность О(1)
+"""
+
+lst_add(10000)
+dct_add(10000)
+#print(dct_test)
+lst_listing()
+dct_listing()
+dct_listing2()
+lst_clear()
+dct_clear()
