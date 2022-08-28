@@ -10,23 +10,23 @@
 """
 
 # Сложность O(n^2)
-def list_min1(spis):
-    for i in spis:
-        min = True
-        for j in spisok:
+def list_min_one(my_list):
+    for i in my_list:
+        my_min = True
+        for j in my_list:
             if i > j:
-                min = False
-        if min:
+                my_min = False
+        if my_min:
             return i
           
 # Сложность O(n)
-def list_min2(spis):
-    min = spis[0]
-    for i in spisok:
-        if i < min:
-            min = i
-    return min
+def list_min_two(my_list):
+    my_min = my_list[0]
+    for i in my_list:
+        if i < my_min:
+            my_min = i
+    return my_min
  
-spisok = [12,23,21,45,62323,55345,66,2234,1123,545435,11,112]
-print(list_min1(spisok))
-print(list_min2(spisok))
+my_list = [12,23,21,45,62323,55345,66,2234,1123,545435,11,112]
+print(list_min_one(my_list))
+print(list_min_two(my_list))
