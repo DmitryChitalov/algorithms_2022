@@ -19,23 +19,23 @@
 """
 
 
-def recur(numb, chet=0, nechet=0):
+def recur(numb, even=0, not_even=0):
     res = numb % 10
     res %= 2
     if res == 0:
-        chet += 1
+        even += 1
         res = numb // 10
         if res == 0:
-            print("четных чисел = ", chet, "Не четных чисел = ", nechet)
+            print("четных чисел = ", even, "Не четных чисел = ", not_even)
             return
-        recur(numb // 10, chet, nechet)
+        recur(numb // 10, even, not_even)
     else:
-        nechet += 1
+        not_even += 1
         res = numb // 10
         if res == 0:
-            print("четных чисел = ", chet, "Не четных чисел = ", nechet)
+            print("четных чисел = ", even, "Не четных чисел = ", not_even)
             return
-        recur(numb // 10, chet, nechet)
+        recur(numb // 10, even, not_even)
 
 
 recur(int(input("Введите число")), 0, 0)
