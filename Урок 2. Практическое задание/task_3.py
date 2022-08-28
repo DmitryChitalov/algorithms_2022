@@ -28,4 +28,4 @@ def rec(count=0, a=10, b=1, digit=0, res=''):
     # print(res)
     return res
 
-rec()
+print(rec())
