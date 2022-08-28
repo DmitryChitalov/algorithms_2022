@@ -15,3 +15,22 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+webHash = {}
+
+
+def getURL(url):
+    if webHash.get(url):
+        print("Урл присутствует")
+    else:
+        res = hashlib.sha256(url.encode('utf-8'))
+        webHash[url] = res.hexdigest()
+        print("Добавленно")
+
+
+getURL('ya.ru')
+getURL('ya.ru')
+getURL('yandex.ru')
+getURL('yandex.ru')
+print(webHash)

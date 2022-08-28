@@ -28,3 +28,94 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+diction = {}
+mas = []
+
+
+def count_time(funct):
+    def wrapper():
+        begin = time.time()
+        funct()
+        print(time.time() - begin)
+
+    return wrapper
+
+
+# А Заполнение элементами
+@count_time
+def fill_list():
+    for i in range(1, 1000000):  # O(n)
+        mas.append(i)  # O(1)
+    return
+
+
+@count_time
+def fill_dic():
+    for i in range(1, 1000000):  # O(n)
+        diction[i] = i  # O(1)
+    return
+
+
+print("\nЗаполнение элементами")
+fill_list()
+fill_dic()
+
+"""
+При одинаковой сложности алгоритма  заполнение словаря происходит медленнее
+так как он состоит из ключа и значения, а массив состоит только из значений.
+Словарь в питоне состоит из двух массивов хешей и массива значений. Как известно, 
+реализация хэш-таблицы должна учитывать возможность появления коллизий – ситуаций, 
+когда разные ключи имеют одинаковое значение хэша. Должен быть способ вставки и 
+извлечения элементов с учётом коллизий, что накладывает дополнительное временя на
+'внутренню работу' c данными
+"""
+
+
+# B. Получение элемента
+
+@count_time
+def get_el_list():
+    for i in mas:  # O(n)
+        i  # O(1)
+        # print(i) # Не стал забивать выввод информацией
+    return
+
+
+@count_time
+def get_el_dic():
+    for i in diction:  # O(n)
+        i  # O(1)
+        # print(i) # Не стал забивать выввод информацией
+    return
+
+
+print("\nПолучение элементов")
+get_el_list()
+get_el_dic()
+
+"""
+Получения элементов из словаря быстрее так как это хеш таблица
+"""
+
+
+# С. Удаление элемента
+
+@count_time
+def pop_el_list():
+    for i in range(len(mas)):
+        mas.pop()
+    return
+
+
+@count_time
+def pop_el_dic():
+    for i in range(len(diction)):
+        diction.popitem()
+    return
+
+
+print("\nУдалание элемента")
+pop_el_list()
+pop_el_dic()
