@@ -43,6 +43,10 @@ class TaskBoard:
         task = self.base.remove()
         self.solved.append(task)
         
+    def to_current(self, item):
+    # Добавляем задачи в текущие
+        self.base.add(item)
+        
     def to_rework(self):
     # Переносим задачу на доработку.
         task = self.base.remove() 
@@ -53,3 +57,13 @@ class TaskBoard:
         task = self.rework.remove()
         self.base.add(task)
        
+if __name__ == '__main__':
+    task_board = TaskBoard()
+    task_board.to_current('Task_One')
+    task_board.to_current('Task_Two')
+    task_board.to_current('Task_Thee')
+    task_board.to_current('Task_Four')
+    task_board.to_current('Five')
+    task_board.close_task()
+    task_board.to_rework()
+    task_board.to_base()
