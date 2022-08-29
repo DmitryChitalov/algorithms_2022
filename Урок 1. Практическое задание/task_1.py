@@ -37,7 +37,7 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(n**2).
+    Сложность: O(n^2).
     """
     for j in range(len(lst_obj)):          # O(n)
         if lst_obj[j] in lst_obj[j+1:]:    # O(n)
@@ -71,3 +71,22 @@ for j in (50, 500, 1000, 5000, 10000):
 print(check_1(lst))
 print(check_2(lst))
 print(check_3(lst))
+
+
+
+
+
+def min_in_list(lst):
+    """
+    Поиск минимального значения в списки со сложностью O(n^2)
+    :param lst: список чисел
+    :return: минимальное число
+
+    """
+    for num_one in lst:  # O(n)
+        is_min = True  # O(1)
+        for num_two in lst:  # O(n)
+            if num_one > num_two:  # O(1)
+                is_min = False  # O(1)
+        if is_min:  # O(1)
+            return num_one  # O(1)
