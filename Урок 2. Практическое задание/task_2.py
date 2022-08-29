@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def figure_counter_2(num, even_count=0, odd_count=0):
+    if int(num) > 0:
+        inv_figure = int(num) % 10
+        if inv_figure % 2:
+            odd_count += 1
+        else:
+            even_count += 1
+        num = int(num) // 10
+        return figure_counter_2(num, even_count, odd_count)
+    return f'{even_count} - чётных, {odd_count} - нечётных'
+
+
+def figure_counter():
+    num = input('Введите число: ')
+    if not num.isdigit():
+        print('Введено недопустимае значение. Повторите ввод.')
+        return figure_counter()
+    else:
+        return figure_counter_2(num)
+
+
+print(figure_counter())

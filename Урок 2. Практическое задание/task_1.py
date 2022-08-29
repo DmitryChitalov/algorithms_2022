@@ -27,3 +27,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    sign = input('Введите операцию. Для завершения работы введите "0": ')
+    if sign == '0':
+        return 'До свидания!'
+    elif sign not in ('+', '-', '/', '*'):  # Проверка на допустимого значения математического знака
+        print('Введена недопустимая операция. Повторите ввод.')
+        return calc()
+    else:  # Проверка на ввод численного значения
+        number_1 = input('Введите первое число: ')
+        if not float(number_1):
+            print('Введено недопустимае значение. Повторите ввод.')
+            return calc()
+        number_2 = input('Введите второе число: ')
+        if not float(number_2):  # Проверка на ввод численного значения
+            print('Введено недопустимае значение. Повторите ввод.')
+            return calc()
+        if sign == '+':
+            res = float(number_1) + float(number_2)
+        elif sign == '-':
+            res = float(number_1) - float(number_2)
+        elif sign == '*':
+            res = float(number_1) * float(number_2)
+        elif sign == '/':
+            if number_2 == '0':  # Проверка допустимости операции деления (на ноль)
+                print('Деление на ноль недопустимо!')
+                return calc()
+            else:
+                res = float(number_1) / float(number_2)
+        print(res)
+        return calc()
+
+
+if __name__ == '__main__':
+    calc()

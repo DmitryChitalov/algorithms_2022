@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def show_ascii(through, to, count=0):
+    count += 1
+    if through > to:
+        return
+    end = '    '
+    if count == 10:
+        end = '\n'
+        count = 0
+    print(f'{through} - {chr(through)}', end=end)
+    return show_ascii(through + 1, to, count)
+
+
+print(show_ascii(32, 127))

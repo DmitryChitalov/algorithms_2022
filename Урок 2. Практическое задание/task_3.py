@@ -18,3 +18,24 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def shifter_1(num, sh=''):
+    if int(num) > 0:
+        last_digit = int(num) % 10
+        sh = sh + str(last_digit)
+        num = int(num) // 10
+        return shifter_1(num, sh)
+    return sh
+
+
+def shifter():
+    num = input('Введите число, которое требуется перевернуть: ')
+    if not num.isdigit():
+        print('Введено недопустимае значение. Повторите ввод.')
+        return shifter()
+    else:
+        return shifter_1(num)
+
+
+print(shifter())

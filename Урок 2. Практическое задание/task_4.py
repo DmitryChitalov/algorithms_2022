@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_el(num, sum_elem=1.0, int_res=1.0):
+    if num > 1:
+        int_res = int_res/(-2)
+        sum_elem = sum_elem + int_res
+        num -= 1
+        return sum_el(num, sum_elem, int_res)
+    return sum_elem
+
+
+print(sum_el(2))
+print(sum_el(3))
+print(sum_el(4))

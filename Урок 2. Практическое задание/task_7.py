@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def theorem(n):
+    def theorem_1(n, sum_n=0):
+        if n < 1:
+            return sum_n
+        return theorem_1(n - 1, sum_n + n)
+    return f'{theorem_1(n)} - левая часть равенства,\n{int(n * (n + 1) / 2)} - правя часть равенства'
+
+
+print(theorem(15))
