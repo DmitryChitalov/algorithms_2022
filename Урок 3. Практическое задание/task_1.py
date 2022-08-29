@@ -28,3 +28,73 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import random
+import time
+
+n = 9999999
+
+
+def dec_timer(func):
+    def wrapper(*args):
+        start = time.time()
+        res = func(*args)
+        end = time.time()
+        print(f"Function time execution = {end - start}")
+        return res
+
+    return wrapper
+
+
+@dec_timer
+def filling_task(n, obj):
+    res = obj()
+    for i in range(n):
+        if type(res) is list:
+            res.append(i)  # O(1)
+        elif type(res) is dict:
+            res[i] = random.randint(0, 1000)  # O(1)
+    return res
+
+
+print("Fillind")
+ls_res = filling_task(n, list)
+
+dict_res = filling_task(n, dict)
+"""
+Время выполнения одной команды вставки в лист и словарь = O(1). 
+Но заполение словаря занимает намного больше времени, так как каждая вставка использует функцию хэширования, что замедляет процесс 
+"""
+print('Getting')
+
+
+@dec_timer
+def getting_task(n, obj):
+    if type(obj) is list:
+        for i in range(n):
+            s = obj[i]  # O(1)
+    elif type(obj) is dict:
+        for i in range(n):
+            s = obj.get(i)  # O(1)
+
+
+getting_task(n, ls_res)
+getting_task(n, dict_res)
+"""
+Время получение значения из листа быстрее, так как нет необходимости вычистлять хэш
+"""
+print('del_task')
+
+
+@dec_timer
+def del_task(n, obj):
+    if type(obj) is list:
+        for i in range(n):
+            obj.pop()# O(1)
+    elif type(obj) is dict:
+        for i in range(n):
+            obj.pop(i)# O(1)
+
+del_task(n, ls_res)
+del_task(n, dict_res)
+
+# Удаление из листа и словаря схожи, так как сложность удаления в обоих структурах O(N)
