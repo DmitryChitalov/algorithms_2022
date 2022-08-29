@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def equality_check(num, total=0):
+    if num == 0:
+        return total
+    total += num
+    return equality_check(num - 1, total)
+
+
+user = int(input('Введите число: '))
+
+if equality_check(user) == user * (user + 1) / 2:
+    print('Равенство выполняется')
+else:
+    print('Равенство не выполняется')
