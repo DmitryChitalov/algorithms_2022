@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def user_enter():
+    users = input('Введите число, которое требуется перевернуть: ')
+    if not (users.isdecimal()):
+        print('Вместо числа введена строка! Исправьтесь')
+        return user_enter()
+    return int(users)
+
+def rev_of_users(users):
+    if not users // 10:
+        return users
+    return str(users % 10) + str(rev_of_users(users // 10))
+
+if __name__ == "__main__":
+    users1 = user_enter()
+    print(f"Перевернутое число: {rev_of_users(users1)}")

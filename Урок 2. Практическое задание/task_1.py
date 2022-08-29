@@ -27,3 +27,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def recurs_calcul():
+    users = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if users == '0':
+        print('Выход')
+        return
+    if not (users == '+' or users == '-' or users == '/' or users == '*' or users == '0'):
+        print('Неверная операция')
+        return recurs_calcul()
+    a = input('Введите первое число: ')
+    b = input('Введите второе число: ')
+    if not (a. isdecimal() and b. isdecimal()):
+        print('Вместо числа введена строка! Исправьтесь')
+        return recurs_calcul()
+    a, b = int(a), int(b)
+    if users == '+':
+        result = a + b
+    elif users == '-':
+        result = a - b
+    elif users == '*':
+        result = a * b
+    elif users == '/':
+        try:
+            result = round((a / b), 2)
+        except ZeroDivisionError:
+            print("На ноль делить нельзя!")
+            return recurs_calcul()
+    print(f'Ваш результат: {result}')
+    return recurs_calcul()
+
+recurs_calcul()
