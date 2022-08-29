@@ -24,3 +24,32 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+from functools import reduce
+
+
+def hex_number():
+    value = input('Введите шестнадцатиричное число: ')
+    return list(value.upper())
+
+
+def hex_sum(data):
+    return list(hex(reduce(lambda x, y: x + y, [int(''.join(i), 16) for i in data.values()])).upper())[2:]
+
+
+def hex_mul(data):
+    return list(hex(reduce(lambda x, y: x * y, [int(''.join(i), 16) for i in data.values()])).upper())[2:]
+
+
+def main():
+    def_data = defaultdict(list)
+    def_data['1'] = hex_number()
+    def_data['2'] = hex_number()
+    symbol = input('ВВедите знак операции(+ или *): ')
+    if symbol == '+':
+        return ''.join(hex_sum(def_data))
+    elif symbol == '*':
+        return ''.join(hex_mul(def_data))
+
+
+print(main())
