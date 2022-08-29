@@ -28,3 +28,45 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+from collections import defaultdict
+
+
+def av_income():
+    entered_list = input(
+        "Через пробел введите прибыль данного предприятия за каждый квартал (Всего 4 квартала): ").split()
+    sum_num_list = sum(list(map(int, entered_list)))
+    return sum_num_list
+
+
+def firm_income():
+    n = counter
+    while n > 0:
+        firm_name = input("Фирма - ")
+        firm_t = namedtuple('firms', 'firm_name income')
+        firms = firm_t(
+            firm_name=firm_name,
+            income=av_income()
+        )
+        n -= 1
+        print(f'{firm_name}-{firms.income}')
+        my_dict[firms.firm_name] = firms.income
+    return f''
+
+def main():
+    firm_income()
+    av_sum = sum(my_dict.values()) / counter
+    more_av = []
+    less_av = []
+    for k, v in my_dict.items():
+        if v > av_sum:
+            more_av.append(k)
+        else:
+            less_av.append(k)
+
+    return f'Предприятия,с прибылью выше среднего значения {" ".join(more_av)}, меньше {" ".join(less_av)}'
+
+
+counter = int(input("Количество фирм "))
+my_dict = defaultdict(int)
+print(main())
