@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def calculation(my_num, even_num=0, odd_num=0):
+    if my_num == 0:
+         return even_num, odd_num
+    else:
+        new_num = my_num // 10
+        if new_num % 2 == 0:
+            even_num += 1
+        else:
+            odd_num += 1
+        return calculation(my_num, even_num, odd_num)
+
+try:
+    MY_NUM = int(input("Введите натуральное число: "))
+    print(f"Четных и нечетных цифр в числе: {calculation(MY_NUM)}")
+except ValueError:
+    print("Введите только число")
+        
