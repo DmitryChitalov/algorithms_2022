@@ -14,24 +14,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 """
 
-num = int(input('Введите число: '))
 
-
-def right_side():
-    global num
-    res = num*(num+1)/2
-    return int(res)
-
-
-def left_side(num, i=0, sum=0):
-    if num == i:
-        return sum
+def left_side(number):
+    if number == 1:
+        return number
     else:
-        i += 1
-        sum += i
-        return left_side(num, i, sum)
+        return number + left_side(number-1)
 
 
-print(f'Равенство-{right_side() == left_side(num)}')
-print(right_side())
-print(left_side(num))
+def right_side(val):
+    res = f'Равенство-{(val*(val+1)/2) == left_side(num)}\n{left_side(num)}={int(val*(val+1)/2)}'
+    return res
+
+
+num = int(input('Введите число: '))
+print(right_side(num))
