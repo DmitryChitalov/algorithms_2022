@@ -13,3 +13,8 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def my_function(numb):
+    return 0 if numb == 0 else numb + my_function(numb - 1)
+NUMB = int(input('Введите натуральнео число: '))
+print(f'Для n = {NUMB}, сумма элементов: {my_function(NUMB)} = {NUMB}({NUMB}+1)/2')
