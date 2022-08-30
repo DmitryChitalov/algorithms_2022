@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def table_form(first_character = 32):
+    if first_character == 128:
+        return
+    print(f'{first_character} \t {chr(first_character)}', end=' ')
+    if (first_character - 31) % 10 == 0:
+        print('\n')
+
+    table_form(first_character + 1)
+
+table_form()
+
