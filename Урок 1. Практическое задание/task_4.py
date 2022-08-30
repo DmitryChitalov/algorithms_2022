@@ -22,3 +22,45 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+# Общая сложность O(n)
+def authorization_1(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['password'] == user_password \
+                    and not value['activation']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['password'] != user_password:
+                return "Пароль не верный"
+
+    return "Данного пользователя не существует"
+
+
+# общая сложность O(1)
+def authorization_2(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:
+            return "Добро пожаловать! Доступ к ресурсу предоставлен"
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[user_name]['password'] != user_password:
+            return "Пароль не верный"
+    else:
+        return "Данного пользователя не существует"
+
+
+users = {'user1': {'password': '11111', 'activation': True},
+            'user2': {'password': '11111', 'activation': False},
+            'user3': {'password': '11111', 'activation': True},
+            'user4': {'password': '11111', 'activation': False}
+            }
+
+print(authorization_1(users, 'user1', '1111'))
+print(authorization_1(users, 'user2', '11111'))
+print(authorization_1(users, 'user3', '11111'))
+print(authorization_2(users, 'user1', '1111'))
+print(authorization_2(users, 'user2', '11111'))
+print(authorization_2(users, 'user3', '11111'))
