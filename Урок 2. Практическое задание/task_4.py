@@ -10,3 +10,9 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def my_function(numb):
+    return 0 if numb == 0 else 1 + my_function(numb - 1) / - 2
+NUMB = int(input('Всего элементов: '))
+print(f'Количество элементов: {NUMB}, сумма элементов: {my_function(NUMB)}')
