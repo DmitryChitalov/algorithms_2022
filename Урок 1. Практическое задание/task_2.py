@@ -15,23 +15,25 @@
 # -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 # -- проставьте сложности каждого выражения в двух ваших алгоритмах
 # """
+# O(n^2)
 def min_lst(x):
-    min_a = x[0]
-    idx = 1
-    while idx <= (len(x) - 1):
-        if min_a > x[idx]:
-            min_a = x[idx]
-        idx += 1
-    return min_a
+    min_a = x[0]                   # O(1)
+    idx = 1                        # O(1)
+    while idx <= (len(x) - 1):     # O(n)
+        while x[idx] < min_a:      # O(n)
+            min_a = x[idx]         # O(1)
+        idx += 1                   # O(1)
+    return min_a                   # O(1)
 
+# O(n)
 def min_lst_2(x):
-    min_b = x[0]
-    for i in x[1:]:
-        if i < min_b:
-            min_b = i
-    return min_b
+    min_b = x[0]                   # O(1)
+    for i in x[1:]:                # O(n)
+        if i < min_b:              # O(len(i))
+            min_b = i              # O(1)
+    return min_b                   # O(1)
 
-lst_a = [-3, 1, -5, 1000, -55]
-print(f'Минимальное значение в списке: {min_lst(lst_a)}')
-print(f'Минимальное значение в списке: {min_lst_2(lst_a)}')
+lst_a = [-3, 1, -5, 0, 1000, -55, -500, 6, -501]                    # O(1)
+print(f'Минимальное значение в списке: {min_lst(lst_a)}')        # O(1)
+print(f'Минимальное значение в списке: {min_lst_2(lst_a)}')      # O(1)
 
