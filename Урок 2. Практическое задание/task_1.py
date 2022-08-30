@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    """Функция запускается пользователем, предлагает ввести математическикий оператор и его аргументы.
+     Проверяет корректность данных и возвращает результат операции. Во всех случаях кроме ввода 0
+     функция начинает свою реализацию снова"""
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    available_operations = ['0', '+', '-', '*', '/']
+    if operation not in available_operations:
+        print('Ой, вы ввели неправильную операцию, попробуйте снова')
+        calculator()
+    if operation == '0':
+        print('Всего хорошего, до свидания!')
+        exit()
+    else:
+        try:
+            first = int(input('Введите первое число: '))
+            second = int(input('Введите второе число: '))
+            if operation == '+':
+                print(first + second)
+            elif operation == '-':
+                print(first - second)
+            elif operation == '*':
+                print(first * second)
+            elif operation == '/':
+                try:
+                    print(first / second)
+                except ZeroDivisionError:
+                    print('Делить на 0 недопустимо. Попробуем еще раз')
+            calculator()
+        except ValueError:
+            print(f'Вместо числа вы ввели строку (((  '
+                  f'Давайте попробуем начать сначала')
+            calculator()
+
+
+calculator()
