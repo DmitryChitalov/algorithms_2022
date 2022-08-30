@@ -21,3 +21,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_list(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+lst = list(range(1000))
+print(timeit('func_1(lst)', globals=globals(), number=10000))
+print(timeit('func_list(lst)', globals=globals(), number=10000))
+
+"""
+Вывод: удалось ускорить задачу, применив list comprehensions,
+который выполняется быстрее, чем  добавление элементов в список в цикле по очереди.
+"""
+
