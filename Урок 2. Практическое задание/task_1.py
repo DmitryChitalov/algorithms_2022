@@ -27,3 +27,52 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    type_op = input("Введите операцию ( +, -, *, / для выхода введте q): ")
+    
+    if type_op == 'q'
+        return "Выход"
+    
+    else:
+        if type_op in "+-*/":
+            try:
+                one_num = int(input("Введите первое чиcло: "))
+                two_num = int(input("Введите второе чиcло: "))
+                
+                if type_op == '+':
+                    result = one_num + two_num
+                    print(f"{one_num} + {two_num} = {result}")
+                    return calculator()
+                
+                elif type_op == '-:
+                    result = one_num - two_num
+                    print(f"{one_num} - {two_num} = {result}")
+                    return calculator()
+                  
+                elif type_op == '*':
+                    result = one_num * two_num
+                    print(f"{one_num} * {two_num} = {result}")
+                    return calculator()
+                  
+                elif type_op == '/':
+                    try:
+                        result = one_num / two_num
+                    except ZerroDivisionError:
+                        print("Деление на 0 запрещено")
+                    else:
+                        print(print(f"{one_num} / {two_num} = {result}")
+                    finally:
+                        return calculator()
+                    
+            except ValueError:
+                print("Введите числовое значение")
+                return calc()
+                    print(f"{one_num} / {two_num} = {result}")
+                    return calculator()
+        else:
+            print("Ошибка ввода")
+            return calculator()
+                              
+    
+calculator()

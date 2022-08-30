@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def my_ascii(ascii_cod=32):
+    if ascii_cod == 128:
+        return True
+    print(f' {ascii_cod} - {chr(ascii_cod)}', end=' ')
+    if (ascii_cod - 31) % 10 == 0:
+        print('\n')
+    my_ascii(ascii_cod + 1)
+    
+    
+my_ascii()

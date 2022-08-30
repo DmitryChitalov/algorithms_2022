@@ -7,3 +7,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+
+def my_function(count, ran_num):
+    my_num = int(input("Введите ваше число: "))
+    if count == 10 or my_num == ran_num:
+        if my_num == ran_num:
+            print('Угадали!')
+        print(f'Случайное число: {ran_num}')
+    else:
+        if my_num > ran_num:
+            print(f'Не угадали, случайное число меньше {my_num}')
+        else:
+            print(f'Не угадали, случайное число больше {my_num}')
+        my_function(count + 1, ran_num)
+        
+my_function(1, random.randint(0,100))
