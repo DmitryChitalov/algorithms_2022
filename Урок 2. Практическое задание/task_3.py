@@ -19,7 +19,7 @@
 1230 -> 0321
 """
 
-ref reverse(my_num):
+def reverse(my_num):
     rest_num, rem_num = divmod(my_num, 10)
     if rest_num == 0:
         return str(rem_num)
