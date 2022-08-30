@@ -21,3 +21,20 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+arr1 = [23, 2, 65, 72, 74, 8, 5, 33, 111, 6]
+print(func_1(arr1))
+print(timeit("func_1(arr1)", number=100000, globals=globals()))
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+""" для оптимизации использовал list comprehension, скорость выполнения которой выше, чем у цикла for
+замеры это подтвердили"""
+
+arr2 = [23, 2, 65, 72, 74, 8, 5, 33, 111, 6]
+print(func_2(arr2))
+print(timeit("func_1(arr2)", number=100000, globals=globals()))
+
