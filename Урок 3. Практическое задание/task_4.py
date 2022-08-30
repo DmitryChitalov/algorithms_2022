@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+from uuid import uuid4
+
+cash = {}
+
+
+def web_cash(url):
+    salt = uuid4().hex
+    url_hash = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
+    if url in cash.keys():
+        return f'Уже соществует: {url_hash, url}'
+    else:
+        cash[url] = url_hash
+        return f'Добавлено: {cash}'
+
+
+print(web_cash('gb.ru'))
+print(web_cash('gb.ru'))
