@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+my_list = [1, 2, -1, 100]
+
+
+# сложность O(1) + (O(n)*O(1)*O(n) + O(1) = O(n**2) - квадратичная
+def min_value_1(lst):
+    min_number = lst[0]  # присвоение и обращение по индексу O(1)
+    result = lst.copy()  # copy O(n)
+    for i in lst:  # цикл for в списке - O(n)
+        if i < min_number:  # O(1)
+            min_number = i  # O(1)
+        else:
+            result.remove(i)  # O(n)
+    return result[0]  # O(1)
+
+
+# сложность: O(1) + O(n)*O(1) + O(1) = О(n) - линейная
+def min_value_2(lst):
+    result = lst[0]  # присвоение и обращение по индексу O(1)
+    for i in lst:  # цикл for в списке - O(n)
+        if i < result:  # O(1)
+            result = i  # O(1)
+    return result  # O(1)
+
+
+print(min_value_1(my_list))
+print(min_value_2(my_list))
