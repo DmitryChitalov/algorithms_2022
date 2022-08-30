@@ -22,3 +22,68 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+from random import randrange
+
+
+def data_dict_generator(n):
+    data_dict = {}
+    for i in range(n):
+        login = ''.join([chr(randrange(65, 91)) for _ in range(5)])
+        data_dict[login] = [''.join([chr(randrange(33, 122)) for _ in range(10)]), True if randrange(2) else False]
+    return data_dict
+
+
+def enter_1(data):  # Итоговая сложность функции O(1)
+    login = input("Введите логин: ")  # O(1)
+    if login in data:  # O(1)
+        password = input('Введите пароль: ')  # O(1)
+        if password != data[login][0]:  # O(1)
+            return False, 'Пароль неверный.'  # O(1)
+        elif data[login][1]:  # O(1)
+            return True, ''  # O(1)
+        else:
+            return False, "Авторизация не пройдена. Авторизируйтесь, пожалуйста! "  # O(1)
+    else:
+        return False, "Tакого логина нет в системе"  # O(1)
+
+
+def enter_2(data):  # Итоговая сложность функции O(n)
+    login = input("Введите логин: ")  # O(1)
+    flag = 0  # O(1)
+    for i in data:  # O(n)
+        if login == i:  # O(1)
+            flag = 1  # O(1)
+            break  # O(1)
+    if flag:  # O(1)
+        password = input('Введите пароль: ')  # O(1)
+        if password != data[login][0]:  # O(1)
+            return False, 'Пароль неверный.'  # O(1)
+        elif data[login][1]:  # O(1)
+            return True, ''  # O(1)
+        else:
+            return False, "Авторизация не пройдена. Авторизируйтесь, пожалуйста! "  # O(1)
+    else:
+        return False, "Tакого логина нет в системе"  # O(1)
+
+
+"""
+Функция enter_1 более выгодная, потому что имеет меньшую сложность O(1) вместо O(n). 
+С точки зрения использования памяти - тоже, потому что создает лишнюю переменную flag (хотя одна переменная
+на фоне базы - несущественно, конечно). 
+"""
+data = data_dict_generator(5)
+print(data)
+enter, *message = enter_1(data)
+if enter:
+    print("Вход в систему выполнен")
+else:
+    print("Во входе отказано. ")
+    print(*message)
+
+print('**************')
+enter, *message = enter_2(data)
+if enter:
+    print("Вход в систему выполнен")
+else:
+    print("Во входе отказано. ")
+    print(*message)
