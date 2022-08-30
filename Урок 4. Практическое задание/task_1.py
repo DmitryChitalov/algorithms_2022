@@ -12,6 +12,12 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
+from timeit import timeit
+
+some_arr = []
+for i in range(1000):
+    some_arr.append(i)
+
 
 def func_1(nums):
     new_arr = []
@@ -19,3 +25,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(timeit("func_1(some_arr)", globals=globals(), number=10000))
+
+
+def func_2(nums):
+    new_arr = [i for i, el in enumerate(nums) if el % 2 == 0]
+    return new_arr
+
+
+print(timeit("func_2(some_arr)", globals=globals(), number=10000))
+
+# Аналитика: во второв варианте требуемый список создается через генератор, замеры показывают рост быстродействия.
