@@ -17,3 +17,23 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+# Линейно-логарифмическая
+def max_revenue(my_dict):
+    vals = sorted(list(my_dict.items()), key=lambda tup: tup[1], reverse=True)[:3]
+    return vals
+
+
+print(max_revenue({'Apple': 190000000, 'Google': 200000000, 'Toyota': 30000000, 'HP': 3000000, 'SpaceX': 2450004000}))
+
+
+# Квадратичный
+def max_value(dct):
+    top_3 = []
+    aux = sorted([(v, k) for (k, v) in dct.items()])
+    for k, v in aux[-3:]:
+        top_3.append(v)
+    return list(reversed(top_3))
+
+
+print(max_value({'Apple': 190000000, 'Google': 200000000, 'Toyota': 30000000, 'HP': 3000000, 'SpaceX': 2450004000}))

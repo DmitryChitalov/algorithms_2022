@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def left_side(number):
+    if number == 1:
+        return number
+    else:
+        return number + left_side(number-1)
+
+
+def right_side(val):
+    res = f'Равенство-{(val*(val+1)/2) == left_side(num)}\n{left_side(num)}={int(val*(val+1)/2)}'
+    return res
+
+
+num = int(input('Введите число: '))
+print(right_side(num))
