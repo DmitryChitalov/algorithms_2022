@@ -17,3 +17,15 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 """
+
+
+def inverted_numb(numb):
+    number, numeral = divmod(numb, 10)
+    if number == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(inverted_numb(number))
+
+
+message = int(input("Введите число, которое требуется перевернуть:\n"))
+print(f'Перевернутое число: {inverted_numb(message)}')

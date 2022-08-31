@@ -10,3 +10,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Нужно обойтисть без создания массива!
 """
+
+
+def recur_method(i, amount=0, value=1):
+    if i == 0:
+        return amount
+    amount += value
+    value /= -2
+    return recur_method(i - 1, amount, value)
+
+
+count = int(input('Введите количество элементов:\n'))
+print(f'Количество элементов - {count}, их сумма - {recur_method(count)}')

@@ -12,3 +12,18 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def equality(numb):
+    if numb == 1:
+        return numb
+    else:
+        return equality(numb - 1) + numb
+
+
+try:
+    number = int(input("Введите число: "))
+    if equality(number) == number * (number + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print("Это не число!")

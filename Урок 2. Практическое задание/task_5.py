@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table(value=32):
+    if value == 128:
+        return True
+    print(f' {value} - {chr(value)}', end=' ')
+    if (value - 31) % 10 == 0:
+        print('\n')
+
+    table(value + 1)
+
+
+table()
