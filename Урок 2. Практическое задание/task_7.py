@@ -25,7 +25,7 @@ def rec(num, summ=0, right_part=0):
             rec(num, summ=0, right_part=right_part)
         elif num >= 1:
             summ += num
-            print(num)
+            # print(num)
             rec(num-1, summ=summ, right_part=right_part)
         else:
             # print(sum)
