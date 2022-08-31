@@ -28,3 +28,47 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import numpy
+
+from collections import namedtuple
+
+
+def fill_tuples(count1):
+    RES = namedtuple('Company', 'id name avg_inc tot_inc_year')
+    incomes = []
+    for i in range(0, int(count1)):
+        comp_name = input('Введите название предприятия:   ')
+        avg_income_list = (input('Через пробел введите прибыль данного предприятия '
+                                 'за каждый квартал(Всего 4 квартала): ')).split()
+        incoms_list = [int(n) for n in avg_income_list]
+        tot = sum(incoms_list)
+        lst_avg = numpy.average(incoms_list)
+        comp_data = RES(
+            id=i,
+            name=comp_name,
+            avg_inc=lst_avg,
+            tot_inc_year=tot
+        )
+        incomes.append(comp_data)
+    return compare_avg(incomes)
+
+
+def compare_avg(incomes1):
+    total_avg_inc = 0
+    total_inc = 0
+
+    for income1 in incomes1:
+        total_avg_inc += income1.avg_inc
+        total_inc += income1.tot_inc_year
+    avg_inc1 = total_avg_inc / len(incomes1)
+    tot_avg_inc1 = total_inc / len(incomes1)
+
+    big_inc = [income1.name for income1 in incomes1 if income1.avg_inc >= avg_inc1]
+    low_inc = [income1.name for income1 in incomes1 if income1.avg_inc < avg_inc1]
+    print(f'Средняя годовая прибыль всех предприятий: {tot_avg_inc1}')
+    print(f'Предприятия, с прибылью равной или выше среднего значения: {big_inc}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {low_inc}')
+
+
+count = input('Введите количество предприятий для расчета прибыли:   ')
+fill_tuples(count)
