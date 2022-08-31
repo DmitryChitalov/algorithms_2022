@@ -1,82 +1,66 @@
 """
 Задание 2.
 
-Приведен код, который формирует из введенного числа
-обратное по порядку входящих в него цифр.
-Задача решена через рекурсию
-Выполнена попытка оптимизировать решение мемоизацией
-Сделаны замеры обеих реализаций.
+Написать программу сложения и умножения двух шестнадцатеричных чисел.
+При этом каждое число представляется как массив,
+элементы которого это цифры числа.
+Например, пользователь ввёл A2 и C4F.
+Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
+Сумма чисел из примера: [‘C’, ‘F’, ‘1’],
+произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
+Подсказка:
+Попытайтесь решить это задание в двух вариантах
+1) через collections
 
-П.С. задание не такое простое, как кажется
+defaultdict(list)
+int(, 16)
+reduce
+
+2) через ООП
+
+вспомните про перегрузку методов
+
+__mul__
+__add__
 """
 
-from timeit import timeit
-from random import randint
+from collections import defaultdict
 
 
-def recursive_reverse(number):
-    if number == 0:
-        return str(number % 10)
-    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+def get_hex(obj_dict):
+    print(hex(int(obj_dict[0], 16) + int(obj_dict[1], 16))[2:])
+    print(hex(int(obj_dict[0], 16) * int(obj_dict[1], 16))[2:])
 
 
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
-
-print('Не оптимизированная функция recursive_reverse')
-print(
-    timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+def main():
+    obj_dict = defaultdict(list)
+    for i in range(2):
+        obj_dict[i] = input(
+            'Введите шестнадцатиричное число: ').upper()
+    return get_hex(obj_dict)
 
 
-def memoize(f):
-    cache = {}
-
-    def decorate(*args):
-
-        if args in cache:
-            return cache[args]
-        else:
-            cache[args] = f(*args)
-            return cache[args]
-    return decorate
+if __name__ == '__main__':
+    main()
 
 
-@memoize
-def recursive_reverse_mem(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+class GetHex():
+    def __init__(self, hex_number):
+        self.hex_number = hex_number
+
+    def __str__(self):
+        return str(self.hex_number)[2:]
+
+    def __add__(self, other):
+        return GetHex(hex(int(self.hex_number, 16) + int(other.hex_number, 16)))
+
+    def __mul__(self, other):
+        return GetHex(hex(int(self.hex_number, 16) * int(other.hex_number, 16)))
 
 
-print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+first_number = GetHex(input('Введите шестнадцатиричное число: ').upper())
+second_number = GetHex(input('Введите шестнадцатиричное число: ').upper())
+
+print(first_number + second_number)
+print(first_number * second_number)

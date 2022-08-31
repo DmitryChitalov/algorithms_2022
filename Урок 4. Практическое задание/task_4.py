@@ -1,41 +1,42 @@
 """
-Задание 4.
+Задача 4.
+Создайте обычный словарь и упорядоченный словарь OrderedDict.
 
-Приведены два алгоритма. В них определяется число,
-которое встречается в массиве чаще всего.
+Выполните операции, равные по смыслу, с каждым из словарей и сделайте замеры.
+Опишите полученные результаты, сделайте выводы
 
-Сделайте профилировку каждого алгоритма через timeit
-
-Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
-Сделайте замеры и опишите, получилось ли у вас ускорить задачу
+И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from collections import OrderedDict
+from timeit import timeit
 
 
-def func_1():
-    m = 0
-    num = 0
-    for i in array:
-        count = array.count(i)
-        if count > m:
-            m = count
-            num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
+obj_dict = {x: x+1 for x in range(10000)}
+ordered_dict = OrderedDict({x: x+1 for x in range(10000)})
 
 
-def func_2():
-    new_array = []
-    for el in array:
-        count2 = array.count(el)
-        new_array.append(count2)
-
-    max_2 = max(new_array)
-    elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'
+def popitem_dict():
+    obj_dict.popitem()
 
 
-print(func_1())
-print(func_2())
+def popitem_od():
+    ordered_dict.popitem()
+
+
+def pop_dict(n):
+    obj_dict.pop(n)
+
+
+def pop_od(n):
+    ordered_dict.pop(n)
+
+
+print(timeit("popitem_dict()", globals=globals(), number=1000))
+print(timeit("popitem_od()", globals=globals(), number=1000))
+print(timeit("for i in range(1000):" "pop_dict(i)", globals=globals(), number=1))
+print(timeit("for i in range(1000):" "pop_od(i)", globals=globals(), number=1))
+
+"""
+OrderedDict чуть медленнее чем обычный словарь, после версии Python 3.6 - OD становится не актуален
+"""
