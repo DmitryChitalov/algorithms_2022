@@ -34,9 +34,9 @@ for_choice = 'qwertyuiopasdfghjklzxcvbnm1234567890'
 
 def create_test_data():
     """Функция создает случайный список и и его точкую копию deque"""
-    list_test = [random.choice(for_choice) for i in range(100000)]
-    deque_test = deque(list_test)
-    return list_test, deque_test
+    l_test = [random.choice(for_choice) for _ in range(100000)]
+    d_test = deque(l_test)
+    return l_test, d_test
 
 
 list_test, deque_test = create_test_data()
@@ -49,7 +49,7 @@ if a < b:
 else:
     print(f"""Append list выполнился быстрее append deque на: {(a-b)/b*100}%""")
 """
-Ответ:
+Ответ: list.append выполнился быстрее deque.append на: 29%
 """
 
 print()
@@ -64,7 +64,7 @@ if a < b:
 else:
     print(f"""Pop list выполнился быстрее pop deque на: {(a-b)/b*100}%""")
 """
-Ответ:
+Ответ: list.pop() и duque.pop() выполняются примерно одинаковое время
 """
 print()
 
@@ -78,7 +78,7 @@ if a < b:
 else:
     print(f"""Extend list выполнился быстрее extend deque на: {(a-b)/b*100}%""")
 """
-Ответ:
+Ответ: deque.extend выполняется намного быстрее. В 39 раз.
 """
 print()
 
@@ -93,10 +93,9 @@ if a < b:
 else:
     print(f"""insert(0) list выполнился быстрее appendleft deque на: {(a-b)/b*100}%""")
 """
-Ответ: # ['y']+list_test еще дольше
+Ответ: # appendleft выполняется в тысячи раз быстрее, чем insert(0), ['y']+list_test еще дольше
 """
 print()
-
 
 list_test, deque_test = create_test_data()
 a = timeit.timeit("deque_test.popleft()", globals=globals(), number=1000)
@@ -108,7 +107,7 @@ if a < b:
 else:
     print(f"""pop(0) list выполнился быстрее popleft deque на: {(a-b)/b*100}%""")
 """
-Ответ: #
+Ответ: # popleft выполняется в десятки тысяч раз быстрее 
 """
 print()
 
@@ -124,7 +123,7 @@ if a < b:
 else:
     print(f"""[0,1,10]+list выполнился быстрее extendleft deque на: {(a-b)/b*100}%""")
 """
-Ответ: #
+Ответ: # extendleft выполняется в десятки тысяч раз быстрее
 """
 print()
 
@@ -141,6 +140,6 @@ if a < b:
 else:
     print(f"""Получения элемента из list быстрее получения элемента из deque на: {(a-b)/b*100}%""")
 """
-Ответ: #
+Ответ: Получение элемента из list немного быстрее чем из deque
 """
 print()
