@@ -28,3 +28,21 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import Counter
+
+companies_info = Counter()
+number_companies = int(input('Введите количество компаний: '))
+for i in range(number_companies):
+    name_company = input('Введите название компании: ')
+    profit_company = [int(i) for i in input('Введите через пробел прибыль по кварталам: ').split()]
+    companies_info[name_company] = sum(profit_company)
+
+average_profit = sum(companies_info.values()) / number_companies
+print(f'Среднегодовая прибыль всех предприятий {average_profit}')
+for i in companies_info.keys():
+    if companies_info[i] >= average_profit:
+        print(f'Прибыль компании {i} выше среднего')
+    else:
+        print(f'Прибыль компании {i} ниже среднего')
+
