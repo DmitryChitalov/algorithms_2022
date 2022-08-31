@@ -67,3 +67,14 @@ if __name__ == '__main__':
     print(unique_substrings('mam'))
     from_the_end()
     from_the_beginning()
+
+    inp_str = str(input("Введите строку S: "))  # не считает саму подстроку за уникальную.
+    my_dict = {}
+    for i in range(len(inp_str)):
+        for j in range(i + 1, len(inp_str) if i == 0 else len(inp_str) + 1):
+            hash_obj = hashlib.md5((inp_str[i:j]).encode('utf-8'))
+            hex_dig_res = hash_obj.hexdigest()
+            my_dict[hex_dig_res] = inp_str[i:j]
+    print(f'{inp_str} - {len(my_dict)} уникальных подстрок. Сама строка не считается уникальной.')
+    for key in my_dict.keys():
+        print(my_dict[key])
