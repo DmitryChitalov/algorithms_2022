@@ -12,6 +12,8 @@
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
 
+from timeit import timeit
+
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -35,3 +37,20 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    enter_num = str(enter_num)
+    emp_list = []
+    for x in enter_num:
+        emp_list.insert(0, x)
+    res_str = ''.join(emp_list)
+    return res_str
+
+
+print(timeit("revers(420420)", number=1000000, globals=globals()))
+print(timeit("revers_2(420420)", number=1000000, globals=globals()))
+print(timeit("revers_3(420420)", number=1000000, globals=globals()))
+print(timeit("revers_4(420420)", number=1000000, globals=globals()))
+
+# третий вариант - состоит из двух действий  с О(n) и является наиболее эффективным
