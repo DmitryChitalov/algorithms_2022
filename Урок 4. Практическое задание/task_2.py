@@ -11,6 +11,7 @@
 
 П.С. задание не такое простое, как кажется
 """
+#Заглушка
 
 from timeit import timeit
 from random import randint
