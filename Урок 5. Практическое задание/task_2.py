@@ -24,3 +24,10 @@ reduce
 __mul__
 __add__
 """
+a = input("Число - ")
+b = input("Число - ")
+summa = int(a, 16) + int(b, 16)
+summa = hex(summa).split('x')[-1]
+composition = int(a, 16) * int(b, 16)
+composition = hex(composition).split('x')[-1]
+print(f'сумма {list(a)} и {list(b)} равна {list(summa)}, a произведение {list(composition)}')
