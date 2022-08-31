@@ -22,3 +22,22 @@
 р
 а
 """
+import hashlib
+
+
+def count_substr(st):
+    substr = set()
+    st_1 = st
+    for i in range(len(st_1)):
+        for k in range(len(st_1)):
+            el = st_1[0:k + 1]
+            el = hashlib.md5(el.encode('utf-8')).hexdigest()
+            substr.add(el)
+        st_1 = st_1[1:]
+    substr.discard(hashlib.md5(st.encode('utf-8')).hexdigest())
+    print(substr)
+    print(f'{st} - {len(substr)} уникальных подстрок')
+
+
+if __name__ == "__main__":
+    count_substr('papa')
