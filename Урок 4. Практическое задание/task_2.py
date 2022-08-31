@@ -80,3 +80,11 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+print(recursive_reverse(55250))
+print(recursive_reverse_mem(5525))
+
+"""
+В данном случае мемоизация не дает эффекта, потому что у нас каждый раз идет новый аргумент функции, которого
+раньше не было, поэтому операции с кэшом не является рабочим способом.
+"""
