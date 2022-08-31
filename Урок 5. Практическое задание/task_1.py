@@ -28,3 +28,20 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+companies = collections.namedtuple('company', ['name', 'profit'])
+dct_companies = {}
+for _ in range(int(input('Введите количество предприятий для расчета прибыли: '))):
+    companies.name = input('Введите название предприятия: ')
+    companies.profit = tuple(map(int, input('введите прибыль данного предприятия: ').split()))
+    print(companies.name, companies.profit)
+    dct_companies[companies.name] = companies.profit
+
+mid_profit = sum(map(sum, dct_companies.values())) / len(dct_companies)
+down_mid_profit = list(k for k, v in dct_companies.items() if sum(v) < mid_profit)
+up_mid_profit = list(k for k, v in dct_companies.items() if sum(v) > mid_profit)
+
+print(f'Средняя годовая прибыль всех предприятий: {mid_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {", ".join(up_mid_profit)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(down_mid_profit)}')
