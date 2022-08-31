@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def my_row(ascii_table=32):
+    if ascii_table == 128:
+        return True
+    print(f'{ascii_table} - {chr(ascii_table)}', end='')
+
+    if (ascii_table - 31) % 10 == 0:
+        print('\n')
+    my_row(ascii_table + 1)
+
+
+my_row()
