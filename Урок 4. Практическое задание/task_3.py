@@ -35,3 +35,29 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+num_100 = randint(10000, 1000000)
+num_1000 = randint(1000000, 10000000)
+num_10000 = randint(100000000, 10000000000000)
+
+print(timeit("revers(num_100)", globals=globals(), number=1000))
+print(timeit("revers_2(num_100)", globals=globals(), number=1000))
+print(timeit("revers_3(num_100)", globals=globals(), number=1000))
+print(timeit("revers_4(num_100)", globals=globals(), number=1000))
+
+"""
+    revers   0.0015156999999999948 рекурсия самый медленный способ из-за многократного вызова функции внутри себя 
+    
+    revers_2 0.0009806999999999871 цикл быстрее рекурсии
+    
+    revers_3 0.0003384000000000026 самый быстрый способ, число разворачиватся как строка через срез, не используются 
+    арифметические операции
+    
+    revers_4 0.0005999000000000004 мой варинат, разворот через reversed, быстрее цикла и рекурсии, но уступает
+    по скорости развороту через срез
+"""
