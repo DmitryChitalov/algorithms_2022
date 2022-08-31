@@ -1,0 +1,265 @@
+"""
+Задание 1.
+from random import sample
+
+
+##############################################################################
+def check_1(lst_obj):
+    """Функция должна создать множество из списка.
+    Алгоритм 1:
+    Создать множество из списка
+    Сложность: линейная.
+    """
+    lst_to_set = set(lst_obj)  # линейная
+    return lst_to_set  # линейная
+
+
+##############################################################################
+def check_2(lst_obj):
+    """Функция должная вернуть True, если все элементы списка различаются.
+    Алгоритм 2:
+    Проходимся по списку и для каждого элемента проверяем,
+    что такой элемент отстутствует
+    в оставшихся справа элементах
+    Сложность: квадратичная.
+    """
+    for j in range(len(lst_obj)):          # линейная
+        if lst_obj[j] in lst_obj[j+1:]:    # квадратичная
+            return False                   # константная
+    return True                            # константная
+
+
+##############################################################################
+def check_3(lst_obj):
+    """Функция должная вернуть True, если все элементы списка различаются.
+    Алгоритм 3:
+    Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
+    Если присутствуют дубли, они будут находиться рядом.
+    Сложность: n log n
+    """
+    lst_copy = list(lst_obj)                 # линейная
+    lst_copy.sort()                          # n log n
+    for i in range(len(lst_obj) - 1):        # линейная
+        if lst_copy[i] == lst_copy[i+1]:     # константная
+            return False                     # константная
+    return True                              # константная
+
+
+for j in (50, 500, 1000, 5000, 10000):
+    # Из 100000 чисел возьмем 'j' случайно выбранных
+    # Всего 10 тыс. чисел
+    lst = sample(range(-100000, 100000), j)
+
+print(check_1(lst))
+print(check_2(lst))
+print(check_3(lst))
+
+
+"""
+Задание 2.
+Реализуйте два алгоритма.
+Оба должны обеспечивать поиск минимального значения для списка.
+Сложность первого алгоритма должна быть O(n^2) - квадратичная.
+Сложность второго алгоритма должна быть O(n) - линейная.
+"""
+
+from random import randint
+
+# первый вариант с О(n^2)
+def list_min_f(lst):
+    for i in lst:
+        is_min = True
+        for j in lst:
+            if i > j:
+                is_min = False
+            if is_min:
+                return i
+
+# второй вариант с О(n)
+def list_min_s(lst):
+    min_value = lst[0]
+    for i in lst:
+        if i < min_value:
+            min_value = i
+        return min_value
+
+lst1 = [randint(0, 100) for i in range(20)]
+print(lst1)
+print(list_min_f(lst1))
+print(list_min_s(lst1))
+
+
+"""
+Задание 3.
+"""
+
+base_company = {
+    'google' : 2000,
+    'lukoil' : 500,
+    'apple' : 232,
+    'monetka' : 4378,
+    'magnit' : 10,
+    'xioami' : 9780,
+    'nike' : 6789,
+    'reebok' : 1900,
+    'booking' : 2000
+}
+
+# первый вариант - О(N^2)
+def sorted_1(base_company):
+    list_from_dict = list(base_company.items())
+    for i in range(len(list_from_dict)):
+        lowest_value_index = i
+        for j in range(i + 1, len(list_from_dict)):
+            if list_from_dict[j][1] > \
+                    list_from_dict[lowest_value_index][1]:
+                lowest_value_index = j
+        list_from_dict[i], list_from_dict[lowest_value_index] =\
+            list_from_dict[lowest_value_index], list_from_dict[i]
+    print(list_from_dict[0:3])
+
+
+# второй вариант - О(N*logN)
+
+def sorted_2(base_company):
+    list_from_dict = list(base_company.items())
+    list_from_dict.sort(key=lambda i: i[1], reverse=True)
+    for i in range(3):
+        print(f"{list_from_dict[i][0]}: {list_from_dict[i][1]}")
+
+sorted_1(base_company)
+sorted_2(base_company)
+
+"""
+Задание 4.
+"""
+# общая сложность О(n)
+def authorization_f(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['password'] == user_password \
+                    and not value['activation']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['password'] != user_password:
+                return "Пароль не верный"
+    return 'Данного пользователя не существует'
+
+# общая сложность О(1)
+
+def authorization_s(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:
+            return "Добро пожаловать! Доступ к ресурсу предоставлен"
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[user_name]['password'] != user_password:
+            return "Пароль не верный"
+    else:
+        return "Данного пользователя не существует"
+
+
+    """
+Задание 5. На закрепление навыков работы со стеком
+
+"""
+
+class PlateStackClass:
+    def __init__(self, max_size):
+        self.elems = []
+        self.max_size = max_size  #размер стопки
+
+    def __str__(self):
+        return str(self.elems)
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        """ Предполагаем, что верхний элемент стека находится в конце списка
+        если размер стопки равен пороговому значению, то создается новая стопка
+        и туда кладется значение
+        """
+        if len(self.elems[len(self.elems)-1]) < self.max_size:
+            self.elems[len(self.elems)-1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems)-1].append(el)
+    def pop_out(self):
+        """берем тарелку из крайней стопки, если она пустая ее удаляем ее"""
+        result = self.elems[len(self.elems)-1].pop()
+        if len(self.elems[len(self.elems)-1]) == 0:
+            self.elems.pop()
+        return result
+
+    def get_val(self):
+        return self.elems[len(self.elems)-1]
+
+    def stack_size(self):
+        """Общее количество тарелок"""
+        elem_sum = 0
+        for stack in self.elems:
+            elem_sum += len(stack)
+        return elem_sum
+
+    def stack_count(self):
+        """количество стоек"""
+        return len(self.elems)
+
+if __name__ == '__main__':
+    plates = PlateStackClass(3)
+    print(type(plates))
+    plates.push_in('Plate1')
+    plates.push_in('Plate2')
+    plates.push_in('Plate3')
+    plates.push_in('Plate4')
+    plates.push_in('Plate5')
+    print(plates)
+    print(plates.pop_out())
+    print(plates.get_val())
+    print(plates.stack_size())
+    print(plates.stack_count())
+    print(plates)
+
+
+
+# Задание 6. На закрепление навыков работы со временем
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems ==[]
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+class TaskBoard:
+    def __init__(self):
+        self.cur_queue = QueueClass()  #базовая очередь
+        self.revision_queue = QueueClass() # очередь на доработку
+        self.log = [] #список решенных задач
+
+    def resolve_task(self):
+        # закрываем текущую задачу и добавляем в лог
+        task = self.cur_queue.from_queue()
+        self.log.append(task)
+
+    def to_revision_task(self):
+        # отправляем текущую задачу на доработку
+        task = self.cur_queue.from_queue()
+        self.revision_queue.to_queue(task)
+
+    def to_current_queue(self, item):
+        #добавляем задачу в текущие
+        self.cur_queue.to_queue(item)
