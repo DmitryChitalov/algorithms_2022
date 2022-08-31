@@ -11,6 +11,12 @@
 
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+from timeit import timeit
+
+nums = [x for x in range(1, 100)]
+
+
+'''Итератор с функцией append'''
 
 
 def func_1(nums):
@@ -19,3 +25,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(timeit('func_1(nums)', globals=globals(), number=1000))
+
+print()
+
+'''# Списковое включение, работает быстрее итератора с функцией append'''
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+print(timeit('func_2(nums)', globals= globals(), number=1000))
