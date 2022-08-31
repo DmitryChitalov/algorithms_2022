@@ -24,3 +24,10 @@ reduce
 __mul__
 __add__
 """
+
+a = input('Введите первое число')
+b = input('Введите второе число')
+
+print(f'Сумма чисел из примера: {list(str(hex(int(a, 16) + (int(b, 16)))).lstrip("0x").upper())},')
+print(f'произведение - {list(str(hex(int(a, 16) * (int(b, 16)))).lstrip("0x").upper())}.')
+
