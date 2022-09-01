@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def odd_even(number, even = 0, odd = 0, i = 0):
+    """Функция возвращает количество четных и нечетных цифр в виде кортежа"""
+    if number == 0 and i == 0: # Для случая с нулем, который четное число.
+        return 1, odd
+    elif number == 0 and i != 0:
+        return even, odd
+    else:
+        if number % 10 % 2 == 0:
+            even += 1
+            i += 1
+            return odd_even(number // 10, even, odd, i)
+        else:
+            odd += 1
+            i += 1
+            return odd_even(number // 10, even, odd, i)
+
+
+print(odd_even(11122))
+print(odd_even(0))
+

@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_characters(ascii_serial_number = 32, i = 0):
+    if ascii_serial_number > 127:
+        return None
+    else:
+        print(f' {ascii_serial_number}  - {chr(ascii_serial_number)}', end=' ') if ascii_serial_number < 100 else \
+            print(f' {ascii_serial_number} - {chr(ascii_serial_number)}', end=' ')
+        i += 1
+        if i == 10:
+            print('\n')
+            i = 0
+        ascii_serial_number += 1
+    print_characters(ascii_serial_number, i)
+
+print_characters()
