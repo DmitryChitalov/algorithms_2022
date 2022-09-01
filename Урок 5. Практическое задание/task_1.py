@@ -28,3 +28,60 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+import re
+from collections import namedtuple
+
+
+def get_firm():
+    Firm = namedtuple('Firm', 'firm_name profit')
+    profit_pattern = r'^([\d]+\s){3}[\d]+$'
+
+    firm_name = input('Введите название предприятия: ')
+    while True:
+        firm_profit = input('Через пробел введите прибыль данного предприятия '
+                            'за каждый квартал (Всего 4 квартала): ')
+
+        if re.fullmatch(profit_pattern, firm_profit):
+            profit_list = list(map(int, firm_profit.split()))
+            return Firm(firm_name, profit_list)
+        else:
+            print('Введены неверные данные!')
+
+
+def get_count():
+    while True:
+        try:
+            return int(input('Введите количество предприятий для расчета прибыли: '))
+        except ValueError:
+            print('Введено не число!')
+
+
+def main():
+    firms = []
+    firms_count = get_count()
+
+    for _ in range(firms_count):
+        firms.append(get_firm())
+
+    if len(firms) == 1:
+        print(f'{firms[0].firm_name} - единственное предприятие, годовая прибыль: {firms[0].profit}')
+    else:
+        mean_profit = round(sum(
+            [sum(firm.profit) for firm in firms]) / firms_count, 2)
+        greater_profit = []
+        less_profit = []
+
+        for firm in firms:
+            if sum(firm.profit) > mean_profit:
+                greater_profit.append(firm.firm_name)
+            elif sum(firm.profit) < mean_profit:
+                less_profit.append(firm.firm_name)
+
+        print(f'Средняя годовая прибыль всех предприятий: {mean_profit}')
+        print(f'Предприятия с прибылью выше среднего значения: {", ".join(greater_profit)}')
+        print(f'Предприятия с прибылью ниже среднего значения: {", ".join(less_profit)}')
+
+
+if __name__ == '__main__':
+    main()
