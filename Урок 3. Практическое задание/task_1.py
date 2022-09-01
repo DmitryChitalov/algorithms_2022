@@ -28,3 +28,143 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+def time_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполенения функции {func.__name__} - {end - start}')
+        return result
+
+    return timer
+
+
+@time_decorator
+def list_append(num):
+    """
+    Заполнение списка цифрами через append общая сложность O(n)
+    :param num: количество элементов списка
+    :return: заполненный список
+    """
+    lst = []  # Сложность O(1)
+    for i in range(num):  # Сложность O(n)
+        lst.append(i)  # Сложность O(1)
+    return lst  # Сложность O(1)
+
+
+@time_decorator
+def list_insert(num):
+    """
+    Заполнение списка цифрами через insert общая сложность O(n)
+    :param num: количество элементов списка
+    :return: заполненный список
+    """
+    lst = []  # Сложность O(1)
+    for i in range(num):  # Сложность O(n)
+        lst.insert(0, i)  # Сложность O(n)
+    return lst  # Сложность O(1)
+
+
+@time_decorator
+def dict_fill(num):
+    """
+    Заполнение словаря цифрами общая сложность O(n)
+    :param num: количество элементов словаря
+    :return: заполненный словарь
+    """
+    res_dict = {}
+    for i in range(num):  # Сложность O(n)
+        res_dict[i] = i * 2  # Сложность O(1)
+    return res_dict  # Сложность O(1)
+
+
+@time_decorator
+def list_output(lst):
+    """
+    Изменение элементов списка общая сложность O(n)
+    :param lst: список
+    :return: измененный список
+    """
+    for i in range(len(lst)):  # Сложность O(n)
+        lst[i] += 1  # Сложность O(1)
+
+
+@time_decorator
+def dict_output(dict_work):
+    """
+    Изменение элементов словаря общая сложность O(n)
+    :param dict_test: словарь
+    :return: измененный словарь
+    """
+    for key in dict_work.keys():  # Сложность O(n)
+        dict_work[key] += 1  # Сложность O(1)
+
+
+@time_decorator
+def clear_list(lst):
+    """
+    Удаление 20 000 элементов списка общая сложность O(n)
+    :param lst: список
+    :return: список уменьшенный на 20000 элементов
+    """
+    if len(lst) > 40000:  # Сложность O(1)
+        for i in range(20000):  # Сложность O(n)
+            lst.pop(i)  # Сложность O(n)
+
+
+@time_decorator
+def clear_dict(dict_work):
+    """
+    Удаление 20 000 элементов словаря общая сложность O(n)
+    :param dict_test: словарь
+    :return: словарь уменьшенный на 20000 элементов
+    """
+    if len(dict_work) > 20000:  # Сложность O(1)
+        for key in range(20000):  # Сложность O(n)
+            dict_work.pop(key)  # Сложность O(1)
+
+
+if __name__ == '__main__':
+    number = 10 ** 5
+    my_list_append = list_append(number)
+    print('')
+
+    my_list_insert = list_insert(number)
+    print('')
+
+    my_dict = dict_fill(number)
+    print('')
+
+    """
+    Время заполнения списка через append составило 0.008793354034423828
+    ремя заполнения списка через insert составило 2.3475472927093506
+    Время заполнения словаря составило 0.010970115661621094
+    Самым медленным получилось заполнения списка через insert, так как сложность 
+    операции вставки самма большая O(n)
+    Но заполнения списка через append быстрее чем заполнения словаря так как заносится один элемент,
+    а у списка дополнительно вычисляется хэш  
+    """
+
+    list_output(my_list_append)
+    print('')
+    dict_output(my_dict)
+    print('')
+
+    """
+    Время изменения элементов списка составило 0.008128643035888672
+    Время изменения элементов словаря составило 0.008975982666015625
+    Изменение элементов списка на немного выполняется быстрее при одинаковой сложности операции
+    """
+
+    clear_list(my_list_append)
+    print('')
+    clear_dict(my_dict)
+
+    """
+        Время удаления 20 000 элементов списка составило 0.339876651763916
+        Время удаления 20 000 элементов словаря составило 0.0029909610748291016
+        Удаление элементов словаря гораздо быстрее так как сложность операции O(1), а списка O(n) 
+        """
