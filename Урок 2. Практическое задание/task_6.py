@@ -7,3 +7,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randrange
+
+
+def number_guess(count, number):
+    if count == 0:
+        print("Попытки закончились. Вы проиграли! Загаданное число - ", number)
+        return
+    guess = int(input("Введите число: "))
+    if number == guess:
+        print(f"Вы выиграли! Я загадал именно {number}! ")
+        return
+    result = 'больше' if guess > number else 'меньше'
+    print(f"Вы не угадали! Ваше число {result} загаданного! Осталось {count - 1} попыток!")
+    number_guess(count - 1, number)
+
+
+number_guess(10, randrange(100))
