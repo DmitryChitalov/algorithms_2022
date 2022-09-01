@@ -30,62 +30,90 @@ b) получение элемента списка, оцените сложно
 """
 import time
 
-def time_of_function(func) :
-    def wrapped(*args):
-        start_time = time.perf_counter_ns()
-        res = func(*args)
-        print(time.perf_counter_ns() - start_time)
-        return res
+def function(func) :
+    def wrapped(*args, **kwargs):
+        start_time = time.time()
+        rez = func(*args, **kwargs)
+        time_end = time.time()
+        res = (time_end - start_time) * 1000
+        print(f'Операция заняла {res} сек')
     return wrapped
+# a)
+lst_2 = []
+lst_3 = []
+dct_2 = {}
+
+@function
+def put_in(n):#O(n)
+    for i in range(1, n + 1): #O(n)
+        lst_2.append(i)#O(1)
+    return 'done'#O(1)
+put_in(100000)
+
+@function
+def put_in_2(n):#O(n^2)
+    for i in range(1, n + 1): #O(n)
+        lst_3.insert(0, 1)#O(n)
+    return 'done' #O(1)
+put_in_2(100000)
+
+@function
+def put_in_3(n): #O(n)
+    for i in range(1, n + 1): #O(n)
+        dct_2[i] = 1#O(1)
+    return 'done' #O(1)
+put_in_3(100000)
+
+
+"""Cложность в O-нотации для заполнения списка функцией append- O(n), 
+заполнение словаря также имеет сложность #O(n). Однако при использовании функции insert(если 
+вставлять значение в начало списка) сложность- O(n^2). Замер времени показывает, что заполнение списка
+при помощи append быстрее, чем словаря, но при использовании insert(вставка в начало списка)
+тратится значительно больше времени.
+"""
+
 # b)
-lst_1 = [2, 3, 4]
+# #
+# @function
+# def get_el(lst): #O(n)
+#     for idx, i in enumerate(lst): #O(n)
+#         return lst[idx] #O(1)
 #
-@time_of_function
-def get_el(lst):
-    for i in range(len(lst)): #O(n)
-        print(lst[i])         #O(1)
-
-get_el(lst_1)
+# get_el(lst_2)
 #
+# @function
+# def get_el_2(dct): #O(n)
+#     for key in dct:  #O(n)
+#         return dct[key]  #O(1)
 #
-dct_1 = {'a': 1, 'b': 2, 'c': 3}
-@time_of_function
-def get_el_2(dct):
-    for key in dct.keys():  #O(n)
-        print(dct[key])     #O(1)
-
-get_el_2(dct_1)
+# get_el_2(dct_2)
+#
+# """Получение элемента словаря значительно быстрее, чем элемента списка. Но обе функции имеют сложность O(n)"""
 
 #c)
-# @time_of_function
-# def pop_out(lst):  #O(n)
-#     while lst:   #O(n)
-#         print(lst.pop())  # O(1)
-# pop_out(lst_1)
-#
-# @time_of_function
-# def del_out(lst):  #O(n^2)
-#     for i in range(len(lst)-1):  #O(n)
-#         del lst[i]  # O(n)
-# del_out(lst_1)
-#
+@function
+def pop_out(lst):  #O(n)
+    while lst:   #O(n)
+        return lst.pop()  # O(1)
+pop_out(lst_2)
 
-
-
-
-
-
-
-@time_of_function
+@function
 def pop_out_2(dct):  #0(n)
-    for key in list(dct): #O(n)
-        print(dct.pop(key))   #O(1)
-pop_out_2(dct_1)
+    for key in dct: #O(n)
+        return dct.pop(key)   #O(1)
+pop_out_2(dct_2)
+"""Операция pop также значительно быстрее в словарях. """
 
-@time_of_function    #O(n)
+
+@function
+def del_out(lst):  #O(n^2)
+    for i in lst:  #O(n)
+        del(i)  # O(n)
+del_out(lst_2)
+
+@function    #O(n)
 def del_out_2(dct):  #0(n)
-    for key in list(dct):  # O(n)
+    for key in dct.copy():  # O(n)
         del dct[key]    #O(1)
-del_out_2(dct_1)
+del_out_2(dct_2)
 
-di
