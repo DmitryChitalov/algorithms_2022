@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_symbol(start_sym=32, count=1):
+    if start_sym == 128:
+        return
+    if count == 10:
+        print(f'{start_sym} - {chr(start_sym)}')
+        count = 0
+    else:
+        print(f'{start_sym} - {chr(start_sym)}', end=' ')
+    return table_symbol(start_sym + 1, count+1)
+
+
+table_symbol()
