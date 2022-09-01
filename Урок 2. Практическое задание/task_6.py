@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+numb_random = random.randint(1, 100)
+
+
+def game_number_random(count, numb):
+    answer = int(input(f'Введите число от 1 до 100: '))
+    if count == 10 or answer == numb:
+        if answer == numb:
+            print("Поздравляем! Вы угадали загаданное число!")
+        print(f"Загаданное число: {numb}")
+    else:
+        if answer > numb:
+            print(f"Загаданное число меньше чем {answer}")
+        else:
+            print(f"Загаданное число больше чем {answer}")
+        game_number_random(count + 1, numb)
+
+game_number_random(1, numb_random)

@@ -28,3 +28,114 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+from random import choice
+
+
+# создаем декоратор для измерения времени операции
+
+
+def time_measurement(function):
+    def wrapper(*args):
+        start = time()
+        function(*args)
+        end = time()
+        time_diff = end - start
+        return time_diff
+
+    return wrapper
+
+
+home_list = []
+home_dict = {}
+
+
+# a) заполнение списка и заполнение словаря
+
+@time_measurement
+def measure_list(i):
+    for i in range(i):
+        home_list.append(choice(range(1, 1000000)))  # сложность операции O(1)
+    return home_list
+
+
+@time_measurement
+def measure_dict(i):
+    for i in range(i):
+        home_dict[i] = (choice(range(1, 1000000)))  # сложность операции O(1)
+    return home_dict
+
+
+print(measure_list(1000000))
+print(measure_dict(1000000))
+print(len(home_list))
+print(len(home_dict))
+
+"""
+Результаты замеров: 
+Время выполнения функции measure_list - 1.032357931137085
+Время выполнения функции measure_dict - 1.0953195095062256
+
+Заполнение списка b словаря происходит в среднем одинаково. Разница в среднем 3% то в пользу словаря,
+то в пользу списка. После первого замера лидера не выявлено.
+"""
+
+
+# б) получение элемента списка и получение элемента словаря
+
+
+@time_measurement
+def getting_list(i):
+    for i in range(i):
+        home_list[i] = home_list[i + 1]  # сложность операции O(1)
+    return home_list
+
+
+@time_measurement
+def getting_dict(dct):
+    for i in range(899999, 999999):
+        dct[i] = 'fill'  # сложность операции O(1)
+
+
+print(getting_list(100000))
+print(getting_dict(home_dict))
+
+"""
+Результаты замеров: 
+Время выполнения функции getting_list - 0.014991044998168945
+Время выполнения функции getting_dict - 0.007996559143066406
+
+Изменение словаря происходит на 87% быстрее списка. Во втором замере по скорости выигрывает словарь.
+"""
+
+
+# в) удаление элементов списка и удаление элементов словаря
+
+
+@time_measurement
+def remove_list(i):
+    for i in range(i):
+        home_list.pop(i)  # сложность операции O(n)
+    return home_list
+
+
+@time_measurement
+def remove_dict(i):
+    for i in range(i):
+        home_dict.pop(i)  # сложность операции O(1)
+    return home_dict
+
+
+print(remove_list(10000))
+print(remove_dict(10000))
+print(len(home_list))
+print(len(home_dict))
+
+"""
+Результаты замеров: 
+Время выполнения функции remove_list - 13.775460481643677
+Время выполнения функции remove_dict - 0.0009996891021728516
+
+Сложность удаления элементов списка O(n), в связи с этим скорость удаление элементов словаря (у него сложность O(1)) 
+происходит значительно быстрее чем списка.
+"""

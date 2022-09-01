@@ -22,3 +22,20 @@
 р
 а
 """
+
+# Функция hash() возвращает хеш-значение объекта, если оно есть.
+# Хэш-значения являются целыми числами.
+# Они используются для быстрого сравнения ключей словаря во время поиска в словаре.
+
+word = str(input("Введите слово для определения количества различных подстроек: "))
+
+some_set = set()
+some_dict = {}
+for i in range(len(word)):
+    for j in range(len(word) - 1 if i == 0 else len(word), i, -1):
+        some_set.add(hash(word[i:j]))
+        print(word[i:j])
+        some_dict[word[i:j]] = hash(word[i:j])
+
+print(list(some_dict.keys()))
+print("Количество различных подстрок в заданном слове: ", len(some_set))

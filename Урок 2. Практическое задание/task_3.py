@@ -18,3 +18,31 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+""" Нижеуказанным методом нельзя перевернуть число с нулём. Например 01234.
+def reverse_number (number, result = ''):
+    if number == 0:
+        return print(int(result))
+    else:
+        x = str(number % 10)
+        number = number // 10
+        result = result + x
+        reverse_number(number, result)
+
+reverse_number(abs(int(input('Введите число: '))))"""
+
+""" С нулем можно перевернуть число через срез.
+number = input('Введите число, которое требуется перевернуть:: ')
+
+print(f'Перевернутое число: {number[::-1]}')"""
+
+
+def reverse_number(num):
+    if num < 10:
+        return str(num)
+    else:
+        return str(num % 10) + reverse_number(num // 10)
+
+
+number = int(input("Введите число, которое требуется перевернуть: "))
+print(f'Перевернутое число: {reverse_number(number)}')
