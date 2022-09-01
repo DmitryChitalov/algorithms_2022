@@ -34,7 +34,7 @@ from collections import namedtuple
 
 
 def get_firm():
-    Firm = namedtuple('Firm', 'firm_name total_profit')
+    Firm = namedtuple('Firm', 'firm_name profit')
     profit_pattern = r'^([\d]+\s){3}[\d]+$'
 
     firm_name = input('Введите название предприятия: ')
@@ -44,7 +44,7 @@ def get_firm():
 
         if re.fullmatch(profit_pattern, firm_profit):
             profit_list = list(map(int, firm_profit.split()))
-            return Firm(firm_name, sum(profit_list))
+            return Firm(firm_name, profit_list)
         else:
             print('Введены неверные данные!')
 
@@ -65,16 +65,17 @@ def main():
         firms.append(get_firm())
 
     if len(firms) == 1:
-        print(f'{firms[0].firm_name} - единственное предприятие, годовая прибыль: {firms[0].total_profit}')
+        print(f'{firms[0].firm_name} - единственное предприятие, годовая прибыль: {firms[0].profit}')
     else:
-        mean_profit = round(sum([firm.total_profit for firm in firms]) / firms_count, 2)
+        mean_profit = round(sum(
+            [sum(firm.profit) for firm in firms]) / firms_count, 2)
         greater_profit = []
         less_profit = []
 
         for firm in firms:
-            if firm.total_profit > mean_profit:
+            if sum(firm.profit) > mean_profit:
                 greater_profit.append(firm.firm_name)
-            elif firm.total_profit < mean_profit:
+            elif sum(firm.profit) < mean_profit:
                 less_profit.append(firm.firm_name)
 
         print(f'Средняя годовая прибыль всех предприятий: {mean_profit}')
