@@ -30,90 +30,96 @@ b) получение элемента списка, оцените сложно
 """
 import time
 
-def function(func) :
+
+def function(func):
     def wrapped(*args, **kwargs):
         start_time = time.time()
-        rez = func(*args, **kwargs)
-        time_end = time.time()
-        res = (time_end - start_time) * 1000
-        print(f'Операция заняла {res} сек')
+        try:
+            return func(*args, **kwargs)
+        finally:
+            print(f'Операция  {func.__name__} заняла {(time.time() - start_time) * 1000} сек')
+
     return wrapped
+
+
 # a)
 lst_2 = []
 lst_3 = []
 dct_2 = {}
 
-@function
-def put_in(n):#O(n)
-    for i in range(1, n + 1): #O(n)
-        lst_2.append(i)#O(1)
-    return 'done'#O(1)
-put_in(100000)
 
 @function
-def put_in_2(n):#O(n^2)
-    for i in range(1, n + 1): #O(n)
-        lst_3.insert(0, 1)#O(n)
-    return 'done' #O(1)
-put_in_2(100000)
+def lst_appnd(n):  # O(n)
+    for i in range(1, n + 1):  # O(n)
+        lst_2.append(i)  # O(1)
+
+
+lst_appnd(100000)
+
 
 @function
-def put_in_3(n): #O(n)
-    for i in range(1, n + 1): #O(n)
-        dct_2[i] = 1#O(1)
-    return 'done' #O(1)
-put_in_3(100000)
+def lst_insrt(n):  # O(n^2)
+    for i in range(1, n + 1):  # O(n)
+        lst_3.insert(0, 1)  # O(n)
 
+
+lst_insrt(100000)
+
+
+@function
+def dct_add(n):  # O(n)
+    for i in range(1, n + 1):  # O(n)
+        dct_2[i] = 1  # O(1)
+
+
+dct_add(100000)
 
 """Cложность в O-нотации для заполнения списка функцией append- O(n), 
 заполнение словаря также имеет сложность #O(n). Однако при использовании функции insert(если 
 вставлять значение в начало списка) сложность- O(n^2). Замер времени показывает, что заполнение списка
-при помощи append быстрее, чем словаря, но при использовании insert(вставка в начало списка)
+при помощи append немного быстрее, чем заполнение словаря, но при использовании insert(вставка в начало списка)
 тратится значительно больше времени.
 """
 
+
 # b)
-# #
-# @function
-# def get_el(lst): #O(n)
-#     for idx, i in enumerate(lst): #O(n)
-#         return lst[idx] #O(1)
-#
-# get_el(lst_2)
-#
-# @function
-# def get_el_2(dct): #O(n)
-#     for key in dct:  #O(n)
-#         return dct[key]  #O(1)
-#
-# get_el_2(dct_2)
-#
-# """Получение элемента словаря значительно быстрее, чем элемента списка. Но обе функции имеют сложность O(n)"""
 
-#c)
 @function
-def pop_out(lst):  #O(n)
-    while lst:   #O(n)
+def get_lst_el(lst): #O(n)
+    for idx, i in enumerate(lst): #O(n)
+        return lst[idx] #O(1)
+
+get_lst_el(lst_2)
+#
+@function
+def get_dct_el(dct): #O(n)
+    for key in dct:  #O(n)
+        return dct[key]  #O(1)
+
+get_dct_el(dct_2)
+
+"""Получение элемента словаря значительно быстрее, чем элемента списка. Но обе функции имеют сложность O(n)"""
+
+# c)
+@function
+def pop_out_lst(lst):  # O(n)
+    while lst:  # O(n)
         return lst.pop()  # O(1)
-pop_out(lst_2)
+
+
+pop_out_lst(lst_2)
+
 
 @function
-def pop_out_2(dct):  #0(n)
-    for key in dct: #O(n)
-        return dct.pop(key)   #O(1)
-pop_out_2(dct_2)
+def pop_out_dct(dct):  # 0(n)
+    for key in dct:  # O(n)
+        return dct.pop(key)  # O(1)
+
+
+pop_out_dct(dct_2)
 """Операция pop также значительно быстрее в словарях. """
 
 
-@function
-def del_out(lst):  #O(n^2)
-    for i in lst:  #O(n)
-        del(i)  # O(n)
-del_out(lst_2)
 
-@function    #O(n)
-def del_out_2(dct):  #0(n)
-    for key in dct.copy():  # O(n)
-        del dct[key]    #O(1)
-del_out_2(dct_2)
+
 
