@@ -27,3 +27,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calculator():
+    operation = input('Enter operation: ')
+    if operation == '0':
+        print('Calculator Exited')
+        return None
+    else:
+        if operation == '+' or operation == '-' or operation == '*' or operation == '/':
+            while True:
+                number1 = input("Please, enter the first number: ")
+                if not number1.isdigit():
+                    print(f' "{number1}" is a string. Enter number, please!')
+                else:
+                    number1 = int(number1)
+                    break
+            while True:
+                number2 = input("Please, enter the second number: ")
+                if not number2.isdigit():
+                    print(f' "{number2}" is a string. Enter number, please!')
+                else:
+                    number2 = int(number2)
+                    break
+            if operation == '+':
+                print(f'The result is {number1 + number2}')
+                return calculator()
+            elif operation == '-':
+                print(f'The result is {number1 - number2}')
+                return calculator()
+            elif operation == '*':
+                print(f'The result is {number1 - number2}')
+                return calculator()
+            elif operation == '/':
+                if number2 != 0:
+                    print(f'The result is {number1 / number2}')
+                    return calculator()
+                else:
+                    print(f'Division by Zero!!!')
+                    return calculator()
+        else:
+            print('Wrong operation. + - * / operations are acceptable. Others not. Type "0" to exit calculator.')
+            return calculator()
+# calculator()
+
+print(calculator())

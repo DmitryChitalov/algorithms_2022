@@ -13,3 +13,13 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def natural_sum(n, sum=0):
+    if n == 1:
+        return sum + n
+    else:
+        sum = sum + n
+        return natural_sum(n-1, sum)
+
+n = int(input('Enter natural number: '))
+print(f'{natural_sum(n)} = {int(n*(n+1)/2)}')
