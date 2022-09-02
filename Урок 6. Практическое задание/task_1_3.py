@@ -29,4 +29,40 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для третьего скрипта
+За основу взят результат ДЗ 5 урока 4 задание
+"""
+
+from memory_profiler import profile
+import json
+
+
+@profile
+def fill_dict_test():
+    my_dict2 = {}
+    for i in range(100000):
+        my_dict2[i] = i + 1
+    return my_dict2
+
+
+new_dict = fill_dict_test()
+
+print("_________Оптимизированное решение___________________")
+
+
+@profile
+def fill_dict_test_opt():
+    my_dict2 = {}
+    for i in range(100000):
+        my_dict2[i] = i + 1
+    with open("dict_file.json", "w") as dict_file:
+        json.dump(my_dict2, dict_file)
+    del my_dict2
+
+
+new_dict2 = fill_dict_test_opt()
+"""
+
+Аналитика: для оптимизации вместо обычного заполнения словаря в цикле был применен метод через сериализацию 
+(сохранение  словаря в файл json), это позволило существенно уменьшить использование памяти.
+
 """

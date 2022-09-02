@@ -29,4 +29,50 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+
+
+За основу взят результат ДЗ 5 урока 3 задание
+"""
+
+from timeit import default_timer
+from memory_profiler import profile
+
+
+@profile
+def appendleft_test():
+    my_lst111 = []
+    start_time4 = default_timer()
+    for i in range(100000):
+        my_lst111.insert(0, i)
+    duration4 = default_timer() - start_time4
+    return duration4
+
+
+print("________________Сравнение времени функции appendleft________________________")
+
+print(f'Время выполнения операции appendleft_test: {appendleft_test()}')
+
+print("_________Оптимизированное решение___________________")
+
+
+@profile
+def appendleft_test_opt():
+    my_lst222 = []
+    start_time5 = default_timer()
+    for i in range(100000):
+        my_lst222.insert(0, i)
+    duration5 = default_timer() - start_time5
+    del my_lst222
+    return duration5
+
+
+print("________________Сравнение времени функции appendleft________________________")
+
+print(f'Время выполнения операции appendleft_test: {appendleft_test_opt()}')
+
+"""
+
+Аналитика: для оптитмизации памяти мы после того, как массив для вычислений нам более не понадобился использовали 
+del, что позволило высвободить память.
+
 """

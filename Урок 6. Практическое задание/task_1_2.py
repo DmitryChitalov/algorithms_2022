@@ -29,4 +29,55 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для второго скрипта
+
+
+За основу взят результат ДЗ 4 урока 4 задание
+"""
+import numpy
+from memory_profiler import profile
+
+array = [1, 3, 1, 3, 4, 5, 1]
+
+# Далее для формирования значимого по размеру массива добавим блок кода для расширения массива
+for ii in range(1, 90000):
+    array.append(ii)
+
+
+@profile
+def func_2():
+    new_array = []
+    for el in array:
+        count2 = array.count(el)
+        new_array.append(count2)
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+print(func_2())
+print('_______________________Оптимизированный код________________________')
+
+
+@profile
+def func_22():
+    new_array2 = []
+    for el in array:
+        count2 = array.count(el)
+        new_array2.append(count2)
+    nump_arr = numpy.asarray(new_array2)
+    max_3 = max(nump_arr)
+    elem1 = array[new_array2.index(max_3)]
+    return f'Чаще всего встречается число {elem1}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
+print(func_22())
+
+"""
+
+Аналитика: для оптимизации использования памяти применили numpy, 
+что привело даже к высвобождению памяти от начальных значений. 
+
 """

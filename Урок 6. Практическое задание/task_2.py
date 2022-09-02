@@ -8,4 +8,38 @@
 
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
+
+За основу для анализа взят результат ДЗ 4 урока 2 задание. Далее приводится код, в котором уже решена проблема
+простого профилирования рекурсивной функции.
+"""
+
+from timeit import timeit
+from random import randint
+from memory_profiler import profile
+
+
+def recursive_reverse(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+
+
+@profile
+def recur_start(number_to_start):
+    recursive_reverse(number_to_start)
+
+
+num_10000 = randint(1000000000000000000000000000, 1000000000000000000000000000000000000000000000000000000000000)
+
+print('Не оптимизированная функция recursive_reverse')
+print(
+    timeit(
+        "recur_start(num_10000)",
+        setup='from __main__ import recur_start, num_10000',
+        number=1))
+
+"""
+При попытке простого профилирования функции recursive_reverse возникает проблема вывода профиля использования памяти,
+кадый раз при запуске функции в рекурсии. Для того, чтобы этого избежать создали функцию-обертку recur_start, которая
+ просто запускает функцию recursive_reverse с нужными параметрами и уже профилируем эту функцию обертку. 
 """
