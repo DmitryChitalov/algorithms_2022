@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+def my_substring(my_str):
+    my_search = set()
+    i = 0
+    j = len(my_str) - 1
+    while j > 0:
+        rev_my_str = my_str[::-1]
+        my_search.add(hashlib.sha224(my_str[i:-1].encode(encoding='utf-8')))
+        my_search.add(hashlib.sha224(rev_my_str[i:-1].encode(encoding='utf-8')))
+        j -= 1
+        i += 1
+    return my_search
+
+print(my_substring('papa'))
+print('подстрок уникальных ', len(my_substring('papa')))
