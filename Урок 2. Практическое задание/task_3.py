@@ -18,3 +18,19 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def flip(num, flip_num=''):
+    if num == 0:
+        return flip_num
+    else:
+        flip_num += str(num % 10)
+        num = num // 10
+        return flip(num, flip_num)
+
+
+try:
+    num = int(input('Введите число: '))
+    print(f'Перевернутое число: {flip(num)}')
+except ValueError:
+    print("Вы вместо числа ввели строку")
