@@ -3,10 +3,11 @@
 
 Реализуйте функции:
 
-a) заполнение списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
-   заполнение словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+a) заполнение списка, оцените сложность в O-нотации (операции нужно проводить в цикле)
+   заполнение словаря, оцените сложность в O-нотации (операции нужно проводить в цикле)
    сделайте аналитику, что заполняется быстрее и почему
    сделайте замеры времени
+
 
 b) получение элемента списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
    получение элемента словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
@@ -28,3 +29,87 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+# from random import randrange, sample
+
+
+# Декоратор - вычисление времени
+
+def calc_time(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        res = func(*args, **kwargs)
+        end = time.time()
+        print('Время выполнения функции {}: {} секунд.'.format(func.__name__, end - start))
+        return res
+
+    return wrapper
+
+
+# a) Заполнение списка / словаря
+
+@calc_time
+def push_in_list(lst, rng):
+    for el in rng:
+        lst.append(el)
+    return lst
+
+# @calc_time
+# def push_in_dict(dict, data_key, data_val):
+#     for i in data_key, data_val:
+#         dict[data_key[i]] = data_val[i]
+#     return dict
+
+
+lst = [1, 55, 63, 98, 2, 64, 87]
+rng = range(1, 1000000)
+lst_new = push_in_list(lst, rng)  # O(n)
+
+
+#
+# dict = {
+# }
+#
+# data_key = [i for i in range(1, 10)]
+# data_val = [i for i in range(1, 100)]
+#
+# dict_new = push_in_dict(dict, data_key, data_val)
+
+
+# ###############################################################
+# # b) Получение элемента из списка / словаря
+#
+@calc_time
+def get_val_list(lst,n):
+    for el in rng:
+        lst = lst [:n]
+    return lst
+
+lst = [i for i in range(1, 100)]
+
+lst_new = get_val_list(lst, 10)
+
+
+
+# ##############################################################
+# # c) Удаление элемента из списка / словаря
+
+@calc_time
+def pop_out_list(lst,n):
+    for i in range(n):
+        lst.pop(i)
+    return lst
+
+lst = [i for i in range(1, 10000)]
+
+
+lst_new = pop_out_list(lst, 5000)           #почему свыше 5000 - ошибка ?
+#
+#
+#
+#
+#
+#
