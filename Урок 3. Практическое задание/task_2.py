@@ -25,16 +25,21 @@ f1dcaeeafeb855965535d77c55782349444b
 import hashlib, csv
 
 
-def verification():
+def create_hash_password():
+    login = input("Enter login: ")
+    password = input("Enter password: ")
+    hash_password = set()
+    hash_password = hashlib.sha256(password.encode("utf-8") + login.encode("utf-8")).hexdigest()
+    print(f'Хэш + соль = {hash_password}, Логин = {login}, Пароль = {password}')
+    return hash_password
+
+
+def write_hash_password(hash_password):
     start_exit = input("Введите любую клавишу для начала или 0 для выхода: ")
     if start_exit == '0':
         print("Выход")
     else:
-        password = input("Enter password: ")
-        login = input("Enter login: ")
-        hash_password = set()
-        hash_password = hashlib.sha256(password.encode("utf-8") + login.encode("utf-8")).hexdigest()
-        print(f'Хэш + соль = {hash_password}, Логин = {login}, Пароль = {password}')
+        print(f'Хэш + соль = {hash_password}')
         with open('data.csv', 'r+') as file:
             file.write(hash_password)
             file.write("\n")
@@ -43,31 +48,9 @@ def verification():
                     print("Совпадение найдено")
                 else:
                     print("Ваши данные занесены в базу")
-        return verification()
+        return write_hash_password(hash_password)
 
 
-verification()
+if __name__ == "__main__":
+    write_hash_password(create_hash_password())
 
-
-
-# def verification(count):
-#     password = input("Enter password: ")
-#     login = input("Enter login: ")
-#     hash_password = hashlib.sha256(password.encode("utf-8") + login.encode("utf-8"))
-#     hash_password = hash_password.hexdigest()
-#     print(f'Хэш + соль = {hash_password}, Логин = {login}, Пароль = {password}')
-#     if count < 3:
-#         print("Проверка")
-#         password = input("Enter password: ")
-#         login = input("Enter login: ")
-#         test = hashlib.sha256(password.encode("utf-8") + login.encode("utf-8"))
-#         test = test.hexdigest()
-#         print(f'Хэш + соль = {test}, Логин = {login}, Пароль = {password}')
-#         if test == hash_password:
-#             print('Проверка пройдена, Хэши одинаковы')
-#         else:
-#             print(f'Проверка провалена, Хэши имеют разное значение. У вас отсалось - {3 - count}')
-#             return verification(count+1)
-#
-#
-# verification(1)
