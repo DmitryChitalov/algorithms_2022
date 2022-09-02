@@ -10,7 +10,11 @@
 def func1(*args): #O(n^2)
     names_list = [] #O(1)
     for item in args: #O(n)
+<<<<<<< HEAD
+        if item > 4: #O(n)
+=======
         if item > 4: #O(len(..))
+>>>>>>> lesson_1
             names_list.append(item) #O(1)
     return names_list #O(1)
 
