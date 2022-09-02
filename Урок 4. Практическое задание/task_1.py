@@ -11,11 +11,17 @@
 
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+import timeit
 
-
+mycode = '''
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
+            print(new_arr)
     return new_arr
+'''
+
+
+print(timeit.timeit(setup='', stmt=mycode, number=10000))
