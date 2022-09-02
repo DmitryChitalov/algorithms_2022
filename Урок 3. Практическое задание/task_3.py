@@ -22,3 +22,15 @@
 р
 а
 """
+
+import hashlib
+
+
+our_str = 'papa'
+hash_set = set()
+for i in range(len(our_str)):
+    for j in range(i + 1, len(our_str) + 1):
+        h = hashlib.sha1(our_str[i:j].encode('utf-8')).hexdigest()
+        hash_set.add(h)
+
+print(f'В строке "{our_str}" - {len(hash_set) - 1} уникальных подстрок ')
