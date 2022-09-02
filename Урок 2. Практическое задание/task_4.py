@@ -10,3 +10,20 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_elements(n, remain = 1, result = 1, num = 1):
+
+    if n == remain:
+        return result
+    else:
+        print(result)
+        num = num / 2 * (-1)
+        result += num
+        return sum_elements(n, remain + 1, result, num)
+
+
+try:
+    N = int(input('Введите количество элементов: '))
+    print(f'Количество элементов - {N}, их сумма - {sum_elements(N)}')
+except ValueError:
+    print("Вы вместо числа ввели строку")

@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+def lets_find_num(attempt, num):
+
+    print(f'Попытка №{attempt}')
+    try:
+        answer = int(input("Введите число от 0 до 100: "))
+    except ValueError:
+        print("Вы вместо числа ввели строку")
+
+    if answer == num or attempt == 10:
+        print(f'Верно, загаданное число: {num}')
+        return ''
+    else:
+        if answer > num:
+            print(f"Загаданное число меньше чем: {answer}")
+        else:
+            print(f"Загаданное число больше чем: {answer}")
+
+    lets_find_num(attempt + 1, num)
+
+num = randint(0, 100)
+lets_find_num(1, num)

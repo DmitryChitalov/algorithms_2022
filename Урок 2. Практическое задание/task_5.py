@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbols(symbol_numb):
+
+    if symbol_numb == 128:
+        return ''
+    print(f' {symbol_numb} - {chr(symbol_numb)} ', end='')
+    if (symbol_numb - 31) % 10 == 0:
+        print('\n')
+    symbol_numb += 1
+    symbols(symbol_numb)
+
+symbols(32)

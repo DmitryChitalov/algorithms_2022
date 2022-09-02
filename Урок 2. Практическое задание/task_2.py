@@ -17,3 +17,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def digits(num, even=0, diseven=0):
+
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: ({even}, {diseven})'
+    else:
+        digit = num % 10
+        num = num // 10
+        if digit % 2 == 0:
+            even += 1
+        else:
+            diseven += 1
+        return digits(num, even, diseven)
+
+try:
+    num = int(input('Введите натуральное число: '))
+    print(digits(num))
+except ValueError:
+    print("Вы вместо числа ввели строку")
