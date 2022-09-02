@@ -29,4 +29,57 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+
+
+
+За основу взят результат ДЗ 3 урока 1 задание
+"""
+import time
+from memory_profiler import profile, memory_usage
+
+
+@profile
+def fill_list():
+    test1_list = []
+    start_val = time.time()
+    for i in range(1, 20000):
+        test1_list.append(i)
+        i += 1
+    end_val = time.time()
+    return end_val - start_val, test1_list
+
+
+print('-----------------Время формирования списка----------------------')
+first_count, list_to_read = fill_list()
+print(first_count)
+
+
+def profile_deco(func1):
+    def wrapper(*args):
+        memo_start = memory_usage()
+        list222 = func1(args)
+        memo_end = memory_usage()
+        return list222, memo_end[0] - memo_start[0]
+
+    return wrapper
+
+
+@profile_deco
+def fill_list_opt(range1):
+    for n in range1:
+        yield n
+
+
+print('-----------------Время формирования списка оптимизированное----------------------')
+start_val1 = time.time()
+first_opt_count_gen, memo_used = fill_list_opt(list(range(20000)))
+print(f'Формирование списка в виде генератора заняло {time.time() - start_val1} времени')
+print(f'Формирование списка в виде генератора заняло {memo_used} MiB памяти')
+
+"""
+
+Аналитика: для оптимизации вместо обычного заполнения в цикле был применен метод через формирование 
+генератора списка, это позволило существенно уменьшить использование памяти 
+(заодно, кстати, сократив и временные затраты).
+
 """

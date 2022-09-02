@@ -29,4 +29,48 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+За основу взят результат ДЗ 4 урока 1 задание
+"""
+from memory_profiler import profile
+import timeit
+import numpy
+
+nums_start = [1, 4, 5, 6, 7, 5, 10, 25, 30]
+
+
+@profile
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+# Далее для формирования значимого по размеру массива добавим блок кода для расширения массива
+for ii in range(1, 90000):
+    nums_start.append(ii)
+
+start_time = timeit.default_timer()
+func_1(nums_start)
+print(timeit.default_timer() - start_time)
+
+print('_______________________Оптимизированный код________________________')
+
+
+@profile
+def func_1_opt(nums1):
+    new_arr = [i for i in nums1 if i % 2 == 0]
+    s = numpy.asarray(new_arr)
+    return s
+
+
+start_time2 = timeit.default_timer()
+func_1_opt(nums_start)
+print(timeit.default_timer() - start_time2)
+"""
+
+Аналитика: для оптимизации вместо обычного массива  в цикле был применен модуль asarray  из numpy.
+Это привело к существенному уменьшению потребляемой памяти
+
 """
