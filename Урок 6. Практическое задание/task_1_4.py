@@ -30,3 +30,26 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import profile
+my_list = []
+for i in range(0, 50000):
+    my_list.append(i)
+@profile()
+def sorting_list():
+    my_list_2 = []
+    for i in my_list:
+        if i % 2 == 0:
+            my_list_2.append(i)
+    return my_list_2
+sorting_list()
+
+@profile
+def sorting_list2():
+    my_list_3 = list(filter(lambda x: x % 2 == 0, my_list))
+    return my_list_3
+sorting_list2()
+
+'''
+сортировка списка по условию 0.6 MIB
+с помощью filter 0.0 MIB
+'''
