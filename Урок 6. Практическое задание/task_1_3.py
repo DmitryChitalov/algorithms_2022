@@ -30,3 +30,18 @@
 
 Это файл для третьего скрипта
 """
+
+
+
+def func_2(nums):
+    """В предлагаемой функции цикл был заменен на list comprehension"""
+    return [x for x in range(len(nums)) if nums[x] % 2 == 0]  # nums[x] это четные элементы, x это индексы
+
+
+n = [34, 890, 562, 8998, 82, 773, 92, 91, 95, 84, 89, 75, 43, 94, 88, 75, 71, 95, 128, 845, 854]
+
+"""Первый вариант расчета"""
+t1 = Timer(stmt='func_1(n)', setup='from __main__ import func_1', globals=globals())
+print('func_1()', t1.timeit(number=1000000), 'second')
+t2 = Timer(stmt='func_2(n)', setup='from __main__ import func_2', globals=globals())
+print('func_2()', t2.timeit(number=1000000), 'second')

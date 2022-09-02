@@ -30,3 +30,19 @@
 
 Это файл для четвертого скрипта
 """
+
+
+
+
+
+
+
+def revers_2(enter_num, revers_num=0):
+    while enter_num != 0:
+        num = enter_num % 10
+        revers_num = (revers_num + num / 10) * 10
+        enter_num //= 10
+    return revers_num
+
+number = 5674567890976545678998765890
+print(revers(number))
