@@ -22,3 +22,17 @@
 р
 а
 """
+
+from hashlib import sha1
+
+
+def uniq_str(value):
+    hash_set = set()
+    for i in range(len(value)):
+        for j in range(i + 1, len(value) + 1):
+            if value[i:j] != value:
+                hash_set.add(sha1(value[i:j].encode('utf-8')).hexdigest())
+    return f'Уникальных подстрок: {len(hash_set)}'
+
+
+print(uniq_str('papa'))

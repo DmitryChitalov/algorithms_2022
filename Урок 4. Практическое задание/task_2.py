@@ -29,8 +29,8 @@ num_10000 = randint(100000000, 10000000000000)
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
+        "recursive_reverse(randint(10000, 1000000))",
+        setup='from __main__ import recursive_reverse, randint',
         number=10000))
 print(
     timeit(
@@ -67,8 +67,8 @@ def recursive_reverse_mem(number):
 print('Оптимизированная функция recursive_reverse_mem')
 print(
     timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
+        'recursive_reverse_mem(randint(10000, 1000000))',
+        setup='from __main__ import recursive_reverse_mem, randint',
         number=10000))
 print(
     timeit(
@@ -80,3 +80,30 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация не нужна в этом случае, randint создаёт значение и передаёт его функции в timeit
+и это значение гоняется number раз, соответственно оно достаётся из кеша, раз оно одно,
+но стоит randint загнать в аргумент функции, всё меняется, время сравнивается лиш в некоторых случаях
+с мемоизацией чуть быстрее, так как randint периодически может выдать одинаковые значения
+
+Это результат когда randint вне аргумента функции:
+Не оптимизированная функция recursive_reverse
+0.021261800000502262
+0.023765399993862957
+0.04039659999398282
+Оптимизированная функция recursive_reverse_mem
+0.001625899996724911
+0.0015977000002749264
+0.0016661000045132823
+
+Это результат когда в первую функцию randint передал аргументом функции:
+Не оптимизированная функция recursive_reverse
+0.03807680000318214
+0.033891899991431274
+0.05702300000120886
+Оптимизированная функция recursive_reverse_mem
+0.0386175000021467
+0.0016899000038392842
+0.0026708000077633187
+"""
