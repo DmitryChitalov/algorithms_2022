@@ -50,3 +50,8 @@ c2 = calc("C4F")
 
 print(c1 + c2)
 print(c1 * c2)
+
+"""
+Решение через collections
+"""
+import collections
