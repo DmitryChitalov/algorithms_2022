@@ -30,3 +30,49 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import memory_usage
+from numpy import array, append, delete
+# lesson 1 task 2
+
+m1 = memory_usage()
+
+
+def min_val_in_list2(list):
+    min_val = list[0]
+    for i in list:
+        if i < min_val:
+            min_val = i
+    return min_val
+
+
+mylist = [i for i in range(100000)]
+print(min_val_in_list2(mylist))
+m2 = memory_usage()
+mem_usage = m2[0] - m1[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+
+m3 = memory_usage()
+
+
+def min_val_in_array(array):
+    min_val = array[0]
+    for i in array:
+        if i < min_val:
+            min_val = i
+    return min_val
+
+
+my_array = array([i for i in range(100000)])
+print(min_val_in_array(my_array))
+m4 = memory_usage()
+mem_usage = m4[0] - m3[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+'''
+Вывод. Использование памяти существенно сокращено за счёт замены списка массивом array.
+До оптимизации:
+Выполнение заняло 4.56640625 Mib
+После оптимизации:
+Выполнение заняло 0.7265625 Mib
+'''
