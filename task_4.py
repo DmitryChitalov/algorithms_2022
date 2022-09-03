@@ -1,79 +1,102 @@
 """
-Задание 4.
+Задача 4.
+Создайте обычный словарь и упорядоченный словарь OrderedDict.
 
-Для этой задачи:
-1) придумайте 2-3 решения (обязательно с различной сложностью)
-2) оцените сложность каждого выражения в этих решениях в нотации О-большое
-3) оцените итоговую сложность каждого решения в нотации О-большое
-4) сделайте вывод, какое решение эффективнее и почему
+Выполните операции, равные по смыслу, с каждым из словарей и сделайте замеры.
+Опишите полученные результаты, сделайте выводы
 
-Сама задача:
-Пользователи веб-ресурса проходят аутентификацию.
-В системе хранятся логин, пароль и отметка об активации учетной записи.
-
-Нужно реализовать проверку, может ли пользователь быть допущен к ресурсу.
-При этом его учетка должна быть активирована.
-А если нет, то польз-лю нужно предложить ее пройти.
-
-Приложение должно давать ответы на эти вопросы
- и быть реализовано в виде функции.
-Для реализации хранилища можно применить любой подход,
-который вы придумаете, например, применить словарь.
-
-Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
+И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях
 """
 
-########################################################################
-"""
-Решение 1
-Сложность: O(1) - константная
-"""
+################################################################
+from timeit import default_timer
+from collections import OrderedDict
+
+some_dict = {}  # обычный словарь
+some_ordered_dict = OrderedDict()  # OrderedDict
+n = 10 ** 7  # число операций
 
 
-def authorization(users, user_name, user_password):
-    if users.get(user_name):                                            # O(1) - Константная
-        if users[user_name]['password'] == user_password \
-                and users[user_name]['activation']:                     # O(1) - Константная
-            return "Здравствуйте! Вы допущены к ресурсу"
-        elif users[user_name]['password'] == user_password \
-                and not users[user_name]['activation']:                 # O(1) - Константная
-            return "Учетная запись не активна! Пройдите активацию!"     # O(1) - Константная
-        elif users[user_name]['password'] != user_password:             # O(1) - Константная
-            return "Пароль не верный"                                   # O(1) - Константная
-    else:
-        return "Данного пользователя не существует"                     # O(1) - Константная
+def time_decorator(some_func):
+    """Вычисляет время выполения декорируемой функции"""
+
+    def wrapper(*args, **kwargs):
+        start = default_timer()
+        result = some_func(*args, **kwargs)
+        print(f'Время выполенения функции {some_func.__name__} '
+              f'составило {default_timer() - start}. ')
+
+        return result
+
+    return wrapper
 
 
-########################################################################
-""" 
-Решение 2
-Сложность: O(n) - линейная
-"""
+@time_decorator
+def fill_dict(some_dict, n):
+    """Заполняет обычный словарь"""
+    for i in range(n):
+        some_dict[i] = i
 
 
-def authorization_2(users, user_name, user_password):
-    for key, value in users.items():                                            # O(n) - Линейная
-        if key == user_name:                                                    # O(1) - Константная
-            if value['password'] == user_password and value['activation']:      # O(1) - Константная
-                return "Здравствуйте! Вы допущены к ресурсу"                    # O(1) - Константная
-            elif value['password'] == user_password \
-                    and not value['activation']:                                # O(1) - Константная
-                return "Учетная запись не активна! Пройдите активацию!"         # O(1) - Константная
-            elif value['password'] != user_password:                            # O(1) - Константная
-                return "Пароль не верный"                                       # O(1) - Константная
-
-    return "Данного пользователя не существует"                                 # O(1) - Константная
+@time_decorator
+def fill_ordered_dict(some_ordered_dict, n):
+    """Заполняет OrderedDict"""
+    for i in range(n):
+        some_ordered_dict[i] = i
 
 
-my_users = {'user1': {'password': '11111', 'activation': True},
-            'user2': {'password': '11111', 'activation': False},
-            'user3': {'password': '11111', 'activation': True},
-            'user4': {'password': '11111', 'activation': False}
-            }
+fill_dict(some_dict, n)
+fill_ordered_dict(some_ordered_dict, n)
 
-print(authorization(my_users, 'user6', '1111'))
-print(authorization_2(my_users, 'user6', '1111'))
+# Время выполенения функции fill_dict составило 0.916514579.
+# Время выполенения функции fill_ordered_dict составило 1.3870536470000001.
+
 
 """
-Решение 1 эффективнее, так как константная сложность выполняется быстрее линейной
+Обычный словарь заполняется элементами быстрее, чем OrderedDict. 
+Это связано прежде всего с тем, что:
+1. OrderedDict реализован на Python, а обычный словарь на С 
+и априори должен работать быстрее.
+2. OrderedDict был разработан для быстрого переупорядочивания элементов, 
+а производительность в части заполнения вторична.
 """
+
+
+@time_decorator
+def change_dict(dct):
+    """Выполняет операции по изменению обычного словаря"""
+    for i in range(1000000):
+        dct.pop(i)  # удаляем 1000000 ключей из словаря
+    for j in range(1000001, 2000002):
+        dct[j] = 'fill'  # изменяем 1000000 значений в словаре
+    for k, v in dct.items():
+        dct[k] = 'some value'  # итерируемся по словарю, изменяя значения
+
+
+@time_decorator
+def change_ordered_dict(dct):
+    """Выполняет операции по изменению OrderedDict"""
+    for i in range(1000000):
+        dct.pop(i)  # удаляем 1000000 ключей из OrderedDict"
+    for j in range(1000001, 2000002):
+        dct[j] = 'fill'  # изменяем 1000000 значений в OrderedDict"
+    for k, v in dct.items():
+        dct[k] = 'some value'  # итерируемся по OrderedDict, изменяя значения
+
+
+change_dict(some_dict)
+change_ordered_dict(some_ordered_dict)
+
+# Время выполенения функции change_dict составило 0.8423442569999997.
+# Время выполенения функции change_ordered_dict составило 1.3677892429999998.
+
+"""
+При выполнении операций изменения, итерации и присваивания обычный словарь 
+работает гораздо быстрее, чем OrderedDict.
+Начиная с версии Python 3.6 обычный словарь также поддерживает запоминание 
+порядка добавления пар ключ-значение. Таким
+образом в настоящее время использование OrderedDict оправдано, 
+если нужны только специфичные для него функции,
+такие как move_to_end(key, last=True), popitem(last=True).
+"""
+
