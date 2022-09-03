@@ -25,3 +25,16 @@ appendleft, popleft, extendleft дека и соответствующих им 
 для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
 (append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+
+import itertools
+import collections
+
+lst = [123, 1, 34245, 32432, 23432, 432134, 23423]
+deq = collections.deque(lst)
+
+mas = [1, 2, 3, 4, 5]
+
+lst.extend(mas)
+
+print(lst)
+print(deq)
