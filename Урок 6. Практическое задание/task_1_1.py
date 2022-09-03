@@ -30,3 +30,34 @@
 
 Это файл для первого скрипта
 """
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+@decor
+# не оптимизированная
+def func_1(nums):
+    my_list = []
+    for k, v in enumerate(nums):
+        if v % 2 == 0:
+            my_list.append(k)
+    return my_list
+
+
+@decor
+# f строки и lc
+def func_2(nums):
+    return f'{[i for i in range(len(nums)) if nums[i] % 2 == 0]}'
+
+
+my_arr = list(range(100000))
+# res, mem_diff = func_1(my_arr)
+# print(f'{mem_diff} MenInBlack')
+res2, mem_diff2 = func_2(my_arr)
+print(f'{mem_diff2} MenInBlack')
