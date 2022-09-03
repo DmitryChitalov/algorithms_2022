@@ -28,3 +28,49 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, defaultdict
+
+
+# namedtuple
+def get_company():
+    name = input('Введите название предприятия: ')
+    profit_quarters = input('Через пробел ввидите прибыль данного предприятия '
+                            'за каждый квартал (всего 4 квартала): ').split()
+    profit_year = sum(map(float, profit_quarters))
+    return name, profit_year
+
+
+def namedtuple_calc():
+    CompanyInfo = namedtuple('CompanyInfo', 'name profit')
+    count = int(input('Введите количество предприятий для расчета прибыли: '))
+    company_list = [CompanyInfo(*get_company()) for _ in range(count)]
+    mean_val = sum(map(lambda x: x.profit, company_list)) / count
+    company_above = [el.name for el in company_list if el.profit >= mean_val]
+    company_below = [el.name for el in company_list if el.profit < mean_val]
+    print('Предприятия, с прибылью выше среднего значения:', end=' ')
+    print(*company_above, sep=', ')
+    print('Предприятия, с прибылью ниже среднего значения:', end=' ')
+    print(*company_below, sep=', ')
+
+
+# defaultdict
+def defaultdict_calc():
+    company_dict = defaultdict(float)
+    count = int(input('Введите количество предприятий для расчета прибыли: '))
+    for _ in range(count):
+        name = input('Введите название предприятия: ')
+        for quarter in range(1, 5):
+            profit_quarter = float(input(f'Введите прибыль за {quarter} квартал: '))
+            company_dict[name] += profit_quarter
+    mean_val = sum(company_dict.values()) / count
+    print('Предприятия, с прибылью выше среднего значения:', end=' ')
+    print(*(key for key, val in company_dict.items() if val >= mean_val), sep=', ')
+    print('Предприятия, с прибылью ниже среднего значения:', end=' ')
+    print(*(key for key, val in company_dict.items() if val < mean_val), sep=', ')
+
+
+if __name__ == '__main__':
+    print('1) namedtuple', '\n')
+    namedtuple_calc()
+    print('\n', '2) defaultdict', '\n')
+    defaultdict_calc()
