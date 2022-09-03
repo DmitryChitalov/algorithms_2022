@@ -25,3 +25,47 @@ appendleft, popleft, extendleft дека и соответствующих им 
 для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
 (append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+
+from collections import deque
+from timeit import timeit
+
+lst = [i for i in range(10000)]
+deq = deque(lst)
+
+
+def lst_append():
+    for i in range(1000):
+        lst.append(i)
+
+
+def desque():
+    for i in range(1000):
+        deq.append(i)
+
+
+def pop_lst():
+    for i in range(1000):
+        lst.pop()
+
+
+def pop_deq():
+    for i in range(1000):
+        deq.pop()
+
+
+def lst_extend():
+    ext = [i for i in range(1000)]
+    lst.extend(ext)
+
+
+def deq_extend():
+    ext = [i for i in range(1000)]
+    deq.extend(ext)
+
+
+print(timeit("lst_append()", globals=globals(), number=1000))
+print(timeit("desque()", globals=globals(), number=1000))
+print(timeit("pop_lst()", globals=globals(), number=1000))
+print(timeit("pop_deq()", globals=globals(), number=1000))
+print(timeit("lst_extend()", globals=globals(), number=1000))
+print(timeit("deq_extend()", globals=globals(), number=1000))
