@@ -46,7 +46,7 @@ def decor(func):
 
 
 @decor
-# 2.39453125 без tuple - 0.70703125 c filter + list - 0.66796875 c filter + tuple
+# 2.39453125 не оптимизированно - 0.70703125 c filter + list - 0.66796875 c filter + tuple
 def func_2(nums):
     my_list = tuple(filter(lambda x: x % 2 == 0, nums))
     return my_list
@@ -56,4 +56,4 @@ my_arr = list(range(100000))
 print(f'- {func_2(my_arr)}')
 res2, mem_diff2 = func_2(my_arr)
 print(f'{mem_diff2} MenInBlack')
-# 2.39453125 без tuple - 0.70703125 c filter + list - 0.66796875 c filter + tuple
+# 2.39453125 не оптимизированно - 0.70703125 c filter + list - 0.66796875 c filter + tuple
