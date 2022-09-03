@@ -27,3 +27,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if sign == '0':  # Базовый случай
+        return
+    elif sign not in ['+', '-', '*', '/']:
+        print(f'{sign} - это не математическая операция. Нужно ввести "+", "-", "*" или "/". Для выхода введите 0')
+        return calculator()
+
+    try:
+        num1 = int(input('Введите первое число: '))
+        num2 = int(input('Введите второе число: '))
+    except ValueError:
+        print('Вы вместо числа ввели строку (((. Исправьтесь')
+        return calculator()
+
+    if sign == '+':
+        print('Ваш результат:', num1 + num2)
+    elif sign == '-':
+        print('Ваш результат:', num1 - num2)
+    elif sign == '*':
+        print('Ваш результат:', num1 * num2)
+    elif sign == '/':
+        if num2:  # num2 != 0
+            print('Ваш результат:', num1 / num2)
+        else:
+            print('Делить на ноль нельзя!!!')
+    return calculator()
+
+
+if __name__ == '__main__':
+    calculator()

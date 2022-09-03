@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_numbers(n):
+    if n == 0:
+        return n
+
+    return n + sum_numbers(n - 1)
+
+
+if __name__ == '__main__':
+    N = 5
+    result = sum_numbers(N)
+    formula = N * (N + 1) / 2
+    print(result, formula)
+    print(result == formula)
