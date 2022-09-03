@@ -28,3 +28,43 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+
+def firm_dict(keys, val):
+    mas = []
+    temp_firm_revenue = {}
+    for i in val.split():
+        mas.append(int(i))
+    temp_firm_revenue[keys] = mas
+    temp = collections.Counter(temp_firm_revenue)
+    summ = 0
+    for i in temp.values():
+        summ = sum(i)
+    firm_revenue[summ] = temp_firm_revenue
+
+
+def get_average(ave: dict):
+    average_income = sum(ave.keys()) / len(ave)
+    print("Средний заработок всех фирм составил ", average_income)
+    min_mass = []
+    max_mass = []
+    for i in ave.keys():
+        if average_income > i:
+            min_mass.append(ave.get(i))
+        else:
+            max_mass.append(ave.get(i))
+    print("Фирмы с выше средним доходом ", max_mass, " Фирмы с доходом ниже среднего ", min_mass)
+
+
+firm_revenue = {}
+
+how_many = int(input("Сколько фирм"))
+
+for i in range(how_many):
+    key = input("Введите название фирмы")
+    val = input("Введите заработок по месяцам через пробел")
+    firm_dict(key, val)
+
+print(firm_revenue)
+get_average(firm_revenue)
