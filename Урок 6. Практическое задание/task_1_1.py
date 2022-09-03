@@ -30,3 +30,53 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+
+# lesson 4 task 1
+
+def func_4(nums):
+    new_arr = []
+    l = len(nums) - 1
+    while l:
+        if not nums[l] % 2:
+            new_arr.append(l)
+        l = l - 1
+    return new_arr
+
+
+m1 = memory_usage()
+my_big_list = list(range(1, 100000))
+newlist = func_4(my_big_list)
+m2 = memory_usage()
+mem_usage = m2[0] - m1[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+# Оптимизируем с помощью генератора.
+
+
+def func_4_gen(nums_gen):
+    new_arr = []
+    idx = 0
+    for i in nums_gen:
+        if i % 2:
+            new_arr.append(idx)
+        idx += 1
+    return new_arr
+
+
+m3 = memory_usage()
+my_big_gen = (i for i in range(1, 100000))
+
+newlist2 = func_4_gen(my_big_gen)
+m4 = memory_usage()
+mem_usage = m4[0] - m3[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+"""
+Вывод. Использован генератор вместо списка, использование памяти существенно сокращено.
+До оптимизации:
+Выполнение заняло 6.06640625 Mib
+После оптимизации:
+Выполнение заняло 2.171875 Mib
+"""

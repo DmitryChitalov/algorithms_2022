@@ -30,3 +30,65 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import memory_usage
+from recordclass import recordclass
+
+#lesson 3 task 4
+
+import hashlib
+from uuid import uuid4
+
+
+class CacheWeb:
+    def __init__(self):
+        self.web_dict = {}
+        self.salt_dict = {}
+
+    def web_to_cache(self, url):
+        if self.web_dict.get(url):
+            return self.web_dict[url]
+        else:
+            salt = uuid4().hex
+            self.salt_dict.setdefault(url, salt)
+            self.web_dict.setdefault(url, hashlib.sha256(url.encode('utf-8') + salt.encode()).hexdigest())
+
+urlrec = recordclass('urlrec', ('salt', 'hash'))
+class CacheWebO:
+    __slots__ = ['web_dict', 'salt_dict']
+
+    def __init__(self):
+        self.web_dict = {}
+
+    def web_to_cache(self, url):
+        if self.web_dict.get(url):
+            return self.web_dict[url].hash
+        else:
+            salt = uuid4().hex
+            self.web_dict[url] = urlrec(salt=salt, hash=hashlib.sha256(url.encode('utf-8') + salt.encode()).hexdigest())
+
+
+m1 = memory_usage()
+our_web_cache = CacheWeb()
+for i in range(1000000):
+    our_web_cache.web_to_cache(uuid4().hex)
+m2 = memory_usage()
+print(f"Выполнение заняло {m2[0] - m1[0]} Mib")
+
+
+m3 = memory_usage()
+our_web_cache2 = CacheWebO()
+for i in range(1000000):
+    our_web_cache2.web_to_cache(uuid4().hex)
+m4 = memory_usage()
+print(f"Выполнение заняло {m4[0] - m3[0]} Mib")
+
+
+'''
+Вывод. Использование recordclass позволило сократить расход памяти. Использование слотов не повлияло на память.
+До оптимизации:
+Выполнение заняло 386.828125 Mib
+После оптимизации:
+Выполнение заняло 377.60546875 Mib
+'''
+
+
