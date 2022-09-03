@@ -80,3 +80,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+
+
+
+
+
+
+
+
+def reverse(number):
+    if number == 0:
+        return ''
+    return f'{str(number % 10)}{reverse(number // 10)}'
+print('хз какая функция:')
+print(
+    timeit(
+        "reverse(num_100)",
+        setup='from __main__ import reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        "reverse(num_1000)",
+        setup='from __main__ import reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        "reverse(num_10000)",
+        setup='from __main__ import reverse, num_10000',
+        number=10000))
+

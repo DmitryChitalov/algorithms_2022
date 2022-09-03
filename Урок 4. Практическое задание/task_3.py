@@ -1,3 +1,6 @@
+from timeit import timeit
+from random import randint
+
 """
 Задание 3.
 
@@ -35,3 +38,28 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(enter_num):
+    if enter_num:
+        print(enter_num % 10, end = '')
+        return revers_4(enter_num // 10)
+
+print(revers_4(1200))
+
+
+
+print(timeit("revers",
+             globals=globals(),
+             number=10000))
+
+print(timeit("revers_2",
+        globals=globals(),
+        number=10000))
+
+print(timeit("revers_3",
+        globals=globals(),
+        number=10000))
+
+print(timeit("revers_4",
+        globals=globals(),
+        number=10000))
