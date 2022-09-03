@@ -28,3 +28,30 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+name = []
+avg_ls = []
+more = []
+less = []
+a = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(a):
+    name.append(input('Введите название предприятия: '))
+    rent = 0
+    for j in range(4):
+        rent += (float(input(f'введите прибыль данного предприятия за {j + 1} квартал: ')))
+    avg_ls.append(rent / 4)
+ls_avg = namedtuple('ls_avg', name)
+p = ls_avg._make(avg_ls)
+print(p._asdict())
+summ_avg = 0
+for i in (p._asdict()).values():
+    summ_avg += i
+summ_avg /= a
+for k, i in (p._asdict()).items():
+    if i > summ_avg:
+        more.append(k)
+    else:
+        less.append(k)
+print(f'Средняя годовая прибыль всех предприятий: {summ_avg}')
+print(f'Предприятия, с прибылью выше среднего значения: {more}')
+print(f'Предприятия, с прибылью ниже среднего значения: {less}')
