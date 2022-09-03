@@ -9,3 +9,18 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+@profile()
+def wrapper(a):
+    def revers(a):
+        while a > 0:
+            b = int(a % 10)
+            a = int(a // 10)
+            return f"{b}{revers(a)}"
+        return f""
+    return wrapper
+
+num = 1234567890
+print(wrapper(num))
+# если вызывать без обертки, то получим много вызовов декоратора (много таблиц с данными).

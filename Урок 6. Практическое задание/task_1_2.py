@@ -30,3 +30,47 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        print(m1)
+        res = func(args[0])
+        m2 = memory_usage()
+        print(m2)
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor
+# 2.39453125
+def func_2(nums):
+    my_list = []
+    for k, v in enumerate(nums):
+        if v % 2 == 0:
+            my_list.append(k)
+    return my_list
+
+
+@decor
+# 0.01953125
+def func_2(nums):
+    for k in nums:
+        if k % 2 == 0:
+            yield k
+
+
+my_arr = list(range(100000))
+
+# res, mem_diff = func_1(my_arr)
+# print(f'{mem_diff} MenInBlack')
+
+res2, mem_diff2 = func_2(my_arr)
+# for i in res2:
+#     print(i)
+print(f'{mem_diff2} MenInBlack')
+# yield очень сильно экономит память
