@@ -23,4 +23,30 @@ reduce
 
 __mul__
 __add__
+
+a = 'A2'
+b = 'C4F'
+print(hex(int(a, 16) + int(b, 16)))
 """
+
+
+class calc():
+    def __init__(self, pasr_str):
+        self.a = pasr_str
+        self.mas = []
+        for i in self.a:
+            self.mas.append(i)
+        print(self.mas)
+
+    def __add__(self, other):
+        return hex(int(self.a, 16) + int(other.a, 16))
+
+    def __mul__(self, other):
+        return hex(int(self.a, 16) * int(other.a, 16))
+
+
+c1 = calc("A2")
+c2 = calc("C4F")
+
+print(c1 + c2)
+print(c1 * c2)
