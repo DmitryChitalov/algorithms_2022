@@ -21,6 +21,9 @@ def recursive_reverse(number):
         return str(number % 10)
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
+"""
+Функция с меморизацией работает дольше, так как каждый раз проверяется наличие результата в кэше. Это замедляет функцию
+"""
 
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
