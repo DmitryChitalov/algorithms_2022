@@ -7,3 +7,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+def v6(x=0, count=10):
+    if x == 0:
+        x = random.randrange(1,100)
+
+    if count == 0:
+        return f'Попытки кончились. Загаданное число: {x}'
+
+    y = int(input('Введите число: \n'))
+    if y == x:
+        return f'Правильно!'
+    elif y > x:
+        print(f'Загаданное число меньше. Осталось {count-1} - попыток')
+    else:
+        print(f'Загаданное число больше. Осталось {count-1} - попыток')
+    return v6(x, count-1)
+
+print(v6())

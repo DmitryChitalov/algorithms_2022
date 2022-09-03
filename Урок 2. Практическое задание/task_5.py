@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def v5(x=32):
+    if x > 126:
+        return f'{x} - {chr(x)}'
+    if x % 10 == 1:
+        z = f'{x} - {chr(x)}\n'
+    else:
+        z = f'{x} - {chr(x)} '
+    return z + v5(x+1)
+
+print(v5())

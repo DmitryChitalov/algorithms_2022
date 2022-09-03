@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def v2(digit, x=0, y=0):
+    lastnum = digit % 10
+    nextnum = digit // 10
+    if nextnum == 0:
+        if digit % 2 == 0:
+            x += 1
+        else:
+            y += 1
+        return f'Количество четных и нечетных цифр в числе равно: ({x}, {y})'
+    if lastnum % 2 == 0:
+        x += 1
+    else:
+        y += 1
+    return v2(nextnum, x, y)
+
+print(v2(58923556))
