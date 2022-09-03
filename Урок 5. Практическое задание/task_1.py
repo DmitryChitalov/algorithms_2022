@@ -45,12 +45,10 @@ def namedtuple_calc():
     count = int(input('Введите количество предприятий для расчета прибыли: '))
     company_list = [CompanyInfo(*get_company()) for _ in range(count)]
     mean_val = sum(map(lambda x: x.profit, company_list)) / count
-    company_above = [el.name for el in company_list if el.profit >= mean_val]
-    company_below = [el.name for el in company_list if el.profit < mean_val]
     print('Предприятия, с прибылью выше среднего значения:', end=' ')
-    print(*company_above, sep=', ')
+    print(*(el.name for el in company_list if el.profit >= mean_val), sep=', ')
     print('Предприятия, с прибылью ниже среднего значения:', end=' ')
-    print(*company_below, sep=', ')
+    print(*(el.name for el in company_list if el.profit < mean_val), sep=', ')
 
 
 # defaultdict
