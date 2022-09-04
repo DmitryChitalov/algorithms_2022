@@ -15,3 +15,24 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# O (n**2)
+
+def minimum_elem(lst):
+    for i in lst:
+        min_elem = True
+        for n in lst:
+            if i > n:
+                min_elem = False
+        if min_elem:
+            return 1
+
+
+# O (n)
+def minimum_elem_2(lst):
+    min_elem = lst[0]
+    for i in lst:
+        if i < min_elem:
+            min_elem = i
+    return min_elem

@@ -22,3 +22,44 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+users_list = {'Ivan': (123, True),
+              'Sergey': (456, True),
+              'Anna': (789, False),
+              'Nikita': (654, False)}
+
+# Вариант 1 -  O(1)
+def authorization(users, user_name, pwd):
+    if user_name in users:
+        if users[user_name][0] == pwd:
+            if users[user_name][1] == True:
+                print('Добро пожаловать!')
+            else:
+                print('Учетная запись не активирована. Пройдите этап активации для получения доступа')
+        else:
+            print('Неверный пароль')
+    else:
+        print('Неверное имя пользователя')
+
+#authorization(users_list,'Anna',789)
+
+# Вариант 2 - O(n)
+def authorization_2(users, user_name, pwd):
+    for key, value in users.items():
+        if key == user_name:
+            if value[0] == pwd:
+                if value[1] == True:
+                    return 'Добро пожаловать!'
+                elif value[1] != True:
+                    return 'Учетная запись не активирована. Пройдите этап активации для получения доступа'
+            elif value[0] != pwd:
+                return 'Неверный пароль'
+    return 'Неверное имя пользователя'
+
+
+authorization(users_list,'Ivan',123)
+authorization(users_list,'Anna',789)
+
+print(authorization_2(users_list,'Sergey',456))
+print(authorization_2(users_list,'Nikita',654))
