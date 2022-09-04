@@ -28,3 +28,72 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import defaultdict
+
+
+def number_of_firms():
+    n = input('Введите количество предприятий для расчета прибыли: ')
+    if n.isdigit():
+        return int(n)
+    else:
+        print('Количество предприятий должно быть цифрой. Попробуйте снова.')
+        number_of_firms()
+
+
+def revenue_input():
+    n = input(f'Через пробел введите прибыль данного '
+              f'предприятия за каждый квартал'
+              f'(Всего 4 квартала):').split()
+
+    check = 0
+    for i, el in enumerate(n):
+        if el.isdigit():
+            check += 1
+            n[i] = int(n[i])
+    if check == 4:
+        return n
+    else:
+        print('Прибыль следует указать в цифрах через пробел. '
+              'Должно быть 4 квартала. Попробуйте снова.')
+        revenue_input()
+
+
+def find_average(l: list):
+    return sum(l) / len(l)
+
+
+def show_upper_ave(comp, ave_sum):
+    res = {}
+    for k, v in comp.items():
+        if find_average(v) > ave_sum:
+            res[k] = find_average(v)
+    return res
+
+
+def show_lower_ave(comp, ave_sum):
+    res = {}
+    for k, v in comp.items():
+        if find_average(v) < ave_sum:
+            res[k] = find_average(v)
+    return res
+
+
+if __name__ == '__main__':
+    companies = defaultdict(list)
+    average_rev = 0
+
+    for i in range(0, number_of_firms()):
+        c = input(f'Введите название {i + 1}-й компании: ')
+        companies[c] = revenue_input()
+        average_rev += find_average(companies[c])
+
+    average_rev = average_rev / len(companies)
+
+    print('-' * 100)
+    print(f'Средняя прибыль предприятий: {average_rev}')
+    print(f'Предприятия с прибылью выше среднего значения: '
+          f'{show_upper_ave(companies, average_rev)}')
+    print(f'Предприятия с прибылью ниже среднего значения: '
+          f'{show_lower_ave(companies, average_rev)}')
+
