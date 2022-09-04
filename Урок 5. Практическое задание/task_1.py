@@ -28,3 +28,36 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+import statistics
+
+
+default_dict = collections.defaultdict(int)
+
+
+def avarage_profit():
+    count_campaing = int(input('Введите количество предприятий: '))
+    avarage_all = []
+    while count_campaing:
+        name_campaing = input('Введите название предприятия: ')
+        profit_quartet = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split(' ')
+        i = 0
+        for el in profit_quartet:
+            profit_quartet[i] = int(el)
+            avarage_all.append(int(profit_quartet[i]))
+            i += 1
+        avarage_prifit_corpotation = statistics.mean(profit_quartet)
+        default_dict[name_campaing] = avarage_prifit_corpotation
+        count_campaing -= 1
+
+    avarage_all = statistics.mean(avarage_all)
+
+    print(f'{avarage_all} - среднегодовая прибыль всех предприятий')
+    for key in default_dict:
+        if default_dict[key] > avarage_all:
+            print(f'Компания {key} имеет доход выше среднего')
+        else:
+            print(f'Компания {key} имеет доход средний либо ниже среднего')
+
+
+avarage_profit()
