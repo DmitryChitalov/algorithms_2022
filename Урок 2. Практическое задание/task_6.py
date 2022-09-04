@@ -7,3 +7,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def game_rand(num, trying=10):
+    """
+    Игра - отгадай число
+    """
+    if trying == 0:
+        return f'Число попыток исчерпано. Загаданное число - {num}'
+    guess_num = int(input('Отгадайте число: '))
+    if guess_num == num:
+        return f'Поздравляем!! Вы отгадали число. это - {num}'
+    if guess_num > num:
+        print('Неверно! Слишком много. Попробуйте меньше')
+    else:
+        print('Неверно! Слишком мало. Попробуйте больше')
+    return game_rand(num, trying - 1)
+
+
+rand_num = randint(0, 100)
+print(game_rand(rand_num))

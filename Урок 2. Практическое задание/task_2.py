@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def rec_calc(num, odd=0, even=0):
+    """ Подсчет нечетных цифр"""
+    if num < 1:
+        return even, odd
+    if num % 2:
+        odd += 1
+    else:
+        even += 1
+    return rec_calc(num // 10, odd, even)
+
+
+numb = int(input("Введите число: "))
+print(f'Количество четных и нечетных цифр равно: {rec_calc(numb)}')
