@@ -14,6 +14,7 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат."""
 
+<<<<<<< HEAD
 сompany = {
     'hjkhj': 654,
     'hjghjghj': 78,
@@ -45,6 +46,16 @@ def func2(company): #O(n)
 
 func1(сompany)
 func2(сompany)
+=======
+def func1(*args): #O(n)
+    names_list = {} #O(1)
+    for k, v in args: #O(n)
+        names_list[k] = v #O(1)
+        sorted_list = sorted(names_list.values())
+    return names_list.get #O(1)
+
+print(func2(1:7, 4, 8))
+>>>>>>> lesson_1
 
 
 """
