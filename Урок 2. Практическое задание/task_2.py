@@ -17,3 +17,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def number_types(n, evens=0, odds=0):
+    if n == 0:
+        return {'even numbers': evens, 'odd number': odds}
+    if n % 10 % 2 == 0:
+        evens += 1
+    else:
+        odds += 1
+    return number_types(n // 10, evens, odds)
+
+print(number_types(200458))
+
