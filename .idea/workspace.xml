@@ -26,13 +26,21 @@
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,8 +64,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.task_6">
-    <configuration name="task_2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.task_4">
+    <configuration name="12" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -65,11 +73,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/12.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,7 +86,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_3 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -86,11 +94,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -99,7 +107,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_4 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -107,11 +115,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -120,7 +128,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -128,11 +136,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_5.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,7 +149,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_6" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -149,11 +157,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_6.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_6" />
-        <item itemvalue="Python.task_5" />
-        <item itemvalue="Python.task_4 (1)" />
-        <item itemvalue="Python.task_3 (1)" />
-        <item itemvalue="Python.task_2 (1)" />
+        <item itemvalue="Python.task_4" />
+        <item itemvalue="Python.task_3" />
+        <item itemvalue="Python.12" />
+        <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1" />
       </list>
     </recent_temporary>
   </component>
@@ -198,22 +206,22 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="217" key="GridCell.Tab.0.bottom" timestamp="1661356417562">
+    <state width="1899" height="217" key="GridCell.Tab.0.bottom" timestamp="1662314322896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1661356417562" />
-    <state width="1899" height="217" key="GridCell.Tab.0.center" timestamp="1661356417562">
+    <state width="1899" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1662314322896" />
+    <state width="1899" height="217" key="GridCell.Tab.0.center" timestamp="1662314322896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1661356417562" />
-    <state width="1899" height="217" key="GridCell.Tab.0.left" timestamp="1661356417562">
+    <state width="1899" height="217" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1662314322896" />
+    <state width="1899" height="217" key="GridCell.Tab.0.left" timestamp="1662314322896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1661356417562" />
-    <state width="1899" height="217" key="GridCell.Tab.0.right" timestamp="1661356417562">
+    <state width="1899" height="217" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1662314322896" />
+    <state width="1899" height="217" key="GridCell.Tab.0.right" timestamp="1662314322896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1661356417562" />
+    <state width="1899" height="217" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1662314322896" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1661273668221">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
