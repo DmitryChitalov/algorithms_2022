@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def number_turn(user_input):
+    if user_input < 10:
+        return str(user_input)
+    else:
+        return str(user_input % 10) + number_turn(user_input // 10)
+
+
+number = int(input('Введите число, которое требуется перевернуть: '))
+print(f'Перевернутое число: {number_turn(number)}')

@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def equality(n, left_part=0):
+    if n == 0:
+        return left_part
+    else:
+        left_part = left_part + n
+        return equality(n-1, left_part)
+
+
+user_input = int(input('Введите число:'))
+if equality(user_input) == user_input*(user_input+1)/2:
+    print('Равенство верно!')
