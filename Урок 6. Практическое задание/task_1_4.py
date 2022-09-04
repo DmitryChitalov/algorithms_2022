@@ -30,3 +30,33 @@
 
 Это файл для четвертого скрипта
 """
+
+''' Реализовать формирование списка, используя функцию range(). 
+В список должны войти чётные числа от 100 до 1000 (включая границы). 
+Нужно получить результат вычисления произведения всех элементов списка.'''
+from memory_profiler import profile
+from functools import reduce
+
+
+@profile
+def result():
+    lst = [i for i in range(100, 1001) if i % 2 == 0]
+    res = 1
+    for i in lst:
+        res *= i
+    return res
+
+
+print(result())
+
+
+@profile
+def new():
+    lst = [i for i in range(100, 1001) if i % 2 == 0]
+    res = reduce(lambda x, y: x * y, lst)
+    return res
+
+
+print(new())
+
+''' во втором случае использую встроеную функцию reduce вместо обычного перебора'''

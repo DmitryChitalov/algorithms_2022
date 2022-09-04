@@ -30,3 +30,28 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import profile
+
+
+'''. Для чисел в пределах от 20 до 240 найти числа, кратные 20 или 21.'''
+lst = [i for i in range(20, 241)]
+
+
+@profile
+def find(lst):
+    res = []
+    for i in lst:
+        if (i % 20 == 0) or (i % 21 == 0):
+            res.append(i)
+    return res
+
+
+print(find(lst))
+
+
+@profile
+def new_find(lst):
+    return [i for i in lst if (i % 20 == 0) or (i % 21 == 0)]
+
+
+print(find(lst))
