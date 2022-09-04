@@ -30,3 +30,31 @@
 
 Это файл для первого скрипта
 """
+
+
+'''Представлен список чисел. Определить элементы списка, не имеющие повторений.
+Сформировать из этих элементов список с сохранением порядка их следования в исходном списке, например:
+src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+result = [23, 1, 3, 10, 4, 11] '''
+from memory_profiler import profile
+
+
+@profile
+def get_uniq_numbers(src: list):
+    src_out = []
+    for number in src:
+        if src.count(number) == 1:
+            src_out.append(number)
+    return src_out
+
+
+@profile
+def new(src):
+    return [number for number in src if src.count(number) == 1]
+
+
+src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+print(get_uniq_numbers(src))
+print(new(src))
+
+'''Улучшение: меньше кода, и быстрее скорость работы с листкомприхеншен'''

@@ -30,3 +30,49 @@
 
 Это файл для второго скрипта
 """
+
+'''Есть два списка:
+tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена']
+klasses = ['9А', '7В', '9Б', '9В', '8Б', '10А', '10Б', '9А']
+Необходимо реализовать генератор, возвращающий кортежи вида (<tutor>, <klass>), например:
+('Иван', '9А')
+('Анастасия', '7В')
+...
+Количество генерируемых кортежей не должно быть больше длины списка tutors.
+Если в списке klasses меньше элементов, чем в списке tutors, необходимо вывести
+последние кортежи в виде: (<tutor>, None), например:
+('Станислав', None)
+Доказать, что вы создали именно генератор. Проверить его работу вплоть до истощения.
+Подумать, в каких ситуациях генератор даст эффект. '''
+from memory_profiler import profile
+
+
+tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена', 'Максим', 'Вероника', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий']
+klasses = ['9А', '7В', '9Б', '9В', '8Б', '10А', '10Б', '8Б', '10А', '10Б']
+
+
+@profile
+def check_gen(tutors: list, klasses: list):
+    while len(tutors) >= len(klasses):
+        klasses.append(None)
+    return zip(tutors, klasses)
+
+
+@profile
+def new_fun(tutors, klasses):
+    return ((tutors, klasses[i]) if i < len(klasses) else (tutors, None)
+            for i, tutors in enumerate(tutors))
+
+
+generator = check_gen(tutors, klasses)
+for _ in range(len(tutors)):
+    print(next(generator))
+
+print()
+
+gen2 = new_fun(tutors, klasses)
+for _ in range(len(tutors)):
+    print(next(gen2))
+
+'''Генератор сам по себе используется для оптимизации скорости,
+со вторым решением оптимизировалась скорость'''
