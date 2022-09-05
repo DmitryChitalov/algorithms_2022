@@ -30,3 +30,51 @@
 
 Это файл для первого скрипта
 """
+
+"""Основы Python. HW2. Task5:"""
+from random import uniform
+from numpy import array
+import numpy as np
+from memory_profiler import profile
+
+my_list = [round(uniform(10, 100), 2) for _ in range(30000)]  # автоматическая генерация случайных 30000 чисел
+
+
+@profile
+def transfer_list_in_str(list_in: list) -> list:
+    """Функция принимает в себя список чисел, преобразует каждое число в заданный формат строк
+    и возвращает список строк """
+    str_out = []
+    for i in list_in:
+        rubles, penny = str(i).split('.')
+        if len(penny) < 2:
+            penny = '0' + penny
+        str_out.append(f'{rubles} руб {penny} коп')
+    return str_out
+
+
+# print(f'Исходный список: {my_list}')
+"""Профилированный код"""
+
+
+@profile
+def transfer_list_in_str_2(list_in: list):
+    """Функция принимает в себя список чисел, преобразует каждое число в заданный формат строк
+        и возвращает ndarray строк """
+    str_out = array([])
+    for i in list_in:
+        rubles, penny = str(i).split('.')
+        if len(penny) < 2:
+            penny = '0' + penny
+        np.append(str_out, f'{rubles} руб {penny} коп')
+    return str_out
+
+
+# result_1 = transfer_list_in_str(my_list)
+result_2 = transfer_list_in_str_2(my_list)
+
+
+"""ОТВЕТ: Использование функции с обычным списком увеличило Mem usage на 3.5 MiB 
+в результате выполнения append
+Использование функции с ndarray не привело к увеличению Mem usage
+"""
