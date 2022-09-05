@@ -30,7 +30,7 @@ print(hex(int(a, 16) + int(b, 16)))
 """
 
 
-class calc():
+class Calc(str):
     def __init__(self, pasr_str):
         self.a = pasr_str
         self.mas = []
@@ -45,8 +45,8 @@ class calc():
         return hex(int(self.a, 16) * int(other.a, 16))
 
 
-c1 = calc("A2")
-c2 = calc("C4F")
+c1 = Calc("A2")
+c2 = Calc("C4F")
 
 print(c1 + c2)
 print(c1 * c2)
@@ -55,3 +55,18 @@ print(c1 * c2)
 Решение через collections
 """
 import collections
+
+
+def pars_string(string):
+    x = collections.defaultdict(list)
+    y = collections.defaultdict(list)
+    x, y = string.split()
+    x = list(x)
+    y = list(y)
+    print(x, ' \n', y)
+    print(int("".join(x), 16) + int("".join(y), 16))
+
+
+diction = collections.defaultdict(list)
+
+pars_string("11 111")
