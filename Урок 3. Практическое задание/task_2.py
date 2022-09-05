@@ -22,3 +22,65 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import json
+
+def get_login():
+    login = input(f'Enter your login, please: ')
+    return login.lower()
+
+def get_password():
+    password = input(f'Enter your password, please: ')
+    return password
+
+def get_access():
+    print('Getting access')
+    user_login = get_login()
+    with open('passwords.json', 'r') as f:
+        dct = json.load(f)
+    if user_login in dct:
+        user_password = get_password()
+        password_hash = hashlib.sha256(user_login.encode() + user_password.encode()).hexdigest()
+        if dct[user_login] == password_hash:
+            print('access granted')
+        else:
+            print('access denied')
+    else:
+        print('user does not exist')
+
+
+
+def new_user():
+    print('New user registration')
+    user_login = get_login()
+    try:
+        with open('passwords.json', 'r') as f:
+            dct = json.load(f)
+            if user_login in dct:
+                print('User exists. Choose another name')
+                return None
+    except FileNotFoundError:
+        with open('passwords.json', 'w') as f:
+            json.dump({}, f)
+
+    user_password = get_password()
+    password_hash = hashlib.sha256(user_login.encode() + user_password.encode()).hexdigest()
+
+
+    with open('passwords.json', 'r') as f:
+        dct = json.load(f)
+    with open('passwords.json', 'w') as f:
+        dct[user_login] = password_hash
+        json.dump(dct, f)
+
+
+
+
+new_user()
+
+get_access()
+
+
+
+
+

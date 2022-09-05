@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+str = 'papa'
+under_strings = []
+strings = []
+
+for i in range(len(str)):
+    for j in range(i+1, len(str)+1):
+        strings.append(str[i:j])
+        under_strings.append(hashlib.sha256(str[i:j].encode()).hexdigest())
+
+print(len(set(under_strings)))
+print(set(strings))
