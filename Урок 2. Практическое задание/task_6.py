@@ -7,3 +7,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+def value(count, num):
+    print(f"Попытка №{count}")
+    menuselect = int(input("В программе генерируется случайное целое число от 0 до 100: "))
+    if count == 10 or menuselect == num:
+        if menuselect == num:
+            print("Верно!")
+        print(f"Вы исчерпали попытки. Загаданное число: {num}")
+    else:
+        if menuselect > num:
+            print(f"Загаданное число меньше")
+        else:
+            print(f"Загаданное число больше")
+        value(count+1, num)
+
+value(1, random.randint(0, 100))

@@ -18,3 +18,11 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def numb(num):
+    num1, numeral = divmod(num, 10)
+    if num1 ==0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(numb(num1))
+value = int(input("Введите число, которое требуется перевернуть: "))
+print(f'Вывод: {numb(value)}')

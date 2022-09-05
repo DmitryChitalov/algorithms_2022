@@ -13,3 +13,8 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def recur_method(base):
+    return base if base == 1 else base + recur_method(base-1)
+n = 5
+print(f'Is 1+2+...+{n} = {n}({n}+1)/2? \nAnswer: '
+      f"{recur_method(n) == n*(n+1)/2} (Sum = {recur_method(n)})")
