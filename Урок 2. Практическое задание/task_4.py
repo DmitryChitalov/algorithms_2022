@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def num_sum(n, s=1, result=0):
+    if n == 0:
+        return result
+    else:
+        result += s
+        n -= 1
+        s /= -2
+        return num_sum(n, s, result)
+
+
+input_num = int(input('Введите число: '))
+print(num_sum(input_num))
