@@ -30,18 +30,26 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import profile
+import random
 
 
-
-def func_2(nums):
+@profile
+def func_1(nums):
     """В предлагаемой функции цикл был заменен на list comprehension"""
     return [x for x in range(len(nums)) if nums[x] % 2 == 0]  # nums[x] это четные элементы, x это индексы
 
 
-n = [34, 890, 562, 8998, 82, 773, 92, 91, 95, 84, 89, 75, 43, 94, 88, 75, 71, 95, 128, 845, 854]
+@profile
+def func_2(nums):
+    """В предлагаемой функции цикл был заменен на list comprehension"""
+    return tuple([x for x in range(len(nums)) if nums[x] % 2 == 0])  # nums[x] это четные элементы, x это индексы
 
-"""Первый вариант расчета"""
-t1 = Timer(stmt='func_1(n)', setup='from __main__ import func_1', globals=globals())
-print('func_1()', t1.timeit(number=1000000), 'second')
-t2 = Timer(stmt='func_2(n)', setup='from __main__ import func_2', globals=globals())
-print('func_2()', t2.timeit(number=1000000), 'second')
+
+n = [random.randint(0, 1000000) for i in range(1000000)]
+
+func_1(n)
+func_2(n)
+
+"""Простая замена list на tuple при возврате результатов кортежа на большом массие сократила объем используемой памяти 
+на 1.8 MiB"""
