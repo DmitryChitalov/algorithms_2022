@@ -146,7 +146,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.task_1 (1)">
+  <component name="RunManager" selected="Python.task_4">
     <configuration name="task_1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -254,11 +254,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_1 (1)" />
         <item itemvalue="Python.task_4" />
         <item itemvalue="Python.task_3" />
-        <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1 (1)" />
         <item itemvalue="Python.task_2 (1)" />
+        <item itemvalue="Python.task_2" />
       </list>
     </recent_temporary>
   </component>
@@ -400,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661941802977</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="1, 4">
+      <created>1662223519892</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1662223519893</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -439,7 +446,8 @@
     <MESSAGE value="1-7 last" />
     <MESSAGE value="1-7 lastlast" />
     <MESSAGE value="2-3" />
-    <option name="LAST_COMMIT_MESSAGE" value="2-3" />
+    <MESSAGE value="1, 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="1, 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -26,6 +26,8 @@ num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
+RETRY_COUNT = 10
+
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
@@ -83,31 +85,47 @@ print(
 
 
 
+#Тестируем данную функцию с разными числами (генерируем функцией randint):
 
-
-
-
-
-
-
-def reverse(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{reverse(number // 10)}'
-print('хз какая функция:')
+print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
-        "reverse(num_100)",
-        setup='from __main__ import reverse, num_100',
+        "recursive_reverse(randint(10000, 1000000))",
+        setup='from __main__ import recursive_reverse, randint',
         number=10000))
 print(
     timeit(
-        "reverse(num_1000)",
-        setup='from __main__ import reverse, num_1000',
+        "recursive_reverse(randint(1000000, 10000000))",
+        setup='from __main__ import recursive_reverse, randint',
         number=10000))
 print(
     timeit(
-        "reverse(num_10000)",
-        setup='from __main__ import reverse, num_10000',
+        "recursive_reverse(randint(100000000, 10000000000000))",
+        setup='from __main__ import recursive_reverse, randint',
         number=10000))
+
+
+
+print('Оптимизированная функция recursive_reverse_mem')
+print(
+    timeit(
+        "recursive_reverse_mem(randint(10000, 1000000))",
+        setup='from __main__ import recursive_reverse_mem, randint',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse_mem(randint(1000000, 10000000))",
+        setup='from __main__ import recursive_reverse_mem, randint',
+        number=10000))
+print(
+    timeit(
+        "recursive_reverse_mem(randint(100000000, 10000000000000))",
+        setup='from __main__ import recursive_reverse_mem, randint',
+        number=10000))
+
+"""Из полученных замеров с разными числами, находящимися в одних диапазонах следует,
+что мемоизация в данном случае не нужна, она даже немного замедляет функцию. Отсутствует оптимальная
+ подструктура."""
+
+
 
