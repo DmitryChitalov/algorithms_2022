@@ -28,9 +28,18 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
-import collections
+from collections import namedtuple
 
+"""
+Задание
+Для решения задачи обязательно примените коллекцию из модуля collections
+Для своего решнения использовал temp = collections.Counter(temp_firm_revenue)
+в строке 47 для подсчета среднего значения. 
+Насколько понял вы хотите увидеть решения с namedtuple. Будет сделанно.
+"""
 
+"""
+Решение 1
 def firm_dict(keys, val):
     mas = []
     temp_firm_revenue = {}
@@ -68,3 +77,44 @@ for i in range(how_many):
 
 print(firm_revenue)
 get_average(firm_revenue)
+
+"""
+
+"""
+Решение 2 с использованием namedtuple
+"""
+
+
+def pars_string(name_typle):
+    profit_firm[(name_typle.first + name_typle.second + name_typle.thirst + name_typle.four) / 2] = name_typle.firm_name
+
+
+def average_firm():
+    ave = 0
+    mini = []
+    maxi = []
+    for i in profit_firm.keys():
+        ave = ave + i
+    print("Средний доход всех фирм равен ", ave / (len(profit_firm.keys())))
+    ave = ave / (len(profit_firm.keys()))
+
+    for i in profit_firm.keys():
+        if i > ave:
+            maxi.append(profit_firm[i])
+        else:
+            mini.append(profit_firm[i])
+    print("Фирмы с меньшим доходом ", mini, "\nФирмы с доходом больше среднего", maxi)
+
+
+profit_firm = {}
+
+for i in range(int(input("Введите количество фирм"))):
+    Firm = namedtuple("firm", 'frim_name first second thirst four')
+    Firm.firm_name = input("Название фирмы")
+    Firm.first = int(input("Введите доход за первый месяц"))
+    Firm.second = int(input("Введите доход за второй месяц"))
+    Firm.thirst = int(input("Введите доход за третий месяц"))
+    Firm.four = int(input("Введите доход за четвертый месяц"))
+    pars_string(Firm)
+
+average_firm()
