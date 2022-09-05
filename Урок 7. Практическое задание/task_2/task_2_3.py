@@ -16,3 +16,30 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from timeit import timeit
+from random import randint
+from statistics import median
+
+m = 10
+ARRAY_10 = [randint(-100, 100) for i in range(2 * m + 1)]
+m = 100
+ARRAY_100 = [randint(-100, 100) for j in range(2 * m + 1)]
+m = 1000
+ARRAY_1000 = [randint(-100, 100) for k in range(2 * m + 1)]
+
+print(f'Медиана массива с m = 10: {median(ARRAY_10)}',
+      timeit('max_heap_sort(ARRAY_10)', globals=globals(), number=100))
+print(f'Медиана массива с m = 100: {median(ARRAY_100)}',
+      timeit('max_heap_sort(ARRAY_100)', globals=globals(), number=100))
+print(f'Медиана массива с m = 1000: {median(ARRAY_1000)}',
+      timeit('max_heap_sort(ARRAY_1000)', globals=globals(), number=100))
+'''
+Результаты:
+Медиана массива с m = 10: -21 0.01916049999999997
+Медиана массива с m = 100: 1 1.3750762
+Медиана массива с m = 1000: 1 106.606775
+
+Самым быстрым способом оказался способ через функцию median из statistic
+Cамым худшим оказался нахождение медианы через сортировку
+
+'''

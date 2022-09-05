@@ -14,3 +14,26 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from timeit import timeit
+from random import randint
+
+def get_mediana(my_list, m):
+    for i in range(m):
+        my_list.remove(max(my_list))
+    return my_list
+
+m = 10
+my_list_10 = [randint(0, 100) for x in range(2*m+1)]
+print(timeit("get_mediana(my_list_10[:], m)", globals=globals(), number=1000))
+
+m = 100
+my_list_100 = [randint(0, 100) for x in range(2*m+1)]
+print(timeit("get_mediana(my_list_100[:], m)", globals=globals(), number=1000))
+
+m = 1000
+my_list_1000 = [randint(0, 100) for x in range(2*m+1)]
+print(timeit("get_mediana(my_list_1000[:], m)", globals=globals(), number=30))
+# Результаты
+# 0.0198922
+# 1.2371535
+# 3.0462731000000005
