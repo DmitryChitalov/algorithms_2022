@@ -16,3 +16,58 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+import time
+from random import randint
+from statistics import median
+
+
+# Для создания исходных списков используем функцию fill_list
+
+def fill_list(range_step):
+    test1_list = []
+    for ii in range(0, 2 * range_step + 1):
+        test1_list.append(randint(1, 2 * range_step))
+    return test1_list
+
+
+def median_engine(list_to_med1):
+    start_val = time.time()
+    med = median(list_to_med1)
+    end_val = time.time()
+    return end_val - start_val, med
+
+
+# Создадим списки, которые будем сортировать
+list_to_read11 = fill_list(5)
+list_to_read101 = fill_list(50)
+list_to_read1001 = fill_list(500)
+
+print('______________Замеры поиска медианы списка из 11 элементов___________________')
+
+print(f'Список для поиска медианы:{list_to_read11}')
+time_count1, med1 = median_engine(list_to_read11)
+print(f'Время поиска медианы: {time_count1}')
+print(f'Медиана:{med1}')
+
+print('______________Замеры поиска медианы списка из 101 элементов___________________')
+
+print(f'Список для поиска медианы:{list_to_read101}')
+time_count11, med2 = median_engine(list_to_read101)
+print(f'Время поиска медианы: {time_count11}')
+print(f'Медиана:{med2}')
+
+print('______________Замеры поиска медианы списка из 11 элементов___________________')
+
+print(f'Список для поиска медианы:{list_to_read1001}')
+time_count111, med3 = median_engine(list_to_read1001)
+print(f'Время поиска медианы: {time_count111}')
+print(f'Медиана:{med3}')
+
+"""
+Вывод: при поиске медианы самый медленный вариант показывает поиск с гном-сортировкой, 
+далее идет поиск без сортировки и самый быстрый результата дает встроенная функция поиска медианы. 
+Проигрыш первого варианта в основном связан с затратами на сортировку.
+Самый эффективный способ - встроенная функция.
+
+"""
