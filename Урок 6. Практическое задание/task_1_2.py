@@ -31,24 +31,3 @@
 Это файл для второго скрипта
 """
 
-
-def check_numbers(number: int, odd_digits: int = 0, even_digits: int = 0):
-    """Функция принимает в себя число, а также количество четных и нечетных цифр в числе,
-    которые по умолчанию равны нулю, до тех пор пока длинна числа больше 1, функция отделяет последнюю цифру
-    и проверяет ее на четность и рекурсивно вызывает сама себя передавая в себя остаток числа и результаты проверки"""
-    if len(str(number)) > 1:
-        num = number % 10
-        if num % 2 == 0:
-            even_digits += 1
-        else:
-            odd_digits += 1
-        check_numbers(number // 10, odd_digits, even_digits)
-    else:
-        if number % 2 == 0:
-            even_digits += 1
-        else:
-            odd_digits += 1
-        print(f'Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})')
-
-
-check_numbers(int(input('Введите число: ')))
