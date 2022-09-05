@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def my_check(n):
+    if n > 1:
+        return n + my_check(n - 1)
+    else:
+        return 1
+
+
+try:
+    num = int(input('Введите число для проверки: '))
+    print(f'Результат проверки - {my_check(num) == int(num * (num + 1) / 2)}')
+except ValueError:
+    print('Неверное значение ввода, повторите ввод числа!')

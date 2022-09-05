@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_numbers(number, even_numbers=0, odd_numbers=0):
+    if number == 0:
+        return (f'Количество четных и нечетных цифр в числе: {even_numbers} и {odd_numbers}')
+    else:
+        current_number = number % 10
+        if current_number % 2 == 0:
+            even_numbers += 1
+        else:
+            odd_numbers += 1
+        number //= 10
+    return even_odd_numbers(number, even_numbers, odd_numbers)
+
+
+print(even_odd_numbers(123))
