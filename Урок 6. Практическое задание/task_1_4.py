@@ -31,18 +31,55 @@
 Это файл для четвертого скрипта
 """
 
+from collections import namedtuple
+from memory_profiler import profile
+import random
+from recordclass import recordclass
+
+all_companies = []
 
 
+def add_to_companies(name: str, income: str):
+    """Функция принимает в себя название и прибыль компании, создает объект namedtuple
+    и добавляет объект в список компаний"""
+    f_q_profit, s_q_profit, th_q_profit, fo_q_profit = list(map(int, (income.split())))
+    company = recordclass(f'{name}', 'company_name f_quarter_profit s_quarter_profit th_quarter_profit fo_quarter_profit')
+    new_company = company(company_name=f"{name}", f_quarter_profit=f"{f_q_profit}", s_quarter_profit=f'{s_q_profit}',
+                          th_quarter_profit=f'{th_q_profit}', fo_quarter_profit=f'{fo_q_profit}')
+    all_companies.append(new_company)
 
 
+def add_to_companies2(name: str, income: str):
+    """Функция принимает в себя название и прибыль компании, создает объект namedtuple
+    и добавляет объект в список компаний"""
+    f_q_profit, s_q_profit, th_q_profit, fo_q_profit = list(map(int, (income.split())))
+    company = namedtuple(f'{name}', 'company_name f_quarter_profit s_quarter_profit th_quarter_profit fo_quarter_profit')
+    new_company = company(company_name=f"{name}", f_quarter_profit=f"{f_q_profit}", s_quarter_profit=f'{s_q_profit}',
+                          th_quarter_profit=f'{th_q_profit}', fo_quarter_profit=f'{fo_q_profit}')
+    all_companies.append(new_company)
 
 
-def revers_2(enter_num, revers_num=0):
-    while enter_num != 0:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-    return revers_num
+num_of_companies = 1000
 
-number = 5674567890976545678998765890
-print(revers(number))
+
+# Генератор компаний
+@profile
+def com_generator1(number_of_companies):
+    """Функция создает компании для скрипта"""
+    for i in range(number_of_companies):
+        add_to_companies(f'Horns_{i}', ' '.join(list(map(str, (random.randint(0, 10000), random.randint(0, 10000),
+                                random.randint(0, 10000), random.randint(0, 10000))))))
+
+
+@profile
+def com_generator2(number_of_companies):
+    """Функция создает компании для скрипта"""
+    for i in range(number_of_companies):
+        add_to_companies2(f'Horns_{i}', ' '.join(list(map(str, (random.randint(0, 10000), random.randint(0, 10000),
+                                random.randint(0, 10000), random.randint(0, 10000))))))
+
+
+com_generator1(num_of_companies)
+com_generator2(num_of_companies)
+
+"""recordclass занял на 0.8 MiB меньше памяти чем namedtuple"""
