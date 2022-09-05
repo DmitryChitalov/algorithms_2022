@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="missions.mission15.main.file_manager" />
+          <option value="set.*" />
         </list>
       </option>
     </inspection_tool>
