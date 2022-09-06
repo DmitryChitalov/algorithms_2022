@@ -30,3 +30,65 @@
 
 Это файл для пятого скрипта
 """
+from recordclass import recordclass
+from pympler import asizeof
+
+'''
+За основу взято задание 3.1 основы питона. Идея - заменить словарь на recordclass и посмотреть, что выйдет. К сожалению
+изящного решения с recordclass у меня не получилось, но в части памяти эффект был. Так, размер словаря из первого
+решения составил 2208, в то время как оптимизированный аналогичный словарь под recordclass всего 104.
+'''
+
+
+# 1. Написать функцию num_translate(), переводящую числительные от 0 до 10 c английского на русский
+# вариант из домашнего задания
+def num_translate(number):
+    """number - число от 0 до 10 на английском"""
+    numbers = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+               'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
+    return numbers[number]
+
+
+# вариант с recordclass
+def num_translate_2(number):
+    """number - число от 0 до 10 на английском"""
+    optim_var = recordclass('optim_var', ('zero', 'one', 'two', 'three', 'four', 'five',
+                                          'six', 'seven', 'eight', 'nine', 'ten'))
+    numbers = optim_var(zero='ноль', one='один', two='два', three='три', four='четыре', five='пять',
+                        six='шесть', seven='семь', eight='восемь', nine='девять', ten='десять')
+    # return numbers.number не работает, поэтому пришлось через if, наверное есть более изящный способ(
+    if number == 'zero':
+        return numbers.zero
+    elif number == 'one':
+        return numbers.one
+    elif number == 'two':
+        return numbers.two
+    elif number == 'three':
+        return numbers.three
+    elif number == 'four':
+        return numbers.four
+    elif number == 'five':
+        return numbers.five
+    elif number == 'six':
+        return numbers.six
+    elif number == 'seven':
+        return numbers.seven
+    elif number == 'eight':
+        return numbers.eight
+    elif number == 'nine':
+        return numbers.nine
+    elif number == 'ten':
+        return numbers.ten
+
+
+print(num_translate('zero'))
+numbers = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+           'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
+print(asizeof.asizeof(numbers))  # => 2208
+print(num_translate_2('zero'))
+optim_var = recordclass('optim_var', ('zero', 'one', 'two', 'three', 'four', 'five',
+                                      'six', 'seven', 'eight', 'nine', 'ten'))
+numbers = optim_var(zero='ноль', one='один', two='два', three='три', four='четыре', five='пять',
+                    six='шесть', seven='семь', eight='восемь', nine='девять', ten='десять')
+print(asizeof.asizeof(numbers))  # => 104
+

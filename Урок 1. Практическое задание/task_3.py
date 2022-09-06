@@ -17,3 +17,28 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+dict_org = {'ООО "Амелия"': 20042018, 'ООО "Турбобелка"': 96700, 'Terragroup': 8742111, 'Ubmrella corp': 6471234,
+            'BroPro': 124011}
+
+
+# "простой" вариант O(n log n) - сложность линейно-логарифмическая
+# sorted O(n log n) + reverse O(n) + создание среза O(n) = O(n log n)
+def best_org(dct, org_numb):
+    return sorted(dct, key=dct.get, reverse=True)[:org_numb]
+
+
+# "сложный" вариант с двумя циклами
+# O(n) * O(n) + O(1) + O(1) + O(n) + O(n) = O(n**2) - квадратичная сложность
+def best_org_2(dct, org_numb):
+    result = {}
+    for i in sorted(dct.values()):  # O(n)
+        for x in dct.keys():  # O(n)
+            if dct[x] == i:  # O(1)
+                result[x] = dct[x]  # O(1)
+                break
+    result = list(result)[-org_numb:]  # O(n)
+    return list(reversed(result))  # O(n)
+
+
+print(best_org(dict_org, 3))
+print(best_org_2(dict_org, 3))

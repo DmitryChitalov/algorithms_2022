@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def get_some_n(n, result=0):
+    result += n
+    n -= 1
+    if n == 0:
+        return result
+    return get_some_n(n, result)
+
+
+print(bool(get_some_n(5) == 5 * (5 + 1) / 2))  # => True
+print(bool(get_some_n(6) == 6 * (6 + 1) / 2))  # => True
+print(bool(get_some_n(7) == 7 * (7 + 1) / 2))  # => True
