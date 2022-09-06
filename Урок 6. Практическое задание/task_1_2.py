@@ -62,36 +62,37 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
-import time
+import numpy
+from memory_profiler import profile
+
+"""
+Взял задание с курса алгоритмы 
+Пытался оптимизировать решения с использованием numpy.
+Получил обратный результат с увеличением 
+Если увеличить объем в 100 (range(1,1000000))раз то numpy съет в два раза больше памямти
+
+"""
 
 diction = {}
 mas = []
 
 
-def count_time(funct):
-    def wrapper():
-        begin = time.time()
-        funct()
-        print(time.time() - begin)
-
-    return wrapper
-
-
 # А Заполнение элементами
-@count_time
+@profile
 def fill_list():
-    for i in range(1, 1000000):  # O(n)
-        mas.append(i)  # O(1)
+    for i in range(1, 100000):
+        mas.append(i)
     return
 
 
-@count_time
-def fill_dic():
-    for i in range(1, 1000000):  # O(n)
-        diction[i] = i  # O(1)
+@profile
+def fill_numpy():
+    a = numpy.array([])
+    for i in range(1, 100000):
+        numpy.append(a, i)
     return
 
 
 print("\nЗаполнение элементами")
 fill_list()
-fill_dic()
+fill_numpy()
