@@ -16,3 +16,40 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+
+list_in = [randint(-100, 100) for _ in range(11)]
+
+# замеры 10
+print(f'10 элементов - {timeit("median(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {median(list_in[:])}')
+
+
+list_in = [randint(-100, 100) for _ in range(101)]
+# замеры 100
+print(f'100 элементов - {timeit("median(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {median(list_in[:])}')
+
+
+list_in = [randint(-100, 100) for _ in range(1001)]
+# замеры 1000
+print(f'1000 элементов - {timeit("median(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {median(list_in[:])}')
+
+
+"""
+Результаты замеров
+
+10 элементов - 0.0015397000242955983
+медиана = -6
+100 элементов - 0.008465700026135892
+медиана = 10
+1000 элементов - 0.19624289998319
+медиана = 0
+
+Выводы: эффективнее оказался способ с использованием встроенной функции median из модуля statistics
+
+"""
