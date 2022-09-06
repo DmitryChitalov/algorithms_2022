@@ -18,7 +18,44 @@
 Приложение должно давать ответы на эти вопросы
  и быть реализовано в виде функции.
 Для реализации хранилища можно применить любой подход,
-который вы придумаете, например, применить словарь.
+который вы придумаете, например, применить словарь."""
 
-Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
-"""
+# Общая сложность O(n)
+def authorization_f(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['пароль'] == user_password and value['активация']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['пароль'] == user_password \
+                    and not value['активация']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['пароль'] != user_password:
+                return "Пароль не верный"
+
+    return "Данного пользователя не существует"
+
+# общая сложность O(1)
+def authorization_s(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['пароль'] == user_password \
+                and users[user_name]['активация']:
+            return "Добро пожаловать! Доступ к ресурсу предоставлен"
+        elif users[user_name]['пароль'] == user_password \
+                and not users[user_name]['активация']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[user_name]['пароль'] != user_password:
+            return "Пароль не верный"
+    else:
+        return "Данного пользователя не существует"
+
+my_users = {'user1': {'пароль': '11111', 'активация': False},
+            'user2': {'пароль': '11111', 'активация': True},
+            'user3': {'пароль': '11111', 'активация': True},
+            'user4': {'пароль': '11111', 'активация': False}
+            }
+
+print(authorization_s(my_users, 'user3', '1111'))
+print(authorization_f(my_users, 'user8', '1111'))
+
+"""Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!"""
+
