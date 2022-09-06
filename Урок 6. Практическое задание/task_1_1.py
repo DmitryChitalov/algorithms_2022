@@ -70,5 +70,17 @@ def func_for(n):
     return summ
 
 
+@profile
+def func_for1(n):
+    summ = 0
+    i = 0
+    while i != n:
+        summ = summ + funct(i + 1)
+        i += 1
+
+    return summ
+
+
 print(recurs(100))
 print("For - ", func_for(100))
+print("While - ", func_for1(100))
