@@ -22,3 +22,19 @@
 р
 а
 """
+
+from hashlib import sha256
+
+hash_set = set()
+origin_set = set()
+text = input('Введите строку в которой хотите подсчитать колическтво уникальных подстрок: ')
+
+for i in range(len(text)):
+    for j in range(i + 1, len(text) + 1):
+        if text[i:j] != text:
+            hash_set.add(sha256(text[i:j].encode()).hexdigest())
+            origin_set.add(text[i:j])
+
+print(origin_set)
+print(hash_set)
+print(f'Количество элементов в множестве: {len(hash_set)}')
