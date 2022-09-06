@@ -23,4 +23,57 @@ reduce
 
 __mul__
 __add__
+
+a = 'A2'
+b = 'C4F'
+print(hex(int(a, 16) + int(b, 16)))
 """
+
+
+class Calc(str):
+    def __init__(self, pasr_str):
+        self.a = pasr_str
+        self.mas = []
+        for i in self.a:
+            self.mas.append(i)
+        print(self.mas)
+
+    def __add__(self, other):
+        return hex(int(self.a, 16) + int(other.a, 16))
+
+    def __mul__(self, other):
+        return hex(int(self.a, 16) * int(other.a, 16))
+
+
+c1 = Calc("A2")
+c2 = Calc("C4F")
+
+print(c1 + c2)
+print(c1 * c2)
+
+"""
+Решение через collections
+"""
+import collections
+from functools import reduce
+
+def pars_string(string):
+    x = collections.defaultdict(list)
+    y = collections.defaultdict(list)
+    x, y = string.split()
+    x = list(x)
+    y = list(y)
+    print(x, ' \n', y)
+    minus = (int("".join(x), 16) + int("".join(y), 16))
+    print('%X' % minus)
+    multiply = (int("".join(x), 16) * int("".join(y), 16))
+    print('%X' % multiply)
+
+
+diction = collections.defaultdict(list)
+
+a = "A2"
+b = "C4F"
+item = [a, b]
+
+pars_string("A2 c4f")
