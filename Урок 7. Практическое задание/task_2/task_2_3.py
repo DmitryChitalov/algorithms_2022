@@ -16,3 +16,24 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from timeit import timeit
+from random import randint
+from statistics import median
+
+x = 10
+arr_10 = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(arr_10[:])", globals=globals(), number=100))
+
+x = 100
+arr_100 = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(arr_100[:])", globals=globals(), number=100))
+
+x = 1000
+arr_1000 = [randint(0, 100) for i in range(2 * x + 1)]
+print(timeit("median(arr_1000[:])", globals=globals(), number=100))
+# 0.00018741399999999686
+# 0.0012171620000000077
+# 0.024526239000000005
+
+# Самый быстрый вариант - последний (т.е. через встроенную функцию median), самый меленный - при сортировке.
