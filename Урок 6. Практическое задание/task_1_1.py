@@ -31,11 +31,11 @@
 Это файл для первого скрипта
 """
 from memory_profiler import profile
-
-
-@profile
-def func():
-    pass
+"""
+Взял задание с курса алгоритмы 
+Оптимизировавал решение использовав простой цикл место рекурсии
+Убрал дополнительную проверку if
+"""
 
 
 def funct(k):
@@ -43,6 +43,12 @@ def funct(k):
     return ((-1) ** n) / (2 ** n)
 
 
+"""
+Старое решение
+"""
+
+
+@profile
 def recurs(n, summ=0):
     if n != 0:
         summ = summ + funct(n)
@@ -51,23 +57,18 @@ def recurs(n, summ=0):
         return summ
 
 
-print(recurs(3))
+"""
+Новое решение
+"""
 
 
-# Вариант 2
-def recurs2(n):
-    if n == 1:
-        return funct(n)
-    return funct(n) + recurs2(n - 1)
+@profile
+def func_for(n):
+    summ = 0
+    for i in range(n):
+        summ = summ + funct(i + 1)
+    return summ
 
 
-print(recurs2(3))
-
-
-# Вариант 3
-
-def recurs3(n):
-    return funct(n) if (n == 1) else funct(n) + recurs3(n - 1)
-
-
-print(recurs3(3))
+print(recurs(100))
+print("For - ", func_for(100))
