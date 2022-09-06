@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def func(num1):
+    if num1 == 1:
+        return num1
+    else:
+        return func(num1 - 1) + num1
+
+
+numb = int(input("Введите число: "))
+if func(numb) == numb * (numb + 1) / 2:
+    print("Верно")
