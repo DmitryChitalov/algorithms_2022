@@ -28,3 +28,116 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+import time
+
+
+def time_counter(func):
+
+    def wrapper(*args):
+        start = time.perf_counter()
+        result = func(*args)
+        finish = time.perf_counter()
+        print(f'Time for function "{func.__name__}" = {finish - start}.')
+        return result
+    return wrapper
+
+
+# (A) заполнение списка/словаря O(n)
+
+@time_counter
+def my_list(new_list=[]):
+    for i in range(1000):  # O(n) - линейная
+        new_list.append(i)  # O(1) - константная
+
+
+@time_counter
+def my_dict(new_dict={}):
+    for i in range(1000):  # O(n) - линейная
+        new_dict[i] = str(i)  # O(1) - константная
+
+
+# my_list()
+# my_dict()
+
+""" 
+АНАЛИТИКА -- что заполняется быстрее и почему
+Список заполняется быстрей, поскольку ему не приходится выполнять хэширование.
+Результаты по времени меняются в зависимости от работы системы. 
+Примерный результат работы:
+Time for function "my_list" = 0.00011949999999999461.
+Time for function "my_dict" = 0.0004844999999999988.
+"""
+
+
+# (B) получение элемента списка/словаря O(n)
+
+test_list = []
+test_dict = {}
+
+for i in range(1000):  # заполняем test_list/test_dict
+    test_list.append(i)
+    test_dict[i] = str(i)
+
+
+@time_counter
+def get_list_el(lst, n):
+    for i in lst:  # О(n) - линейная
+        if i == n:  # О(n) - константная
+            return lst[i]  # О(n) - константная
+
+
+@time_counter
+def get_dict_el(dct, n):
+    for key in dct:  # O(n) - линейная
+        if key == n:  # О(1) - константная
+            return dct[key]  # O(1) - константная
+
+
+# get_list_el(test_list, 172)
+# get_dict_el(test_dict, 172)
+
+"""
+АНАЛИТИКА
+В теории, получение элемента из словаря должно происходить быстрее, т.к. он является 
+хэш-таблицей. Но т.к. по условию мы используем цикл - разница во времени с получением 
+элемента из списка практически не заметна.
+Пример работы:
+Time for function "get_list_el" = 1.030000000000475e-05.
+Time for function "get_dict_el" = 1.1799999999992372e-05.
+"""
+
+
+# (C) удаление элемента списка/словаря О(n)
+
+@time_counter
+def pop_list_el(lst=[]):
+    for i in range(len(lst)):  # O(n) - линейная
+        lst.pop()  # O(1) - константная
+
+
+@time_counter
+def pop_dict_el(dct={}):
+    for i in range(len(dct)):  # O(n) - линейная
+        del dct[i]  # O(1) - константная
+
+
+# pop_list_el(test_list)
+# pop_dict_el(test_dict)
+
+"""
+АНАЛИТИКА
+И опять же таки, при прочих равных (из-за использования цикла) особой разницы во времени
+при удалении объектов из словаря и списка не замечено. При большом (относительно) количестве
+запуска кода быстрей выполняется то одно, то другое удаление.
+
+Time for function "pop_list_el" = 7.449999999999818e-05.
+Time for function "pop_dict_el" = 7.500000000000562e-05.
+
+Time for function "pop_list_el" = 7.83999999999993e-05.
+Time for function "pop_dict_el" = 9.40000000000038e-05.
+
+Time for function "pop_list_el" = 8.369999999999905e-05.
+Time for function "pop_dict_el" = 7.240000000000024e-05.
+"""

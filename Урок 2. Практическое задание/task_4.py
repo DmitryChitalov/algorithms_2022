@@ -10,3 +10,23 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_el(n, counter=0, value=1, result=0):
+
+    if n == 0:
+        return f'Количество элементов - {counter}, их сумма - {result}'
+
+    counter += 1
+    result += value
+    value /= -2
+
+    return sum_el(n - 1, counter, value, result)
+
+
+def main():
+    count = int(input('Укажите количество элементов: '))
+    print(sum_el(count))
+
+
+main()
