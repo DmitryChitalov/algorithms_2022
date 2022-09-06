@@ -28,3 +28,94 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import random
+import time
+
+
+def timedec(func):
+    def wrapper(list):
+        start = time.time()
+        func(list)
+        end = time.time()
+        print(f' Время выполнения: {end-start} секунд.')
+    return wrapper
+
+
+emptylist = []
+emptydict = {}
+
+
+@timedec
+def list_add(list):
+    for x in range(10**7):
+        list.append(x)
+
+# Сложность O(1) - константная
+
+@timedec
+def dict_add(dict):
+    for x in range(10**7):
+        dict[x] = x
+
+# Сложность O(1) - константная
+
+
+print('Заполнение списка:')
+list_add(emptylist)
+print('Заполнение словаря')
+dict_add(emptydict)
+print('В целом, операции заполнения обладают одинаковой сложность для списка и словаря. Однако при увелечении объема данных, чуть быстрее оказываются списки.')
+print('Предпологаю, это связано с тем, что для словаря создаются пары ключ-значения, а в список просто вставляется значение в конец')
+print('\n')
+
+
+@timedec
+def list_get(list):
+    for x in range(10**6):
+        z = random.randrange(1, 10**6, 1)
+        res = list[z]
+
+# Сложность O(n) - линейная
+
+@timedec
+def dict_get(dict):
+    for x in range(10**6):
+        z = random.randrange(1, 10 ** 6, 1)
+        res = dict[x]
+
+# Сложность O(1) - константная
+
+print('Получение элемента списка:')
+list_get(emptylist)
+print('Получение элемента словаря')
+dict_get(emptydict)
+print('\n')
+
+
+@timedec
+def list_pop(list):
+    for x in range(10**3):
+        z = random.randrange(1, 10**3, 1)
+        if z in list:
+            list.remove(z)
+
+# Сложность O(n) - линейная
+
+@timedec
+def dict_pop(dict):
+    for x in range(10 ** 6):
+        z = random.randrange(1, 10 ** 6, 1)
+        if z in dict:
+            dict.pop(z)
+
+# Сложность O(1) - константная
+
+print('Удаление элемента списка:')
+list_pop(emptylist)
+print('Удаление элемента словаря:')
+dict_pop(emptydict)
+
+print('При операциях Получения элемента и Удаление элемента, списку сначала приходится проходить по всем значениям в поисках нужного (сложность O(n).)')
+print('В то время как словарь моментально возвращает значение по ключу, если такое присутствует (сложность O(1))')
+print('В связи с этим, скорость выполнения этих операций у словарей гораздо выше, особенно это заметно в операциях по удалению элемента')

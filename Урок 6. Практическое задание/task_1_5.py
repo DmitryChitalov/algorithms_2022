@@ -30,3 +30,73 @@
 
 Это файл для пятого скрипта
 """
+
+"""
+В данном задании использовался код с задания:
+Урок 2, задание 4
+https://github.com/DmitryChitalov/algorithms_2022/pull/754
+Уход от рекурсии к циклу (рекурсия обычно задействует гораздо больше памяти)
+"""
+
+from memory_profiler import memory_usage
+
+
+def memory_diff(func):
+    def wrapper(*args, **kwargs):
+        md1 = memory_usage()
+        res = func(*args)
+        md2 = memory_usage()
+        mdiff = md2[0] - md1[0]
+        print(f"Выполнение заняло {mdiff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory_diff
+def v4(x=-1, y=1, z=0.0):
+    if x == -1:
+        x = int(input('Укажите количество элементов:\n'))
+    res = y
+    if x == 1:
+        return f'Сумма элементов = {res}'
+    if z == 0:
+        z = y / -2
+    else:
+        z = z / -2
+    res += z
+    return v4(x-1, res, z)
+
+
+print(v4())
+
+
+@memory_diff
+def v5():
+    mas = [1]
+    n = 1
+    num = int(input('Укажите количество элементов:\n')) - 1
+    while num:
+        n = n / -2
+        mas.append(n)
+        num -= 1
+    return sum(mas)
+
+
+print(v5())
+
+"""
+Для оптимизации памяти заменил рекурсию на цикл
+Результаты при запуске скрипта
+
+Укажите количество элементов:
+3
+Выполнение заняло 0.0 Mib
+Выполнение заняло 0.0 Mib
+Выполнение заняло 0.0234375 Mib
+Сумма элементов = 0.75
+Укажите количество элементов:
+3
+Выполнение заняло 0.0 Mib
+0.75
+"""

@@ -30,3 +30,78 @@
 
 Это файл для четвертого скрипта
 """
+
+"""
+В данном задании использовался код с задания:
+Урок 3, задание 4
+https://github.com/DmitryChitalov/algorithms_2022/pull/804
+__slots__
+"""
+
+from pympler import asizeof
+from uuid import uuid4
+import hashlib
+
+
+class UrlHash:
+    def __init__(self):
+        self.elems = {}
+
+    def ask_for_url(self, url):
+        x = self.elems.get(url, '0')
+        if x == '0':
+            salt = uuid4().hex
+            self.elems[url] = hashlib.sha512(url.encode() + salt.encode()).hexdigest()
+        else:
+            print(self.elems[url])
+
+
+def url_append():
+    urlhash_obj = UrlHash()
+    var = ''
+    while var != '-':
+        var = input('Введите url или - для выхода: \n')
+        urlhash_obj.ask_for_url(var)
+    print('Выход')
+
+
+cls_obj = UrlHash()
+print('Размер стандартного объекта класса: ', asizeof.asizeof(cls_obj))
+
+
+class UrlHashSlots:
+
+    __slots__ = ['elems']
+
+    def __init__(self):
+        self.elems = {}
+
+    def ask_for_url(self, url):
+        x = self.elems.get(url, '0')
+        if x == '0':
+            salt = uuid4().hex
+            self.elems[url] = hashlib.sha512(url.encode() + salt.encode()).hexdigest()
+        else:
+            print(self.elems[url])
+
+
+def url_append_slots():
+    urlhash_obj = UrlHashSlots()
+    var = ''
+    while var != '-':
+        var = input('Введите url или - для выхода: \n')
+        urlhash_obj.ask_for_url(var)
+    print('Выход')
+
+
+cls_obj_slots = UrlHashSlots()
+print('Размер объекта класса с использованием __slots__ : ', asizeof.asizeof(cls_obj_slots))
+
+
+"""
+Для оптимизации памяти при создании класса использовал конструкцию __slots__
+Результаты при запуске скрипта
+
+Размер стандартного объекта класса:  272
+Размер объекта класса с использованием __slots__ :  104
+"""

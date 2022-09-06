@@ -30,3 +30,88 @@
 
 Это файл для первого скрипта
 """
+
+"""
+В данном задании использовался код с задания:
+Урок 1, задание 5
+https://github.com/DmitryChitalov/algorithms_2022/pull/717
+__slots__
+"""
+from pympler import asizeof
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def push_in(self, el):
+        if self.is_empty() or len(self.elems[self.stack_size() - 1]) == 2:
+            nlist = []
+            nlist.append(el)
+            self.elems.append(nlist)
+        else:
+            self.elems[(self.stack_size() - 1)].append(el)
+
+    def pop_out(self):
+        if len(self.elems[self.stack_size() - 1]) == 1:
+            self.elems.pop()
+        else:
+            self.elems[self.stack_size() - 1].pop()
+
+    def get_val(self):
+        return self.elems[self.stack_size() - 1][len(self.elems[len(self.elems) - 1]) - 1]
+
+
+class StackClassSlots:
+
+    __slots__ = ['elems']
+
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def push_in(self, el):
+        if self.is_empty() or len(self.elems[self.stack_size() - 1]) == 2:  # указываем, что пороговое значение стопки == 2, для примера
+            nlist = []
+            nlist.append(el)
+            self.elems.append(nlist)
+        else:
+            self.elems[(self.stack_size() - 1)].append(el)
+
+    def pop_out(self):
+        if len(self.elems[self.stack_size() - 1]) == 1:
+            self.elems.pop()
+        else:
+            self.elems[self.stack_size() - 1].pop()
+
+    def get_val(self):
+        return self.elems[self.stack_size() - 1][len(self.elems[len(self.elems) - 1]) - 1]
+
+
+
+
+SC_OBJ = StackClass()
+print('Стандартный класс: ', asizeof.asizeof(SC_OBJ), '\n')
+
+SC_SLOT_OBJ = StackClassSlots()
+print('Класс с использованием конструкции __slots__: ', asizeof.asizeof(SC_SLOT_OBJ))
+
+"""
+Для оптимизации памяти при создании класса использовал конструкцию __slots__
+Результаты при запуске скрипта
+
+Стандартный класс:  264 
+
+Класс с использованием конструкции __slots__:  96
+"""

@@ -30,3 +30,54 @@
 
 Это файл для второго скрипта
 """
+
+"""
+В данном задании использовался код с задания:
+Урок 4, задание 1
+https://github.com/DmitryChitalov/algorithms_2022/pull/858
+filter()
+"""
+from memory_profiler import memory_usage
+
+other_nums = [x for x in range(10**5)]
+
+
+def memory_diff(func):
+    def wrapper(*args, **kwargs):
+        md1 = memory_usage()
+        res = func(*args)
+        md2 = memory_usage()
+        mdiff = md2[0] - md1[0]
+        print(f"Выполнение заняло {mdiff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory_diff
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+@memory_diff
+def func_3(nums):
+    new_arr = list(filter(lambda x: nums[x] % 2 == 0, range(len(nums))))
+    return new_arr
+
+
+print('Решение через lc:')
+func_2(other_nums)
+print('Решение через filter:')
+func_3(other_nums)
+
+"""
+Для оптимизации памяти заменил list comprehension на функцию filter
+Результаты при запуске скрипта
+
+Решение через lc:
+Выполнение заняло 1.7890625 Mib
+Решение через filter:
+Выполнение заняло 0.0 Mib
+"""
+
+
