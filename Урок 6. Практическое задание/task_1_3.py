@@ -30,3 +30,34 @@
 
 Это файл для третьего скрипта
 """
+
+import numpy
+from memory_profiler import profile
+
+"""
+Взял задание с курса алгоритмы 
+
+
+"""
+
+diction = {}
+
+
+@profile
+def fill_numpy():
+    a = numpy.array([])
+    for i in range(1, 100000):
+        numpy.append(a, i)
+    return
+
+
+@profile
+def fill_dic():
+    for i in range(1, 1000000):  # O(n)
+        diction[i] = i  # O(1)
+    return
+
+
+print("\nЗаполнение элементами")
+fill_dic()
+fill_numpy()
