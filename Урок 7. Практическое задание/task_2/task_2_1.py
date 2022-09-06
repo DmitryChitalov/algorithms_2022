@@ -15,3 +15,51 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def shell_sort(lst):
+    """
+    Сортировка Шелла
+    """
+    step = len(lst) // 2
+    while step > 0:
+        for i in range(step, len(lst)):
+            j = i
+            pos = j - step
+            while pos >= 0 and lst[pos] > lst[j]:
+                lst[pos], lst[j] = lst[j], lst[pos]
+                j = pos
+                pos = j - step
+        step //= 2
+    return lst
+
+
+list_in = [randint(-100, 100) for _ in range(11)]
+# замеры 10
+print(f'10 элементов - {timeit("shell_sort(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {shell_sort(list_in[:])[len(list_in) // 2]}')
+
+list_in = [randint(-100, 100) for _ in range(101)]
+# замеры 100
+print(f'100 элементов - {timeit("shell_sort(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {shell_sort(list_in[:])[len(list_in) // 2]}')
+
+list_in = [randint(-100, 100) for _ in range(1001)]
+# замеры 1000
+print(f'1000 элементов - {timeit("shell_sort(list_in[:])", globals=globals(), number=1000)}')
+print(f'медиана = {shell_sort(list_in[:])[len(list_in) // 2]}')
+
+
+"""
+Результаты замеров
+
+10 элементов - 0.02456039999378845
+медиана = 23
+100 элементов - 0.4309606999740936
+медиана = -19
+1000 элементов - 6.518632100021932
+медиана = -1
+
+"""
