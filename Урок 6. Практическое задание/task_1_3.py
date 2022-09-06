@@ -30,3 +30,72 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+В данном задании использовался код с задания:
+Урок 1, задание 4
+https://github.com/DmitryChitalov/algorithms_2022/pull/717
+Сериализация
+"""
+
+from memory_profiler import memory_usage
+from json import dumps, loads
+from pympler import asizeof
+
+
+def memory_diff(func):
+    def wrapper(*args, **kwargs):
+        md1 = memory_usage()
+        res = func(*args)
+        md2 = memory_usage()
+        mdiff = md2[0] - md1[0]
+        print(f"Выполнение заняло {mdiff} Mib")
+        return res
+
+    return wrapper
+
+
+anydict = {'Ivanov': ['qwerty', True], 'Petrov': ['123', False], 'Sidorov': ['zcx123', True]}
+
+
+@memory_diff
+def f4_v2(username):
+    var = anydict.get(username)
+    if not var[1]:
+        print(f'Пользователь {username} не может быть допущен к ресурсу.\nНеобходимо пройти активацию учетной записи')
+    else:
+        print(f'Пользователь {username} допущен к ресурсу')
+
+
+sr_dict = dumps(anydict)
+
+
+@memory_diff
+def f4_v3(username):
+    out_dict = loads(sr_dict)
+
+    var = out_dict.get(username)
+    if not var[1]:
+        print(f'Пользователь {username} не может быть допущен к ресурсу.\nНеобходимо пройти активацию учетной записи')
+    else:
+        print(f'Пользователь {username} допущен к ресурсу')
+
+
+f4_v2('Ivanov')
+f4_v3('Ivanov')
+
+print('Размер словаря: ', asizeof.asizeof(anydict))
+print('Размер сериализованного словаря: ', asizeof.asizeof(sr_dict))
+
+"""
+Для оптимизации памяти сериализовал словарь с помошью dumps
+Результаты при запуске скрипта
+
+Пользователь Ivanov допущен к ресурсу
+Выполнение заняло 0.0 Mib
+Пользователь Ivanov допущен к ресурсу
+Выполнение заняло 0.0 Mib
+Размер словаря:  840
+Размер сериализованного словаря:  136
+
+"""
