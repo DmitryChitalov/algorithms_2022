@@ -16,3 +16,20 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+import random
+from timeit import timeit
+
+m = 5
+some_array = [random.randrange(-100, 100) for i in range(2*m + 1)]
+print(timeit("sorted(some_array)[m]", globals=globals(), number=1))
+m = 50
+some_array2 = [random.randrange(-100, 100) for i in range(2*m + 1)]
+print(timeit("sorted(some_array2)[m]", globals=globals(), number=1))
+m = 500
+some_array3 = [random.randrange(-100, 100) for i in range(2*m + 1)]
+print(timeit("sorted(some_array3)[m]", globals=globals(), number=1))
+
+'''
+Медленнее всего работает гномья сортировка, на втором месте второй способ, 
+третий, встроенная сортировка, самый быстрый.
+'''
