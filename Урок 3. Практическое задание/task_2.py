@@ -22,3 +22,49 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import sqlite3
+from uuid import uuid4
+
+
+def log_pass():
+    """
+    Ввод логина и пароля
+    """
+    user_login = input('Введите логин: ')
+    user_pass = input('Введите пароль: ')
+    return user_login, user_pass
+
+
+conn = sqlite3.connect('new_db')
+curs = conn.cursor()
+curs.executescript("""DROP TABLE IF EXISTS autorisation;
+                      CREATE TABLE IF NOT EXISTS autorisation
+                      (login varchar(50), 
+                       pass_hash varchar(255), 
+                       salt varchar(255));""")
+login, passwd = log_pass()
+salt = uuid4().hex
+pass_hash = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+curs.execute("INSERT INTO autorisation values(?, ?, ?)", (login, pass_hash, salt))
+print('Пройдите авторизацию.')
+login, passwd = log_pass()
+curs.execute("""SELECT login, pass_hash, salt
+                FROM autorisation""")
+result = curs.fetchall()
+is_exist = False
+j = -1
+for i, val in enumerate(result):
+    if login in val:
+        is_exist = True
+        j = i
+if is_exist:
+    user = result[j]
+    pass_hash = hashlib.sha256(user[2].encode() + passwd.encode()).hexdigest()
+    if pass_hash == user[1]:
+        print('Авторизация прошла успешно')
+    else:
+        print('Неверный логин или пароль')
+else:
+    print('Пользователь с таким логином не найден')
+conn.close()
