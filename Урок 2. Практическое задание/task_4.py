@@ -10,3 +10,30 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+# version 1
+num = int(input('Введите количество элементов: '))
+i = 0
+number = 1
+sum = 0
+while i < num:
+    sum += number
+    number /= -2
+    i += 1
+
+print(f'Количество элементов {num}, их сумма - {sum}')
+
+
+# version 2
+def recurs_meth(i, num_2, coun_t, sum_m):
+    if i == coun_t:
+        print(f'Количество элементов {coun_t}, их сумма - {sum_m}')
+    elif i < coun_t:
+        return recurs_meth(i + 1, num_2 / 2 * -1, coun_t, sum_m + num_2)
+
+
+try:
+    N = int(input('Введите количество элементов: '))
+    recurs_meth(0, 1, N, 0)
+except ValueError:
+    print('Вы вели в место чила строку. Исправьте ')

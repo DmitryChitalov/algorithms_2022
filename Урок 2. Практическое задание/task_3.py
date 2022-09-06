@@ -18,3 +18,28 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+# version 1
+number = input('Введите число, которое требуется перевернуть: ')
+print(f'Перевернутое число: {number[::-1]}')
+
+# version 2
+number2 = int(input('Введите число, которое требуется перевернуть: '))
+while number2 != 0:
+    s = number2 % 10
+    print(s, end='')
+    number2 = number2 // 10
+
+print()
+
+
+# version 3
+def f_revers(number3):
+    rest_num, numeral = divmod(number3, 10)
+    if rest_num == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(f_revers(rest_num))
+
+
+s = int(input('Введите число, которое требуется перевернуть: '))
+print(f'Перевернутое число: {f_revers(s)}')
