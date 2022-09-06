@@ -30,3 +30,38 @@
 
 Это файл для пятого скрипта
 """
+
+# Урок 2, задание 7
+
+from memory_profiler import profile
+
+
+def row_sum(n):
+    if n == 1:
+        return n
+    else:
+        return row_sum(n - 1) + n
+
+
+@profile
+def wrap(var):
+    def equality(n):
+        return row_sum(n) == n * (n + 1) / 2
+    return equality(var)
+
+
+@profile
+def opt(n):
+    res = 0
+    for i in range(1, n + 1):
+        res += i
+    return res == n * (n + 1) / 2
+
+
+num = 900
+# wrap(num)
+opt(num)
+
+"""
+Переход от рекурсии к циклу позволяет снизить выделение памяти.
+"""

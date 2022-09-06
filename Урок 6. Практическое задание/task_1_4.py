@@ -30,3 +30,68 @@
 
 Это файл для четвертого скрипта
 """
+
+# Урок 1, задание 3
+
+from memory_profiler import memory_usage
+
+
+def mem_profiler(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        result = func(*args, **kwargs)
+        m2 = memory_usage()
+        print(m2[0] - m1[0])
+        return result
+    return wrapper
+
+
+companies = [
+    ('Ашан', 278.8),
+    ('Леруа Мерлен Восток', 456.6),
+    ('Эппл Рус', 386),
+    ('JT Group', 345.5),
+    ('Тойота Мотор/Toyota Motor', 332),
+    ('Рено Россия, Автоваз', 456.3),
+    ('ИКЕА Дом', 299.2),
+    ('Фольксваген Груп Рус', 517),
+    ('Philip Morris International', 392.2),
+    ('Самсунг Электроникс Рус Компани', 288.7)
+]
+
+
+@mem_profiler
+def method_1(storage):
+    lst = storage[:]
+    result_list = []
+    for j in range(3):
+        max_elem = lst[0]
+        max_index = 0
+        for i in range(1, len(lst)):
+            if lst[i][1] > max_elem[1]:
+                max_elem = lst[i]
+                max_index = i
+        temp = lst.pop(max_index)
+        result_list.append(temp)
+    return result_list
+
+
+@mem_profiler
+def opt(storage: list):
+    tpl = tuple(sorted(storage[:], key=lambda x: x[1]))
+    result_list = []
+    for _ in range(3):
+        result_list.append(tpl[-1])
+        tpl = tpl[:-1]
+    del tpl
+    return tuple(result_list)
+
+
+# print(method_1(companies))
+print(opt(companies))
+
+
+"""
+Использование кортежей вместо списков, а также удаление неиспользуемых ссылок
+позволяет сократить выделение памяти.
+"""
