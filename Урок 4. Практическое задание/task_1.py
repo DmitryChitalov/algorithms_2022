@@ -11,7 +11,10 @@
 
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+from timeit import timeit
 
+
+# замеряем скорость работы заданной функции
 
 def func_1(nums):
     new_arr = []
@@ -19,3 +22,23 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+numbers = [i for i in range(1, 200)]
+print(timeit("func_1(numbers)", "from __main__ import func_1, numbers", number=1000))
+
+""" Время исполнения операции 0.019437499999185093"""
+
+
+# пробуем оптимизировать код
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+print(func_2(numbers))
+print(timeit("func_2(numbers)", "from __main__ import func_2, numbers", number=1000))
+
+""" Время исполнения операции 0.014631600000939216. При разных замерах показывает скорость на 10-20 процентов быстрее.
+Список создается за один проход. Нет добавления элементов на каждой итерации"""
