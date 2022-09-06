@@ -17,12 +17,13 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
 class QueueClass:
     def __init__(self):
         self.base = []
         self.solved = []
         self.revision = []
-
 
     def is_empty(self):
         return self.base == []

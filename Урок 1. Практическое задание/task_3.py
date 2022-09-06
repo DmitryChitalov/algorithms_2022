@@ -36,10 +36,7 @@ for k, v in sorted(profit_company.items(), key=by_value, reverse=True):     # O(
 print(max_profit)                                                           # O(1)
 
 
-# Второй способ: Сложность O (n**2)
-
-global max_value                                                            # O(1)
-global key_max_value                                                        # O(1)
+# Второй способ: Сложность O(n**2)
 
 max_profit_2 = {}                                                           # O(1)
 while len(max_profit_2) < 3:                                                # O(n)
