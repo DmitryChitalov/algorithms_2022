@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def binary_search(count, num1):
+    print(f"Попытка №{count}")
+    number = int(input("Угадайте число от 0 до 100: "))
+    if count == 10:
+        print("Попытки закончились")
+    elif number == num1:
+        print("Вы угадали число, поздравляю!")
+    else:
+        if number > num1:
+            print(f"Загаданное число меньше чем {number}")
+        else:
+            print(f"Загаданное число больше чем {number}")
+        binary_search(count + 1, num1)
+
+
+binary_search(1, random.randint(0, 100))
