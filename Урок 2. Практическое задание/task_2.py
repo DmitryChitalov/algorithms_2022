@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recur_method(numb, total=0, total1=0):
+    if numb == 0:
+        return total, total1
+    else:
+        ld = numb % 10
+        if ld % 2 == 0:
+            total += 1
+        else:
+            total1 += 1
+        numb = numb // 10
+        return recur_method(numb, total, total1)
+
+
+try:
+    number = int(input("Введите натуральное число: "))
+    print(f"Количество четных и нечетных цифр в числе: {recur_method(number)}")
+except ValueError:
+    print("Вы ввели строку, повторите попытку")
