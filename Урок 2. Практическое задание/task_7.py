@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+# version 1
+def recur_meth(num):
+    if num == 1:
+        return num
+    else:
+        return recur_meth(num - 1) + num
+
+
+try:
+    NUM = int(input('Введите любое натуральное число: '))
+    if recur_meth(NUM) == NUM * (NUM + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print('Вы в место числа ввели строку (: ')

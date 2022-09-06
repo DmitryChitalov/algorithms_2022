@@ -27,3 +27,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# version 1
+while True:
+    oper = input('Введите операцию (+, -, *, / или 0 для выхода: ')
+    num1, num2, = int(input('Введите первое число: ')), int(input('Введите второе число: '))
+
+    if oper == '0':
+        break
+    elif oper == '+':
+        print(f'Ваш результат: {num1 + num2}')
+    elif oper == '-':
+        print(f'Ваш результат: {num1 - num2}')
+    elif oper == '*':
+        print(f'Ваш результат: {num1 * num2}')
+    elif oper == '/':
+        if num1 == 0:
+            print('Деление на ноль, (((. Исправьтесь !')
+        else:
+            print(f'Ваш результат: {num1 / num2}')
+    else:
+        print(f'Вы вместо числа ввели строку {oper} (((. Исправьтесь')
+
+# version 2
+
+while True:
+    oper = input('Введите операцию (+, -, *, / или 0 для выхода: ')
+    if oper == '0':
+        break
+    try:
+        num1 = int(input('Введите первое число: '))
+        num2 = int(input('Введите второе число: '))
+    except ValueError:
+        print('Вы вместо числа ввели строку(((. Исправьтесь')
+        continue
+
+    if oper == '+':
+        print(f'Ваш результат: {num1 + num2}')
+    elif oper == '-':
+        print(f'Ваш результат: {num1 - num2}')
+    elif oper == '*':
+        print(f'Ваш результат: {num1 * num2}')
+    elif oper == '/':
+        if num1 == 0:
+            print('Деление на ноль, (((. Исправьтесь !')
+        print(f'Ваш результат: {num1 / num2}')
+
+print('ВЫХОД')
