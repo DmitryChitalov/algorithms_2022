@@ -23,8 +23,93 @@ b) получение элемента списка, оцените сложно
 НУЖНО выполнить каждый пункт
 обязательно отделяя каждый пункт друг от друга
 
+
 Подсказка: для замеров воспользуйтесь модулем time (см. примеры урока 1)
 вы уже знаете, что такое декоратор и как его реализовать,
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from random import randrange
+from time import time
+
+
+def timer(func):
+    def wrapper(*args):
+        start_time = time()
+        return_value = func(*args)
+        print(f'Время выполнения - {time() - start_time:.5f}')
+        return return_value
+
+    return wrapper
+
+
+# Заполнение
+@timer
+def list_in():  # Итоговая ложность O(n)
+    lst = []  # Сложность O(1)
+    for i in range(50000):  # Сложность O(n)
+        lst.append(randrange(-500, 500))  # Сложность O(1)
+    return lst  # Сложность O(1)
+
+
+@timer
+def dictionary_in():  # Итоговая ложность O(n)
+    dct = {}  # Сложность O(1)
+    for i in range(50000):  # Сложность O(n)
+        dct[i] = randrange(-500, 500)  # Сложность O(1)
+    return dct  # Сложность O(1)
+
+
+#  Заполнение словаря и списка имеет одинаковую сложность. Экспериментальное время отличается не сильно.
+# Получение элемента
+@timer
+def list_find_index(lst):  # Итоговая сложность O(n)
+    for _ in range(10000):  # Сложность O(n)
+        a = lst[randrange(50000)]  # Сложность O(1)
+
+
+@timer
+def dictionary_find_key(dct):  # Итоговая сложность O(n)
+    for _ in range(10000):  # Сложность O(n)
+        a = dct[randrange(50000)]  # Сложность O(1)
+
+
+#  Получение элемента из словаря и списка имеет одинаковую сложность. Экспериментальное время отличается не сильно.
+#  Удаление
+@timer
+def list_del(lst):  # Итоговая сложность О(n^2)
+    for _ in range(1000):  # Сложность O(n)
+        a = randrange(10000)  # Сложность O(1)
+        if a < len(lst):  # Сложность O(1)
+            del lst[a]  # Сложность O(n)
+
+
+@timer
+def dict_del(dct):  # Итоговая сложность O(n)
+    for _ in range(1000):  # Сложность O(n)
+        a = randrange(10000)  # Сложность O(1)
+        if a in dct:  # Сложность O(1)
+            del dct[a]  # Сложность O(1)
+
+
+# Удаление элемента из словаря сильно быстрее, чем из списка.
+
+
+print("Заполнение")
+print("Список")
+my_list = list_in()
+print('Словарь')
+my_dict = dictionary_in()
+print("*************************")
+print("Получение элемента по ключу/индексу")
+print("Список")
+list_find_index(my_list)
+print('Словарь')
+dictionary_find_key(my_list)
+print("*************************")
+print("Удаление")
+print("Список")
+list_del(my_list)
+print('Словарь')
+dict_del(my_dict)
+print("*************************")

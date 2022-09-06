@@ -22,3 +22,36 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import csv
+import hashlib
+import uuid
+import csv
+
+
+def activation(login, parol):
+    salt = uuid.uuid4().hex
+    hash = hashlib.sha256(parol.encode("utf-8") + salt.encode("utf-8")).hexdigest()
+    print('Хеш вашего пароля ', hash)
+    with open("parol.csv", 'a') as file:
+        table = csv.writer(file)
+        table.writerow([login, salt, hash])
+
+
+def enter(login, parol):
+    with open('parol.csv', 'r') as file:
+        data_table = csv.reader(file)
+        data = {}
+        for i in data_table:
+            if not i:
+                data[i[0]] = [i[1], i[2]]
+        if login not in data:
+            return "Вашего логина нет в системе"
+        hash = hashlib.sha256(parol.encode("utf-8") + data[login][0].encode("utf-8")).hexdigest()
+        if hash == data[login][1]:
+            return "Вы ввели правильный пароль"
+        return "Вы ввели неправильный пароль"
+
+
+activation(input("Введите логин: "), input("Введите пароль: "))
+activation(input("Введите логин: "), input("Введите пароль: "))
+print(enter(input("Введите логин: "), input("Введите пароль: ")))

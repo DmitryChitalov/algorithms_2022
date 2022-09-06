@@ -22,3 +22,14 @@
 р
 а
 """
+import hashlib
+
+my_set = set()
+my_string = input("Введите строку: ")
+length = len(my_string)
+for i in range(1, length):
+    for j in range(length - i + 1):
+        slice = my_string[j:j + i]
+        hash = hashlib.sha256(slice.encode('utf-8')).hexdigest()
+        my_set.add(hash)
+print("Уникальных подстрок - ", len(my_set))
