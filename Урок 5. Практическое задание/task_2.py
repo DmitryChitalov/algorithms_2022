@@ -55,7 +55,7 @@ print(c1 * c2)
 Решение через collections
 """
 import collections
-
+from functools import reduce
 
 def pars_string(string):
     x = collections.defaultdict(list)
@@ -64,9 +64,16 @@ def pars_string(string):
     x = list(x)
     y = list(y)
     print(x, ' \n', y)
-    print(int("".join(x), 16) + int("".join(y), 16))
+    minus = (int("".join(x), 16) + int("".join(y), 16))
+    print('%X' % minus)
+    multiply = (int("".join(x), 16) * int("".join(y), 16))
+    print('%X' % multiply)
 
 
 diction = collections.defaultdict(list)
 
-pars_string("11 111")
+a = "A2"
+b = "C4F"
+item = [a, b]
+
+pars_string("A2 c4f")
