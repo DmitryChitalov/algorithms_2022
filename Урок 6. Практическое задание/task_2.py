@@ -9,3 +9,42 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+import random
+from memory_profiler import profile
+
+
+@profile
+def decor(func):
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        return res
+
+    return wrapper
+
+
+@decor
+def check_numbers(number: int, odd_digits: int = 0, even_digits: int = 0):
+    """Функция принимает в себя число, а также количество четных и нечетных цифр в числе,
+    которые по умолчанию равны нулю, до тех пор пока длинна числа больше 1, функция отделяет последнюю цифру
+    и проверяет ее на четность и рекурсивно вызывает сама себя передавая в себя остаток числа и результаты проверки"""
+    if len(str(number)) > 1:
+        num = number % 10
+        if num % 2 == 0:
+            even_digits += 1
+        else:
+            odd_digits += 1
+        check_numbers(number // 10, odd_digits, even_digits)
+    else:
+        if number % 2 == 0:
+            even_digits += 1
+        else:
+            odd_digits += 1
+        print(f'Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})')
+
+
+check_numbers(int(''.join([str(random.randint(0, 2000)) for _ in range(100)])))  # Формируем длинное числовое значение
+
+"""Для избежания многократного профилирования каждой вызванной рекурсии и получения общего результата
+Профилирование необходимо выполнять с функцией оболочкой, в нашем случае с decor"""
+

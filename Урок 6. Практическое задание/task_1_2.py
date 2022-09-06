@@ -30,3 +30,54 @@
 
 Это файл для второго скрипта
 """
+
+from random import randint, choice
+from memory_profiler import profile
+
+"""
+Алгоритмы, урок 2, задание 4
+Найти сумму n элементов следующего ряда чисел:
+1 -0.5 0.25 -0.125 ...
+Количество элементов (n) вводится с клавиатуры.
+
+Заменил рекурсию на цикл. Получилась экономия памяти
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    61     19.5 MiB     19.5 MiB           1   @profile
+    62                                         def wrapper():
+    63     20.1 MiB      0.5 MiB           1       res = geometric_progression_short(500)
+    64                                             # res = geometric_progression(500)
+    65     20.1 MiB      0.0 MiB           1       return res
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    62     19.5 MiB     19.5 MiB           1   @profile
+    63                                         def wrapper():
+    64                                             # res = geometric_progression_short(500)
+    65     19.5 MiB      0.0 MiB           1       res = geometric_progression(500)
+    66     19.5 MiB      0.0 MiB           1       return res
+"""
+
+
+@profile
+def wrapper():
+    # res = geometric_progression_short(500)
+    res = geometric_progression(500)
+    return res
+
+
+def geometric_progression_short(n):
+    return (-0.5) ** (n - 1) + geometric_progression_short(n - 1) if n else 0
+
+
+def geometric_progression(n):
+    i = 1
+    sum_progression = 0
+    while i <= n:
+        sum_progression += (-0.5) ** (i - 1)
+        i += 1
+    return sum_progression
+
+
+print(wrapper())
+

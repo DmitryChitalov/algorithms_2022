@@ -30,3 +30,28 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+import random
+
+
+@profile
+def func_1(nums):
+    """В предлагаемой функции цикл был заменен на list comprehension"""
+    return [x for x in range(len(nums)) if nums[x] % 2 == 0]  # nums[x] это четные элементы, x это индексы
+
+
+@profile
+def func_2(nums):
+    """В предлагаемой функции цикл был заменен на list comprehension"""
+    return tuple([x for x in range(len(nums)) if nums[x] % 2 == 0])  # nums[x] это четные элементы, x это индексы
+
+
+n = [random.randint(0, 1000000) for i in range(1000000)]
+
+func_1(n)
+func_2(n)
+
+"""Вывод: простая замена list на tuple при возврате результатов 
+кортежа на большом массиве сократила объем используемой памяти 
+на 1.8 MiB"""
+
