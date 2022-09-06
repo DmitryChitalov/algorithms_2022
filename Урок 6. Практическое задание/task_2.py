@@ -9,3 +9,35 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+
+from memory_profiler import profile
+
+"""
+При профилировании памяти рекурсивной функции происходит вывод таблиц
+при каждом рекурсивном вызове функции в процессе выполнения скрипта.
+Можно обернуть исходную рекурсивную функцию в другую
+и профилировать память, занимаемую уже "оберткой".
+"""
+
+#  Урок 2, задание 5
+
+
+@profile
+def wrapper():
+    def ascii_table(number=32, counter=1):
+        if number > 127:
+            return
+
+        end_of_string = ' '
+        if (counter + 10) % 10 == 0:
+            end_of_string = '\n'
+
+        print(f'{number} - {chr(number)}{end_of_string}', end='')
+
+        return ascii_table(number + 1, counter + 1)
+
+    return ascii_table()
+
+
+wrapper()
