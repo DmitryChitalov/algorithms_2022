@@ -15,3 +15,28 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+from uuid import uuid4
+import hashlib
+
+
+def get_page(url):
+    if cache_page.get(url):
+        print(f'Данный адрес: {url} присутствует в кэше')
+    else:
+        page_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_page[url] = page_hash
+        print(f'Кэш дополнен адресом: {url}')
+        print(cache_page)
+
+salt = uuid4().hex
+cache_page = {}
+
+page1 = input('Введите адрес 1 страницы: ')
+get_page(page1)
+page2 = input('Введите адрес 2 страницы: ')
+get_page(page2)
+page3 = input('Введите адрес 3 страницы: ')
+get_page(page3)
+
+

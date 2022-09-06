@@ -28,3 +28,105 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+
+def timer_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполенения функции {func.__name__} '
+              f'составило {end - start}')
+        return result
+    return timer
+
+
+# Пункт а:
+@timer_decorator
+def write_list(list, n):
+    for i in range(n):
+        list.append(i)       # Сложность операции O(1)
+
+
+list1 = []
+n = 10 ** 4
+write_list(list1, n)
+print('-' * 50)
+
+
+@timer_decorator
+def write_dict(dict, n):
+    for i in range(n):  # добавления нового элемента имеет сложность О(1).
+        dict[i] = i
+
+
+dict1 = {}
+write_dict(dict1, n)
+print('_' * 50)
+
+"""
+Время выполенения функции write_list составило 0.005240917205810547
+--------------------------------------------------
+Время выполенения функции write_dict составило 0.005354881286621094
+__________________________________________________
+Время заполнения примерно одинаково так как имеет сложность одинакова 0(1)
+"""
+
+# Пункт b:
+@timer_decorator
+def get_element_list(lst, num):
+    for i in range(num):
+        print(lst[i], end=' ')      # Сложность операции O(1)
+    print()
+
+
+get_element_list(list1, n)
+print('_' * 50)
+
+
+@timer_decorator
+def get_element_dict(dict, n):
+    for i in range(n):
+        print(dict[i], end=' ')
+    print()
+
+
+get_element_dict(dict1, n)
+print('-' * 50)
+
+"""
+Время выполенения функции get_element_list составило 0.10910487174987793
+--------------------------------------------------
+Время выполенения функции get_element_dict составило 0.10306882858276367
+--------------------------------------------------
+"""
+# Пункт c:
+
+
+@timer_decorator
+def del_elem_list(list):
+    for i in range(1000):
+        list.pop(i)
+
+
+del_elem_list(list1)
+print('-' * 50)
+
+
+@timer_decorator
+def del_elem_dict(dict):
+    for i in range(1000):
+        dict.pop(i)
+
+
+del_elem_dict(dict1)
+print('-' * 50)
+
+"""
+Время выполенения функции del_elem_list составило 0.002209186553955078
+--------------------------------------------------
+Время выполенения функции del_elem_dict составило 8.0108642578125e-05
+--------------------------------------------------
+"""
