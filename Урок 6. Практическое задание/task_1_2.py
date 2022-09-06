@@ -30,3 +30,54 @@
 
 Это файл для второго скрипта
 """
+
+# Урок 3, задание 3
+
+import hashlib
+from memory_profiler import memory_usage
+
+
+def mem_profiler(function):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        result = function(*args, **kwargs)
+        m2 = memory_usage()
+        print(m2[0] - m1[0])
+        return result
+    return wrapper
+
+
+@mem_profiler
+def func(string):
+    hashes = set()
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            substring = string[i:j + 1]
+            if substring != string:
+                hashes.add(hashlib.sha256(substring.encode(encoding='utf-8')).hexdigest())
+    return len(hashes)
+
+
+@mem_profiler
+def func_opt(string):
+    hashes = list()
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            substring = string[i:j + 1]
+            if substring != string:
+                hash_str = hashlib.sha256(substring.encode(encoding='utf-8')).hexdigest()
+                if hash_str not in hashes:
+                    hashes.append(hash_str)
+    res = len(hashes)
+    del hashes
+    return res
+
+
+line = 'papkhjsdsfgsdsfkfhjkaertyugfkgndfkjgnsdkfgjsdkfgjsdkfa'
+# func(line)
+func_opt(line)
+
+"""
+Для уменьшения потребления памяти заменил множество на список,
+а также перед завершением выполнения функции удалил ссылку на него после использования.
+"""

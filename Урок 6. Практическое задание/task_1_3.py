@@ -30,3 +30,40 @@
 
 Это файл для третьего скрипта
 """
+
+# Урок 4, задание 1
+
+import numpy as np
+from memory_profiler import memory_usage
+
+
+def mem_profiler(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        result = func(*args, **kwargs)
+        m2 = memory_usage()
+        print(m2[0] - m1[0])
+        return result
+    return wrapper
+
+
+@mem_profiler
+def func_list(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+@mem_profiler
+def opt(nums):
+    arr = np.array([])
+    for i in nums:
+        np.append(arr, i)
+    return arr
+
+
+lst = list(range(10 ** 5))
+func_list(lst)
+opt(lst)
+
+"""
+Для уменьшения потребления памяти вместо списка применил массив из numpy.
+"""
