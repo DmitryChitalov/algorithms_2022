@@ -30,3 +30,44 @@
 
 Это файл для четвертого скрипта
 """
+
+"""ДЗ 2.3"""
+
+
+from memory_profiler import profile
+from random import randint
+
+
+@profile
+def mem_pr(m):
+    def mirror(n, b=0):
+        if len(str(n)) != 1:
+            a = n % 10
+            b = b * 10 + a
+            n //= 10
+            return mirror(n, b)
+        else:
+            b = b * 10 + n
+            return b
+
+
+    e = mirror(m)
+    if len(str(e)) == len(str(m)):
+        print(e)
+    else:
+        print(f'{e:0{len(str(m))}d}')
+    return
+
+
+m = randint(10e200, 10e201)
+mem_pr(m)
+
+"""Исправлено - рекурсия заменена на встроенную операцию, экономия 0.2 MiB на 7 стр"""
+
+
+@profile
+def mirror1(n):
+    return str(n)[::-1]
+
+
+print(mirror1(m))
