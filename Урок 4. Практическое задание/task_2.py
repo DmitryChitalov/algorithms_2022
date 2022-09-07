@@ -22,26 +22,34 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
+def num_100():
+    return randint(10000, 1000000)
 
+def num_1000():
+    return randint(1000000, 10000000)
+
+
+def num_10000():
+    return randint(100000000, 10000000000000)
+
+
+count=10000
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
-        "recursive_reverse(num_100)",
+        "recursive_reverse(num_100())",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=count))
 print(
     timeit(
-        "recursive_reverse(num_1000)",
+        "recursive_reverse(num_1000())",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=count))
 print(
     timeit(
-        "recursive_reverse(num_10000)",
+        "recursive_reverse(num_10000())",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=count))
 
 
 def memoize(f):
@@ -67,16 +75,33 @@ def recursive_reverse_mem(number):
 print('Оптимизированная функция recursive_reverse_mem')
 print(
     timeit(
-        'recursive_reverse_mem(num_100)',
+        'recursive_reverse_mem(num_100())',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=count))
 print(
     timeit(
-        'recursive_reverse_mem(num_1000)',
+        'recursive_reverse_mem(num_1000())',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=count))
 print(
     timeit(
-        'recursive_reverse_mem(num_10000)',
+        'recursive_reverse_mem(num_10000())',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=count))
+
+"""с
+На первый взгляд, когда запускаешь программу, мемоизация дает приличный выигрыш.
+Логика подсказывает, что не должна: мемоизация будет работать, если встречаются одинаковые данные. 
+В процессе переворота одного числа мемоизация не раотает: одинаковые подстроки там не встречаются,
+они по крайней мере по длине разные.
+После некоторого количества размышлений до меня дошло. Тест так устроен, что программа переворачивает 
+много раз одно и то же число.
+Тогда, конечно, мемоизация работает.
+А вот если изменить код так, чтобы переворачивались разные числа (и я так код изменила),
+то выигрыш за счет мемоизации обернется проигрышем по времени (небольшим), и я даже боюсь сказать,
+какого размера кэшем.
+
+...А еще программа неправильно работает.
+Она лишний ноль в конце добавляет. Вот, смотрите:
+"""
+print(recursive_reverse(135))
