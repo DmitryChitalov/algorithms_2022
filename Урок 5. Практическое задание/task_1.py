@@ -28,3 +28,33 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+# count_company = int(input("Введите количество предприятий: "))
+# name_company = input("Введите название предприятия: ")
+# count_profit = 0
+# quarter_1st = input("Введите прибыль 1кв: ")
+# quarter_2nd = input("Введите прибыль 2кв: ")
+# quarter_3rd = input("Введите прибыль 3кв: ")
+# quarter_4th = input("Введите прибыль 4кв: ")
+# profit_company = []
+# profit_company.append(quarter_1st)
+
+name_company = ["Рога", "Копыта"]
+company_all = {"Рога": [1, 2, 3, 4], "Копыта": [9, 8, 7, 6]}
+x1 = company_all[name_company[0]]
+x2 = company_all[name_company[1]]
+
+
+def averange_profit(new_list):
+    result = 0
+    for i in new_list:
+        result += i
+    average_profit = result / 4
+    return average_profit
+
+
+# print(averange_profit(x1))
+# print(averange_profit(x2))
+
+result = averange_profit(x1) + averange_profit(x2)
+print(result)
