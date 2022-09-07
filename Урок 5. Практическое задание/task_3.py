@@ -144,3 +144,9 @@ def analize():
           f"{(timeit('get_elem_deque(some_deque.copy())', globals=globals(), number=100))}")
 
 analize()
+
+"""
+Специфические методы deque работающие с началом списка значительно быстрее чем 
+аналоги в list.  Остальные тесты показывают преимущество при работе с list
+
+"""
