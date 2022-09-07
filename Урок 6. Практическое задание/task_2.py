@@ -9,3 +9,32 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import memory_usage
+
+
+def dec(func):
+    def wrapper(*args):
+        start = memory_usage()
+        res = func(*args)
+        return f'Заняло пямяти = {memory_usage()[0] - start[0]}'
+    return wrapper
+
+
+@dec
+def rev(n):
+    return func(n)
+
+
+def func(num, reversed=''):
+    if num == 0:
+        return reversed
+    reversed += str(num % 10)
+    return func(num // 10, reversed)
+
+
+print(rev(23456789765432134567892345678976543213456789))
+
+'''
+Вывод: Для профилировки необходимо создать отдельную функцию,
+которая вызывает функцию уже с рекурсией, для того чтобы замер делался один раз
+'''
