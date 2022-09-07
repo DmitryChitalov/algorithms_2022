@@ -10,35 +10,30 @@
 Опишите этот путь и покажите его применение
 """
 
+"""
+При замерах рекурсии выдается каждая операция и замер прозводится на стадии выполнения каждой ф-и
+Получается при каждом вызове ф-и рекурсии происходит зомер времени
+Для решения данной проблеммы был использован декоратор
+"""
+
+from memory_profiler import profile
+
+
+@profile
+def rec_wrapper(dec_func):
+    def wrapper(*args):
+        res = dec_func(*args)
+        return res
+
+    return wrapper
+
 
 def funct(k):
     n = k - 1
     return ((-1) ** n) / (2 ** n)
 
 
-def recurs(n, summ=0):
-    if n != 0:
-        summ = summ + funct(n)
-        return recurs(n - 1, summ)
-    else:
-        return summ
-
-
-print(recurs(3))
-
-
-# Вариант 2
-def recurs2(n):
-    if n == 1:
-        return funct(n)
-    return funct(n) + recurs2(n - 1)
-
-
-print(recurs2(3))
-
-
-# Вариант 3
-
+@rec_wrapper
 def recurs3(n):
     return funct(n) if (n == 1) else funct(n) + recurs3(n - 1)
 
