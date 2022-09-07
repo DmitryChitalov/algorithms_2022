@@ -29,4 +29,77 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для пятого скрипта
+
+
+
+Python basic - https://github.com/Frvzr/gb_python_basics/tree/master/Koposhilov_Ivan_dz_9
+
+Задание 2
+Реализовать класс Road (дорога).
+
+определить атрибуты: length (длина), width (ширина);
+значения атрибутов должны передаваться при создании экземпляра класса;
+атрибуты сделать защищёнными;
+определить метод calculate расчёта массы асфальта, необходимого для покрытия всей дороги;
+использовать формулу: длина * ширина * масса асфальта для покрытия одного кв. метра дороги асфальтом, толщиной в 1 см * число см толщины полотна;
+проверить работу метода.
+
+"""
+
+# Первоначальный вариант
+
+
+from pympler import asizeof
+
+
+class Road:
+    def __init__(self, length: int, width: int):
+        """конструктор класса
+        :param length: длинна в метрах
+        :param width: ширина в метрах
+        """
+        self._length = length
+        self._width = width
+        self.length_to_width = self._length * self._width
+
+    def calculate(self, height: int = 5, mass_m_2: int = 25) -> int:
+        """
+        считает масу массу асфальта, необходимого для покрытия всей дороги в тоннах
+        :param height: высота дорожного полотна в сантиметрах
+        :param mass_m_2: масса в кг квадратного метра дороги высотой 1 см
+        :return: int значение тонн, дробная часть если есть НЕ учитывается
+        """
+        self.result = self.length_to_width * (mass_m_2 / 1000) * (height / 100)
+        return self.result
+
+
+road = Road(5000, 20)
+print(f'Для изготовления покрытия дороги нужно {road.calculate()} тонн.')
+print(asizeof.asizeof(road))  # -> 504
+
+
+# Оптимизированный вариант
+
+
+class RoadNew:
+    __slots__ = ('_length', '_width', 'length_to_width', 'result')
+
+    def __init__(self, length: int, width: int):
+        self._length = length
+        self._width = width
+        self.length_to_width = self._length * self._width
+
+    def calculate(self, height: int = 5, mass_m_2: int = 25) -> int:
+        self.result = self.length_to_width * (mass_m_2 / 1000) * (height / 100)
+        return self.result
+
+
+road_new = RoadNew(5000, 20)
+print(
+    f'Для изготовления покрытия дороги нужно {road_new.calculate()} тонн.')
+print(asizeof.asizeof(road_new))  # -> 184
+
+
+"""
+Добавление слотов при хранении параметров значительно уменьшило потребление памяти было 504, стало 184
 """
