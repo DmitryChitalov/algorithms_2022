@@ -22,3 +22,21 @@
 р
 а
 """
+import hashlib
+
+
+def count_substr(word):
+    """
+    Подсчет количества подстрок
+    """
+    unicue_substr = set()
+    for i in range(len(word)):
+        for j in range(i+1, len(word)+1):
+            if word[i:j] != word:
+                substr_hash = hashlib.sha256(word[i:j].encode()).hexdigest()
+                unicue_substr.add(substr_hash)
+    return len(unicue_substr)
+
+
+my_word = input('Введите строку, из латинских букв: ')
+print(count_substr(my_word))
