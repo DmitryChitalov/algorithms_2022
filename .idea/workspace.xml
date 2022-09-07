@@ -1,36 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
-    </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="home work lesson_2 at 07-09-2022 C.Leonid" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -138,22 +113,11 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications"
+  }
+}]]></component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -165,6 +129,14 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
     </task>
+    <task id="LOCAL-00001" summary="home work lesson_2 at 07-09-2022 C.Leonid">
+      <created>1662545894483</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662545894483</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -190,6 +162,24 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="home work lesson_2 at 07-09-2022 C.Leonid" />
+    <option name="LAST_COMMIT_MESSAGE" value="home work lesson_2 at 07-09-2022 C.Leonid" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/algorithms_2022$task_3.coverage" NAME="task_3 Coverage Results" MODIFIED="1662544368915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Урок 1. Практическое задание" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
