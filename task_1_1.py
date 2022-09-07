@@ -32,11 +32,11 @@
 """
 
 ############################################################################
+from memory_profiler import memory_usage
+
 """ Приведен код, формирующий из введенного числа
 обратное по порядку входящих в него
 цифр и вывести на экран. """
-
-from memory_profiler import memory_usage
 
 
 def decor(func):
@@ -69,5 +69,5 @@ def my_revers(enter_num):
 
 numb = 742234523452345234523453742234523452345234523453
 
-print(revers(numb))     # 0.0859375
+print(revers(numb))  # 0.0859375
 print(my_revers(numb))  # 0.0
