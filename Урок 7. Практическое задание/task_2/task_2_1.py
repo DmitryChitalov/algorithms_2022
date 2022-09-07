@@ -69,13 +69,8 @@ print(arr_1000)
 
 
 def median(lst_obj):
-    n = len(lst_obj)
-    if n % 2 == 1:
-        return lst_obj[n // 2]
-    else:
-        i = n // 2
-        return (lst_obj[i - 1] + lst_obj[i]) / 2
-
+    m = (len(lst_obj) - 1) // 2
+    return lst_obj[m]
 
 print(f'med:{(median(arr_10))}')
 print(f'med:{(median(arr_100))}')
