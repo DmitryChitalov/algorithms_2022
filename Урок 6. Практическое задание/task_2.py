@@ -9,3 +9,57 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+
+"""Исходный вариант, дз 2.6"""
+import random
+from memory_profiler import profile
+
+
+@profile
+def game(num=44, n=10):
+    if n > 0:
+        a = int(input('Введите число: '))
+        n -= 1
+        if a > num:
+            print('Слишком большое!')
+            return game(num, n)
+        elif a < num:
+            print('Слишком маленькое!')
+            return game(num, n)
+        else:
+            return 'Вы угадали!'
+    return num
+
+
+"""При профилировании замеряются все циклы рекурсии внутри функции и выводятся таблицы всех проходов"""
+
+
+print(game(random.randint(0, 100)))
+
+"""Доработанный вариант"""
+
+
+@profile
+def game_mem():
+    def game(num=44, n=10):
+        if n > 0:
+            a = int(input('Введите число: '))
+            n -= 1
+            if a > num:
+                print('Слишком большое!')
+                return game(num, n)
+            elif a < num:
+                print('Слишком маленькое!')
+                return game(num, n)
+            else:
+                return 'Вы угадали!'
+        return num
+    d = game(random.randint(0, 100))
+    return d
+
+"""Здесь 'рабочая' функция помещена внутрь 'маскирующей' функции. При профилировании измеряются этапы маскирующей
+функции и  воспринимает вложенную функцию как одно действие"""
+
+print(game_mem())
+
