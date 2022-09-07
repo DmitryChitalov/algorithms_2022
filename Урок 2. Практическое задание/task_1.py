@@ -27,3 +27,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# version 1
+num = (input('Введите натуральное число: '))
+even, odd = 0, 0
+
+for i in num:
+    j = int(i)
+    if j % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+
+
+# version 2
+def recur_m(num2, even2=0, odd2=0):
+    if num2 == 0:
+        return even2, odd2
+    else:
+        cur_n = num2 % 10
+        num2 = num2 // 10
+        if cur_n % 2 == 0:
+            even2 += 1
+        else:
+            odd2 += 1
+        return recur_m(num2, even2, odd2)
+
+
+try:
+    NUM = int(input('Введите натуральное число: '))
+    print(f'Количество четных и нечетных цифр в числе равно: {recur_m(NUM)}')
+except ValueError:
+    print('Вы в место числа ввели строку. Исправьтесь')
+# Взял у Вас из разьяснения ДЗ ((( сам не смог
