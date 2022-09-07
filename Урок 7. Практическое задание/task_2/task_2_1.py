@@ -15,3 +15,95 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def heapsort(data):
+    # Формируем первоначальное сортирующее дерево
+    # Для этого справа-налево перебираем элементы массива
+    # (у которых есть потомки) и делаем для каждого из них просейку
+    for start in range((int(len(data) - 2) // 2), -1, -1):
+        heapsift(data, start, len(data) - 1)
+
+        # Первый элемент массива всегда соответствует корню сортирующего дерева
+    # и поэтому является максимумом для неотсортированной части массива.
+    for end in range(len(data) - 1, 0, -1):
+        # Меняем этот максимум местами с последним
+        # элементом неотсортированной части массива
+        data[end], data[0] = data[0], data[end]
+        # После обмена в корне сортирующего дерева немаксимальный элемент
+        # Восстанавливаем сортирующее дерево
+        # Просейка для неотсортированной части массива
+        heapsift(data, 0, end - 1)
+    return data
+
+
+# Просейка свеху вниз, в результате которой восстанавливается сортирующее дерево
+def heapsift(data, start, end):
+    # Начало подмассива - узел, с которого начинаем просейку вниз
+    root = start
+
+    # Цикл просейки продолжается до тех пор,
+    # Пока встречаются потомки, большие чем их родитель
+    while True:
+
+        child = root * 2 + 1  # Левый потомок
+        # Левый потомок за пределами подмассива - завершаем просейку
+        if child > end: break
+
+        # Если правый потомок тоже в пределах подмассива,
+        # то среди обоих потомков выбираем наибольший
+        if child + 1 <= end and data[child] < data[child + 1]:
+            child += 1
+
+        # Если больший потомок больше корня, то меняем местами
+        # при этом больший потомок сам становится корнем,
+        # от которого дальше опускаемся вниз по дереву
+        if data[root] < data[child]:
+            data[root], data[child] = data[child], data[root]
+            root = child
+        else:
+            break
+
+def finding_mediana(list_m, mediana):
+    return heapsort(list_m[:])[mediana]
+
+
+m = 10
+orig_list = [randint(-100, 100) for _ in range(2*m+1)]
+print(f'Исходный список: {orig_list}')
+print(f'Результат сортировки копии списка: {heapsort(orig_list[:])}')
+
+print(f'Медиана = {finding_mediana(orig_list[:], m)}')
+
+
+
+m
+
+
+
+# замеры 10
+print(
+    timeit(
+        "finding_mediana(orig_list[:], m)",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(
+    timeit(
+        "finding_mediana(orig_list[:], m)",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(
+    timeit(
+        "finding_mediana(orig_list[:], m)",
+        globals=globals(),
+        number=1000))
