@@ -30,3 +30,31 @@
 
 Это файл для второго скрипта
 """
+from random import randint
+from timeit import timeit
+
+from memory_profiler import profile
+
+src = [randint(0, 1000) for i in range(1000)]
+
+
+@profile
+def list_func(n):
+    result = [elem for idx, elem in enumerate(n) if elem > n[idx - 1] and idx > 0]
+    return result
+
+
+print(f'Время работы исходного варианта = ',
+      timeit('list_func(src)', globals=globals(), number=1))
+
+
+@profile
+def generator_func(n):
+    result = (elem for idx, elem in enumerate(n) if elem > n[idx - 1] and idx > 0)
+    return result
+
+
+print(f'Время работы оптимизированного оптимизированного варианта скрипта = ',
+      timeit('generator_func(src)', globals=globals(), number=1))
+
+# первая функция list comprehension - 0.10341439799999996, во второй функции генератор - 0.0012137650000000333
