@@ -10,3 +10,14 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_elem(elements, start_row=1.0):
+    if elements == 1:
+        return start_row
+    return start_row + sum_elem(elements - 1, start_row * (-0.5))
+
+
+user_elem = int(input('Введите количество элементов: '))
+
+print(sum_elem(user_elem))
