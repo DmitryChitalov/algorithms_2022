@@ -19,10 +19,12 @@ from random import randint
 from timeit import timeit
 
 
-def unsorted_mediana(list_m, m):
-    while len(list_m) > m+1:
+def unsorted_mediana(list_m: list, middle: int):
+    """Функция """
+    while len(list_m) > middle+1:
         list_m.remove(max(list_m))
     return max(list_m)
+
 
 m = 10
 orig_list = [randint(-100, 100) for _ in range(2*m+1)]
@@ -38,7 +40,9 @@ print(
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(100)]
+m = 100
+orig_list = [randint(-100, 100) for _ in range(2*m+1)]
+
 
 # замеры 100
 print(
@@ -47,7 +51,9 @@ print(
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(1000)]
+m = 1000
+orig_list = [randint(-100, 100) for _ in range(2*m+1)]
+
 
 # замеры 1000
 print(

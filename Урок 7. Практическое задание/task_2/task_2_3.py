@@ -29,31 +29,34 @@ print(f'Отсортированная копия для проверки: {sort
 print(f'Медиана = {statistics.median(orig_list)}')
 print(f'Медиана = {int(median(orig_list))}')
 
-
+m = 10
+orig_list_10 = [randint(-100, 100) for _ in range(2*m+1)]
+m = 100
+orig_list_100 = [randint(-100, 100) for _ in range(2*m+1)]
+m = 1000
+orig_list_1000 = [randint(-100, 100) for _ in range(2*m+1)]
 print('Замеры statistics')
 
 # замеры 10
 print(
     timeit(
-        "statistics.median(orig_list)",
+        "statistics.median(orig_list_10[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(100)]
 
 # замеры 100
 print(
     timeit(
-        "statistics.median(orig_list)",
+        "statistics.median(orig_list_100[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(1000)]
 
 # замеры 1000
 print(
     timeit(
-        "statistics.median(orig_list)",
+        "statistics.median(orig_list_1000[:])",
         globals=globals(),
         number=1000))
 
@@ -62,7 +65,7 @@ print('Замеры numpy')
 # замеры 10
 print(
     timeit(
-        "median(orig_list)",
+        "median(orig_list_10[:])",
         globals=globals(),
         number=1000))
 
@@ -71,7 +74,7 @@ orig_list = [randint(-100, 100) for _ in range(100)]
 # замеры 100
 print(
     timeit(
-        "median(orig_list)",
+        "median(orig_list_100[:])",
         globals=globals(),
         number=1000))
 
@@ -80,7 +83,7 @@ orig_list = [randint(-100, 100) for _ in range(1000)]
 # замеры 1000
 print(
     timeit(
-        "median(orig_list)",
+        "median(orig_list_1000[:])",
         globals=globals(),
         number=1000))
 
@@ -88,23 +91,24 @@ print(
 """
 ИТОГИ
 Поиск медианы с сортировкой списка методом кучи
-0.1414635970004383
-0.7642583890001333
-10.474215252999784
+0.25552693999998155
+2.2669138229994132
+30.884409926000444
 Поиск медианы без сортировки списка
-0.017381194999870786
-0.3872662739995576
-25.51902260099996
+0.022013129000697518
+1.7148088540016033
+80.48186990999966
 Поиск медианы функцией библиотеки statistics
-0.006574248999640986
-0.07222399300007964
-0.26326558900018426
+0.0020644559990614653
+0.03314585400039505
+0.5624510300003749
 Поиск медианы функцией библиотеки numpy
-0.34361335700032214
-0.10602535599991825
-0.3065561670000534
+0.10075170999880356
+0.17874589199891489
+0.5718858239997644
 
 Анализ поиска медианы небольших списков 
 Наиболле эффективными методами является функция стандартной библиотеки statistics либо отказ от сортировки  
 На средних и больших списках наиболее эффективны библиотеки statistics и numpy
+Предполагаю, что на очень больших значениях эффективнее всего numpy
 """

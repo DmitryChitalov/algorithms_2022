@@ -321,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660696206530</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Задания подготовлены">
+      <created>1662524916497</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1662524916497</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -354,7 +361,8 @@
     <MESSAGE value="Выполнены задание 1-4" />
     <MESSAGE value="Выполнено задание 6, есть понимание как выполнить задание 5" />
     <MESSAGE value="Задание 5 выполнено" />
-    <option name="LAST_COMMIT_MESSAGE" value="Задание 5 выполнено" />
+    <MESSAGE value="Задания подготовлены" />
+    <option name="LAST_COMMIT_MESSAGE" value="Задания подготовлены" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

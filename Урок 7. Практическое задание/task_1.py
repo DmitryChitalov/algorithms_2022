@@ -18,7 +18,6 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
-import copy
 
 """Сортировка пузырьком"""
 
@@ -26,7 +25,7 @@ from random import randint
 from timeit import timeit
 
 
-def bubble_sort(lst_obj):
+def bubble_sort(lst_obj: list):
     n = 1
     while n < len(lst_obj):
         a = 0
@@ -40,10 +39,7 @@ def bubble_sort(lst_obj):
     return lst_obj
 
 
-orig_list = [randint(-100, 100) for _ in range(10)]  #deepcopy
-orig_list1 = copy.deepcopy(orig_list)
-orig_list2 = copy.deepcopy(orig_list)
-orig_list3 = copy.deepcopy(orig_list)
+orig_list = [randint(-100, 100) for _ in range(10)]
 
 print(f'Исходный список: {orig_list}')
 print(f'Результат сортировки копии списка: {bubble_sort(orig_list[:])}')
@@ -72,4 +68,3 @@ print(
         "bubble_sort(orig_list[:])",
         globals=globals(),
         number=1000))
-
