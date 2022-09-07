@@ -30,3 +30,66 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import profile
+
+"""
+Взял задание с курса алгоритмы 
+Оптимизировал класс который умножает два числа из строки
+При исользовании слотов есть незначительное уменьшение использования памяти
+"""
+
+
+class Calc(str):
+
+    def __init__(self, pasr_str):
+        self.a = pasr_str
+        self.mas = []
+        self.c = ''
+        for i in self.a:
+            self.mas.append(i)
+        print(self.mas)
+
+    def __add__(self, other):
+        return hex(int(self.a, 16) + int(other.a, 16))
+
+    @profile
+    def __mul__(self, other):
+        for i in range(1, 10000):
+            self.c += hex(int(self.a, 16) * int(other.a, 16))
+        return hex(int(self.a, 16) * int(other.a, 16))
+
+
+c1 = Calc("A2")
+c2 = Calc("C4F")
+
+print(c1 + c2)
+print(c1 * c2)
+print("\n\n Новый класс + новый замер")
+
+
+class Calc1(str):
+    __slots__ = ['pasr_str', 'a', 'mas', 'c']
+
+    def __init__(self, pasr_str):
+        self.c = ''
+        self.a = pasr_str
+        self.mas = []
+        for i in self.a:
+            self.mas.append(i)
+        print(self.mas)
+
+    def __add__(self, other):
+        return hex(int(self.a, 16) + int(other.a, 16))
+
+    @profile
+    def __mul__(self, other):
+        for i in range(1, 10000):
+            self.c += hex(int(self.a, 16) * int(other.a, 16))
+        return hex(int(self.a, 16) * int(other.a, 16))
+
+
+c11 = Calc1("A2")
+c22 = Calc1("C4F")
+
+print(c11 + c22)
+print(c11 * c22)

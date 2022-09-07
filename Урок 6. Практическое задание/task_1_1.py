@@ -30,3 +30,67 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+
+"""
+Взял задание с курса алгоритмы 
+Оптимизировавал решение использовав простой цикл место рекурсии
+Убрал дополнительную проверку if выйграл небольшое количество памяти
+"""
+
+
+@profile
+def rec_wrapper(dec_func):
+    def wrapper(*args):
+        res = dec_func(*args)
+        return res
+
+    return wrapper
+
+
+def funct(k):
+    n = k - 1
+    return ((-1) ** n) / (2 ** n)
+
+
+"""
+Старое решение
+"""
+
+
+@rec_wrapper
+def recurs(n, summ=0):
+    if n != 0:
+        summ = summ + funct(n)
+        return recurs(n - 1, summ)
+    else:
+        return summ
+
+
+"""
+Новое решение
+"""
+
+
+@profile
+def func_for(n):
+    summ = 0
+    for i in range(n):
+        summ = summ + funct(i + 1)
+    return summ
+
+
+@profile
+def func_for1(n):
+    summ = 0
+    i = 0
+    while i != n:
+        summ = summ + funct(i + 1)
+        i += 1
+
+    return summ
+
+
+print(recurs(100))
+print("For - ", func_for(100))
+print("While - ", func_for1(100))
