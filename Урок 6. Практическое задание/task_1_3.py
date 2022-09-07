@@ -30,3 +30,27 @@
 
 Это файл для третьего скрипта
 """
+# Исходный код: Урок 5. Практическое задание task_3.py
+#
+# Способ 3 минимизации расходования памяти. Использование NumPy
+#
+#
+from pympler import asizeof
+from numpy import array
+
+# Создание простого списка
+simple_lst = [i for i in range(10 ** 5)]
+print(type(simple_lst))
+print(f"size simple_lst is: {asizeof.asizeof(simple_lst)} bytes")
+"""
+<class 'list'>
+size simple_lst is: 4024448 bytes
+"""
+
+numpy_ndarr = array(simple_lst)
+print(type(numpy_ndarr))
+print(f"size numpy_ndarr is: {asizeof.asizeof(numpy_ndarr)} bytes")
+"""
+<class 'numpy.ndarray'>
+size numpy_ndarr is: 400128 bytes
+"""

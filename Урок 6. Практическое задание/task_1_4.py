@@ -30,3 +30,57 @@
 
 Это файл для четвертого скрипта
 """
+# Исходный код: Урок 4. Практическое задание task_1.py
+#
+# Способ 9 минимизации расходования памяти. Использование возможностей
+# функции filter
+#
+from memory_profiler import memory_usage
+# MEBIBYTE = 1048576
+test_arr = [n for n in range(10000)]
+
+
+def decor_memory_usage(func):
+    def wrapper(*args, **kwargs):
+        mem1 = memory_usage()
+        res = func(args[0], **kwargs)
+        mem2 = memory_usage()
+        mem_diff = mem2[0] - mem1[0]
+        return res, mem_diff
+    return wrapper
+
+
+@decor_memory_usage  # 1 Mebibyte = 1048576 Bytes
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+res_list_1, mem_diff_1 = func_1(test_arr)
+print(f"Выполнение функции func_1 заняло {mem_diff_1:.8f} Mib")
+
+
+@decor_memory_usage
+def func_2(nums):
+    return [i for i, v in enumerate(nums) if not v % 2]
+
+
+res_list_2, mem_diff_2 = func_2(test_arr)
+print(f"Выполнение функции func_2 заняло {mem_diff_2:.8f} Mib")
+
+
+@decor_memory_usage
+def func_3(nums):
+    return list(filter(lambda v: v % 2 == 0, nums))
+
+
+res_filter_3, mem_diff_3 = func_3(test_arr)
+print(f"Выполнение функции func_3 заняло {mem_diff_3:.8f} Mib")
+"""
+Выполнение функции func_1 заняло 0.14843750 Mib
+Выполнение функции func_2 заняло 0.17578125 Mib
+Выполнение функции func_3 заняло 0.04296875 Mib
+"""
