@@ -9,3 +9,23 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+
+def sum_of_nums(a, n):
+    if n == 0:
+        return 0
+    return a + sum_of_nums(a / -2, n - 1)
+
+
+@profile
+def solution_for_func(a, n):
+    return sum_of_nums(a, n)
+
+
+print(solution_for_func(1, 6))
+
+# Обернув вызов функции в другую функцию декоратор
+# посчитает память только один раз, не
+# вызывая лишний раз декоратор
