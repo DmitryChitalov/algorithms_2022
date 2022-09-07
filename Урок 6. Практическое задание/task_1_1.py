@@ -31,11 +31,21 @@
 Это файл для первого скрипта
 """
 from memory_profiler import profile
+
 """
 Взял задание с курса алгоритмы 
 Оптимизировавал решение использовав простой цикл место рекурсии
 Убрал дополнительную проверку if выйграл небольшое количество памяти
 """
+
+
+@profile
+def rec_wrapper(dec_func):
+    def wrapper(*args):
+        res = dec_func(*args)
+        return res
+
+    return wrapper
 
 
 def funct(k):
@@ -48,7 +58,7 @@ def funct(k):
 """
 
 
-@profile
+@rec_wrapper
 def recurs(n, summ=0):
     if n != 0:
         summ = summ + funct(n)
