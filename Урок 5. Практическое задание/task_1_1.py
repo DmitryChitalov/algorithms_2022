@@ -29,44 +29,57 @@
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
 from collections import defaultdict
+from collections import namedtuple
 from statistics import mean
 
 MY_DEF_DIC = defaultdict(int)
 MY_LST = []
+COUNT_FIRM = 0
 
 
-def input_firm():
+def input_firms(num_firm):
+    if num_firm == 0:
+        return MY_DEF_DIC
+
     inp_firm = input('Введите название предприятия: ')
     ls_profit = input('через пробел введите прибыль данного предприятия \n'
                       'за каждый квартал(Всего 4 квартала): ').split()
     profit = 0
     for _ in ls_profit:
         profit = profit + int(_)
-    MY_DEF_DIC[inp_firm] = profit
+    FIRM = namedtuple(inp_firm, 'id firm_name firm_profit')
+    company_data = FIRM(
+        id=num_firm,
+        firm_name=inp_firm,
+        firm_profit=profit
+    )
+    MY_DEF_DIC[num_firm] = company_data
+    num_firm -= 1
+    input_firms(num_firm)
 
 
 def average_profit():
     for key, val in MY_DEF_DIC.items():
-        MY_LST.append(val)
+        MY_LST.append(val.firm_profit)
     ava_prof = mean(MY_LST)
     return ava_prof
 
 
 def comparison_with_average(ava_prof):
     print('Средняя годовая прибыль всех предприятий:', ava_prof)
-    above_average = ' '.join([key for key, val in MY_DEF_DIC.items() if val > ava_prof])
+    above_average = ' '.join([val.firm_name for val in MY_DEF_DIC.values() if val.firm_profit > ava_prof])
+
     print('Предприятия, с прибылью выше среднего значения:', above_average)
-    below_average = ' '.join([key for key, val in MY_DEF_DIC.items() if val < ava_prof])
-    print('Предприятия, с прибылью ниже среднего значения: ', below_average)
-    average = ' '.join([key for key, val in MY_DEF_DIC.items() if val == ava_prof])
+    below_average = ' '.join([val.firm_name for val in MY_DEF_DIC.values() if val.firm_profit < ava_prof])
+    print('Предприятия, с прибылью ниже среднего значения:', below_average)
+    average = ' '.join([val.firm_name for val in MY_DEF_DIC.values() if val.firm_profit == ava_prof])
     if average:
-        print('Предприятия, с прибылью равной среднему значеню: ', average)
+        print('Предприятия, с прибылью равной среднему значеню:', average)
 
 
 if __name__ == '__main__':
-    num_firms = input('Введите количество предприятий для расчета прибыли: ')
-    for i in range(int(num_firms)):
-        input_firm()
+    num_firms = int(input('Введите количество предприятий для расчета прибыли: '))
+    input_firms(num_firms)
 
     average_profit()
     comparison_with_average(average_profit())

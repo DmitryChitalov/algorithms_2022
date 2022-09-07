@@ -24,3 +24,39 @@ reduce
 __mul__
 __add__
 """
+
+
+class IncreaseNumbers:
+    """ Сложениу и умножение двух шестнадцатеричных чисел """
+
+    def __init__(self, num):
+        self.num = list(num)
+
+    def __repr__(self):
+        return self.num
+
+    def __str__(self):
+        return f'Число сохранено : {self.num}'
+
+    def __add__(self, other):
+        self.num = ''.join(self.num)
+        other.num = ''.join(other.num)
+        add_nums = list(hex(int(self.num, 16) + int(other.num, 16)).upper())
+        return f'Сумма чисел: {add_nums[2:]}'
+
+    def __mul__(self, other):
+        self.num = ''.join(self.num)
+        other.num = ''.join(other.num)
+        mul_nuns = list(hex(int(self.num, 16) * int(other.num, 16)).upper())
+        return f'Произведение - {mul_nuns[2:]}'
+
+
+if __name__ == '__main__':
+    first_number = input('Введите первое число: ')
+    first_num = IncreaseNumbers(first_number)
+    print(first_num)
+    second_number = input('Введите второе число: ')
+    second_num = IncreaseNumbers(second_number)
+    print(second_num)
+    print(first_num + second_num)
+    print(first_num * second_num)
