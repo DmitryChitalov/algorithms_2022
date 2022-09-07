@@ -30,3 +30,54 @@
 
 Это файл для пятого скрипта
 """
+import numpy
+from memory_profiler import profile
+
+"""
+Взял задание с курса алгоритмы 
+Сравнил 4е возможных метода добавления информацию
+в словарь, в массив, в nampy массив и добавление через генератор
+Лушче всего себя показали nampy и геенраторы. Они меньше всего используют памяти
+"""
+
+mas = []
+diction = {}
+
+
+# А Заполнение элементами
+@profile
+def fill_list():
+    for i in range(1, 100000):
+        mas.append(i)
+    return
+
+
+@profile
+def fill_numpy():
+    a = numpy.array([])
+    for i in range(1, 100000):
+        numpy.append(a, i)
+    return
+
+
+@profile
+def fill_dic():
+    for i in range(1, 100000):  # O(n)
+        diction[i] = i  # O(1)
+    return
+
+
+@profile
+def fill_gen():
+    a = (a.append(i) for i in (range(1, 100000)))
+    return
+
+
+print("Лист")
+fill_list()
+print("Numpy")
+fill_numpy()
+print("Словарь")
+fill_dic()
+print("Генератор")
+fill_gen()
