@@ -13,3 +13,9 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def check_expression(n):
+    sum_n = lambda l: l if l <= 1 else l + sum_n(l - 1)
+    return sum_n(n) == n * (n + 1) / 2
+
+print(check_expression(5))

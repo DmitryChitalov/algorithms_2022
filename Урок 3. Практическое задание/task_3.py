@@ -22,3 +22,16 @@
 р
 а
 """
+
+from hashlib import sha512
+
+
+def substrings_hash(text):
+    return {sha512(text.lower()[i: j].encode('utf-8')).hexdigest() for i in range(len(text))
+            for j in range(i + 1, len(text) + 1) if text[i: j] != text}
+
+
+s = input('Enter a string: ')
+
+print(len(substrings_hash(s)), substrings_hash(s))
+

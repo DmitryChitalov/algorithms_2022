@@ -27,3 +27,23 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    user_input = lambda n: n if n.isdigit() else user_input(input('Вы вместо числа ввели строку (((. '
+                                                                       'Исправьтесь.\nВведите число: '))
+    check_oper = lambda o: o if o in ['+', '-', '/', '*'] else exit(0) if o == '0' \
+        else (input('Нет такого оператора.'
+                    'Введите +, -, * или /: '))
+    operator = check_oper(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+
+    first_n = user_input(input('Введите первое число: '))
+    second_n = user_input(input('Введите второе число: '))
+    try:
+        print(eval(f'{first_n + operator + second_n}'))
+    except ZeroDivisionError:
+        print('Не надо на ноль делить.')
+    return calc()
+
+calc()
+
+
