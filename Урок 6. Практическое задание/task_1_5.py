@@ -30,3 +30,48 @@
 
 Это файл для пятого скрипта
 """
+
+
+"""ДЗ 2.2"""
+
+
+from memory_profiler import profile
+from random import randint
+
+
+def ch_even(n, oddnum=0, evennum=0):
+    if (n % 2) == 1:
+        oddnum += 1
+    else:
+        evennum += 1
+    return oddnum, evennum
+
+
+@profile
+def num_dig(a):
+    def num_dig1(n, oddnum=0, evennum=0):
+        if len(str(n)) == 1:
+            oddnum, evennum = ch_even(n, oddnum, evennum)
+            return oddnum, evennum
+        else:
+            oddnum, evennum = ch_even(n, oddnum, evennum)
+            n //= 10
+            return num_dig1(n, oddnum, evennum)
+    result = num_dig1(a)
+    return result
+
+
+m = randint(10e200, 10e201)
+print(num_dig(m))
+
+"""Без рекурсии экономия 0.2MiB (15 строка)"""
+@profile
+def num_dig2(n, oddnum=0, evennum=0):
+    while len(str(n)) != 1:
+        oddnum, evennum = ch_even(n, oddnum, evennum)
+        n //= 10
+    oddnum, evennum = ch_even(n, oddnum, evennum)
+    return oddnum, evennum
+
+
+print(num_dig2(m))
