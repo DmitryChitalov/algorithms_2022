@@ -16,3 +16,28 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+if __name__ == '__main__':
+    tlist = [12, 11, 13, 5, 6, 7, 1]
+    print('Массив:', tlist, 'Медиана:', median(tlist))
+    test_list10 = [randint(1, 10) for _ in range(11)]
+    test_list100 = [randint(1, 100) for _ in range(101)]
+    test_list1000 = [randint(1, 1000) for _ in range(1001)]
+    print('Время выполнения на массиве длиной 10 элементов', timeit("median(test_list10[:])",
+                                                                    globals=globals(), number=500))
+    print('Время выполнения на массиве длиной 100 элементов', timeit("median(test_list100[:])",
+                                                                    globals=globals(), number=500))
+    print('Время выполнения на массиве длиной 1000 элементов', timeit("median(test_list1000[:])",
+                                                                    globals=globals(), number=500))
+    """
+    Время выполнения на массиве длиной 10 элементов 0.0009926999999999575
+    Время выполнения на массиве длиной 100 элементов 0.00789620000000002
+    Время выполнения на массиве длиной 1000 элементов 0.14552469999999995
+    
+    Наименьшее время выполнения у встроенной функции median модуля statistics.
+    Наибольшее - у функции, использующей метод сортировки кучей.
+    """
