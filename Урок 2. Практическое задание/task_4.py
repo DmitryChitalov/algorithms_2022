@@ -10,3 +10,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def row_sum(n, i=0, row=1, result=0):
+    if i != n:
+        return row_sum(n=n, i=i + 1, row=row / 2 * -1, result=result + row)
+    else:
+
+        return result
+
+
+try:
+    number = int(input('Введите число: '))
+    print(f'Количество элементов - {number}, их сумма - {row_sum(number)}')
+except ValueError:
+    print('Введено не натуральное число')

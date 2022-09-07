@@ -13,3 +13,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def test(n):
+    if n == 1:
+        print(n, end=' ')
+        return n
+    else:
+        print(n, end='+')
+        return test(n - 1) + n
+
+
+try:
+    n = int(input('Введите число: '))
+    if test(n) == n * (n + 1) / 2:
+        print(f'= {n} * ({n}+1) / 2')
+    else:
+        print(f'!= {n} * ({n}+1) / 2')
+except ValueError:
+    print('Введено не натуральное число')
