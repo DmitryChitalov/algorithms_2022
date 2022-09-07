@@ -18,3 +18,64 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        counter = 0
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                counter += 1
+        if counter == 0:
+            break
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(-100, 100) for _ in range(10)]
+print(orig_list)
+print(bubble_sort(orig_list))
+my_list = [92, 89, 83, 69, 29, -25, -34, -49, -50, -100]
+print(my_list)
+print(bubble_sort(my_list))
+print('*' * 50)
+# замеры 10
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+print('*' * 50)
+# замеры 10
+print(
+    timeit(
+        "bubble_sort(my_list[:])",
+        globals=globals(),
+        number=1000))
+
+my_list = [92, -1, 34, -34, -11, 33, -53, -32, -15, -51, 75, -9, -7, 1, 97, 6, -94, -81, -9, -19, 35, 22, -58, 45, 51, 68, -66, 56, 41, 85, 38, 80, 53, 94, 20, 18, 12, -98, -95, -87, -19, -10, -13, 57, -97, 53, 79, -97, 62, 75, 97, 76, -15, 34, -89, -22, 12, 63, 64, 65, 50, 89, -75, 47, -69, 31, -76, -56, -97, -69, -9, -25, 67, 68, -7, -28, -48, -49, -80, 34, -30, -22, 56, 34, -90, 28, -73, 40, 46, 100, 84, -99, -41, 37, -39, -81, 54, -20, -49, 4]
+
+# замеры 100
+print(
+    timeit(
+        "bubble_sort(my_list[:])",
+        globals=globals(),
+        number=1000))
+
+# данная доработка эффективна только в том случае если список слабо "перемешан" (особенно ближе к концу, тогда будет меньше итераций и функция отработает быстрее)
+
