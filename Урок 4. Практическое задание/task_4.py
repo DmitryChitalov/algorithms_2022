@@ -9,8 +9,10 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
+
+array = [3, 1, 1, 3, 4, 5, 1]
 
 
 def func_1():
@@ -37,5 +39,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_count_elem = max(array, key=array.count)
+    max_count = array.count(max_count_elem)
+    return f'Число {max_count_elem} встречается чаще всего: {max_count} раз(а)'
+
+
 print(func_1())
+print(timeit('func_1()', globals=globals()))
 print(func_2())
+print(timeit('func_2()', globals=globals()))
+print(func_3())
+print(timeit('func_3()', globals=globals()))
+
+"""
+Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+2.62306929999977
+Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+3.0135897000000114
+Число 1 встречается чаще всего: 3 раз(а)
+2.5803303000002416
+Получилось немного ускорить задачу"""

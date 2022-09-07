@@ -17,8 +17,9 @@ from random import randint
 
 
 def recursive_reverse(number):
+    """Рекурсивный разворот"""
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -59,6 +60,7 @@ def memoize(f):
 
 @memoize
 def recursive_reverse_mem(number):
+    """ реверс с мемоизацией"""
     if number == 0:
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
@@ -80,3 +82,18 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.03429350000033082
+0.039856399999735004
+0.10064740000007077
+Оптимизированная функция recursive_reverse_mem
+0.0025868000002446934
+0.002426000000014028
+0.002768399999695248
+
+Замеры оптимизированной функции показывают лучшие результаты.
+но эти результаты показаны для 10000 вызовов для одного и того же числа.
+Если функция вызывается только один раз, оптимизация не имеет смысла.
+Потому что при реверсе не встречаются одинаковые подстроки"""
