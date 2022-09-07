@@ -35,9 +35,9 @@ import numpy
 from memory_profiler import profile
 
 """
-Взял задание с курса алгоритмы 
-
-
+Взял задание с курса алгоритмы  
+Сравнение nampy и словаря. 
+При исползовании словаря - опративная память используется меньше
 """
 
 diction = {}
@@ -53,7 +53,7 @@ def fill_numpy():
 
 @profile
 def fill_dic():
-    for i in range(1, 1000000):  # O(n)
+    for i in range(1, 100000):  # O(n)
         diction[i] = i  # O(1)
     return
 
