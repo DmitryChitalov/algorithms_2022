@@ -32,7 +32,11 @@ def gnome(some_list):
             if i < 0:
                 i, index = index, index + 1
     return orig_list
-
+"""
+0.005511600058525801
+0.04279040009714663
+0.5367399000097066
+"""
 
 m = 6
 orig_list = [randint(1, 100) for _ in range(2*m + 1)]
