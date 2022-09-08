@@ -16,3 +16,19 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def make_lst(m):
+    return [randint(-100, 100) for i in range(2*m+1)]
+
+
+print(timeit("median(make_lst(10))", globals=globals(), number=100))
+print(timeit("median(make_lst(100))", globals=globals(), number=100))
+print(timeit("median(make_lst(1000))", globals=globals(), number=100))
+
+"""
+встроенный метод из модуля statistics самый быстрый в исполнении
+"""
