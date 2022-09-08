@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def my_recurs(numb):
+    if numb == 1:
+        return numb
+    else:
+        return my_recurs(numb - 1) + numb
+
+
+try:
+    NUMB = int(input("Введите число:"))
+    if my_recurs(NUMB) == NUMB * (NUMB + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print("Вы вместо числа ввели строку.Исправьте.")
