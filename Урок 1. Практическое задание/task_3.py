@@ -17,3 +17,28 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+my_dict = {'apple': 1000,
+           'microsoft': 2000,
+           'tesla': 5000,
+           'lada': 500,
+           'samsung': 1500}
+
+# 1 вариант O(n^2*log n)
+
+sort_dict = sorted(my_dict.values(), reverse=True)  # O(n log n)
+top3 = {}  # O(1)
+for i in sort_dict:  # O(n)
+    for j in my_dict.keys():  # O(n)
+        if my_dict[j] == i and len(top3) != 3:  # O(n + 1)
+            top3[j] = i  # O(1)
+print(top3)  # O(1)
+
+# 2 вариант O(n*log n)
+
+my_dict2 = list(my_dict.items())  # O(len(...)
+my_dict2.sort(key=lambda i: i[1], reverse=True)  # O(n log n)
+print(my_dict2[0:3])  # O(1)
+
+# Второй вариант эффективнее т. к. список перебирается 1 раз и делается простой срез,
+# без создания еще одного словаря. Плюс, если бы данные хранились изначально в списке, а не словаре, то
+# приравнивать к списку не нужно бы было.
