@@ -18,54 +18,59 @@ from collections import Counter
 
 
 # Подготовить таблицу вероятностей каждого символа
-def findTheCharFrequency(text):
-    count = Counter(text)
+def findfrequency(chars):
+    count = Counter(chars)
     sorted_elements = dict(sorted(count.items(), key=lambda item: item[1]))
     return sorted_elements
 
+
 # Создать класс узла
-class Node(object):
+class BinaryTree(object):
     def __init__(self, name=None, value=None):
         self.name = name
         self.value = value
-        self.lchild = None
-        self.rchild = None
+        # левый потомок
+        self.left_child = None
+        # правый потомок
+        self.right_child = None
+
 
 # Создать дерево Хаффмана
 class HuffmanTree(object):
     def __init__(self, elements: dict):
-        self.Leaf = [Node(key, value) for key, value in elements.items()]
+        # Из словарей отсортированных по значению создаем самостоятельные объекты
+        self.Leaf = [BinaryTree(key, value) for key, value in elements.items()]
+        # Перебираем объекты пока не дойдем до корня
         while len(self.Leaf) != 1:
             self.Leaf.sort(key=lambda x: x.value, reverse=True)
-            n = Node(value=(self.Leaf[-1].value + self.Leaf[-2].value))
+            n = BinaryTree(value=(self.Leaf[-1].value + self.Leaf[-2].value))
             n.lchild = self.Leaf.pop(-1)
             n.rchild = self.Leaf.pop(-1)
             self.Leaf.append(n)
         self.root = self.Leaf[0]
         self.Buffer = list(range(10))
 
-    # Создавать коды с рекурсивным мышлением
-    def Hu_generate(self, tree, length):
-        node = tree
-        if (not node):
+    def code_generate(self, tree_data, length):
+        if not tree:
             return
-        elif node.name:
-            print(node.name + ' is:', end='')
+        elif tree_data.name:
+            print(f'"{tree_data.name}" :', end='')
             for i in range(length):
                 print(self.Buffer[i], end='')
-            print('\n')
+            print()
             return
         self.Buffer[length] = 0
-        self.Hu_generate(node.lchild, length + 1)
+        self.code_generate(tree_data.lchild, length + 1)
         self.Buffer[length] = 1
-        self.Hu_generate(node.rchild, length + 1)
+        self.code_generate(tree_data.rchild, length + 1)
 
-    #Output кодировка Хаффмана
+    #  Вывод кодировки Хаффмана
     def get_code(self):
-        self.Hu_generate(self.root, 0)
+        self.code_generate(self.root, 0)
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     text = r'He threw three free throws.'
-    counted_elements = findTheCharFrequency(text)  # Сначала посчитали и отсортировали число вхождений
-    tree = HuffmanTree(counted_elements)
-    tree.get_code()
+    counted_elements = findfrequency(text)  # Сначала посчитали и отсортировали число вхождений
+    tree = HuffmanTree(counted_elements)  # Сформировали из отсортированных значений, данные кодировки
+    tree.get_code()  # Вывод данных
