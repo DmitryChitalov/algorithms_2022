@@ -24,3 +24,20 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+from functools import reduce
+
+def numbers():
+    numbers = defaultdict(list)
+    for i in range(1, 3):
+        number = input(f"Введите {i}-е шестнадцатеричное число: ")
+        numbers[number] = list(number)
+    return numbers
+
+def_number = numbers()
+print("Числа сохранены как: ", end=' ')
+print(*def_number.values())
+my_sum = sum([int(''.join(i), 16) for i in def_number.values()])
+print("Сумма: ", list(format(my_sum, 'X')))
+my_mult = reduce(lambda x, y: x * y, [int(''.join(i), 16) for i in def_number.values()])
+print("Произведение: ", list(format(my_mult, 'X')))
