@@ -80,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+'''Не смог анализировать, пока что нет времени, возможно вернусь к ней позже'''

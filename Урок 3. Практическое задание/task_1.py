@@ -28,3 +28,67 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_counter(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        func(*args, **kwargs)
+        end = time.time()
+        result = end - start
+        print(f'Время выполнения функции {func.__name__} составило :')
+        return result
+    return wrapper
+
+
+my_list = []
+my_dict = {}
+
+
+@time_counter
+def new_list():
+    for i in range(1, 1000000):       # 0(1) Операция по добавлению элемента в список быстрее
+        my_list.append(i)                    # т.к словарь расчитывает хэш
+    return my_list
+
+
+print(new_list())
+
+
+print()
+
+
+@time_counter
+def new_dict():
+    for i in range(1, 1000000):      # O(1)
+        my_dict[i] = i
+    return my_dict
+
+
+print(new_dict())
+
+print()
+new_list = [x for x in range(1, 1000000)]
+new_dict = {x: x for x in range(1, 1000000)}
+
+
+@time_counter
+def del_list(l):
+    for i in l:
+        l.pop(i)
+        return l
+
+
+print(del_list(new_list))
+print()
+
+
+@time_counter
+def del_dict(d):          # Операция по удалению элемента из списка словаря быстрее
+    for i in d:
+        d.pop(i)
+        return d
+
+
+print(del_dict(new_dict))
