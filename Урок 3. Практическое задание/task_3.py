@@ -22,3 +22,12 @@
 р
 а
 """
+from hashlib import sha256
+
+text1 = 'mamamilaramu'
+buf = set()
+for i in range(len(text1)):
+    for j in range(i, len(text1), 1):
+        buf.add(sha256(text1[i:j].encode()).hexdigest())
+        # print(text1[i:j])
+print(f'Количество различных (уникальных) подстрок в строке "{text1}" составляет {len(buf)}')
