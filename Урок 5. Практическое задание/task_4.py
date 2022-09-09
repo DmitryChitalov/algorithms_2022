@@ -36,7 +36,7 @@ dct = {i: i for i in range(100000)}
 ordered_dct = OrderedDict(dct)
 
 def change_dct():
-    for key in range(100):
+    for key in range(100000):
         dct[key] = '1'
 
 def change_ordered_dct():
