@@ -30,3 +30,34 @@
 
 Это файл для третьего скрипта
 """
+# Основы Python. Урок 5, задание №5
+
+from memory_profiler import profile
+
+#Исходный код
+@profile
+def get_uniq_numbers(src: list):
+    dict_nums = {}
+    for x in src:
+        dict_nums[x] = dict_nums.get(x, 0) + 1  # считаем в значениях количество повторов числа по по ключу числа
+    new_list = [x for x in src if dict_nums[x] == 1] # формируем список из ключей, в которых значение == 1
+
+    return new_list
+
+#Оптимизированный код (удаление словаря, в который помещались промежуточные подсчеты)
+@profile
+def get_uniq_numbers_1(src: list):
+    dict_nums = {}
+    for x in src:
+        dict_nums[x] = dict_nums.get(x, 0) + 1  # считаем в значениях количество повторов числа по по ключу числа
+    new_list = [x for x in src if dict_nums[x] == 1] # формируем список из ключей, в которых значение == 1
+    del dict_nums
+    return new_list
+
+
+# src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+# src = [randint(0,100) for i in range(500)]
+# src = [randint(0,10000) for i in range(50000)]
+print(get_uniq_numbers_(src))
+
+# Оптимизация заметна лишь при увеличении количества элементов в списке
