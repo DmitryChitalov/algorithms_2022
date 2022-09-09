@@ -28,3 +28,89 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+from random import randint
+
+
+def timer1(func):
+    def time_mes(*args, **kwargs):
+        start = time()
+        act = func(*args, **kwargs)
+        stop = time()
+        res = stop - start
+        print(f'Функция выполняется за {res}')
+        return act
+    return time_mes
+
+
+# №1
+@timer1
+def ls_made(n):
+    ls = []
+    for i in range(n):
+        ls.append(randint(0, 100))  # O(1)константная
+    return ls
+
+
+@timer1
+def dic_made(n):
+    dic = {}
+    for i in range(n):
+        dic[i] = (randint(0, 100))  # O(1)константная
+    return dic
+
+
+print('заполнение списка')
+a = ls_made(1000000)
+print('заполнение словаря')
+b = dic_made(1000000)
+"""Формирование списка проходит немного быстрее, т.к. в слловаре необходимо создавать для каждой записи
+ уникальный ключ"""
+
+
+# №2
+@timer1
+def ls_get(ls):
+    for i in range(len(ls)):
+        el = ls[i]  # O(1)константная
+    return
+
+
+@timer1
+def dic_get(dic):
+    for i in dic.keys():
+        el = dic[i]  # O(1)константная
+    return
+
+
+print('получение элемента списка')
+ls_get(a)
+print('получение элемента словаря')
+dic_get(b)
+"""Получение элемента списка и получение элемента словаря происходит за одно и тоже время,
+ т.к. поиск по индексу и поиск по ключу идентичны по сложности и скорости"""
+
+
+# №3
+@timer1
+def ls_del(ls):
+    ln = len(ls)
+    for i in range(ln):
+        ls.pop()  # O(1)константная
+    return
+
+
+@timer1
+def dic_del(dic):
+    ln = len(dic.keys())
+    for i in range(ln):
+        dic.popitem()  # O(1)константная
+    return
+
+
+print('удаление элемента списка')
+ls_del(a)
+print('удаление элемента словаря')
+dic_del(b)
+"""Удаление элементов списка происходит быстрее, т.к. удаляется только значение в определенной позиции.
+ А в словаре необходимо удалить еще и значение ключа."""
