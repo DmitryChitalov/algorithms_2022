@@ -30,3 +30,45 @@
 
 Это файл для пятого скрипта
 """
+# Основы Python. Урок 5, задание №4
+
+from memory_profiler import memory_usage
+import numpy as np
+
+some_list = np.random.randint(0, 300, 50000)
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+#Исходный код
+@decor
+def list_more_numb_1(lst):
+    result = [num for i, num in enumerate(lst) if lst[i] > lst[i - 1] and i > 0]
+    return result
+
+#Оптимизированный код
+@decor
+def list_more_numb_2(lst):
+    for i in range(1, len(lst)):
+        if lst[i] > lst[i - 1]:
+            yield lst[i]
+
+
+if __name__ == "__main__":
+    gen, mem_differ = list_more_numb_1(some_list)
+    print(f'выполнено за {mem_differ} Mib')
+
+if __name__ == "__main__":
+    res, mem_diff = list_more_numb_2(some_list)
+    for i in res:
+        print(i)
+    print(f'выполнено за {mem_diff} Mib')
+
+# получено существенное улучшение - через список - выполнено за 1.22265535 Mib, выполнение через генератор - выполнено за 0.00389535 Mib
