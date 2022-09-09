@@ -15,3 +15,15 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from hashlib import sha256
+flag1 = True
+cash = {}
+while flag1 is True:
+    url = input('Введите URL-адрес: ')
+    if url in cash.keys():
+        print(cash[url])
+    else:
+        cash[url] = sha256(url.encode() + url[::-1].encode()).hexdigest()
+    if input('Продолжить (Да/Нет): ') == 'Нет':
+        flag1 = False
+print(cash)
