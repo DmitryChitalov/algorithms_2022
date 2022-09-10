@@ -16,3 +16,26 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+import statistics
+
+list_1 = [randint(-100, 100) for _ in range(2 * randint(10, 15) + 1)]
+list_2 = [randint(-100, 100) for _ in range(2 * randint(100, 105) + 1)]
+list_3 = [randint(-100, 100) for _ in range(2 * randint(1000, 1005) + 1)]
+
+
+def m3(list):
+    return f'Медиана: {statistics.median(list)}'
+
+
+print('Массив 10-15 элементов: ', timeit('m3(list_1[:])', globals=globals(), number=100), f'\n{m3(list_1[:])}')
+print('Массив 100-105 элементов: ', timeit('m3(list_2[:])', globals=globals(), number=100), f'\n{m3(list_2[:])}')
+print('Массив 1000-1005 элементов: ', timeit('m3(list_3[:])', globals=globals(), number=100), f'\n{m3(list_3[:])}')
+
+"""
+Массив 10-15 элементов:  0.0001036000030580908 
+Массив 100-105 элементов:  0.0007097999987308867 
+Массив 1000-1005 элементов:  0.015283200002158992 
+"""
