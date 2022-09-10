@@ -22,3 +22,20 @@
 р
 а
 """
+
+
+import hashlib
+
+
+def number_of_unique(row_def):
+    unique_substrings = set()
+    for i in range(1, len(row_def)):
+        for j in range(len(row_def) - i + 1):
+            res = hashlib.sha256(row_def[j:j + i].encode('utf-8')).hexdigest()
+            unique_substrings.add(res)
+            print(row_def[j:j + i], end=' ')
+    return len(unique_substrings)
+
+
+row = input('Введите строку: ')
+print(f'\nВ строке {row} {number_of_unique(row)} уникальных подстрок')
