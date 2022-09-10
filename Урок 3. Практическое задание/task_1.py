@@ -28,3 +28,91 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+TEST_DCT = {}
+TEST_LST = []
+
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        res = func(*args, **kwargs)
+        finish = time.time()
+        run_time = finish - start
+        print(f'Время работы функции {run_time}')
+        return res
+    return wrapper
+
+
+@timer
+def filling_lst(value):      # O(n)
+    for i in range(value):   # O(n)
+        TEST_LST.append(i)   # O(1)
+    return f'Список заполнен'
+
+
+@timer
+def filling_dct(value):      # O(n)
+    for i in range(value):   # O(n)
+        TEST_DCT[i] = i      # O(1)
+    return f'Словарь заполнен'
+
+
+print(filling_dct(9999999))
+print(filling_lst(9999999))
+"""
+По первому пункту список заполняется чуть быстрее, т.к.
+словарь тратит время на вычисление хеш(Но бывает и наоборот)
+Время работы функции списка 1.2909142971038818
+Время работы функции словаря 1.3684840202331543
+"""
+
+
+@timer
+def get_element_lst(value):  # O(n)
+    for i in range(value):   # O(n)
+        elem = TEST_LST[i]   # O(1)
+    return f'Элементы списка получены'
+
+
+@timer
+def get_element_dct(value):  # O(n)
+    for i in range(value):   # O(n)
+        elem = TEST_DCT[i]   # O(1)
+    return f'Элементы словаря получены'
+
+
+print(get_element_lst(9999999))
+print(get_element_dct(9999999))
+"""
+По второму пункту элементы списка получаю быстрее, т.к.
+в словаре затрачивается время на вычисление хеша
+Время работы функции списка 0.9995875358581543
+Время работы  словаря 1.9830639362335205
+"""
+
+
+@timer
+def delete_element_lst(value):  # O(n**2)
+    for i in range(value):      # O(n)
+        TEST_LST.remove(i)      # O(n)
+    return f'Элементы списка удалены'
+
+
+@timer
+def delete_element_dct(value):  # O(n)
+    for i in range(value):      # O(n)
+        TEST_DCT.pop(i)         # O(1)
+    return f'Элементы словаря удалены'
+
+
+print(delete_element_lst(999))
+print(delete_element_dct(999))
+"""
+По третьему пункту удаление во много раз быстрее в словаре т.к.
+удаление из списка проходит в квадратичной сложности  в словаре линейно
+Время работы функции списка 10.986734390258789
+Время работы функции словаря 0.0009982585906982422
+"""

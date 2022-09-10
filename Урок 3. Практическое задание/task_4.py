@@ -4,7 +4,6 @@
 
 Функция должна принимать url-адрес и проверять
 есть ли в кэше соответствующая страница или нет
-есть ли в кэше соответствующая страница или нет
 
 Пример кэша: {'url-адрес': 'хеш url-а'; 'url-адрес': 'хеш url-а'; ...}
 
@@ -15,3 +14,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+from uuid import uuid4
+import hashlib
+
+SALT = uuid4().hex
+cache_base = {}
+
+
+def get_url(url):
+    if cache_base.get(url):
+        return f'Этот адрес есть в кеше {cache_base[url]}'
+    else:
+        result = hashlib.sha256(SALT.encode('utf-8') + url.encode('utf-8')).hexdigest()
+        cache_base[url] = result
+        return f'Адрес сохранён в кеш'
+
+
+print(get_url('http://vk.com/'))
+
+print(get_url('http://vk.com/'))
