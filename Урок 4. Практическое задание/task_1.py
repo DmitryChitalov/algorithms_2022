@@ -27,7 +27,6 @@ print(timeit.timeit(setup='', stmt=mycode, number=10000))
 
 mycode1 = '''
 def func_1(nums):
-    new_arr = []
     new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
     return new_arr
 '''
