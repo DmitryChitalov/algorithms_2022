@@ -16,3 +16,21 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+import random
+from timeit import timeit
+from statistics import median
+
+
+m = 5
+some_array = [random.randint(-100, 100) for _ in range(2 * m + 1)]
+print(some_array)
+print(f'Медиана: {median(some_array[:])}')
+
+
+for m in [10, 100, 1000]:
+    test_list = [random.randint(-100, 100) for _ in range(m)]
+    print(f'Сортировка списка из {m} элементов: ', end=' ')
+    print(timeit('median(test_list[:])', globals=globals(), number=1000))
+
+#Самый эффективный способ поиска медианы - применение встроенной функции.
