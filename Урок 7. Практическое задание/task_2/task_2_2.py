@@ -14,3 +14,25 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+import random
+from timeit import timeit
+
+
+def find_median(my_array):
+    avg_val = sum(my_array) / len(my_array)
+    next_to_avg_val = my_array[0]
+    for i in my_array:
+        if abs(i - avg_val) < abs(i - next_to_avg_val):
+            next_to_avg_val = i
+    return next_to_avg_val
+
+m = 5
+some_array = [random.randrange(-100, 100) for i in range(2*m + 1)]
+
+print(timeit("find_median(some_array[:])", globals=globals(), number=1))
+m = 50
+some_array = [random.randrange(-100, 100) for i in range(2*m + 1)]
+print(timeit("find_median(some_array[:])", globals=globals(), number=1))
+m = 500
+some_array = [random.randrange(-100, 100) for i in range(2*m + 1)]
