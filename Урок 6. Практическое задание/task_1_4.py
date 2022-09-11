@@ -30,3 +30,62 @@
 
 Это файл для четвертого скрипта
 """
+from random import randint
+from memory_profiler import profile
+
+
+@profile
+def list_append(num):
+    """
+    Заполнение списка цифрами через append и
+    добавление случайного числа
+    :param num: количество элементов списка
+    :return: список чисел
+    """
+    lst = []
+    lst_random = [randint(0, j) for j in range(num)]
+    for i in range(num):
+        lst.append(i + lst_random[i])
+    return lst
+
+
+@profile
+def list_append_opti(num):
+    """
+    Заполнение списка цифрами через append и
+    добавление случайного числа
+    :param num: количество элементов списка
+    :return: список чисел
+    """
+    lst = []
+    lst_random = [randint(0, j) for j in range(num)]
+    for i in range(num):
+        lst.append(i + lst_random[i])
+    del lst_random
+    return lst
+
+
+if __name__ == '__main__':
+    list_append(10 ** 5)
+    list_append_opti(10 ** 5)
+
+    """
+    Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    54     23.0 MiB     23.0 MiB           1   @profile
+    55                                         def list_append_opti(num):
+    56                                             
+    57                                             Заполнение списка цифрами через append и нахождение суммы
+    58                                             элементов списка
+    59                                             :param num: количество элементов списка
+    60                                             :return: сумма элементов
+    61                                             
+    62     23.0 MiB      0.0 MiB           1       lst = []
+    63     24.3 MiB      1.3 MiB      100003       lst_random = [randint(0, j) for j in range(num)]
+    64     28.6 MiB      3.1 MiB      100001       for i in range(num):
+    65     28.6 MiB      1.2 MiB      100000           lst.append(i + lst_random[i])
+    66     27.0 MiB     -1.6 MiB           1       del lst_random
+    67     27.0 MiB      0.0 MiB           1       return lst
+    
+    Использование del очищает память удаляя уже не используемый список
+    """

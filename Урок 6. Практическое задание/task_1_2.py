@@ -30,3 +30,59 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile, memory_usage
+
+
+def decor_profiler(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return mem_diff
+
+    return wrapper
+
+
+@decor_profiler
+def num_revers(num):
+    def number_revers(number):
+        """
+        Реверс цифр натурального цисла с использованием рекурсии
+        :param number: число
+        :return: строку с реверсным цислом
+        """
+        if number < 10:
+            return str(number)
+        else:
+            return str(number % 10) + str(number_revers(number // 10))
+
+    return number_revers(num)
+
+
+@decor_profiler
+def number_revers_opti(number):
+    """
+    Реверс цифр натурального цисла
+    :param number: число
+    :return: строку с реверсным цислом
+    """
+    return print(str(number)[::-1])
+
+
+if __name__ == '__main__':
+    my_num = 7513845012384901238563974583245873289453294502394590384985903274907590237490570329475
+
+    print('Замер памяти используя реверс строки: ', number_revers_opti(my_num))
+    print('Замер памяти используя рекурсию: ', num_revers(my_num))
+
+    """
+    Результаты замеров:
+    Замер памяти используя реверс строки:  0.01171875
+    Замер памяти используя рекурсию:  0.0234375
+    
+    При использовании алгоритма для реверса числа показало,
+    что эффективный для использования памяти
+    стал алгоритм, который переводит число в строку и делает ее реверс,
+    по сравнению с использованием рекурсии
+    """

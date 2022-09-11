@@ -30,3 +30,85 @@
 
 Это файл для третьего скрипта
 """
+from random import randint
+from memory_profiler import profile
+
+
+@profile
+def list_append(num):
+    """
+    Заполнение списка цифрами через append и
+    добавление случайного числа
+    :param num: количество элементов списка
+    :return: список чисел
+    """
+    lst = []
+    lst_random = [randint(0, j) for j in range(num)]
+    for i in range(num):
+        lst.append(i + lst_random[i])
+    return lst
+
+
+@profile
+def list_append_opti(num):
+    """
+    Заполнение списка цифрами через append и
+    добавление случайного числа
+    :param num: количество элементов списка
+    :return: список чисел
+    """
+    lst = []
+    gen_num = (randint(0, j) for j in range(num))
+    i = 0
+    for el in gen_num:
+        lst.append(i + el)
+        i += 1
+    return lst
+
+
+if __name__ == '__main__':
+    list_append_opti(10 ** 5)
+    list_append(10 ** 5)
+
+    """
+    Результаты замеров:
+    с использованием генератора
+    Line #    Mem usage    Increment  Occurrences   Line Contents
+    =============================================================
+    52     20.2 MiB     20.2 MiB           1   @profile
+    53                                         def list_append_opti(num):
+    54                                             
+    55                                             Заполнение списка цифрами через append и
+    56                                             добавление случайного числа
+    57                                             :param num: количество элементов списка
+    58                                             :return: список чисел
+    59                                             
+    60     20.2 MiB      0.0 MiB           1       lst = []
+    61     25.1 MiB      0.0 MiB      200003       gen_num = (randint(0, j) for j in range(num))
+    62     20.2 MiB      0.0 MiB           1       i = 0
+    63     25.1 MiB      3.0 MiB      100001       for el in gen_num:
+    64     25.1 MiB      1.8 MiB      100000           lst.append(i + el)
+    65     25.1 MiB      0.1 MiB      100000           i += 1
+    66     25.1 MiB      0.0 MiB           1       return lst
+
+
+    с использованием списка
+    Line #    Mem usage    Increment  Occurrences   Line Contents
+    =============================================================
+    37     21.7 MiB     21.7 MiB           1   @profile
+    38                                         def list_append(num):
+    39                                             
+    40                                             Заполнение списка цифрами через append и
+    41                                             добавление случайного числа
+    42                                             :param num: количество элементов списка
+    43                                             :return: список чисел
+    44                                             
+    45     21.7 MiB      0.0 MiB           1       lst = []
+    46     25.1 MiB      3.4 MiB      100003       lst_random = [randint(0, j) for j in range(num)]
+    47     28.9 MiB      3.1 MiB      100001       for i in range(num):
+    48     28.9 MiB      0.8 MiB      100000           lst.append(i + lst_random[i])
+    49     28.9 MiB      0.0 MiB           1       return lst
+    
+    Заполнение списка с использованием генератора в отличие от списка 
+    позволяеет уменьшить использование памяти
+    """
