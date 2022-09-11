@@ -22,3 +22,41 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+from hashlib import sha256
+import csv
+
+
+def users_data():
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    hash_pass = sha256(login.encode() + password.encode()).hexdigest()
+    return login, hash_pass
+
+
+def write_data():
+    login, hash_pass = users_data()
+    print(f'В базе данных хранится строка: {hash_pass}')
+    with open("users_data.csv", mode="w") as w_file:
+        file_writer = csv.writer(w_file, delimiter=",", lineterminator="\r")
+        file_writer.writerow([login, hash_pass])
+
+
+def check_data():
+    login, check_pass = users_data()
+    print(check_pass)
+    with open("users_data.csv", mode="r") as r_file:
+        file_reader = csv.reader(r_file, delimiter=",")
+        f = 0
+        for n in file_reader:
+
+            if login == n[0] and check_pass == n[1]:
+                print('Данные верны, вы вошли в систему')
+                f = 1
+                break
+        if f == 0:
+            print('Пользователь с такими данными не найден')
+
+
+write_data()
+check_data()
