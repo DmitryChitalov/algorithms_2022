@@ -30,3 +30,68 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import profile, memory_usage
+
+
+def decor_profiler(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return mem_diff
+
+    return wrapper
+
+
+@decor_profiler
+def culc_even_noteven(number, even=0, not_even=0):
+    """
+    Подсчет четных и не четных цифр в рекурссии
+    :param number: введенное цисло
+    :param even: количество четных
+    :param not_even: количество не четных
+    :return: строка с указанием сколько четных и не четных цифр
+    """
+    if number == 0:
+        return f'четных чисел {even}, не четных {not_even}'
+    else:
+        cur_number = number % 10
+        number = number // 10
+        if cur_number % 2 == 0:
+            even += 1
+        else:
+            not_even += 1
+        return culc_even_noteven(number, even, not_even)
+
+
+@decor_profiler
+def culc_even_noteven_opti(number):
+    """
+    Подсчет четных и не четных цифр в цисле
+    :param number: введенное цисло
+    :return: строка с указанием сколько четных и не четных цифр
+    """
+    even = 0
+    not_even = 0
+    while number != 0:
+        if number % 10 == 0:
+            even += 1
+        else:
+            not_even += 1
+        number = number // 10
+    return f'четных чисел {even}, не четных {not_even}'
+
+
+if __name__ == '__main__':
+    print('Результат замера с использованием цикла: ',
+          culc_even_noteven_opti(487364593204750394095739047590374532452345349057093745973049))
+    print('Результат замера с использованием рекурсии: ',
+          culc_even_noteven(487364593204750394095739047590374532452345349057093745973049))
+    """
+    Результат замера с использованием цикла:  0.01171875
+    Результат замера с использованием рекурсии:  0.0859375
+    
+    В алгоритме подсчета четных и не четных цифр в числе показал, что
+    использования цикла эффективнее чем рекурсии по затрачеваемой памяти
+    """

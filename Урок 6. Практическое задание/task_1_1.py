@@ -30,3 +30,70 @@
 
 Это файл для первого скрипта
 """
+from sys import getsizeof
+
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        self.elems = []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+
+class QueueClassOpti:
+    __slots__ = ['elems']
+
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        self.elems = []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+
+def create_queue(num):
+    queue_stand = QueueClass()
+    for i in range(num):
+        queue_stand.to_queue(i)
+    return queue_stand
+
+
+def create_queue_opti(num):
+    queue_opti = QueueClassOpti()
+    for i in range(num):
+        queue_opti.to_queue(i)
+    return queue_opti
+
+
+if __name__ == '__main__':
+    my_num = 10 ** 4
+
+    print('Размер объекта класса созданного со слотами: ', getsizeof(create_queue_opti(my_num)))
+    print('Размер объекта класса созданного без слотов: ', getsizeof(create_queue(my_num)))
+    """
+    Результаты замеров:
+    Размер объекта класса созданного со слотами:  40
+    Размер объекта класса созданного без слотов:  48
+    
+    Создания класса - очередь, с использованием слота и без.
+    Показал, что созданный объект с использованием слота,
+    занимает меньше памяти
+    """
