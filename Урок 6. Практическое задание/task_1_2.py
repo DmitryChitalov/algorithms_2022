@@ -2,7 +2,7 @@
 Задание 1.
 
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы Python
+курсов Алгоритмы и Основы
 
 На каждый скрипт нужно два решения - исходное и оптимизированное.
 
@@ -30,3 +30,40 @@
 
 Это файл для второго скрипта
 """
+# код из задания 1, урок 4
+
+from memory_profiler import profile
+
+
+@profile
+def shell():
+    some_arr = []
+    for i in range(100000):
+        some_arr.append(i)
+
+    new_arr = []
+    for i in range(len(some_arr)):
+        if some_arr[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+# так как нам не требуется менять исходный тестовый массив, можно получить выигрышь в памяти,
+# сделав из него кортеж, сразу после генерации, перед дальнейшим использованием в коде
+
+@profile
+def shell_2():
+    some_arr = []
+    for i in range(100000):
+        some_arr.append(i)
+    some_arr = tuple(some_arr)
+
+    new_arr = []
+    for i in range(len(some_arr)):
+        if some_arr[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+shell()
+shell_2()
