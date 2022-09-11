@@ -28,3 +28,76 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def time_measure(func):
+    def wrapper(*args):
+        start_t = time.time()
+        func(*args)
+        end_t = time.time()
+        return end_t - start_t
+
+    return wrapper
+
+
+my_lst = []
+my_dict = dict()
+
+
+# a)
+
+@time_measure
+def list_fill(n):
+    for i in range(n):  # O(n)
+        my_lst.append(i)  # O(1)
+
+
+@time_measure
+def dict_fill(n):
+    for i in range(n):  # O(n)
+        my_dict[i] = i  # O(1)
+
+
+print('Время на заполнение списка -', list_fill(100000000))
+print('Время на заполнение словаря -', dict_fill(100000000))
+
+
+# Время для списка: 4.80 сек, для словаря - 6.69 сек. Сложность у обеих функций линейная, значит список заполняется
+# быстрее, потому что не создаются хэши записей для хранения хэш-таблицы в оперативной памяти, как в случае со словарем
+
+# b)
+
+
+@time_measure
+def dict_del(n):
+    return my_dict.pop(n)           # O(1)
+
+
+@time_measure
+def lst_del(n):
+    return my_lst.pop(n)            # O(n)
+
+
+@time_measure
+def lst_change():
+    for i in range(len(my_lst)):    # O(n)
+        my_lst[i] = 100             # O(n)
+    return
+
+
+@time_measure
+def dict_change():
+    for i in my_dict.keys():        # O(n)
+        my_dict[i] = 100            # O(1)
+    return
+
+
+print('Время на удаление элемента из списка -', lst_del(9999997))
+print('Время на удаление элемента из словаря -', dict_del(9999997))
+print('Время на изменение элемента из списка -', lst_change())
+print('Время на изменение элемента из словаря -', dict_change())
+
+# Список - 0.05 сек и 3.29 сек, словарь - 0.0 сек и 2.8 сек соответственно. Операции со словарем быстрее, потому
+# что идет поиск по хешу, из-за этого операции поиска в словаре имеют константуную сложность, а в списке линейную
