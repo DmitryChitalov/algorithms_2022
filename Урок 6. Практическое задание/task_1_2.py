@@ -29,4 +29,66 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для второго скрипта
+
+Задание 1.
+
+Приведен код, который позволяет сохранить в
+массиве индексы четных элементов другого массива
+
+Сделайте замеры времени выполнения кода с помощью модуля timeit
+
+Попробуйте оптимизировать код, чтобы снизить время выполнения
+Проведите повторные замеры
+
+ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+from memory_profiler import profile, memory_usage
+
+lst = []
+
+
+def mem_usage_decorator(some_func):
+    """Вычисляет память, выделяемую под выполнение декорируемой функции"""
+
+    def wrapper(*args, **kwargs):
+        result = some_func(*args, **kwargs)
+        lst.append(str(memory_usage()))  # добавляем в список
+        # значение задействованной памяти
+        return result
+
+    return wrapper
+
+
+def ind_odd_el(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@mem_usage_decorator
+def ind_odd_el_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+@mem_usage_decorator
+def ind_odd_el_gen(nums):
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            yield i
+
+
+if __name__ == '__main__':
+    lst_app = [i for i in range(10 ** 5)]
+    a = ind_odd_el_gen(lst_app)
+    print(lst)
+    lst = []
+    b = ind_odd_el_2(lst_app)
+    print(lst)
+
+'''
+['[24.5703125]']  -- показатель памяти для генератора
+['[26.1640625]']  -- показатель памяти для лист комп. 
+Поменяли лк на генератор, что дало нам ощутимый прирост по памяти
+'''
