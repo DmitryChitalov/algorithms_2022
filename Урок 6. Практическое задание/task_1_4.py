@@ -1,3 +1,8 @@
+from memory_profiler import memory_usage
+from random import randint
+import numpy as np
+from pympler import asizeof
+import array
 """
 Задание 1.
 
@@ -30,3 +35,54 @@
 
 Это файл для четвертого скрипта
 """
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func()
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+# lst = [i for i in range(1, 100000)]
+# print(f'Создание простого списка : {asizeof.asizeof(lst)} Mib')
+# to_lst = []
+# print(f'Создание пустого простого списка :{asizeof.asizeof(to_lst)} Mib')
+
+# неоптимизированная функция. Задание 5.3, алгоритмы
+@decor
+def lst_append():
+    lst = [i for i in range(1, 100000)]
+    to_lst = []
+    for i in lst:
+        to_lst.append(i)
+    return to_lst
+
+
+
+# lst_2 = np.array([i for i in range(1, 100000)])
+# print(f'Создание numpy списка : {asizeof.asizeof(lst_2)}Mib')
+# to_lst_2 = np.array([])
+# print(f'Создание numpy пустого списка : {asizeof.asizeof(to_lst_2)} Mib')
+
+# оптимизированная функция.
+@decor
+def lst_append_2():
+    lst_2 = np.array([i for i in range(1, 100000)])
+    to_lst_2 = np.array([])
+    arr = np.append(lst_2, to_lst_2)
+    lst_3 = arr.tolist()
+    return lst_3
+
+if __name__ == '__main__':
+    res, mem_diff = lst_append()
+    print(f"Выполнение  неоптимизированной функции заняло {mem_diff} Mib")
+
+if __name__ == '__main__':
+    res, mem_diff = lst_append_2()
+    print(f"Выполнение оптимизированной функции заняло {mem_diff} Mib")
+
+"""Использование Numpy позволяет значительно снизить количество потребляемой памяти,
+особенно когда массив содержит большое количество элементов(примерно в 2 раза). """
+
