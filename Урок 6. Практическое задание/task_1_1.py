@@ -30,3 +30,48 @@
 
 Это файл для первого скрипта
 """
+# дз 1, задача 2, основы python
+from memory_profiler import profile
+
+
+@profile
+def my_list():
+    total_list = []
+    sum_list = 0
+
+    for i in range(0, 5000):
+        if i % 2 != 0:
+            total_list.append(i ** 3)
+
+    for el in total_list:
+        sum_els = 0
+        cycle_el = el
+        while cycle_el / 10 > 0:
+            sum_els += cycle_el % 10
+            cycle_el = cycle_el // 10
+        if sum_els % 7 == 0:
+            sum_list += el
+
+    print(sum_list)
+
+# оптимизирована
+@profile
+def my_list_optim_tuple():
+    sum_list = 0
+    total_list = tuple(i ** 3 for i in range(0, 5000) if i % 2 != 0)
+
+    for el in total_list:
+        sum_els = 0
+        cycle_el = el
+        while cycle_el / 10 > 0:
+            sum_els += cycle_el % 10
+            cycle_el = cycle_el // 10
+        if sum_els % 7 == 0:
+            sum_list += el
+
+    print(sum_list)
+
+my_list()
+my_list_optim_tuple()
+
+#  после оптимизации экономия памяти составила 0.1 MiB. Замена списка на кортеж.

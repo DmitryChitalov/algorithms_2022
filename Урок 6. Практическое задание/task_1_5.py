@@ -30,3 +30,21 @@
 
 Это файл для пятого скрипта
 """
+# дз 5, задача 4, основы
+
+from numpy import array
+from pympler import asizeof
+
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+
+# до оптимизации
+
+lst_1 = [src[el+1] for el in range(len(src)-1)  if src[el] < src[el+1]]
+print(asizeof.asizeof(lst_1))
+
+# после оптимизации
+
+lst_2 = array([src[el+1] for el in range(len(src)-1)  if src[el] < src[el+1]])
+print(asizeof.asizeof(lst_2))
+
+#  с использованием array оптимизация памяти почти в 2 разa (до 312, после 152)

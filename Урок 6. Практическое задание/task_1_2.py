@@ -30,3 +30,40 @@
 
 Это файл для второго скрипта
 """
+from pympler import asizeof
+from numpy import array
+
+tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена']
+groups = ['9А', '7В', '9Б', '9В']
+
+def generator_tutors(tutors, groups):
+    length = len(groups)
+    for idx, man in enumerate(tutors):
+        if idx < length:
+            yield man, groups[idx]
+        else:
+            yield man, None
+
+gen_tutors = generator_tutors(tutors, groups)
+for _ in range(len(tutors)):
+    print(next(gen_tutors))
+
+print(asizeof.asizeof(generator_tutors(tutors, groups)))
+
+# после оптимизации
+tutors_o = array(['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена'])
+groups_o = array(['9А', '7В', '9Б', '9В'])
+
+def generator_tutors_o(tutors, groups):
+    length = len(groups)
+    for idx, man in enumerate(tutors):
+        if idx < length:
+            yield man, groups[idx]
+        else:
+            yield man, None
+gen_tutors = generator_tutors_o(tutors, groups)
+for _ in range(len(tutors)):
+    print(next(gen_tutors))
+
+print(asizeof.asizeof(generator_tutors_o(tutors_o, groups_o)))
+# Использование array сократило использование памяти почти в 2 раза (до 1600 после 984)
