@@ -22,3 +22,43 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+db = {
+    'login1111': {'pass1111': 1},  # Учетка активирована
+    'login2222': {'pass2222': 2},  # Учетка не активирована
+    'login3333': {'pass3333': 1},
+    'login4444': {'pass4444': 2},
+    'login5555': {'pass5555': 1},
+    'login6666': {'pass6666': 1},
+    'login7777': {'pass7777': 2}
+}
+
+
+def validate_user_O1(login, password):
+    # Общая сложность: # O(1)
+    if db.get(login):  # O(1)
+        if db.get(login).get(password):  # O(2)
+            if db.get(login).get(password) == 1:  # O(3)
+                return 'пользователь допущен к ресурсу'  # O(1)
+            return 'необходимо активировать учетную запись'  # O(1)
+        return 'введен неверный пароль'  # O(1)
+    return 'данного пользователя не существует'  # O(1)
+
+
+def validate_user_On3(login, password):
+    # Общая сложность: O(n) * O(n) + O(1) * O(n) + O(1) = O(n^3)
+    for _log in db:  # O(n)
+        if _log == login:  # O(len(l)) ==> O(n)
+            for pas in db[_log]:  # O(n) (Для этого примера O(1), так как один ключ во вложенном словаре)
+                if pas == password:  # O(n)
+                    if db[_log][pas] == 1:  # O(1)
+                        return 'пользователь допущен к ресурсу'
+                    return 'необходимо активировать учетную запись'
+            return 'введен неверный пароль'
+    return 'данного пользователя не существует'
+
+
+print(validate_user_O1('login1111', 'pass1111'))
+print(validate_user_On3('login7777', 'pass7777'))
+
+# Вывод: Функция validate_user_O1 работает быстрее за счет постоянной алгоритмической сложности

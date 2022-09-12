@@ -9,3 +9,31 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+
+@profile
+def test_memory():
+    def gcd(a, b):
+        if b == 0:
+            return a
+        return gcd(b, a % b)
+
+    print(gcd(120, 56))
+
+
+test_memory()
+"""Во избежания многократного вывода информации о профилировании памяти рекурсивной функции можно воспользоваться 
+внешней функцией, которая оборачивает рекурсивную функцию, и произвести замер памяти этой (внешней) функции.
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    16     19.4 MiB     19.4 MiB           1   @profile
+    17                                         def test_memory():
+    18     19.4 MiB      0.0 MiB           4       def gcd(a, b):
+    19     19.4 MiB      0.0 MiB           3           if b == 0:
+    20     19.4 MiB      0.0 MiB           1               return a
+    21     19.4 MiB      0.0 MiB           2           return gcd(b, a % b)
+    22                                         
+    23     19.4 MiB      0.0 MiB           1       print(gcd(120, 56))
+"""
