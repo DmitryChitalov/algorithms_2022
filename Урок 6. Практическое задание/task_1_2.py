@@ -43,7 +43,6 @@ def lst_gen():
     lst = [src[i] for i in range(len(src)) if src[i-1] < src[i]]
     return lst
 
-
 # оптимизированное решение
 def gen():
     for i in range(len(src)):
@@ -53,7 +52,5 @@ def gen():
 
 print(asizeof.asizeof(lst_gen()))
 print(asizeof.asizeof(gen()))
-
-
 
 """Использование генераторов позволяет существенно минимизировать расходование памяти."""

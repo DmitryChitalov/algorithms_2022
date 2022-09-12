@@ -59,8 +59,6 @@ def lst_append():
         to_lst.append(i)
     return to_lst
 
-
-
 # lst_2 = np.array([i for i in range(1, 100000)])
 # print(f'Создание numpy списка : {asizeof.asizeof(lst_2)}Mib')
 # to_lst_2 = np.array([])

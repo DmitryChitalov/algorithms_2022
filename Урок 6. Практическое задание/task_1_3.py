@@ -146,8 +146,6 @@ class PoliceCar_2(Car):
     def __init__(self, speed, color, name, is_police=False):
         super().__init__(speed, color, name, is_police)
 
-
-
 b1 = WorkCar_2(70,'Красная', 'Ауди', False)
 b2 = TownCar_2(70, 'черная', 'бмв', False)
 b3 = PoliceCar_2(100, "белый", "Форд", True)
