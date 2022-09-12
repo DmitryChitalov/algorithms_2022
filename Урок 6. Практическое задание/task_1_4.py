@@ -30,3 +30,47 @@
 
 Это файл для четвертого скрипта
 """
+
+
+from memory_profiler import memory_usage
+
+
+# ИСХОДНОЕ
+def func_4(nums):
+    our_l = []
+    i = len(nums) - 1
+    while i:
+        if not nums[i] % 2:
+            our_l.append(i)
+        i = i - 1
+    return our_l
+
+
+m1 = memory_usage()
+test_list = list(range(1, 100000))
+new_list_1 = func_4(test_list)
+m2 = memory_usage()
+mem_usage = m2[0] - m1[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+
+# ОПТИМИЗИРОВАННОЕ
+def func_4_filter(nums):
+    our_list = filter(lambda x: x % 2 == 0, nums)
+    return our_list
+
+
+m3 = memory_usage()
+test_list = list(range(1, 100000))
+new_list_2 = func_4_filter(test_list)
+m4 = memory_usage()
+mem_usage = m4[0] - m3[0]
+print(f"Выполнение заняло {mem_usage} Mib")
+
+'''
+Выполнение заняло 5.76953125 Mib
+Выполнение заняло 0.34765625 Mib
+
+Вывод:
+Использование filter даёт возможность существенно экономить память.
+'''

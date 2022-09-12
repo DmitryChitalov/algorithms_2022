@@ -22,3 +22,31 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+
+import hashlib
+
+
+def get_hash(salt='111'):
+    password = input('')
+    p_hash = hashlib.sha256(salt.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    return p_hash
+
+
+salt = 'salt'
+
+print('Введите пароль:')
+first_hash = get_hash()
+print(first_hash)
+with open('key.csv', 'w', encoding='utf-8') as w:
+        w.write(first_hash)
+
+print('Введите пароль для проверки:')
+second_hash = get_hash()
+print(second_hash)
+with open('key.csv', 'r', encoding='utf-8') as r:
+        try_hash = r.readline()
+if second_hash == try_hash:
+    print('Password is correct. Welcome on board.')
+else:
+    print('Wrong password. Try later.')

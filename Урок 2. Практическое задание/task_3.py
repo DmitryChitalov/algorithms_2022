@@ -18,3 +18,23 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def convert(num):
+    if num // 10 == 0:
+        return num
+    return str(num % 10) + str(convert(num // 10))
+
+
+def shifter():
+    num = input('Число, что перевернуть желаете, введите Вы: ')
+    if not num.isdigit():
+        print('Попробуйте ещё раз. Введите именно число, состоящее из цифр')
+        shifter()
+    else:
+        num = int(num)
+        print(convert(num))
+
+
+if __name__ == '__main__':
+    shifter()
