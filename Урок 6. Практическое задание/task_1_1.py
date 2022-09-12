@@ -29,4 +29,83 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+
+Задание 6. На закрепление навыков работы с очередью
+Примечание: в этом задании вспомните ваши знания по работе с ООП
+и опирайтесь на пример урока
+Реализуйте класс-структуру "доска задач".
+Структура должна предусматривать наличие несольких очередей задач, например
+1) базовой, откуда задачи берутся, решаются и отправляются в список решенных
+2) очередь на доработку, когда нерешенные задачи из первой очереди отправляются
+на корректировку решения
+3) список решенных задач, куда задачи перемещаются из базовой очереди или
+очереди на доработку
+После реализации структуры, проверьте ее работу на различных сценариях
+Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+from memory_profiler import profile, memory_usage
+from random import randint
+
+lst = []
+
+
+def mem_usage_decorator(some_func):
+    """Вычисляет память, выделяемую под выполнение декорируемой функции"""
+
+    def wrapper(*args, **kwargs):
+        result = some_func(*args, **kwargs)
+        lst.append(str(memory_usage()))  # добавляем в список
+        # значение задействованной памяти
+        return result
+
+    return wrapper
+
+
+@mem_usage_decorator
+def even_odd_counter_recursion(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        lst = [i for i in range(10**4)]  # для более наглядных результатов
+        if number % 2 == 0:
+            return even_odd_counter_recursion(number // 10, even + 1, odd)
+        else:
+            return even_odd_counter_recursion(number // 10, even, odd + 1)
+
+
+def main_rec():
+    random_number = randint(100, 9999)
+    even_odd_counter_recursion(random_number)
+
+
+@mem_usage_decorator
+def even_odd_counter(n):
+    odd, even = 0, 0
+    lst = [i for i in range(10 ** 3)]  # для более наглядных результатов
+    while n != 0:
+        if n % 2 == 1:
+            odd += 1
+        else:
+            even += 1
+        n //= 10
+
+
+def main():
+    random_number = randint(100, 9999)
+    even_odd_counter(random_number)
+
+
+if __name__ == '__main__':
+    main()
+    print(lst)
+    lst = []
+    main_rec()
+    print(lst)
+
+'''
+[19.59765625]  - затрачено функцией без рекурсии
+'[21.1796875]', '[21.1796875]', '[21.1796875]', '[20.859375]', '[20.859375] - затрачено функцией с рекурсией
+
+Убрали рекурсию, сделали через цикл, выиграли по памяти
+'''
