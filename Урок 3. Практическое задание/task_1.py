@@ -107,7 +107,7 @@ def del_list(lst: list, el):  # O(n)
     lst.remove(el)  # O(n)
 
 
-# Сразу удаляем элемент из словаря.
+# Сразу удаляем элемент из словаря
 @my_decorator
 def del_dict(dct: dict, el):  # O(1)
     del dct[el]  # O(1)
