@@ -30,3 +30,70 @@
 
 Это файл для второго скрипта
 """
+
+
+# Доработанная задача № 4 из 3 урока по курсу "Алгоритмы и структуры данных на Python"
+
+from pympler import asizeof
+from os import urandom
+from hashlib import pbkdf2_hmac
+
+
+# ИСХОДНОЕ
+class Cash:
+
+    def __init__(self):
+        self.urls = {}
+        self.salt = urandom(32)
+
+    def check_url(self, url):
+        rep_url = self.urls.get(url)
+        if rep_url is None:
+            self.urls.setdefault(url, pbkdf2_hmac('sha512', url.encode('utf-8'), self.salt, 1000))
+            return f'Хэш для {url}'
+        else:
+            return f'хэш {url} - {rep_url.hex()}'
+
+
+# ОПТИМИЗИРОВАННОЕ
+class CashOptimize:
+    __slots__ = ['urls', 'salt']
+
+    def __init__(self):
+        self.urls = {}
+        self.salt = urandom(32)
+
+    def check_url(self, url):
+        rep_url = self.urls.get(url)
+        if rep_url is None:
+            self.urls.setdefault(url, pbkdf2_hmac('sha512', url.encode('utf-8'), self.salt, 1000))
+            return f'Хэш для {url}'
+        else:
+            return f'хэш {url} - {rep_url.hex()}'
+
+
+cash_obj = Cash()
+cash_obj_optimize = CashOptimize()
+print(cash_obj.check_url('www.gb.ru'))
+print(cash_obj.check_url('www.gb.ru'))
+
+print(cash_obj.check_url('www.ya.ru'))
+print(cash_obj.check_url('www.ya.ru'))
+
+print(cash_obj_optimize.check_url('www.gb.ru'))
+print(cash_obj_optimize.check_url('www.gb.ru'))
+
+print(cash_obj_optimize.check_url('www.ya.ru'))
+print(cash_obj_optimize.check_url('www.ya.ru'))
+
+print(f'size cash_obj - {asizeof.asizeof(cash_obj)}')
+print(f'size cash_obj_optimize - {asizeof.asizeof(cash_obj_optimize)}')
+
+
+"""
+size cash_obj - 904
+size cash_obj_optimize - 688
+
+Выводы:
+Использование слотов экономнее.
+"""
