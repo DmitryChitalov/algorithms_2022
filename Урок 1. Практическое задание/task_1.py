@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(n).
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n)
+    return lst_to_set  # O(1).
 
 
 ##############################################################################
@@ -37,12 +37,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(n^2).
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 ##############################################################################
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(n log n).
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n)
+    lst_copy.sort()                          # O(n log n)
+    for i in range(len(lst_obj) - 1):        # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
+            return False                     # O(1)
+    return True                              # O(1)
 
 
 for j in (50, 500, 1000, 5000, 10000):
@@ -71,3 +71,22 @@ for j in (50, 500, 1000, 5000, 10000):
 print(check_1(lst))
 print(check_2(lst))
 print(check_3(lst))
+
+
+
+
+
+def min_in_list(lst):
+    """
+    Поиск минимального значения в списки со сложностью O(n^2)
+    :param lst: список чисел
+    :return: минимальное число
+
+    """
+    for num_one in lst:  # O(n)
+        is_min = True  # O(1)
+        for num_two in lst:  # O(n)
+            if num_one > num_two:  # O(1)
+                is_min = False  # O(1)
+        if is_min:  # O(1)
+            return num_one  # O(1)
