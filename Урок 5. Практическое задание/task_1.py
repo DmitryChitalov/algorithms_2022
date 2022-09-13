@@ -28,3 +28,32 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import Counter, namedtuple
+
+company_count = Counter()
+CompanyTuple = namedtuple('Companies', 'name profit')
+tuple_comp = []
+count = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(count):
+    name_company = input('Введите название предприятия: ')
+    profit = input('через пробел введите прибыль данного предприятия'
+                   'за каждый квартал(Всего 4 квартала): ')
+    profit_company = map(int, list(profit.split(sep=' ')))
+    a = sum(profit_company)
+    company_count[name_company] = a
+    tuple_comp.append(CompanyTuple(name=name_company, profit=a))
+    print()
+print(company_count)
+print(tuple_comp)
+average_1 = company_count.total() / count
+average_2 = sum(company.profit for company in tuple_comp) / count
+print(f'Средняя годовая прибыль всех предприятий в Count: {average_1}')
+print(f'Средняя годовая прибыль всех предприятий в namedtuple: {average_2}')
+print(f'Предприятия, с прибылью выше среднего значения Count: '
+      f'{[key for key, val in company_count.items() if val > average_1]}')
+print(f'Предприятия, с прибылью выше среднего значения namedtuple: '
+      f'{[company.name for company in tuple_comp if company.profit > average_2]}')
+print(f'Предприятия, с прибылью ниже среднего значения Count: '
+      f'{[key for key, val in company_count.items() if val < average_1]}')
+print(f'Предприятия, с прибылью ниже среднего значения namedtuple: '
+      f'{[company.name for company in tuple_comp if company.profit < average_2]}')
