@@ -28,3 +28,38 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+import functools
+
+
+def income1():
+    Company = collections.namedtuple('Company', 'name income')
+    lst = []
+    for i in range(int(input('Enter number of companies:'))):
+        name = input('Company name:')
+        total_income = sum([int(i) for i in input('Company income separated by space:').split()])
+        lst.append(Company(name=name, income=total_income))
+    average_income = functools.reduce(lambda x, y: x + y.income, lst, 0) / len(lst)
+    print(f"Average income: {average_income:.1f}")
+    above = [i.name for i in filter(lambda x: x.income > average_income, lst)]
+    print('Above average: ', *above)
+    less = [i.name for i in filter(lambda x: x.income < average_income, lst)]
+    print('Less then average:', *less)
+
+
+def income2():
+    dct = collections.defaultdict()
+    for i in range(int(input('Enter number of companies:'))):
+        name = input('Company name:')
+        dct[name] = tuple([int(i) for i in input('Company income separated by space:').split()])
+    print(dct)
+    average_income = functools.reduce(lambda x, y: x + sum(dct[y]), dct, 0) / len(dct)
+    print(f"Average income: {average_income:.1f}")
+    above = [i for i in dct if sum(dct[i]) > average_income]
+    print('Above average: ', *above)
+    less = [i for i in dct if sum(dct[i]) < average_income]
+    print('Less then average:', *less)
+
+
+income1()
+income2()
