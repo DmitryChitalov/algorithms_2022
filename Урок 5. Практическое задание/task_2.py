@@ -24,3 +24,27 @@ reduce
 __mul__
 __add__
 """
+
+
+from collections import defaultdict
+from functools import reduce
+
+
+nums = defaultdict(list)
+
+
+def calc(nums):
+
+    sum_result = sum([int(''.join(i), 16) for i in nums.values()])
+    mul_result = reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in nums.values()])
+    print(f'Сумма чисел равна: {list("%X" % sum_result)}')
+    print(f'Произведение чисел равно: {list("%X" % mul_result)}')
+
+
+
+num1 = input(f'Введите первое шестнадцатиричное число:')
+nums[f'1-{num1}'] = list(num1)
+num2 = input(f'Введите второе шестнадцатиричное число:')
+nums[f'2-{num2}'] = list(num2)
+print(nums)
+calc(nums)
