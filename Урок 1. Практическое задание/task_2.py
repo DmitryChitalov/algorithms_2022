@@ -9,9 +9,30 @@
 
 Сложность второго алгоритма должна быть O(n) - линейная.
 
-
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def find_min_value(my_list):
+    for i in my_list:           # O(N)
+        min_val = True          # O(1) 
+        for item in my_list:    # O(N)
+            if i > item:        # O(N) 
+                min_val = False # O(1)
+        if min_val:             # O(N)
+            return i            # O(1)
+
+
+
+
+def find_min_value(lst):
+    min_val = lst[0].         # O(1)
+    for i in lst:             # O(N)
+        if i < min_val:       # O(N) 
+            min_val = i.      # O(1)
+        
+    return min_val            # O(1)
+
+
