@@ -30,14 +30,14 @@ print(median_stat(list_1[:]))
 
 # m = 100
 list_2 = [randint(-100, 100) for _ in range(201)]
-print(timeit("median(list_2)", globals=globals(), number=1000))
-print(median_stat(list_2))
+print(timeit("median(list_2[:])", globals=globals(), number=1000))
+print(median_stat(list_2[:]))
 # время: 0.01358985
 
 # m = 1000
 list_3 = [randint(-100, 100) for _ in range(2001)]
-print(timeit("median(list_3)", globals=globals(), number=1000))
-print(median_stat(list_3))
+print(timeit("median(list_3[:])", globals=globals(), number=1000))
+print(median_stat(list_3[:]))
 # время: 0.276106946
 
 

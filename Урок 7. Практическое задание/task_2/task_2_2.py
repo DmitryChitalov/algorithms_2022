@@ -26,17 +26,17 @@ def median(data, m):
 # m = 10
 data_1 = [randint(-100, 100) for _ in range(21)]
 print(timeit("median(data_1[:], 10)", globals=globals(), number=1000))
-print(median(data_1, 10))
+print(median(data_1[:], 10))
 # время: 0.010820562999999978
 
 # m = 100
 data_2 = [randint(-100, 100) for _ in range(201)]
 print(timeit("median(data_2[:], 100)", globals=globals(), number=1000))
-print(median(data_2, 100))
+print(median(data_2[:], 100))
 # время: 0.601101051
 
 # m = 1000
 data_3 = [randint(-100, 100) for _ in range(2001)]
 print(timeit("median(data_3[:], 1000)", globals=globals(), number=1000))
-print(median(data_3, 1000))
+print(median(data_3[:], 1000))
 # время: 57.151018901

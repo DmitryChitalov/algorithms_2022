@@ -43,7 +43,7 @@ def bubble_sort(lst_obj):
 #
 orig_list = [randint(-100, 100) for _ in range(10)]
 print(f' Исходный массив с 10 случайными элементами: {orig_list}')
-print(f' Отсортированный функцией массив: { bubble_sort(orig_list)}')
+print(f' Отсортированный функцией массив: {bubble_sort(orig_list)}')
 
 sorted_lst = [i for i in range(100, 1, -1)]
 sorted_lst_2 = [i for i in range(1000, 1, -1)]
