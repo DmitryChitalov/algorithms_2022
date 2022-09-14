@@ -49,7 +49,7 @@ def bubble_sort_new(lst_obj):
 
 
 orig_list_10 = [randint(-100, 100) for _ in range(10)]
-sorted_list_10 = [i for i in range(10)]
+sorted_list_10 = list(range(10))
 sorted_list_10.sort(reverse=True)
 
 print(bubble_sort(sorted_list_10[:]))
@@ -89,7 +89,7 @@ print(
         number=1000))
 
 orig_list_100 = [randint(-100, 100) for _ in range(100)]
-sorted_list_100 = [i for i in range(100)]
+sorted_list_100 = list(range(100))
 sorted_list_100.sort(reverse=True)
 
 print('bubble_sort(sorted_list_100[:]) замеры 100')
@@ -125,7 +125,7 @@ print(
         number=1000))
 
 orig_list_1000 = [randint(-100, 100) for _ in range(1000)]
-sorted_list_1000 = [i for i in range(1000)]
+sorted_list_1000 = list(range(1000))
 sorted_list_1000.sort(reverse=True)
 
 print('bubble_sort(sorted_list_1000[:]) замеры 1000')
@@ -196,5 +196,4 @@ bubble_sort_new(orig_list[:]) замеры 1000
 что не тратится время на сортировку этой части (нет лишних безрезультатных проходов по списку).
 В случае с отсортированным списком время сокращается в десятки - тысячи раз, и,
 чем больше исходный список, тем разрыв во времени больше.
-
 """
