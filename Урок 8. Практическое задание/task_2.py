@@ -11,6 +11,9 @@
 Поработайте с оптимизированной структурой,
 протестируйте на реальных данных - на клиентском коде
 """
+class MyError(Exception):
+    def __init__(self, text):
+        self.txt = text
 
 
 class BinaryTree:
@@ -72,7 +75,7 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+# r.insert_left(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
@@ -80,3 +83,13 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+try:
+    r.insert_left(40)
+    if left < right:        
+        raise MyError("Левый потомок должен быть меньше правого")
+except MyError as mr:
+    print(mr)
+else:
+    print(True)
+  
