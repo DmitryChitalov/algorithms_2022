@@ -80,3 +80,4 @@ def average_profit(companies, result):
 
 average_profit(list_companies, result_profit)
 
+# Готово

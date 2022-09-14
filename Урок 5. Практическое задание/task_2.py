@@ -85,3 +85,5 @@ def hexadecimal_calc_2():
 
 if __name__ == '__main__':
     hexadecimal_calc_2()
+
+# Готово

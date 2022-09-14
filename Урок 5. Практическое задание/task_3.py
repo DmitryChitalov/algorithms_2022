@@ -116,3 +116,4 @@ print(f'Замеры deque element - {test_element_deque}\nЗамеры list ele
 # Общия оценка : deque = 6 очков, list = 1 очко, list лучше показал себя в удалении элемента pop,
 # вывод всегда используй deque
 
+# Готово
