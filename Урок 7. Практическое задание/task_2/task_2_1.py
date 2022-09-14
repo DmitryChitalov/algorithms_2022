@@ -15,3 +15,46 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def array_median(lst_obj):
+    """
+Находит медиану массива
+    :param lst_obj: array
+    :return: int
+    """
+    step = len(lst_obj)
+    while step > 1 or flag:
+        if step > 1:
+            step = int(step / 1.247331)
+        flag, i = False, 0
+        while i + step < len(lst_obj):
+            if lst_obj[i] < lst_obj[i + step]:
+                lst_obj[i], lst_obj[i + step] = lst_obj[i + step], lst_obj[i]
+                flag = True
+            i += 1
+    return lst_obj[int(len(lst_obj)/2):][0]
+
+
+test_list = [randint(-1000, 1000) for _ in range(101)]
+# test_list = [1, 5, 2, 10, 14, 15, 6, 3, 7, 4, 8, 11, 16, 9, 12, 13, 17]
+
+print(test_list)
+print(array_median(test_list))
+print(
+    timeit(
+        "array_median(test_list[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+Замеры времени:
+--- на массиве из 11 элементов:
+0.013141364000000003
+--- на массиве из 101 элемента:
+0.30012837200000003
+--- на массиве из 1001 элемента:
+7.065493761999999
+"""
