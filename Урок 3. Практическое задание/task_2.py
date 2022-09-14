@@ -22,3 +22,29 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import json
+
+data_for_file = {'salt': 'операция Ы', 'hash': ''}  # создаем файл, в котором будет храниться соль и хеш
+with open("secret_file.json", "w") as parole_file:
+    json.dump(data_for_file, parole_file)
+
+
+def get_parole():
+    with open("secret_file.json", "r") as parole_file:
+        salt_from_file = json.load(parole_file)['salt']  # достаем из файла соль
+    parole = input('Введите пароль: ')
+    hash_parole = hashlib.sha256(salt_from_file.encode('utf-8') + parole.encode('utf-8')).hexdigest()  # получаем хеш
+    with open("secret_file.json", "w") as parole_file:  # записываем в файл хеш
+        data_for_file['hash'] = hash_parole
+        json.dump(data_for_file, parole_file)
+    check_parole = input('Введите пароль повторно для проверки: ')
+    with open("secret_file.json", "r") as parole_file:
+        data = json.load(parole_file)  # достаем данные из файла
+    if hashlib.sha256(data['salt'].encode('utf-8') + check_parole.encode('utf-8')).hexdigest() == data['hash']:
+        return 'ok'  # сравниваем хеш пароля введенного второй раз с данными из файла
+    else:
+        return 'Проверка провалилась'
+
+
+print(get_parole())
