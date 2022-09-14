@@ -1,0 +1,150 @@
+# Задание 1.
+
+
+from time import time
+
+n = 10 ** 5
+
+def time_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполнения функции {func.__name__}'
+              f'составило {end - start}')
+        return result
+
+    return timer
+
+@time_decorator
+def fill_list_append(lst, num):
+    #заполняем список
+    for i in range(num):
+        lst.append(i)  # сложность операции О(1)
+
+some_list = []
+fill_list_append(some_list, n)
+print('*' * 100)
+
+@time_decorator
+def fill_list_insert(lst, num):
+    #заполнение списка
+    for i in range(num):
+        lst.insert(0, i) #сложность операции О(n)
+
+some_list = []
+fill_list_insert(some_list, n)
+print('*' * 100)
+
+@time_decorator
+def fill_dict(dct, num):
+    # заполняем словарь
+    for i in range(num): #операция заполнения словаря занимает меньше времени
+        dct[i] = i #добавление нового элемента сложность О(1)
+
+some_dict = {}
+fill_dict(some_dict, n)
+print('*' * 100)
+
+
+
+# Задание 2.
+
+from hashlib import sha256
+
+from os.path import join, dirname
+from sqllite3 import connect, OperationalError, IntegrityError
+
+class HashClass:
+    def __init__(self):
+        self.db_obj = join(dirname(__file__), 'demo.sqlite')
+        self.conn = connect(self.db_obj)
+        self.crs = self.conn.cursor()
+
+    def create_table(self):
+
+        create_stmt = 'CREATE TABLE user_info (user_login varchar(255)' \
+                    'unique, user_password varchar(255));'
+
+    try:
+        self.crs.execute(create_stmt)
+    except OperationalError:
+        print('Таблица уже создана!')
+    else:
+        self.conn.commit()
+        print('Операция прошла успешно, БД обновлена')
+
+    @staticmethod
+    def get_hash():
+        login = input('Введите логин: ')
+        passwd = input('Введите пароль: ')
+        hash_obj = sha256(login.encode() + passwd.encode()).hexdigest()
+        return login, hash_obj
+
+    def register(self):
+        login, reg_hash = self.get_hash()
+        insert_stmt = 'INSERT INTO user_info (user_login, user_password)' \
+                        'VALUES (?, ?)'
+        user_info = (login, reg_hash)
+        try:
+            self.crs.execute(insert_stmt, user_info)
+        except IntegrityError:
+            print('Ваши данные уже в БД, выполните вход')
+        else:
+            self.comm.commit()
+            print('Регистрация прошла успешно')
+
+    def log_in(self):
+        login, check_hash = self.get_hash()
+        select_stmt = 'SELECT user_password FROM user_info WHERE user_login = ?'
+        self.crs.execute(select_stmt, (login,))
+        out_hash = self.crs.fetchone()
+        if check_hash == out_hash[0]:
+            print('Это Вы')
+        else:
+            print('Пароль не верный или вы не зарегистрированы')
+
+network = HashClass()
+network.create_table()
+network.register()
+network.log_in()
+
+
+
+# Задание 3.
+
+
+
+
+import hashlib
+
+some_set = set()
+some_str = 'papa'
+for i in range(len(some_str)):
+    for j in range(i + 1, len(some_str) + 1):
+        if some_str[i:j] != some_str:
+            some_set.add(hashlib.sha256(some_str[i:j].encode()).hexdigest)
+            print(some_str[i:j], end=' ')
+print(f'\n{some_set}')
+print(f'Количество элементов в множестве: {len(some_set)}')
+
+
+
+#Задание 4.
+
+
+
+salt = uuid4().hex
+cache_obj = {}
+
+def get_page(url):
+    if cache_obj.get(url):
+        print(f'Данный адрес: {url} присутствует в кэше')
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_obj[url] = res
+        print(cache_obj)
+
+get_page("https://geekbrains.ru/")
+get_page("https://geekbrains.ru/")
+get_page("https://geekbrains.ru/")
