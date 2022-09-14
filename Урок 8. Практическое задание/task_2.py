@@ -80,3 +80,115 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+
+# Исправленный код
+
+class NotRight(Exception):
+    pass
+
+
+class BinaryTree:
+    def __init__(self, root_obj):
+        # корень
+        self.root = root_obj
+        # левый потомок
+        self.left_child = None
+        # правый потомок
+        self.right_child = None
+
+    # добавить потомка
+    def insert_node(self, new_node):
+        # если у узла нет левого потомка
+        try:
+            if new_node == self.root:
+                raise NotRight
+        except NotRight:
+            print('Некоректное значение')
+        else:
+            # добавить левого потомка
+            if new_node <  self.root:
+            # если у узла нет левого потомка
+                if self.left_child is None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.left_child = BinaryTree(new_node)
+                # если у узла есть левый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    try:
+                        if new_node > self.left_child.get_root_val():
+                            tree_obj.left_child = self.left_child
+                        elif new_node < self.left_child.get_root_val():
+                            tree_obj.right_child = self.left_child
+                        else:
+                            raise NotRight
+                        self.left_child = tree_obj
+                    except NotRight:
+                        print('Такой узел существует')
+
+            # добавить правого потомка
+            else:
+            # если у узла нет правого потомка
+                if self.right_child is None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.right_child = BinaryTree(new_node)
+                # если у узла есть правый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    try:
+                        if new_node > self.right_child.get_root_val():
+                            tree_obj.left_child = self.right_child
+                        elif new_node < self.right_child.get_root_val():
+                            tree_obj.right_child = self.right_child
+                        else:
+                            raise NotRight
+                        self.right_child = tree_obj
+                    except NotRight:
+                        print('Такой узел существует')
+
+    # метод доступа к правому потомку
+    def get_right_child(self):
+        return self.right_child
+
+    # метод доступа к левому потомку
+    def get_left_child(self):
+        return self.left_child
+
+    # метод установки корня
+    def set_root_val(self, obj):
+        self.root = obj
+
+    # метод доступа к корню
+    def get_root_val(self):
+        return self.root
+
+
+r = BinaryTree(8)
+print(r.get_root_val())
+print(r.get_left_child())
+print(r.get_right_child())
+r.insert_node(7)
+print(r.get_left_child())
+print(r.get_left_child().get_root_val())
+r.insert_node(9)
+print(r.get_right_child())
+print(r.get_right_child().get_root_val())
+r.get_right_child().set_root_val(16)
+print(r.get_right_child().get_root_val())
+r.insert_node(17)
+print(r.get_left_child())
+print(r.get_left_child().get_root_val())
+print(r.get_right_child())
+print(r.get_right_child().get_root_val())
+r.insert_node(3)
+print(r.get_left_child())
+print(r.get_left_child().get_root_val())
+print(r.get_right_child())
+print(r.get_right_child().get_root_val())
+
