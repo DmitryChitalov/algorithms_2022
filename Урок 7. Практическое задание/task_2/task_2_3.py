@@ -16,3 +16,31 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+m = int(input('Введите число: '))
+my_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'Неотсортированный сприсок: {my_list}')
+print(f'Медиана: {median(my_list)}')
+
+print('Замер на массив 10 эл.', timeit('median([randint(-100, 100) for _ in range(11)])',
+                                       globals=globals(), number=1000))
+
+print('Замер на массив 100 эл.', timeit('median([randint(-100, 100) for _ in range(101)])',
+                                        globals=globals(), number=1000))
+
+print('Замер на массив 1000 эл.', timeit('median([randint(-100, 100) for _ in range(1001)])',
+                                         globals=globals(), number=1000))
+
+
+"""
+Самый эффективный способ это встроенная функция поиска медианы
+это видно по замерам, особенно на 1000 элементов
+
+Замер на массив 10 эл. 0.013983499986352399
+Замер на массив 100 эл. 0.0872617999848444
+Замер на массив 1000 эл. 0.7976101000094786
+"""
