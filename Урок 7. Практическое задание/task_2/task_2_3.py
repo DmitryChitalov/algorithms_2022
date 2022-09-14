@@ -1,3 +1,6 @@
+from random import randint
+from timeit import timeit
+from statistics import median
 """
 Задание 2. Массив размером 2m + 1, где m – натуральное число,
 заполнен случайным образом. Найдите в массиве медиану.
@@ -15,4 +18,32 @@
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
+"""
+
+def median_stat(lst):
+    return median(lst)
+# m = 10
+list_1 = [randint(-100, 100) for _ in range(21)]
+print(timeit("median(list_1[:])", globals=globals(), number=1000))
+print(median_stat(list_1[:]))
+# время: 0.0013395089999999957
+
+# m = 100
+list_2 = [randint(-100, 100) for _ in range(201)]
+print(timeit("median(list_2)", globals=globals(), number=1000))
+print(median_stat(list_2))
+# время: 0.01358985
+
+# m = 1000
+list_3 = [randint(-100, 100) for _ in range(2001)]
+print(timeit("median(list_3)", globals=globals(), number=1000))
+print(median_stat(list_3))
+# время: 0.276106946
+
+
+"""
+Как показывают замеры, самым быстрым способом нахождение медианы 
+являеся применение встроенной функции, на втором месте- способ без сортировки,
+самым медленным способом является применение "Гномьей" сортировки.Разница становится
+более заметной при увеличении количества элементов массива.
 """
