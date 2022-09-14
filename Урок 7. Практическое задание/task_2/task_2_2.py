@@ -14,3 +14,44 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def not_sort(data):
+    n = len(data) / 2
+    while True:
+        idx_max = 0
+        for i in range(len(data)):
+            if data[i] > data[idx_max]:
+                idx_max = i
+        if n + 1 >= len(data):
+            return data[idx_max]
+        data.pop(idx_max)
+
+m_10 = 10
+m_100 = 100
+m_1000 = 1000
+lst_10 = [randint(1, 100) for _ in range(2 * m_10 + 1)]
+lst_100 = [randint(1, 100) for _ in range(2 * m_100 + 1)]
+lst_1000 = [randint(1, 100) for _ in range(2 * m_1000 + 1)]
+
+print(f'Исходный массив в 10 элементов:                {lst_10}')
+print(f'Медиана сортированного массива в 10 элементов: {not_sort(lst_10[:])}')
+print('-----------------------------------------------------------------')
+print('Время массива в 10 элементов:   ', end='')
+print(timeit('not_sort(lst_10[:])', globals=globals(), number=100))
+print('Время массива в 100 элементов:  ', end='')
+print(timeit('not_sort(lst_100[:])', globals=globals(), number=100))
+print('Время массива в 1000 элементов: ', end='')
+print(timeit('not_sort(lst_1000[:])', globals=globals(), number=100))
+
+'''
+Результаты поиска медианы без сортировки:
+-----------------------------------------------------------------
+Время массива в 10 элементов:   0.005318500043358654
+Время массива в 100 элементов:  0.2850075999740511 
+Время массива в 1000 элементов: 26.884302099992055
+Данный вариант быстрее варианта с сортировкой, т.к. не 
+тратится время на перемещение элементов в массиве
+'''
