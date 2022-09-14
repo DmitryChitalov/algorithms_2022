@@ -24,3 +24,20 @@ reduce
 __mul__
 __add__
 """
+
+from collections import deque, defaultdict
+
+numbers = defaultdict(list)
+number_1 = "A2"
+number_2 = "C4F"
+
+
+def full_dict():
+    sum_of_nums = hex(int(number_1, 16) + int(number_2, 16))[2:].upper()
+    multiplication_of_nums = hex(int(number_1, 16) * int(number_2, 16))[2:].upper()
+    sum = list(deque(sum_of_nums))
+    multiplication = list(deque(multiplication_of_nums))
+    return f'Сумма чисел из примера: {sum}, произведение - {multiplication}'
+
+
+print(full_dict())
