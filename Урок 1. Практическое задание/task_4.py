@@ -22,3 +22,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+data_users = {'usr1': ['12345', True], 'usr2': ['12g3', False], 'usr3': ['r345', True], 'usr4': ['1245', False]}
+
+
+def account_validation(data):                           # O(n)
+    while True:                                         # O(1)
+        login = input('Введите логин: ')                # O(1)
+        if login in data.keys():                        # O(n)
+            if data[login][1]:                          # O(1)
+                password = input('Введите пароль: ')    # O(1)
+                if password == data[login][0]:          # O(1)
+                    print('Добро пожаловать на портал!')  # O(1)
+                    break                                 # O(1)
+                else:                                     # O(1)
+                    print('Неверный пароль')              # O(1)
+            else:                                         # O(1)
+                active = input('Учётная запись не активирована, Активируйте учётную запись(Да/Нет)')  # O(1)
+                if active.lower() == 'да':                  # O(n)
+                    data[login][1] = True                   # O(1)
+                else:                                       # O(1)
+                    print('Всего доброго')                  # O(1)
+                    break                                   # O(1)
+        else:                                               # O(1)
+            print('Такого логина не существует.')           # O(1)
+
+
+account_validation(data_users)
+
+
+def account_validation_2(data, login, password):        # O(1)
+    if data.get(login):                                 # O(1)
+        if data[login][1]:                              # O(1)
+            if data[login][0] == password:              # O(1)
+                return 'Добро пожаловать'               # O(1)
+            else:                                       # O(1)
+                return 'Неверный пароль'                # O(1)
+        else:                                           # O(1)
+            return 'Вы не авторизованы, авторизуйтесь'  # O(1)
+    else:                                               # O(1)
+        return 'Неверный логин'                         # O(1)
+
+
+answer = account_validation_2(data_users, 'usr3', 'r345')
+print(answer)
