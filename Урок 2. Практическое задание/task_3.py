@@ -18,3 +18,29 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def my_def(num, renum=str()):
+    num = str(num)
+    if len(num) == 0:
+        return renum
+    else:
+        num = int(num)
+        number = num % 10
+        number = str(number)
+        renum += number
+        num = str(num)
+        num = num[:-1]
+        return my_def(num, renum)
+
+
+def my_def2():
+    try:
+        num1 = int(input('Введите число, которое требуется перевернуть: '))
+        print('Перевернутое число: ', my_def(num1))
+    except ValueError:
+        print('Не верный ввод, попробуйте еще раз')
+        return my_def2()
+
+
+my_def2()

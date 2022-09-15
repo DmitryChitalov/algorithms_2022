@@ -19,3 +19,25 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def my_def(start, i=0):
+    if start == 128:
+        exit()
+    print(start, '-', chr(start), end=' ')
+    if i % 10 == 0:
+        print('\n')
+    my_def(start + 1, i + 1)
+# Самое сложное было перенести после 10 пар...
+
+
+def my_def2():
+    try:
+        start = int(input('Введите начало таблицы символов: '))
+        print('Сумма:', my_def(start))
+    except ValueError:
+        print('Не верный ввод, попробуйте еще раз')
+        return my_def2()
+
+
+my_def2()

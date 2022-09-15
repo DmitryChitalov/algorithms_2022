@@ -10,3 +10,31 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def my_def(num, sum_num, e, i):
+    if num == i:
+        return sum_num
+    else:
+        return my_def(num, sum_num+e, e/-2, i+1)
+
+
+def my_def2():
+    try:
+        num1 = int(input('Введите количество элементов: '))
+        print('Сумма:', my_def(num1, 0, 1, 0))
+    except ValueError:
+        print('Не верный ввод, попробуйте еще раз')
+        return my_def2()
+
+
+my_def2()
+
+#
+# n = 4
+# e = 1
+# s = 0
+# for i in range(n):
+#     s += e
+#     e /= -2
+# print(s)
