@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def my_def(num, even_numbers=0, non_even_numbers=0):
+    if num == 0:
+        return even_numbers, non_even_numbers
+    else:
+        number = num % 10
+        if number % 2 == 0:
+            even_numbers += 1
+        else:
+            non_even_numbers += 1
+        return my_def(num // 10, even_numbers, non_even_numbers)
+
+
+def my_def2():
+    try:
+        num1 = int(input('Введите число: '))
+        print('Количество четных и нечетных цифр в числе равно:', my_def(num1))
+    except ValueError:
+        print('Не верный ввод, попробуйте еще раз')
+        return my_def2()
+
+
+my_def2()

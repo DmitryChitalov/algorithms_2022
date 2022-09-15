@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def my_def(num):
+    if num == 1:
+        return num
+    if num > 0:
+        return num + my_def(num - 1)
+
+
+def my_def2():
+    try:
+        n = int(input('Введите число: '))
+        if my_def(n) == n * (n + 1) / 2:
+            print('Равенство выполняется ')
+    except ValueError:
+        print('Не верный ввод, попробуйте еще раз')
+        return my_def2()
+
+
+my_def2()

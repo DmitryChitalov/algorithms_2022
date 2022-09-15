@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+from random import randint
+
+
+def my_def(num, i):
+    answer = int(input('Введите число от 1 до 100: '))
+    if i == 9 and answer != num:
+        print('Загаданное число: ', num)
+        exit()
+    if answer == num:
+        print(answer, '-', num, 'Ответ верный')
+        exit()
+    if answer > num:
+        print('Ответ меньше загаданного')
+    else:
+        print('Ответ больше загаданного')
+    my_def(num, i+1)
+
+
+my_def(randint(1, 100), 0)
