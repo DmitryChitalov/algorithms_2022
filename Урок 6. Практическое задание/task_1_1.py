@@ -30,3 +30,106 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+
+# 5. Реализовать структуру «Рейтинг», представляющую собой набор натуральных чисел, который не возрастает.
+# У пользователя нужно запрашивать новый элемент рейтинга.
+# Если в рейтинге существуют элементы с одинаковыми значениями,
+# то новый элемент с тем же значением должен разместиться после них.
+
+
+rating_list = [7, 5, 3, 3, 2]
+
+@profile
+def rating_1(lst):
+    while True:
+        rating = input("Введите рейтинг: ")
+        if rating.isdigit():
+            rating = int(rating)
+            break
+        else:
+            print("Вы ввели неверные данные, должно быть целое положительное число. ")
+    i = 0
+
+    for i in range(len(lst)):
+        if lst[i] < rating:
+            lst.insert(i, rating)
+            break
+        else:
+            i += 1
+
+    if i == len(lst):  # если не находим в списке числа, которое меньше нашего
+        lst.append(rating)
+    return lst
+
+print(rating_1(rating_list))
+
+"""Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    44     14.8 MiB     14.8 MiB           1   @profile
+    45                                         def rating_1(lst):
+    46     14.8 MiB      0.0 MiB           1       while True:
+    47     14.8 MiB      0.0 MiB           1           rating = input("Введите рейтинг: ")
+    48     14.8 MiB      0.0 MiB           1           if rating.isdigit():
+    49     14.8 MiB      0.0 MiB           1               rating = int(rating)
+    50     14.8 MiB      0.0 MiB           1               break
+    51                                                 else:
+    52                                                     print("Вы ввели неверные данные, должно быть целое положительное число. ")
+    53     14.8 MiB      0.0 MiB           1       i = 0
+    54                                         
+    55     14.8 MiB      0.0 MiB           6       for i in range(len(lst)):
+    56     14.8 MiB      0.0 MiB           5           if lst[i] < rating:
+    57                                                     lst.insert(i, rating)
+    58                                                     break
+    59                                                 else:
+    60     14.8 MiB      0.0 MiB           5               i += 1
+    61                                         
+    62     14.8 MiB      0.0 MiB           1       if i == len(lst):  # если не находим в списке числа, которое меньше нашего
+    63     14.8 MiB      0.0 MiB           1           lst.append(rating)
+    64     14.8 MiB      0.0 MiB           1       return lst
+
+
+[7, 5, 3, 3, 2, 2]"""
+
+# или просто запихиваем в конец, сортируем и разворачиваем.
+
+@profile
+def rating_2(lst):
+    while True:
+        rating = input("Введите рейтинг: ")
+        if rating.isdigit():
+            rating = int(rating)
+            break
+        else:
+            print("Вы ввели неверные данные, должно быть целое положительное число. ")
+    lst.append(rating)
+    lst.sort()
+    lst.reverse()
+    return lst
+
+print(rating_2(rating_list))
+
+"""
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    70     14.9 MiB     14.9 MiB           1   @profile
+    71                                         def rating_2(lst):
+    72     14.9 MiB      0.0 MiB           1       while True:
+    73     14.9 MiB      0.0 MiB           1           rating = input("Введите рейтинг: ")
+    74     14.9 MiB      0.0 MiB           1           if rating.isdigit():
+    75     14.9 MiB      0.0 MiB           1               rating = int(rating)
+    76     14.9 MiB      0.0 MiB           1               break
+    77                                                 else:
+    78                                                     print("Вы ввели неверные данные, должно быть целое положительное число. ")
+    79     14.9 MiB      0.0 MiB           1       lst.append(rating)
+    80     14.9 MiB      0.0 MiB           1       lst.sort()
+    81     14.9 MiB      0.0 MiB           1       lst.reverse()
+    82     14.9 MiB      0.0 MiB           1       return lst
+
+
+[7, 5, 3, 3, 2, 2, 2]
+
+Оптимизация наоборот. Код проще и использует встроенные инструменты, а памяти занимает больше.
+"""
