@@ -1,0 +1,151 @@
+"""
+Задание 1.	
+"""
+
+def calc():
+
+    """Рекурсия"""
+    operation_type = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if operation_type == '0':
+        return 'Выход'
+
+    else:
+        if operation_type in '+-*/':
+            try:
+                num_1 = int(input('Введите первое число: '))
+                num_2 = int(input('Введите второе число: '))
+
+                if operation_type == '+':
+                    res = num_1 + num_2
+                    print(f'Ваш результат {res}')
+                    return calc()
+
+                elif operation_type == '-':
+                    res = num_1 - num_2
+                    print(f'Ваш результат {res}')
+                    return calc()
+
+                elif operation_type == '*':
+                    res = num_1 * num_2
+                    print(f'Ваш результат {res}')
+                    return calc()
+
+                elif operation_type == '/':
+                    try:
+                        res = num_1 / num_2
+                    except ZeroDivisionError:
+                        print('Деление на 0 невозможно')
+                    else:
+                        print(f'Ваш результат {res}: ')
+                    finally:
+                        return calc()
+
+            except ValueError:
+                print('Вы вместо трехзначного числа ввели строку. Исправьте')
+                return calc()
+
+        else:
+            print('Вы ввели неверный символ, введите заново')
+            return calc()
+
+calc()
+
+
+"""
+Задание 2.	
+"""
+
+def recur_method(numb, even=0, odd=0):
+    if numb == 0:  #все цифры числа извлечены
+        return even, odd
+    else:
+        cur_n = numb % 10 # достаем очередную цифру числа
+        numb = numb // 10 # число естественно становится короче
+        if cur_n % 2 == 0: # проверка на четность\не четность
+            even += 1
+        else:
+            odd += 1
+        return recur_method(numb, even, odd)
+
+try:
+    NUMB = int(input('Введите натуральное число: '))
+    print(f"Количество четных и нечетных цифр в числе: {recur_method(NUMB)}")
+except ValueError:
+    print('Вы вместо числа ввели строку, исправьте')
+
+"""
+Задание 3.	
+"""
+
+def revers_number(numb):
+    rest_numb, numeral = divmod(numb, 10)
+    if rest_numb == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(revers_number(rest_numb))
+
+number = int(input('Введите число, которое требуется перевернуть: '))
+print(f'Перевернутое число: {revers_number(number)}')
+
+"""
+Задание 4.	
+"""
+
+def recur_method(i, numb, n_count, common_sum):
+    if i == n_count:
+        print(f'Количество элементов - {n_count}, их сумма - {common_sum}')
+    elif i < n_count:
+        return recur_method(i + 1, numb / 2*-1, n_count, common_sum+numb)
+try:
+    N_COUNT = int(input('Введите количество элементов: '))
+    recur_method(0, 1, N_COUNT, 0)
+except ValueError:
+    print('Вы вместо числа ввели строку, исправьте: ')
+
+    """
+    Задание 5.	"""
+
+
+def chr_row(ascii_val=32):
+    if ascii_val == 128:
+        return True
+    print(f'{ascii_val} - {chr(ascii_val)}', end=' ')
+    if (ascii_val - 31) % 10 == 0:
+        print('\n')
+
+    chr_row(ascii_val + 1)
+
+chr_row()
+
+"""
+Задание 6.	
+"""
+
+import random
+
+def recur_method(count, numb):
+    print(f'Попытка №{count}')
+    answer = int(input('Введите число от 0 до 100: '))
+    if count == 10 or answer == numb:
+        if answer == numb:
+            print('Верно!')
+        print(f'Загаданное число: {numb}')
+    else:
+        if answer > numb:
+            print(f'Загаданное число меньше чем {numb}')
+        else:
+            print(f'Загаданное число больше чем {numb}')
+        recur_method(count + 1, numb)
+
+recur_method(1, random.randint(0, 100))
+
+"""
+Задание 7.
+"""
+
+length = int(input('Введите длину последовательности: '))
+summa = 0
+for i in range(length):
+    summa += 1 / (-2) ** i
+print(f'Сумма последовательности = {summa}')

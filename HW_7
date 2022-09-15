@@ -1,0 +1,209 @@
+"""
+Задание 1.
+"""
+
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort_unoptimized(some_lst):
+    """Выполняет самую простую сортировку пузырьком"""
+    for i in range(len(some_lst)):
+        for j in range(len(some_lst) - 1):
+            if some_lst[j] < some_lst[j + 1]:
+                some_lst[j], some_lst[j + 1] = some_lst[j + 1], some_lst[j]
+    return some_lst
+
+
+def bubble_sort_optimized1(some_lst):
+    """Сортировка пузырьком с использованием маркера"""
+    flag = True
+    while flag:
+        flag = False
+        for i in range(len(some_lst) - 1):
+            if some_lst[i] < some_lst[i + 1]:
+                some_lst[i], some_lst[i + 1] = some_lst[i + 1], some_lst[i]
+                flag = True
+    return some_lst
+
+
+orig_list = [randint(-100, 100) for i in range(1000)]
+
+print(
+    timeit(
+        "bubble_sort_unoptimized(orig_list)",
+        globals=globals(),
+        number=100))
+print(
+    timeit(
+        "bubble_sort_optimized1(orig_list)",
+        globals=globals(),
+        number=100))
+
+"""
+Прирост скорости : 35.75998955340817 %
+
+Прирост скорости : 3.4761047190917167 %
+
+Прирост скорости : -3.222190195814698 %
+
+"""
+
+"""
+Задание 2. 
+"""
+#Гномья сортирвка
+from random import randint
+from timeit import timeit
+
+
+def gnome_sort(sort_list):
+     i = 1
+    while i < len(sort_list):
+        if not i or sort_list[i - 1] <= sort_list[i]:
+            i += 1
+        else:
+            sort_list[i], sort_list[i - 1] = sort_list[i - 1], sort_list[i]
+            i -= 1
+    return sort_list
+
+
+# ---------------------------------------------------------------------------
+m = 10
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "gnome_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 100
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "gnome_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 1000
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "gnome_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+# ---------------------------------------------------------------------------
+
+
+
+# без сортировки
+def without_sort(lst_obj):
+    temp = lst_obj
+    left_list = []
+    right_list = []
+    for i in range(len(temp)):
+        for j in range(len(temp)):
+            if temp[i] > temp[j]:
+                left_list.append(temp[j])
+            if temp[i] < temp[j]:
+                right_list.append(temp[j])
+            if temp[i] == temp[j] and i > j:
+                left_list.append(temp[j])
+            if temp[i] == temp[j] and i < j:
+                right_list.append(temp[j])
+        if len(left_list) == len(right_list):
+            return temp[i]
+        left_list.clear()
+        right_list.clear()
+
+
+# ---------------------------------------------------------------------------
+m = 10
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "without_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 100
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "without_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 1000
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "without_sort(orig_list[:])",
+        globals=globals(),
+        number=100))
+# ---------------------------------------------------------------------------
+
+"""
+0.0028830660000000036
+0.535382379
+167.943498432
+"""
+
+#3) с помощью встроенной функции поиска медианы
+
+def another_way(lst_obj):
+    """
+    Возвращает медиану массива путем удаления максимальных элементов
+    """
+    temp_list = lst_obj
+    for i in range(len(lst_obj) // 2):
+        temp_list.remove(max(temp_list))
+    return max(temp_list)
+
+
+# ---------------------------------------------------------------------------
+m = 10
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "another_way(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 100
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "another_way(orig_list[:])",
+        globals=globals(),
+        number=100))
+
+# ---------------------------------------------------------------------------
+m = 1000
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+
+print(
+    timeit(
+        "another_way(orig_list[:])",
+        globals=globals(),
+        number=100))
+# ---------------------------------------------------------------------------
+
+"""
+0.0007911750000000051
+0.043091434
+3.8958528349999995
+"""

@@ -1,0 +1,244 @@
+"""
+Задание 1.
+
+"""
+
+from collections import namedtuple
+
+
+def calc():
+    my_var = "Company"
+    n = int(input("Введите количество предприятий: "))
+    companies = namedtuple(
+        my_var,
+        " name period_1 period_2 period_3 period_4")
+    profit_aver = {}
+
+    for i in range(n):
+        company = companies(
+            name=input("Введите название предприятия: "), period_1=int(
+                input("Введите прибыль за первый квартал: ")), period_2=int(
+                input("Введите прибыль за второй квартал: ")), period_3=int(
+                input("Введите прибыль за третий квартал: ")), period_4=int(
+                    input("Введите прибыль за четвертый квартал: ")))
+
+        profit_aver[company.name] = (
+            company.period_1 + company.period_2 +
+            company.period_3 + company.period_4) / 4
+
+    total_aver = 0
+    for value in profit_aver.values():
+        total_aver += value
+    total_aver = total_aver / n
+
+    for key, value in profit_aver.items():
+        if value > total_aver:
+            print(f"{key} - прибыль выше среднего")
+        elif value < total_aver:
+            print(f"{key} - прибыль ниже среднего")
+        elif value == total_aver:
+            print(f"{key} - средняя прибыль")
+
+
+calc()
+
+"""
+Задание 2.
+
+"""
+import collections
+import functools
+
+
+def calc():
+    nums = collections.defaultdict(list)
+
+    # defaultdict(<class 'list'>,
+    # {'1-A2': ['A', '2'], '2-C4F': ['C', '4', 'F']})
+    for d in range(2):
+        n = input(f"Введите {d+1}-е натуральное шестнадцатиричное число: ")
+        nums[f"{d+1}-{n}"] = list(n)
+    print(nums)
+
+    # 16-указываем с числами какой системы делаем операции
+    sum_res = sum([int(''.join(i), 16) for i in nums.values()])
+    print(sum_res)
+    # '%X'	Число в шестнадцатеричной системе счисления
+
+    print("Сумма: ", list('%X' % sum_res))
+    # f'{15:x}' -> f
+    mul_res = functools.reduce(lambda a, b: a * b,
+                               [int(''.join(i), 16) for i in nums.values()])
+    print("Произведение: ", list('%X' % mul_res))
+
+
+calc()
+"""
+Задача 3.
+
+"""
+from collections import deque
+from timeit import timeit
+
+# Заполнение списка
+some_lst = [i for i in range(10 ** 5)]
+
+# Заполнение очереди
+some_deque = deque([i for i in range(10 ** 5)])
+
+n = 10 ** 4
+
+
+# 1. операции, равные по смыслу и используемым выражениям
+# в списке - append, pop, extend
+
+# append
+def append_list(some_lst):
+    for i in range(n):
+        some_lst.append(i)
+    return some_lst
+
+
+# append
+def append_deque(some_deque):
+    for i in range(n):
+        some_deque.append(i)
+    return some_deque
+
+
+# print(timeit('append_list(some_lst.copy())', globals=globals(), number=100))
+# print(timeit('append_deque(some_deque.copy())', globals=globals(), number=100))
+# 0.17083706399999998
+# 0.17358429199999997
+
+
+# pop
+def pop_list(some_lst):
+    for i in range(n):
+        some_lst.pop()
+    return some_lst
+
+
+# pop
+def pop_deque(some_deque):
+    for i in range(n):
+        some_deque.pop()
+    return some_deque
+
+
+# print(timeit('pop_list(some_lst.copy())', globals=globals(), number=100))
+# print(timeit('pop_deque(some_deque.copy())', globals=globals(), number=100))
+# 0.01335096600000002
+# 0.013849336999999962
+
+
+# extend
+def extend_list(some_lst):
+    for i in range(n):
+        some_lst.extend([1, 2, 3])
+    return some_lst
+
+
+# extend
+def extend_list(some_deque):
+    for i in range(n):
+        some_deque.extend([1, 2, 3])
+    return some_deque
+
+
+# print(timeit('extend_list(some_lst.copy())', globals=globals(), number=100))
+# print(timeit('extend_list(some_deque.copy())', globals=globals(), number=100))
+# 0.24264321900000002
+# 0.24306069100000005
+
+
+
+"""
+Задача 4.
+
+"""
+
+from timeit import default_timer
+from collections import OrderedDict
+
+some_dict = {}  # обычный словарь
+some_ordered_dict = OrderedDict()  # OrderedDict
+n = 10 ** 7  # число операций
+
+
+def time_decorator(some_func):
+    """Вычисляет время выполения декорируемой функции"""
+
+    def wrapper(*args, **kwargs):
+        start = default_timer()
+        result = some_func(*args, **kwargs)
+        print(f'Время выполенения функции {some_func.__name__} '
+              f'составило {default_timer() - start}. ')
+
+        return result
+
+    return wrapper
+
+
+@time_decorator
+def fill_dict(some_dict, n):
+    """Заполняет обычный словарь"""
+    for i in range(n):
+        some_dict[i] = i
+
+
+@time_decorator
+def fill_ordered_dict(some_ordered_dict, n):
+    """Заполняет OrderedDict"""
+    for i in range(n):
+        some_ordered_dict[i] = i
+
+
+fill_dict(some_dict, n)
+fill_ordered_dict(some_ordered_dict, n)
+
+# Время выполенения функции fill_dict составило 0.916514579.
+# Время выполенения функции fill_ordered_dict составило 1.3870536470000001.
+
+
+"""
+Обычный словарь заполняется элементами быстрее, чем OrderedDict. 
+Это связано прежде всего с тем, что:
+1. OrderedDict реализован на Python, а обычный словарь на С 
+и априори должен работать быстрее.
+2. OrderedDict был разработан для быстрого переупорядочивания элементов, 
+а производительность в части заполнения вторична.
+"""
+
+
+@time_decorator
+def change_dict(dct):
+    """Выполняет операции по изменению обычного словаря"""
+    for i in range(1000000):
+        dct.pop(i)  # удаляем 1000000 ключей из словаря
+    for j in range(1000001, 2000002):
+        dct[j] = 'fill'  # изменяем 1000000 значений в словаре
+    for k, v in dct.items():
+        dct[k] = 'some value'  # итерируемся по словарю, изменяя значения
+
+
+@time_decorator
+def change_ordered_dict(dct):
+    """Выполняет операции по изменению OrderedDict"""
+    for i in range(1000000):
+        dct.pop(i)  # удаляем 1000000 ключей из OrderedDict"
+    for j in range(1000001, 2000002):
+        dct[j] = 'fill'  # изменяем 1000000 значений в OrderedDict"
+    for k, v in dct.items():
+        dct[k] = 'some value'  # итерируемся по OrderedDict, изменяя значения
+
+
+change_dict(some_dict)
+change_ordered_dict(some_ordered_dict)
+
+# Время выполенения функции change_dict составило 0.8423442569999997.
+# Время выполенения функции change_ordered_dict составило 1.3677892429999998.
+
+"""
+Использование OrderedDict оправдано при условии использования специфичных его функции
+"""
