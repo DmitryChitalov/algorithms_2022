@@ -15,3 +15,32 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# O(n^2) - квадратичная
+
+my_list = [3, 5, 7, 9, 11, 2, 13, 15]  # O(1)
+
+
+def min_lst_func2(lst):
+    my_min = lst[0]  # O(1)
+    for i in range(len(lst)):  # O(n)
+        for j in range(len(lst)):  # O(n)
+            if my_min > lst[j]:  # 0(1)
+                my_min = lst[j]  # 0(1)
+    return my_min  # O(1)
+
+
+print(min_lst_func2(my_list))
+
+
+# O(n) - линейная
+
+def min_lst_func(lst):  #
+    my_min = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        if my_min > i:  # O(1)
+            my_min = i  # O(1)
+    return my_min  # O(1)
+
+
+print(min_lst_func(my_list))  #
