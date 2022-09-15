@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def search_min_On2(lst):
+    # Общая сложность: O(n) * ( O(1) + O(n) * ( O(1) + O(1) ) ) + O(1) = O(n^2)
+    for i in lst:  # O(n)
+        min_value = i  # O(1)
+        for j in lst:  # O(n)
+            if j < min_value:  # O(1)
+                min_value = j  # O(1)
+    return min_value  # O(1)
+
+
+def search_min_On(lst):
+    # Общая сложность: O(1) + O(n) * ( O(1) + O(1) ) + O(1) = O(n)
+    min_value = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        if i < min_value:  # O(1)
+            min_value = i  # O(1)
+    return min_value  # O(1)
+
+
+print(search_min_On2([3, 4, 5, 6, -2, 6, 7, 5, 3, 5, 1, 0, -5]))
+print(search_min_On([3, 4, 5, 6, -2, 6, 7, 5, 3, 5, 1, 0, -5]))

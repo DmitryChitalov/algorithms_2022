@@ -10,7 +10,12 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+
+
+array = [1, 3, 1, 3, 4, 5, 1]  # + [5] * 15 + [1] * 32 + [3] * 8
+SETUP = 'from __main__ import func_1, func_2, func_3, array'
+NUMBER = 100_000
 
 
 def func_1():
@@ -37,5 +42,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return max([(array.count(el), el) for el in set(array)])
+    # n, num = max([(array.count(el), el) for el in set(array)])
+    # return f'Чаще всего встречается число {num}, ' \
+    #        f'оно появилось в массиве {n} раз(а)'
+
+
+print(timeit('func_1()', SETUP, number=NUMBER))
+print(timeit('func_2()', SETUP, number=NUMBER))
+print(timeit('func_3()', SETUP, number=NUMBER))
+
 print(func_1())
 print(func_2())
+# print(func_3())
+n, num = func_3()
+print(f'Чаще всего встречается число {num}, оно появилось в массиве {n} раз(а)')
+
+"""
+В примере все три функции имеют квадратичную сложность, но func_3 за счет преобразования списка во множество, 
+элементов будет меньше, значит и работать будет быстрее с увеличением длины списка
+"""
