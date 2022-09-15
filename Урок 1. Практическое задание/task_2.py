@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+from random import randint
+
+
+# Первый вариант с O(n^2)
+def list_min_1(lst1):
+    for i in lst1:
+        min_ = i
+        for j in lst1:
+            if j < min_:
+                min_ = j
+    return min_
+
+
+# Второй вариант с O(n)
+def list_min_2(lst):
+   min_ = lst[0]
+   for i in lst:
+       if i < min_:
+           min_ = i
+   return min_
+
+
+lst1 = [randint(0, 100) for i in range(20)]
+print(lst1)
+print(list_min_1(lst1))
+print(list_min_2(lst1))
