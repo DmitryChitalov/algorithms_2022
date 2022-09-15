@@ -53,37 +53,41 @@ def bubble_sort_adv(lst_obj):
     return lst_obj
 
 
-test_list = [randint(-100, 100) for _ in range(10)]
+test_list = [randint(-1000, 1000) for _ in range(2000)]
+test_list_1 = deepcopy(test_list)
+test_list_2 = deepcopy(test_list)
 test_list_adv = deepcopy(test_list)
+test_list_adv_1 = deepcopy(test_list)
+test_list_adv_2 = deepcopy(test_list)
 
 
 print(test_list)
-print(bubble_sort(test_list))
+print(bubble_sort(test_list_1))
 print(
     timeit(
-        "bubble_sort(test_list[:])",
+        "bubble_sort(test_list_2[:])",
         globals=globals(),
         number=1000))
 print('------------------Обновлённая функция:')
 print(test_list_adv)
-print(bubble_sort_adv(test_list_adv))
+print(bubble_sort_adv(test_list_adv_1))
 print(
     timeit(
-        "bubble_sort_adv(test_list[:])",
+        "bubble_sort_adv(test_list_adv_2[:])",
         globals=globals(),
         number=1000))
-
 """
-Замеры времени обеих реализаций показали эффективность доработки 
-работы функции как на малых, так и на больших массивах. Чем больше
-сортируемый массив, тем выигрыш во времени больше:
+Замеры времени обеих реализаций показали эффективность доработки при обработке больших массивов.
+Не смотря на то, что основные ресурсы при сортировке расходуются на перестановку элементов и 
+пересчёт их индексов, а не сравнение элементов, последний указанный фактор, видимо, тоже имеет значение.
 --- на массиве из 10 элементов:
-0.020008542000000018
-0.005990272000000019
+0.016567623000000004
+0.016877435000000003
 --- на массиве из 100 элементов:
-1.0108404949999998
-0.01933687500000003
+1.246513269
+1.1228253900000003
 --- на массиве из 1000 элементов:
-73.43539755900001
-0.20718251200000282
+110.039253304
+144.22202149
+--- на массиве из 2000 элементов:
 """
