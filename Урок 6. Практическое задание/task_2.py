@@ -9,3 +9,38 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+@profile
+def fact_profile(n):
+    def fact(n):
+        if (n <= 1):
+            return 1
+        else:
+            return (n * fact(n-1))
+    f = fact(n)
+    return f
+
+print(fact_profile(982))
+
+
+"""
+Замер происходит при каждом вызове функции, т.е. в случае рекурсии замер будет производиться столько раз, 
+сколько функция вызовет саму себя.
+В данном примере рекурсивная функция вложена внутрь другой функции. 
+Мы замеряем параметры функции-обертки. Замер производится один раз, а не 981 раз.
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    15     14.8 MiB     14.8 MiB           1   @profile
+    16                                         def fact_profile(n):
+    17     16.2 MiB      1.4 MiB         983       def fact(n):
+    18     16.2 MiB      0.0 MiB         982           if (n <= 1):
+    19     16.2 MiB      0.0 MiB           1               return 1
+    20                                                 else:
+    21     16.2 MiB      0.0 MiB         981               return (n * fact(n-1))
+    22     16.2 MiB      0.0 MiB           1       f = fact(n)
+    23     16.2 MiB      0.0 MiB           1       return f
+
+"""
