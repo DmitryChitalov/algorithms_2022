@@ -28,3 +28,56 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple, defaultdict
+
+
+def create():
+    i = int(input('Введите количество предприятий: '))
+    companies = namedtuple('company', 'name quarter1 quarter2 quarter3 quarter4')
+    average_income = {}
+    for j in range(i):
+        name = input('Введите название предприятия: ')
+        income = input('через пробел введите прибыль данного предприятия: ').split()
+        a, b, c, d = map(int, income)
+        company = companies(
+            name=name,
+            quarter1=a,
+            quarter2=b,
+            quarter3=c,
+            quarter4=d)
+        average_income[company.name] = \
+            (company.quarter1 + company.quarter2 + company.quarter3 + company.quarter4) / 4
+    print(average_income)
+    annual_income = sum(average_income.values()) / i
+    print(f'Средняя годовая прибыль всех предприятий: {annual_income}')
+    print(
+        f'Предприятия, с прибылью выше среднего значения: {[name for name, val in average_income.items() if val > annual_income]}')
+    print(
+        f'Предприятия, с прибылью ниже среднего значения: {[name for name, val in average_income.items() if val < annual_income]}')
+
+
+create()
+
+
+def create_2():
+    i = int(input('Введите количество предприятий: '))
+    average_income = defaultdict(int)
+    for j in range(i):
+        name = input('Введите название предприятия: ')
+        income = input('через пробел введите прибыль данного предприятия: ').split()
+        s = 0
+        for val in income:
+            s += int(val)
+        average_income[name] = s / 4
+
+    print(average_income)
+    annual_income = sum(average_income.values()) / i
+    print(f'Средняя годовая прибыль всех предприятий: {annual_income}')
+    print(
+        f'Предприятия, с прибылью выше среднего значения: {[name for name, val in average_income.items() if val > annual_income]}')
+    print(
+        f'Предприятия, с прибылью ниже среднего значения: {[name for name, val in average_income.items() if val < annual_income]}')
+
+
+create_2()
