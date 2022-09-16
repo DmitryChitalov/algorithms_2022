@@ -30,3 +30,44 @@
 
 Это файл для первого скрипта
 """
+
+
+"""
+Урок 2. Задание 3.	Сформировать из введенного числа
+обратное по порядку входящих в него
+цифр и вывести на экран. Например, если введено число 3486,
+то надо вывести число 6843.
+Решите через рекурсию. В задании нельзя применять циклы.
+"""
+from memory_profiler import profile
+
+
+@profile
+def recursion(num):
+    def flip(num, flip_num=''):
+        if num == 0:
+            return flip_num
+        else:
+            flip_num += str(num % 10)
+            num = num / 10
+        return flip(num, flip_num)
+    print(f'Перевернутое число: {flip(num)}')
+
+
+@profile
+def second_flip(num):
+    return str(num)[::-1]
+
+
+try:
+    num = int(input('Введите число: '))
+    second_flip(num)
+    recursion(num)
+except ValueError:
+    print("Вы вместо числа ввели строку")
+
+
+'''
+Память была оптимизирована путем замены рекурсии на встроенный метод
+Количество занимаемой памяти после оптимизации снизилось
+'''
