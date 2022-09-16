@@ -28,3 +28,28 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+# Класс namedtuple() модуля collections возвращает новый подкласс кортежа с именем typename.
+# Новый подкласс используется для создания объектов, похожих на кортежи, которые имеют индексируемые и итерируемые поля,
+# доступные для поиска по атрибутам.
+from collections import namedtuple
+
+quantity_company = int(input('Введите количество предприятий: '))
+Company = namedtuple('Company', 'name profit')
+companies = []
+profits = []
+
+for i in range(quantity_company):
+    name = input(f'Введите название предприятия: ')
+    annual_profit = sum(map(int, input('Через пробел введите прибыль данного предприятия'
+                                       ' за каждый квартал(Всего 4 квартала): ').split()))
+    profits.append(annual_profit)
+    company = Company(name, annual_profit)
+    companies.append(company)
+
+average_profit = sum(profits) / quantity_company
+
+unprofitable_companies = [i.name for i in companies if i.profit < average_profit]
+profitable_companies = [i.name for i in companies if i.profit >= average_profit]
+
+print(f'Предприятия, с прибылью ниже среднего значения: {unprofitable_companies}')
+print(f'Предприятия, с прибылью выше среднего значения: {profitable_companies}')
