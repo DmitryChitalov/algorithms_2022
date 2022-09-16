@@ -19,3 +19,12 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def chr_table(ascii_value):
+    if ascii_value == 128:
+        return True
+    print(f' {ascii_value} - {chr(ascii_value)}', end=' ')
+    if (ascii_value - 31) % 10 == 0:
+        print('\n')
+    chr_table(ascii_value + 1)
+
+chr_table(32)

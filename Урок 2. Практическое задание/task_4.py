@@ -10,3 +10,13 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+my_number = int(input('Введите количество элементов для сложения: '))
+list_numbers = [1, -0.5, 0.25, -0.125]
+def sum_numbers(numbers, n):
+    if n == 1:
+        return numbers[0]
+    else:
+        return numbers[0] + sum_numbers(numbers[1:n], n-1)
+
+
+print(f'Сумма элементов равна: {sum_numbers(list_numbers, my_number)}')

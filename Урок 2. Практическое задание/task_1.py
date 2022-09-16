@@ -27,3 +27,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def math_operation():
+
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if operation == '0':
+        return "Сессия завершена"
+
+    else:
+        if operation in "+-*/":
+            try:
+                num_1 = int(input("Введите первое число: "))
+                num_2 = int(input("Введите второе число: "))
+            except ValueError:
+                print("Значение числа должно быть введено цифрами.")
+                return math_operation()
+        else:
+            print("Введен неверный символ, повторите попытку.")
+            return math_operation()
+
+        if operation == '+':
+            result = num_1 + num_2
+            print(f"Полученный результат: {result}")
+            return math_operation()
+
+        elif operation == '-':
+            result = num_1 - num_2
+            print(f"Полученный результат: {result}")
+            return math_operation()
+
+        elif operation == '*':
+            result = num_1 * num_2
+            print(f"Полученный результат: {result}")
+            return math_operation()
+
+        elif operation == '/':
+            try:
+                result = num_1 / num_2
+            except ZeroDivisionError:
+                print("На ноль делить нельзя")
+            else:
+                print(f"Полученный результат: {result}")
+            finally:
+                return math_operation()
+
+
+math_operation()
