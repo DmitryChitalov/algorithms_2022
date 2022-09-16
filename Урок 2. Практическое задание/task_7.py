@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def checking_equality(number):
+    if number == 1:
+        return number
+    else:
+        return checking_equality(number - 1) + number
+
+n = 76
+if checking_equality(n) == n*(n+1)/2:
+    print("Равенство верное")
+else:
+    print("Равенство не выполняется")

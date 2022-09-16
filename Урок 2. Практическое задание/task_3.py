@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+numbers_list = []
+def reversed_number(number):
+    rev_num = ''.join(numbers_list)
+    if number == 0:
+        return rev_num
+    else:
+        new_number = str(number % 10)
+        numbers_list.append(new_number)
+        return reversed_number(number // 10)
+
+
+print(reversed_number(1230))
