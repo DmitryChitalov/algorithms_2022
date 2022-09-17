@@ -1,3 +1,7 @@
+from memory_profiler import memory_usage
+from random import randint
+from json import loads, dumps
+from memory_profiler import profile
 """
 Задание 1.
 
@@ -15,7 +19,6 @@
 Вам нужно написать аналитику, что вы сделали для оптимизации памяти и
 чего добились.
 
-
 ВНИМАНИЕ:
 1) скрипты для оптимизации нужно брать только из сделанных вами ДЗ
 курсов Алгоритмы и Основы
@@ -30,3 +33,43 @@
 
 Это файл для пятого скрипта
 """
+
+# неоптимизированная функция( алгоритмы 4.1):
+@profile
+def func_3(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+print(func_3(list(range(50000))))
+
+"""Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    38     16.1 MiB     16.1 MiB           1   @profile
+    39                                         def func_3(nums):
+    40     16.1 MiB      0.0 MiB           1       new_arr = []
+    41     17.2 MiB      0.0 MiB       50001       for i in range(len(nums)):
+    42     17.2 MiB      0.7 MiB       50000           if nums[i] % 2 == 0:
+    43     17.2 MiB      0.4 MiB       25000               new_arr.append(i)
+    44     17.2 MiB      0.0 MiB           1       return new_arr"""
+
+
+
+оптимизированная функция ( алгоритмы 4.1)
+@profile
+def func_2(nums):
+    new_list = filter(lambda x: x % 2 == 0, nums)
+    return new_list
+print(func_2(list(range(50000))))
+
+"""   Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    57     16.1 MiB     16.1 MiB           1   @profile
+    58                                         def func_2(nums):
+    59     16.1 MiB      0.0 MiB           1       new_list = filter(lambda x: x % 2 == 0, nums)
+    60     16.1 MiB      0.0 MiB           1       return new_list"""
+
+"""Функция filter помогает значительно оптимизировать память. """
+
+

@@ -1,3 +1,5 @@
+import collections
+from collections import namedtuple
 """
 Задание 1.
 
@@ -28,3 +30,56 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+def profit_counter():
+    try:
+        amount = int(input('Введите количество предприятий для расчета прибыли: '))
+        avrg = 0
+        s = 0
+        dct = {}
+        big_prft = []
+        small_prft = []
+        for i in range(amount):
+            name = input('Введите название предприятия: ')
+            try:
+                profit = (input('Через пробел введите прибыль данного предприятия за'
+                           ' каждый квартал(Всего 4 квартала): ')).split(' ')
+                prft = [int(x) for x in profit]
+                summa = sum(prft)
+                prft.append(summa)
+                dct[name] = prft
+                s += summa
+                avrg = s / amount
+            except ValueError:
+                print("Ошибка ввода! Вы ввели не числа!")
+                profit_counter()
+
+        for i, j in dct.items():
+            Company = namedtuple(i, 'quater1 quater2 quater3 quater4 summa')
+            try:
+                i = Company._make(j)
+                if i.summa >= avrg:
+                    big_prft.append(Company.__name__)
+                else:
+                    small_prft.append(Company.__name__)
+            except TypeError:
+                print(("Ошибка ввода! Введите четыре числа через пробел!"))
+                profit_counter()
+
+        print(f'Средняя годовая прибыль всех предприятий: {avrg}')
+        print(f'Предприятия, с прибылью выше (или равной) среднего значения: {big_prft}')
+        if small_prft:
+            print(f'Предприятия, с прибылью ниже среднего значения: {small_prft}')
+        else:
+            print("У кампаний одинаковая прибыль")
+    except ValueError:
+        print("Ошибка ввода! Вы ввели не число!")
+        profit_counter()
+
+profit_counter()
+
+
+
+
+
+

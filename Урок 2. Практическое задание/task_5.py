@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def rec(num=32, count=2):
+    if num <= 127:
+        if count <= 10:
+            print(f'{num} - {chr(num)}', end=' ')
+            return rec(num=num+1, count=count+1)
+        elif count > 10:
+            count = 1
+            print(f'{num} - {chr(num)}')
+            return rec(num=num + 1, count=count + 1)
+
+rec()
+
+
+

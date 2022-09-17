@@ -27,3 +27,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+class MyException(Exception):
+    pass
+
+def rec():
+    try:
+        a = int(input("Введите число 1:"))
+        b = int(input("Введите число 2:"))
+        sign = input("Введите один знак операции с числами - '+', '-', '*' или '/',"
+                 " для выхода из программы введите '0' :")
+        if sign != '0':
+            if sign not in('+', '-', '/', '*'):
+                raise MyException("wrong sign")
+            if sign == '+':
+                print(a + b)
+            elif sign == '-':
+                print(a - b)
+            elif sign == '*':
+                print(a * b)
+            elif sign == '/':
+                if b != 0:
+                    print(a / b)
+                else:
+                    raise ZeroDivisionError("You can not divide by zero")
+            return rec()
+    except MyException as e:
+        print("Ошибка! Введен неправильный знак операции!")
+    except ValueError:
+        print('Вы вместо числа ввели строку ((( Исправьтесь!')
+    except ZeroDivisionError:
+        print("Число два не должно быть равно 0! На ноль делить нельзя!")
+    return rec()
+rec()

@@ -1,6 +1,12 @@
+import numpy as np
+from memory_profiler import memory_usage
+from random import randint
+from pympler import asizeof
+import array
+from memory_profiler import profile
+from json import loads, dumps
 """
 Задание 1.
-
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
 курсов Алгоритмы и Основы Python
 
@@ -30,3 +36,21 @@
 
 Это файл для второго скрипта
 """
+# основы 5.4
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+#неоптимизированная функция
+def lst_gen():
+    lst = [src[i] for i in range(len(src)) if src[i-1] < src[i]]
+    return lst
+
+# оптимизированное решение
+def gen():
+    for i in range(len(src)):
+        if src[i - 1] < src[i]:
+            yield src[i]
+
+
+print(asizeof.asizeof(lst_gen()))
+print(asizeof.asizeof(gen()))
+
+"""Использование генераторов позволяет существенно минимизировать расходование памяти."""

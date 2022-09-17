@@ -1,3 +1,5 @@
+from random import randint
+from timeit import timeit
 """
 Задание 1.
 
@@ -18,3 +20,80 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+
+# доработанная функция
+def bubble_sort(lst_obj):
+    n = 1
+    not_sorted = True
+    while n < len(lst_obj):
+        val = 0
+        if not not_sorted:
+            return lst_obj
+
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                val += 1
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+
+        if val == 0:
+            return lst_obj
+        n += 1
+    return lst_obj
+#
+orig_list = [randint(-100, 100) for _ in range(10)]
+print(f' Исходный массив с 10 случайными элементами: {orig_list}')
+print(f' Отсортированный функцией массив: {bubble_sort(orig_list)}')
+
+sorted_lst = [i for i in range(100, 1, -1)]
+sorted_lst_2 = [i for i in range(1000, 1, -1)]
+print(f' Доработаная функция с 10 случайными элементами :{timeit("bubble_sort(orig_list[:])", globals=globals(), number=1000)}')
+
+
+orig_list = [randint(-100, 100) for _ in range(100)]# замеры 100
+print(f' Доработаная функция с 100 случайными элементами :{timeit("bubble_sort(orig_list[:])",globals=globals(),number=1000)}')
+print(f' Доработаная функция с 100 отсортированными элементами :{timeit("bubble_sort(sorted_lst[:])",globals=globals(),number=1000)}')
+
+orig_list = [randint(-100, 100) for _ in range(1000)] #замеры 1000
+print(f' Доработаная функция с 1000 случайными элементами :{timeit("bubble_sort(orig_list[:])",globals=globals(),number=1000)}')
+print(f' Доработаная функция с 1000 отсортированными элементами :{timeit("bubble_sort(sorted_lst_2[:])",globals=globals(),number=1000)}')
+#недоработанная функция
+def bubble_sort_2(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+orig_list_2 = [randint(-100, 100) for _ in range(10)]
+sorted_lst = [i for i in range(100, 1, -1)]
+
+print(f' недоработаная функция с 10 случайными элементами :{timeit("bubble_sort_2(orig_list_2[:])", globals=globals(), number=1000)}')
+
+orig_list_2 = [randint(-100, 100) for _ in range(100)]# замеры 100
+print(f' недоработаная функция с 100 случайными элементами :{timeit("bubble_sort_2(orig_list_2[:])", globals=globals(), number=1000)}')
+print(f' недоработаная функция с 100 отсортированными элементами :{timeit("bubble_sort_2(sorted_lst[:])", globals=globals(), number=1000)}')
+
+orig_list_2 = [randint(-100, 100) for _ in range(1000)] #замеры 1000
+print(f' недоработаная функция с 1000 случайными элементами :{timeit("bubble_sort_2(orig_list_2[:])", globals=globals(), number=1000)}')
+print(f' недоработаная функция с 1000 отсортированными элементами :{timeit("bubble_sort_2(sorted_lst_2[:])", globals=globals(), number=1000)}')
+
+
+""" Результаты:
+Доработаная функция с 10 случайными элементами :0.0027473239999999954
+Доработаная функция с 100 случайными элементами :1.217074389
+Доработаная функция с 100 отсортированными элементами :0.010222839999999955
+Доработаная функция с 1000 случайными элементами :115.770084017
+Доработаная функция с 1000 отсортированными элементами :0.12260394900000904
+недоработаная функция с 10 случайными элементами :0.013002454000002217
+недоработаная функция с 100 случайными элементами :0.9868495070000023
+недоработаная функция с 100 отсортированными элементами :0.5128056169999979
+недоработаная функция с 1000 случайными элементами :107.390144671
+недоработаная функция с 1000 отсортированными элементами :58.55720593500001"""
+
+
+"""Если требуется отсортировать уже отсортированный (частично или полностью) массив, то доработка функции
+существенно уменьшает время исполнения. Если массив заполнен случайными числами,
+то необходимости в оптимизации нет (в этом случае функция работает даже немного дольше)."""

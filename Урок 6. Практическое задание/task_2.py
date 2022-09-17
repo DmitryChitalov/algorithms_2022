@@ -1,3 +1,4 @@
+from memory_profiler import profile
 """
 Задание 2.
 
@@ -9,3 +10,23 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+# task 3 из практического задания 2.
+
+num = int(input("Введите  целое число"))
+
+@profile
+def rec(count=0, a=10, b=1, digit=0, res=''):
+    if count < len(str(num)):
+        digit = str(num % a // b)
+        res = str(res + digit)
+        return rec(count=count + 1, a=a * 10, b=b * 10, res=res)
+    # print(res)
+    return res
+#Происходит измерение каждого рекурсивного вызова функции.
+#Чтобы решить эту проблему нужно обернуть рекурсивную функцию другой функцией:
+@profile
+def wrapper():
+    return rec()
+
+
+print(wrapper())
