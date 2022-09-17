@@ -14,3 +14,26 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+mass_10 = [randint(1, 100) for i in range(2 * 5 + 1)]
+mass_100 = [randint(1, 100) for j in range(2 * 50 + 1)]
+mass_1000 = [randint(1, 100) for k in range(2 * 500 + 1)]
+
+
+def median(data):
+    numbers = data
+    for i in numbers:
+        if i == 2:
+            numbers.remove(i)
+        return i
+
+
+print(timeit('median(mass_10[:])', globals=globals(), number=1000))
+print()
+print(timeit('median(mass_100[:])', globals=globals(), number=1000))
+print()
+print(timeit('median(mass_1000[:])', globals=globals(), number=1000))
+
+

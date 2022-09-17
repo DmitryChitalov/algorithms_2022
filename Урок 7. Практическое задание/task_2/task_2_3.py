@@ -16,3 +16,21 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+mass_10 = [randint(1, 100) for i in range(2 * 5 + 1)]
+mass_100 = [randint(1, 100) for j in range(2 * 50 + 1)]
+mass_1000 = [randint(1, 100) for k in range(2 * 500 + 1)]
+
+
+def median_search(data):
+    return median(data[:])
+
+
+print(timeit('median_search(mass_10[:])', globals=globals(), number=1000))
+print()
+print(timeit('median_search(mass_100[:])', globals=globals(), number=1000))
+print()
+print(timeit('median_search(mass_1000[:])', globals=globals(), number=1000))
