@@ -44,7 +44,7 @@ for i in string:
     if i not in dct:
         dct[i] = 1
     else:
-        dct
+        dct[i] += 1
 node_list = deque([HuffmanDecode(dct[i], i) for i in dct])
 
 for i in range(len(dct)-1):
