@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def user_enter():
+    users = input('Введите натуральное число: ')
+    if not (users.isdecimal()):
+        print('Вместо числа введена строка! Исправьтесь')
+        return user_enter()
+    return int(users)
+
+def recurs_parity(users, even=0, odd=0):
+    if users == 0:
+        print('Введите число больше 0')
+        return even, odd
+    else:
+        last_element = users % 10
+        if not last_element % 2:
+            even += 1
+        else:
+            odd += 1
+        users = users // 10
+        return recurs_parity(users, even, odd)
+
+
+if __name__ == "__main__":
+    users1 = user_enter()
+    print(f"Количество четных и нечетных цифр в числе равно: {recurs_parity(users1)}")

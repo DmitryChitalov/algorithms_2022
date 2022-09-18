@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+user_number = int(input('Введите натуральное число: '))
+
+def check(n, my_sum=0):
+    if n > 0:
+        my_sum = my_sum + n
+        n = n - 1
+    else:
+        return my_sum
+    return check(n, my_sum)
+
+print(check(user_number) == user_number * (user_number + 1) / 2)

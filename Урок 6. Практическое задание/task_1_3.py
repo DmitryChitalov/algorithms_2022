@@ -30,3 +30,30 @@
 
 Это файл для третьего скрипта
 """
+#  дз 4, задача 1, алгоритмы
+
+
+from memory_profiler import profile
+
+# до оптимизации
+lst = list(range(0, 5000))
+
+@profile
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+# после оптимизации
+@profile
+def func_2(nums):
+    new_list = filter(lambda x: x % 2 == 0, nums)
+    return new_list
+
+
+func_1(lst)
+func_2(lst)
+
+# c использованием Filter уменьшилось использование памяти на 0.1 MiB

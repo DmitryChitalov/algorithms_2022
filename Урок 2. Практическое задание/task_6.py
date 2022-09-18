@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+guess = random.randint(0, 50)
+
+def game(guess, user_try=10):
+    if user_try:
+        user_number = int(input('Угадайте число: '))
+        if guess != user_number:
+            if user_number < guess:
+                print('Введённое число меньше загаданного')
+            else:
+                print('Введённое число больше загаданного')
+            game(guess, user_try - 1)
+        else:
+            print('Вы выграли')
+    else:
+        print(f'Вы проиграли, загаданное число {guess}')
+
+game(guess)

@@ -10,3 +10,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+def user_enter():
+    users = input('Введите количество элементов: ')
+    if not (users.isdecimal()):
+        print('Вместо числа введена строка! Исправьтесь')
+        return user_enter()
+    return int(users)
+
+def quantity_elem(count, elem, users, my_sum):
+    if count == users:
+        print(f"Количество элементов - {users}, их сумма - {my_sum}")
+    elif count < users:
+        return quantity_elem(count + 1, elem/2 * -1, users, my_sum + elem)
+
+if __name__ == "__main__":
+    quantity_elem(0, 1, user_enter(), 0)

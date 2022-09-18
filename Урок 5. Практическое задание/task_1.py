@@ -28,3 +28,24 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, defaultdict
+
+def enter_company():
+    name = input('Введите название предприятия для расчета прибыли: ')
+    profit = input('Через пробел ввидите прибыль данного предприятия за каждый квартал (всего 4 квартала): ').split()
+    profit_total = sum(map(float, profit))
+    return name, profit_total
+
+def namedtuple_calc():
+    CompanyInfo = namedtuple('CompanyInfo', 'name profit')
+    count = int(input('Введите количество предприятий для расчета прибыли: '))
+    company_all = [CompanyInfo(*enter_company()) for _ in range(count)]
+    mean = sum(map(lambda x: x.profit, company_all)) / count
+    print('Предприятия, с прибылью выше среднего значения:', end=' ')
+    print(*(el.name for el in company_all if el.profit >= mean), sep=', ')
+    print('Предприятия, с прибылью ниже среднего значения:', end=' ')
+    print(*(el.name for el in company_all if el.profit < mean), sep=', ')
+    print(f'Средняя годовая прибыль всех предприятий : {mean}')
+
+if __name__ == '__main__':
+    namedtuple_calc()

@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def symbols_table(number=32, register=1):
+    if number > 127:
+        return print('\n', 'символы от 32 до 127')
+    end = ' '
+    if (register + 10) % 10 == 0:
+        end = '\n'
+    print(f'{number} - {chr(number)}{end}', end='')
+    return symbols_table(number + 1, register + 1)
+
+symbols_table()

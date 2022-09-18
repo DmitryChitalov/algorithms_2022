@@ -17,3 +17,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+class DequeClass():
+    def __init__(self):
+        self.tasks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        self.tasks_corrects = []
+        self.solution_tasks = []
+
+    def solved(self):
+        self.solution_tasks.append(self.tasks.pop()) # задачи решены из основного списка
+
+    def correct(self):
+        self.tasks_corrects.append(self.tasks.pop()) #задачи для корректировки в список для доработки
+
+    def solution_correct(self):
+        self.solution_tasks.append(self.tasks_corrects.pop()) #решенные задачи из списка на доработку
+
+    def __str__(self):
+        return f'{self.tasks} - Осталось решить\n{self.tasks_corrects} - на корректировку \n{self.solution_tasks} - решены'
+
+
+tasks = DequeClass()
+tasks.correct()
+tasks.correct()
+tasks.correct()
+tasks.correct()
+tasks.correct()
+tasks.solved()
+tasks.solved()
+tasks.solved()
+tasks.solution_correct()
+tasks.solution_correct()
+print(tasks)
+

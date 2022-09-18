@@ -30,3 +30,41 @@
 
 Это файл для четвертого скрипта
 """
+# дз 3, задача 2, основы
+
+from memory_profiler import profile
+
+
+# до оптимизации
+@profile
+def num_translate_adv(num):
+    num_dictionary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+                      'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
+    num_dictionary_title = {'Zero': 'Ноль', 'One': 'Один', 'Two': 'Два', 'Three': 'Три', 'Four': 'Четыре',
+                            'Five': 'Пять',
+                            'Six': 'Шесть', 'Seven': 'Семь', 'Eight': 'Восемь', 'Nine': 'Девять', 'Ten': 'Десять'}
+    if num.lower() in num_dictionary.keys():
+        if num.istitle():
+            return num_dictionary_title[num]
+        else:
+            return num_dictionary[num]
+
+
+# после оптимизации
+@profile
+def num_translate_adv_op(num):
+    num_dictionary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+                      'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять',
+                      'Zero': 'Ноль', 'One': 'Один', 'Two': 'Два', 'Three': 'Три',
+                      'Four': 'Четыре', 'Five': 'Пять', 'Six': 'Шесть', 'Seven': 'Семь',
+                      'Eight': 'Восемь', 'Nine': 'Девять', 'Ten': 'Десять'}
+    if num in num_dictionary.keys():
+        if num.istitle():
+            return num_dictionary[num]
+        else:
+            return num_dictionary[num]
+
+
+print(num_translate_adv('five'))  # восемь
+print(num_translate_adv_op('five'))  # Девять
+# после оптимизации стало меньше на 0.1 MiB
