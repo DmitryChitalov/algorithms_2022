@@ -92,5 +92,6 @@ try:
     r.get_right_child().set_root_val(16)
     print(r.get_right_child().get_root_val())
     print(r.get_left_child().get_root_val())
+
 except AttributeError:
     print('Ошибка считывания данных из дерева: нельзя вывести root, если ветка пуста')
