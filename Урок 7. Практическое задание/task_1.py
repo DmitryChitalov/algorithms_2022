@@ -19,6 +19,7 @@
 а по убыванию.
 """
 import random
+import timeit
 
 
 def rand_mas():
