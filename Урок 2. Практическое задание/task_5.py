@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_table(number_symbl, result, col_elem):
+    if number_symbl > 127:
+        return print(result)
+    else:
+        if col_elem == 1:
+            result += str(number_symbl) + ' - ' + chr(number_symbl) + '\n '
+            col_elem = 10
+        else:
+            result += str(number_symbl) + ' - ' + chr(number_symbl) + ' '
+            col_elem -= 1
+        number_symbl += 1
+        return ascii_table(number_symbl, result, col_elem)
+
+
+ascii_table(32, '', 10)

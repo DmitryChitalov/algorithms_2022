@@ -28,3 +28,98 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+# Создаем декоратор.
+
+def my_decorator(func):
+    def wrapper(*args):
+        now = time.time()
+        result = func(*args)
+        print((time.time() - now))
+        return result
+
+    return wrapper
+
+
+# a)
+
+# Заполняем список с помощью List Comprehensions.
+@my_decorator
+def list_generator(n):  # O(n)
+    return [i for i in range(0, n)]  # O(n)
+
+
+# Заполняем словарь.
+@my_decorator
+def dict_generator(n):  # O(n)
+    return {i: None for i in range(0, n)}  # O(n)
+
+
+print('a)')
+print('Заполняем список:')
+my_lst = list_generator(999999)
+
+print('Заполняем словарь:')
+my_dct = dict_generator(999999)
+
+
+# Словарь заполняеться дольше, так как для словаря дополнительно формируется хеш-таблица.
+
+
+# b)
+
+# В цикле перебираем и сравниваем каждую позицию с искомым элементом.
+@my_decorator
+def list_item(lst: list, el):  # O(n)
+    for itm in lst:  # O(n)
+        if itm == el:  # O(1)
+            return itm  # O(1)
+
+
+# Сразу получаем искомый элемент.
+@my_decorator
+def dict_item(dct: dict, el):  # O(1)
+    return dct[el]  # O(1)
+
+
+print('б)')
+print('Получаем элемент списка:')
+list_element = list_item(my_lst, 999998)
+
+print('Получаем элемент словаря:')
+dict_element = dict_item(my_dct, 999998)
+
+
+# Получение элемента из словаря быстрее.
+# Так как скорость алгоритмов измеряется в темпе роста количества операций,
+# для получения элемента списка (линейное время) необходимо выполнить больше операций.
+# Получение элемента словаря (константное время) происходит за одну операцию.
+
+
+# с)
+
+# Удаляем элемент из списка с помощью метода remove.
+@my_decorator
+def del_list(lst: list, el):  # O(n)
+    lst.remove(el)  # O(n)
+
+
+# Сразу удаляем элемент из словаря
+@my_decorator
+def del_dict(dct: dict, el):  # O(1)
+    del dct[el]  # O(1)
+
+
+print('c)')
+print('Удаляем элемент списка:')
+del_list(my_lst, 999998)
+
+print('Удаляем элемент словаря:')
+del_dict(my_dct, 999998)
+
+# Удаление элемента из словаря быстрее.
+# Аналогичная ситуация с получением элемента. Количество операций у словаря меньше (константное время),
+# соответственно и выполняется быстро.
