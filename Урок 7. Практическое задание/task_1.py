@@ -59,5 +59,7 @@ per1 = """
 sort_mass(mass.copy())
 """
 
-print(timeit.timeit(setup='', stmt=per, number=1000000))
-print(timeit.timeit(setup='', stmt=per1, number=1000000))
+print(timeit.timeit(setup='', stmt=per, number=10000, globals=globals()))
+print(timeit.timeit(setup='', stmt=per1, number=10000, globals=globals()))
+print(sort_mass(mass.copy()))
+print(sort_mass_old(mass.copy()))
