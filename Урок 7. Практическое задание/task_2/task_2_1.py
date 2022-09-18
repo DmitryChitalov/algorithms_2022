@@ -16,6 +16,7 @@
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
 import random
+import timeit
 
 
 def random_mass(num: int):
@@ -39,15 +40,27 @@ def gnom_sort(mass):
 
 i = 10
 mas = gnom_sort(random_mass(i))
+per = """
+mas = gnom_sort(random_mass(i))
+"""
 print(mas)
 print("Медиана = ", mas[i + 1], " Элемент ", i + 1)
+print(timeit.timeit(setup='', stmt=per, number=10000, globals=globals()))
 
 i = 100
 mas = gnom_sort(random_mass(i))
+per = """
+mas = gnom_sort(random_mass(i))
+"""
 print(mas)
 print("Медиана = ", mas[i + 1], " Элемент ", i + 1)
+print(timeit.timeit(setup='', stmt=per, number=10000, globals=globals()))
 
 i = 1000
 mas = gnom_sort(random_mass(i))
+per = """
+mas = gnom_sort(random_mass(i))
+"""
 print(mas)
 print("Медиана = ", mas[i + 1], " Элемент ", i + 1)
+print(timeit.timeit(setup='', stmt=per, number=10000, globals=globals()))
