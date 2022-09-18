@@ -30,3 +30,52 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+from random import randrange
+import numpy
+
+#  Исходный код
+@profile
+def change():
+    my_list = [randrange(10000) for _ in range(1000000)]
+    for i in range(0, len(my_list) // 2 * 2, 2):
+        my_list[i], my_list[i+1] = my_list[i+1], my_list[i]
+
+#  Оптимизированный код
+@profile
+def change_numpy():
+    my_list = numpy.array([randrange(10000) for _ in range(1000000)])
+    for i in range(0, len(my_list) // 2 * 2, 2):
+        my_list[i], my_list[i+1] = my_list[i+1], my_list[i]
+
+if __name__ == '__main__':
+    print ("Используем список")
+    change()
+    print("Используем numpy.array")
+    change_numpy()
+"""   
+Результаты работы:
+
+Используем список
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    39     30.9 MiB     30.9 MiB           1   @profile
+    40                                         def change():
+    41     69.3 MiB     38.4 MiB     1000003       my_list = [randrange(10000) for _ in range(1000000)]
+    42     69.3 MiB -12038.3 MiB      500001       for i in range(0, len(my_list) // 2 * 2, 2):
+    43     69.3 MiB -12038.2 MiB      500000           my_list[i], my_list[i+1] = my_list[i+1], my_list[i]
+
+
+Используем numpy.array
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    44     32.6 MiB     32.6 MiB           1   @profile
+    45                                         def change_numpy():
+    46     69.3 MiB  -9387.7 MiB     1000003       my_list = numpy.array([randrange(10000) for _ in range(1000000)])
+    47     37.4 MiB  -8033.6 MiB      500001       for i in range(0, len(my_list) // 2 * 2, 2):
+    48     37.4 MiB  -8001.8 MiB      500000           my_list[i], my_list[i+1] = my_list[i+1], my_list[i]
+
+При использовании numpy сначала выделяется столько же памяти примерно (потому что сначала создается список)
+А потом она освобождается. И рабочей памяти остается 5 MiB против 38 MiB со списком
+"""
