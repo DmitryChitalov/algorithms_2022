@@ -29,6 +29,14 @@ def rand_mas():
     return mass
 
 
+def sort_mass_old(new_mass):
+    for i in range(len(new_mass) - 1):
+        for j in range(len(new_mass) - 1 - i):
+            if new_mass[j] < new_mass[j + 1]:
+                new_mass[j], new_mass[j + 1] = new_mass[j + 1], new_mass[j]
+    return new_mass
+
+
 def sort_mass(new_mass):
     for i in range(len(new_mass) - 1):
         k = False
@@ -43,5 +51,13 @@ def sort_mass(new_mass):
 
 mass = rand_mas()
 print(mass)
-print(sort_mass([9, 8, 7, 6, 5, 4, 3, 2, 1]))
-print(sort_mass(mass.copy()))
+
+per = """
+sort_mass_old(mass.copy())
+"""
+per1 = """
+sort_mass(mass.copy())
+"""
+
+print(timeit.timeit(setup='', stmt=per, number=1000000))
+print(timeit.timeit(setup='', stmt=per1, number=1000000))
