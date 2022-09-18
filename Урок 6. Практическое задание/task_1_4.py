@@ -30,3 +30,51 @@
 
 Это файл для четвертого скрипта
 """
+from functools import reduce
+from memory_profiler import memory_usage
+
+
+def memoriser(func, *args):
+    def wrapper(*args):
+        start = memory_usage()[0]
+        res = func(*args)
+        mem = memory_usage()[0] - start
+        print(func)
+        print(mem)
+        return res
+
+    return wrapper
+
+
+# Исходный код
+@memoriser
+def mult_1():
+    my_list = [i for i in range(100, 10001, 2)]
+    return (reduce(lambda x, y: x * y, my_list, 1))
+
+
+# Оптимизированный код
+@memoriser
+def mult_2():
+    my_list = (i for i in range(100, 10001, 2))
+    return (reduce(lambda x, y: x * y, my_list, 1))
+
+
+print("Генератор")
+mult_2()
+
+print("Списочное включение")
+mult_1()
+
+"""
+Генератор
+<function mult_2 at 0x0000022A53E50280>
+0.08984375
+Списочное включение
+<function mult_1 at 0x0000022A53E50550>
+0.4375
+
+Как и следовало ожидать, генератор память экономит.
+А удивительно, насколько числа отличаются от запуска к запуску.
+
+"""
