@@ -63,4 +63,4 @@ mas = gnom_sort(random_mass(i))
 """
 print(mas)
 print("Медиана = ", mas[i + 1], " Элемент ", i + 1)
-print(timeit.timeit(setup='', stmt=per, number=10000, globals=globals()))
+print(timeit.timeit(setup='', stmt=per, number=100, globals=globals()))
