@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_numbers(number, odd=0, even=0):
+    if number == 0:
+        return f'Количество чисел: чётных {even} , нечётных {odd}'
+    else:
+        num = number % 10
+        if num % 2 == 1:
+            odd += 1
+        else:
+            even += 1
+        return count_numbers(number // 10, odd, even)
+
+
+user_num = int(input('Введите число: '))
+print(count_numbers(user_num))
