@@ -22,3 +22,16 @@
 р
 а
 """
+
+import hashlib
+
+new_string = 'papa'
+new_set = set()
+for i in range(len(new_string)):
+    for j in range(i + 1, len(new_string) + 1):
+        sub_string = new_string[i:j]
+        if sub_string != new_string:
+            new_set.add(hashlib.sha256(sub_string.encode()).hexdigest())
+            #new_set.add(hashlib.sha256(b'sub_string').hexdigest()) не поняла почему не работает этот вариант,
+                                                                  # буквы латинские
+print(new_set)

@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from uuid import uuid4
+import hashlib
+
+
+cache_obj = {}
+hash_salt = uuid4().int
+
+def check_page(url):
+    if cache_obj.get(url):
+        print(f'Данный адрес: {url} присутствует в кэше')
+    else:
+        url_hash = hashlib.sha512(b'hash_salt' + url.encode()).hexdigest()
+        cache_obj[url] = url_hash
+        print(cache_obj)
+
+
+check_page('https://docs.python.org/')
+check_page('https://docs.python.org/')
