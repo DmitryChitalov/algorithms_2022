@@ -18,3 +18,40 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+from random import randint
+from timeit import timeit
+
+lst = [randint(-100, 100) for i in range(10)]
+
+print(lst)
+
+def stone_sort_1(lst):
+    for i in range(len(lst)-1):
+        for j in range(len(lst) -1 - i):
+            if lst[j] < lst[j + 1]: # для убывания достаточно поменять знак > на <.
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+def stone_sort_2(lst):
+    k = 0
+    flag = True
+    for i in range(9):
+        if flag: #проверка на фложок
+            flag = False # флажок выставляем False, если замен не будет, то вылет из цикла. Если замена есть,
+            # поменяем флажок на True и цикл повторится.
+            for j in range(9 - i):
+                if lst[j] < lst[j + 1]: # для убывания достаточно поменять знак > на <.
+                    lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                    flag = True
+            k += 1 # для подсчета циклов
+        else:
+            #print(flag, k, lst) # Узнаем с каким флагом и через сколько циклов закончится сортировка
+            return lst, k, flag
+    return lst, k, flag
+
+print(timeit("stone_sort_1(lst[:])", globals=globals(), number=1000000)) # время выполнения 10.315750375000789
+
+print(timeit("stone_sort_2(lst[:])", globals=globals(), number=1000000)) # время выполнения оптимизированного кода 9.432412559999648
+# прирост производительности около 10%
+# print(lst)
