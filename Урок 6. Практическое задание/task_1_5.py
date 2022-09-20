@@ -30,3 +30,51 @@
 
 Это файл для пятого скрипта
 """
+# Из алгоритмы. ДЗ 3.1. Заполнение списка и заполнение словаря в д.3.1. занимало приблизительно одинаковое время.
+# Сравниваем место занимаемое в памяти.
+
+from memory_profiler import memory_usage
+from random import choice
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# 1) Заполнение списка
+
+@decor
+def measure_list(i):
+    home_list = []
+    for i in range(i):
+        home_list.append(choice(range(1, 1000000)))
+    return home_list
+
+
+# Выполнение заняло 4.640625 Mib
+
+# 2) Заполнение словаря
+@decor
+def measure_dict(i):
+    home_dict = {}
+    for i in range(i):
+        home_dict[i] = (choice(range(1, 1000000)))
+    return home_dict
+
+
+# Выполнение заняло 10.44140625 Mib
+
+if __name__ == '__main__':
+    res_1, mem_diff_1 = measure_list(100000)
+    print(f'Выполнение заняло {mem_diff_1} Mib')
+    res_2, mem_diff_2 = measure_dict(100000)
+    print(f'Выполнение заняло {mem_diff_2} Mib')
+
+# Заполнение словаря занимает ожидаемо больше места, так как нужно заполнить и ключи и значения.

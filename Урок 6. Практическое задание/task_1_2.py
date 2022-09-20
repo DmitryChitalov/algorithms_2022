@@ -30,3 +30,49 @@
 
 Это файл для второго скрипта
 """
+# Из алгоритмы. ДЗ 2.3
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# 1) Версия до оптимизации
+
+@decor
+def reverse_number(num):
+    if num < 10:
+        return str(num)
+    else:
+        return str(num % 10) + str(reverse_number(num // 10))
+
+
+# Выполнение заняло 0.24609375 Mib
+
+# 2) Версия после оптимизации. Решение через срез.
+
+
+@decor
+def reverse_number_2(num):
+    return str(num)[::-1]
+
+
+# Выполнение заняло 0.0703125 Mib
+
+if __name__ == '__main__':
+    n = 18009906656599999
+    res_1, mem_diff_1 = reverse_number(n)
+    print(f'Выполнение заняло {mem_diff_1} Mib')
+    res_2, mem_diff_2 = reverse_number(n)
+    print(f'Выполнение заняло {mem_diff_2} Mib')
+
+# Выполнение через срез занимает меньше места, так как это встроенная и уже оптимизированная функция.

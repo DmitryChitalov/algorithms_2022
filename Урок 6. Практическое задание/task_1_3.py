@@ -30,3 +30,68 @@
 
 Это файл для третьего скрипта
 """
+# Из основ. ДЗ 3.1
+
+from json import loads, dumps
+from pympler import asizeof
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+number_dict = {
+
+    "zero": "ноль",
+    "one": "один",
+    "two": "два",
+    "three": "три",
+    "four": "четыре",
+    "five": "пять",
+    "six": "шесть",
+    "seven": "семь",
+    "eight": "восемь",
+    "nine": "девять",
+
+}
+
+
+# 1) Версия до оптимизации
+
+@decor
+def num_translate(value: str) -> str:
+    """переводит числительное с английского на русский """
+    str_out = number_dict.get(value)
+    return str_out
+
+# Выполнение заняло 0.00390625 Mib
+
+
+# 2) Версия после оптимизации. Оптимизация с помощью сериализации.
+
+dumped_dict = dumps(number_dict)
+
+
+@decor
+def num_translate_2(value: str) -> str:
+    """переводит числительное с английского на русский """
+    str_out = loads(dumped_dict).get(value)
+    return str_out
+
+
+# Выполнение заняло 0.0 Mib
+
+print('Размер словаря: ', asizeof.asizeof(number_dict))
+print('Размер словаря: ', asizeof.asizeof(dumped_dict))
+print(num_translate("two"))
+print(num_translate_2("two"))
+
+# Хранение словаря требует большей памяти, при обращении к Json происходит сжатие.
