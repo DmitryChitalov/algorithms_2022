@@ -22,3 +22,20 @@
 р
 а
 """
+import hashlib
+
+my_set = set()
+str_n = str(input('Введите строку: '))
+
+
+for i in range(len(str_n)):
+    for j in range(len(str_n), i, -1):
+        if str_n[i:j] != str_n:
+            my_set.add(hashlib.md5(str_n[i:j].encode()).hexdigest())
+print(my_set, end='\n')
+print('Количество подстрок: ', len(my_set))
+
+
+
+
+
