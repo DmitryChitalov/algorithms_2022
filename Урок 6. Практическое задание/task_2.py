@@ -9,3 +9,64 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+
+# 1) Берем функцию, получения элемента из ряда Фибоначчи.
+
+@profile
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+print(fibonacci(5))
+
+
+# При профилировании функции с рекурсией мы получаем большое количество таблиц. Конкретно для числа 5 - 15.
+# При увеличении числа увеличивается количество таблиц.
+
+# 2) Возможные решения данной проблемы. а) Написать свой декоратор. б) Обернуть нашу функцию.
+
+
+@profile
+def wrapper(wr_fibonacci):
+    def fibonacci_1(n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return fibonacci_1(n - 1) + fibonacci_1(n - 2)
+
+    return fibonacci_1(wr_fibonacci)
+
+
+print(wrapper(5))
+
+
+#  3) При запросе 40-ого элемента скорость выполнения в рекурсии очень долгая. Так что для оптимизации и быстрого
+#  доступа к нужному числу лучше использовать цикл.
+
+
+@profile
+def fibonacci_2(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    f1 = 0
+    f2 = 1
+    num = 1
+    for i in range(1, n):
+        num = f1 + f2
+        f1 = f2
+        f2 = num
+    return num
+
+
+print(fibonacci_2(40))

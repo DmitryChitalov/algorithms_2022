@@ -29,4 +29,49 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для четвертого скрипта
+
 """
+# Из алгоритмы. ДЗ 4.1
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# 1) Версия до оптимизации
+@decor
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+# Выполнение заняло 0.203125 Mib
+
+# 2) Версия после оптимизации. Через генератор.
+@decor
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+# Выполнение заняло 0.125 Mib
+
+if __name__ == '__main__':
+    numbers = [i for i in range(1, 10000)]
+    res_1, mem_diff_1 = func_1(numbers)
+    print(f'Выполнение заняло {mem_diff_1} Mib')
+    res_2, mem_diff_2 = func_2(numbers)
+    print(f'Выполнение заняло {mem_diff_2} Mib')
+
+# Занимает меньше места, так как мы не храним массив, мы храним обЪект генератора

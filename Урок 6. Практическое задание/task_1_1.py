@@ -30,3 +30,59 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+# Из алгоритмы. ДЗ 2.2
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# 1) Версия до оптимизации
+
+@decor
+def count_even_odd(number, even=0, odd=0):
+    if not number:
+        return even, odd
+    if number % 10 % 2 == 1:
+        odd += 1
+    else:
+        even += 1
+    return count_even_odd(number // 10, even, odd)
+
+
+# Выполнение заняло 0.01171875 Mib
+
+# 2) Версия после оптимизации. Решение через цикл.
+
+@decor
+def count_even_odd_2(numb, even=0, odd=0):
+    while numb > 0:
+        numb, digit = divmod(numb, 10)
+        if digit % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return even, odd
+
+
+# Выполнение заняло 0.0 Mib
+
+
+if __name__ == '__main__':
+    n = 38253
+    res_1, mem_diff_1 = count_even_odd(n)
+    print(f'Выполнение заняло {mem_diff_1} Mib')
+    res_2, mem_diff_2 = count_even_odd_2(n)
+    print(f'Выполнение заняло {mem_diff_2} Mib')
+
+# Работа в цикле занимает меньше места, чем в рекурсии.
