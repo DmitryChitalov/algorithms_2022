@@ -30,3 +30,46 @@
 
 Это файл для первого скрипта
 """
+
+
+from memory_profiler import memory_usage
+from random import randint
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+nums = [randint(0, 10000000) for i in range(10000000)]
+
+
+@memory
+def initial_version():
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+initial_version()
+
+
+# оптимизированное
+@memory
+def optimized_version():
+    return list(filter(lambda x: x % 2 == 0, nums))
+
+
+optimized_version()
+
+"""
+Выполнение initial_version заняло 190.3984375 Mib
+Выполнение optimized_version заняло 39.01171875 Mib
+При использовании функции filter экономия памяти отличная
+"""
