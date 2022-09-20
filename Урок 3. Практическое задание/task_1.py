@@ -28,3 +28,44 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+from time import time
+
+
+def measure_time(func_for_measure):
+    def func_wrapp(*args):
+        time_start = time()
+        func_result = func_for_measure(*args)
+        time_end = time()
+        print(f'Время выполнения функции {func_for_measure.__name__}: {time_end - time_start}')
+        return func_result
+    return func_wrapp
+
+
+#a)
+# Сложность: O(N)
+@measure_time
+def fill_list(num_of_els, a_list=[]):
+    for i in range(32, 32 + num_of_els):    # O(N)
+        a_list.append(chr(i))               # O(1)
+    return a_list
+# Время выполнения функции fill_list: 0.2270512580871582
+
+
+# Сложность: O(N)
+@measure_time
+def fill_dict(num_of_els, a_dict={}):
+    for i in range(32, 32 + num_of_els):    # O(N)
+        a_dict[i] = chr(i)                  # O(1)
+    return a_dict
+# Время выполнения функции fill_dict: 0.3380765914916992
+
+
+the_list = fill_list(1100000)
+the_dict = fill_dict(1100000)
+
+
+# Несмотря на то, что сложности алгоритмов заполнения списка и заполнения
+# словаря одинаковые, словарь заполняется дольше из-за необходимости
+# вычисления хешей ключей
