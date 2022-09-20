@@ -30,3 +30,95 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import profile
+
+
+
+"""
+Задание 2.	Подсчитать четные и нечетные цифры введенного натурального числа.
+Например, если введено число 34560, то у него 3 четные цифры
+(4, 6 и 0) и 2 нечетные (3 и 5).
+
+Подсказка:
+На каждом шаге вам нужно 'доставать' из числа очередную цифру
+и смотреть является ли она четной или нечетной.
+При этом увеличиваем соответствующий счетчик
+Пока все числа не извлечены, рекурсивные вызовы продолжаем
+Условие завершения рекурсии - все числа извлечены
+Используем операции % //. Операции взятия по индексу применять нельзя.
+
+Решите через рекурсию. В задании нельзя применять циклы.
+
+Пример:
+Введите число: 123
+Количество четных и нечетных цифр в числе равно: (1, 2)
+"""
+
+# Задание № 2
+
+@profile
+def number(x, negative, positive):
+
+    if x == 0:
+        print(f'Количество нечетныых цифр - {negative}, Количество четных цифр - {positive}')
+
+    else:
+        result = x % 10
+        if result % 2 == 0:
+            positive += 1
+        else:
+            negative += 1
+
+        return number((x // 10), negative, positive)
+
+
+number(321, 0, 0)
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     59     19.6 MiB     19.6 MiB           4   @profile
+#     60                                         def number(x, negative, positive):
+#     61     19.6 MiB      0.0 MiB           4       print(x)
+#     62
+#     63     19.6 MiB      0.0 MiB           4       if x == 0:
+#     64     19.6 MiB      0.0 MiB           1           print(f'Количество нечетныых цифр - {negative}, Количество четных цифр - {positive}')
+#     65
+#     66                                             else:
+#     67     19.6 MiB      0.0 MiB           3           result = x % 10
+#     68     19.6 MiB      0.0 MiB           3           if result % 2 == 0:
+#     69     19.6 MiB      0.0 MiB           1               positive += 1
+#     70                                                 else:
+#     71     19.6 MiB      0.0 MiB           2               negative += 1
+#     72
+#     73     19.7 MiB      0.0 MiB           3           return number((x // 10), negative, positive)
+
+
+@profile
+def number_1(number, negative, positive):
+
+    for x in number:
+        i = int(x)
+        if i % 2 == 0:
+            positive += 1
+        else:
+            negative += 1
+    print(f'У числа {number}: четных цифр - {positive}, нечетных - {negative} ')
+
+
+number_1('321', 0, 0)
+
+# Line #    Mem usage    Increment  Occurrences   Line Contents
+# =============================================================
+#     96     19.6 MiB     19.6 MiB           1   @profile
+#     97                                         def number_1(x, negative, positive):
+#     98
+#     99     19.6 MiB      0.0 MiB           4       for f in x:
+#    100     19.6 MiB      0.0 MiB           3           i = int(f)
+#    101     19.6 MiB      0.0 MiB           3           if i % 2 == 0:
+#    102     19.6 MiB      0.0 MiB           1               positive += 1
+#    103                                                 else:
+#    104     19.6 MiB      0.0 MiB           2               negative += 1
+#    105     19.6 MiB      0.0 MiB           1       print(f'У числа {x}: четных цифр - {positive}, нечетных - {negative} ')
+
+# Во второй функции сделанны изменения в лучшую сторону, так как теперь функция не вызывает сама себя,
+# что уменьшает время занятой памяти
