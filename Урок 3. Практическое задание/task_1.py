@@ -28,3 +28,92 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+from random import randint
+
+
+def time_decor(arg):
+    def my_def_timer(*args):
+        start = time.time()
+        arg(*args)
+        stop = time.time()
+        result = stop - start
+        return result
+
+    return my_def_timer
+
+
+# a) Заполнение. Обе операции имеют сложность 0(1) т.к. нет неизвестных.
+
+my_list = []
+my_dict = {}
+
+
+@time_decor
+def completion():
+    for i in range(1, 10000001, 1):
+        my_list.append(i)
+    return my_list
+
+
+print('Заполнение списка -', completion())
+
+
+@time_decor
+def completion2():
+    for i in range(1, 10000001, 1):
+        my_dict[i] = i
+    return my_dict
+
+
+print('Заполнение словаря -', completion2())
+
+
+# Список заполняется быстрее на как не хэшируется...
+
+# b) Получение элементов
+
+
+@time_decor
+def receiving():
+    for i in range(1, 1000001, 1):
+        elem = my_list[i]  # O(1)
+
+
+print('Получение элементов списка -', receiving())
+
+
+@time_decor
+def receiving2():
+    for i in range(1, 1000001, 1):
+        my_dict.get(i)  # O(1)
+
+
+print('Получение элементов словаря -', receiving2())
+
+
+# Хотя сложность операций одинаковая, из списка элемент возвращается быстрее т.к. нет поиска значения ключа,
+# возвращается элемент по индексу.
+
+
+# c) Удаление элементов
+
+@time_decor
+def del_item():
+    for i in range(1, 1001, 1):
+        my_list.remove(i)  # O(n)
+
+
+print('Удаление элементов списка -', del_item())
+
+
+@time_decor
+def del_item2():
+    for i in range(1, 10001, 1):
+        del my_dict[i]  # O(1)
+
+
+print('Удаление элементов словаря -', del_item2())
+
+# Удаление элементов из словаря происходит быстрее т.к. сложность операции O(1)
