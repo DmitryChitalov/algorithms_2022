@@ -12,7 +12,6 @@
 протестируйте на реальных данных - на клиентском коде
 """
 
-
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -24,41 +23,65 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+        try:
+            # если у узла нет левого потомка
+            if self.root >= new_node:
+                if self.left_child is None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.left_child = BinaryTree(new_node)
+                # если у узла есть левый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.left_child = self.left_child
+                    self.left_child = tree_obj
+            else:
+                raise ValueError('You cannot input value greater than root')
+        except ValueError as e:
+            print(e)
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+        try:
+            if self.root <= new_node:
+                # если у узла нет правого потомка
+                if self.right_child is None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.right_child = BinaryTree(new_node)
+                # если у узла есть правый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.right_child = self.right_child
+                    self.right_child = tree_obj
+            else:
+                raise ValueError('You cannot input value less than root')
+        except ValueError as e:
+            print(e)
 
     # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        try:
+            if self is not None:
+                return self.right_child
+            else:
+                raise AttributeError
+        except AttributeError as e:
+            print(e)
 
     # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        try:
+            if self is not None:
+                return self.left_child
+            else:
+                raise AttributeError
+        except AttributeError as e:
+            print(e)
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -66,13 +89,20 @@ class BinaryTree:
 
     # метод доступа к корню
     def get_root_val(self):
-        return self.root
+        try:
+            if self is not None:
+                return self.root
+            else:
+                raise AttributeError
+        except AttributeError as e:
+            print(e)
 
 
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+r.insert_left(65)
+r.insert_left(7)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
