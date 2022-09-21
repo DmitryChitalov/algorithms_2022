@@ -15,3 +15,34 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+
+from random import randint
+from timeit import timeit
+
+
+def gnom(data):
+    i = 0
+    stop = len(data)
+    while True:
+        if i + 1 == stop:
+            return data
+        if data[i] > data[i + 1]:
+            data[i], data[i + 1] = data[i + 1], data[i]
+            if i == 0:
+                i += 1
+            else:
+                i -= 1
+        else:
+            i += 1
+
+
+m_10 = 10
+m_100 = 100
+m_1000 = 1000
+lst_10 = [randint(1, 100) for _ in range(2 * m_10 + 1)]
+lst_100 = [randint(1, 100) for _ in range(2 * m_100 + 1)]
+lst_1000 = [randint(1, 100) for _ in range(2 * m_1000 + 1)]
+print(f'Исходный массив в 10 элементов:                {lst_10}')
+print(f'Сортированный массив в 10 элементов:           {gnom(lst_10[:])}')
+print(f'Медиана сортированного массива в 10 элементов: {gnom(lst_10[:])[10]}')
