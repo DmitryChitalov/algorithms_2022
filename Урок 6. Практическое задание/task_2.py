@@ -9,3 +9,30 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+
+@profile
+def decor(f):
+    def wrapper(*args):
+        res = f(*args)
+        return res
+    return wrapper
+
+
+@decor
+def func(lst):
+    if len(lst) == 1:
+        return lst.pop()
+    else:
+        return lst.pop() + func(lst)
+
+
+print(func(list(range(100))))
+
+
+"""
+Проблема заключалась в том, что если профилировать рекурсию, получим столько таблиц, сколько будет вызовов функции, 
+чтобы от этого избавиться можно обернуть функцию в другую и замерить использование памяти для неё
+"""
