@@ -30,3 +30,41 @@
 
 Это файл для первого скрипта
 """
+
+# Алгоритмы и структуры данных на Python. Базовый курс.
+# Урок 4. Задание 1.
+
+from memory_profiler import memory_usage
+
+
+def decor_m(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@decor_m
+def func_1():
+    result = [i for i in range(0, 1000000, 2)]
+    return result
+
+
+@decor_m
+def func_2():
+    return [i for i, el in enumerate(el for el in range(1000000)) if el % 2 == 0]
+
+
+func_1()
+func_2()
+
+"""
+Выполнение func_1 заняло 19.23046875 Mib
+Выполнение func_2 заняло 18.16015625 Mib
+Применил функцию enumerate и это позволило не значительно оптимизировать память.
+"""
