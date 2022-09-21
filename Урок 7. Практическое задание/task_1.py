@@ -18,3 +18,87 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(-100, 100) for _ in range(15)]
+
+print(orig_list)
+print(bubble_sort(orig_list[:]))
+
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+def bubble_sort2(lst_obj):
+    origin = lst_obj.copy()
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        if lst_obj == origin:
+            break
+        n += 1
+    return lst_obj
+
+
+print(orig_list)
+print(bubble_sort2(orig_list[:]))
+
+print(
+    timeit(
+        "bubble_sort2(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+'''
+[0, 99, 45, -2, 13, -99, -99, -4, -1, -44, -28, 17, 56, -99, 46]
+[99, 56, 46, 45, 17, 13, 0, -1, -2, -4, -28, -44, -99, -99, -99]
+0.014869399999999991 - время работы до доработки
+[0, 99, 45, -2, 13, -99, -99, -4, -1, -44, -28, 17, 56, -99, 46]
+[99, 56, 46, 45, 17, 13, 0, -1, -2, -4, -28, -44, -99, -99, -99]
+
+0.014501400000000012 - время работы после доработки
+Разницы нет, время работы алгоритмов примерно одинаковое, так как вероятность получить сразу отсортированный 
+список через Random очень мала. 
+Однако если просимулировать ситуацию, когда на вход к функциям попадает отсортированный массив, 
+то видим эффектиность доработки
+'''
+
+sort_list = sorted([randint(-100, 100) for _ in range(15)], reverse=True)
+print('Время работы функций при передаче им отсортированного массива: ')
+print(
+    timeit(
+        "bubble_sort(sort_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+print(
+    timeit(
+        "bubble_sort2(sort_list[:])",
+        globals=globals(),
+        number=1000))
+
+'''
+0.009423400000000012
+0.0017554000000000042
+В этом случае доработка эффективна. Разница времени работы функций очень большая, доработка дает ускорение.
+'''

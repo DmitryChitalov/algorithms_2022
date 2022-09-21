@@ -16,3 +16,46 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+import statistics
+from random import randint
+from timeit import timeit
+
+m = 5
+lst5 = [randint(-100, 100) for _ in range(2*m+1)]   # список из 11 элементов
+m2 = 50
+lst50 = [randint(-100, 100) for _ in range(2*m2+1)]     # список из 101 элемента
+m3 = 500
+lst500 = [randint(-100, 100) for _ in range(2*m3+1)]    # список из 1001 элемента
+
+print(lst5)
+print(statistics.median(lst5))
+
+print(
+    timeit(
+        "statistics.median(lst5)",
+        globals=globals(),
+        number=100))
+
+print(
+    timeit(
+        "statistics.median(lst50)",
+        globals=globals(),
+        number=100))
+
+print(
+    timeit(
+        "statistics.median(lst500)",
+        globals=globals(),
+        number=100))
+
+
+'''
+0.00012019999999998698
+0.000765700000000008
+0.020306400000000002
+Выводы:
+Самый быстрый способ - через встроенную функцию
+На втором месте про производиельности - через сортировку Шелла или Кучей
+Самые медленные способы - Гномья сортировка и нахождение медианы без сортировки через циклы
+'''
