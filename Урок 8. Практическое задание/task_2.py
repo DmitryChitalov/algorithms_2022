@@ -22,6 +22,13 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def insert_val(self, new_node):
+        root = self.get_root_val()
+        if new_node > root:
+            self.insert_right(new_node)
+        if new_node < root:
+            self.insert_left(new_node)
+
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
@@ -77,6 +84,26 @@ print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
 print(r.get_right_child())
+r.insert_val(40)
+print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print(r.get_left_child())
+
+r.insert_val(10)
+print(r.get_right_child())
+print(r.get_right_child().get_root_val()) # 10 вместо 40
+print(r.get_right_child().get_right_child())
+print(r.get_right_child().get_right_child().get_root_val()) #  40 образовало новый вложенный корень
+print(r.get_right_child().get_left_child())
+print(r.get_left_child())
+r.insert_val(1)
+print(r.get_right_child())
+print(r.get_left_child())
+r.insert_val(15)
+print(r.get_right_child().get_root_val()) # "15 вместо 10"
+print(r.get_right_child().get_right_child())
+print(r.get_right_child().get_right_child().get_root_val()) #10
+print(r.get_right_child().get_left_child())
+print(r.get_left_child())
