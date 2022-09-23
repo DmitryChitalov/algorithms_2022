@@ -20,7 +20,7 @@ import timeit
 
 
 def timer(n):
-    def deco(func, *args):
+    def deco(func):
         def wrapper(*args):
             result = 0
             for _ in range(n):
@@ -56,7 +56,7 @@ def shell_sort(lst):
                 counter = 1
         dif_index -= 1
         step = ciura[dif_index]
-    return lst[(length - 1) // 2]
+    return lst
 
 
 @timer(100)
@@ -71,21 +71,27 @@ def gnom_sort(lst):
         else:
             now = seed
             seed += 1
-    return lst[(length - 1) // 2]
+    return lst
 
 
 print("Гномья сортировка")
 print("11 чисел", end=' ')
-gnom_sort([randrange(-100, 100) for _ in range(11)])
+m = 10
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
 print("101 число", end=' ')
-gnom_sort([randrange(-100, 100) for _ in range(101)])
+m = 100
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
 print("1001 число", end=' ')
-gnom_sort([randrange(-100, 100) for _ in range(100001)])
+m = 1000
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
 
 print("Сортировка Шелла (вроде)")
-print("11 чисел", end=' ')
-shell_sort([randrange(-100, 100) for _ in range(11)])
-print("101 число", end=' ')
-shell_sort([randrange(-100, 100) for _ in range(101)])
-print("1001 число", end=' ')
-shell_sort([randrange(-100, 100) for _ in range(100001)])
+print("21 число", end=' ')
+m = 10
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("201 число", end=' ')
+m = 100
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("2001 число", end=' ')
+m = 1000
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])

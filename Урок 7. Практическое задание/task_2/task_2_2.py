@@ -19,8 +19,9 @@
 from random import randrange
 import timeit
 
+
 def timer(n):
-    def deco(func,*args):
+    def deco(func):
         def wrapper(*args):
             result = 0
             for _ in range(n):
@@ -34,17 +35,22 @@ def timer(n):
 
     return deco
 
+
 @timer(100)
 def median(lst1):
-    lst=lst1[:]
-    n=(len(lst) - 1) // 2
+    lst = lst1[:]
+    n = len(lst) // 2
     for i in range(n):
         lst.remove(max(lst))
     return max(lst)
 
-print("11 чисел", end=' ')
-median([randrange(-100,100) for _ in range(11)])
-print("101 число", end=' ')
-median([randrange(-100,100) for _ in range(101)])
-print("1001 число", end=' ')
-median([randrange(-100,100) for _ in range(1001)])
+
+print("21 число", end=' ')
+m = 10
+median([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("201 число", end=' ')
+m = 100
+median([randrange(-100, 100) for _ in range(2 * m + 1)])
+m = 1000
+print("2001 число", end=' ')
+median([randrange(-100, 100) for _ in range(2 * m + 1)])
