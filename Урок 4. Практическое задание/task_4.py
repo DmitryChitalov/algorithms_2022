@@ -10,7 +10,11 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
+print(max(array, key=array.count))
 
 
 def func_1():
@@ -37,5 +41,25 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def my_def():
+    return max(array, key=array.count)
+
+
+"""
+
+
+Мой вариант быстрее. Нет ни циклов, ни условий, ни проверок.
+Встроенная функция 'max' и встроенный метод 'count'.
+По документации сложность O(n)
+
+
+"""
+
 print(func_1())
 print(func_2())
+print(my_def())
+
+
+print(timeit("func_1()", globals=globals(), number=1000))
+print(timeit("func_2()", globals=globals(), number=1000))
+print(timeit("my_def()", globals=globals(), number=1000))
