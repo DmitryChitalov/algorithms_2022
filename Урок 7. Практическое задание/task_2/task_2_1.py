@@ -15,3 +15,83 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randrange
+import timeit
+
+
+def timer(n):
+    def deco(func):
+        def wrapper(*args):
+            result = 0
+            for _ in range(n):
+                start = timeit.default_timer()
+                ret = func(*args)
+                result += timeit.default_timer() - start
+            print(f"Время выполнения {result:.5f}")
+            return ret
+
+        return wrapper
+
+    return deco
+
+
+@timer(100)
+def shell_sort(lst):
+    length = len(lst)
+    ciura = (0, 1, 4, 10, 23, 57, 132, 301, 701, 1750)
+    dif_index = -1
+    while ciura[dif_index] > length // 2:
+        dif_index -= 1
+    step = ciura[dif_index]
+    while step > 0:
+        for i in range(step):
+            now = i
+            counter = 1
+            while now + step < length:
+                while lst[now + step] < lst[now] and now >= 0:
+                    lst[now + step], lst[now] = lst[now], lst[now + step]
+                    now -= step
+                    counter += 1
+                now += counter * step
+                counter = 1
+        dif_index -= 1
+        step = ciura[dif_index]
+    return lst
+
+
+@timer(100)
+def gnom_sort(lst):
+    now = 1
+    seed = 2
+    length = len(lst)
+    while now < length - 2:
+        if lst[now] > lst[now + 1]:
+            lst[now], lst[now + 1] = lst[now + 1], lst[now]
+            now -= 1 if now > 0 else 0
+        else:
+            now = seed
+            seed += 1
+    return lst
+
+
+print("Гномья сортировка")
+print("11 чисел", end=' ')
+m = 10
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("101 число", end=' ')
+m = 100
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("1001 число", end=' ')
+m = 1000
+gnom_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+
+print("Сортировка Шелла (вроде)")
+print("21 число", end=' ')
+m = 10
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("201 число", end=' ')
+m = 100
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
+print("2001 число", end=' ')
+m = 1000
+shell_sort([randrange(-100, 100) for _ in range(2 * m + 1)])
