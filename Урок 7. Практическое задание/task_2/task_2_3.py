@@ -16,20 +16,60 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from heapq import heappop, heappush
 from random import randint
+from timeit import timeit
+
+# heappush(list, item) – используется для добавления элемента кучи и его повторной сортировки.
+# heappop(список) – нужна для удаления и возврата элемента.
+# heapfy() – используется для превращения данного списка в кучу.
 
 
-def heap_sorting(numbers_list):
-    new_arr = []
-    count = 0
-    while count < len(numbers_list):
-        i = max(numbers_list)
-        new_arr.append(i)
-        numbers_list.remove(i)
-    return f'{new_arr} - отсортированный список'
+def pyramid_sort(numbers_list):
+    heap = []
+    for i in numbers_list:
+        heappush(heap, i)
+    sort = []
+
+    while heap:
+        sort.append(heappop(heap))
+    return sort
 
 
-numbers_list = [randint(-100, 100) for i in range(10)]
-print(f'{numbers_list} - исходный список')
-print(heap_sorting(numbers_list))
+m_10 = 10
+numbers_list = [randint(-100, 100) for i in range(2*m_10+1)]
+print(f'{numbers_list} - исходный список m_10')
+print(pyramid_sort(numbers_list))
+time_func = timeit("pyramid_sort(numbers_list[:])", globals=globals(), number=10000)
+print(f'{time_func} - время выполнения функции с m_10')
+print(f'Медианный элемент numbers_list: {pyramid_sort(numbers_list)[m_10]}')
 
+m_100 = 100
+numbers_list = [randint(-100, 100) for i in range(2*m_100+1)]
+print(f'{numbers_list} - исходный список m_100')
+print(pyramid_sort(numbers_list))
+time_func = timeit("pyramid_sort(numbers_list[:])", globals=globals(), number=10000)
+print(f'{time_func} - время выполнения функции с m_100')
+print(f'Медианный элемент numbers_list: {pyramid_sort(numbers_list)[m_100]}')
+
+m_1000 = 1000
+numbers_list = [randint(-100, 100) for i in range(2*m_1000+1)]
+print(f'{numbers_list} - исходный список m_1000')
+print(pyramid_sort(numbers_list))
+time_func = timeit("pyramid_sort(numbers_list[:])", globals=globals(), number=10000)
+print(f'{time_func} - время выполнения функции с m_1000')
+print(f'Медианный элемент numbers_list: {pyramid_sort(numbers_list)[m_1000]}')
+
+# Аналитика
+# [-93, -87, -61, -23, -72, -2, 36, -83, 13, 90, -99, -69, -56, -95, 52, -74, 80, 33, -42, -81, -37] - исходный список m_10
+# [-99, -95, -93, -87, -83, -81, -74, -72, -69, -61, -56, -42, -37, -23, -2, 13, 33, 36, 52, 80, 90]
+# 0.07228169962763786 - время выполнения функции с m_10
+# Медианный элемент numbers_list: -56
+
+# 0.862890100106597 - время выполнения функции с m_100
+# Медианный элемент numbers_list: -7
+
+# 9.80386590026319 - время выполнения функции с m_1000
+# Медианный элемент numbers_list: 1
+#
+# Process finished with exit code 0
