@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def my_recurs(count, numb):
+    print(f"Попытка №{count}")
+    my_numbers = int(input("Введите число от 0 до 100:"))
+    if count == 10 or my_numbers == numb:
+        if my_numbers == numb:
+            print("Верно!")
+        print(f"Загаданное число: {numb}")
+    else:
+        if my_numbers > numb:
+            print(f"Загаданное число меньше чем {my_numbers}")
+        else:
+            print(f"Загаданное число больше чем {my_numbers}")
+        my_recurs(count + 1, numb)
+
+
+my_recurs(1, random.randint(0, 100))
