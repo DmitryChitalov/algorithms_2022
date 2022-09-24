@@ -16,3 +16,20 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+
+
+def heap_sorting(numbers_list):
+    new_arr = []
+    count = 0
+    while count < len(numbers_list):
+        i = max(numbers_list)
+        new_arr.append(i)
+        numbers_list.remove(i)
+    return f'{new_arr} - отсортированный список'
+
+
+numbers_list = [randint(-100, 100) for i in range(10)]
+print(f'{numbers_list} - исходный список')
+print(heap_sorting(numbers_list))
+
