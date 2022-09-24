@@ -72,5 +72,5 @@ print(f'Медианный элемент numbers_list: {numbers_list[m_1000]}')
 # Медианный элемент numbers_list: -5
 # 38.94577859994024 - время выполнения функции с m_1000
 # Медианный элемент numbers_list: -3
-#
+# Готово
 # Process finished with exit code 0
