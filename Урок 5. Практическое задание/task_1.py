@@ -28,3 +28,35 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+
+def calc():
+    my_company = "Company"
+    p = int(input("Введите количество предприятий:"))
+    companies = namedtuple(my_company, "name cvartal_1 cvartal_2 cvartal_3 cvartal_4")
+    profit_aver = {}
+    for i in range(p):
+        company = companies(name=input("Введите название предвприятия: "), cvartal_1=int(
+            input("Введите прибыль за 1-й квартал: ")), cvartal_2=int(
+            input("Введите прибыль за 2-й квартал: ")), cvartal_3=int(
+            input("Введите прибыль за 3-й квартал: ")), cvartal_4=int(
+            input("Введите прибыль за 4-й квартал: ")))
+        profit_aver[company.name] = (company.cvartal_1 + company.cvartal_2 + company.cvartal_3 + company.cvartal_4) / 4
+
+    total_aver = 0
+    for value in profit_aver.values():
+        total_aver += value
+    total_aver = total_aver / p
+
+    for key, value in profit_aver.items():
+        if value > total_aver:
+            print(f"{key} - прибыль выше среднего")
+        elif value < total_aver:
+            print(f"{key} - прибыль ниже среднего")
+        elif value == total_aver:
+            print(f"{key} - средняя прибыль")
+
+
+calc()
