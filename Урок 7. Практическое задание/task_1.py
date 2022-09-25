@@ -79,20 +79,52 @@ def bubble_sort_v_3(numbers_list):
     return f'{numbers_list} - отсортированный список № 3, количество циклов - {count} '
 
 
-numbers_list = [randint(-100, 100) for i in range(15)]
+# Функция № 1
+# Список 10
+numbers_list = [randint(-100, 100) for i in range(10)]
 print(f'{numbers_list} - исходный список')
+time_func = timeit("bubble_sort(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func} - время выполнения функции № 1, Список 10')
+# Список 100
+numbers_list = [randint(-100, 100) for i in range(100)]
+time_func = timeit("bubble_sort(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func} - время выполнения функции № 1, Список 100')
+# Список 1000
+numbers_list = [randint(-100, 100) for i in range(1000)]
+time_func = timeit("bubble_sort(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func} - время выполнения функции № 1, Список 1000')
 
-print(bubble_sort(numbers_list))
-time_func = timeit("bubble_sort(numbers_list[:])", globals=globals(), number=10000)
-print(f'{time_func} - время выполнения функции № 1')
 
-print(bubble_sort_v_2(numbers_list))
-time_func_2 = timeit("bubble_sort_v_2(numbers_list[:])", globals=globals(), number=10000)
-print(f'{time_func_2} - время выполнения функции № 2')
+# Функция № 2
+# Список 10
+numbers_list = [randint(-100, 100) for i in range(10)]
+print(f'{numbers_list} - исходный список')
+time_func_2 = timeit("bubble_sort_v_2(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_2} - время выполнения функции № 2, Список 10')
+# Список 100
+numbers_list = [randint(-100, 100) for i in range(100)]
+time_func_2 = timeit("bubble_sort_v_2(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_2} - время выполнения функции № 2, Список 100')
+# Список 1000
+numbers_list = [randint(-100, 100) for i in range(1000)]
+time_func_2 = timeit("bubble_sort_v_2(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_2} - время выполнения функции № 2, Список 1000')
 
-print(bubble_sort_v_3(numbers_list))
-time_func_3 = timeit("bubble_sort_v_3(numbers_list[:])", globals=globals(), number=10000)
-print(f'{time_func_3} - время выполнения функции № 3')
+
+# Функция № 3
+# Список 10
+numbers_list = [randint(-100, 100) for i in range(10)]
+print(f'{numbers_list} - исходный список')
+time_func_3 = timeit("bubble_sort_v_3(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_3} - время выполнения функции № 3,  Список 10')
+# Список 100
+numbers_list = [randint(-100, 100) for i in range(100)]
+time_func_3 = timeit("bubble_sort_v_3(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_3} - время выполнения функции № 3,  Список 100')
+# Список 1000
+numbers_list = [randint(-100, 100) for i in range(1000)]
+time_func_3 = timeit("bubble_sort_v_3(numbers_list[:])", globals=globals(), number=1000)
+print(f'{time_func_3} - время выполнения функции № 3,  Список 1000')
 
 # Аналитика
 # Как видим в первом варианте мы заходим в цикл столько раз сколько есть в нем элементов,
@@ -100,11 +132,16 @@ print(f'{time_func_3} - время выполнения функции № 3')
 # что сокращает кол-во цыклов
 # В третьем варианте хотел проверить, измениться ли время,
 # если я очевидно поставлю самый большой и самый маленький элемент на их позиции, как видим это увеличило время
-# [18, 6, -49, -87, -95, 43, 92, 95, 51, -18, 93, -62, 19, 68, -78] - исходный список
-# [95, 93, 92, 68, 51, 43, 19, 18, 6, -18, -49, -62, -78, -87, -95] - отсортированный список № 1, количество циклов - 14
-# 0.18871669936925173 - время выполнения функции № 1
-# [95, 93, 92, 68, 51, 43, 19, 18, 6, -18, -49, -62, -78, -87, -95] - отсортированный список № 2, количество циклов - 1
-# 0.044412399642169476 - время выполнения функции № 2
-# [95, 93, 92, 68, 51, 43, 19, 18, 6, -18, -49, -62, -78, -87, -95] - отсортированный список № 3, количество циклов - 1
-# 0.06310540065169334 - время выполнения функции № 3
-# Готово
+# [66, -60, -25, 52, 23, 37, -60, -93, 77, -77] - исходный список
+# 0.014531600289046764 - время выполнения функции № 1, Список 10
+# 1.1794150993227959 - время выполнения функции № 1, Список 100
+# 113.77043860033154 - время выполнения функции № 1, Список 1000
+# [92, -84, 83, -10, 98, -90, -44, -60, 25, 29] - исходный список
+# 0.01543780043721199 - время выполнения функции № 2, Список 10
+# 1.1148466002196074 - время выполнения функции № 2, Список 100
+# 120.07088469993323 - время выполнения функции № 2, Список 1000
+# [-3, -48, 34, 92, 37, -22, 80, 20, -4, -59] - исходный список
+# 0.016482099890708923 - время выполнения функции № 3,  Список 10
+# 1.3139631999656558 - время выполнения функции № 3,  Список 100
+# 120.70242819935083 - время выполнения функции № 3,  Список 1000
+

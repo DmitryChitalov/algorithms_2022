@@ -28,10 +28,10 @@ def gnome(data):
 			data[i - 1], data[i] = data[i], data[i - 1]
 			if i > 1:
 				i -= 1
-	return f'{data} - отсортированный список  '
+	return f'{data} - отсортированный список'
+
 
 # по формуле
-
 
 m_10 = 10
 
@@ -51,6 +51,7 @@ time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции c m_100 ')
 print(f'Медианный элемент numbers_list: {numbers_list[m_100]}')
 
+
 m_1000 = 1000
 
 numbers_list = [randint(-100, 100) for i in range(2*m_1000+1)]
@@ -58,6 +59,7 @@ gnome(numbers_list)
 time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции c m_1000')
 print(f'Медианный элемент numbers_list: {numbers_list[m_1000]}')
+
 
 # Нахождение медианы без формулы
 
@@ -68,6 +70,7 @@ m = len(numbers_list) // 2 - 1
 time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции c M')
 print(f'Медианный элемент numbers_list: {numbers_list[int(m)]}')
+
 
 # Аналитика
 # по формуле
