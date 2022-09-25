@@ -20,7 +20,8 @@ from timeit import timeit
 
 
 def gnome(data):
-	i, size = 1, len(data)
+	i, size = 1, len(data) # один таб
+		# 8 пробелов
 	while i < size:
 		if data[i - 1] <= data[i]:
 			i += 1
@@ -88,4 +89,3 @@ print(f'Медианный элемент numbers_list: {numbers_list[int(m)]}')
 # 0.03250730037689209 - время выполнения функции c M
 # Медианный элемент numbers_list: 44
 # Готово
-
