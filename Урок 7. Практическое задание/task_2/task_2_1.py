@@ -1,27 +1,9 @@
-"""
-Задание 2. Массив размером 2m + 1, где m – натуральное число,
-заполнен случайным образом. Найдите в массиве медиану.
-
-Медианой называется элемент ряда, делящий его на
-две равные по длине части:
-в одной находятся элементы,
-которые не меньше медианы,
-в другой – не больше медианы.
-
-Решите задачу тремя способами:
-
-1) с помощью сортировки, которую мы не рассматривали на уроке (Гномья, Шелла,
-Кучей)
-
-сделайте замеры на массивах длиной 10, 100, 1000 элементов
-"""
 from random import randint
 from timeit import timeit
 
 
 def gnome(data):
-	i, size = 1, len(data) # один таб
-		# 8 пробелов
+	i, size = 1, len(data)
 	while i < size:
 		if data[i - 1] <= data[i]:
 			i += 1
@@ -31,34 +13,34 @@ def gnome(data):
 				i -= 1
 	return f'{data} - отсортированный список'
 
-
 # по формуле
+
 
 m_10 = 10
 
 numbers_list = [randint(-100, 100) for i in range(2*m_10+1)]
 print(f'{numbers_list} - исходный список m_10')
-print(gnome(numbers_list))
 time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции с m_10')
+print(gnome(numbers_list))
 print(f'Медианный элемент numbers_list: {numbers_list[m_10]}')
 
 
 m_100 = 100
 
 numbers_list = [randint(-100, 100) for i in range(2*m_100+1)]
-gnome(numbers_list)
 time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции c m_100 ')
+gnome(numbers_list)
 print(f'Медианный элемент numbers_list: {numbers_list[m_100]}')
 
 
 m_1000 = 1000
 
 numbers_list = [randint(-100, 100) for i in range(2*m_1000+1)]
-gnome(numbers_list)
 time_func = timeit("gnome(numbers_list[:])", globals=globals(), number=10000)
 print(f'{time_func} - время выполнения функции c m_1000')
+gnome(numbers_list)
 print(f'Медианный элемент numbers_list: {numbers_list[m_1000]}')
 
 

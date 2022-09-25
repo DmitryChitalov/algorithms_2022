@@ -38,15 +38,15 @@ ordinary_list = list()
 # append, pop, extend списка и дека и сделать выводы что и где быстрее
 
 # Append - добавление элемента в конец списка
-test_append_list = timeit('for i in first_list: ordinary_list.append(i)', globals=globals(), number=10000)
-test_append_deque = timeit('for i in first_list: deque_list.append(i)', globals=globals(), number=10000)
+test_append_list = timeit('for i in first_list: ordinary_list.append(i)', globals=globals(), number=1000)
+test_append_deque = timeit('for i in first_list: deque_list.append(i)', globals=globals(), number=1000)
 print(f'Замеры deque append - {test_append_deque}\nЗамеры list append - {test_append_list}')
 # Замеры deque append - 0.008271599654108286 +
 # Замеры list append - 0.010595600120723248 -
 
 # Pop - убрать последний элемент в списке
-test_pop_list = timeit('for i in first_list: ordinary_list.pop()', globals=globals(), number=10000)
-test_pop_deque = timeit('for i in first_list: deque_list.pop()', globals=globals(), number=10000)
+test_pop_list = timeit('for i in first_list: ordinary_list.pop()', globals=globals(), number=1000)
+test_pop_deque = timeit('for i in first_list: deque_list.pop()', globals=globals(), number=1000)
 print(f'Замеры deque pop - {test_pop_deque}\nЗамеры list pop - {test_pop_list}')
 # Замеры deque pop - 0.11060390016064048 -
 # Замеры list pop - 0.07875300012528896 +
@@ -104,13 +104,23 @@ print(f'Замеры deque extendleft - {test_extendleft_deque}\nЗамеры li
 # сравнить операции получения элемента списка и дека
 # и сделать выводы что и где быстрее
 
-test_element_list = timeit('ordinary_list[0]', globals=globals(), number=10000)
-test_element_deque = timeit('ordinary_list[0]', globals=globals(), number=10000)
+test_element_list = timeit('ordinary_list[0]', globals=globals(), number=99999)
+test_element_deque = timeit('ordinary_list[0]', globals=globals(), number=99999)
 print(ordinary_list[5], ordinary_list[5] )
 print(f'Замеры deque element - {test_element_deque}\nЗамеры list element - {test_element_list}')
 # Замеры deque element - 0.0005272999405860901 +
 # Замеры list element - 0.0006356001831591129 -
-
+# Увеличил число повторений до 99999
+# Замеры deque element - 0.0046594999730587006
+# Замеры list element - 0.005942199844866991
+# Замеры deque element - 0.007010199595242739
+# Замеры list element - 0.007477799896150827
+# Замеры deque element - 0.005516999866813421
+# Замеры list element - 0.005524999927729368
+# Замеры deque element - 0.005275900010019541
+# Замеры list element - 0.005122799891978502
+# Замеры deque element - 0.007399599999189377
+# Замеры list element - 0.007568900007754564
 # Вывод : Получение элемента в списке, как показали замеры deque быстрее работает с индексами
 
 # Общия оценка : deque = 6 очков, list = 1 очко, list лучше показал себя в удалении элемента pop,
