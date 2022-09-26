@@ -17,3 +17,20 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+companies_dict = {"Potato": 100000,
+                  "Andatra": 1500000,
+                  "Gary&Boris": 5000000,
+                  "Sugar_garbage": 80000,
+                  "ELFs": 0,
+                  "TraktorBawling": 666000}
+
+print(sorted(companies_dict, key=companies_dict.get)[3:])
+"""
+max_income = None
+for elem in companies_dict.values():
+    if not max_income:
+        max_income = elem
+    elif elem > max_income:
+        max_income = elem
+        print(elem)
+"""
