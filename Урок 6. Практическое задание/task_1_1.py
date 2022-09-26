@@ -30,3 +30,39 @@
 
 Это файл для первого скрипта
 """
+import random
+import sys
+import time
+from copy import deepcopy
+
+from memory_profiler import memory_usage
+from pympler.asizeof import asizeof
+
+
+def mem_decor(f):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        t1 = time.time()
+        func_res = f(*args, **kwargs)
+        m2 = memory_usage()
+        mem = m2[0] - m1[0]
+        res_time = time.time() - t1
+        return f'{res_time} == {mem}'
+    return wrapper
+
+@mem_decor
+def func_2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+
+@mem_decor
+def func_2_optimise(nums):
+    new_arr = filter(lambda x: True if x % 2 == 0 else False, nums)
+    return list(new_arr)
+
+
+array = [random.randint(100, 1000) for _ in range(100000)]
+print(func_2(array))
+print(func_2_optimise(array))
+
