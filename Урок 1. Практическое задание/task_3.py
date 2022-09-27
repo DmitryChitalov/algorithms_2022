@@ -17,6 +17,27 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+""" Сложность: O(n log n)."""
+
+
+def choose_companies_1(data):
+    max_val_comp = (sorted(data, key=data.get)[3:])  # O(n log n)
+    return f"Три компании с максимальной доходностью >>> {max_val_comp}"  # O(1)
+
+
+""" Сложность: O(n^2)."""
+
+
+def choose_companies_2(data):
+    sort_val = sorted(data.values())  # O(n log n)
+    my_list = []  # O(1)
+    for el in sort_val:  # O(n)
+        for key in data.keys():  # O(n)
+            if data[key] == el:  # O(1)
+                my_list.append(key)  # O(1)
+    return f"Три компании с максимальной доходностью >>> {my_list[3:]}"  # O(1)
+
+
 companies_dict = {"Potato": 100000,
                   "Andatra": 1500000,
                   "Gary&Boris": 5000000,
@@ -24,13 +45,11 @@ companies_dict = {"Potato": 100000,
                   "ELFs": 0,
                   "TraktorBawling": 666000}
 
-print(sorted(companies_dict, key=companies_dict.get)[3:])
-"""
-max_income = None
-for elem in companies_dict.values():
-    if not max_income:
-        max_income = elem
-    elif elem > max_income:
-        max_income = elem
-        print(elem)
-"""
+print(choose_companies_1(companies_dict))
+print(choose_companies_2(companies_dict))
+
+"""Вывод: Из двух представленных алгоритмов решения задания наиболее эффективным будет 
+алгоритм с линейно-логарифмической сложностью, так как время выполнение скрипта будет
+расти плавнее при добавлении новых элементов (происходит лишь сортировка без цикличности)
+в отличие от способа с квадратичной сложностью, где время будет стремительно увеличиваться
+даже при незначительном увеличении элементов словаря (из за вложенности циклов)."""
