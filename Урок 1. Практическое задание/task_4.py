@@ -38,34 +38,39 @@ users_check = {'log1': '+',
                'log6': '+'
                }
 
-#Итоговая сложность: 10 ==> Лучший вариант т. к. наименьшая сложность
+# Итоговая сложность: 10 ==> Лучший вариант т. к. наименьшая сложность
+
 
 def authentication_1(login, pasword):
-    if users.get(login) == pasword and users_check.get(login) == '+': # O(1+1)
-        print('Вы вошли в систему') # O(1)
-    elif users.get(login) == pasword and users_check.get(login) != '+': # O(1+1)
-        print('Ваша учетная запись не активированна, хотите ли вы это сделать?') # O(1)
-    elif login not in users.keys(): # O(1)
-        print("Такой пользователь отсутсвует в базе данных") # O(1)
-    elif users.get(login) != pasword: # O(1)
-        print('Неверный пароль') # O(1)
+    if users.get(login) == pasword and users_check.get(login) == '+':  # O(1+1)
+        print('Вы вошли в систему')  # O(1)
+    elif users.get(login) == pasword and users_check.get(login) != '+':  # O(1+1)
+        print('Ваша учетная запись не активированна, хотите ли вы это сделать?')  # O(1)
+    elif login not in users.keys():  # O(1)
+        print("Такой пользователь отсутсвует в базе данных")  # O(1)
+    elif users.get(login) != pasword:  # O(1)
+        print('Неверный пароль')  # O(1)
 
-#Итоговая сложность: 16n + 3
+# Итоговая сложность: 16n + 3
+
 
 def authentication_2(login, pasword):
-    n = 0 # O(1)
-    for el in users: # O(n)
-        if el == login and users.get(login) == pasword and users_check.get(login) == "+" and n != 1: # O(1+1+1+1)
-            n = 1 # O(1)
-            print('Вы вошли в систему') # O(1)
-        elif el == login and users.get(login) != pasword and n!=1: # O(1+1+1)
-            n = 1 # O(1)
-            print('Неверный пароль') # O(1)
-        elif el == login and users_check.get(login) != "+" and n!=1: # O(1+1+1)
-            n = 1 # O(1)
-            print('Ваша учетная запись не активированна, хотите ли вы это сделать?') # O(1)
-    if n == 0: # O(1)
-        print("Такой пользователь отсутсвует в базе данных") # O(1)
+    n = 0  # O(1)
+    for el in users:  # O(n)
+        # O(1+1+1+1)
+        if el == login and users.get(login) == pasword and users_check.get(login) == "+" and n != 1:
+            n = 1  # O(1)
+            print('Вы вошли в систему')  # O(1)
+        elif el == login and users.get(login) != pasword and n != 1:  # O(1+1+1)
+            n = 1  # O(1)
+            print('Неверный пароль')  # O(1)
+        # O(1+1+1)
+        elif el == login and users_check.get(login) != "+" and n != 1:
+            n = 1  # O(1)
+            # O(1)
+            print('Ваша учетная запись не активированна, хотите ли вы это сделать?')
+    if n == 0:  # O(1)
+        print("Такой пользователь отсутсвует в базе данных")  # O(1)
 
 
 authentication_1('log1', 'pas1')

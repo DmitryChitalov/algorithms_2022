@@ -14,6 +14,7 @@
 --код с нуля писать не нужно, требуется доработать пример с урока
 """
 
+
 class DequeClass:
     def __init__(self):
         self.elems = []
@@ -37,12 +38,11 @@ class DequeClass:
         return len(self.elems)
 
 
-
 def pal_checker(string):
     dc_obj = DequeClass()
 
     for el in string:
-    	if el != ' ':
+        if el != ' ':
             dc_obj.add_to_rear(el)
 
     still_equal = True

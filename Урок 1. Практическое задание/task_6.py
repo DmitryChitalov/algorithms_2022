@@ -22,33 +22,33 @@ from random import random
 
 
 class Task_Borad:
-	def __init__(self):
-		self.base = []
-		self.queue = []
-		self.solved = []
+    def __init__(self):
+        self.base = []
+        self.queue = []
+        self.solved = []
 
-	def to_queue(self, item):
-		r = round(random())
-		if r == 0:
-			self.queue.insert(0, item)
-		else:
-			self.solved.insert(0, item)
+    def to_queue(self, item):
+        r = round(random())
+        if r == 0:
+            self.queue.insert(0, item)
+        else:
+            self.solved.insert(0, item)
 
-	def solve_queue(self):
-		self.solved.extend(self.queue)
-		self.queue.clear()
+    def solve_queue(self):
+        self.solved.extend(self.queue)
+        self.queue.clear()
 
-	def which_are_in_queue(self):
-		return self.queue
+    def which_are_in_queue(self):
+        return self.queue
 
-	def which_are_solved(self):
-		return self.solved
+    def which_are_solved(self):
+        return self.solved
 
-	def solved_lenght(self):
-		return len(self.solved)
+    def solved_lenght(self):
+        return len(self.solved)
 
-	def queue_lenght(self):
-		return len(self.queue)
+    def queue_lenght(self):
+        return len(self.queue)
 
 
 if __name__ == '__main__':
@@ -63,7 +63,6 @@ if __name__ == '__main__':
 
     print(brd.queue_lenght())
     print(brd.solved_lenght())
-    
 
     brd.solve_queue()
 
@@ -72,4 +71,3 @@ if __name__ == '__main__':
 
     print(brd.queue_lenght())
     print(brd.solved_lenght())
-    

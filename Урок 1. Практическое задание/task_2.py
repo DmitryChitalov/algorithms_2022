@@ -23,7 +23,7 @@ def sort_kv(lst):
     a = lst[0]                       # O(1)
     for el in lst:                   # O(n)
         for el2 in lst[::-1]:        # O(n)
-            if el > el2 and el2 < a:  # O(1) 
+            if el > el2 and el2 < a:  # O(1)
                 a = el2              # O(1)
     print(a)                         # O(1)
 
