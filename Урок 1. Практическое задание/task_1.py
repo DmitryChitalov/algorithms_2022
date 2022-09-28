@@ -22,9 +22,9 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: len(lst_obj) + 1.
+    Сложность: n + 1.
     """
-    lst_to_set = set(lst_obj)  # len(lst_obj)
+    lst_to_set = set(lst_obj)  # O(n)
     return lst_to_set  # O(1)
 
 
@@ -37,7 +37,7 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: n + 3.
+    Сложность: 2n + 1.
     """
     for j in range(len(lst_obj)):          # O(n)
         if lst_obj[j] in lst_obj[j+1:]:    # O(1)
@@ -53,9 +53,9 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: len(lst_obj) + n log n + n + 2
+    Сложность: n + n log n + 2n - 1
     """
-    lst_copy = list(lst_obj)                 # len(lst_obj)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n log n)
     for i in range(len(lst_obj) - 1):        # O(n - 1)
         if lst_copy[i] == lst_copy[i+1]:     # O(1)
