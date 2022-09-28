@@ -17,3 +17,63 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+class Task:
+    def __init__(self):
+        # Имеем в начале где то хранящиеся списки задач (наверняка в БД)
+        # Базовый список задач
+        self.tasks_base = []
+        # Список задач на доработку
+        self.tasks_revision = []
+        # Список завершенных задач
+        self.tasks_solved = []
+        # Задача, это тоже список данных, таких как:
+        # сама задача, ответственный, срок, статус выполнения
+        self.task = []
+
+    def new_task(self, task : str, responsible : str, period : str, status : str):
+        self.task.append(task)
+        self.task.append(responsible)
+        self.task.append(period)
+        self.task.append(status)
+        self.tasks_base.append(self.task)
+        self.task = []
+
+    def base_to_revision(self, num_base : int):
+        self.task = self.tasks_base.pop(num_base - 1)
+        self.task[3] = 'revision'
+        self.tasks_revision.append(self.task)
+        self.task = []
+
+    def base_to_solved(self, num_base : int):
+        self.task = self.tasks_base.pop(num_base - 1)
+        self.task[3] = 'solved'
+        self.tasks_solved.append(self.task)
+        self.task = []
+
+    def revision_to_solved(self, num_base : int):
+        self.task = self.tasks_revision.pop(num_base - 1)
+        self.task[3] = 'solved'
+        self.tasks_solved.append(self.task)
+        self.task = []
+
+    def view_tasks(self):
+        print('Текущий список задач:\n', self.tasks_base)
+        print('Текущий список задач в доработке:\n', self.tasks_revision)
+        print('Выполненные задачи:\n', self.tasks_solved)
+
+if __name__ == '__main__':
+    tasks = Task()
+    tasks.new_task('Первая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Вторая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Третья задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Четвертая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Пятая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.view_tasks()
+    tasks.base_to_revision(2)
+    tasks.view_tasks()
+    tasks.base_to_solved(3)
+    tasks.view_tasks()
+    tasks.base_to_revision(3)
+    tasks.revision_to_solved(1)
+    tasks.view_tasks()
