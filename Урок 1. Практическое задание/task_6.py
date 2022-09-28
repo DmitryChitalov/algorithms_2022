@@ -31,7 +31,7 @@ class Task:
         # сама задача, ответственный, срок, статус выполнения
         self.task = []
 
-    def new(self, task : str, responsible : str, period : str, status : str):
+    def new_task(self, task : str, responsible : str, period : str, status : str):
         self.task.append(task)
         self.task.append(responsible)
         self.task.append(period)
@@ -57,23 +57,23 @@ class Task:
         self.tasks_solved.append(self.task)
         self.task = []
 
-    def print(self):
+    def view_tasks(self):
         print('Текущий список задач:\n', self.tasks_base)
         print('Текущий список задач в доработке:\n', self.tasks_revision)
         print('Выполненные задачи:\n', self.tasks_solved)
 
 if __name__ == '__main__':
     tasks = Task()
-    tasks.new('Первая задача', 'ИвановИИ', '2022-09-28', 'new')
-    tasks.new('Вторая задача', 'ИвановИИ', '2022-09-28', 'new')
-    tasks.new('Третья задача', 'ИвановИИ', '2022-09-28', 'new')
-    tasks.new('Четвертая задача', 'ИвановИИ', '2022-09-28', 'new')
-    tasks.new('Пятая задача', 'ИвановИИ', '2022-09-28', 'new')
-    tasks.print()
+    tasks.new_task('Первая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Вторая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Третья задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Четвертая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.new_task('Пятая задача', 'ИвановИИ', '2022-09-28', 'new')
+    tasks.view_tasks()
     tasks.base_to_revision(2)
-    tasks.print()
+    tasks.view_tasks()
     tasks.base_to_solved(3)
-    tasks.print()
+    tasks.view_tasks()
     tasks.base_to_revision(3)
     tasks.revision_to_solved(1)
-    tasks.print()
+    tasks.view_tasks()

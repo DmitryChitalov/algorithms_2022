@@ -41,7 +41,7 @@ find_top3_1(company_profit)
 # Второй способ. Сложность O(N)
 def find_top3_2(company : dict):
     top_3 = {}                                                                      # O(1)
-    while len(top_3) < 3:                                                           # O(3)
+    while len(top_3) < 3:                                                           # O(1)
         max_profit = 0                                                              # O(1)
         max_company = ""                                                            # O(1)
         for k, v in company.items():                                                # O(N)
