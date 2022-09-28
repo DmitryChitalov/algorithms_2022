@@ -22,3 +22,40 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+user_log = {
+    'aaa' : ['aaa', True],
+    'bbb' : ['bbb', False],
+    'ccc' : ['ccc', False],
+    'ddd' : ['ddd', False],
+    'eee' : ['eee', True],
+    'fff' : ['fff', True]
+}
+
+# print(sorted(company_profit.items(), reverse=True, key=lambda comp: comp[1]))
+# print(len(company_profit))
+
+# Первый способ. Сложность O(N)
+def autentification_1(users : dict, user : str):
+    for k, v in users.items():                                                                  # O(N)
+        if k == user:                                                                           # O(1)
+            if v[1]:                                                                            # O(1)
+                print(f'Пользователь {user} авторизован. Введите пароль для аутентификации.')   # O(1)
+                return True                                                                     # O(1)
+            else:
+                print(f'Пользователь {user} не авторизован. Пройдите авторизацию')              # O(1)
+                return False                                                                    # O(1)
+autentification_1(user_log, 'fff')
+
+# Второй способ. Сложность O(1)
+def autentification_2(users : dict, user : str):
+    user_data = users.get(user)                                                                 # O(1)
+    if user_data[1]:                                                                            # O(1)
+        print(f'Пользователь {user} авторизован. Введите пароль для аутентификации.')           # O(1)
+        return True                                                                             # O(1)
+    else:
+        print(f'Пользователь {user} не авторизован. Пройдите авторизацию')                      # O(1)
+        return False                                                                            # O(1)
+autentification_2(user_log, 'fff')
+
+# Вывод: Способ 2 быстрее. Т.к. нет цикла по словарю.
