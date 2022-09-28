@@ -23,7 +23,7 @@ comp = {10000: "к1",
         1: "к4",
         50000: "к5",
         1453142134: "к6",
-        14000: "к7", }
+        14000: "к7"}
 
 
 # Итоговая сложность : n + n log n + 1
@@ -34,17 +34,17 @@ def most_year_profit_1(slovar):
     print(slovar.get(s[-1]), slovar.get(s[-2]), slovar.get(s[-3]))  # O(1)
 
 
-# Итоговая сложность : n + 1 + n(n(n + 2)) + 1 = n + 2 + n³ + n² = n³ + 2n² + n + 2
+# Итоговая сложность : n + 1 + n(n + 1 + 2n) + 1 = n + 2 + n² + n + 2n² = 3n² + 2n + 2
 
 def most_year_profit_2(slovar):
     s = list(slovar.keys())  # O(n)
     a = s[0]  # O(1)
     while len(s) != 3:  # O(n)
         for el in s:  # O(n)
-            if el > a:  # O(1)
+            if el < a:  # O(1)
                 a = el  # O(1)
-            else:
-                s.remove(el)  # O(n)
+        s.remove(a)  # O(n)
+        a = s[0]  # O(1)
     print(slovar.get(s[-1]), slovar.get(s[-2]), slovar.get(s[-3]))  # O(1)
 
 
