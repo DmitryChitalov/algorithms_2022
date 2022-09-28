@@ -22,3 +22,50 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+"""Сложность: O(n) - линейная"""
+
+
+def check_auth_1(data, input_data):
+    for key, val in data.items():  # O(n)
+        if input_data == key and val > 0:  # O(1)
+            return "Успешная авторизация! Доступ разрешен."  # O(1)
+        elif input_data == key and val == 0:  # O(1)
+            return "Успешная аутентификация! Однако, для доступа к ресурсу " \
+                   "необходимо активировать учетную запись!"  # O(1)
+    return "Access deny!!!"  # O(1)
+
+
+"""Сложность: O(2n) - линейная"""
+
+
+def check_auth_2(data, input_data):
+    key = 1  # O(1)
+    my_list = []  # O(1)
+    for k, v in data.items():  # O(n)
+        if input_data == k:  # O(1)
+            my_list.append(v)  # O(1)
+        for elem in my_list:  # O(n)
+            if elem == key:  # O(1)
+                return f"{input_data.split('/')[0]} * Успешная авторизация! Доступ разрешен."  # O(1)
+            elif key != elem:  # O(1)
+                return f"{input_data.split('/')[0]} * Успешная аутентификация! Однако, " \
+                       f"для доступа к ресурсу " \
+                       "необходимо активировать учетную запись!"  # O(1)
+
+    return "Access deny!!!"
+
+
+users_auth = {"Mastadont666/12345678": 1, "Andatra/qwerty12345": 0,
+              "Boris300/superman777": 1, "Sugar_garbage/oooooops!": 1,
+              "ELFs/omg_password!": 0, "TraktorBawling/88888888": 1}
+user_input = input("Введите логин/пароль >>> ")
+
+print(check_auth_1(users_auth, user_input))
+print(check_auth_2(users_auth, user_input))
+
+"""Вывод: Из двух представленных алгоритмов решения задания наиболее эффективным будет 
+алгоритм 1 с линейной сложность, так как время выполнение скрипта будет
+расти плавнее при добавлении новых элементов (у нас один цикл + выборка)
+в отличие от способа с той же линейной но 2n сложностью, где время исполнения будет чуть выше 
+(из за 2-х циклов)."""
