@@ -22,3 +22,52 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+user_dict = {}
+user_1 = {
+          'password': 'password_1',
+          'activated': True}
+user_2 = {
+          'password': 'password_2',
+          'activated': True}
+user_3 = {
+          'password': 'password_3',
+          'activated': False}
+user_dict['user_1'] = user_1
+user_dict['user_2'] = user_2
+user_dict['user_3'] = user_3
+
+print(user_dict)
+
+
+def check_1(log, passwd):
+    """
+    О(1)
+    """
+    if user_dict.get(log):                                        # O(1)
+        if user_dict[log]['password'] == passwd:                  # O(1)
+            if user_dict[log]['activated']:                       # O(1)
+                return 'Вход выполнен'                            # O(1)
+            return 'Необходимо активировать учетную запись'       # O(1)
+        return 'Incorrect login and/or password'                  # O(1)
+    return "Пользователь с таким именем не зарегистрирован"       # O(1)
+
+
+def check_2(log, passwd):
+    """
+    О(n)
+    """
+    for key, value in user_dict.items():                           # O(n)
+        if key == log:                                             # O(1)
+            if value['password'] == passwd:                        # O(1)
+                if value['activated']:                             # O(1)
+                    return 'Вход выполнен'                         # O(1)
+                return 'Активируйте учетную запись'                # O(1)
+            return 'Неверно указан логин/пароль'                   # O(1)
+    return 'Пользователь с таким именем не зарегистрирован'        # O(1)
+
+
+login = input("Login: ")
+password = input("Password: ")
+print(check_1(login, password))
+print(check_2(login, password))
