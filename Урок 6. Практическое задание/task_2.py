@@ -21,10 +21,10 @@ from pympler.asizeof import asizeof
 
 
 def mem_decor(f):
-    def wrapper(*args, **kwargs):
+    def wrapper(*args):
         m1 = memory_usage()
         t1 = time.time()
-        func_res = f(*args, **kwargs)
+        func_res = f(*args)
         m2 = memory_usage()
         mem = m2[0] - m1[0]
         res_time = time.time() - t1
@@ -57,11 +57,34 @@ def recursive_reverse_opti(number):
 
 print(recursive_reverse_opti(num_10000))
 
+@mem_decor
+def fact_profile(n):
+    def fact(n):
+        if (n <= 1):
+            return 1
+        else:
+            return (n * fact(n - 1))
 
+    f = fact(n)
+    return f
+
+@mem_decor
+def fact(n):
+    if (n <= 1):
+        return 1
+    else:
+        return (n * fact(n - 1))
+
+
+t1 = time.time()
+fact(10)
+print(time.time() - t1)
+t1 = time.time()
+print(fact_profile(10))
+print(time.time() - t1)
 """
 2.1940019130706787 == 0.015625
 0.10527706146240234 == 0.0
 
 Получаются такие данный. Не понимаю почему так происходит.
 """
-

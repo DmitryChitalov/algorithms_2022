@@ -15,3 +15,37 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from statistics import median
+import timeit
+from random import randint
+
+
+def gnome_sort(lst):
+    i = 1
+    while i < len(lst):
+        if lst[i] >= lst[i - 1]:
+            i += 1
+        else:
+            lst[i], lst[i - 1] = lst[i - 1], lst[i]
+            if i > 1:
+                i -= 1
+    return lst
+
+
+def mid_find(lst_in):
+    gnome_sort(lst_in)
+    ln = len(lst_in)
+    if ln % 2 == 0:
+        first = lst_in[ln // 2 - 1]
+        second = lst_in[ln // 2]
+        med = (first + second) / 2
+    else:
+        med = lst_in[ln // 2]
+
+
+orig_list_10 = [randint(-100, 100) for _ in range(11)]
+orig_list_100 = [randint(-100, 100) for _ in range(101)]
+orig_list_1000 = [randint(-100, 100) for _ in range(1001)]
+print(timeit.timeit(stmt='mid_find(orig_list_10)', globals=globals()))
+print(timeit.timeit(stmt='mid_find(orig_list_100)', globals=globals()))
+print(timeit.timeit(stmt='mid_find(orig_list_1000)', globals=globals()))
