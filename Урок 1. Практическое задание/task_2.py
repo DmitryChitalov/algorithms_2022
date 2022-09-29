@@ -15,3 +15,25 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def f1(lst_obj):  # Общая сложность O(N^2)
+    for i in range(len(lst_obj)):  # O(N)
+        if lst_obj[i] < lst_obj[0]:  # O(1)
+            a = lst_obj.pop(i)  # 0(N)
+            lst_obj.insert(0, a)  # O(N)
+    return lst_obj[0]  # O(1)
+
+
+def f2(lst_obj):  # Общая сложность O(N)
+    min_lst_obj = lst_obj[0]  # O(1)
+    for i in range(1, len(lst_obj)):  # O(N)
+        if lst_obj[i] < min_lst_obj:  # O(1)
+            min_lst_obj = lst_obj[i]  # O(1)
+    return min_lst_obj  # O(1)
+
+
+if __name__ == '__main__':
+    my_lst = [5, 8, -20, 1, 0, -1]
+    print(f1(my_lst))
+    print(f2(my_lst))

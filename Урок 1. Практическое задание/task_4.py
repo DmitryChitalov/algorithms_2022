@@ -22,3 +22,49 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def autification(user, password):  # Общая сложность O(1)
+    key = f'{user},{password}'  # O(1)
+    status = database.get(key, False)  # O(1)
+    if status:  # O(1)
+        if status == 'active':  # O(1)
+            return f'Добро пожаловать {user} !'  # O(1)
+        else:  # O(1)
+            return f'{user}, вам нужно пройти активацию аккаунта!' # O(1)
+    else:  # O(1)
+        return f'Пользователь не найден или введен неправильный пароль.'  # O(1)
+
+
+def autification_2(user, password):  # Общая сложность O(N)
+    key = f'{user},{password}'  # O(1)
+    for k, v in database.items():  # O(N)
+        if k == key:  # O(1)
+            if v == 'active':  # O(1)
+                return f'Добро пожаловать {user} !'  # O(1)
+            else:  # O(1)
+                return f'{user}, вам нужно пройти активацию аккаунта!'  # O(1)
+    return f'Пользователь не найден или введен неправильный пароль.'  # O(1)
+
+
+if __name__ == '__main__':
+
+    database = {
+        'ura,123': 'active',
+        'dima,567': 'non active',
+        'misha,432': 'active'
+    }
+
+print(autification('ura', 123))
+print(autification('dima', 567))
+print(autification('vasya', 567))
+print(autification('musha', 321))
+print(autification_2('ura', 123))
+print(autification_2('dima', 567))
+print(autification_2('vasya', 567))
+print(autification_2('musha', 321))
+
+"""
+Первое решение эффективнее, тк общая сложность решения 1: O(1),
+а сложность решения 2: O(N).
+"""
