@@ -30,3 +30,81 @@
 
 Это файл для четвертого скрипта
 """
+
+
+from memory_profiler import profile
+
+
+# @profile
+# def test_def():
+#     n = input('Введите число прописью от 0 до 10')
+#
+#     def num_translate(n):
+#         if n == 'zero':
+#             print ('ноль')
+#             exit()
+#         if n == 'one':
+#             print ('один')
+#             exit()
+#         if n == 'two':
+#             print ('два')
+#             exit()
+#         if n == 'three':
+#             print ('три')
+#             exit()
+#         if n == 'four':
+#             print ('четыре')
+#             exit()
+#         if n == 'five':
+#             print ('пять')
+#             exit()
+#         if n == 'six':
+#             print ('шесть')
+#             exit()
+#         if n == 'seven':
+#             print ('семь')
+#             exit()
+#         if n == 'eight':
+#             print ('восемь')
+#             exit()
+#         if n == 'nine':
+#             print ('девять')
+#             exit()
+#         if n == 'ten':
+#             print ('десять')
+#             exit()
+#         else:
+#             print(None)
+#     num_translate(n)
+#
+#
+# test_def()
+
+
+@profile
+def test_def():
+    n = int(input('Введите число прописью от 0 до 10: '))
+    test_dict = {
+        0: ('zero', 'ноль'),
+        1: ('one', 'один'),
+        2: ('two', 'два'),
+        3: ('three', 'три'),
+        4: ('four', 'четыре'),
+        5: ('five', 'пять'),
+        6: ('six', 'шесть'),
+        7: ('seven', 'семь'),
+        8: ('eight', 'восемь'),
+        9: ('nine', 'девять'),
+        10: ('ten', 'десять')}
+    for key, value in test_dict.items():
+        if n == key:
+            print(f'{value[1]}')
+    del n
+    del test_dict
+
+
+test_def()
+
+"""
+Логика, что и прежде...но код изменен - в скорости и памяти в теории выигрывает...
+"""
