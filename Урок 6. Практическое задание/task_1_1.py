@@ -30,3 +30,35 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+
+
+
+# def test1():
+#     src = [i**2 for i in range(100000)]
+#     result = []
+#     for idx, num in enumerate(src):
+#         if num > src[idx - 1] and idx != 0:
+#             result.append(num)
+#     print(result)
+# test1()
+
+# @profile
+def test2():
+    src = [i**2 for i in range(100000)]
+    result = []
+    for idx, num in enumerate(src):
+        if num > src[idx - 1] and idx != 0:
+            result.append(num)
+    print(f'{result}')
+    del src
+    del result
+
+
+print(test2())
+
+"""
+Удалены использованные переменные и 'print' заменен на f-строку.
+Это позволило снизить используемую память на 3.3 MiB.
+"""
