@@ -30,3 +30,51 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+
+
+def memory_decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f'Выполнение функции {func.__name__} заняло {mem_diff} Mib')
+        return res
+    return wrapper
+
+
+@memory_decor
+def even_id(nums):
+    """Сохранение индексов четных элементов list comprehensions"""
+    new_arr = [i for i, val in enumerate(nums) if val % 2 == 0]
+    return new_arr
+
+
+"""
+Выполнение функции even_id заняло 913.671875 Mib
+"""
+
+
+@memory_decor
+def even_id_gen(nums):
+    """Сохранение индексов четных элементов, генератор"""
+    for i, val in enumerate(nums):
+        if val % 2 == 0:
+            yield i
+
+
+"""
+Выполнение функции even_id_gen заняло 0.0078125 Mib
+"""
+
+num = range(100000000)
+arr = even_id(num)
+gen = even_id_gen(num)
+for el in gen:
+    a = el
+print(a)  # 99999998
+
+"""
+Использование генератора значительно уменьшает объем используемой памяти
+"""
