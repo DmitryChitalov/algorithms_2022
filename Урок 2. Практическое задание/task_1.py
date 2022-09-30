@@ -28,4 +28,40 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-"hello_world"
+
+def my_calc():
+    user_choice = input("Введите операцию (+, -, *, / или 0 для выхода)")
+    if user_choice == "0":
+        exit()
+    elif user_choice == "+":
+        user_numb_1 = int(input("Введите первое число >>> "))
+        user_numb_2 = int(input("Введите второе число"))
+        res = user_numb_1 + user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "-":
+        user_numb_1 = int(input("Введите первое число >>> "))
+        user_numb_2 = int(input("Введите второе число"))
+        res = user_numb_1 - user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "*":
+        user_numb_1 = int(input("Введите первое число >>> "))
+        user_numb_2 = int(input("Введите второе число"))
+        res = user_numb_1 * user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "/":
+        user_numb_1 = int(input("Введите первое число >>> "))
+        user_numb_2 = int(input("Введите второе число"))
+        if user_numb_2 == 0:
+            return "Error!"
+        res = user_numb_1 / user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    else:
+        print("Error!")
+        return my_calc()
+
+
+print(my_calc())
