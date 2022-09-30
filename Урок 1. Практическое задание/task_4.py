@@ -22,3 +22,51 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+user_dict = {
+    "Fox": {"password": 123, "is_active": True},
+    "Bin": {"password": 456, "is_active": False},
+    "Kim": {"password": 789, "is_active": False}
+
+}
+print(user_dict["Fox"])
+
+
+# Способ 1
+# Сложность: O(1) — константное время
+def check_is_active():
+    user_input = input("Введите логин: ")  # O(1)
+    try:
+        if user_dict[user_input]["is_active"] is False:  # O(1)
+            print("Для доступа к ресурсу необходимо активировать учетную запись.")  # O(1)
+        else:
+            print("Доступ разрешен")  # O(1)
+    except KeyError:
+        print("Ошибка! Введен неверный логин.")  # O(1)
+
+
+check_is_active()
+
+
+# Способ 2
+# Сложность: O(n) линейное время
+def check_is_active_2():
+    user_input = input("Введите логин: ")  # O(1)
+    try:
+        for i in user_dict[user_input]:  # O(n)
+            if user_dict[user_input]["is_active"] is False:  # O(1)
+                print("Для доступа к ресурсу необходимо активировать учетную запись.")  # O(1)
+            else:
+                print("Доступ разрешен")  # O(1)
+            break
+    except KeyError:
+        print("Ошибка! Введен неверный логин.")  # O(1)
+
+
+check_is_active_2()
+
+'''
+Первый способ решения эффективнее, 
+т.к. при константной сложности выполнения функция работает быстрее, 
+чем при линейной.
+'''
