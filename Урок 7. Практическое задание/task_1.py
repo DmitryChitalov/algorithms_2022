@@ -18,3 +18,85 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+from random import randint
+from timeit import timeit
+
+
+def new_array(length):
+    arr = []
+    for _ in range(length):
+        arr.append(randint(-100, 100))
+    return arr
+
+
+def bubble_sort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr) - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+
+def bubble_sort_new(arr):
+    for i in range(len(arr)):
+        is_sorted = True
+        for j in range(len(arr) - i - 1):
+            if arr[-j - 1] < arr[-j - 2]:
+                arr[-j - 1], arr[-j - 2] = arr[-j - 2], arr[-j - 1]
+                is_sorted = False
+        if is_sorted:
+            break
+    return arr
+
+
+size = 10
+my_array = new_array(size)
+
+print(bubble_sort(my_array[:]))
+print(bubble_sort_new(my_array[:]))
+print(my_array)
+print('*' * 50)
+
+"""
+[-94, -58, -47, -2, 1, 15, 30, 35, 62, 73]
+[-94, -58, -47, -2, 1, 15, 30, 35, 62, 73]
+[62, 1, -47, 30, 15, -2, -94, -58, 73, 35]
+"""
+
+
+for d in range(1, 4):
+    my_array = new_array(size ** d)
+    print(f'Массив из {size ** d} элементов: ')
+    print(f'Время для функции bubble_sort: '
+          f'{timeit("bubble_sort(my_array[:])", globals=globals(), number=1000)}')
+    print(f'Время для функции bubble_sort_new: '
+          f'{timeit("bubble_sort_new(my_array[:])", globals=globals(), number=1000)}')
+    print('*' * 50)
+
+"""
+**************************************************
+Массив из 10 элементов: 
+Время для функции bubble_sort: 0.01202579983510077
+Время для функции bubble_sort_new: 0.028322999831289053
+**************************************************
+"""
+
+"""
+**************************************************
+Массив из 100 элементов: 
+Время для функции bubble_sort: 1.2565060001797974
+Время для функции bubble_sort_new: 2.087141699856147
+**************************************************
+"""
+
+"""
+**************************************************
+Массив из 1000 элементов: 
+Время для функции bubble_sort: 116.09419590001926
+Время для функции bubble_sort_new: 199.10584459989332
+**************************************************
+"""
+
+
+""" 
+Доработка функции очень помогла, время значительно ускорилось"""

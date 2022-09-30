@@ -15,3 +15,80 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def new_array(length):
+    arr = []
+    for _ in range(length):
+        arr.append(randint(-100, 100))
+    return arr
+
+
+def gnome_sort(arr):
+    """Гномья сортировка"""
+    i = 1
+    while i < len(arr):
+        if i == 0:
+            i = 1
+        if arr[i] < arr[i - 1]:
+            arr[i], arr[i - 1] = arr[i - 1], arr[i]
+            i -= 1
+        else:
+            i += 1
+    return arr
+
+
+def find_mediana(arr):
+    my_arr = gnome_sort(arr[:])
+    if len(arr) % 2:
+        med = my_arr[(len(arr) - 1) // 2]
+    else:
+        med = (my_arr[len(arr) % 2] + my_arr[(len(arr) % 2) - 1]) / 2
+    return f'Медианой массива является: {med}'
+
+
+size = 11
+my_array = new_array(size)
+print('*' * 50)
+print(my_array)
+print(gnome_sort(my_array[:]))
+print(find_mediana(my_array))
+print('*' * 50)
+
+"""
+**************************************************
+[51, 6, -7, -75, -82, 60, -35, 78, 28, 9, 30]
+[-82, -75, -35, -7, 6, 9, 28, 30, 51, 60, 78]
+Медианой массива является: 9
+**************************************************
+"""
+
+size = 10
+for d in range(1, 4):
+    my_array = new_array(size ** d + 1)
+    print(f'Массив из {size ** d + 1} элементов: ')
+    print(f'Время для функции find_mediana: {timeit("find_mediana(my_array[:])", globals=globals(), number=1000)}')
+    print('*' * 50)
+
+"""
+**************************************************
+Массив из 11 элементов: 
+Время для функции find_mediana: 0.022457299986854196
+**************************************************
+"""
+
+"""
+**************************************************
+Массив из 101 элементов: 
+Время для функции find_mediana: 1.5294677000492811
+**************************************************
+"""
+
+"""
+**************************************************
+Массив из 1001 элементов: 
+Время для функции find_mediana: 160.08702969993465
+**************************************************
+"""
