@@ -30,3 +30,54 @@
 
 Это файл для первого скрипта
 """
+
+"""
+Урок 2 
+Задание 3.	Сформировать из введенного числа
+обратное по порядку входящих в него
+цифр и вывести на экран. 
+"""
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return mem_diff
+
+    return wrapper
+
+
+numbers_list = []
+
+
+@decor
+def reversed_number(number):
+    rev_num = ''.join(numbers_list)
+    if number == 0:
+        return rev_num
+    else:
+        new_number = str(number % 10)
+        numbers_list.append(new_number)
+        return reversed_number(number // 10)
+
+
+@decor
+def reverse_number_2(number):
+    number = str(number)
+    return number.split().reverse()
+
+
+my_number = 123859423651489621233194648783928465473829284645592927
+print(reversed_number(my_number))
+print(reverse_number_2(my_number))
+
+"""
+0.08203125
+0.0
+Для оптимизации использования памяти рекурсия была заменена на встроенную операцию
+и как видно из замеров, это существенно снизило использование оперативной памяти. 
+"""

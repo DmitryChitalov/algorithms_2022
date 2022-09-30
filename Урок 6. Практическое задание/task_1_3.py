@@ -30,3 +30,91 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+Урок 4 задача 4.
+Для замеров заменила array = [1, 3, 1, 3, 4, 5, 1] на больший массив
+array = list(range(50000)).
+Как видно из замеров в момент создания переменной array, 
+выделяется дополнительная объем памяти в размере 1.9 MIB.
+Для оптимизации использования памяти была проведена операция del  
+для удаления этой переменной и освобождения памяти, но в соответствии с
+замерами память не освободилась.
+"""
+from memory_profiler import profile
+
+
+@profile
+def func():
+    array = list(range(50000))
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    print(f'Чаще всего встречается число {num}, 'f'оно появилось в массиве {m} раз(а)')
+    del array
+
+
+func()
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    42     13.9 MiB     13.9 MiB           1   @profile
+    43                                         def func():
+    44     15.7 MiB      1.9 MiB           1       array = list(range(50000))
+    45     15.7 MiB      0.0 MiB           1       m = 0
+    46     15.7 MiB      0.0 MiB           1       num = 0
+    47     15.7 MiB      0.0 MiB       50001       for i in array:
+    48     15.7 MiB      0.0 MiB       50000           count = array.count(i)
+    49     15.7 MiB      0.0 MiB       50000           if count > m:
+    50     15.7 MiB      0.0 MiB           1               m = count
+    51     15.7 MiB      0.0 MiB           1               num = i
+    52     15.7 MiB      0.0 MiB           1       print(f'Чаще всего встречается число {num}, 'f'оно появилось в массиве {m} раз(а)')
+    53     15.7 MiB      0.0 MiB           1       del array
+
+
+
+Process finished with exit code 0
+
+"""
+
+@profile
+def func_1():
+    array = list(range(50000))
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, 'f'оно появилось в массиве {m} раз(а)'
+
+
+print(func_1())
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    42     13.8 MiB     13.8 MiB           1   @profile
+    43                                         def func_1():
+    44     15.7 MiB      1.9 MiB           1       array = list(range(50000))
+    45     15.7 MiB      0.0 MiB           1       m = 0
+    46     15.7 MiB      0.0 MiB           1       num = 0
+    47     15.7 MiB      0.0 MiB       50001       for i in array:
+    48     15.7 MiB      0.0 MiB       50000           count = array.count(i)
+    49     15.7 MiB      0.0 MiB       50000           if count > m:
+    50     15.7 MiB      0.0 MiB           1               m = count
+    51     15.7 MiB      0.0 MiB           1               num = i
+    52     15.7 MiB      0.0 MiB           2       return f'Чаще всего встречается число {num}, ' \
+    53     15.7 MiB      0.0 MiB           1              f'оно появилось в массиве {m} раз(а)'
+
+
+Чаще всего встречается число 0, оно появилось в массиве 1 раз(а)
+
+Process finished with exit code 0
+"""
