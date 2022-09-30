@@ -33,3 +33,4 @@ def num_count(number, even_num=0, odd_num=0):
 if __name__ == '__main__':
     print(num_count(34560))
     print(num_count(123))
+    
