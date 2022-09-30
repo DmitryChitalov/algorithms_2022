@@ -21,13 +21,13 @@ class StackPlates:
 
     def add_stack(self, vol, varibl):
         if len(self.stack) == 0:
-            self.stack.append(list(str(varibl)))
+            self.stack.append([str(varibl)])
             vol = vol-1
         for i in range(1, vol+1):
             stack = self.stack.pop()
             if len(list(stack)) == self.vol_stack:
                 self.stack.append(stack)
-                self.stack.append(list(str(varibl)))
+                self.stack.append([str(varibl)])
             if len(list(stack)) < self.vol_stack:
                 stack.append(str(varibl))
                 self.stack.append(stack)
@@ -37,9 +37,9 @@ if __name__ == '__main__':
     # Создаем стек с размером стопки
     a = StackPlates(5)
     # добавляем количество тарелок - vol и тип тарелки - varibl
-    a.add_stack(6, 8)
-    a.add_stack(6, 2)
-    a.add_stack(3, 256)
-    a.add_stack(5, 1)
+    a.add_stack(6, "p5656")
+    a.add_stack(6, "222")
+    a.add_stack(3, "6676")
+    a.add_stack(5, "ttghfgh6666")
 
     print(a.stack)
