@@ -19,7 +19,7 @@
 
 def min_value1(lst1):                   # O(N^2)
     result = lst1[0]                    # O(1)
-    for i in range(1, len(lst1)):       # O(N^2)    with internal for
+    for i in range(1, len(lst1)):       # O(N)
         for j in range(i, len(lst1)):   # O(N)
             if lst1[j] < result:        # O(1)
                 result = lst1[j]        # O(1)
@@ -38,7 +38,7 @@ def min_value2(lst1):                   # O(N)
 
 
 if __name__ == '__main__':
-    li = [16, 17, 15, 18, 14, 19, 13]
+    li = (16, 17, 15, 18, 14, 19, 13)
 
     print(' procedure min_value1')
     print(min_value1(li))

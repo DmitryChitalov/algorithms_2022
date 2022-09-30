@@ -21,7 +21,7 @@
 from random import choice
 
 
-class Tasks():
+class Tasks:
     def __init__(self):
         self.new = []
         self.to_edit = []

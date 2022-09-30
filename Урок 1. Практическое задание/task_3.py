@@ -27,36 +27,36 @@ script    max_values3b       O( N )
 """
 
 
-def max_values3a(input_data):                       # O(N^2)
-    sorted_data = sorted(input_data.values())       # O(N)
+def max_values_3a(input_data):                       # O(N^2)
+    sorted_data = sorted(input_data.values())       # O(N Log N)
     # print(sorted_data)                            # O(N)
     sorted_dict = {}                                # O(1)
     count = 0                                       # O(1)
-    for i in sorted_data[::-1]:                     # O(N^2)   cycle for at line 35
+    for i in sorted_data[::-1]:                     # O(N)   
         count += 1                                  # O(1)
         if count > 3:                               # O(1)
             break                                   # O(1)
-        for k in input_data.keys():                 # O(N)  inner cycle
+        for k in input_data.keys():                 # O(N)  
             if i == input_data[k]:                  # O(1)
                 sorted_dict[k] = input_data[k]       # O(1)
     return sorted_dict                              # O(1)
 
 
-def max_values3b(input_data):                       # O(N)
+def max_values_3b(input_data):                       # O(N^2)
 
     if len(input_data) < 3:                         # O(1)
         raise ValueError("Number of items is less than 3")       # O(1)
 
 #   first 3 pairs
-    pair_key = list(input_data.keys())[0]           # O(1)
-    pair_value = list(input_data.values())[0]       # O(1)
+    pair_key = list(input_data.keys())[0]           # O(N)
+    pair_value = list(input_data.values())[0]       # O(N)
     pair0 = { pair_key: pair_value}                 # O(1)
 
     # Debug print
     # print (f' pair0 = {pair0} ')
 
-    pair_key = list(input_data.keys())[1]           # O(1)
-    pair_value = list(input_data.values())[1]       # O(1)
+    pair_key = list(input_data.keys())[1]           # O(N)
+    pair_value = list(input_data.values())[1]       # O(N)
     if pair_value > list(pair0.values())[0]:        # O(1)
         pair1 = pair0                               # O(1)
         pair0 = {pair_key: pair_value}              # O(1)
@@ -67,16 +67,16 @@ def max_values3b(input_data):                       # O(N)
     # print(f' pair0 = {pair0} ')
     # print(f' pair1 = {pair1} ')
 
-    pair_key = list(input_data.keys())[2]           # O(1)
-    pair_value = list(input_data.values())[2]       # O(1)
+    pair_key = list(input_data.keys())[2]           # O(N)
+    pair_value = list(input_data.values())[2]       # O(N)
     if pair_value > list(pair0.values())[0]:         # O(1)
         pair2 = pair1                               # O(1)
         pair1 = pair0                               # O(1)
         pair0 = {pair_key: pair_value}              # O(1)
-    elif pair_value>list(input_data.values())[1]:   # O(1)
+    elif pair_value>list(input_data.values())[1]:   # O(N)
         pair2 = pair1                               # O(1)
         pair1 = {pair_key: pair_value}              # O(1)
-    elif pair_value> list(input_data.values())[2]:  # O(1)
+    elif pair_value> list(input_data.values())[2]:  # O(N)
         pair2 = {pair_key: pair_value}              # O(1)
 
     # Debug print
@@ -93,16 +93,16 @@ def max_values3b(input_data):                       # O(N)
         # Debug print
         # print(pair_key,' ', pair_value)
 
-        pair_key = list(input_data.keys())[i]       # O(1)
-        pair_value = list(input_data.values())[i]   # O(1)
+        pair_key = list(input_data.keys())[i]       # O(N)
+        pair_value = list(input_data.values())[i]   # O(N)
         if pair_value > list(pair0.values())[0]:    # O(1)
             pair2 = pair1                           # O(1)
             pair1 = pair0                           # O(1)
             pair0 = {pair_key: pair_value}          # O(1)
-        elif pair_value > list(pair1.values())[0]:  # O(1)
+        elif pair_value > list(pair1.values())[0]:  # O(N)
             pair2 = pair1                           # O(1)
             pair1 = {pair_key: pair_value}          # O(1)
-        elif pair_value > list(pair2.values())[0]:  # O(1)
+        elif pair_value > list(pair2.values())[0]:  # O(N)
             pair2 = {pair_key: pair_value}          # O(1)
 
         # Debug print
@@ -137,7 +137,7 @@ if __name__ == '__main__':
                  }
 
     print(companies, "\n")
-    print(' max_values3a method')
-    print(max_values3a(companies))
-    print('\n max_values3b method')
-    print(max_values3b(companies))
+    print(' max_values_3a method')
+    print(max_values_3a(companies))
+    print('\n max_values_3b method')
+    print(max_values_3b(companies))
