@@ -51,6 +51,6 @@ def min_of_list_2(user_list):
 
 print(min_of_list_2(num_list))
 print(min_of_list_2(user_list))
-    # O(1) + O(n) * (O(1) + O(1)) + O(1) = O(n)
+# O(1) + O(n) * (O(1) + O(1)) + O(1) = O(n)
 
-# Результат выполнения функций одинаков.
+# Результат выполнения функций одинаков
