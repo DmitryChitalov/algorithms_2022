@@ -51,9 +51,6 @@ class Plates:
         if sum_of_plates <= plates:
             self.elems = [0]
 
-
-
-
     def num_of_plates(self):
         return self.elems
 
