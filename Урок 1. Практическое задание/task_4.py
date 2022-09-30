@@ -22,3 +22,48 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class Base:
+    def __init__(self):  # O(1)
+        self.base = {'Иванов': ['123', True], 'Сидоров': ['321', False]}  # O(1)
+
+    def __str__(self):  # O(1)
+        return (f': {self.base}')  # O(1)
+
+    def check_1(self, user):  # O(1)
+        if self.base.get(user) == None:  # O(1)
+            return False  # O(1)
+        else:
+            return True  # O(1)
+
+    def check_2(self, user):  # O(N)
+        for key, value in self.base.items():  # O(N)
+            if user == key:  # O(1)
+                if not value[1]:  # O(1)
+                    return 1  # есть в базе, доступ запрещен # O(1)
+                else:
+                    pas = input('Введите пароль: ') # O(1)
+                    if value[0] == pas:  # O(1)
+                        return 3  # есть в базе, доступ разрешен # O(1)
+                    else:
+                        return 2  # есть в базе, доступ запрещен # O(1)
+            else:
+                return 0  # нет в базе # O(1)
+
+    def add(self, slt):  # O(1)
+        self.base[slt[0]] = slt[1]  # O(1)
+
+
+bs = Base()
+user = input("Введите пользователя: ")
+if not bs.check_1(user):  # добавить
+    slt = [user, [input('Введите пароль: '), True]]
+    bs.add(slt)
+else:
+    rtn = bs.check_2(user)
+    if rtn == 1 or rtn == 2:  # доступ запрещен
+        print(f' Для пользователя {user} доступ запрещен')
+    elif rtn == 3:
+        print(f' Для пользователя {user} доступ разрешен')
+print(bs)
