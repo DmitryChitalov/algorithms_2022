@@ -12,7 +12,9 @@
 После реализации структуры, проверьте ее работу на различных сценариях
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
-class taskboard:
+
+
+class Taskboard:
 
     def __init__(self, tasks_list):
         self.t_for_solution = tasks_list
@@ -43,7 +45,7 @@ class taskboard:
             self.t_finished.insert(0, self.t_for_correction.pop())
 
 
-target_tasks = taskboard(['one', 'two', 'three', 'four', 'five'])
+target_tasks = Taskboard(['one', 'two', 'three', 'four', 'five'])
 target_tasks.to_solve()
 target_tasks.to_correct()
 target_tasks.to_correct()

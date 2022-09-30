@@ -39,8 +39,8 @@ def sorted_1(capitals):
 def sorted_2(capitals):
     max_income = {}                                                  # O(1)
     top_capitals = dict(capitals)                                    # O(1)
-    for i in range(3):                                               # O(n)
-        max_ = max(top_capitals.items(), key=lambda k_v: k_v[1])     # O(1)
+    for i in range(3):                                               # O(1) (есть кол-во раз цикла)
+        max_ = max(top_capitals.items(), key=lambda k_v: k_v[1])     # O(n)
         del top_capitals[max_[0]]                                    # O(1)
         max_income[max_[0]] = max_[1]                                # O(1)
     return max_income                                                # O(1)
@@ -51,3 +51,4 @@ print(sorted_2(capitals))
 
 
 # Второй вариант c O(n) эффективнее, решает задачу без сортировки
+
