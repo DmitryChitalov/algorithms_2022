@@ -26,7 +26,7 @@ comp = {10000: "к1",
         14000: "к7"}
 
 
-# Итоговая сложность : n + n log n + 1
+# Итоговая сложность : n + n log n + 1 ==> O(n log n)
 
 def most_year_profit_1(dict):
     s = list(dict.keys())  # O(n)
@@ -34,23 +34,10 @@ def most_year_profit_1(dict):
     print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
 
 
-# Итоговая сложность :  4n + 3
+
+# Итоговая сложность : 2n + 1 ==> O(n) ==> Лучший вариант т. к. наименьшая сложность
 
 def most_year_profit_2(dict):
-    s = list(dict.keys())  # O(n)
-    a = s[0]  # O(1)
-    while len(s) != 3:  # O(1)
-        for el in s:  # O(n)
-            if el < a:  # O(1)
-                a = el  # O(1)
-        s.remove(a)  # O(n)
-        a = s[0]  # O(1)
-    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
-
-
-# Итоговая сложность : 2n + 1 ==> Лучший вариант т. к. наименьшая сложность
-
-def most_year_profit_3(dict):
     s = list(dict.keys())  # O(n)
     while len(s) != 3:  # O(1)
         s.remove(min(s))  # O(n)
@@ -60,4 +47,3 @@ def most_year_profit_3(dict):
 
 most_year_profit_1(comp)
 most_year_profit_2(comp)
-most_year_profit_3(comp)

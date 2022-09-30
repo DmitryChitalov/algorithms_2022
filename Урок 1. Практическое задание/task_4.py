@@ -38,7 +38,7 @@ users_check = {'log1': '+',
                'log6': '+'
                }
 
-# Итоговая сложность: 10 ==> Лучший вариант т. к. наименьшая сложность
+# Итоговая сложность: 1+1+1+1+1+1+1+1+1+1 ==> O(1) Лучший вариант т. к. наименьшая сложность
 
 
 def authentication_1(login, pasword):
@@ -51,7 +51,7 @@ def authentication_1(login, pasword):
     elif users.get(login) != pasword:  # O(1)
         print('Неверный пароль')  # O(1)
 
-# Итоговая сложность: 16n + 3
+# Итоговая сложность: 16n + 3 ==> O(n)
 
 
 def authentication_2(login, pasword):
