@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_even(data):
+    odd = 0
+    even = 0
+    if len(data) == 0:
+        print("Bye!")
+        exit()
+    elif int(data[0]) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+        return odd_even(data[1:])
+    print(even, odd)
+
+
+user_choice = input("Введите число: ")
+odd_even(user_choice)
