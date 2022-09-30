@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def overturn(number=int(input('Введите число: ')), turned_num=''):
+    if number // 10 == 0 and number % 10 == 0:
+        return f'Перевернутое число: {turned_num}'
+    num = str(number % 10)
+    return overturn(int(number // 10), turned_num + num)
+
+
+if __name__ == '__main__':
+    print(overturn())
