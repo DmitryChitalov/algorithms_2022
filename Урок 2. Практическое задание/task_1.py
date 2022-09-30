@@ -27,3 +27,47 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def counter():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation not in ['+', '-', '*', '/', '0']:
+        print('Вы ввели неправильное значение!')
+        return counter()
+    if operation == '0':
+        return 0
+    first_number = input('Введите первое число: ')
+    if first_number.isdigit():
+        first_number = int(first_number)
+    else:
+        print('Вы ввели не число. Исправтесь!!!')
+        return counter()
+    second_number = input('Введите второе число: ')
+    if second_number.isdigit():
+        second_number = int(second_number)
+    else:
+        print('Вы ввели не число. Исправтесь!!!')
+        return counter()
+    if operation == '/' and second_number == 0:
+        print('Делить на ноль нельзя!!!!')
+        return counter()
+    if operation == '+':
+        result = first_number + second_number
+        print(f'Ваш результат: {result}')
+        return counter()
+    if operation == '-':
+        result = first_number - second_number
+        print(f'Ваш результат: {result}')
+        return counter()
+    if operation == '*':
+        result = first_number * second_number
+        print(f'Ваш результат: {result}')
+        return counter()
+    if operation == '/':
+        result = first_number / second_number
+        print(f'Ваш результат: {result}')
+        return counter()
+
+
+if __name__ == '__main__':
+    print(counter())
