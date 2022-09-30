@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+##############################################################################
+from random import sample
+
+
+# Сложность O(n^2)
+def min_1(lst):
+    start = lst[0]
+    for j in range(len(lst)):  # O(N)
+        for i in lst[j + 1:]:  # O(N)
+            if start > i:  # O(1)
+                start = i  # O(1)
+    return start  # O(1)
+
+
+# Сложность O(N)
+def min_2(lst):
+    start = lst[0]  # O(1)
+    for j in lst[1:]:  # O(N)
+        if start > j:  # O(1)
+            start = j  # O(1)
+    return start  # O(1)
+
+
+lst = sample(range(-100000, 100000), 100)
+print(lst)
+print(min_1(lst))
+print(min_2(lst))
