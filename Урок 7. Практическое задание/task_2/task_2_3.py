@@ -16,3 +16,32 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def median_function(lst):
+    return median(lst[:])
+
+
+m = 10
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+print(timeit("median_function(orig_list[:])", globals=globals(), number=100))
+
+m = 100
+orig_list_2 = [randint(0, 100) for j in range(2 * m + 1)]
+print(timeit("median_function(orig_list_2[:])", globals=globals(), number=100))
+
+m = 1000
+orig_list_3 = [randint(0, 100) for k in range(2 * m + 1)]
+print(timeit("median_function(orig_list_3[:])", globals=globals(), number=100))
+
+#  0.00014990000636316836
+#  0.001220100006321445
+#  0.020969600009266287
+
+#  Самым эффективным способом нахождения медианы, оказался способ номер три, с помощью встроенной функции
+#  поиска медианы. На втором месте с помощью сортировки Шелла. Самый долгий тспособ без сортировки, при чем время
+#  её выполнения значительно больше при большем количестве элеметов. Во всех других замерах,
+#  скорость выполнения меньше секунды.
