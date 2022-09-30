@@ -41,7 +41,7 @@ def recursive_reverse(number):
 
 
 num_10000 = random.randint(100000000, 10000000000)
-print(recursive_reverse(num_10000))
+# print(recursive_reverse(num_10000))
 
 
 @mem_decor
@@ -55,7 +55,7 @@ def recursive_reverse_opti(number):
     return r
 
 
-print(recursive_reverse_opti(num_10000))
+# print(recursive_reverse_opti(num_10000))
 
 @mem_decor
 def fact_profile(n):
@@ -77,14 +77,18 @@ def fact(n):
 
 
 t1 = time.time()
-fact(10)
+print(fact(10)) # 1.9725430011749268 == 0.03125
 print(time.time() - t1)
+
+
 t1 = time.time()
-print(fact_profile(10))
+print(fact_profile(10))# 0.10403203964233398 == 0.0
 print(time.time() - t1)
 """
 2.1940019130706787 == 0.015625
 0.10527706146240234 == 0.0
 
-Получаются такие данный. Не понимаю почему так происходит.
+проблема в чтом что при обычной рекурсии происходит вызов декоратора каждый раз вызовы этой функции. 
+Решение проблемы - использование обертки рекурсии внутри фукнции
+
 """
