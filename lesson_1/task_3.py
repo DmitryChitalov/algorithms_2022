@@ -17,7 +17,7 @@ company_profits = {'Яндекс': 5123, 'Газпром': 61200, 'Сбер': 45
 
 # O(n^2) квадратичная
 
-greatest_profit = sorted(company_profits.values(), reverse=True)[:3] # O(1)
+greatest_profit = sorted(company_profits.values(), reverse=True)[:3] # O(n)
 result = {}                                     # O(1)
 for i in greatest_profit:                       # O(n)
     for j in company_profits.keys():            # O(n)
@@ -30,7 +30,7 @@ print(result)
 # O(n) лиейная
 
 sorted_companies = {}                                                               # O(1)
-sorted_keys = sorted(company_profits, key=company_profits.get, reverse=True)        # O(1)
+sorted_keys = sorted(company_profits, key=company_profits.get, reverse=True)        # O(n)
 for i in sorted_keys[:3]:                                                           # O(n)
     sorted_companies[i] = company_profits[i]                                        # O(1)
 

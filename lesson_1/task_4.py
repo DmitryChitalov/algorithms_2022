@@ -21,12 +21,12 @@
 
 def authorization_1(login, password, accept):
     for key, value in login.items():                                        #O(n)
-        if key == password:                                                 #O(n)
-            if value['пароль'] == accept and value['активация']:            #O(n)
+        if key == password:                                                 #O(1)
+            if value['пароль'] == accept and value['активация']:            #O(1)
                 return "Доступ разрешен"                                    #O(1)
-            elif value['пароль'] == accept and not value['активация']:      #O(n)
+            elif value['пароль'] == accept and not value['активация']:      #O(1)
                 return "Пройдите активацию"                                 #O(1)
-            elif value['пароль'] != password:                               #O(n)
+            elif value['пароль'] != password:                               #O(1)
                 return "Пароль не верный"                                   #O(1)
 
     return "Учетная запись не существует"                                   #O(1)
@@ -34,15 +34,15 @@ def authorization_1(login, password, accept):
 # O(1) константная
 
 def authorization_2(login, password, accept):
-    if login.get(password):
-        if login[password]['пароль'] == accept and login[password]['активация']:
-            return "Доступ разрешен"
-        elif login[password]['пароль'] == accept and not login[password]['активация']:
-            return "Пройдите активацию"
-        elif login[password]['пароль'] != accept:
-            return "Пароль не верный"
+    if login.get(password):                                                                 #O(1)
+        if login[password]['пароль'] == accept and login[password]['активация']:            #O(1)
+            return "Доступ разрешен"                                                        #O(1)
+        elif login[password]['пароль'] == accept and not login[password]['активация']:      #O(1)
+            return "Пройдите активацию"                                                     #O(1)
+        elif login[password]['пароль'] != accept:                                           #O(1)
+            return "Пароль не верный"                                                       #O(1)
     else:
-        return "Учетная запись не существует"
+        return "Учетная запись не существует"                                               #O(1)
 
 users = {'user_1': {'пароль': '12345', 'активация': False},
         'user_2': {'пароль': '78942', 'активация': False},
