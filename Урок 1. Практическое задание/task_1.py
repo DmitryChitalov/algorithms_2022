@@ -37,10 +37,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: 2n + 1.
+    Сложность: n² + 1
     """
     for j in range(len(lst_obj)):          # O(n)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(1)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
             return False                   # O(1)
     return True                            # O(1)
 
@@ -53,12 +53,12 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: n + n log n + 2n - 1
+    Сложность: n + n log n + n²
     """
     lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n log n)
     for i in range(len(lst_obj) - 1):        # O(n - 1)
-        if lst_copy[i] == lst_copy[i+1]:     # O(1)
+        if lst_copy[i] == lst_copy[i+1]:     # O(n)
             return False                     # O(1)
     return True                              # O(1)
 

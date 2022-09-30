@@ -21,7 +21,7 @@
 from random import random
 
 
-class Task_Borad:
+class TaskBoard:
     def __init__(self):
         self.base = []
         self.queue = []
@@ -52,7 +52,7 @@ class Task_Borad:
 
 
 if __name__ == '__main__':
-    brd = Task_Borad()
+    brd = TaskBoard()
 
     brd.to_queue('mew')
     brd.to_queue(3)

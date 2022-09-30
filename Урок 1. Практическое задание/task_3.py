@@ -28,34 +28,34 @@ comp = {10000: "к1",
 
 # Итоговая сложность : n + n log n + 1
 
-def most_year_profit_1(slovar):
-    s = list(slovar.keys())  # O(n)
+def most_year_profit_1(dict):
+    s = list(dict.keys())  # O(n)
     s.sort()  # O(n log n)
-    print(slovar.get(s[-1]), slovar.get(s[-2]), slovar.get(s[-3]))  # O(1)
+    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
 
 
-# Итоговая сложность : n + 1 + n(n + 1 + 2n) + 1 = n + 2 + n² + n + 2n² = 3n² + 2n + 2
+# Итоговая сложность :  4n + 3
 
-def most_year_profit_2(slovar):
-    s = list(slovar.keys())  # O(n)
+def most_year_profit_2(dict):
+    s = list(dict.keys())  # O(n)
     a = s[0]  # O(1)
-    while len(s) != 3:  # O(n)
+    while len(s) != 3:  # O(1)
         for el in s:  # O(n)
             if el < a:  # O(1)
                 a = el  # O(1)
         s.remove(a)  # O(n)
         a = s[0]  # O(1)
-    print(slovar.get(s[-1]), slovar.get(s[-2]), slovar.get(s[-3]))  # O(1)
+    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
 
 
-# Итоговая сложность : n + n² + 1 ==> Лучший вариант т. к. наименьшая сложность
+# Итоговая сложность : 2n + 1 ==> Лучший вариант т. к. наименьшая сложность
 
-def most_year_profit_3(slovar):
-    s = list(slovar.keys())  # O(n)
-    while len(s) != 3:  # O(n)
+def most_year_profit_3(dict):
+    s = list(dict.keys())  # O(n)
+    while len(s) != 3:  # O(1)
         s.remove(min(s))  # O(n)
 
-    print(slovar.get(s[-1]), slovar.get(s[-2]), slovar.get(s[-3]))  # O(1)
+    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
 
 
 most_year_profit_1(comp)
