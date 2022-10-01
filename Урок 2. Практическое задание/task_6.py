@@ -7,3 +7,27 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def guess_the_number(n=0, i=-1):
+    if i == -1:
+        n = random.randint(1, 100)
+        print(n)
+        print('Угадай число? Всего 10 попыток!')
+        i = 10
+    quess = int(input('Введите число :'))
+    if quess == n:
+        print('Молодец')
+        return
+    if quess > n:
+        print('слишком много')
+    if quess < n:
+        print('слишком мало')
+    if i == 0:
+        print(f'Попытки закончились, число {n}')
+        return
+    guess_the_number(n, i-1)
+
+
+guess_the_number()
