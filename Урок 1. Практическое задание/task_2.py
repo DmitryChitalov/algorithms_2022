@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def find_min1(arr):
+    """
+    Сложность: O(n)
+    """
+    min = arr[0] #O(1)
+    for i in arr: #O(n)
+        if i < min: #O(1)
+            min = i #O(1)
+    return min #O(1)
+
+def find_min2(arr):
+    """
+    Сложность: O(n^2)
+    """
+    for i in arr: #O(n)
+        min = True #O(1)
+        for j in arr: #O(n)
+            if j < i: #O(1)
+                min = False #O(1)
+                break #O(1)
+        if min: #O(1)
+            return i #O(1)
+
+
+print(find_min1([1, 2, 3, 5, -12]))
+print(find_min2([2, 4, 6, 1, -12]))

@@ -17,3 +17,38 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+d = [
+    ('q', 12),
+    ('w', 133),
+    ('r', 2000),
+    ('z', 1),
+    ('x', 3)
+]
+
+def find_max(info_list):
+    """
+    Сложность: #O(n log n)
+    """
+    info_list.sort(key=lambda i: i[1], reverse=True) #O(n log n)
+    print(*info_list[:3:]) #O(1)
+
+
+def find_max2(info_list):
+    """
+    Сложность: #O(n)
+    """
+    max = [] #O(1)
+    for _ in range(3): #O(1)
+        buff = 0 #O(1)
+        for i in range(len(info_list)): #O(n)
+            if info_list[i][1] > info_list[buff][1]: #O(1)
+                buff = i #O(1)
+        max.append(info_list.pop(buff)) #O(1)
+    print(*max) #O(1)
+
+"""
+Первый алгоритм будет работать быстрее
+"""
+
+
+

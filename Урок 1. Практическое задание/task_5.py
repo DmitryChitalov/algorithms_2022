@@ -17,3 +17,36 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+class Stack:
+    def __init__(self, lim):
+        self.lim = lim
+        self.lst = [[]]
+
+    def __str__(self):
+        return '\n'.join([' '.join([str(j) for j in i]) for i in self.lst])
+
+    def is_full(self):
+        return len(self.lst[-1]) == self.lim
+
+    def add(self, item):
+        self.lst[-1].append(item)
+        if self.is_full():
+            self.lst.append([])
+
+    def pop(self):
+        a = self.lst[-1].pop()
+        if not self.lst[-1]:
+            self.lst.pop()
+        return a
+
+
+a = Stack(5)
+
+for i in range(22):
+    a.add(i)
+
+print(a)
+for _ in range(6):
+    print(a.pop())
+
+print(a)

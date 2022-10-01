@@ -22,3 +22,45 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'user1' : ('pas', True),
+    'user2': ('passwd', True),
+    'user3': ('123', False),
+    'user4': ('qwe', False),
+    'user5': ('password', True)
+}
+def user_check(name, passwd):
+    """
+    Сложноость: #O(n)
+    """
+    for k, v in users.items(): #O(n)
+        if k == name: #O()
+            if v[0] == passwd: #O(1)
+                if v[1]: #O(1)
+                    return "access grandet"  #O(1)
+                else:
+                    return "account not activated"  #O(1)
+            else:
+                return "incorrect password"  #O(1)
+    return "no such user" #O(1)
+
+def user_check2(name, passwd):
+    """
+    Сложность: #O(1)
+    """
+    user = users.get(name) #O(1)
+    if user:  #O(1)
+        if user[0] == passwd:  # O(1)
+            if user[1]:  # O(1)
+                return "access grandet"  # O(1)
+            else:
+                return "account not activated"  # O(1)
+        else:
+            return "incorrect password"  # O(1)
+    else:
+        return "no such user" #O(1)
+
+"""
+Второй алгоритм работает быстрее из-за отсутствия перебора всех пользователей
+"""
