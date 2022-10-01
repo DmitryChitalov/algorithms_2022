@@ -18,3 +18,10 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def reverse_int(number):
+    if not number//10:
+        return str(number)
+    return str(number % 10) + reverse_int(number//10)
+
+print(reverse_int(1230))

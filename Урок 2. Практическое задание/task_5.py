@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def ascii_table(first=33, last=127, newline=-1):
+    """
+    Выводит в правильном табличном виде независимо от начального и конечного номера символа
+    """
+    if newline == -1:
+        newline = (first - 1) % 10
+    if first > last:
+        return 0
+    print(f'{first} - {chr(first)}', end=' ')
+    if first%10 == newline:
+        print()
+    return ascii_table(first+1, last, newline)
+
+ascii_table()

@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+def random_game(number=randint(0, 100), attempt=0):
+
+    answer = int(input('Угадайте число'))
+
+    if answer < number:
+        print('Загаданное число больше чем ', answer)
+    elif answer > number:
+        print('Загаданное число меньше чем ', answer)
+    else:
+        print('Вы угадали')
+        return 0
+    if attempt == 9:
+        print('Попытки закончились, загаданное число:', number)
+        return 0
+    return random_game(number, attempt+1)
+
+random_game()

@@ -13,3 +13,10 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def rule_check(number):
+    if number == 1:
+        return 1
+    return number + rule_check(number-1)
+
+n = int(input())
+print(rule_check(n) == n*(n+1)/2)

@@ -10,3 +10,11 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sequence_sum(n):
+    n -= 1
+    if n == 0:
+        return 1
+    return pow(-2, -n) + sequence_sum(n)
+
+print(sequence_sum(3))
