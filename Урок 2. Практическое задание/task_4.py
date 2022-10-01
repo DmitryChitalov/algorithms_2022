@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_number_divided_by_minus_2(n : int, num : int = 1, res : float = 1.0):
+    if n == 1:
+        return res
+    else:
+        num /= -2
+        res += num
+        n -= 1
+        return sum_number_divided_by_minus_2(n, num, res)
+
+n = int(input('Введите количество элементов: '))
+print(f'Количество элементов - {n}, их сумма - {sum_number_divided_by_minus_2(n)}')
