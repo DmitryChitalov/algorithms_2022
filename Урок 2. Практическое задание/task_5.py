@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_code_output(n, x):
+    if n == 128:
+        return
+    if x % 10 == 0:
+        print('')
+    print(str(n) + ' - ' + str(chr(n)), end=' ')
+    return ascii_code_output(n + 1, x + 1)
+
+
+ascii_code_output(32, 0)

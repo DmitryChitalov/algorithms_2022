@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_of_sequence(n, sum_of_n):
+    if n == 0:
+        return sum_of_n
+    return sum_of_sequence(n-1, sum_of_n + n)
+
+
+num = int(input('Введите n для сравнения 1+2+...+n = n(n+1)/2: '))
+
+if sum_of_sequence(num, 0) == num*(num+1)/2:
+    print('Стороны выражения равны')
+else:
+    print('Стороны выражения не равны')
