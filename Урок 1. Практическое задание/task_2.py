@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+y = [1, 3, 6, 9, 25, 36, 4, 11, 88, 55, 96, 38]
+
+def sorting(list):
+    min_ = list[5]                            #O(1)
+    for el1 in list:                          #O(n)
+        for el2 in list:                      #O(n)
+            if el1 > el2 and min_ > el2:      #O(1)
+                min_ = el2                    #O(1)
+    return min_                               #O(1)
+
+result = sorting(y)
+print(result)
+
+
+
+y = [1, 3, 6, 9, 25, 36, 4, 11, 88, 55, 96, 38]
+
+def sorting(list):
+    min_ = list[0]      #O(1)
+    for el in list:     #O(n)
+        if el < min_:   #O(1)
+           min_ = el    #O(1)
+    return min_         #O(1)
+
+result = sorting(y)
+print(result)
