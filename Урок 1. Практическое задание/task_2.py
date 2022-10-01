@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+x = [57, 87, 61, 15, 44, 21, 15, 52, 92, 71, 49, 52, 36, 57, 69]
+
+
+def sort_kv(lst):
+    a = lst[0]                       # O(1)
+    for el in lst:                   # O(n)
+        for el2 in lst[::-1]:        # O(n)
+            if el > el2 and el2 < a:  # O(1)
+                a = el2              # O(1)
+    print(a)                         # O(1)
+
+
+def sort_ln(lst):
+    a = lst[0]     # O(1)
+    for el in lst:  # O(n)
+        if a > el:  # O(1)
+            a = el  # O(1)
+    print(a)       # O(1)
+
+
+sort_kv(x)
+sort_ln(x)
