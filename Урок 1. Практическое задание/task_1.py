@@ -46,7 +46,7 @@ def check_3(lst_obj):
     Если присутствуют дубли, они будут находиться рядом.
     Сложность: O(n*Logn)
     """
-    lst_copy = list(lst_obj)                 # O(1)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n*Logn)
     for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # O(1)

@@ -32,9 +32,9 @@ print(task_1(corporations))
 
 def task_2(corp):
     corp_max = []                           # O(1)
-    for i in range(3):                      # O(n)
-        max_val = max(corp.values())        # O(n**2)
-        for j in corp.items():              # O(n**2)
+    for i in range(3):                      # O(1)
+        max_val = max(corp.values())        # O(n)
+        for j in corp.items():              # O(n)
             if j[1] == max_val:             # O(1)
                 break                       # O(1)
         corp.pop(j[0])                      # O(1)
