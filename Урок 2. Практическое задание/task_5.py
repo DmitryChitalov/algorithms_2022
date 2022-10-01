@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def table_simbols(n : int = 32, st : str = ''):
+    st += f' {n} - {chr(n)}'
+    if n == 127:
+        print(st)
+        return ''
+    else:
+        if n % 10 == 1:
+            st += '\n'
+        n += 1
+        return table_simbols(n, st)
+
+table_simbols()

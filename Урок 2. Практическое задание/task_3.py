@@ -18,3 +18,14 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def inverse_number(num : int, res : str = ''):
+    if num == 0:
+        print(f"Перевернутое число: {int(res)}")
+    else:
+        last_num = num % 10
+        num = num // 10
+        res += str(last_num)
+        return inverse_number(num, res)
+
+print(inverse_number(123))

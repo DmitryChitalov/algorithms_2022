@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_series(n : int, sum : int = 0, st : str = ''):
+    if n < 0:
+        print('Количество элементов не может быть отрицательным!')
+        return None, None
+    sum += n
+    if n == 0:
+        st += str(n)
+        return sum, st[::-1]
+    else:
+        st += str(n) + '+'
+        n -= 1
+        return sum_series(n, sum, st)
+
+n = int(input('Укажите количество элементов ряда: '))
+sum, st = sum_series(n)
+if sum:
+    print(f'для {n} =', n * (n + 1) / 2)
+    print(f'{st} = {n}({n}+1)/2')
