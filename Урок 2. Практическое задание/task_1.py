@@ -27,3 +27,45 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+import re
+
+
+def summ_num():
+    n1 = int(inp_num('Введите первое число: '))
+    znak = inp_znak()
+    n2 = int(inp_num('Введите второе число: ', znak))
+    if znak == '+':
+        rez = (n1 + n2)
+    if znak == '-':
+        rez = (n1 - n2)
+    if znak == '*':
+        rez = (n1 * n2)
+    if znak == '/':
+        rez = (n1 / n2)
+    print(f'Ваш результат : {rez}')
+    return summ_num()
+
+
+def inp_num(n, znak = 0):
+    num = input(n)
+    num_reg = re.fullmatch(r'\d+', num)
+    if znak == '/' and num == '0':
+        print('На ноль делить нельзя, исправьтесь')
+        return inp_num(n, znak)
+    if not num_reg:
+        print('Вы вместо числа ввели строку')
+        return inp_num(n, znak)
+    return num
+
+
+def inp_znak():
+    znak = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if znak == '0':
+        exit()
+    znak_reg = re.fullmatch(r'[+-/*0]', znak)
+    if not znak_reg:
+        print("Исправьтесь")
+        return inp_znak()
+    return znak
+
+summ_num()

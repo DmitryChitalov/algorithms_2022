@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def out_table(start, stop, step='-1'):
+    if step == '-1':
+        step = start % 10
+    print(f'{start} - {chr(start)}', end=' ')
+    start = start + 1
+    if start > stop:
+        return
+    if ((start + step) % 10) == 1:
+        print('')
+    out_table(start, stop, step=-1)
+
+
+out_table(32, 127)
