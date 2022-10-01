@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum(num, remain=-2):
+    if num == 0:
+        return 0
+    else:
+        remain = remain / (-2)
+        num -= 1
+        return remain + sum(num, remain)
+
+
+num = int(input('Введите число элементов ряда 1 -0.5 0.25 -0.125 ... : '))
+print(sum(num))

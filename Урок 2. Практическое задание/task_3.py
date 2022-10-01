@@ -18,3 +18,16 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def mirror(num):
+    if num == 0:
+        return ''
+    else:
+        remain = num % 10
+        num = num // 10
+        return f'{remain}{mirror(num)}'
+
+
+num = int(input('Введите число, которое требуется перевернуть: '))
+print(mirror(num))

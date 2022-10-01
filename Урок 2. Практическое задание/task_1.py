@@ -27,3 +27,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+#
+# oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+# if oper not in ['+', '-', '*', '/']:
+#     oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+#
+# first_num = input('Введите первое число: ')
+# if first_num.isdigit() == False:
+#     first_num = input('Введите первое число: ')
+#
+# second_num = input('Введите второе число: ')
+# if second_num.isdigit() == False:
+#     second_num = input('Введите второе число: ')
+#
+# result = 0
+# print(f'{first_num} {oper} {second_num} = ', result)
+
+
+def calc():
+    operand = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operand == '0':
+        return print('До свидания!')
+    first_num = input('Введите первое число: ')
+    second_num = input('Введите второе число: ')
+    if first_num.isdigit() and second_num.isdigit() and operand in ['+', '-', '*', '/']:
+        if operand == '/' and second_num == '0':
+            print('Деление на 0 запрещено!')
+        elif operand == '+':
+            print(int(first_num) + int(second_num))
+        elif operand == '-':
+            print(int(first_num) - int(second_num))
+        elif operand == '*':
+            print(int(first_num) * int(second_num))
+        elif operand == '/':
+            print(int(first_num) / int(second_num))
+    else:
+        print('Вы ввели некорректные данные!')
+    calc()
+
+calc()
