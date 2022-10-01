@@ -22,3 +22,41 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'user_0': {
+        'login': 'max',
+        'pass': '123',
+        'active': True
+    },
+    'user_1': {
+        'login': 'tom',
+        'pass': '456',
+        'active': True
+    },
+    'user_2': {
+        'login': 'qwe',
+        'pass': '789',
+        'active': False
+    },
+    'user_3': {
+        'login': 'rty',
+        'pass': '012',
+        'active': True
+    }
+}
+
+
+def auth_0(users, name, password):
+    if users.get(name):
+        if users[name]['pass'] == password and users[name]['active']:        # O(1)
+            return 'Пользователь авторизован'                                # O(1)
+        elif users[name]['pass'] == password and not users[name]['active']:  # O(1)
+            return 'Пользователь не активен'                                 # O(1)
+        elif users[name]['pass'] != password:                                # O(1)
+            return 'Неправильный пароль'
+    else:
+        return f'{name} does not exist'
+
+
+print(auth_0(users, 'user_2', '789'))
