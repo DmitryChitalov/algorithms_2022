@@ -14,7 +14,7 @@
 """
 
 
-class Task_Board_Class:
+class Taskboard:
     def __init__(self):
         self.elems = []
 
