@@ -22,3 +22,15 @@
 р
 а
 """
+
+import hashlib
+
+st = input('Введите строку состоящую только из строчных латинских букв: ')
+hsh_set = set()
+
+for i in range(0, len(st) + 1):
+    for j in range(0, i):
+        hsh = hashlib.sha256(st[j:i].encode('utf-8')).hexdigest()
+        if hsh not in hsh_set and st[j:i] != st:
+            print(st[j:i])
+            hsh_set.add(hsh)
