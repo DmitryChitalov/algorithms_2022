@@ -28,3 +28,78 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        result = function(*args)
+        # print(time.perf_counter_ns() - start_time)
+        print('Время выполнения: {:.5f} ms'.format((time.perf_counter_ns() - start_time) / 1000000))
+        return result
+    return wrapped
+
+
+# Заполнение списка: сложность O(n)
+@time_of_function
+def list_filling(n):
+    # l = [i for i in range(0, n)]                              # O(n)
+    l = list(i for i in range(0, n))                            # O(n)
+    print(l)                                                    # O(1)
+    return l
+
+# Заполнение словаря: сложность O(n)
+@time_of_function
+def dict_filling(n):
+    # d = dict((key, value) for item in list if condition)
+    d = dict((i, str(i)) for i in range(0, n))                  # O(n)
+    print(d)                                                    # O(1)
+    return d
+
+n = int(input('Укажите количество элементов списка/словаря: '))
+l = list_filling(n)
+d = dict_filling(n)
+# Словарь работает быстрее.
+# Почему? Наверное словарю при добавлении элемента
+# не нужно каждый раз искать последовательное место в памяти
+
+
+
+# Получение элемента списка
+@time_of_function
+def list_get_elem(l : list, i : int):
+    print(f'Элемент списка с индексом {i} = {l[i]}')            # O(1)
+
+# Получение элемента словаря
+@time_of_function
+def dict_get_elem(d : dict, k : int):
+    print(f'Элемент словаря с ключем {k} = {d[k]}')             # O(1)
+
+list_get_elem(l, 3)
+dict_get_elem(d, 3)
+# Элементы словаря достаются быстрее, т.к. у них прямой доступ
+# и при внутренней реализации не требуется просматривать все элементы
+# для поиска нужного.
+# Словарь же это хэш-таблица, с быстрым доступом
+
+
+# Удаление элемента списка
+@time_of_function
+def list_del_elem(l : list, i : int):
+    el = l.pop(3)
+    print(f'Удаленный элемент списка с индексом {i} = {el}')    # O(1)
+
+# Удаление элемента словаря
+@time_of_function
+def dict_del_elem(d : dict, k : int):
+    el = d.pop(3)
+    print(f'Удаленный элемент словаря с ключем {k} = {el}')     # O(1)
+
+list_del_elem(l, 3)
+dict_del_elem(d, 3)
+# Аналогично предыдущему
+# Элементы словаря достаются быстрее, т.к. у них прямой доступ
+# и при внутренней реализации не требуется просматривать все элементы
+# для поиска нужного.
+# Словарь же это хэш-таблица, с быстрым доступом
