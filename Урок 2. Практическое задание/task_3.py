@@ -18,3 +18,25 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def num_rev(num):
+    if len(num) == 1:
+        return num
+    else:
+        n_s = str(int(num) % 10)
+        num = str(int(num) // 10)
+
+        return n_s + num_rev(num)
+
+
+num = input('Введите число: ')
+
+print(num_rev(num))
+
+# num = 3451
+# num_rev('3451')
+# num_rev('345') -> 1
+# num_rev(34) -> 15
+# num_rev(3) -> 154
+# Срабатывает базовое условие len(num) == 1 -> 1543
