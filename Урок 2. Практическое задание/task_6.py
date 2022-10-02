@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def search(num, n):
+    if n == 0:
+        print(f'Попытки закончились, загаданное число: {num}')
+        return
+    val = int(input('Введите число: '))
+    if val > num:
+        print('число меньше')
+    elif val < num:
+        print('число больше')
+    else:
+        print('верно')
+        return
+    search(num, n - 1)
+
+
+search(randint(0, 100), 10)
