@@ -27,3 +27,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def my_calc():
+    user_choice = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if user_choice == "0":
+        print("Bye!")
+        exit()
+    elif user_choice == "+":
+        user_numb_1 = int(input("Введите первое число: "))
+        user_numb_2 = int(input("Введите второе число: "))
+        res = user_numb_1 + user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "-":
+        user_numb_1 = int(input("Введите первое число: "))
+        user_numb_2 = int(input("Введите второе число: "))
+        res = user_numb_1 - user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "*":
+        user_numb_1 = int(input("Введите первое число: "))
+        user_numb_2 = int(input("Введите второе число: "))
+        res = user_numb_1 * user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    elif user_choice == "/":
+        user_numb_1 = int(input("Введите первое число: "))
+        user_numb_2 = int(input("Введите второе число: "))
+        if user_numb_2 == 0:
+            print("Error! Not zero!")
+            return my_calc()
+        res = user_numb_1 / user_numb_2
+        print(f"Result >>> {res}")
+        return my_calc()
+    else:
+        print("Error! Bad value!")
+        return my_calc()
+
+
+print(my_calc())

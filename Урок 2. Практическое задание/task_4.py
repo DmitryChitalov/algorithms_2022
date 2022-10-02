@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def get_sum(data, step):
+    divider = step
+    if data > 0:
+        divider /= -2
+        data -= 1
+        return divider + get_sum(data, divider)
+    return 0
+
+
+user_choice = int(input('Сколько элементов ряда (1 -0.5 0.25 -0.125...) просуммировать? '))
+print(get_sum(user_choice, -2))
