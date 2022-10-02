@@ -50,11 +50,11 @@ users = {
 def auth_0(users, name, password): # O(1)
     if users.get(name):
         if users[name]['pass'] == password and users[name]['active']:        # O(1)
-            return 'Пользователь "{name}" авторизован'                                # O(1)
+            return 'Пользователь "{name}" авторизован'                       # O(1)
         elif users[name]['pass'] == password and not users[name]['active']:  # O(1)
-            return 'Пользователь "{name}" не активен'                                 # O(1)
+            return 'Пользователь "{name}" не активен'                        # O(1)
         elif users[name]['pass'] != password:                                # O(1)
-            return '"{name}": Неправильный пароль'                                     # O(1)
+            return '"{name}": Неправильный пароль'                           # O(1)
         else:
             return f'Пользователь "{name}" не найден'                        # O(1)
 
@@ -63,11 +63,11 @@ def auth_1 (users, name, password): # O(N)
     for user, status in users.items():                                       # O(N)
         if user == name:                                                     # O(1)
             if status['pass'] == password and status['active']:              # O(1)
-                return f'Пользователь "{name}" авторизован'                           # O(1)
+                return f'Пользователь "{name}" авторизован'                  # O(1)
             elif status['pass'] == password and not status['active']:        # O(1)
-                return f'Пользователь "{name}" не активен'                            # O(1)
+                return f'Пользователь "{name}" не активен'                   # O(1)
             elif status['pass'] != password:                                 # O(1)
-                return f'"{name}": Неправильный пароль'                                # O(1)
+                return f'"{name}": Неправильный пароль'                      # O(1)
             else:
                 return f'Пользователь "{name}" не найден'                    # O(1)
 
