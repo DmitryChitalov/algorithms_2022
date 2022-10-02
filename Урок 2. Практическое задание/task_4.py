@@ -12,14 +12,14 @@
 """
 
 
-def sum(num, remain=-2):
+def sum_elements_of_row(num, remain=-2):
     if num == 0:
         return 0
     else:
         remain = remain / (-2)
         num -= 1
-        return remain + sum(num, remain)
+        return remain + sum_elements_of_row(num, remain)
 
 
 num = int(input('Введите число элементов ряда 1 -0.5 0.25 -0.125 ... : '))
-print(sum(num))
+print(sum_elements_of_row(num))

@@ -7,7 +7,9 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
 import random
+
 
 def guess(num, trys=10):
     user_num = int(input('Введите число: '))
@@ -24,6 +26,7 @@ def guess(num, trys=10):
         trys -= 1
     return guess(num, trys)
 
-num = round(random.random()*100)
+
+num = round(random.random() * 100)
 print(num)
 guess(num)
