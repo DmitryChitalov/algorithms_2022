@@ -18,12 +18,12 @@
 def recur(n):
     if n == 0:
         return 0
-    return (n + recur(n - 1))
+    return n + recur(n - 1)
 
 
 n = int(input('Введите число: '))
-sum = recur(n)
-if sum == n * (n + 1) / 2:
+sum_count = recur(n)
+if sum_count == n * (n + 1) / 2:
     print(f'результат {sum:.2f}, равенство выполняется')
 else:
     print(f'результат {sum:.2f}, равенство не выполняется')

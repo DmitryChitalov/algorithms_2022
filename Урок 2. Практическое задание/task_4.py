@@ -12,10 +12,10 @@
 """
 
 
-def recur(n, res, sum):
-    sum += res
+def recur(n, res, sum_count):
+    sum_count += res
     if n == 0:
-        return sum
+        return sum_count
     res /= -2
 
     return recur(n - 1, res, sum)

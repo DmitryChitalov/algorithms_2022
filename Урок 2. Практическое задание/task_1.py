@@ -31,10 +31,10 @@ def input_(val):
     res = input(val)
     try:
         res = int(res)
-        return(str(res))
+        return str(res)
     except:
         print("Вы вместо трехзначного числа ввели строку или отрицательное число (((. Исправьтесь")
-        return(input_(val))
+        return input_(val)
 
 def rec():
     oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
