@@ -15,3 +15,76 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+from random import randint
+from timeit import timeit
+
+
+"""
+1 способ. Сортировка Шелла.
+Сортировка Шелла закидывает текущий элемент в буфер и сравнивает его с левой частью массива.
+Если находит бо́льшие элементы слева, то сдвигает их вправо, освобождая место для вставки.
+Но при этом берёт не всю левую часть, а только некоторую группу элементов из неё,
+где элементы разнесены друг от друга на некоторое расстояние.
+Такая система позволяет быстро вставлять элементы примерно в ту область массива, где они должны находиться.
+"""
+
+
+def shell(seq):
+    inc = len(seq) // 2
+    while inc:
+        for i, el in enumerate(seq):
+            while i >= inc and seq[i - inc] > el:
+                seq[i] = seq[i - inc]
+                i -= inc
+            seq[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return seq
+
+
+m = 10
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
+print(f'{shell(orig_list)}')
+print(f'Медиана: {orig_list[m]}')
+# замеры 10
+print(
+    timeit(
+        "shell(orig_list[:])",
+        globals=globals(),
+        number=1000))
+m = 100
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'{shell(orig_list)}')
+print(f'Медиана: {orig_list[m]}')
+# замеры 100
+print(
+    timeit(
+        "shell(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+m = 1000
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'{shell(orig_list)}')
+print(f'Медиана: {orig_list[m]}')
+# замеры 1000
+print(
+    timeit(
+        "shell(orig_list[:])",
+        globals=globals(),
+        number=1000))
+"""
+Результаты тестов.
+(m = 10)
+0.0051321000210009515
+(m = 100)
+0.08724749996326864
+(m = 1000)
+1.611517199955415
+"""
+
+
+
+
+

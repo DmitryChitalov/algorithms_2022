@@ -18,3 +18,120 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+from random import randint
+from timeit import timeit
+
+
+"""
+Первоначальный вариант с сортировкой по убыванию.
+"""
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(-100, 100) for _ in range(10)]
+
+# замеры 10
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+"""
+Доработанный вариант.
+"""
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        checking_for_sorting = False
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                checking_for_sorting = False
+        if checking_for_sorting == True:
+             break
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(-100, 100) for _ in range(10)]
+print(orig_list)
+# замеры 10
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+print(bubble_sort(orig_list))
+orig_list = [randint(-100, 100) for _ in range(100)]
+print(orig_list)
+# замеры 100
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+print(bubble_sort(orig_list))
+orig_list = [randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+"""
+Замеры первого варианта.
+0.005479199986439198
+0.4142441000440158
+Замеры второго варианта.
+[-85, 17, -2, -35, 18, 45, 84, 26, 84, -36]
+0.006510400038678199
+[84, 84, 45, 26, 18, 17, -2, -35, -36, -85]
+[30, -42, 87, 30, 50, 5, -76, 79, 14, 19, 80, 6, 85, -6, -97, -53, -6, -29, -89, -14, -84, 50, -77, -43, 89, 75, 77, 73,
+ -32, -4, -95, -12, -56, 24, 10, 56, 39, -78, 48, 10, -58, 15, 56, -85, 7, -48, -87, 95, 79, -19, -41, 10, 100, -30,
+  -35, -95, -64, 35, -79, -59, 86, 95, 56, -61, 36, -72, -52, 97, -7, -75, 86, 42, 8, -76, -95, -83, 86, -20, 51, -49,
+   -74, 58, -12, 68, 51, 34, -53, -8, -25, -46, 52, 60, -67, -61, 58, 87, 78, -95, 79, -17]
+0.4382225999725051
+[100, 97, 95, 95, 89, 87, 87, 86, 86, 86, 85, 80, 79, 79, 79, 78, 77, 75, 73, 68, 60, 58, 58, 56, 56, 56, 52, 51, 51,
+ 50, 50, 48, 42, 39, 36, 35, 34, 30, 30, 24, 19, 15, 14, 10, 10, 10, 8, 7, 6, 5, -4, -6, -6, -7, -8, -12, -12, -14,
+  -17, -19, -20, -25, -29, -30, -32, -35, -41, -42, -43, -46, -48, -49, -52, -53, -53, -56, -58, -59, -61, -61, -64,
+   -67, -72, -74, -75, -76, -76, -77, -78, -79, -83, -84, -85, -87, -89, -95, -95, -95, -95, -97]
+   
+ВЫВОД.
+В данном случае доработка не эффективна т.к. при каждом тесте берется не отсортированная копия, а лишняя проверка
+чуть добавляет увеличивает время исполнения кода.
+"""
