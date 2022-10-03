@@ -24,7 +24,7 @@ def check_1(lst_obj):
 
     Сложность: T(n) = len(n) + 1, O(len(n)) зависит от длины списка list_obj.
     """
-    lst_to_set = set(lst_obj)  # O(len(lst_obj)) зависит от длины списка list_obj  
+    lst_to_set = set(lst_obj)  # O(len(lst_obj)) зависит от длины списка list_obj, O(1) Думаю константная сложность!
     return lst_to_set  # O(1)
 
 
@@ -39,8 +39,8 @@ def check_2(lst_obj):
 
     Сложность: T(n) = n + 1 + n + n + 1 + 1 = 3n + 1 = n, O(n).
     """
-    for j in range(len(lst_obj)):          # O(n)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(1) + O(n) + O(n - (j+1))
+    for j in range(len(lst_obj)):          # O(n) + O(1) = O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(1) + O(n) + O(n - (j+1)) = O(n)
             return False                   # O(1)
     return True                            # O(1)
 
@@ -55,7 +55,7 @@ def check_3(lst_obj):
 
     Сложность: T(n) = len(n) + n log n + n + 1 + 1 + 1 = n log n, O(nlogn)
     """
-    lst_copy = list(lst_obj)                 # O(len(lst_obj)) зависит от длины списка lst_obj
+    lst_copy = list(lst_obj)                 # O(len(lst_obj)) зависит от длины списка lst_obj, O(1)
     lst_copy.sort()                          # O(n log n)
     for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # 1 + 1 + 1, O(1)
