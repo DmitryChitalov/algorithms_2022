@@ -38,14 +38,14 @@ def mid_find(lst_in):
     if ln % 2 == 0:
         first = lst_in[ln // 2 - 1]
         second = lst_in[ln // 2]
-        med = (first + second) / 2
+        return (first + second) / 2
     else:
-        med = lst_in[ln // 2]
+        return lst_in[ln // 2]
 
 
 orig_list_10 = [randint(-100, 100) for _ in range(11)]
 orig_list_100 = [randint(-100, 100) for _ in range(101)]
 orig_list_1000 = [randint(-100, 100) for _ in range(1001)]
-print(timeit.timeit(stmt='mid_find(orig_list_10)', globals=globals()))
-print(timeit.timeit(stmt='mid_find(orig_list_100)', globals=globals()))
-print(timeit.timeit(stmt='mid_find(orig_list_1000)', globals=globals()))
+print(timeit.timeit(stmt='mid_find(orig_list_10)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_100)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_1000)', globals=globals(), number=10000))
