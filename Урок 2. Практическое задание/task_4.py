@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def calc(num, sum_count = 0, next_num = 1):
+    sum_count += next_num
+
+    if num == 0:
+        return sum_count
+    next_num /= -2
+    return calc(num - 1, sum_count, next_num)
+
+
+num = int(input('Введите количество элементов:'))
+print(f'Количество элементов - {num}, их сумма - {calc(num)}')
