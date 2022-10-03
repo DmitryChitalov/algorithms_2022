@@ -17,3 +17,44 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+def show_tasks():
+    print(basic_tasks.tasks)
+    print(fix_tasks.tasks)
+    print(resolved_tasks.tasks)
+    print('---')
+
+class TaskBoard():
+    def __init__(self):
+        self.tasks = []
+    
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def move_task(self, lst):
+        if not self.tasks:
+            print('В этом списке нет задач')
+        else:
+            lst.add_task(self.tasks[-1])
+            self.tasks.pop()
+
+basic_tasks = TaskBoard()
+fix_tasks = TaskBoard()
+resolved_tasks = TaskBoard()
+
+basic_tasks.add_task('Задача 1')
+basic_tasks.add_task('Задача 2')
+show_tasks()
+
+basic_tasks.move_task(fix_tasks)
+show_tasks()
+
+fix_tasks.move_task(resolved_tasks)
+show_tasks()
+
+resolved_tasks.move_task(basic_tasks)
+show_tasks()
+
+basic_tasks.move_task(fix_tasks)
+fix_tasks.move_task(resolved_tasks)
+show_tasks()
