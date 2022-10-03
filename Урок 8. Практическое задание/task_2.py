@@ -13,70 +13,89 @@
 """
 
 
+class WrongValue(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
 class BinaryTree:
-    def __init__(self, root_obj):
-        # корень
-        self.root = root_obj
-        # левый потомок
-        self.left_child = None
-        # правый потомок
-        self.right_child = None
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+    def insert(self, value: int):
+        """ вставка """
+        try:
+            if not str(value).isdigit():
+                raise WrongValue(f'Вы ввели "{value}", так не надо.'
+                                 f'\nСледует использовать цифры.\n{"*" * 50}')
+        except WrongValue as message:
+            print(message)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            if value < self.value:
+                if self.left is None:
+                    self.left = BinaryTree(value)
+                else:
+                    self.left.insert(value)
+            else:
+                if self.right is None:
+                    self.right = BinaryTree(value)
+                else:
+                    self.right.insert(value)
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+    def inorder_tree(self):
+        """ вывести в сортированном виде """
+        if self.left:
+            self.left.inorder_tree()
+        print(self.value)
+        if self.right:
+            self.right.inorder_tree()
+        return f'{"-" * 30}'
 
-    # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        """ правый потомок """
+        return self.right
 
-    # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        """ правый потомок """
+        return self.left
 
-    # метод установки корня
     def set_root_val(self, obj):
-        self.root = obj
+        """ установка корня """
+        self.value = obj
 
-    # метод доступа к корню
     def get_root_val(self):
-        return self.root
+        """ доступ к корню """
+        return self.value
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert(40)
+r.insert(12)
+r.insert(5)
+r.insert(2)
+r.insert(16)
+r.insert(1)
+r.insert(51)
+r.insert(11)
+r.insert(3)
+r.insert(39)
+r.insert(6)
+r.insert('А и Б')
+
+print('Все элементы дерева в отсортированном виде')
+print(r.inorder_tree())
+
+print('Корни отдельных веток:')
+print(f'root: {r.value}')  # root 8
+print(f'left root: {r.left.get_root_val()}')  # 5
+print(f'right root: {r.right.get_root_val()}')  # 40
+print(f'left left root: {r.left.left.get_root_val()}')  # 2
+print(f'left right root: {r.left.right.get_root_val()}')  # 6
+print(f'right left root: {r.right.left.get_root_val()}')  # 12
+
+"""
+здесь https://bit.ly/3y1gL4Q удобства представлена схема 
+текущего бинарного дерева с данными, использованными в задании 
+"""
