@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def calc(num):
+    if num == 1:
+        return num
+    return num + calc(num - 1)
+
+num = int(input('Введите число:'))
+
+if calc(num) == num * (num + 1) / 2:
+    print('Равенство выполняется')
+else:
+    print('Равенство не выполняется')
