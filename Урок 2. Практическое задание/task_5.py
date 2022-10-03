@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbol_table(n):
+    if n == 128:
+        return
+    print(f'{n} - {chr(n)}', end='\n' if n % 10 == 1 else ' ')
+    symbol_table(n + 1)
+    return
+
+
+symbol_table(32)
