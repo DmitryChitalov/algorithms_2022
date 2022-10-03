@@ -23,7 +23,7 @@ num = [num for num in range(0, 100)]
 num_list = list(random.sample(num, n_num))
 print(num_list)
 
-# Реализуем квадротичный поиск O(n^2).
+# Реализуем квадратичный поиск O(n^2). Исправлено! Конечно квадратичный! -)))
 def min_of_list_1(user_list):
     for i in range(len(user_list)):
         min_el = user_list[i]
