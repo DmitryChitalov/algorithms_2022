@@ -16,3 +16,34 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from statistics import median
+from timeit import timeit
+from random import randint
+
+# 10
+m = 5
+my_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'{timeit("median(my_list[:])", globals=globals(), number=100)} сек.')
+print(f'Медиана (10): {median(my_list[:])}')
+print('_' * 50)
+
+# 100
+m = 50
+my_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'{timeit("median(my_list[:])", globals=globals(), number=100)} сек.')
+print(f'Медиана (100): {median(my_list[:])}')
+print('_' * 50)
+
+# 1000
+m = 500
+my_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'{timeit("median(my_list[:])", globals=globals(), number=100)} сек.')
+print(f'Медиана (1000): {median(my_list[:])}')
+
+# 4.579100000000336e-05 сек.
+# 0.0003808749999999958 сек.
+# 0.005752791 сек.
+
+# похоже на самый быстрый вариант, полагаю, потому что связано с тем,
+# что не тратится время на сортировку, ну и видимо алгоритм поиска медианы эффективный
