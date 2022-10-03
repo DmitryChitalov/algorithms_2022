@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_table(elem):
+
+    if elem > 128:
+        return
+    else:
+        print(f'{elem} - {chr(elem)}')
+        return ascii_table(elem + 1)
+
+ascii_table(32)
