@@ -10,3 +10,26 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def res_sum(num, cnt, res, el):
+    if num == 0 and cnt == 0:
+        print('Количество элементов - 0, их сумма - 0')
+    elif num == 0 and cnt != 0:
+        print('Количество элементов - ' + str(cnt) + ', их сумма - ' + str(res))
+    else:
+        if cnt == 0:
+            res = 1
+            cnt += 1
+            num -= 1
+        else:
+            cnt += 1
+            el = el * -0.5
+            res += el
+            num -= 1
+        res_sum(num, cnt, res, el)
+
+
+n = int(input('Введите количество элементов: '))
+
+res_sum(n, 0, 1, 1)

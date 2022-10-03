@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+num_any = randint(0, 100)
+
+def game(num, cnt):
+    if cnt == 10:
+        print('Ваши попытки закончились. Загаданное число: ' + str(num))
+    elif cnt < 10:
+        user_num = int(input('Введите число: '))
+        if user_num == num:
+            print('Вы угадали!')
+        elif user_num < num:
+            print('Загаданное число больше')
+            cnt += 1
+            game(num, cnt)
+        elif user_num > num:
+            print('Загаданное число меньше')
+            cnt += 1
+            game(num, cnt)
+
+
+game(num_any, 0)

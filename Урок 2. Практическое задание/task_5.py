@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_code(num, cnt):
+    if num > 127:
+        return ' '
+    else:
+        if cnt == 10:
+            print(' ')
+            cnt = 0
+            table_code(num, cnt)
+        else:
+            print(str(num) + ' - ' + chr(num) + ' ', end=' ')
+            num += 1
+            cnt += 1
+            table_code(num, cnt)
+
+
+table_code(32, 0)
