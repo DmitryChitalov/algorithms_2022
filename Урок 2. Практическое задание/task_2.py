@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_count(num, count, count_2, cnt):
+    if num == 0 and cnt == 0:
+        print('The end !', 'Нечетных: 0, Четных: 1')
+    elif num == 0 and cnt != 0:
+        print('The end!', 'Нечетных: ', count, ', ', 'Четных: ', count_2)
+    elif num != 0:
+        last = num % 10
+#        print(last)
+        cnt += 1
+        if (last % 2) == 0:
+            count_2 += 1
+            num = (num - last) // 10
+            even_count(num, count, count_2, cnt)
+        else:
+            count += 1
+            num = (num - last) // 10
+            even_count(num, count, count_2, cnt)
+
+
+user_num = int(input('Введите число: '))
+
+even_count(user_num, 0, 0, 0)

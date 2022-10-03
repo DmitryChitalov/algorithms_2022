@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check_resault(num, cnt, res):
+    if cnt > (num + 0):
+        print('Результат сложения = ' + str(res) + ', результат выражения ' + str(num) + '(' + str(num) + '+1)/2 = ' + str(num*(num+1)/2))
+    else:
+        res += cnt
+        cnt += 1
+        check_resault(num, cnt, res)
+
+
+user_num = int(input('Введите натуральное число: '))
+check_resault(user_num, 1, 0)
