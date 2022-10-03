@@ -20,14 +20,14 @@
 companies = {'ARS': 526879.45, 'SELECT': 895674.32, 'FOX': 789456.78, 'mail-group': 478956.56, 'MSI': 478955.55}
 
 # 1 способ
-list_values = sorted(list(companies.values()), reverse=True)[:3]                     # O(n)
-for el in list_values:                                                               # O(1)
-    for k, v in companies.items():                                                   # O(n)
-        if v == el:                                                                  # O(n)
+list_values = sorted(list(companies.values()), reverse=True)[:3]                     # n + n + nlogn + (n + k) = 3*n + nlogn = n, O(n) Исправлено!
+for el in list_values:                                                               # O(n)
+    for k, v in companies.items():                                                   # n*n = n^2, O(n^2)
+        if v == el:                                                                  # O(1)
             print(k, ':', v)                                                         # O(1)
 
 
-# O(n)  + O(1) + O(n)  + O(1) = O(n)
+# O(n)  + O(n^2) + O(1)  + O(1) = O(n) Исправлено!
 
 # 2 способ
 sorted_companies = sorted(companies, key=companies.get, reverse=True)[:3]    # O(n*log n)
