@@ -16,3 +16,39 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from statistics import median
+from random import randint
+from timeit import timeit
+
+
+def finding_median(lst):
+    return median(lst)
+
+
+m_1 = 10
+my_list_1 = [randint(1, 200) for _ in range(2 * m_1 + 1)]
+print(timeit("finding_median(my_list_1[:])", globals=globals(), number=100))
+
+
+m_2 = 100
+my_list_2 = [randint(1, 200) for _ in range(2 * m_2 + 1)]
+
+print(timeit("finding_median(my_list_2[:])", globals=globals(), number=100))
+
+
+m_3 = 1000
+my_list_3 = [randint(1, 200)for _ in range(2 * m_3 + 1)]
+
+print(timeit("finding_median(my_list_3[:])", globals=globals(), number=100))
+
+"""
+0.00025716199999999134
+0.0014190550000000024
+0.028858160000000008
+"""
+"""
+Самым эффективным оказался способ решения, реализованный с помощью встроенной функции поиска медианы.
+Его эффективность особенно видна в результатах замеров большого массива.
+Самым неэффективным оказался способ поиска медианы с помощью гномьей сортировки.
+"""
