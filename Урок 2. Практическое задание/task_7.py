@@ -13,3 +13,13 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def arithmetic_rate_summ(n):
+    return 1 if n == 1 else n + arithmetic_rate_summ(n - 1)
+
+
+n = int(input('Введите количество чисел: '))
+a = arithmetic_rate_summ(n)
+print(a,'=', n * (n + 1) / 2)
+print('Формула верна' if arithmetic_rate_summ(n) == n * (n + 1) / 2 else "Формула неверна")

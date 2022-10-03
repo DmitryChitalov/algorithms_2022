@@ -27,3 +27,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+import operator
+
+operations = {'+': operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
+
+
+def calc():
+    oper = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if oper == '0':
+        return
+    try:
+        if oper not in operations:
+            raise KeyError
+        a = int(input('Введите первое число: '))
+        b = int(input('Введите второе число: '))
+        print("Результат операции: ", operations[oper](a, b))
+    except ValueError:
+        print("Ошибка! Неверный формат")
+    except ZeroDivisionError:
+        print("На ноль делить можно, но не в этот раз)")
+    except KeyError:
+        print('Неизвестная операция, повторите ввод')
+    calc()
+
+
+calc()
