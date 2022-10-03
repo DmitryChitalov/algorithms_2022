@@ -18,3 +18,23 @@
 в массив стопок (lst = [[], [], [], [],....]) либо созданием объекта
 класса-стек в самом же классе.
 """
+class StackClass:
+    def __init__(self):
+        self.elems = [[], [], [], [], []]
+
+    def push_in(self, el, col):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        j = 1
+        for i in range(0, len(self.elems) - 1):
+            while len(self.elems[i]) < col:
+                if j > el:
+                    break
+                self.elems[i].append(j)
+                j += 1
+
+
+if __name__ == '__main__':
+    SC_OBJ = StackClass()
+    SC_OBJ.push_in(13, 5)
+
+    print(SC_OBJ.elems)

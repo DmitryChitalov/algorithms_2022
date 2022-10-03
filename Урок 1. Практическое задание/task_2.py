@@ -13,3 +13,26 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 -- нельзя использовать встроенные функции min() и sort()
 """
+
+lst = (4, -1, 10, 100, 0, -5, 2, 9, 50, -10)
+
+# O(n^2) - квадратичная
+def min_val1(obj):
+    min = obj[0]
+    for i in range(len(obj) - 1):
+        for j in range(i + 1, len(obj)):
+            if min > obj[j]:
+                min = obj[j]
+    return min
+
+# O(n) - линейная
+def min_val2(obj):
+    min = obj[0]
+    for i in obj:
+        if i < min:
+            min = i
+    return min
+
+
+print(min_val1(lst))
+print(min_val2(lst))
