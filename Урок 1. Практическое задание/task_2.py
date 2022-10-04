@@ -15,3 +15,28 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+lst1 = [1, 5, 15, 10, 113, 27, 45, 2]
+
+
+
+def check_min1(lst):
+    for i in range(len(lst)):   # O(n^2)
+        for j in range(i + 1, len(lst)):    # O(n)
+            if lst[i] > lst[j]:  # O(1)
+                m = lst[i]  # O(1)
+                lst[i] = lst[j]  # O(1)
+                lst[j] = m  # O(1)
+    return lst[0]
+
+
+###
+def check_min2(lst):  # O(n)
+    lst_min = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        if lst_min > i:  # O(1)
+            lst_min = i  # O(1)
+    return lst_min  # O(1)
+
+
+print(check_min2(lst1))
+print(check_min1(lst1))
