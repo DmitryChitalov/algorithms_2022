@@ -14,25 +14,21 @@
 """
 
 
-def summa(current_number=0):
-    global sum1, number
-    sum1 += current_number
-    if current_number == number:
+def sequence_sum(num, current_num=1, sum1=0):
+    print(f'{current_num}', end='')
+    sum1 += current_num
+    if current_num == num:
+        print(f' = {sum1} ')
         return
-    current_number += 1
-    if current_number == 1:
-        print(f'{current_number} ', end="")
-    else:
-        print(f'+ {current_number} ', end="")
-    summa(current_number)
+    current_num += 1
+    print(f' + ', end='')
+    sequence_sum(num, current_num, sum1)
 
 
 if __name__ == '__main__':
     for number in range(1, 10):
-        sum1 = 0
         print(f'\n for  N = {number} :')
-        summa()
-        print (f' = {sum1} ')
+        sequence_sum(number)
         print (f'{number} * ({number} + 1)/2  = {int(number * (number + 1) / 2)} ')
 
 # Script Listing:

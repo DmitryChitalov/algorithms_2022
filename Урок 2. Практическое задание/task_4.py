@@ -12,17 +12,18 @@
 """
 
 
-def sequence05(step_left, current_sum=0, current_value=1):
-    global step
+def sum_of_sequence(step_left, steps_total=0, current_sum=0, current_value=1):
     # print(f' step_left = {step_left} , current_sum = {current_sum}, current_value = {current_value} ')
+    if steps_total == 0:
+        steps_total = step_left
     if step_left == 0:
-        print(f' number of elements = {step}, their summa = {current_sum}  ')
+        print(f' number of elements = {steps_total}, their summa = {current_sum}  ')
         return
     else:
         current_sum += current_value
         current_value = current_value / -2
         step_left -= 1
-        sequence05(step_left, current_sum, current_value)
+        sum_of_sequence(step_left, steps_total, current_sum, current_value)
 
 
 def digit_input():
@@ -38,7 +39,7 @@ def digit_input():
 
 if __name__ == '__main__':
     step = digit_input()
-    sequence05(step)
+    sum_of_sequence(step)
 
 # Script listing:
 #
