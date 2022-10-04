@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def output_codes_symbols(symbol_number=32, i=1):
+    if symbol_number > 127:
+        return
+    else:
+        print(f"{ord(chr(symbol_number))} - {chr(symbol_number)}", end=' ')
+        if i % 10 == 0:
+            print()
+        return output_codes_symbols(symbol_number + 1, i + 1)
+
+
+output_codes_symbols()

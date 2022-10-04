@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def counting_arity(number, even=0, odd=0):
+    if number == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+    else:
+        last_number = number % 10
+        if last_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return counting_arity(number // 10, even, odd)
+
+
+user_number = int(input("Введите число: "))
+counting_arity(user_number)

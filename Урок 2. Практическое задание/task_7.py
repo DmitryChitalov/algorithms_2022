@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def first(n):
+    if n == 1:
+        return n
+    elif n > 0:
+        return n + first(n - 1)
+
+
+n = 5
+print(first(n) == n * (n + 1) // 2)

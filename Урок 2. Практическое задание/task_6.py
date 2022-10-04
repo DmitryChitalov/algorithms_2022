@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+n = randint(0, 100)
+
+
+def guess_number(counter=1):
+    print("В программе генерируется случайное целое число от 0 до 100. \n"
+          "Ваша задача угадать это число не более чем за 10 попыток. \n"
+          f"{counter}-ая попытка.")
+    user_guess = int(input("Введите число: "))
+    while counter != 10:
+        if user_guess == n:
+            return f"Вы угадали! Это число {n}."
+        elif user_guess > n:
+            print("Загаданное число меньше.")
+            return guess_number(counter + 1)
+        else:
+            print("Загаданное число больше.")
+            return guess_number(counter + 1)
+    return f"Проигрыш! Вы израсходовали 10 попыток. Загаданное число {n}."
+
+
+print(guess_number())
