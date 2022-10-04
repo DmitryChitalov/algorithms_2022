@@ -17,9 +17,11 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+# Script with global variables
 
 
-def even_odd(num, even=0, odd=0):
+def even_odd(num):
+    global even, odd
     # print(f'num = {num} ,even= {even} , odd= {odd} ')
     num1 = num % 10
     # print(f' num1 = {num1} ,  ', end='')
@@ -31,12 +33,12 @@ def even_odd(num, even=0, odd=0):
         # print('even ')
     if num < 10:
         pass
-        print('\n Result:')
-        print(f'number = {number} ,even= {even} , odd= {odd} ')
+        # print('\n Result:')
+        # print(f'number = {number} ,even= {even} , odd= {odd} ')
         return
     else:
         num = num // 10
-        even_odd(num, even, odd)
+        even_odd(num)
 
 
 def digit_input():
@@ -49,11 +51,15 @@ def digit_input():
 
 
 if __name__ == '__main__':
+    even = 0
+    odd = 0
     number = digit_input()
     even_odd(number)
+    print(f'\n --- Result --- ')
+    print(f'for {number}  even = {even} , odd = {odd} ')
 
-# SCRIPT Listing:
-#  please enter an INT  number:   1122334400
+# Script listing:
+#  please enter an INT  number:   445566
 #
-#  Result:
-# number = 1122334400 ,even= 6 , odd= 4
+#  --- Result ---
+# for 445566  even = 4 , odd = 2
