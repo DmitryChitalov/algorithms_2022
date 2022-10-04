@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def my_func(n=int(input('Введите число элементов: ')), number=float(1), row_sum=float(1), counter=1):
+    if n == 1:
+        return f'Количество элементов {counter}, их сумма {row_sum}'
+    number = number / -2
+    row_sum += number
+    n -= 1
+    counter += 1
+    return my_func(n, number, row_sum, counter=counter)
+
+
+if __name__ == '__main__':
+    print(my_func())

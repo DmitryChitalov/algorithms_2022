@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def num_count(number, even_num=0, odd_num=0):
+    if number // 10 == 0 and number % 10 == 0:
+        return f'Количество четных чисел: {even_num}, количество нечетных чисел: {odd_num}.'
+    num = number % 10
+    if num % 2 == 0:
+        even_num += 1
+    if num % 2 != 0:
+        odd_num += 1
+    return num_count(int(number // 10), even_num, odd_num)
+
+
+if __name__ == '__main__':
+    print(num_count(34560))
+    print(num_count(123))
+    

@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def row(n, result=0, counter=1):
+    if counter > n:
+        return result == int(n * (n + 1) / 2)
+    result += counter
+    return row(n, result, counter + 1)
+
+
+if __name__ == '__main__':
+    print(row(5))
+    print(row(6))
+    
