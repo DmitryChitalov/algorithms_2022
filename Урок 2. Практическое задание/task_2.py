@@ -27,7 +27,11 @@ def count_even_odd(n, even=0, odd=0):
         return count_even_odd((n // 10), even, odd)
     print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
 
-n = int(input('Введите число: '))
+try:
+    n = int(input('Введите число: '))
+except ValueError:
+    print('Вы ввели не натуральное число! Исправтесь!')
+    exit(1)
 
 count_even_odd(n)
 
