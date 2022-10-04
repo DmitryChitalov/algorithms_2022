@@ -10,3 +10,14 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_of_numbers(quantity, number=1):
+    if quantity == 1:
+        return number
+    else:
+        return number + sum_of_numbers(quantity - 1, number / -2)
+
+
+user_input = int(input("Введите количество элементов: "))
+print(sum_of_numbers(user_input))
