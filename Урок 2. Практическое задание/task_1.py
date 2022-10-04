@@ -15,7 +15,7 @@
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
-Решите через рекурсию. В задании нельзя применять циклы.
+Решите через рекурсию. Решение через цикл не принимается.
 
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
@@ -27,3 +27,65 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def recursion1():
+   operator = sign()
+   if operator == "0":
+       return
+   digit1 = digit("first")
+   digit2 = digit("second")
+   if operator == "/" and digit2 == 0 :
+       print("Division to 0 isn't possible")
+       recursion1()
+   elif operator == "+":
+       print(f'{digit1} + {digit2} =  {digit1 + digit2}')
+       recursion1()
+   elif operator == "-":
+       print(f'{digit1} - {digit2} = {digit1 - digit2}')
+       recursion1()
+   elif operator == "*":
+       print(f'{digit1} * {digit2} = {digit1 * digit2}')
+       recursion1()
+   else:
+       print(f'{digit1} / {digit2} =  {digit1 * digit2}')
+       recursion1()
+
+
+def sign():
+    while True:
+        sign = input("\nPlease enter operation sign (+, -, *, / or 0 for exit): ")
+        if sign in ("+", "-", "*", "/", "0"):
+            return sign
+        else:
+            print(' Please try to enter sign again ')
+
+def digit(param):
+    while True:
+        try:
+            digit1 = int(input(f"Pls enter {param} value  : "))
+            return digit1
+        except ValueError:
+            print(' Please try to enter digit again ')
+
+
+recursion1()
+
+# Script listing:
+#
+# Please enter operation sign (+, -, *, / or 0 for exit): abc
+#  Please try to enter sign again
+#
+# Please enter operation sign (+, -, *, / or 0 for exit): /
+# Pls enter first value  : 5
+# Pls enter second value  : 0
+# Division to 0 isn't possible
+#
+# Please enter operation sign (+, -, *, / or 0 for exit): +
+# Pls enter first value  : 23
+# Pls enter second value  : 34
+# 23 + 34 =  57
+#
+# Please enter operation sign (+, -, *, / or 0 for exit): 0
+#
+# Process finished with exit code 0
+
