@@ -28,3 +28,111 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def my_decorator(func_to_decorate):
+    def wrapper(*args, **kwargs):
+        # print('код до функции')
+        start_val = time.time()
+        func_to_decorate(*args, **kwargs)
+        # print('код после функции')
+        end_val = time.time()
+        print('Время: ', end_val - start_val)
+
+    return wrapper
+
+
+def fill_list(n):  # O(N)
+    my_list = []  # O(1)
+    for i in range(0, n):  # O(N)
+        my_list.append(i)  # O(1)
+    return my_list
+
+
+def fill_dict(n):  # O(N)
+    my_dict = {}  # O(1)
+    for i in range(0, n):  # O(N)
+        my_dict[i] = i  # O(1)
+    return my_dict
+
+
+def read_list(n, my_list):  # O(N)
+    for i in range(0, n):  # O(N)
+        data = my_list[i]  # O(1)
+    return
+
+
+def read_dict(n, my_dict):  # O(N)
+    for i in range(0, n):  # O(N)
+        data = my_dict[i]  # O(1)
+    return
+
+
+def delete_list(m, my_list):  # O(N:^2)
+    for i in range(0, m):  # O(N)
+        my_list.remove(i)  # O(N)
+    return
+
+
+def delete_dict(m, my_dict):  # O(N)
+    for i in range(0, m):  # O(N)
+        del my_dict[i]  # O(1)
+    return
+
+
+n = 10 ** 6
+m = 10 ** 3
+
+# a) заполнение списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    заполнение словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    сделайте аналитику, что заполняется быстрее и почему
+#    сделайте замеры времени
+
+print('функция заполнения списка')
+my_func_decorated = my_decorator(fill_list)
+for i in range(0, 3):
+    my_func_decorated(n)
+
+print('функция заполнения словаря')
+my_func_decorated = my_decorator(fill_dict)
+for i in range(0, 3):
+    my_func_decorated(n)
+
+# b) получение элемента списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    получение элемента словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    сделайте аналитику, что заполняется быстрее и почему
+#    сделайте замеры времени
+
+print('функция чтения списка')
+my_func_decorated = my_decorator(read_list)
+for i in range(0, 3):
+    my_func_decorated(n, fill_list(n))
+
+print('функция чтения словаря')
+my_func_decorated = my_decorator(read_dict)
+for i in range(0, 3):
+    my_func_decorated(n, fill_dict(n))
+
+# с) удаление элемента списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    удаление элемента словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+#    сделайте аналитику, что заполняется быстрее и почему
+#    сделайте замеры времени
+
+print('функция удаления списка')
+my_func_decorated = my_decorator(delete_list)
+for i in range(0, 3):
+    my_func_decorated(m, fill_list(n))
+
+print('функция удаления словаря')
+my_func_decorated = my_decorator(delete_dict)
+for i in range(0, 3):
+    my_func_decorated(m, fill_dict(n))
+
+# ВЫВОДЫ:
+# функция заполнения списка работает немного быстрее, т.к. в словарь записываются хэши,
+# а на их вычисление требуется дополнительное время.  сложность одинаковая
+# функция чтения списка работает так же немного быстрее,  сложность одинаковая
+# а вот функция удаления словаря работает намного быстрее, т.к.встроенная функция remove имеет линейную сложность,
+# а с циклом функция становится по сложности квадратичной, а удаление из списка линейная.
