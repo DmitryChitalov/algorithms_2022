@@ -23,4 +23,5 @@ def progression(n, elem=1, result=0):
 
 
 n = int(input('Введите количества элементов: '))
+
 progression(n)

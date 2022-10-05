@@ -23,5 +23,6 @@ def result(n):
 
 
 num = int(input('Введите кол-во членов последовательнсти: '))
+
 if result(num) == int(num * (num + 1) / 2):
     print('Верно!')

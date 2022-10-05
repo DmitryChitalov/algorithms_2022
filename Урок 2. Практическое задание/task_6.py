@@ -29,4 +29,5 @@ def game(n, try_num=10):
 
 
 n = random.randint(0, 100)
+
 game(n)

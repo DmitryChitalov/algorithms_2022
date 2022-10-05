@@ -36,4 +36,5 @@ def chopper(num, even=0, uneven=0):
 
 
 num = int(input('Введите число: '))
+
 chopper(num)

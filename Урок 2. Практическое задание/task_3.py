@@ -30,4 +30,5 @@ def reverse(num, reversed_num=''):
 
 
 number = int(input('Введите число: '))
+
 reverse(number)

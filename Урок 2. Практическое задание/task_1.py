@@ -30,7 +30,7 @@
 
 
 def calc():
-    operation = input('Введите операцию: ')
+    operation = input('Введите вашу операцию: ')
     if operation == '0':
         print('Выход')
     elif operation != '+' and operation != '-' and operation != '*' and operation != '/':
