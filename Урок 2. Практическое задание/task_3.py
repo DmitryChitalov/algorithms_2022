@@ -20,17 +20,18 @@
 """
 
 
-# def num_rev(num):
-#     if len(num) == 1:
-#         return num
-#     else:
-#         n_s = str(int(num) % 10)
-#         num = str(int(num) // 10)
-#
-#         return n_s + num_rev(num)
-
 def num_rev(num):
-    return str(num) if int(num) < 10 else str(num % 10) + num_rev(num // 10)
+    if len(num) == 1:
+        return num
+    else:
+        n_s = str(int(num) % 10)
+        num = str(int(num) // 10)
+
+        return n_s + num_rev(num)
+
+# Решим задачу через тернарный оператор
+# def num_rev(num):
+#     return str(num) if int(num) < 10 else str(num % 10) + num_rev(num // 10)
 
 
 # num = input('Введите число: ')

@@ -22,10 +22,18 @@ def row_sum(n: int) -> float:
         print('Введите положительное число отличное от нуля  и не более 52!')
         return exit(1)
 
+def recur_method(n):
+    return 0 if n == 0 else 1 + recur_method(n - 1) / -2
 
-n = int(input('Введите количество элементов: '))
-
+try:
+    n = int(input('Введите количество элементов: '))
+except ValueError:
+    print('Вы ввели не число!')
+    exit(1)
+    24
 print(f'Количество элементов - {n}, их сумма -', row_sum(n))
+print()
+print(f'Количество элементов - {n}, их сумма -', recur_method(n))
 
 # n = 3
 # row_sum(3)
