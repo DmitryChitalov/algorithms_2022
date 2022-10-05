@@ -18,6 +18,7 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+import timeit
 from random import randint
 
 
@@ -49,5 +50,5 @@ def bubble_sort_reverse(lst_obj):
 
 orig_list = [randint(-100, 100) for _ in range(10)]
 
-print(bubble_sort(orig_list))
-print(bubble_sort_reverse(orig_list))
+print(timeit.timeit(stmt='bubble_sort(orig_list[:])', globals=globals(), number=10000))
+print(timeit.timeit(stmt='bubble_sort_reverse(orig_list[:])', globals=globals(), number=10000))
