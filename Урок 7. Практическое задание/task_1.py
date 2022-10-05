@@ -21,7 +21,8 @@
 from random import randint
 
 
-def bubble_sort(lst_obj):
+def bubble_sort(lst_obj_in):
+    lst_obj = lst_obj_in[0:]
     n = 1
     while n < len(lst_obj):
         for i in range(len(lst_obj) - n):
@@ -31,7 +32,8 @@ def bubble_sort(lst_obj):
     return lst_obj
 
 
-def bubble_sort_reverse(lst_obj):
+def bubble_sort_reverse(lst_obj_in):
+    lst_obj = lst_obj_in[0:]
     n = 0
     while n < len(lst_obj):
         is_not_sorted = True
