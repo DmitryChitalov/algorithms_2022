@@ -29,7 +29,7 @@ def num_rev(num):
 
         return n_s + num_rev(num)
 
-# Решим задачу через тернарный оператор
+# Решим задачу через тернарный оператор.
 # def num_rev(num):
 #     return str(num) if int(num) < 10 else str(num % 10) + num_rev(num // 10)
 
