@@ -32,10 +32,10 @@ def max_val_1(c_d):
     return three_comp  # O(1)
 
 
-# Сложность O(n^2) квадратичная
+# Сложность O(n) линейная
 def max_val_2(c_d):
     three_comp = {}  # O(1)
-    while len(three_comp) < 3:  # O(n)
+    while len(three_comp) < 3:  # O(1)
         mval = 0  # O(1)
         mkey = 0  # O(1)
         for key, val in c_d.items():  # O(n)

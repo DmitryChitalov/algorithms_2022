@@ -17,22 +17,22 @@
 lst = (4, -1, 10, 100, 0, -5, 2, 9, 50, -10)
 
 # O(n^2) - квадратичная
-def min_val1(obj):
-    min = obj[0]
+def num_val1(obj):
+    num = obj[0]
     for i in range(len(obj) - 1):
         for j in range(i + 1, len(obj)):
-            if min > obj[j]:
-                min = obj[j]
-    return min
+            if num > obj[j]:
+                num = obj[j]
+    return num
 
 # O(n) - линейная
-def min_val2(obj):
-    min = obj[0]
+def num_val2(obj):
+    num = obj[0]
     for i in obj:
-        if i < min:
-            min = i
-    return min
+        if i < num:
+            num = i
+    return num
 
 
-print(min_val1(lst))
-print(min_val2(lst))
+print(num_val1(lst))
+print(num_val2(lst))
