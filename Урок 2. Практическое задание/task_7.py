@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def result(n):
+    if n == 0:
+        return 0
+    else:
+        return n + sum(n - 1)
+
+
+num = int(input('Введите кол-во членов последовательнсти: '))
+if result(num) == int(num * (num + 1) / 2):
+    print('Верно!')

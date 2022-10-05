@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def chopper(num, even=0, uneven=0):
+    if num % 2 == 0:
+        even += 1
+    else:
+        uneven += 1
+    num = num // 10
+    if num > 9:
+        chopper(num, even, uneven)
+    else:
+        if num % 2 == 0:
+            even += 1
+        else:
+            uneven += 1
+        print('Четных цифр: ', even, ' ', 'Нечетных цифр: ', uneven)
+
+
+num = int(input('Введите число: '))
+chopper(num)
