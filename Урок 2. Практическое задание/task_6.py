@@ -7,3 +7,27 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+import random
+
+
+def game(n, try_num=10):
+    if try_num == 0:
+        print('Число попыток кончилось, ответ: ', n)
+    else:
+        try_num -= 1
+        player_num = int(input('Угадайте число: '))
+        if player_num == n:
+            print('Вы выиграли!')
+        elif player_num > n:
+            print('Загаданное число меньше')
+            game(n, try_num)
+        else:
+            print('Загаданное число больше')
+            game(n, try_num)
+
+
+n = random.randint(0, 100)
+
+game(n)

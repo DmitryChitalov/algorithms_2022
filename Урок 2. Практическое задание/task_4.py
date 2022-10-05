@@ -10,3 +10,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def progression(n, elem=1, result=0):
+    if n > 0:
+        n -= 1
+        result += elem
+        elem = -elem / 2
+        progression(n, elem, result)
+    else:
+        print('Сумма ряда: ', result)
+
+
+n = int(input('Введите количества элементов: '))
+
+progression(n)
