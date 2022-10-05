@@ -30,4 +30,26 @@ b) получение элемента списка, оцените сложно
 """
 import time
 
-pass
+"""Случай А! Сложность: """
+
+
+def time_decorator(my_functions):
+    def wrappings(*args):
+        start_val = time.perf_counter()
+        result = my_functions(*args)
+        end_val = time.perf_counter()
+        print(f"{my_functions.__name__} отработала за >>> {end_val - start_val}")
+        return result
+
+    return wrappings
+
+
+@time_decorator
+def add_list(n):
+    my_list = []
+    for el in range(-n, n):
+        my_list.append(el)
+    return my_list
+
+
+add_list(100500)
