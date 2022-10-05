@@ -24,3 +24,31 @@ reduce
 __mul__
 __add__
 """
+
+
+class HexNum:
+    def __init__(self, num):
+        self.hex = hex(int(num, 16))
+        self.hex_arr = [i.upper() for i in num]
+
+    def __mul__(self, other):
+        res_num = int(self.hex, 16) * int(other.hex, 16)
+        self.hex_arr = [i.upper() for i in str(res_num)[2:]]
+        self.hex = hex(res_num)
+        return self
+
+    def __add__(self, other):
+        res_num = self.hex + other.hex
+        self.hex_arr = [i.upper() for i in str(res_num)[2:]]
+        self.hex = hex(res_num)
+        return self
+
+
+num = input('first num')
+num_2 = input('second num')
+
+num = HexNum(num)
+num_2 = HexNum(num_2)
+
+res = num * num_2
+print(res)

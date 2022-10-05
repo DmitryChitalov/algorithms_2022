@@ -18,3 +18,27 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def num_reverse_cycle(num):
+    res = ''
+    while True:
+        current_num = num % 10
+        num = num // 10
+        res += str(current_num)
+        if num == 0:
+            return res
+
+
+def num_reverse(num):
+    current_num = num % 10
+    num = num // 10
+    if num == 0:
+        return current_num
+    return str(current_num) + str(num_reverse(num))
+
+
+if __name__ == "__main__":
+    num_to_reverse = int(input("Enter the number to reverse: "))
+    print(num_reverse_cycle(num_to_reverse))
+    print(num_reverse(num_to_reverse))

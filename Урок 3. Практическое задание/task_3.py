@@ -22,3 +22,20 @@
 р
 а
 """
+import hashlib
+
+
+def find_sub_str(word):
+    res = set()
+    start = 0
+    end = len(word) - 1
+    while end > 0:
+        reversed_word = word[::-1]
+        res.add(hashlib.md5(word[start:-1].encode('utf-8')))
+        res.add(hashlib.md5(reversed_word[start:-1].encode('utf-8')))
+        end -= 1
+        start += 1
+    return res
+
+
+print(find_sub_str('papappapap'))

@@ -16,3 +16,39 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+import timeit
+from random import randint
+from statistics import median
+
+
+def mid_find(lst_in):
+    return median(lst_in)
+
+
+m = 10
+orig_list_10 = [randint(-100, 100) for _ in range(2 * m + 1)]
+m = 100
+orig_list_100 = [randint(-100, 100) for _ in range(2 * m + 1)]
+m = 1000
+orig_list_1000 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(timeit.timeit(stmt='mid_find(orig_list_10)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_100)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_1000)', globals=globals(), number=10000))
+
+"""
+0.014147332999527862
+0.11959112499971525
+1.3594446249999237
+
+0.0024212500002249726
+0.0024972500004878384
+0.011314375000438304
+
+0.004954875000294123
+0.04694329199992353
+0.6609457499998825
+
+из Всех способ самым эффективным является способ без сортировки и встроенная функция median
+
+
+"""

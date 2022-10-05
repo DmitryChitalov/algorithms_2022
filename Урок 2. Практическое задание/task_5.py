@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_printing(from_num=0):
+    if from_num == 96:
+        return ''
+    is_nxt_row = ''
+    if from_num % 9 == 0 and from_num > 0:
+        is_nxt_row = '\n'
+
+    return f'{from_num + 32} - {chr(from_num + 32)} ' + is_nxt_row + ascii_printing(from_num + 1)
+
+
+if __name__ == "__main__":
+    print(ascii_printing())

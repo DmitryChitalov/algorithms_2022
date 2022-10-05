@@ -1,0 +1,4 @@
+.idea
+*db.sqlite
+*db.sqlite-journal
+*demo.sqlite

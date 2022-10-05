@@ -15,3 +15,16 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+cache = dict()
+
+
+def get_url_cache(cache, url):
+    return cache.setdefault(url, hashlib.sha512(url.encode('utf-8') + 'salt'.encode('utf-8')))
+
+
+print(get_url_cache(cache, 'http'))
+print(get_url_cache(cache, 'http'))
+print(get_url_cache(cache, 'https'))
+print(cache)

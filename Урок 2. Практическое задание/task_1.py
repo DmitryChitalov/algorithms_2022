@@ -27,3 +27,58 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def adding_cycle():
+    result = 0
+    while True:
+
+        nxt_num = input("Enter next number to add: \n")
+        if nxt_num.isdigit():
+            nxt_num = int(nxt_num)
+        else:
+            continue
+        result += nxt_num
+        if nxt_num == 0:
+            return result
+
+def calc_func(func, res, num_type):
+    nxt_num = input("Enter the next number: \n")
+    if nxt_num.isdigit():
+        nxt_num = num_type(nxt_num)
+        if nxt_num != 0:
+            return calc_func(func, func(res, nxt_num), num_type)
+        else:
+            if func is float.__truediv__:
+                print("Невозможно делить на ноль")
+                return calc_func(func, res, num_type)
+            return res
+    else:
+        print("Это не число \n")
+        return calc_func(func, res, num_type)
+
+
+
+
+def calculator(command):
+    start_num = input('Enter number to start:')
+    if not start_num.isdigit():
+        calculator(command)
+    match command:
+        case '+':
+            return calc_func(int.__add__, int(start_num), int)
+        case "-":
+            return calc_func(int.__sub__, int(start_num), int)
+        case "*":
+            return calc_func(float.__mul__, float(start_num), float)
+        case "/":
+            return calc_func(float.__truediv__, float(start_num), float)
+        case _:
+            return "Invalid command"
+
+
+if __name__ == "__main__":
+    while True:
+        command = input("Введите знак операции: +, -, *, / \n\n")
+        print(calculator(command))
+

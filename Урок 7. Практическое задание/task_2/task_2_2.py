@@ -14,3 +14,24 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+import timeit
+from random import randint
+from statistics import median
+
+
+def mid_find(lst_in):
+    ln = len(lst_in)
+    for _ in range(ln // 2):
+        lst_in.pop(lst_in.index(max(lst_in)))
+    return max(lst_in)
+
+
+m = 10
+orig_list_10 = [randint(-100, 100) for _ in range(2 * m + 1)]
+m = 100
+orig_list_100 = [randint(-100, 100) for _ in range(2 * m + 1)]
+m = 1000
+orig_list_1000 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(timeit.timeit(stmt='mid_find(orig_list_10)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_100)', globals=globals(), number=10000))
+print(timeit.timeit(stmt='mid_find(orig_list_1000)', globals=globals(), number=10000))

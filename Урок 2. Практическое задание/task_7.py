@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check_formule(num):
+    def wrapper(n):
+        if n == 1:
+            return 1
+        return n + wrapper(n - 1)
+
+    left = wrapper(num)
+    return left == num * (num + 1) / 2
+
+
+if __name__ == "__main__":
+    command = int(input("Enter the number"))
+    print(check_formule(command))

@@ -17,3 +17,40 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_finding_cycle(num):
+    is_find = True
+    res_even = 0
+    res_odd = 0
+
+    while is_find:
+
+        to_check = num % 10
+        num = num // 10
+
+        if to_check % 2 == 0:
+            res_even += 1
+        else:
+            res_odd += 1
+        if num == 0:
+            return res_even, res_odd
+
+
+def even_odd_finding(num, res=[0, 0]):
+    if num == 0:
+        return tuple(res)
+    to_check = num % 10
+    num = num // 10
+    if to_check % 2 == 0:
+        res[0] += 1
+    else:
+        res[1] += 1
+
+    return even_odd_finding(num, res)
+
+
+if __name__ == "__main__":
+    num = input('Enter the number:\n')
+    print(f"Количество четных и нечетных цифр в числе равно: {even_odd_finding_cycle(int(num))}")
+    print(f"Количество четных и нечетных цифр в числе равно: {even_odd_finding(int(num))}")

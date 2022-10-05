@@ -22,3 +22,33 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+# O(1)
+def first_func(login: str, password_in, dict_check: dict) -> str:
+    password = dict_check[login][0] # O(1)
+    check = dict_check[login][1]  # O(1)
+    if not password == password_in: # O(1)
+        return "Пароль не верный" # O(1)
+    if not check: # O(1)
+        return "Учетная запись не активирована" # O(1)
+    else:
+        return "Учетная запись активиронва" # O(1)
+
+# O(N)
+def second_func(login: str, password_in, dict_check: dict) -> str:
+    for k, v in dict_check.items(): # O(N)
+        if k == login:
+            password = v[0] # O(1)
+            check = v[1]  # O(1)
+            if not password == password_in: # O(1)
+                return "Пароль не верный" # O(1)
+            if not check: # O(1)
+                return "Учетная запись не активирована" # O(1)
+            else:
+                return "Учетная запись активиронва" # O(1)
+
+
+res= {'log': ('pass', 1), 'log1': ('passs', 0)}
+print(first_func("log", 'pass', res))
+print(second_func("log", 'pass', res))
