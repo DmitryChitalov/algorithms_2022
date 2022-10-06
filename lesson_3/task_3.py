@@ -18,6 +18,7 @@
 р
 а
 """
+
 import hashlib
 
 def my_func(my_value):

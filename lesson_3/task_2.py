@@ -21,6 +21,7 @@ f1dcaeeafeb855965535d77c55782349444b
 import hashlib
 import sqlite3
 
+
 # Создаём` файл БД 'example.db'.
 conn = sqlite3.connect('example.db')
 # Cоздаём объект курсор для направления запросов к БД
