@@ -22,3 +22,21 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex # Я не знаю как пользоваться CSV и JSON файлами
+storage = {}
+
+def auth():
+	password = input('Введите пароль: ')
+	storage[password] = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+	print('В базе данных хранится строка: ' + str(storage[password]))
+	password = input('Введите пароль еще раз для проверки: ')
+	if password in storage:
+		print('Вы ввели правильный пароль')
+	else:
+		print('Вы ввели неверный пароль')
+
+auth()

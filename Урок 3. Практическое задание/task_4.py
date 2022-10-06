@@ -15,3 +15,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cache = {}
+
+salt = 'some_strange_salt_123'
+
+
+def caching():
+    url = input('Введите url, для выхода введите 0: ')
+    if url == '0':
+        return
+    if url in cache.keys():
+        print(cache.get(url))
+    else:
+        cache[url] = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    return caching()
+
+
+caching()
