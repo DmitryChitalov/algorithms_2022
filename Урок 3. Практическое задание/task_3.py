@@ -22,3 +22,18 @@
 р
 а
 """
+from hashlib import sha256
+
+hash_set = set()
+type_set = set()
+text = input('Введите строку : ')
+
+for i in range(len(text)):
+    for j in range(i + 1, len(text) + 1):
+        if text[i:j] != text:
+            hash_set.add(sha256(text[i:j].encode()).hexdigest())
+            type_set.add(text[i:j])
+
+print(type_set)
+print(hash_set)
+print(f'Количество элементов в множестве: {len(hash_set)}')
