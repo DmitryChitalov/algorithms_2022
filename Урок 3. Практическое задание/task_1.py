@@ -28,3 +28,125 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+import time
+from random import randint
+
+coeff = randint(10, 100)
+
+lst_1 = []
+dct_1 = {}
+
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        res = function(*args)
+        print(time.perf_counter_ns() - start_time)
+        return res
+    return wrapped
+
+#========================================================================================================#
+
+# Сложность n * 1 = O(n)
+
+
+@time_of_function
+def list_filling(lst):
+    for _ in range(coeff):  # O(n)
+        lst.append(randint(0, 100))  # O(1)
+
+# Сложность n * 1 = O(n)
+
+
+@time_of_function
+def dict_filling(dct):
+    for el in range(coeff):  # O(n)
+        dct[el-1] = [randint(0, 100), randint(0, 100)]  # O(1)
+
+
+'''
+По O-нотации мы видим, что два способа не отличаются по колл-ву операций, но замеры времени показывают,
+что первая операция выполняется почти в 2 раза быстрее чем вторая
+
+'''
+
+#========================================================================================================#
+
+# Сложность 1 + n * 3 = O(n)
+
+
+@time_of_function
+def list_el_getting(lst, num_of_el):
+    n = 0  # O(1)
+    for _ in range(len(lst)):  # O(n)
+        n += 1  # O(1)
+        if n == num_of_el:  # O(1)
+            return lst[n]  # O(1)
+
+# Сложность 1 + n * 3 = O(n)
+
+
+@time_of_function
+def dict_el_getting(dct, num_of_el):
+    n = 0  # O(1)
+    for _ in range(len(dct)):  # O(n)
+        n += 1  # O(1)
+        if n == num_of_el:  # O(1)
+            return dct[n]  # O(1)
+
+
+'''
+По O-нотации мы видим, что два способа не отличаются по колл-ву операций и замеры времени показывают
+не сильно большое отличие между двумя способами
+
+'''
+
+#========================================================================================================#
+
+# Сложность 1 + n * n * 2 = 1 + 2n2 = O(n2)
+
+
+@time_of_function
+def list_el_deliting(lst, num_of_el):
+    n = 0  # O(1)
+    for _ in range(len(lst)):  # O(n)
+        n += 1  # O(1)
+        if n == num_of_el:  # O(1)
+            lst.pop(n)  # O(n)
+
+# Сложность 1 + n + n * 3 = O(n)
+
+
+@time_of_function
+def dict_el_deliting(dct, num_of_el):
+    n = 0  # O(1)
+    keys = list(dct.keys())  # O(n)
+    for _ in range(len(keys)):  # O(n)
+        n += 1  # O(1)
+        if n == num_of_el:  # O(1)
+            dct.pop(keys[n])  # O(1)
+
+
+'''
+По O-нотации мы видим, что два способа отличаются по колл-ву операций, но замеры времени
+показывают, что первая операция выполняется быстрее
+
+'''
+
+#========================================================================================================#
+
+
+list_filling(lst_1)
+dict_filling(dct_1)
+
+print("=======")
+
+list_el_getting(lst_1, 11)
+dict_el_getting(dct_1, 11)
+
+print("=======")
+
+list_el_deliting(lst_1, 11)
+dict_el_deliting(dct_1, 11)

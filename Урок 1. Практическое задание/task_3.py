@@ -17,3 +17,33 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+comp = {10000: "к1",
+        300000: "к2",
+        123123123123: "к3",
+        1: "к4",
+        50000: "к5",
+        1453142134: "к6",
+        14000: "к7"}
+
+
+# Итоговая сложность : n + n log n + 1 ==> O(n log n)
+
+def most_year_profit_1(dict):
+    s = list(dict.keys())  # O(n)
+    s.sort()  # O(n log n)
+    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
+
+
+
+# Итоговая сложность : 2n + 1 ==> O(n) ==> Лучший вариант т. к. наименьшая сложность
+
+def most_year_profit_2(dict):
+    s = list(dict.keys())  # O(n)
+    while len(s) != 3:  # O(1)
+        s.remove(min(s))  # O(n)
+
+    print(dict.get(s[-1]), dict.get(s[-2]), dict.get(s[-3]))  # O(1)
+
+
+most_year_profit_1(comp)
+most_year_profit_2(comp)
