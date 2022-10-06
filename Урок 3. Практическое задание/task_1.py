@@ -94,23 +94,24 @@ fill_dict(dict_ex, list_data)
 
 n = random.randint(0, 10000000)
 
-# Сложность O(1).
+# Сложность O(n).
 @check_time
 def get_el_list(list_ex):
-                     
-    return list_ex[n] # O(1)
+    for i in list_ex:       # O(n)
+        _ = i               # O(1)
 
 # Полунчение элемента словаря через get.
-# Сложность O(1).
+# Сложность O(n).
 @check_time
 def get_el_dict(dict_ex):
-
-    return dict_ex.get(n)  # O(1)
+    for i in range(10000000):  # O(n)
+        _ = dict_ex[i]         # O(1)
 
 get_el_list(list_ex)
-print(get_el_list(list_ex))
+#print(get_el_list(list_ex))
 get_el_dict(dict_ex)
-print(get_el_dict(dict_ex))
+#print(get_el_dict(dict_ex))
 
-# Определить время извлечения элемента из списка и словаря не удалось даже на 10000000.
-# Видимо это очень маленькое время!
+# Впкмя извлечения списка из 10000000 элементов через append составило - 0.343.
+# Впкмя извлечения словаря из 10000000 элементов через append составило - 1.549.
+# Время извлечения элементов словаря больше чем списка, видимо сказывается цикл и метод получения!
