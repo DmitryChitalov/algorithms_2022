@@ -29,7 +29,6 @@ print(func_1(arr1))
 print(timeit("func_1(arr1)", number=100000, globals=globals()))
 
 
-
 def func_2(nums):
     new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
     return new_arr
