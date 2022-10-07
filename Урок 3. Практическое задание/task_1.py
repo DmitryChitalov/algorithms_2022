@@ -28,3 +28,82 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+def used_time(func_used_time):
+    def wrapper(*args):
+        start = time()
+        func_used_time(*args)
+        end = time()
+        return end - start
+    return wrapper
+
+# a)
+
+@used_time
+def complete_list(my_list, n):
+    for i in range(n):
+        my_list.append(i)     #O(1)
+    return my_list
+
+my_list = []
+test_1 = complete_list(my_list, 150000)
+print(f'Время заполнения списка: {test_1}')
+
+@used_time
+def complete_dict(my_dict, n):
+    for i in range(n):
+        my_dict[i] = i         #O(1)
+    return my_dict
+
+my_dict = {}
+test_2 = complete_dict(my_dict, 150000)
+print(f'Время заполнения словаря: {test_2}')
+
+# Вывод: заполнение списка происходит быстрее, так как не требуется вычисление хэшей
+
+# b)
+
+@used_time
+def put_from_list(my_list, n):
+    for i in range(n):
+        my_list[i] = my_list[i + 1]    #O(1)
+    return my_list
+
+test_1_2 = put_from_list(my_list, 15000)
+print(f'Время получения элемента списка: {test_1_2}')
+
+@used_time
+def put_from_dict(my_dict, n):
+    for i in range(n):
+        my_dict.get(i)           #O(1)
+    return dict
+
+
+test_2_2 = put_from_dict(my_dict, 15000)
+print(f'Время получения элемента словаря: {test_2_2}')
+
+# Вывод: время получения элемента из словаря происходит быстрее, так как он представляет собой хэш-таблицу
+
+# c)
+
+@used_time
+def pop_from_list(my_list, n):
+    for i in range(n):
+        my_list.pop(i)         #O(n)
+    return my_list
+
+test_1_3 = pop_from_list(my_list, 5000)
+print(f'Время удаления элемента списка: {test_1_3}')
+
+@used_time
+def pop_from_dict(my_dict, n):
+    for i in range(n):
+        my_dict.pop(i)          #O(1)
+    return my_dict
+
+test_2_3 = pop_from_dict(my_dict, 5000)
+print(f'Время удаления элемента словаря: {test_2_3}')
+
+# Вывод: удаление элементов словаря происходит быстрее, так как он представляет собой хэш-таблицу и операция удаления элемента имеет O(1) сложность
