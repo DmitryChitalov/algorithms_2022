@@ -26,6 +26,7 @@ f1dcaeeafeb855965535d77c55782349444b
 import sqlite3
 import hashlib
 
+# Решееие с использованием базы sqlite.
 '''
 class DbHash:
     def __init__(self):
@@ -78,24 +79,28 @@ data_base_1.sql_insert()
 data_base_1.log_in()
 '''
 
+
+# Решение с хранением логина и хэша-пароля в файле log_pass_hash.csv.
 def create_hash():
     login = input('Введите логин: ')
     us_pass = input('Введите пароль: ')
     hash_passwd = hashlib.sha256(login.encode() + us_pass.encode()).hexdigest()
     return login, hash_passwd
 
+
 def save_hash(login, hash_passwd):
     with open('log_pass_hash.csv', 'a+', encoding='utf-8') as fa:
-        fa.writelines(f'{login};{hash_passwd}\n')                  # Записывает в файл логин и хэш пароля.
+        fa.writelines(f'{login};{hash_passwd}\n')  # Записывает в файл логин и хэш пароля.
+
 
 def read_hash():
     dict_hash = {}
     with open('log_pass_hash.csv', 'r+', encoding='utf-8') as fr:
         for _ in fr:
-             dict_hash.setdefault(_.strip().split(";")[0], _.strip().split(";")[1])
+            dict_hash.setdefault(_.strip().split(";")[0], _.strip().split(";")[1])
 
-    print(dict_hash)
     return dict_hash
+
 
 def log_in(dict_hash):
     u_login = input('Введите логин: ')
@@ -103,7 +108,6 @@ def log_in(dict_hash):
     if u_login in dict_hash:
         u_password = input('Введите пароль: ')
         hash_u_password = hashlib.sha256(u_login.encode() + u_password.encode()).hexdigest()
-        print(hash_u_password)
         if hash_u_password == dict_hash[u_login]:
             print('Доступ разрешён!')
             return exit(0)
@@ -114,8 +118,8 @@ def log_in(dict_hash):
         print('Пользователь не зарегестрирован!')
         return exit(1)
 
+
 login, hash_passwd = create_hash()
 print(login, hash_passwd)
 save_hash(login, hash_passwd)
-#dict_hash = read_hash()
 log_in(read_hash())
