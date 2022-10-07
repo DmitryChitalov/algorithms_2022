@@ -28,3 +28,92 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_decorator(my_function):
+    def wrappings(*args):
+        start_val = time.perf_counter()
+        result = my_function(*args)
+        end_val = time.perf_counter()
+        print(f"{my_function.__name__} отработала за >>> {end_val - start_val}")
+        return result
+
+    return wrappings
+
+
+"""Случай А!"""
+
+
+@time_decorator
+def add_list(n):  # O(n)
+    my_list = []  # O(1)
+    for el in range(n):  # O(n)
+        my_list.append(el)  # O(1)
+    return my_list  # O(1)
+    # add_list отработала за >>> 0.023958886
+
+
+@time_decorator
+def add_dict(n):  # O(n)
+    my_dict = {}  # O(1)
+    for el in range(n):  # O(n)
+        my_dict[-el] = el  # O(1)
+    return my_dict  # O(1)
+    # add_dict отработала за >>> 0.040535034
+
+
+"""Проведённый тест замера времени показал, что заполнение словаря происходит дольше
+в силу того, что словарь - это хэш-таблица, где помимо добавления элемента (ключа) 
+ещё и сразу высчитывается и его хэш-значение"""
+
+"""Случай B!"""
+
+
+@time_decorator
+def get_elem_list(data, n):  # O(1)
+    return data[n]  # O(1)
+    # get_elem_list отработала за >>> 3.3129999999978454e-06
+    # Наш элемент списка >>> 8
+
+
+@time_decorator
+def get_elem_dict(data, n):  # O(1)
+    return data.get(n)  # O(1)
+    # get_elem_dict отработала за >>> 1.8069999999995034e-06
+    # Наш элемент словаря >>> 12
+
+
+"""Проведённый тест замера времени показал, что получение элемента из словаря 
+происходит быстрее в силу того, что в словаре значение выдергивается
+из уже известной ячейки памяти, тогда как в списке проверяются все элементы с первого"""
+
+"""Случай С!"""
+
+
+@time_decorator
+def del_elem_list(data, n):  # O(1)
+    return data.pop(n)  # O(1)
+    # del_elem_list отработала за >>> 2.4090000000018263e-06
+
+
+@time_decorator
+def del_elem_dict(data, n):  # O(1)
+    return data.pop(n)  # O(1)
+    # del_elem_dict отработала за >>> 1.203999999997707e-06
+
+
+"""Проведённый тест замера времени показал, что удаление элемента из словаря 
+происходит быстрее чем из списка, по причине быстроты поиска удалчяемого элемента, 
+которую я озвучил в случае В!"""
+
+add_list(100500)
+add_dict(100500)
+res_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+print(f" Наш элемент списка >>> {get_elem_list(res_list, 12)}")
+res_dict = {0: 0, -1: 1, -2: 2, -3: 3, -4: 4, -5: 5, -6: 6, -7: 7, -8: 8, -9: 9,
+            -10: 10, -11: 11, -12: 12, -13: 13,
+            -14: 14, -15: 15, -16: 16, -17: 17, -18: 18}
+print(f" Наш элемент словаря >>> {get_elem_dict(res_dict, -12)}")
+del_elem_list(res_list, 8)
+del_elem_dict(res_dict, -8)

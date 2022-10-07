@@ -22,3 +22,33 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import json
+
+
+def passwd_hashing(password):
+    with open("passwd.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+        user_hash = hashlib.sha256(password.encode() + data["salt"].encode()).hexdigest()
+        data["hash"] = user_hash
+        with open("passwd.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    return user_hash
+
+
+def check_hash(password):
+    with open("passwd.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+        user_hash = hashlib.sha256(password.encode() + data["salt"].encode()).hexdigest()
+        if user_hash == data["hash"]:
+            return "Correct password"
+        return "Wrong password"
+
+
+user_pass = input("Your password, please? >>> ")
+
+print(passwd_hashing(user_pass))
+
+user_auth = input("Your password again, please? >>> ")
+
+print(check_hash(user_auth))
