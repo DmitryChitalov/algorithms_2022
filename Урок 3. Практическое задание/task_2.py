@@ -86,7 +86,7 @@ def create_hash():
 
 def save_hash(login, hash_passwd):
     with open('log_pass_hash.csv', 'a+', encoding='utf-8') as fa:
-        fa.writelines(f'{login}; {hash_passwd}\n')                  # Записывает в файл логин и хэш пароля.
+        fa.writelines(f'{login};{hash_passwd}\n')                  # Записывает в файл логин и хэш пароля.
 
 def read_hash():
     dict_hash = {}
@@ -95,10 +95,27 @@ def read_hash():
              dict_hash.setdefault(_.strip().split(";")[0], _.strip().split(";")[1])
 
     print(dict_hash)
+    return dict_hash
 
+def log_in(dict_hash):
+    u_login = input('Введите логин: ')
 
+    if u_login in dict_hash:
+        u_password = input('Введите пароль: ')
+        hash_u_password = hashlib.sha256(u_login.encode() + u_password.encode()).hexdigest()
+        print(hash_u_password)
+        if hash_u_password == dict_hash[u_login]:
+            print('Доступ разрешён!')
+            return exit(0)
+        else:
+            print('Неверный пароль!')
+            return exit(1)
+    else:
+        print('Пользователь не зарегестрирован!')
+        return exit(1)
 
 login, hash_passwd = create_hash()
 print(login, hash_passwd)
 save_hash(login, hash_passwd)
-read_hash()
+#dict_hash = read_hash()
+log_in(read_hash())
