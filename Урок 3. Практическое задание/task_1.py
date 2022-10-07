@@ -28,3 +28,84 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        res = function(*args)
+        print(f' {function.__name__} {time.perf_counter_ns() - start_time}')
+        return res
+
+    return wrapped
+
+
+@time_of_function
+def fill_lst(n):  # O(N)
+    res = []
+    for j in range(n):  # O(N)
+        res.append(j)  # O(1)
+
+    # res1 = [i for i in range(n)]
+    return res
+
+
+@time_of_function
+def fill_dct(n):
+    res = {}
+    for j in range(n):  # O(N)
+        res[j] = j  # O(1)
+
+    # res = {x: x for x in range(n)}
+    return res
+
+
+"""
+Орентировочное время заполнения словаря и списко приблизительно одинаково. Заполнение словаря чуть дольше. 
+Списковое включение [i for i in range(n)] в полтора раза быстрее записи в цикле.
+"""
+
+@time_of_function
+def get_lst(n, lst):  # O(N)
+    for j in range(n):  # O(N)
+        i = lst[j]  # O(1)
+
+
+@time_of_function
+def get_dct(n, dct):
+    for j in range(n):  # O(N)
+        i = dct[j]  # O(1)
+
+
+@time_of_function
+def del_lst(n, lst):  # O(N) для pop()  О(N**2) для pop(0)
+    for j in range(n):  # O(N)
+        lst.pop(0)  # O(N)
+        # lst.pop()  # O(1)
+
+
+@time_of_function
+def del_dct(n, dct):
+    for j in range(n):  # O(N)
+        dct.pop(j)  # O(1)
+
+n = 10000
+lst = fill_lst(n)
+dct = fill_dct(n)
+
+get_lst(n, lst)
+get_dct(n, lst)
+
+del_lst(n, lst)
+del_dct(n, dct)
+
+# Наверно я что то делаю не так. Но все показатели для списков и словарей приблизительно одинаковы, кроме случая
+# удаления элемента списка по индексу.
+# Теоретически....
+#      1) Запись в словарь должна быть значительно дольше из за того, что необходимо расчитывать хеш, по сравнению с
+#  списками. У списков запись быстрая - записать один элемент в конец объекта, кроме случая когда переполняется
+#  выделенная под массив память и необходимо время на новое выделение памяти.
+#      2) Доступ по ключу словаря должен быть очень быстрым из того, что "под капотом" там хеш таблицы.
+#      3) Удаление в словаре - быстрое. В списке, если удаление с конца, то тоже быстрое. Если с начала,
+# то необходимо время для перестройки массива. Вот это у меня подтвердить получилось. Сложность О(N**2)

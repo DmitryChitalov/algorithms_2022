@@ -22,3 +22,22 @@
 р
 а
 """
+import hashlib
+
+
+def rec(ls, st):
+    ln = len(ls)
+    if ln == 0:
+        return
+    for j in range(len(ls)):
+        # print(ls[:j + 1])
+        st.add(hashlib.sha256(ls[:j + 1].encode()).hexdigest())
+    rec(ls[1:], st)
+    return
+
+
+set_res = set()
+inp = 'papa'
+rec(inp, set_res)
+# print(set_res)
+print(f"Уникальных подстрок {len(set_res)-1}")
