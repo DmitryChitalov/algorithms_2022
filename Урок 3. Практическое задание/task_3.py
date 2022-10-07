@@ -22,3 +22,29 @@
 р
 а
 """
+
+
+# Напишем функцию определяющую количество уникальных хэш в строке из латинских букв.
+def unique_str(string):
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            if not string[i:j + 1] == string:
+                uni_str.add(hash(string[i:j + 1]))
+    return f'{string} - {len(uni_str)} уникальных подстрок'
+
+
+uni_str = ''
+uni_str = set(uni_str)
+
+# Проверим работу функции.
+string = 'papa'
+print(unique_str(string))
+print(uni_str)
+
+string = 'tetra'
+print(unique_str(string))
+print(uni_str)
+
+string = 'system'
+print(unique_str(string))
+print(uni_str)
