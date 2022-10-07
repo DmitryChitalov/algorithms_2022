@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3c21ce6-2915-4322-87b0-881dd4f7051d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/passwd.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/passwd.json" beforeDir="false" afterPath="$PROJECT_DIR$/passwd.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +71,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="JSON" />
     <property name="last_opened_file_path" value="F:/Курсы GeekBrains. 2022/Алгоритмы и структуры данных на Python/Урок_3/Урок 3. Пример практического задания" />
+    <property name="settings.editor.selected.configurable" value="settings.json.schema" />
   </component>
   <component name="RunManager" selected="Python.task_2">
     <configuration name="ТЕСТОВЫЙ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -245,6 +246,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/task_1.py">
