@@ -13,6 +13,9 @@
 """
 
 
+from timeit import timeit
+
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -35,3 +38,24 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    enter_num = str(enter_num)
+    return "".join(reversed(enter_num))
+
+
+number = 123456789
+
+print(timeit('revers(number)', globals=globals()))
+print(timeit('revers_2(number)', globals=globals()))
+print(timeit('revers_3(number)', globals=globals()))
+print(timeit('revers_4(number)', globals=globals()))
+
+'''
+Вывод.
+Быстрее всего работает функция 3, переворачивающая строку по срезу. 
+Встроенные строковые функции работают быстрее, их сложность - О(1). 
+В функциях 3 и 4 не используются итерация и рекурсия, это также делает их быстрее. 
+У рекурсивной функции 1 факториальная сложность, она работает медленнее всех.
+'''
