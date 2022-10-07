@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def guess_number(count, num):
+    if count == 0:
+        print('Попыток больше не осталось. Ответ:', num)
+        return
+    user_number = int(input('Введите число от 0 до 100: '))
+    if num == user_number:
+        print(f'===\nВерно! Загаданное число: {num}!\n===')
+        return
+    if user_number < num:
+        result = 'больше'
+    else:
+        result = 'меньше'
+    print(f'***\nМое число {result}. Осталось {count - 1} попыток')
+    guess_number(count - 1, num)
+
+
+guess_number(10, randint(0, 100))

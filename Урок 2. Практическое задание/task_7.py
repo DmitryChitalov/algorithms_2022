@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def check(n, summ=0):
+    if n == 1:
+        return summ + n
+    else:
+        summ = summ + n
+        return check(n - 1, summ)
+
+
+n = int(input('Введите натуральное число:'))
+print(f'{check(n)} == {int(n * (n+ 1) / 2)}')
