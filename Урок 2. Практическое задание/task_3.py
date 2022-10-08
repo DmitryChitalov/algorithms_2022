@@ -18,3 +18,13 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def rev_num (num):
+
+    if num // 10 == 0:
+        return str(num)
+    else:
+        return str(num %10) + rev_num(num // 10)
+
+
+print(rev_num(514230))

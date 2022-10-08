@@ -17,3 +17,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def count_even (num):
+    if num // 10 == 0:
+        if num % 2 == 0:
+            ev = 1
+            odd = 1
+        else:
+            ev = 0
+            odd = 1
+        return ev, odd
+
+    else:
+        if num %10 % 2 == 0:
+            ev = 1
+            odd = 0
+        else:
+            ev = 0
+            odd = 1
+
+        return ev + count_even(num//10)[0], odd + count_even(num//10)[1]
+
+print(count_even(1359606))
+
+
+
