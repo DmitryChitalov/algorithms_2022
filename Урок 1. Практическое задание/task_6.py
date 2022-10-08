@@ -44,7 +44,7 @@ class QueueClass:
         return len(self.base)
 
     def curr_task(self):
-        return self.base[:1]                # разобраться со срезом. Ошибка, чтобы правильно выводило название задачи
+        return self.base[-1]                # разобраться со срезом. Ошибка, чтобы правильно выводило название задачи
 
     def get_base(self):
         return self.base
