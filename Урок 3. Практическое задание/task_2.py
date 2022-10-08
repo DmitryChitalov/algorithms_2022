@@ -22,3 +22,27 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import json
+from hashlib import sha256
+
+
+def get_passwd():
+    get_passwd = input("Введите пароль: ")
+    salt = "solarius"
+    res = sha256((get_passwd.encode()) + (salt.encode())).hexdigest()
+    print(f'В базе данных хранится строка: {res}')
+    repeat = input("Введите пароль еще раз для проверки: ")
+    res_ = sha256((repeat.encode()) + (salt.encode())).hexdigest()
+    if res_ == res:
+        print("Вы ввели правильный пароль !")
+        with open("pass.csv", "a") as f:
+            json.dump([res, salt], f)
+        return
+    else:
+        print("Пароли не совпадают !")
+
+
+get_passwd()
+
+

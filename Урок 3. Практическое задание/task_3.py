@@ -22,3 +22,18 @@
 р
 а
 """
+
+from hashlib import sha256
+
+
+def substring(inputstring):
+    my_set = set()
+    for i in range(0, len(inputstring)+1):
+        for j in range(i+1, len(inputstring)+1):
+            substr = inputstring[i:j]
+            if substr != inputstring:
+                my_set.add(sha256((substr.encode())).hexdigest())
+    return my_set
+
+
+print(f'Количество уникальных подстрок =  {len(substring("papa"))}')
