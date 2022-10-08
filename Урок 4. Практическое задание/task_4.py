@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+from timeit import Timer
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +40,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    return f'Чаще всего встречается число {max(sorted(array, reverse=True), key = lambda x: array.count(x))}'
+
+
+# print(func_1())
+# print(func_2())
+# print(func_3())
+
+t1 = Timer(stmt="func_1()", setup="from __main__ import func_1", globals=globals())
+print("Время func_1(): ", t1.timeit(number=10000), "seconds")
+
+t2 = Timer(stmt="func_2()", setup="from __main__ import func_2", globals=globals())
+print("Время func_2(): ", t2.timeit(number=10000), "seconds")
+
+t3 = Timer(stmt="func_3()", setup="from __main__ import func_3", globals=globals())
+print("Время func_3(): ", t3.timeit(number=10000), "seconds")
+
+"""
+Ускорить не удалось. Самый быстрый способ указан в самой простой функции func_1
+func_2 - чуть медленнее, т.к. формируется 2-ой список, на который тратится время
+func_3 - еще медленнее, т.к. помимо формирования неявного второго списка, он еще и подвергается сортировке,
+с определением максимального значения
+"""
