@@ -22,3 +22,21 @@
 р
 а
 """
+
+
+import hashlib
+
+
+def unic_part(str_obj):
+    my_set = set()
+    for i in range(len(str_obj)):
+        for j in range(i + 1, len(str_obj) + 1):
+            if str_obj[i:j] != str_obj:
+                my_set.add(hashlib.sha256(str_obj[i:j].encode()).hexdigest())
+
+    print(f'\n{my_set}')
+    return f'Количество уникальных подстрок: {len(my_set)}'
+
+
+if __name__ == '__main__':
+    print(unic_part('papa'))

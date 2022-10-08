@@ -28,3 +28,100 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+n = 10 ** 6
+print('Часть а')
+
+
+def time_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Функция {func.__name__} выполнилась за {end - start}')
+        return result
+    return timer
+
+
+@time_decorator
+def list_append(lst, num):  # O(1)
+    for i in range(num):
+        lst.append(i)
+
+
+my_lst = []
+list_append(my_lst, n)
+print('*' * 50)
+
+
+@time_decorator
+def fill_dict(dct_obj, num):  # O(1)
+    for i in range(num):
+        dct_obj[i] = i
+
+
+my_dict = {}
+fill_dict(my_dict, n)
+print('*' * 50)
+
+"""
+Словарь - хеш таблица, должен выполняться быстрее, 
+но при замерах добавление в конец списка почти всегда быстрее.
+При использовании insert добавление в словарь будет значительно быстрее. 
+"""
+
+
+print('часть б')
+
+
+@time_decorator
+def take_lst(lst):  # O(1)
+    for i in range(100000):
+        a = lst[i]
+
+
+take_lst(my_lst)
+print('*' * 50)
+
+
+@time_decorator
+def take_dict(dict_obj):  # O(1)
+    for i in range(100000):
+        a = dict_obj[i]
+
+
+take_dict(my_dict)
+print('*' * 50)
+
+"""
+получение элемента из списка происходит быстрее чем из словаря.
+"""
+
+print('часть с')
+
+
+@time_decorator
+def del_list(lst):  # O(N)
+    for i in range(10000):
+        my_lst.pop(i)
+
+
+del_list(my_lst)
+print('*' * 50)
+
+
+@time_decorator
+def del_dict(dict_obj):  # O(1)
+    for i in range(10000):
+        dict_obj.pop(i)
+
+
+del_dict(my_dict)
+print('*' * 50)
+
+"""
+Удаление элемента из словаря значительно быстрее чем удаление элемента из списка
+тк словарь = хеш таблица.
+"""
