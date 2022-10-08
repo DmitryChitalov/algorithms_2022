@@ -13,3 +13,20 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 --код с нуля писать не нужно, требуется доработать пример с урока
 """
+
+def is_palindrome(string):
+    reversed_string = ""
+    s = string.replace(" ","")
+    s = s.lower()
+    for i in range(len(s), 0, -1):
+        if s[i-1] >= 'а' and s[i-1] <= 'я':
+            reversed_string += s[i - 1]
+    if s == reversed_string:
+        print("Palindrome")
+    else:
+        print("Not a palindrome")
+        
+
+if __name__ == '__main__':
+    is_palindrome("молоко делили ледоколом")
+    is_palindrome("Перепад")

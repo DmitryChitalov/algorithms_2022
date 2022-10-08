@@ -7,7 +7,19 @@
 
 Сложность первого алгоритма должна быть O(n^2) - квадратичная.
 
+def SelectionSort(A): 
+    for i in range(0, len(A) - 1):              O(1)
+        min_idx = i                       
+        for j in range(i + 1, len(A)):          O(1)
+            if A[j] < A[min_idx]:               O(N)
+                min_idx = j 
+        A[i], A[min_idx] = A[min_idx], A[i]     O(N)
+
 Сложность второго алгоритма должна быть O(n) - линейная.
+
+int j = -1;
+for (i=0; i < n; i++)                           O(N)
+  if (a[i] == k) j = i;
 
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
