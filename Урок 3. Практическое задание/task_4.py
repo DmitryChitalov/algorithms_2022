@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+cache_obj = {}
+
+
+def get_url(url):
+    if cache_obj.get(url):
+        print(f"Адрес: {url} присутствует в кеше.")
+    else:
+        hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_obj[url] = hash
+        return cache_obj
+
+
+get_url("https://music.yandex.ru/home")
+get_url("https://music.yandex.ru/home")
