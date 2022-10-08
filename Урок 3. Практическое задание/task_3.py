@@ -22,15 +22,15 @@
 р
 а
 """
-
+import hashlib
 
 # Напишем функцию определяющую количество уникальных хэш в строке из латинских букв.
 def unique_str(string):
     for i in range(len(string)):
         for j in range(i, len(string)):
             if not string[i:j + 1] == string:
-                uni_str.add(hash(string[i:j + 1]))
-    return f'{string} - {len(uni_str)} уникальных подстрок'
+                uni_str.add(hashlib.sha256(string[i:j + 1].encode()).hexdigest())
+    return f'{string} - {len(uni_str)} уникальных подстрок.'
 
 
 uni_str = ''
