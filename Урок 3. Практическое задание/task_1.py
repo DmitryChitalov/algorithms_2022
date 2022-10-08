@@ -28,3 +28,108 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_of_function(function):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = function(*args, **kwargs)
+        end = time.time()
+        print(f"Время выполнения функции {function.__name__} "
+              f"составило {end - start}")
+        return result
+
+    return wrapper
+
+
+# a)
+
+my_list = []
+my_dict = {}
+
+
+# Заполнение списка - сложность функции O(1)
+@time_of_function
+def complete_list(user_list):
+    for i in range(1, 100000):  # O(1)
+        user_list.append(i)  # O(1)
+
+
+complete_list(my_list)
+
+
+# Заполнение словаря - сложность функции O(1)
+@time_of_function
+def complete_dict(user_dict):
+    for element in range(1, 100000):  # O(1)
+        user_dict[element] = element ** 2  # O(1)
+
+
+complete_dict(my_dict)
+
+"""
+На заполнение списка затрачивается примерно 0.000998 сек.
+На заполнение словаря - примерно 0.005001 сек.
+Время выполнения добавления элементов в словарь больше, чем в список,
+из-за расчёта хеша для элементов словаря. 
+"""
+
+
+# b)
+
+
+# Получение элемента списка - сложность O(N)
+@time_of_function
+def get_el_list(user_list):
+    for index in range(10000):  # O(N)
+        user_list[index] = user_list[index + 1]  # O(1)
+
+
+get_el_list(my_list)
+
+
+# Получение элемента словаря - сложность #O(N)
+@time_of_function
+def get_el_dict(user_dict):
+    for i in range(10000):  # O(N)
+        user_dict[i] = "Hi"  # O(1)
+
+
+get_el_dict(my_dict)
+
+"""
+На получение элемента списка затрачивается примерно 0.000999 сек.
+На получение элемента словаря - примерно 0.000171 сек.
+Время выполнения получения элементов из словаря меньше, чем из списка,
+из-за поиска элементов словаря по хешу. 
+"""
+
+
+# c)
+
+# Удаление элемента списка - сложность функции O(N)
+@time_of_function
+def delete_el_list(user_list):
+    for element in range(1000):  # O(N)
+        user_list.pop(element)  # O(N)
+
+
+delete_el_list(my_list)
+
+
+# Удаление элемента словаря - сложность функции O(N)
+@time_of_function
+def delete_el_dict(user_dict):
+    for item in user_dict.copy():  # O(N)
+        del user_dict[item]  # O(1)
+
+
+delete_el_dict(my_dict)
+
+"""
+На удаление элемента списка затрачивается примерно 0.007236 сек.
+На удаление элемента словаря - примерно 0.001030 сек.
+Время выполнения удаления элементов из списка больше, чем из словаря,
+так как за счет наличия кеша доступ к элементам словаря осуществляется быстрее. 
+"""
