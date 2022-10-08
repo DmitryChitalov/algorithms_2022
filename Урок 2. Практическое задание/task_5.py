@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii(i=1, start=32):
+    if start == 128:
+        exit()
+    if i % 10 == 0:
+        print(f'{start:8} - {chr(start)}')
+        i += 1
+        start += 1
+        return ascii(i, start)
+    else:
+        print(f'{start:8} - {chr(start)}', end='')
+        i += 1
+        start += 1
+        return ascii(i, start)
+
+
+ascii()

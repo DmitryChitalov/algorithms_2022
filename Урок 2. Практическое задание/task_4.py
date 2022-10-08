@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_nums(num, sum=0, cnt=0, rng=1):
+    if cnt == num:
+        print(f'Количество элементов: {num}, их сумма: {sum}')
+    else:
+        sum += rng
+        rng /= -2
+        cnt += 1
+        return sum_nums(num, sum, cnt, rng)
+
+
+sum_nums(int(input('Введите количество элементов: ')))
