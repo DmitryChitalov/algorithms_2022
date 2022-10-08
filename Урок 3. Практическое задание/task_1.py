@@ -29,19 +29,18 @@ b) получение элемента списка, оцените сложно
 И примените ее к своим функциям!
 """
 
-import time
-import random
+from time import time
 
 # Функция декоратор для измерения времени выполнения функции-аргумента.
 def check_time(func):
-    def wrap(*args):
-        time_start = time.time()
+    def timer(*args):
+        time_start = time()
         ret = func(*args)
-        time_end = time.time()
-        print(func.__name__, time_end - time_start)
+        time_end = time()
+        print(f'Время выполнения функции {func.__name__}, составило - {time_end - time_start}')
         return ret
 
-    return wrap
+    return timer
 
 list_data = [num for num in range(10000000)]
 #print(list_data)
@@ -51,28 +50,28 @@ dict_ex = {}
 
 # Пункт a
 # Заполнение списка через append.
-# Сложность O(n).
 @check_time
 def fill_list(list_ex, list_data):
-    for i in list_data:               # O(n))
-        list_ex.append(i)             # O(1)
+    ''' Заполняется список '''
+    for i in list_data:
+        list_ex.append(i)             # O(1), вставка в конец списка
 
     return list_ex
 
 # Заполнение списка через insert.
-# Сложность O(n).
 @check_time
 def fill_list_1(list_ex, list_data):
-    for i in list_data:               # O(n))
-        list_ex.insert(0, i)          # O(1)
+    ''' Заполняется список '''
+    for i in list_data:
+        list_ex.insert(0, i)          # O(n) по документации, вставка в начало списка
 
     return list_ex
 
 # Заполнение словаря через setdefault.
-# Сложность O(n).
 @check_time
 def fill_dict(dict_ex, list_data):
-    for i in range(10000000):                        # O(n)
+    ''' Заполняется словарь '''
+    for i in range(10000000):
         dict_ex.setdefault(i, list_data[i])      # O(1)
 
     return dict_ex
@@ -98,20 +97,15 @@ fill_dict(dict_ex, list_data)
 
 # Пункт b 
 # Получение элемента списка по индексу.
-
-n = random.randint(0, 10000000)
-
-# Сложность O(n).
 @check_time
 def get_el_list(list_ex):
-    for i in list_ex:       # O(n)
+    for i in list_ex:
         _ = i               # O(1)
 
 # Полунчение элемента словаря через get.
-# Сложность O(n).
 @check_time
 def get_el_dict(dict_ex):
-    for i in range(10000000):  # O(n)
+    for i in range(10000000):
         _ = dict_ex[i]         # O(1)
 
 get_el_list(list_ex)
@@ -119,26 +113,21 @@ get_el_list(list_ex)
 get_el_dict(dict_ex)
 #print(get_el_dict(dict_ex))
 
-# Время извлечения списка из 10000000 элементов через append составило - 0.25221967697143555.
-# Время извлечения словаря из 10000000 элементов через append составило - 0.8499264717102051.
+# Время извлечения списка из 10000000 элементов по индексу составило - 0.25221967697143555.
+# Время извлечения словаря из 10000000 элементов через get составило - 0.8499264717102051.
 # Время извлечения элементов словаря больше чем списка примерно в 3 раза, видимо сказывается цикл и метод получения!
 
 # Пункт c
 # Удаление элемента списка по индексу.
-
-n = random.randint(0, 10000000)
-
-# Сложность O(n).
 @check_time
 def del_el_list(list_ex):
-     for i in list_ex:       # O(n)
+     for _ in list_ex:
         list_ex.pop()        # O(1)
 
 # Удаление элемента словаря по ключу.
-# Сложность O(n).
 @check_time
 def del_el_dict(dict_ex):
-    for i in range(10000000):  # O(n)
+    for i in range(10000000):
         dict_ex.pop(i)         # O(1)
     
 
@@ -147,6 +136,6 @@ del_el_list(list_ex)
 del_el_dict(dict_ex)
 #print(del_el_dict(dict_ex))
 
-# Время удаления списка из 10000000 элементов через append составило - 0.31475400924682617.
-# Время удаления списка из 10000000 элементов через append составило - 1.3295505046844482.
+# Время удаления списка из 10000000 элементов через pop составило - 0.31475400924682617.
+# Время удаления списка из 10000000 элементов через pop составило - 1.3295505046844482.
 # Время удаления элементов словаря больше чем списка примерно в 3 раза!
