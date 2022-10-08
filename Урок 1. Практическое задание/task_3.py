@@ -17,3 +17,32 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def sort_0(data):  # O(n log n)
+    sort_data = {}  # O(1)
+    sort_keys = sorted(data, key=data.get, reverse=True)[0:3]  # O(n log n + 3)
+
+    for k in sort_keys:  # O(n)
+        sort_data[k] = data[k]  # O(1)
+
+    return sort_data  # O(1)
+
+
+def sort_1(data):  # O(n log n)
+    sort_tuple = sorted(data.items(), key=lambda x: x[1], reverse=True)  # O(n log n)
+    sort_data = dict(sort_tuple[0:3])  # O(3)
+
+    return sort_data  # O(1)
+
+
+data_c = {
+    'Dell': 1000000,
+    'Samsung': 50000000,
+    'Apple': 100000000,
+    'Xiaomi': 451555522,
+    'Lenovo': 4875126465,
+    'Google': 47952265922
+}
+
+print(sort_0(data_c))
+print(sort_1(data_c))

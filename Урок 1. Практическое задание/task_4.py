@@ -22,3 +22,36 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'pmtkachev': ('0000', False),
+    'anonim': ('1234', True),
+    'test': ('test', False),
+    'pupkin': ('vasya', True),
+}
+
+
+def check_user_0(name, pswd):
+    # Сложность: O(n)
+    for k, v in users.items():  # O(n)
+        if k == name:  # O()
+            if v[0] == pswd:  # O(1)
+                if v[1]:  # O(1)
+                    return "Access is allowed"  # O(1)
+                else:
+                    return "Not activated"  # O(1)
+            else:
+                return "Wrong password"  # O(1)
+
+
+def check_user_1(name, pswd):
+    # Сложность: O(1)
+    user = users.get(name)  # O(1)
+    if user:  # O(1)
+        if user[0] == pswd:  # O(1)
+            if user[1]:  # O(1)
+                return "Access is allowed"  # O(1)
+            else:
+                return "Not activated"  # O(1)
+        else:
+            return "Wrong password"  # O(1)

@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# Квадратичная сложность O(n^2)
+def check_min_q(data):
+    minimum = data[0]
+    for i in data:  # O(n)
+        for j in data:  # O(n)
+            k = j  # O(1)
+        if i < minimum:  # O(1)
+            minimum = i  # O(1)
+    return minimum  # O(1)
+
+
+# Линейная сложность O(n)
+def check_min_lin(data):
+    minimum = data[0]  # O(1)
+    for i in data:  # O(n)
+        if i < minimum:  # O(1)
+            minimum = i  # O(1)
+    return minimum  # O(1)
+
+
+lst = [10, 45, 47, 1, 5]
+
+print(f'Минимум с квадратичной сложностью {check_min_q(lst)}')
+print(f'Минимум с линейной сложностью {check_min_lin(lst)}')
