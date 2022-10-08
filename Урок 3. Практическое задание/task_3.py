@@ -33,8 +33,7 @@ def unique_str(string):
     return f'{string} - {len(uni_str)} уникальных подстрок.'
 
 
-uni_str = ''
-uni_str = set(uni_str)
+uni_str = set() # Создаём пустое множество.
 
 # Проверим работу функции.
 string = 'papa'
