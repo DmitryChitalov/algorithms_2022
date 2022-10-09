@@ -30,7 +30,7 @@ def sort_0(data):  # O(n log n)
 
 def sort_1(data):  # O(n log n)
     sort_tuple = sorted(data.items(), key=lambda x: x[1], reverse=True)  # O(n log n)
-    sort_data = dict(sort_tuple[0:3])  # O(3)
+    sort_data = dict(sort_tuple[0:3])  # Сложность операции зависит от количества аргументов O(len(...)) или O(n).
 
     return sort_data  # O(1)
 
