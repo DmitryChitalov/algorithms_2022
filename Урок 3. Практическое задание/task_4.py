@@ -15,3 +15,23 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex  
+cache_obj = {}
+print(salt) # 8f496500cb6c406793c2ce349e54436d
+
+def get_page(url):
+    if cache_obj.get(url):
+        print(f'{url} есть в кэше')
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_obj[url] = res
+        print(cache_obj)
+
+
+get_page('https://github.com/')
+get_page('https://github.com/')
+get_page('https://geekbrains.ru/')
+
