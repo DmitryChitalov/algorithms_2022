@@ -16,4 +16,25 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+companies = {
+  'PUPU' : 100000,
+  'Annino' : 435000,
+  'FOrk' : 156784243,
+  'Work' : 6870267,
+  'MiuMiu' : 98260234,
+  'WOW!' : 5176891513465
+}
+
+def first_func(dict_of_companies):
+  maximum = int()
+  company = str()
+  for i in dict_of_companies:
+    if dict_of_companies[i] > maximum:
+      company = i
+  return company
+
+def second_func(dict_of_companies):
+  maximum = max(dict_of_companies.values())
+  company = {k:v for k, v in dict_of_companies.items() if v == maximum}
+  return company
 
