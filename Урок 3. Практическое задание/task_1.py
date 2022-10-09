@@ -28,3 +28,70 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+n = 700000
+
+def time_decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполенения функции {func.__name__} '
+              f'составило {end - start}')
+        return result
+    return timer
+
+
+@time_decorator
+def a_append(a, num):
+    for i in range(num):
+        a.append(i)  # O(1)
+
+some_list = []
+a_append(some_list, n)
+print('*' * 100)
+
+
+@time_decorator
+def a_dict(dct, num):
+    for i in range(num):  # O(1)
+        dct[i] = i
+
+some_dict = {}
+a_dict(some_dict, n)
+print('*' * 100)
+
+# Время выполенения функции a_append составило 0.0438847541809082
+# Время выполенения функции a_dict составило 0.06382942199707031
+
+# Операция заполнения списка через append - добавление в конец 
+# списка - занимает почти столько же времени, как и операция заполнения словаря
+
+
+@time_decorator
+def change_a_list(lst):     # О(n)
+    for i in range(1000):  
+        lst.pop(i)
+    for j in range(1000):
+        lst[j] = lst[j + 1] 
+
+
+change_a_list(some_list)
+print('*' * 100)
+
+
+@time_decorator
+def change_a_dict(dct):     # O(1)
+    for i in range(100000):
+        dct.pop(i) 
+    for j in range(101, 202):
+        dct[j] = 'a'  
+
+change_a_dict(some_dict)
+print('*' * 100)
+
+# Время выполенения функции change_a_list составило 0.4747586250305176
+# Время выполенения функции change_a_dict составило 0.0069713592529296875
+
+# Операция со словарем происходит быстрее, потому что это хеш-таблица
