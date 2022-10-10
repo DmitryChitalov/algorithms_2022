@@ -17,4 +17,20 @@
 Перевернутое число: 321
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
+Здесь получилось 3210
 """
+def num_rev(numbers):
+    if len(numbers) == 1:
+        return numbers
+    else:
+        n = str(int(numbers) % 10)
+        numbers = str(int(numbers) // 10)
+        if n == '0':
+            return num_rev(numbers) + n
+        else:
+            return n + num_rev(numbers)
+
+numbers = input('Введите число: ')
+
+print(num_rev(numbers))
+

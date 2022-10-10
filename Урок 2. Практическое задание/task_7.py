@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def my_sum(number):
+    if number == 1:
+        return 1
+    else:
+        return my_sum(number-1) + number
+
+number = random.randint(1, 1000)
+if my_sum(number) == (number * (number + 1) / 2):
+    print('Равенство верно')
+else:
+    print('Равенство не верно')
