@@ -11,6 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +36,25 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return "".join(reversed(str(enter_num)))
+
+
+user_num = 1234567890
+
+print("Рекурсия:", timeit(f"revers({user_num})", globals=globals()))
+
+print("Цикл:", timeit(f"revers_2({user_num})", globals=globals()))
+
+print("Срез:", timeit(f"revers_3({user_num})", globals=globals()))
+
+print("Реверс:", timeit(f"revers_4({user_num})", globals=globals()))
+
+"""
+Рекурсивный способ решения порождает больше всего вызовов. 
+Скорость работы функции реализованной через цикл зависит от длины аргумента.
+Решение посредством функции revers_4 оптимальнее двух предыдущих.
+Решение через срез имеет константную сложность и отрабатывает быстрее остальных.
+"""
