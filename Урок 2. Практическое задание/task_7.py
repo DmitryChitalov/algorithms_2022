@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def recursion(num, res):
+    if num == 0:
+        return res
+    res.append(num)
+    res.append('+')
+    return recursion(num - 1, res)
+
+
+if __name__ == '__main__':
+    n = int(input('Введите n: '))
+    a = recursion(n, [])
+    a.reverse()
+    string = ''.join(list(map(str, a)))[1:]
+    if eval(string) == n * (n + 1) // 2:
+        print(f'{string} = {n}({n}+1)/2')

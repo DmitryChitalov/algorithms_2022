@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_num(num, ce, co):
+    if (num % 10) % 2 == 0:
+        ce += 1
+    else:
+        co += 1
+    if num // 10 == 0:
+        return f'Четных: {ce} Нечетных: {co}'
+    return check_num((num // 10), ce, co)
+
+
+if __name__ == '__main__':
+    print(check_num(int(input('Введите число: ')), 0, 0))

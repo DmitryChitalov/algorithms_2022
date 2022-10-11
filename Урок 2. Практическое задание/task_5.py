@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symb_code(n=32, strin=''):
+    string = strin
+    if n == 128:
+        return string
+    if n % 10 == 2:
+        string += '\n'
+    string += f'{n} - {chr(n)} '
+    return symb_code(n + 1, string)
+
+
+if __name__ == '__main__':
+    print(symb_code())
