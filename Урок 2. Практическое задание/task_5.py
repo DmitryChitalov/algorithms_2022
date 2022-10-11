@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def process(symbol_num=32, curr_pos=1):
+    if symbol_num > 127:
+        return
+    print(f' {symbol_num} - {chr(symbol_num)}', end='\n' if curr_pos % 10 == 0 else ' ')
+    return process(symbol_num + 1, curr_pos + 1)
+
+
+if __name__ == '__main__':
+    process()
