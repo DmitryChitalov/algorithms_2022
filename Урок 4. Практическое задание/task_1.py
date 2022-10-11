@@ -27,17 +27,18 @@ def my_func(nums):
     return [el for el in range(len(nums)) if nums[el] % 2 == 0]
 
 
-print(func_1([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9]))
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+print(func_1(my_list))
 print(f"Замер func_1 >>> "
-      f"{timeit('func_1', setup='from __main__ import func_1', number=50000000)}")
-# Замер func_1 >>> 0.7996113
-print(my_func([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9]))
+      f"{timeit('func_1(my_list)', globals=globals(), number=500000)}")
+# Замер func_1 >>> 1.327865777
+print(my_func(my_list))
 print(f"Замер my_func >>> "
-      f"{timeit('func_1', setup='from __main__ import func_1', number=50000000)}")
-# Замер my_func >>> 0.7214709000000001
+      f"{timeit('my_func(my_list)', globals=globals(), number=500000)}")
+# Замер my_func >>> 1.215596542
 
 """Произведены замеры времени функции из задания(итератор с функцией append) и 
-оптимизированной мною функции (list comprehension), количество замеров == 50000000.
+оптимизированной мною функции (list comprehension), количество замеров == 500000.
 Результат показал, что оптимизированная функция выполнилась с наименьшими временными затратами,
 так как генератор списков, по умолчанию, работает шустрее for-циклов.
 """
