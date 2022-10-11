@@ -24,15 +24,17 @@ def func_1(nums):
 
 
 def func_2(nums):
-    new_arr = [j for i, j in enumerate(nums) if not i % 2 == 0]
+    new_arr = [i for i, j in enumerate(nums) if i % 2==0]
 
     return new_arr
 
 
 nums = [j * 10 for j in range(51)]
 
-print(timeit.timeit("func_1(nums)", globals=globals(), number=1000))
-print(timeit.timeit("func_2(nums)", globals=globals(), number=1000))
+
+print(func_2(nums))
+# print(timeit.timeit("func_1(nums)", globals=globals(), number=1000))
+# print(timeit.timeit("func_2(nums)", globals=globals(), number=1000))
 
 """
 LC стабильно быстрее чем добавление в цикле в 1,5 - 2 раза.
