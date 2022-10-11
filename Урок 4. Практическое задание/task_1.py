@@ -12,6 +12,8 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -19,3 +21,24 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def my_func(nums):
+    return [el for el in range(len(nums)) if nums[el] % 2 == 0]
+
+
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+print(func_1(my_list))
+print(f"Замер func_1 >>> "
+      f"{timeit('func_1(my_list)', globals=globals(), number=500000)}")
+# Замер func_1 >>> 1.327865777
+print(my_func(my_list))
+print(f"Замер my_func >>> "
+      f"{timeit('my_func(my_list)', globals=globals(), number=500000)}")
+# Замер my_func >>> 1.215596542
+
+"""Произведены замеры времени функции из задания(итератор с функцией append) и 
+оптимизированной мною функции (list comprehension), количество замеров == 500000.
+Результат показал, что оптимизированная функция выполнилась с наименьшими временными затратами,
+так как генератор списков, по умолчанию, работает шустрее for-циклов.
+"""
