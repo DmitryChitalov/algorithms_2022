@@ -17,3 +17,30 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+def top3comp1(comp):  # Итоговая сложность O(n^3)
+    val_list = []  # O(1)
+    for i in comp.values():  # O(n)
+        val_list.append(i)  # O(1)
+    val_list.sort(reverse=True)  # O(nlogn)
+    top3val = val_list[:3]  # O(1)
+    result = []  # O(1)
+    for i in top3val:  # O(n)
+        for k, val in comp.items():  # O(n)
+            if i == val:  # O(n)
+                result.append(k)  # O(1)
+                break  # O(1)
+    return result  # O(1)
+
+
+def top3comp2(comp):  # Итоговая сложность O(nlogn)
+    sorted_comp = sorted(comp, key=comp.get, reverse=True)  # O(nlogn)
+    return sorted_comp[:3]  # O(1)
+
+
+companys = {'Google': 666, 'Яндекс': 555, 'Wildberries': 4444, 'Ozon': 3333}
+
+print(top3comp1(companys))
+print(top3comp2(companys))
+
+# Эффективнее решение №2, алгоритм в нотации О() получился быстрее, код локоничнее и читабельнее

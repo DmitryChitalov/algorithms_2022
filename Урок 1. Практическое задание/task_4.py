@@ -22,3 +22,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def chek_user1(user):  # Итоговая сложность O(n^2)
+    user_login = input('Введите логин:')  # O(1)
+    user_password = input('Введите пароль:')  # O(1)
+    if user_login == user['login'] and user_password == user['password']:  # O(n)
+        if user['status'] == 1:  # O(n)
+            return 'Аутентификацию пройдена'  # O(1)
+        return 'Активируйте учетную запись'  # O(1)
+    return 'Логин или пароль введены неверно'  # O(1)
+
+
+def chek_user2(user):  # Итоговая сложность O(n)
+    user_login = input('Введите логин:')  # O(1)
+    user_password = input('Введите пароль:')  # O(1)
+    if user_login == user['login'] and user_password == user['password'] \
+            and user['status'] == 1:  # O(n)
+        return 'Аутентификацию пройдена'  # O(1)
+    if user_login == user['login'] and user_password == user['password'] \
+            and user['status'] == 0:  # O(n)
+        return 'Активируйте учетную запись'  # O(1)
+    return 'Логин или пароль введены неверно'  # O(1)
+
+
+user1 = {'login': 'p', 'password': '1', 'status': 1}
+print(chek_user1(user1))
+print(chek_user2(user1))
+
+"""
+Эффективнее решение №2, алгоритм в нотации О() получился быстрее, но код стал более грамостким и менее читабелен, 
+а из-за этого тяжелей в обслуживании
+"""
