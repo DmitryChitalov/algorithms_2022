@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def left(n):
+    if n == 1:
+        return n
+    elif n > 0:
+        return n + left(n-1)
+
+def right(n):
+    return n * (n + 1) // 2
+
+##
+if __name__ == '__main__':
+    nuber_user = int(input('Введите число:'))
+    print(left(nuber_user))
+    if left(nuber_user) == right(nuber_user):
+        print(True)
+    else:
+
+        print(False)

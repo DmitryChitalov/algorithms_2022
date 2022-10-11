@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def number_opposite(num, result_number=''):
+    if len(num) == 1:
+        print(f'Перевернутое число: {result_number + num}')
+    else:
+        result_number += str(int(num) % 10)
+        num = int(num) // 10
+        number_opposite(str(num), result_number)
+
+
+if __name__ == '__main__':
+    number = input('Введите число:')
+    number_opposite(number)
