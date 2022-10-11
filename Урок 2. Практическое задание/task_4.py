@@ -10,3 +10,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def rowCount(n, el=1, i=0, sum=0):
+    if i == n:
+        print(f'сумма: {sum}')
+        return
+    else:
+        sum = sum + el
+        el /= -2
+        return rowCount(n, el, i + 1, sum)
+
+
+count = int(input('Введите n: '))
+rowCount(count)

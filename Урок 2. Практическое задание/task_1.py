@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculation():
+    operationsList = ('+', '-', '*', '/', '0')
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        print('Програма завершена')
+        return
+    else:
+        if operation in operationsList:
+            firstDigit = input('Введите первое число: ')
+            secondDigit = input('Введите второе число: ')
+            if not firstDigit.isdigit() or not secondDigit.isdigit():
+                result = 'Вы вместо трехзначного числа ввели строку (((. Исправьтесь'
+            else:
+                firstDigit = int(firstDigit)
+                secondDigit = int(secondDigit)
+                if operation == '+':
+                    result = str(firstDigit + secondDigit)
+                    result = 'Ваш результат ' + result
+                if operation == '-':
+                    result = str(firstDigit - secondDigit)
+                    result = 'Ваш результат ' + result
+                if operation == '*':
+                    result = str(firstDigit * secondDigit)
+                    result = 'Ваш результат ' + result
+                if operation == '/' and secondDigit == 0:
+                    result = 'На ноль нельзя делить'
+                elif operation == '/':
+                    result = str(firstDigit / secondDigit)
+                    result = 'Ваш результат ' + result
+
+        else:
+            result = 'Недопустимая операция'
+        print(result)
+        return calculation()
+
+
+calculation()

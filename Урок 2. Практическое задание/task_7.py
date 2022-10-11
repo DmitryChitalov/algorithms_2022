@@ -13,3 +13,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def checkexpression(n, i=1, leftSum=0, leftString=''):
+    if i > n:
+        rightSum = n * (n + 1) / 2
+        rightString = f'{n}({n}+1)/2'
+        checkResult = '='
+        if (rightSum != leftSum):
+            checkResult = '!='
+        print(leftString + ' ' + checkResult + ' ' + rightString)
+        return
+    else:
+        leftSum += i
+        if leftString=='':
+            leftString=str(i)
+        else:
+            leftString = leftString + '+' + str(i)
+        return checkexpression(n, i + 1, leftSum, leftString)
+
+
+n = int(input('Введите n: '))
+checkexpression(n)

@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def showAsciiTable(start, end, i=False, j=1):
+    if not i:
+        i = start
+    if i > end:
+        return
+    else:
+        endSymbol = ''
+        if j % 10 == 0:
+            endSymbol = '\n'
+            j = 0
+        print("%4d-%s" % (i, chr(i)), end=endSymbol)
+        return showAsciiTable(start, end, i + 1, j + 1)
+
+
+showAsciiTable(32, 127)
