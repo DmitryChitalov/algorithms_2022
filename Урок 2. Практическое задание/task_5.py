@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascci_code(i=1, sign_number=32):
+    if sign_number == 128:
+        return
+    elif i % 10 == 0:
+        print(f'{sign_number:5} - {chr(sign_number)}')
+        i += 1
+        sign_number += 1
+        ascci_code(i, sign_number)
+    else:
+        print(f'{sign_number:5} - {chr(sign_number)}', end=' ')
+        i += 1
+        sign_number += 1
+        ascci_code(i, sign_number)
+
+if __name__ == '__main__':
+    ascci_code()
