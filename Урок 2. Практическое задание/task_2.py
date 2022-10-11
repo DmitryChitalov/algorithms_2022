@@ -22,7 +22,7 @@ def count_even (num):
     if num // 10 == 0:
         if num % 2 == 0:
             ev = 1
-            odd = 1
+            odd = 0
         else:
             ev = 0
             odd = 1
@@ -38,7 +38,29 @@ def count_even (num):
 
         return ev + count_even(num//10)[0], odd + count_even(num//10)[1]
 
-print(count_even(1359606))
+num = 13596852606
+print(count_even(num))
+print('В числе {} четных чисел - {}, нечетных - {}'.format(num, count_even(num)[0], count_even(num)[1]))
 
 
-
+# # Вариант 2
+# def count_even_2 (num):
+#     total = 0
+#     if num // 10 == 0:
+#
+#         if num % 2 == 0:
+#             even = 1
+#         return even
+#
+#     else:
+#         total +=1
+#         if num %10 % 2 == 0:
+#             even = 1
+#
+#         even = even + count_even_2(num//10)
+#     return even, total - even
+#
+#
+# num = 24659
+# print(count_even_2(num))
+# print('В числе {} четных чисел - {}, нечетных - {}'.format(num, count_even_2(num)[0], count_even_2(num)[1]))

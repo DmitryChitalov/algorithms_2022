@@ -27,4 +27,4 @@ def rev_num (num):
         return str(num %10) + rev_num(num // 10)
 
 
-print(rev_num(514230))
+print(rev_num(141206))

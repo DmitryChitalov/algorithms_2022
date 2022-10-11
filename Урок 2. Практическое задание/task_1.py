@@ -35,7 +35,7 @@ def oper_num():
 
 
     if oper == '0':
-        return
+        print('Вы вышли из программы')
     elif oper not in oper_valid:
         print('Вы ввели недопустимый оператор.')
         oper_num()

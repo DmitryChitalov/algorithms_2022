@@ -12,14 +12,12 @@
 """
 
 
-def sum_series(n):
-    if n == 0:
-        return num * (-0.5)
+def sum_series(n, num):
+    if n == 1:
+        return num
     else:
-        num = 1
-        n -= 1
-        return num + sum_series(n)
+        return num + sum_series(n - 1, num * (-0.5))
 
 
 n = int(input('Введите кол-во элементов n: '))
-print(f'Кол-во элементов {n}, их сумма - {sum_series(n)}')
+print(f'Кол-во элементов: {n}, их сумма: {sum_series(n, 1)}')

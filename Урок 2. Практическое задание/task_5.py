@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def table_ASCII(num):
+    if num == 127:
+        return f'{num} - {chr(num)}'
+    elif (num - 32) % 10 == 9:
+        return f'{num} - {chr(num)}\n{table_ASCII(num + 1)}'
+    else:
+        return f'{num} - {chr(num)}     {table_ASCII(num + 1)}'
+
+print(table_ASCII(32))

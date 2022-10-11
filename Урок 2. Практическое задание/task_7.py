@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_set(n):
+    if n == 1:
+        return n
+    else:
+        return n + sum_set(n - 1)
+
+
+n = 10
+
+print(sum_set(n))
+print(n * (n + 1) / 2)
+
+if sum_set(n) == n * (n + 1) / 2:
+    print('Для множества условие выполняется.')
