@@ -17,3 +17,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def countOddAndEven(digit, even=0, odd=0):
+    digit = abs(digit)
+    if digit == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+        return
+    else:
+        lastdigit = digit % 10
+        digit = digit // 10
+        if lastdigit % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return countOddAndEven(digit, even, odd)
+
+
+userDigit = int(input('Введите натуральное число: '))
+countOddAndEven(userDigit)

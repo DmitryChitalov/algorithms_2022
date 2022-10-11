@@ -18,3 +18,16 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverseDigit(digit=0, resDigit=''):
+
+    if digit == 0:
+        print(f'Перевернутое число: {resDigit}')
+        return
+    else:
+        return reverseDigit(digit // 10, resDigit + str(digit % 10))
+
+
+userDigit = int(input('Введите натуральное число: '))
+reverseDigit(userDigit)
