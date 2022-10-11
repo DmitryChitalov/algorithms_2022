@@ -17,3 +17,22 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+import random
+import string
+
+def random_key():
+    return ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
+def random_value():
+    return random.randint(100, 100000)
+
+random_dict = {random_key(): random_value() for _ in range(10)}
+print(random_dict)
+
+
+#1. O(N^2)
+for k, v in random_dict.items():                        # O(N)
+    if v in sorted(list(random_dict.values()))[-3:]:    # O(N) + O(1) + O(len(random_dict) + 0(N*logN)
+        print(k, "-", v)                                # O(1)
+
+#2. O(N)
+print((sorted(list(random_dict.items()), key=lambda x: x[1]))[-3:])     #  O(N) + O(len(random_dict) + 0(N*logN) + O(1)

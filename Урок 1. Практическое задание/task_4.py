@@ -22,3 +22,35 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+import random
+import string
+
+def random_login():
+    return ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
+
+def random_pass():
+    chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    return ''.join(random.choice(chars) for x in range(10))
+
+users_db = {random_login(): (random_pass(), bool(random.getrandbits(1))) for _ in range(10)}
+print(users_db)
+
+#1. O(N^2)
+
+login = input("Login?")                 # 0(1)
+password = input("Pass?")               # 0(1)
+def check1(login, password):
+    if users_db[login][0] == password:  # O(N)
+        print("+")                      # 0(1)
+        if users_db[login][1]:          # O(N)
+            return "Hello, " + login     # 0(1)
+        else:                           # 0(1)
+            return "pls activate"       # 0(1)
+    else:                               # 0(1)
+        return "no"                     # 0(1)
+
+print(check1(login, password))
+
+#2.
+
