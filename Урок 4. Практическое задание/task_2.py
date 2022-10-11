@@ -80,3 +80,5 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Вывод: меморизация не нужна, так как до ее запуска декоратор создает словарь (кэш) и при каждом запуске данные извлекаются из него.
