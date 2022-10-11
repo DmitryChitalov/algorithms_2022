@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def min_n2(lst):
+    min_el = lst[0]             # O(1)
+    for i in range(len(lst)):   # O(N)
+        for j in lst[i + 1:]:   # O(N)
+            if j < min_el:      # O(1)
+                min_el = j      # O(1)
+    return min_el               # O(1)
+
+
+def min_n(lst):
+    min_el = lst[0]         # O(1)
+    for j in lst:           # O(N)
+        if min_el > j:      # O(1)
+            min_el = j      # O(1)
+    return min_el           # O(1)
+
+
+if __name__ == "__main__":
+    my_lst = [9, 5, 3, 6, 2, 7, 4]
+    print(min_n2(my_lst))
+    print(min_n(my_lst))

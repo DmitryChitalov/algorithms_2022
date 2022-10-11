@@ -22,3 +22,62 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def auth(usrs):
+    """
+    тут всё #O(1)
+    """
+    while True:
+        usr = input('enter your login (or 0 to exit): ')
+        if usr == '0':
+            return
+        elif usr not in usrs:
+            print('No such user')
+        else:
+            break
+
+    while True:
+        pswd = input('enter your password (or "x" to exit): ')
+        if pswd == 'x':
+            return
+        elif pswd != users[usr][0]:
+            print('wrong password')
+        elif users[usr][1] == 1:
+            print('You are a good boy')
+            return
+        else:
+            print('You have to activate your account')
+        return
+
+
+def auth_2(usrs):
+    """
+    один цикл дает итоговое O(n), остальное O(1).
+    """
+    usr = input('enter your login: ')
+    pswd = input('enter your passwd: ')
+    for key, value in usrs.items():                     # O(N)
+        if usr == key:
+            if pswd == value[0] and value[1] == 1:
+                print('ok')
+            elif pswd == value[0] and value[1] == 0:
+                print('activate your account please')
+            else:
+                print('wrong password')
+            return
+    print('wrong login')
+    return
+
+# Вывод: во втором решении я специально усложнял алгоритм,
+# он должен был быть хуже
+
+
+if __name__ == '__main__':
+    users = {
+        'user_1': ['password_1', 1],
+        'user_2': ['password_2', 0],
+        'user_3': ['password_3', 1],
+    }
+    auth(users)
+    auth_2(users)
