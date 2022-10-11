@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def process(num: int, even_cnt: int, odd_cnt: int):
+    if num == 0:
+        return f'({even_cnt}, {odd_cnt})'
+    else:
+        digit = num % 10
+        if digit % 2 == 1:
+            odd_cnt += 1
+        else:
+            even_cnt += 1
+        num = num // 10
+        return process(num, even_cnt, odd_cnt)
+
+
+if __name__ == '__main__':
+    num_txt = input('Введите число: ')
+    if not num_txt.isdecimal():
+        print('Некорректный ввод')
+    else:
+        print(f'Количество четных и нечетных цифр в числе: {process(int(num_txt), 0, 0)}')

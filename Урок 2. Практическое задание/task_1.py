@@ -27,3 +27,41 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def process():
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if operator == '0':
+        return 0
+    elif operator not in ('+', '-', '*', '/'):
+        print('Вы ввели некорректный оператор, исправьтесь')
+        return process()
+    else:
+        operator1_txt = input('Введите первое число: ')
+        operator2_txt = input('Введите второе число: ')
+        if not operator1_txt.isdecimal() or not operator2_txt.isdecimal():
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+            return process()
+        else:
+            operator1 = int(operator1_txt)
+            operator2 = int(operator2_txt)
+            if operator == '+':
+                result = operator1 + operator2
+            elif operator == '-':
+                result = operator1 - operator2
+            elif operator == '*':
+                result = operator1 * operator2
+            elif operator == '/':
+                if operator2 == 0:
+                    print('Попытка деления на 0, исправьтесь')
+                    return process()
+                result = operator1 / operator2
+            else:
+                result = 0
+            print(f"Ваш результат {result}")
+            return process()
+
+
+if __name__ == '__main__':
+    process()

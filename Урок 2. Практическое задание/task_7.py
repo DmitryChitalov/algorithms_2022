@@ -13,3 +13,27 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def process(steps: int, curr_num=0, curr_sum=0, curr_str=''):
+    curr_num += 1
+    curr_sum += curr_num
+    if curr_num == 1:
+        curr_str = str(curr_num)
+    else:
+        curr_str += '+' + str(curr_num)
+
+    if steps == curr_num:
+        return f'{curr_str} {"=" if curr_sum == steps * (steps + 1) / 2 else "<>"} {str(steps)}*({str(steps)}+1)/2'
+    elif steps == 0:
+        return 'Некорректный ввод'
+    else:
+        return process(steps, curr_num, curr_sum, curr_str)
+
+
+if __name__ == '__main__':
+    num_txt = input('Введите количество элементов: ')
+    if not num_txt.isdecimal():
+        print('Некорректный ввод')
+    else:
+        print(f'Количество элементов - {int(num_txt)}\n{process(int(num_txt))}')

@@ -18,3 +18,20 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def process(num: int, num_trans=''):
+    if num == 0:
+        return num_trans
+    else:
+        digit = str(num % 10)
+        num = num // 10
+        return process(num, num_trans + digit)
+
+
+if __name__ == '__main__':
+    num_txt = input('Введите число, которое требуется перевернуть: ')
+    if not num_txt.isdecimal():
+        print('Некорректный ввод')
+    else:
+        print(f'{int(num_txt)} -> {process(int(num_txt))}')
