@@ -11,6 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +36,16 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+enter_num = 1357924680
+
+print('revers', timeit(f'revers({enter_num})', globals=globals()))
+print('revers_2', timeit(f'revers_2({enter_num})', globals=globals()))
+print('revers_3', timeit(f'revers_3({enter_num})', globals=globals()))
+print('revers_4', timeit(f'revers_4({enter_num})', globals=globals()))
+
