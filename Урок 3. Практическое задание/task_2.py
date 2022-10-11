@@ -22,3 +22,45 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import sqlite3
+from hashlib import sha256
+
+
+def create_db():
+    db_con = sqlite3.connect('passwd.db')
+    cursor = db_con.cursor()
+    cursor.execute("""CREATE TABLE IF NOT EXISTS passwd(
+    login text,
+    passwd text)""")
+    db_con.commit()
+    return db_con, cursor
+
+
+def set_pass():
+    login, pas = input('Введите логин: '), input('Введите пароль: ')
+    pas_hesh = sha256(login.encode() + pas.encode()).hexdigest()
+    print("В базе данных хранится строка: ", pas_hesh)
+    return login, pas_hesh
+
+
+def check(hesh, log, pas):
+
+    pas_hesh = sha256(log.encode() + pas.encode()).hexdigest()
+    if hesh == pas_hesh:
+        print("Пароль верный")
+    else:
+        print("Пароль не верный")
+
+
+
+
+def main():
+    con, cur = create_db()
+    cur.execute("""INSERT INTO passwd values (?, ?);""", set_pass())
+    con.commit()
+    login, pas = input('Введите логин: '), input('Введите пароль: ')
+    cur.execute("""SELECT passwd FROM passwd where login = ?""", (login,))
+    check(cur.fetchone()[0], login, pas)
+
+if __name__ == '__main__':
+    main()

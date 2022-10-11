@@ -22,3 +22,13 @@
 р
 а
 """
+from hashlib import sha256
+
+raw_str = input()
+
+my_set = set()
+for i in range(len(raw_str)+1):
+    for j in range(i+1, len(raw_str)+1):
+        my_set.add(sha256(raw_str[i:j].encode()).hexdigest())
+
+print(len(my_set)-1)

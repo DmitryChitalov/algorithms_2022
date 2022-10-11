@@ -28,3 +28,77 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+def profiling(func):
+    def wrapper(*args):
+        start = time()
+        res = func(*args)
+        print(time()-start)
+        return res
+    return wrapper
+
+
+my_list = []
+my_dict = {}
+
+# Пункт а
+
+@profiling
+def list_add(lst, n):
+    for i in range(n):
+        lst.append(n)#O(1)
+
+
+@profiling
+def dict_add(dic, n):
+    for i in range(n):
+        dic[i] = i#O(1)
+
+"""
+ При n = 100000000 список: 2.8214011192321777, словарь: 3.9495630264282227. 
+ Словарь заполняется быстрее за счёт того, что он не создаёт хеш для ключей
+"""
+
+
+@profiling
+def get_list(lst):
+    for i in range(len(lst)):
+        buff = lst[i]#O(1)
+
+
+@profiling
+def get_dict(dic):
+    for i in dic.keys():
+        buff = dic[i]#O(1)
+
+
+"""
+    При n = 100000000 список: 2.1897059440612793, словарь: 2.044202947616577.
+    поиск значения в словаре происходит быстрее из-за того, что ключи в нём хронятся в виде хеша
+    
+"""
+@profiling
+def list_pop(lst):
+    for i in range(len(lst)):
+        lst.pop(0)#O(n)
+
+
+@profiling
+def dict_pop(dic):
+    for i in range(len(dic)):
+        dic.pop(i)#O(1)
+
+"""
+    При n = 1000000 список: 79.10793590545654, словарь: 0.04346799850463867.
+    удаление элементов словоря происходит быстрее из-за того, что сложность удаления элементов списка линейная, что 
+    хуже чем у словаря.
+"""
+
+
+list_add(my_list, 1000000000)
+dict_add(my_dict, 1000000000)
+get_list(my_list)
+get_dict(my_dict)
+list_pop(my_list)
+dict_pop(my_dict)
