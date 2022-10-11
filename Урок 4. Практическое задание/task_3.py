@@ -40,17 +40,35 @@ def revers_3(enter_num):
 
 
 def my_revers(enter_num):
-    pass
+    my_list = []
+    for el in reversed(str(enter_num)):
+        my_list.append(el)
+    return ''.join(my_list)
 
 
-n = 4011505
+# print(my_list)
+# return el
 
-# print(revers(n))
+
+n = 10005000
+
 print(f"Замер revers >>> "
-      f"{timeit('revers(n)', globals=globals(), number=500000)}")
-# print(revers_2(n))
+      f"{timeit('revers(n)', globals=globals(), number=105000)}")
+# Замер revers >>> 0.27942606600000003
 print(f"Замер revers_2 >>> "
-      f"{timeit('revers_2(n)', globals=globals(), number=500000)}")
-# print(revers_3(n))
+      f"{timeit('revers_2(n)', globals=globals(), number=105000)}")
+# Замер revers_2 >>> 0.194141034
 print(f"Замер revers_3 >>> "
-      f"{timeit('revers_3(n)', globals=globals(), number=500000)}")
+      f"{timeit('revers_3(n)', globals=globals(), number=105000)}")
+# Замер revers_3 >>> 0.05625192599999995
+print(my_revers(n))
+print(f"Замер my_revers >>> "
+      f"{timeit('my_revers(n)', globals=globals(), number=105000)}")
+# Замер my_revers >>> 0.16085230500000003
+
+"""Проведены исследования времени работы функций предложенных + моя (my_revers).
+Замеры времени показали, что наибольшей эффективностью обладает функция со срезом
+значений строкового выражения нашего числа. При достаточно длинном числе (8 знаков),
+моя реализация с получением значения списка, где лежит наше перевернутое значение, 
+была бы на 2 месте. Реверсы же с циклом while, а особенно первая функция с рекурсией
+здесь являются наименее эффективными"""
