@@ -28,3 +28,33 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+total_profit = 0
+num_firms = int(input('Введите количество предприятий для расчета прибыли: '))
+all_firms = {}
+# создаем шаблон кортежа
+firms = namedtuple('firm_name', 'profit')
+
+for num in range(num_firms):
+    firm_name = input('Введите название предприятия: ')
+    year_profit = sum([int(n) for n in input('через пробел введите прибыль данного предприятия за каждый квартал'
+                                             '(Всего 4 квартала): ').split()])
+    # заполняем шаблон данными
+    all_firms[firm_name] = firms(profit=year_profit)
+    # вычисляем общую прибыль всех компаний
+    total_profit += year_profit
+# вычисляем среднюю прибыль всех компаний
+average_profit = total_profit / num_firms
+print('Средняя годовая прибыль всех предприятий: ', average_profit)
+
+print('Предприятия, с прибылью выше среднего значения:')
+for firm, profit in all_firms.items():
+    if sum(profit) >= average_profit:
+        print(firm)
+
+print('Предприятия, с прибылью ниже среднего значения:')
+for firm, profit in all_firms.items():
+    if sum(profit) < average_profit:
+        print(firm)
