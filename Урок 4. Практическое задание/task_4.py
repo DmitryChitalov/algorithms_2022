@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+from timeit import timeit
+from random import randint
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +40,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    count_arr = sorted([(num, array.count(num)) for num in set(array)], key=lambda max_count: max_count[1])[-1]
+    return f'Чаще всего встречается число {count_arr[0]}, оно появилось в массиве {count_arr[1]} раз(а)'
+
 print(func_1())
 print(func_2())
+print(func_2())
+
+print(f'1.func_1: {timeit("func_1()", globals=globals(), number=1000000)} sec;')
+print(f'1.func_2: {timeit("func_2()", globals=globals(), number=1000000)} sec;')
+print(f'1.func_3: {timeit("func_3()", globals=globals(), number=1000000)} sec;')
+
+"""
+Наиболее эффективная функция - func_1
+"""
