@@ -30,13 +30,14 @@ b) получение элемента списка, оцените сложно
 """
 
 import time
+from random import randint
 
 
 # from random import randrange, sample
 
 
 # Декоратор - вычисление времени
-def calc_time(func):
+def calc_time(func):                    # O(1)
     def wrapper(*args, **kwargs):
         start = time.time()
         res = func(*args, **kwargs)
@@ -47,79 +48,101 @@ def calc_time(func):
     return wrapper
 
 
-
-
 #################################################################################################################
 # # a) Заполнение списка / словаря
 
 # Список
 @calc_time
-def push_in_list(lst, rng):  # O(n)
-    for el in rng:
-        lst.append(el)
-    return lst
+def add_in_list(lst_1, lst_2):      # O(n)
+    for el_2 in lst_2:              # O(n)
+        lst_1.append(el_2)          # O(1)
+    return lst_1
+
+
+@calc_time
+def add_in_dict(dict_1, dict_2):  # O(2*n)   -- порядок сложности O(n)
+    for key_2, val_2 in dict_2.items():         # O(2*n)
+        dict_1[key_2] = val_2                   # O(1)
+    return dict_1
+
+
+lst_1 = [randint(5, 1000) for i in range(0, 20000)]
+lst_2 = [randint(5, 100000) for i in range(0, 1000000)]
 
 
 
-lst = [1, 55, 63, 98, 2, 64, 87]
-rng = range(1, 50000)
+dict_1 = {i: i ** 2 for i in range(0, 20000)}
+dict_2 = {i: i ** 2 + 50 for i in range(0, 1000000)}
 
-lst_new = push_in_list(lst, rng)  # O(n)
-# print(lst_new)
+lst_new = add_in_list(lst_1, lst_2)
+dict_new = add_in_dict(dict_1, dict_2)
+
+print(len(lst_new))
+print(len(dict_new))
+# аналоги
+# lst_1.extend(lst_2)
+# dict_1.update(dict_2)
 
 
-
-
-# Словарь
-
-# @calc_time
-# def push_in_dict(dict, data_key, data_val):
-#     for i in data_key, data_val:
-#         dict[data_key[i]] = data_val[i]
-#     return dict
-
-#
-# dict = {
-# }
-#
-# data_key = [i for i in range(1, 10)]
-# data_val = [i for i in range(1, 100)]
-#
-# dict_new = push_in_dict(dict, data_key, data_val)
+# Сложность алгоритмов - одинаковая O(n), при увеличении объёма данных - рост времени будет линейный
+# по замерам времени - заполнение списка выполняется быстрее словаря
+# потому что при заполнении списка - добавляется 1 элемент, для словаря - 2 элемента: ключ и значение, выполняется вычисление хэша.
 
 
 # ################################################################################################################
 # # b) Получение элемента из списка / словаря
 
+#########################
+# Список
 @calc_time
-def get_val(lst, n):            #O(n)
+def get_el_lst(lst, n):                # O(n)
+    lst_new = []
     for i in range(n):
-        val = lst[i]
-    return val
+        el = lst[i]
+
+##########################
+# Словарь
+@calc_time
+def get_el_dict(dict, n):          # O(n)
+    i = 0
+    for key in dict.keys():         # O(n)
+        if i <= n:                  # O(1)
+            el = dict[key]           #O(1)
+            i += 1                  # O(1)
 
 
-lst = [i for i in range(1, 100000)]
-# print(lst)
+get_el_lst(lst_1, 1000)
+get_el_dict(dict_1, 1000)
 
-val = get_val(lst, 100)
+# Сложность алгоритмов - одинаковая O(n), при увеличении объёма данных - рост времени будет линейный
+# по замерам времени - заполнение списка выполняется быстрее словаря
+# потому что при получении элемента из  списка - ищется элемент по индексу (которые идут по порядку), для словаря - по ключу,  выполняется вычисление хэша
+
+
 
 
 # ###############################################################################################################
 # # c) Удаление элемента из списка / словаря
 
 @calc_time
-def pop_out(lst, n):            #O(n)
-    for i in range(n):
-        lst.pop()
+def pop_lst(lst, n):            #O(n)
+    for i in range(n):          # O(n)
+        lst.pop()               #O(1)
     return lst
 
+@calc_time
+def pop_dict(d, n):         # O(n)
+    i = 0
+    dict_copy = dict(d)         # O(n)
 
-for i in
+    for key in d.keys():        # O(n)
+        if i <= n:              # O(1)
+            dict_copy.pop(key)  # O(1)
 
 
-lst = [i for i in range(1, 10000)]
-# print(lst)
+pop_lst(lst_2, 1000000)
+pop_dict(dict_2, 1000000)
 
-lst_new = pop_out(lst, 7000)
-# print(lst_new)
-
+# Сложность алгоритмов - одинаковая O(n), при увеличении объёма данных - рост времени будет линейный
+# по замерам времени - заполнение списка выполняется быстрее словаря
+# потому что при удалении элемента из  списка - ищется элемент, который всегда последний, для словаря - поиск по ключу, выполняется вычисление хэша

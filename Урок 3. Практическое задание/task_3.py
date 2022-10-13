@@ -39,9 +39,11 @@ def get_set_hash (str):
         set_hash.discard(str)
     return set_hash
 
+
 str = 'helloworld'
 sub_str_hash = get_set_hash(str)
 print(sub_str_hash)
+print(len(sub_str_hash))
 
 
 # def get_set_sub (str):

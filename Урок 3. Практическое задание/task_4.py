@@ -18,20 +18,16 @@
 
 import hashlib
 
-
-
-
 cache = {}
 
-def get_page (url):
 
+def get_page(url):
     if url in cache.keys():
         page = cache[url]
     else:
         page = hashlib.sha512(url.encode('utf-8')).hexdigest()
         cache[url] = page
     return page
-
 
 
 url = input('Введите url-адрес: ')
