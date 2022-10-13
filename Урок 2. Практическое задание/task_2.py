@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def digits(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    else:
+        digit = num % 10
+        num = num // 10
+        if digit % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return digits(num, even, odd)
+
+
+number = int(input('Введите натуральное число: '))
+result = digits(number)
+print(f'Четных цифр: {result[0]}\nНечетных цифр: {result[1]}')

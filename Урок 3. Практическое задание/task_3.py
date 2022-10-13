@@ -22,3 +22,16 @@
 р
 а
 """
+
+import hashlib
+
+tmp_set = set()
+string = str(input('Введите строку: '))
+
+
+for i in range(len(string)):
+    for j in range(len(string), i, -1):
+        if string[i:j] != string:
+            tmp_set.add(hashlib.md5(string[i:j].encode()).hexdigest())
+print(tmp_set)
+print(f'{string} - {len(tmp_set)} уникальных подстрок')
