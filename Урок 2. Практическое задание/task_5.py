@@ -19,3 +19,25 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def create_ascii_table(number=32, last_number=127):
+    """рисуем таблицу ascii символов"""
+
+    # в зависимости от длины числа добавляем пробел, чтобы красивее было
+    if len(str(number)) == 2:
+        ascii_str = f'{number}  - {chr(number)}  '
+    else:
+        ascii_str = f'{number} - {chr(number)}  '
+
+    if number == last_number:
+        return ascii_str
+
+    if number % 10 == 1:
+        ascii_str += '\n'
+
+    return ascii_str + create_ascii_table(number + 1)
+
+
+if __name__ == '__main__':
+    print(create_ascii_table())

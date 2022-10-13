@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_of_row(number):
+    if number == 1:
+        return 1
+    return number + sum_of_row(number - 1)
+
+
+if __name__ == '__main__':
+    n = 10
+    print(sum_of_row(n) == n * (n + 1) / 2)
