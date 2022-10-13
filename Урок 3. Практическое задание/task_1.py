@@ -58,7 +58,7 @@ ins_lst(lst_create)
 
 
 @time_decorator
-def ins_dict(dict1):                                        #O(N)
+def ins_dict(dict1):                                        #O(1)
     for i in range(0, 90000):
         dict1[str(i) + 'rs37'] = i
     return dict1
@@ -84,7 +84,7 @@ lst_get(lst_create)
 
 
 @time_decorator
-def dict_get(dct):                                            #O(N)
+def dict_get(dct):                                            #O(1)
     for i in dct:
         if i == '89966rs37':
             return dct['89966rs37']
@@ -110,7 +110,7 @@ lst_del(lst_create)
 
 
 @time_decorator
-def dict_get(dct):                                            #O(N)
+def dict_get(dct):                                            #O(1)
     for i in dct:
         if i == '89966rs37':
             del dct['89966rs37']
