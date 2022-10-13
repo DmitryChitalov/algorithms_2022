@@ -58,9 +58,9 @@ def avg_profit(data):
         max_profit = [k for k, v in co_profit.items() if v > avg_year_profit]
         min_profit = [k for k, v in co_profit.items() if v < avg_year_profit]
         return f"Средняя годовая прибыль всех предприятий >>> " \
-               f"{avg_year_profit}K $, " \
+               f"{avg_year_profit}K $\n" \
                f"Предприятия, с прибылью выше среднего значения: " \
-               f"{max_profit} " \
+               f"{max_profit}\n" \
                f"Предприятия, с прибылью ниже среднего значения: " \
                f"{min_profit}"
     except (IndexError, ValueError) as e:
