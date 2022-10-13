@@ -9,6 +9,7 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import Timer, timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,3 +40,10 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+t1 = Timer('func_1()', 'from __main__ import func_1')
+
+t2 = Timer('func_2()', 'from __main__ import func_2')
+
+print(t1.timeit(number = 1000), 'seconds')
+print(t2.timeit(number = 1000), 'seconds')
