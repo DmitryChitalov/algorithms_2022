@@ -28,3 +28,96 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+from time import time
+
+
+# Задача a)
+
+
+def time_decorator(func):                                   #O(N log N)
+    def timer(obj):
+        start = time()
+        res = func(obj)
+        end = time()
+        print(f'Время выполнения:  {end - start}')
+        return res
+    return timer
+
+
+@time_decorator
+def ins_lst(lst1):                                          #O(N)
+    for i in range(0, 90000):
+        lst1.append(str(i) + 'r36')
+    return lst1
+
+
+lst_create = []
+ins_lst(lst_create)
+
+
+@time_decorator
+def ins_dict(dict1):                                        #O(N)
+    for i in range(0, 90000):
+        dict1[str(i) + 'rs37'] = i
+    return dict1
+
+
+dict_create = {}
+ins_dict(dict_create)
+
+# Словарь заполняется медленнее, т.к. хешируются ключи
+
+
+# Задача b)
+
+
+@time_decorator
+def lst_get(lst):                                           #O(N)
+    for i in lst:
+        if i == '89983r36':
+            return lst[lst.index('89983r36')]
+
+
+lst_get(lst_create)
+
+
+@time_decorator
+def dict_get(dct):                                            #O(N)
+    for i in dct:
+        if i == '89966rs37':
+            return dct['89966rs37']
+
+
+dict_get(dict_create)
+
+
+# Время получения значения в словаре меньше, т.к. поиск осуществляется по хеш
+
+
+# Задача c)
+
+@time_decorator
+def lst_del(lst):                                             #O(N)
+    for i in lst:
+        if i == '89983r36':
+            lst.remove('89983r36')
+            return lst
+
+
+lst_del(lst_create)
+
+
+@time_decorator
+def dict_get(dct):                                            #O(N)
+    for i in dct:
+        if i == '89966rs37':
+            del dct['89966rs37']
+            return dct
+
+
+dict_get(dict_create)
+
+
+# Из словаря удаляется быстрее т.к. обращение осуществляется по хеш
