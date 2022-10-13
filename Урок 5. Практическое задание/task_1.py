@@ -28,3 +28,40 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+# в названии предприятия должны быть символы
+
+
+def fill_corp():
+    n = input('Введите количество предприятий для расчета прибыли: ')
+    d = []
+    for i in range(int(n)):
+        name = input('Введите название предприятия: ')
+        profit = input('''Через пробел введите прибыль данного предприятия
+        за каждый квартал (Всего 4 квартала): ''').split(' ')
+        name_prof = collections.namedtuple(name, ['I', 'II', 'III', 'IV'])
+        d.append(name_prof(profit[0], profit[1], profit[2], profit[3]))
+    return d
+
+
+my_nam_tupl = fill_corp()
+sum_m = 0
+my_dict = {}
+corp_max = []
+corp_min = []
+for i in my_nam_tupl:
+    summ_f = int(i.I) + int(i.II) + int(i.III) + int(i.IV)
+    sum_m = sum_m + summ_f
+    my_dict[type(i).__name__] = summ_f
+avr_g = int(sum_m / len(my_nam_tupl))
+
+for i in my_dict:
+    if my_dict[i] > avr_g:
+        corp_max.append(i)
+    if my_dict[i] < avr_g:
+        corp_min.append(i)
+
+print(f'Средняя годовая прибыль всех предприятий: {avr_g}')
+print(f'Предприятия, с прибылью выше среднего значения: {corp_max}')
+print(f'Предприятия, с прибылью ниже среднего значения: {corp_min}')
