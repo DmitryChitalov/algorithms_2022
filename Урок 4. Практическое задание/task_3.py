@@ -11,7 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
-from timeit import Timer
+from timeit import Timer, timeit
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -42,6 +42,6 @@ t2 = Timer('revers_2()', 'from __main__ import revers_2')
 
 t3 = Timer('revers_3()', 'from __main__ import revers_3')
 
-print(t1)
-print(t2)
-print(t3)
+print(t1.timeit(number = 1000), 'seconds')
+print(t2.timeit(number = 1000), 'seconds')
+print(t3.timeit(number = 1000), 'seconds')
