@@ -17,3 +17,43 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class QueueTaskClass:
+    def __init__(self):
+        self.basic = []
+        self.modification = []
+        self.solved = []
+
+    def to_basic(self, task_id):
+        self.basic.insert(0, task_id)
+
+    def from_basic_to_solved(self):
+        self.solved.insert(0, self.basic.pop())
+
+    def from_solved_to_modification(self):
+        self.modification.insert(0, self.solved.pop())
+
+    def from_modification_to_solved(self):
+        self.solved.insert(0, self.modification.pop())
+
+
+if __name__ == '__main__':
+    a = QueueTaskClass()
+    a.to_basic(1)
+    a.to_basic(2)
+    a.to_basic(3)
+    a.to_basic(4)
+
+    print(a.basic)
+
+    a.from_basic_to_solved()
+    a.from_basic_to_solved()
+    a.from_basic_to_solved()
+    a.from_solved_to_modification()
+    a.from_solved_to_modification()
+    a.from_modification_to_solved()
+
+    print(a.basic)
+    print(a.solved)
+    print(a.modification)
