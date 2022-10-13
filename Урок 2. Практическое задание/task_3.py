@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def flip(number):
+    """функция для разворота числа"""
+
+    last_digit = str(number % 10)
+    number = number // 10
+
+    if number == 0:
+        return last_digit
+
+    return last_digit + flip(number)
+
+
+if __name__ == '__main__':
+    nmb = int(input('Введите число, которое требуется перевернуть: '))
+
+    print(flip(nmb))
