@@ -15,3 +15,24 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+from uuid import uuid4
+
+
+salt = uuid4().hex
+cash_dict = {}
+
+
+def url_page(url):
+    if cash_dict.get(url):
+        print(f'Хэш url {url} - {cash_dict[url]}')
+    else:
+        result = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cash_dict[url] = result
+        print(cash_dict)
+
+
+if __name__ == '__main__':
+    url_page('https://gb.ru/lessons/260942/homework')
+    url_page('https://gb.ru/lessons/260942/homework')
