@@ -27,3 +27,61 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+char = ['+', '-', '*', '/']
+text = {
+        1: 'Введите операцию (+, -, *, / или 0 для выхода):',
+        2: 'Введите первое число:',
+        3: 'Введите второе число:',
+        4: 'Вы ввели неверный знак',
+        5: 'Вы вместо трехзначного числа ввели строку (((. Исправьтесь',
+        6: 'Ваш результат:',
+        7: 'Ошибка! Делить на ноль нельзя. Попробуйте снова'
+        }
+value = ['', 0, 0]
+
+
+def calculator(data):
+    if data == '0':
+        return
+    if data == 1:
+        value[0] = (input(text[1]))
+        if value[0] == '0':
+            print('Exit')
+            return calculator(0)
+        if value[0] not in char:
+            print(text[4])
+            return calculator(1)
+        else:
+            calculator(2)
+    if data == 2:
+        try:
+            value[1] = int(input(text[2]))
+            return calculator(3)
+        except ValueError:
+            print(text[5])
+            return calculator(1)
+    if data == 3:
+        try:
+            value[2] = int(input(text[3]))
+            if value[2] == 0 and value[0] == '/':
+                print(text[7])
+                return calculator(1)
+            return calculator(4)
+        except ValueError:
+            print(text[5])
+            return calculator(1)
+    if data == 4:
+        if value[0] == '+':
+            print(f'{text[6]} {value[1] + value[2]}')
+        elif value[0] == '-':
+            print(f'{text[6]} {value[1] - value[2]}')
+        elif value[0] == '*':
+            print(f'{text[6]} {value[1] * value[2]}')
+        elif value[0] == '/':
+            print(f'{text[6]} {value[1] / value[2]}')
+        return calculator(1)
+
+
+calculator(1)

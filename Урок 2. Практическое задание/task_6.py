@@ -7,3 +7,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def guess(number=0, count=0):
+    if count == 0:
+        number = randint(0, 100)
+        # print(f'Загадано: {number}')
+    elif count <= 10:
+        try:
+            if int(input(f'Попытка № {count}. Угадайте число: ')) != number:
+                if count < 10:
+                    print('Не верно! Попробуйте еще раз')
+            else:
+                print('<<<<<<<<<Верно>>>>>>>>>>')
+                return
+        except ValueError:
+            print('Ошибка! Вы ввели не число, а строку')
+    elif count > 10:
+        print(f'Вы не угадали. Было загадано - {number}')
+        return
+    return guess(number, count + 1)
+
+
+guess()
