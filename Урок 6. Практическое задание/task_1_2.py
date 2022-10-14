@@ -30,3 +30,80 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import profile
+
+# Урок 2 задание 1
+
+@profile
+def calc_not_optimized():
+    def calc():
+        op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        res = ''
+
+        if op == '0':
+            return ''
+
+        if op in '+-*/':
+            num1 = int(input("Введите первое целое число: "))
+            num2 = int(input("Введите второе целое число: "))
+            if op == '+':
+                res = num1 + num2
+            elif op == '-':
+                res = num1 - num2
+            elif op == '*':
+                res = num1 * num2
+            elif op == '/':
+                if num2 == 0:
+                    print('На ноль делить нельзя!')
+                    res = None
+                else:
+                    res = num1 / num2
+            print(f'Ваш результат: {res}')
+        else:
+            print('Вы указали неверную операцию...')
+        return calc()
+
+    calc()
+
+@profile
+def calc_optimized():
+    def calc():
+        op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        res = ''
+
+        if op == '0':
+            return ''
+
+        if op in '+-*/':
+            num1 = int(input("Введите первое целое число: "))
+            num2 = int(input("Введите второе целое число: "))
+            if op == '+':
+                res = num1 + num2
+            elif op == '-':
+                res = num1 - num2
+            elif op == '*':
+                res = num1 * num2
+            elif op == '/':
+                if num2 == 0:
+                    print('На ноль делить нельзя!')
+                    res = None
+                else:
+                    res = num1 / num2
+
+            # Удаляем уже не нужные num1 и num2, а также оператор
+            del num1
+            del num2
+            del op
+
+            print(f'Ваш результат: {res}')
+        else:
+            print('Вы указали неверную операцию...')
+        return calc()
+
+    calc()
+
+calc_not_optimized()
+calc_optimized()
+
+# Наверное ввиду малого количества выделяемой памяти под num1, num2, op разницы не видно

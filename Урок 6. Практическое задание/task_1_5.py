@@ -30,3 +30,73 @@
 
 Это файл для пятого скрипта
 """
+
+# Урок 9 задание 1 Основы
+from memory_profiler import profile
+import time
+
+
+class TrafficLight():
+    def __init__(self) -> None:
+        self.__color = 'красный'
+
+    def __change_color(self):
+        if self.__color == 'красный':
+            time.sleep(7)
+            self.__color = 'желтый'
+        elif self.__color == 'желтый':
+            time.sleep(2)
+            self.__color = 'зеленый'
+        else:
+            time.sleep(5)
+            self.__color = 'красный'
+
+    def running(self):
+        try:
+            print('Для выхода нажмитие Ctrl+C')
+            while True:
+                print('Сигнал светофора: ', self.__color)
+                self.__change_color()
+        except:
+            print('Завершение программы...')
+
+
+class TrafficLightSlots():
+    # Кортеж слотов
+    __slots__ = ('__color')
+
+    def __init__(self) -> None:
+        self.__color = 'красный'
+
+    def __change_color(self):
+        if self.__color == 'красный':
+            time.sleep(7)
+            self.__color = 'желтый'
+        elif self.__color == 'желтый':
+            time.sleep(2)
+            self.__color = 'зеленый'
+        else:
+            time.sleep(5)
+            self.__color = 'красный'
+
+    def running(self):
+        try:
+            print('Для выхода нажмитие Ctrl+C')
+            while True:
+                print('Сигнал светофора: ', self.__color)
+                self.__change_color()
+        except:
+            print('Завершение программы...')
+
+@profile
+def trL():
+    trafficLight = TrafficLight()
+    trafficLight.running()
+
+@profile
+def trLS():
+    trafficLight = TrafficLightSlots()
+    trafficLight.running()
+
+trL()
+trLS()

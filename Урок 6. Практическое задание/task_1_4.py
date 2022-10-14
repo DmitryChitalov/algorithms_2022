@@ -30,3 +30,39 @@
 
 Это файл для четвертого скрипта
 """
+
+# Урок 2 задание 4 Основы
+from memory_profiler import profile
+import random
+
+@profile
+def rgreeting():
+    initialList = ['инженер-конструктор Игорь',
+                   'главный бухгалтер МАРИНА',
+                   'токарь высшего разряда нИКОЛАй',
+                   'директор аэлита']
+    addition = ['Добрый день, ',
+                'Привет, ',
+                'Здравствуйте, ',
+                'Доброе утро, ',
+                'Добрый вечер, ']
+    return random.choice(addition) + random.choice(initialList).split()[-1].capitalize() + '!'
+
+@profile
+def rgreeting_opt():
+    # Сделаем кортеж
+    initialList = ('инженер-конструктор Игорь',
+                   'главный бухгалтер МАРИНА',
+                   'токарь высшего разряда нИКОЛАй',
+                   'директор аэлита')
+    # Сделаем кортеж
+    addition = ('Добрый день, ',
+                'Привет, ',
+                'Здравствуйте, ',
+                'Доброе утро, ',
+                'Добрый вечер, ')
+    # Сделаем f-строку
+    return f"{random.choice(addition)} {random.choice(initialList).split()[-1].capitalize()}!"
+
+print(rgreeting())
+print(rgreeting_opt())
