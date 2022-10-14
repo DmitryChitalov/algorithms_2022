@@ -9,3 +9,16 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+
+def reverse_numbers(data):
+    last_num = data % 10
+    first_num = data // 10
+    if data == 0:
+        return ""
+
+    return str(last_num) + reverse_numbers(first_num)
+
+
+user_choice = int(input("Введите число для реверса: "))
+print(reverse_numbers(user_choice))

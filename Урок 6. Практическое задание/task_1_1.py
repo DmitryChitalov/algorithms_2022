@@ -30,3 +30,13 @@
 
 Это файл для первого скрипта
 """
+
+
+def add_dict(n):
+    my_dict = {}
+    for el in range(n):
+        my_dict[-el] = el
+    return my_dict
+
+
+add_dict(100500)

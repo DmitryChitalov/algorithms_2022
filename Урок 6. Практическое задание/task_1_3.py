@@ -30,3 +30,10 @@
 
 Это файл для третьего скрипта
 """
+
+
+def my_revers(enter_num):
+    my_list = []
+    for el in reversed(str(enter_num)):
+        my_list.append(el)
+    return ''.join(my_list)
