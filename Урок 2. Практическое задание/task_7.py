@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+# исправил
+def equality(n, i=0, c=0):
+    b = n-i
+    i += 1
+    if i > n:
+        return c
+    return equality(n, i, b+c)
+
+
+try:
+    num = int(input('Enter the number: '))
+    print(equality(num) == num*(num+1)/2)
+except ValueError:
+    print('You must enter the number')
