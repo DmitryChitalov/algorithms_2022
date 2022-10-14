@@ -28,3 +28,26 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import OrderedDict
+order_dct = OrderedDict()
+# ввод данных
+for j in range(2):
+    name =  input('Введите название предприятия: ')
+    values = input('Через пробел введите прибыль данного предприятия\nза каждый квартал(Всего 4 квартала): ')
+    lst = list(map(int,values.split(" ")))
+    order_dct[name] = lst
+
+order_dct['Рога'] = [235, 345634, 55,  235]
+order_dct['Копыта'] = [345, 34, 543, 34]
+
+average_p = sum(map(sum, order_dct.values()))/len(order_dct)
+print(f'Средняя годовая прибыль всех предприятий: {average_p}')
+# comps = [x for x in order_dct.keys() if  ] не сообразил как сделать
+for j in order_dct.items():
+    if sum(j[1])> average_p:
+        print(f'Предприятия, с прибылью выше среднего значения: {j[0]}')
+    elif sum(j[1])<average_p:
+        print(f'Предприятия, с прибылью ниже среднего значения: {j[0]}')
+
+
