@@ -30,3 +30,81 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+
+# Урок 1 задание 5
+
+@profile
+def unslotted():
+    class Stack:
+        def __init__(self, max_one_stack : int = 7):
+            self.stack = []
+            self.max_stack = max_one_stack
+            self.index_list = 0
+
+        def stack_put(self, item):
+            if len(self.stack) == 0:
+                self.stack.append(list())
+            if len(self.stack[self.index_list]) == self.max_stack:
+                self.stack.append(list())
+                self.index_list += 1
+            self.stack[self.index_list].append(item)
+
+        def stack_get(self):
+            if len(self.stack) == 0:
+                print('Стэк пустой')
+                return None
+            else:
+                item = self.stack[self.index_list].pop()
+
+            if len(self.stack[self.index_list]) == 0:
+                self.stack.pop()
+                self.index_list -= 1
+                if self.index_list == -1: self.index_list = 0
+
+            return item
+
+        def stack_print(self):
+            print(self.stack)
+
+@profile
+def slotted():
+    class StackMemory:
+        __slots__ = ('stack', 'max_stack', 'index_list')
+
+        def __init__(self, max_one_stack : int = 7):
+            self.stack = []
+            self.max_stack = max_one_stack
+            self.index_list = 0
+
+        def stack_put(self, item):
+            if len(self.stack) == 0:
+                self.stack.append(list())
+            if len(self.stack[self.index_list]) == self.max_stack:
+                self.stack.append(list())
+                self.index_list += 1
+            self.stack[self.index_list].append(item)
+
+        def stack_get(self):
+            if len(self.stack) == 0:
+                print('Стэк пустой')
+                return None
+            else:
+                item = self.stack[self.index_list].pop()
+
+            if len(self.stack[self.index_list]) == 0:
+                self.stack.pop()
+                self.index_list -= 1
+                if self.index_list == -1: self.index_list = 0
+
+            return item
+
+        def stack_print(self):
+            print(self.stack)
+
+
+# ПРОВЕРКА:
+if __name__ == '__main__':
+    slotted()           # Чуть меньше задействовано памяти при использовании __slots__ (19.9 MiB)
+    unslotted()         # Без __slots__ (20.0)

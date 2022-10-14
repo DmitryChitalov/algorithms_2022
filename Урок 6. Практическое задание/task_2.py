@@ -9,3 +9,25 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+# Создав функцию-обертку мы можем профилировать всю функцию,
+# без вывода профилирования каждого цикла рекурсии
+@profile
+def even_odd():
+    def count_even_odd(num : int, even : int = 0, odd : int = 0):
+        if num == 0:
+            print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+        else:
+            last_num = num % 10
+            num = num // 10
+            if last_num % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+            return count_even_odd(num, even, odd)
+
+    count_even_odd(345677889)
+
+even_odd()
