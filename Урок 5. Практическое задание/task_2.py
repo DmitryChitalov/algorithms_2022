@@ -24,3 +24,24 @@ reduce
 __mul__
 __add__
 """
+
+from collections import defaultdict
+
+
+def hexadecimal_number():
+    hex_dict, hex_sum, hex_mul = defaultdict(list), 0, 1
+    hex_1 = input('Введите первое число: ')
+    hex_2 = input('Введите второе число: ')
+    hex_dict[int(hex_1, 16)] = list(hex_1)
+    hex_dict[int(hex_2, 16)] = list(hex_2)
+    for hex_num in hex_dict:
+        hex_sum += hex_num
+    for hex_num in hex_dict:
+        hex_mul *= hex_num
+
+    print(f'Сумма чисел {list(hex_1)} и {list(hex_2)} равна {list(hex(hex_sum))[2:]}\n'
+          f'Произведение чисел {list(hex_1)} и {list(hex_2)} равна {list(hex(hex_mul))[2:]}')
+
+
+if __name__ == "__main__":
+    hexadecimal_number()
