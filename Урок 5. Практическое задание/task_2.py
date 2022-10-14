@@ -24,3 +24,26 @@ reduce
 __mul__
 __add__
 """
+
+from collections import defaultdict
+from functools import reduce
+
+
+def reducer_func(el_prev, el):
+    return el_prev + el
+
+
+dct = defaultdict(list)
+# dct[1] = list('A2')
+# dct[2] = list('C4F')
+
+dct[1] = list(input(f'Введите число 1: '))
+dct[2] = list(input(f'Введите число 2: '))
+
+val1 = reduce(reducer_func, dct[1])
+val2 = reduce(reducer_func, dct[2])
+
+sm = list(hex(int(val1, 16) + int(val2, 16)).replace('0x', '').upper())
+ml = list(hex(int(val1, 16) * int(val2, 16)).replace('0x', '').upper())
+print(f'Сумма чисел из примера: {sm}')
+print(f'Произведение чисел: {ml}')
