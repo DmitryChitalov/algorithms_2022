@@ -22,3 +22,18 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+def authentication_1(username, password):
+ for i in users:
+  if username == i:
+   if password == i['pass'] and i['active']:
+    return True
+ return False
+
+
+def authentication_2(username, password):
+ return True if username in users and users[username]['pass'] == password and users[username]['active'] else False
+
+
+def authentication_3(username, password):
+ pass
