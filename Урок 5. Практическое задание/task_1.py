@@ -11,7 +11,7 @@
 Подсказка:
 Для решения задачи обязательно примените коллекцию из модуля collections
 Для лучшего освоения материала можете сделать
-несколько варианто решения этого задания,
+несколько вариантов решения этого задания,
 применив несколько коллекций из модуля collections
 
 Пример:
@@ -28,3 +28,17 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+# Resume = namedtuple('Companies', 'name prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+# toyota = Resume('Toyota', 1000, 2000, 3000, 4000)
+# mercedes = Resume('Toyota', 10000, 25000, 30000, 15000)
+
+Companies_templ = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+TOYOTA = Companies_templ(1000, 2000, 3000, 4000)
+MERSEDES = Companies_templ(10000, 25000, 30000, 15000)
+
+
+
+
