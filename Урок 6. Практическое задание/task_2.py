@@ -9,3 +9,25 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+def recur(val, res):
+
+    if val == 0:
+        return res
+    balance = str(val % 10)
+    if balance == 0:
+        res += balance
+    else:
+        res += balance
+    return recur(val // 10, res)
+
+@profile
+def func1():
+    print(recur(10000354654654003213210, ''))
+
+func1()
+'''
+Проблема - в вызове декоратора замера времени на каждом шаге рекурсии.
+Решение - внешняя функция обертка. 
+'''
