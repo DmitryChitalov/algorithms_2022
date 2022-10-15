@@ -24,3 +24,50 @@ reduce
 __mul__
 __add__
 """
+
+# 1)
+
+from collections import defaultdict
+
+def hex_num():
+    hex_1 = input('Первое число: ')
+    hex_2 = input('Второе число: ')
+    operator = input('Операция + или *: ')
+    hex_dict = defaultdict(list)
+    hex_dict[int(hex_1, 16)] = list(hex_1)
+    hex_dict[int(hex_2, 16)] = list(hex_2)
+    return hex_oper(hex_dict, operator)
+
+def hex_oper(hex_dict, operator):
+    if operator == '+':
+        sum = 0
+        for key in hex_dict.keys():
+            sum += key
+        return list(hex(sum)[2:].upper())
+    mult = 1
+    for key in hex_dict.keys():
+        mult *= key
+    return list(hex(mult)[2:].upper())
+
+print(hex_num())
+
+# 2)
+
+class HexClass:
+    def __init__(self, num_1):
+        self.num_1 = num_1
+
+    def __add__(self, other):
+        sum_nums = int(''.join(self.num_1), 16) + int(''.join(other.num_1), 16)
+        return list(f'{sum_nums:X}')
+
+    def __mul__(self, other):
+        mult_nums = int(''.join(self.num_1), 16) * int(''.join(other.num_1), 16)
+        return list(f'{mult_nums:X}')
+
+
+hex_1 = HexClass('A2')
+hex_2 = HexClass('C4F')
+
+print(f'Сумма чисел из примера: {hex_1 + hex_2}\n'
+      f'произведение: {hex_1 * hex_2}')
