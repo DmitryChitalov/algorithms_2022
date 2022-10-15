@@ -35,5 +35,5 @@ def authentication_2(username, password):
  return True if username in users and users[username]['pass'] == password and users[username]['active'] else False
 
 
-# def authentication_3(username, password):
- 
+def authentication_3(username, password):
+ pass
