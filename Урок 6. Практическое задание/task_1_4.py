@@ -30,3 +30,33 @@
 
 Это файл для четвертого скрипта
 """
+import timeit
+from memory_profiler import profile
+
+
+@profile
+def func_3():
+    array = [x for x in range(30000)]
+    elem = max(array, key=array.count)
+    max_3 = array.count(elem)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
+@profile
+def func_4():
+    array = tuple(x for x in range(30000))
+    elem = max(array, key=array.count)
+    max_3 = array.count(elem)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
+# print(timeit.timeit("func_3()", globals=globals(), number=1000))
+# print(timeit.timeit("func_4()", globals=globals(), number=1000))
+
+func_3()
+func_4()
+''' 
+Использовал кортеж вместо списка, значитильный выигрыш по расходу памяти.
+'''
