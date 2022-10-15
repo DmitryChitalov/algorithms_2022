@@ -30,3 +30,40 @@
 
 Это файл для третьего скрипта
 """
+import time
+from memory_profiler import profile
+import recordclass
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        res = function(*args)
+        print(f' {function.__name__} {time.perf_counter_ns() - start_time}')
+        return res
+
+    return wrapped
+
+
+@profile
+# @time_of_function
+def fill_dct1(n):
+    res = {}
+    for j in range(n):  # O(N)
+        res[j] = j  # O(1)
+    return res
+
+@profile
+# @time_of_function
+def fill_dct2(n):
+    res = {x: x for x in range(n)}
+    return res
+
+
+n = 100000
+lst = fill_dct1(n)
+lst = fill_dct2(n)
+
+'''
+Выигрыш по памяти при использование LC для словаря есть, но он не значителен.
+
+'''
