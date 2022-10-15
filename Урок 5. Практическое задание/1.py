@@ -1,10 +1,10 @@
+from collections import namedtuple
 
-from collections import OrderedDict
-
-NEW_DICT_0 = OrderedDict(a=1, b=2, c=3, d=4)
-
-print(NEW_DICT_0)
-
-
-NEW_DICT_1 = dict(a=1, b=2, c=3, d=4)
-print(NEW_DICT_1)
+COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+company = COMPANIES_TEMPL(
+            prof_quart_1 = 100,
+            prof_quart_2 = 200,
+            prof_quart_3 = 300,
+            prof_quart_4 = 400
+        )
+print(company)

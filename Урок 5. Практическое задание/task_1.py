@@ -39,6 +39,63 @@ Companies_templ = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_
 TOYOTA = Companies_templ(1000, 2000, 3000, 4000)
 MERSEDES = Companies_templ(10000, 25000, 30000, 15000)
 
+# def average_profit():                                                                                        # нужно делать через рекурсию ?
+#     company = input('Введите название компании (в конце введите - 0): ')
+#     if company == '0':
+#         print('Вы вышли из программы')
+#         # расчеты среднего значения и вывод компаний наименований
+#
+#     else:
+#         companies = []
+#         profits_inp = input('Введите прибыль компании за каждый квартал (4 квартала) через пробел: ')
+#         profits = profits_inp.split()                                                                       #Можно сделать без этого?
+#         COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+#         company = COMPANIES_TEMPL(
+#             prof_quart_1 = profits[0],
+#             prof_quart_2 = profits[1],
+#             prof_quart_3 = profits[2],
+#             prof_quart_4 = profits[3]
+#         )
+#         companies.append(company)
+#
+#         average_profit()
+
+def average_profit():
+    flag = 1
+    companies = []
+    companies_up = []
+    companies_down =[]
+    count = 0
+    sum = 0
+    while flag != '0':
+        name_inp = input('Введите название компании: ')
+        profits = input('Введите прибыль компании за каждый квартал (4 квартала): ').split()                    #Можно сделать без этого?
+        COMPANIES_TEMPL = namedtuple('Companies', 'name prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+        company = COMPANIES_TEMPL(
+            name = name_inp,
+            prof_quart_1 = int(profits[0]),
+            prof_quart_2 = int(profits[1]),
+            prof_quart_3 = int(profits[2]),
+            prof_quart_4 = int(profits[3])
+        )
+        companies.append(company)
+        sum = sum + company.prof_quart_1 + company.prof_quart_2 + company.prof_quart_3 + company.prof_quart_4
+        count += 4
+
+        flag = input('Для выхода нажмите 0, для продолжения - 1: ')                                             # здесь имя flag - нормальное название ?
+    print(sum, count)
+    avg = sum /count
 
 
+    for company in companies:
+        if company.prof_quart_1 + company.prof_quart_2 + company.prof_quart_3 + company.prof_quart_4 >= avg:
+            companies_up.append(company.name)
+        else:
+            companies_down.append(company.name)
 
+    return avg, companies_up, companies_down
+
+avg = average_profit()
+print(f'Среднегодовая прибыль всех компаний: {avg[0]}')
+print(f'Компании с годовой прибылью выше средней: {avg[1]}')
+print(f'Компании с годовой прибылью ниже средней: {avg[2]}')
