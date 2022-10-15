@@ -82,7 +82,10 @@ print(timeit("extend_deq(test_deque)", globals=globals()))
 # Вывод: Операции append, pop, extend элементов списка и дека по времени примерно равны по скорости.
 
 
-# 2
+"""2) сравнить операции
+appendleft, popleft, extendleft дека и соответствующих им операций списка
+и сделать выводы что и где быстрее"""
+
 test_lst = [5, 15, 25, 35, 45, 55, 65, 75]
 test_deque = deque('515253545556575')
 
@@ -98,7 +101,6 @@ def append_to_dq(test_deque):
         test_deque.appendleft(i)
     return test_deque
 
-# 2
 
 def pop_from_lst(test_lst):
     for i in range(30):
@@ -110,7 +112,6 @@ def pop_from_dq(test_deque):
         test_deque.popleft()
     return test_deque
 
-# 3
 
 def extend_lst(test_lst):
     for i in range(30):
@@ -140,7 +141,9 @@ print(timeit("extend_dq(test_deque)", globals=globals(), number=1000))
 
 Вывод: операции с деком выполняются существенно быстрее"""
 
-# 3
+"""3) сравнить операции получения элемента списка и дека
+и сделать выводы что и где быстрее"""
+
 test_lst = [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105]
 test_deque = deque('5152535455565758595105')
 
