@@ -28,3 +28,36 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+
+def calculator():
+    n = int(input('Введите количество предприятий для расчета прибыли: '))
+    companies = namedtuple('company', 'name income')
+    avarage_income = {}
+    total_avarage_income = 0
+    for i in range(n):
+        company = companies(name=input('Введите название предприятия: '),
+                            income=input('через пробел введите прибыль данного предприятия \
+                                         за каждый квартал(Всего 4 квартала): ').split())
+        total_income = 0
+        for x in range(len(company.income)):
+            total_income += int(company.income[x])
+        avg_income = total_income / len(company.income)
+        avarage_income[company.name] = avg_income
+        total_avarage_income += avg_income
+    avg_total_avarage_income = total_avarage_income / n
+    print(f'Средняя прибыль всех предприятий равна: {avg_total_avarage_income}')
+    for key, value in avarage_income.items():
+        if value > avg_total_avarage_income:
+            print(f'{key} - прибыль выше средней')
+        elif value < avg_total_avarage_income:
+            print(f'{key} - прибыль ниже средней')
+        elif value == avg_total_avarage_income:
+            print(f'{key} - прибыль рывна средней')
+
+
+if __name__ == '__main__':
+    calculator()
+
