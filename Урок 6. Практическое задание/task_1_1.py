@@ -34,6 +34,8 @@ import timeit
 from memory_profiler import profile
 
 import numpy
+
+
 @profile
 def func_1():
     nums = [j * 10 for j in range(50000)]
@@ -43,14 +45,16 @@ def func_1():
             new_arr.append(i)
     return new_arr
 
+
 @profile
 def func_2():
     nums = numpy.array([j * 10 for j in range(50000)])
     new_arr = numpy.array
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
-            numpy.append(new_arr,i)
+            numpy.append(new_arr, i)
     return new_arr
+
 
 func_1()
 func_2()
@@ -66,6 +70,8 @@ import timeit
 from memory_profiler import profile
 
 import numpy
+
+
 @profile
 def func_1():
     nums = [j * 10 for j in range(50000)]
@@ -75,14 +81,16 @@ def func_1():
             new_arr.append(i)
     return new_arr
 
+
 @profile
 def func_2():
     nums = numpy.array([j * 10 for j in range(50000)])
     new_arr = numpy.array
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
-            numpy.append(new_arr,i)
+            numpy.append(new_arr, i)
     return new_arr
+
 
 func_1()
 func_2()
@@ -93,4 +101,3 @@ func_2()
 '''
 # print(timeit.timeit("func_1()", globals=globals(), number=10))
 # print(timeit.timeit("func_2()", globals=globals(), number=10))
-
