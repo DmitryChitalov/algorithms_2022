@@ -30,3 +30,42 @@
 
 Это файл для третьего скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# task_5_1
+# 1. Написать генератор нечётных чисел от 1 до n (включительно), без использования ключевого слова yield
+
+@decor  # Выполнение заняло 2.94921875 Mib
+def iterator_without_yield(n):
+    nums_gen = (i for i in range(1, n + 1) if i % 2 != 0)
+    return nums_gen
+
+
+@decor  # Выполнение заняло 1.953125 Mib
+def iterator_with_filter(lst):
+    nums_gen = filter(lambda i: i in range(0, 10000, 2), lst)
+    return nums_gen
+
+
+if __name__ == '__main__':
+    res, mem_diff = iterator_without_yield(list(range(100000)))
+    print(f"Выполнение заняло {mem_diff} Mib")
+
+    # res2, mem_diff = iterator_with_filter(list(range(100000)))
+    # print(f"Выполнение заняло {mem_diff} Mib")
+
+# В этой задаче используется оптимизацию с помощью функции filter (Способ 9), это позволило
+# значительно оптимизировать память

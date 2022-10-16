@@ -30,3 +30,49 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import memory_usage
+from random import randint
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# Task 4_3.
+# Приведен код, формирующий из введенного числа
+# обратное по порядку входящих в него
+# цифр и вывести на экран.
+
+@decor  # Выполнение заняло 0.57421875 Mib
+def mirror_1(list_of_nums):
+    return ''.join(reversed(str(list_of_nums)))
+
+
+@decor  # Выполнение заняло 0.00390625 Mib
+def mirror_2(list_of_nums):
+    for i in reversed(list_of_nums):
+        yield i
+
+
+if __name__ == '__main__':
+    my_list = [randint(0, 9) for i in range(200000)]
+    # my_generator, mem_diff = mirror_1(my_list)
+    my_generator, mem_diff = mirror_2(my_list)
+    # print(type(my_generator))
+    # for i in my_generator:
+    #     print(i)
+
+    print(f"Выполнение заняло {mem_diff} Mib")
+
+# В этой задаче используется оптимизацию с помощью yield.
+# Она подходит тогда, когда нет необходимости сохранять всю последовательность и промежуточные значения в памяти.
+# Использование yield позволяет не сохранять в память всю последовательность, а просто генерирует объект при каждом
+# вызове функции. Это позволяет обойтись без использования большого количества оперативной памяти.

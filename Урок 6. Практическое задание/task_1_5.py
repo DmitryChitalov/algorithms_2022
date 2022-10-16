@@ -30,3 +30,97 @@
 
 Это файл для пятого скрипта
 """
+
+# 3. Реализовать класс Worker (работник).
+# Техническое задание:
+#
+# определить атрибуты: name, surname, position (должность), income (доход)
+# атрибут income должен быть защищённым и ссылаться на словарь, содержащий элементы: оклад и премия,
+# например, '{"wage": wage, "bonus": bonus}'
+# При создании экземпляра параметры wage, bonus передаются как числа.
+# создать класс Position (должность) на базе класса Worker. Это наследование.
+# в классе Position реализовать методы получения полного имени сотрудника '(get_full_name)' и дохода с учётом премии
+# '(get_total_income)'. Методы возвращают соответсвующие значения. Подумайте, корректно ли в классе наследнике напрямую
+# обращаться к защищенному атрибуту income. Или нужен getter? Аргументируйте ответ.
+# проверить работу примера на реальных данных: создать экземпляры класса Position, передать данные, проверить значения
+# атрибутов, вызвать методы экземпляров.
+
+
+"""Обычный класс и класс со слотами"""
+
+"""
+Функция sys.getsizeof возвращает размер переданного ей обьекта, 
+этот размер не включает в себя сложные структуры классов и т.д.
+
+Функция pympler.asizeof - рекурсивно ищет все вложенные 
+поля и элементы, и отображает общий размер обьекта
+"""
+
+from pympler import asizeof
+
+
+# # Task 9_3.
+# Реализовать класс Worker (работник).
+# Техническое задание:
+#
+# определить атрибуты: name, surname, position (должность), income (доход)
+# атрибут income должен быть защищённым и ссылаться на словарь, содержащий элементы: оклад и премия,
+# например, '{"wage": wage, "bonus": bonus}'
+# При создании экземпляра параметры wage, bonus передаются как числа.
+# создать класс Position (должность) на базе класса Worker. Это наследование.
+# в классе Position реализовать методы получения полного имени сотрудника '(get_full_name)' и дохода с учётом премии
+# '(get_total_income)'. Методы возвращают соответсвующие значения. Подумайте, корректно ли в классе наследнике напрямую
+# обращаться к защищенному атрибуту income. Или нужен getter? Аргументируйте ответ.
+# проверить работу примера на реальных данных: создать экземпляры класса Position, передать данные, проверить значения
+# атрибутов, вызвать методы экземпляров.
+
+class Worker:
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
+
+
+class Position(Worker):
+
+    def get_full_name(self):
+        return f'{self.name} {self.surname}'
+
+    def get_total_income(self):
+        # Подумайте, корректно ли в классе наследнике напрямую обращаться к защищенному атрибуту income.
+        # Или нужен getter? Аргументируйте ответ.
+
+        total_income = self._income["wage"] + self._income["bonus"]
+        return total_income
+
+
+BC_OBJ = Worker("Иван", "Иванов", "менеджер", 3000, 777)
+print(asizeof.asizeof((BC_OBJ)))  # -> 1064
+
+
+class Worker:
+    __slots__ = ['name', 'surname', 'position', '_income']
+
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
+
+
+class Position(Worker):
+
+    def get_full_name(self):
+        return f'{self.name} {self.surname}'
+
+    def get_total_income(self):
+        total_income = self._income["wage"] + self._income["bonus"]
+        return total_income
+
+
+BC_OBJ = Worker("Иван", "Иванов", "менеджер", 3000, 777)
+print(asizeof.asizeof((BC_OBJ)))  # -> 744
+
+# В этой задаче используется оптимизацию с помощью конструкции __slots__ (Способ 2. Слоты в ООП), это позволило
+# уменьшить память, потребляемую экземплярами класса
