@@ -33,7 +33,7 @@
 from memory_profiler import profile
 
 
-class Task_Board1:
+class TaskBoard1:
 
     def __init__(self):
         self.tasks = []
@@ -63,7 +63,7 @@ class Task_Board1:
         return len(degue)
 
 
-class Task_Board2:
+class TaskBoard2:
     __slots__ = ('tasks', 'problems', 'done')
 
     def __init__(self):
