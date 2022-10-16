@@ -30,40 +30,75 @@
 
 Это файл для третьего скрипта
 """
-import time
+"""
+Задание 1.
+
+Пользователь вводит данные о количестве предприятий,
+их наименования и прибыль за 4 квартала
+(т.е. 4 отдельных числа) для каждого предприятия.
+Программа должна определить среднюю прибыль (за год для всех предприятий)
+и вывести наименования предприятий, чья прибыль выше среднего и отдельно
+вывести наименования предприятий, чья прибыль ниже среднего
+
+Подсказка:
+Для решения задачи обязательно примените коллекцию из модуля collections
+Для лучшего освоения материала можете сделать
+несколько варианто решения этого задания,
+применив несколько коллекций из модуля collections
+
+Пример:
+Введите количество предприятий для расчета прибыли: 2
+Введите название предприятия: Рога
+через пробел введите прибыль данного предприятия
+за каждый квартал(Всего 4 квартала): 235 345634 55 235
+
+Введите название предприятия: Копыта
+через пробел введите прибыль данного предприятия
+за каждый квартал(Всего 4 квартала): 345 34 543 34
+
+Средняя годовая прибыль всех предприятий: 173557.5
+Предприятия, с прибылью выше среднего значения: Рога
+Предприятия, с прибылью ниже среднего значения: Копыта
+"""
 from memory_profiler import profile
+from collections import OrderedDict
 import recordclass
 
-def time_of_function(function):
-    def wrapped(*args):
-        start_time = time.perf_counter_ns()
-        res = function(*args)
-        print(f' {function.__name__} {time.perf_counter_ns() - start_time}')
-        return res
 
-    return wrapped
+@profile
+def var1():
+    order_dct = OrderedDict()
+    # # ввод данных
+    for j in range(0, 40000, 2):
+        order_dct[j] = [235, 345634, 55, 235]
+        order_dct[j + 1] = [345, 34, 543, 34]
+
+    average_p = sum(map(sum, order_dct.values())) / len(order_dct)
+    print(f'Средняя годовая прибыль всех предприятий: {average_p}')
+    # comps = [x for x in order_dct.keys() if sum(order_dct[x]) > average_p]
+    # print(comps)
+
+
+def sum_lst(ob):
+    return ob.x1 + ob.x2 + ob.x3 + ob.x4
 
 
 @profile
-# @time_of_function
-def fill_dct1(n):
-    res = {}
-    for j in range(n):  # O(N)
-        res[j] = j  # O(1)
-    return res
+def var2():
+    firm = recordclass.recordclass('Firm', 'name x1 x2 x3 x4')
+    firms = []
+    for j in range(0, 40000, 2):
+        firms.append(firm(j, 235, 345634, 55, 235))
+        firms.append(firm(j + 1, 345, 34, 543, 34))
 
-@profile
-# @time_of_function
-def fill_dct2(n):
-    res = {x: x for x in range(n)}
-    return res
+    average_p = sum(map(sum_lst, firms)) / len(firms)
+    print(f'Средняя годовая прибыль всех предприятий: {average_p}')
 
 
-n = 100000
-lst = fill_dct1(n)
-lst = fill_dct2(n)
+var1()
+var2()
 
 '''
-Выигрыш по памяти при использование LC для словаря есть, но он не значителен.
-
+recordclass дает выигрышь по памяти в 4 раза, по сравнению с dict
+можно было еще list заменить на tuple
 '''
