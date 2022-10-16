@@ -1,10 +1,14 @@
-from collections import namedtuple
+from collections import deque
+from random import randint
 
-COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
-company = COMPANIES_TEMPL(
-            prof_quart_1 = 100,
-            prof_quart_2 = 200,
-            prof_quart_3 = 300,
-            prof_quart_4 = 400
-        )
-print(company)
+
+lst = [randint(0,100) for i in range(0, 20)]
+deq = deque(lst)
+ext_lst = [i for i in range(0, 20)]
+
+for i in range(len(lst)):
+    lst.pop(0)
+    print(lst)
+
+# for i in deq:
+#     deq.popleft()

@@ -31,34 +31,10 @@
 
 from collections import namedtuple
 
-# Resume = namedtuple('Companies', 'name prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
-# toyota = Resume('Toyota', 1000, 2000, 3000, 4000)
-# mercedes = Resume('Toyota', 10000, 25000, 30000, 15000)
-
 Companies_templ = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
 TOYOTA = Companies_templ(1000, 2000, 3000, 4000)
 MERSEDES = Companies_templ(10000, 25000, 30000, 15000)
 
-# def average_profit():                                                                                        # нужно делать через рекурсию ?
-#     company = input('Введите название компании (в конце введите - 0): ')
-#     if company == '0':
-#         print('Вы вышли из программы')
-#         # расчеты среднего значения и вывод компаний наименований
-#
-#     else:
-#         companies = []
-#         profits_inp = input('Введите прибыль компании за каждый квартал (4 квартала) через пробел: ')
-#         profits = profits_inp.split()                                                                       #Можно сделать без этого?
-#         COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
-#         company = COMPANIES_TEMPL(
-#             prof_quart_1 = profits[0],
-#             prof_quart_2 = profits[1],
-#             prof_quart_3 = profits[2],
-#             prof_quart_4 = profits[3]
-#         )
-#         companies.append(company)
-#
-#         average_profit()
 
 def average_profit():
     flag = 1
@@ -99,3 +75,26 @@ avg = average_profit()
 print(f'Среднегодовая прибыль всех компаний: {avg[0]}')
 print(f'Компании с годовой прибылью выше средней: {avg[1]}')
 print(f'Компании с годовой прибылью ниже средней: {avg[2]}')
+
+
+
+# def average_profit():                                                                                        # нужно делать через рекурсию ?
+#     company = input('Введите название компании (в конце введите - 0): ')
+#     if company == '0':
+#         print('Вы вышли из программы')
+#         # расчеты среднего значения и вывод компаний наименований
+#
+#     else:
+#         companies = []
+#         profits_inp = input('Введите прибыль компании за каждый квартал (4 квартала) через пробел: ')
+#         profits = profits_inp.split()                                                                       #Можно сделать без этого?
+#         COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
+#         company = COMPANIES_TEMPL(
+#             prof_quart_1 = profits[0],
+#             prof_quart_2 = profits[1],
+#             prof_quart_3 = profits[2],
+#             prof_quart_4 = profits[3]
+#         )
+#         companies.append(company)
+#
+#         average_profit()
