@@ -28,3 +28,32 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import OrderedDict
+import recordclass
+
+def var1():
+    order_dct = OrderedDict()
+    # # ввод данных
+    for j in range(0,400,2):
+        order_dct[j] = [235, 345634, 55, 235]
+        order_dct[j + 1] = [345, 34, 543, 34]
+
+    average_p = sum(map(sum, order_dct.values())) / len(order_dct)
+    print(f'Средняя годовая прибыль всех предприятий: {average_p}')
+    # comps = [x for x in order_dct.keys() if sum(order_dct[x]) > average_p]
+    # print(comps)
+
+def sum_lst(ob):
+    return ob.x1+ob.x2+ob.x3+ob.x4
+
+def var2():
+    firm = recordclass.recordclass('Firm', 'name x1 x2 x3 x4')
+    firms = []
+    for j in range(0,400,2):
+        firms.append(firm(j , 235, 345634, 55, 235))
+        firms.append(firm(j+1, 345, 34, 543, 34))
+
+    average_p = sum(map(sum_lst, firms)) / len(firms)
+
+    print(average_p)
+var2()
