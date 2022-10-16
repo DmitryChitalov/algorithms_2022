@@ -15,3 +15,59 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+from random import randint
+from timeit import timeit
+
+
+# Гномья сортировка
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+# замер 10:  0.053258300002198666
+m = 10
+my_array = [randint(1, 100) for _ in range(2 * m + 1)]
+print(
+    timeit(
+        "gnome(my_array[:])",
+        globals=globals(),
+        number=1000))
+
+print('исходный массив:', my_array)
+print('отсортированный массив:', gnome(my_array[:]))
+print('медиана: ', gnome(my_array[:])[m])
+
+# замер 100:  4.965421900000365
+m = 100
+my_array = [randint(1, 100) for _ in range(2 * m + 1)]
+print(
+    timeit(
+        "gnome(my_array[:])",
+        globals=globals(),
+        number=1000))
+
+print('исходный массив:', my_array)
+print('отсортированный массив:', gnome(my_array[:]))
+print('медиана: ', gnome(my_array[:])[m])
+
+# замер 1000:  547.5309675000026
+m = 1000
+my_array = [randint(1, 100) for _ in range(2 * m + 1)]
+print(
+    timeit(
+        "gnome(my_array[:])",
+        globals=globals(),
+        number=1000))
+
+print('исходный массив:', my_array)
+print('отсортированный массив:', gnome(my_array[:]))
+print('медиана: ', gnome(my_array[:])[m])
