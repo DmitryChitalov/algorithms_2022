@@ -12,6 +12,12 @@
     в таблицах (см. материалы к уроку).
 """
 
+# O(n) линейное
+# O(n log n)  линейно-логарифмическое
+# O(n**2) квадратичное
+# O(1) + O(1) + O(1) константаное
+
+
 from random import sample
 
 
@@ -22,10 +28,10 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: # O(n) линейное
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n) линейное
+    return lst_to_set          # O(1) константаное
 
 
 ##############################################################################
@@ -37,12 +43,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: # O(n**2) квадратичное .
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(n) линейное
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n) линейное
+            return False                   # O(1) константаное
+    return True                            # O(1) константаное
 
 
 ##############################################################################
@@ -53,14 +59,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: # O(n log n)  линейно-логарифмическое
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # Список с (n) количеством элементов O(n) линейное
+    lst_copy.sort()                          # O(n log n)  линейно-логарифмическое
+    for i in range(len(lst_obj) - 1):        # O(n) линейное
+        if lst_copy[i] == lst_copy[i+1]:     # O(1) константаное
+            return False                     # O(1) константаное
+    return True                              # O(1) константаное
 
 
 for j in (50, 500, 1000, 5000, 10000):
@@ -71,3 +77,4 @@ for j in (50, 500, 1000, 5000, 10000):
 print(check_1(lst))
 print(check_2(lst))
 print(check_3(lst))
+

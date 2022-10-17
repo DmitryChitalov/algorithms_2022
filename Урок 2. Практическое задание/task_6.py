@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import random
+
+# Задание № 6
+
+
+def game(number, max_count):
+    if max_count < 11:
+        print(number)
+        user_number = int(input(f"попытка № {max_count} введите число: "))
+        if user_number == number:
+            print('Victory')
+        elif user_number < number:
+            print("введите число больше")
+            return game(number, max_count + 1)
+        else:
+            print("введите число меньше")
+            return game(number, max_count + 1)
+    else:
+        print("У вас закончились попытки")
+
+
+game(number=random.randint(1, 100), max_count=1)

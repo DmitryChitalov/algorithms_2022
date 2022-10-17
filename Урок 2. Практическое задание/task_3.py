@@ -18,3 +18,19 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+# Задание № 3
+
+
+def number(x, revers_num):
+    if x == 0:
+        print(type(revers_num))
+        print(revers_num)
+
+    else:
+        result = int(x) % 10
+        revers_num += str(result)
+        return number((int(x) // 10), revers_num)
+
+
+number(1230, '')
