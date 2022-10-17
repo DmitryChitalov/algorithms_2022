@@ -30,3 +30,47 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import memory_usage
+
+"""less_4_task_1"""
+
+
+def memory(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@memory
+def func_1_optimized(nums):
+    new_arr = filter(lambda i: i % 2 == 0, range(len(nums)))
+    return new_arr
+
+
+my_list = list(range(-100500, 100500))
+func_1_optimized(my_list)
+# Выполнение <function func_1_optimized at 0x000002A838714558> заняло 0.00390625 Mib
+func_1(my_list)
+# Выполнение <function func_1 at 0x000002A8385EE1F8> заняло 4.17578125 Mib
+
+"""
+В данном примере я оптимизировал выделение памяти за счёт получения объекта массива данных(благодаря
+функции 'filter') вместо конкретного списка, который нам возвращается из неоптимизированной функции.
+Произвёл соответствующие замеры через декоратор @memory.
+"""
