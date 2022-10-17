@@ -23,6 +23,7 @@ def memory(func):
 
     return wrapper
 
+
 """Исходный код"""
 
 

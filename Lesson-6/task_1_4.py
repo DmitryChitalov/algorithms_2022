@@ -17,6 +17,7 @@ def memory(func):
 
     return wrapper
 
+
 n = int(input('Введите значение n: '))
 odd_nums_gen = (n for n in range(1, n + 1, 2))
 print((next(odd_nums_gen)))
@@ -46,4 +47,3 @@ def opti_odd_numb_gen(lst):
 
 opti_odd_numb_gen(list(range(125)))
 # 0.0 Mib
-

@@ -31,21 +31,25 @@ def memory(func):
 
     return wrapper
 
+
 """Исходный скрипт"""
 
+
 @memory
-def reversator(num, revers_num='Зеркальное число: '):
-    if num == 0:
-        return revers_num
-    else:
-        n = num % 10
-        num = num // 10
-    return reversator(num, str(revers_num + str(n)))
+def wrapper(number):
+    def reversator(num, revers_num='Зеркальное число: '):
+        if num == 0:
+            return revers_num
+        else:
+            n = num % 10
+            num = num // 10
+        return reversator(num, str(revers_num + str(n)))
+    return number
 
 
 try:
     number = int(input('Введите число '))
-    print(reversator(number))
+    print(wrapper(number))
 except ValueError:
     print('Тип введенных данных не является числом')
 
