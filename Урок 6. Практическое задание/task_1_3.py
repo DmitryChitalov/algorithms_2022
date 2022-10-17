@@ -30,6 +30,7 @@
 
 Это файл для третьего скрипта
 """
+import time
 
 from memory_profiler import memory_usage
 
@@ -65,10 +66,11 @@ def my_revers_optimized(enter_num):
 # Выполнение <function my_revers_optimized at 0x000001F1968753A8> заняло 0.00390625 Mib
 
 n = 88 ** 8888
-print(my_revers(n))
-my_gen = my_revers_optimized(n)
-get_elem = [elem for elem in my_gen]
-print(''.join(get_elem))
+my_revers_optimized(n)
+my_revers(n)
+# my_gen = my_revers_optimized(n)
+# get_elem = [elem for elem in my_gen]
+# print(''.join(get_elem))
 
 """Здесь оптимизируем работу через ключевое слово yield. В данном случае в памяти не хранится вся
 последовательность данных, а просто генерируется объект на каждый вызов данной функции, что существенно снижает
