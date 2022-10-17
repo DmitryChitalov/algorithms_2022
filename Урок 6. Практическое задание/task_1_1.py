@@ -31,8 +31,6 @@
 Это файл для первого скрипта
 """
 from memory_profiler import profile
-from numpy import array
-from pympler.asizeof import asizeof
 from sys import getsizeof
 
 
