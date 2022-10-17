@@ -30,9 +30,10 @@
 
 Это файл для третьего скрипта
 """
-import time
 
 from memory_profiler import memory_usage
+
+"""less_4_task_3"""
 
 
 def memory(func):
