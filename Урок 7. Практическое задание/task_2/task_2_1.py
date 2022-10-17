@@ -15,3 +15,24 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+def gnome_sort(data):
+    i = 1
+    ln = len(data)
+    while i < ln:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+def run_def(s):
+    a, b = 0, 1000
+    data = [randint(a, b) for _ in range(s)]
+    gnome_sort(data)
+
+print(timeit(run_def(10), globals=globals(), ))
+
