@@ -33,6 +33,8 @@
 from memory_profiler import profile
 from sys import getsizeof
 
+"""less_3_task_1"""
+
 
 @profile()
 def add_dict(n):

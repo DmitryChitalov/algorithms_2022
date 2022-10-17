@@ -33,6 +33,8 @@
 
 from memory_profiler import memory_usage
 
+"""less_4_task_1"""
+
 
 def memory(func):
     def wrapper(*args):

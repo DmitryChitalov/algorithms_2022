@@ -31,9 +31,45 @@
 Это файл для третьего скрипта
 """
 
+from memory_profiler import memory_usage
 
+
+def memory(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory
 def my_revers(enter_num):
     my_list = []
     for el in reversed(str(enter_num)):
         my_list.append(el)
     return ''.join(my_list)
+
+
+# Выполнение <function my_revers at 0x00000246DD455798> заняло 0.2890625 Mib
+
+@memory
+def my_revers_optimized(enter_num):
+    for el in reversed(str(enter_num)):
+        yield ''.join(el)
+
+
+# Выполнение <function my_revers_optimized at 0x000001F1968753A8> заняло 0.00390625 Mib
+
+n = 88 ** 8888
+print(my_revers(n))
+my_gen = my_revers_optimized(n)
+get_elem = [elem for elem in my_gen]
+print(''.join(get_elem))
+
+"""Здесь оптимизируем работу через ключевое слово yield. В данном случае в памяти не хранится вся
+последовательность данных, а просто генерируется объект на каждый вызов данной функции, что существенно снижает
+затраты памяти. Для наглядности передаю достаточно крепкое число))"""
