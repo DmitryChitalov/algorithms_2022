@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+def hash_text(txt):
+    count = len(txt)
+    hash_array = set()
+    for i in range(count):
+        for j in range(i + 1, count + 1):
+            if txt[i:j] == text:
+                continue
+            hash_array.add(hashlib.sha256(txt[i:j].encode('utf-8')).hexdigest())
+    return len(hash_array)
+
+
+if __name__ == '__main__':
+    text = input('Пожалуйста введите текст: ')
+    print(f'В тексте {hash_text(text)} уникальных подстрок.')
