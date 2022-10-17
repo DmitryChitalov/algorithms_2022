@@ -27,3 +27,57 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calc():
+    # Запросс операции
+    operation = input('Please choice on of the following operations (+, -, *, / or 0 for Exit) : ')
+    # Базовый случай
+    if operation == '0':
+        print("bye")
+        return
+
+    """ - !!!
+    Чтобы сделать как в примере :
+    -- Введите операцию (+, -, *, / или 0 для выхода): -
+    -- Введите первое число: вп
+    нужно делать 2 переменные и каждую из них проверять ? 
+    решил сделать через цикл и хранить все в списке
+    - !!!"""
+
+    # месмто хранения чисел
+    numbers = []
+    # получаю числа
+    for i in range(1, 3):
+        number = input(f'Enter {i} number : ')
+        if not number.isdigit():
+            print('We need number not a string')
+            return rec_calc()
+        numbers.append(int(number))
+
+    # операции
+    if operation == '+':
+        print(f'your result : {numbers[0] + numbers[1]}')
+
+    elif operation == '-':
+        print(f'your result : {numbers[0] - numbers[1]}')
+
+    elif operation == '*':
+        print(f'your result : {numbers[0] * numbers[1]}')
+
+    elif operation == '/':
+        if numbers[1] == 0:
+            print('Zerro division error')
+
+        print(f'your result : {numbers[0] / numbers[1]}')
+
+    else:
+        print(f'Unknown operation {operation}')
+    return rec_calc()
+
+
+"""
+Вопрос 
+в этой функции у нас нету стэка вызовов так получается ?
+"""
+rec_calc()

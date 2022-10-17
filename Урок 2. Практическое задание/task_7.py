@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def rec_calc(n):
+    if n == 1:
+        return n
+    return n + rec_calc(n - 1)
+
+
+def check_equality():
+    n = int(input('Enter n : '))
+    view = f'{" + ".join([str(x + 1) for x in range(n)])} = {n}({n}+1)/2'
+    left_result = rec_calc(n)
+    right_result = n*(n+1)/2
+    return f"{view}\nequation is : {left_result == right_result}"
+
+
+
+print(check_equality())
