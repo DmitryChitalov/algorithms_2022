@@ -16,3 +16,30 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+import statistics
+
+
+def fn_median(data):
+    return statistics.median(data)
+
+def run_def(s):
+    a, b = 0, 1000
+    data = [randint(a, b) for _ in range(s)]
+    median_my = fn_median(data)
+    # print(f' median  {median_my}')
+
+
+print(timeit('run_def(11)', globals=globals(), number= 100))
+print(timeit('run_def(101)', globals=globals(), number= 100))
+print(timeit('run_def(1001)', globals=globals(), number= 100))
+
+# 0.0008442000253126025
+# 0.006669400027021766
+# 0.07615009997971356
+
+''' 
+Самая медленный поиск медианны - через гномью сортировку. Далее поиск через цикл в цикле. Оба метода О(N**2)
+Встроенный метод поиска самый быстрый. O(NlogN)
+'''

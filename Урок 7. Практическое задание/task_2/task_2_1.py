@@ -17,6 +17,8 @@
 """
 from random import randint
 from timeit import timeit
+import statistics
+
 
 def gnome_sort(data):
     i = 1
@@ -29,10 +31,22 @@ def gnome_sort(data):
             if i > 1:
                 i -= 1
     return data
+
+
 def run_def(s):
     a, b = 0, 1000
     data = [randint(a, b) for _ in range(s)]
-    gnome_sort(data)
+    data = gnome_sort(data)
+    median_my = data[len(data) // 2]
+    # print(f' median  {median_my}')
+    # print(f' median  {statistics.median(data)}')
 
-print(timeit(run_def(10), globals=globals(), ))
 
+# run_def(11)
+print(timeit('run_def(11)', globals=globals(), number=100))
+print(timeit('run_def(101)', globals=globals(), number=100))
+print(timeit('run_def(1001)', globals=globals(), number=100))
+
+# 0.002634700038470328
+# 0.07996830000774935
+# 7.083652600005735
