@@ -29,5 +29,5 @@ def check_equality():
     return f"{view}\nequation is : {left_result == right_result}"
 
 
-
-print(check_equality())
+if __name__ == '__main__':
+    print(check_equality())
