@@ -17,3 +17,61 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+companies = {'Geocell': 10000000,
+             'Beeline': 500000,
+             'Magti': 1002352123,
+             'Bali': 30000,
+             'Starlink': 562138124
+             }
+
+
+def biggest_income(data: dict):
+    """
+    функция получает доходы всез компаний
+    сортирует его по уменьшению
+    берет первые три значения
+    :param data: словарь с компаниями и доходом
+    :return: отсортированный словарь с 3мя компаниями с наивысшим доходом
+    сложность : O(n log n)
+    """
+    most_income = []  # O(1)
+    top_3 = list(data.values())  # O(n)
+    top_3.sort(reverse=True)  # O(n log n)
+    for v in top_3[:3]:  # O(1)
+        for k in data.keys():  # O(n)
+            if v == data[k]:  # O(1)
+                most_income.append(f"{k} : {v}")  # O(1)
+    return most_income  # O(1)
+
+
+def biggest_income2(data: dict):
+    """
+    функция получает словарь берет все значения с доходом
+    три зара берет максимальное значение
+    После проходит по списку и  словарю находя три компании которые совпадают
+    :param data:
+    :return:
+    сложность: O(n)
+    """
+    result = []
+    top_income = []  # O(1)
+    all_income = list(data.values())  # O(1)
+    for i in range(3):  # O(1)
+        max_value = max(all_income)  # O(n)
+        all_income.remove(max_value)  # O(n)
+        top_income.append(max_value)  # O(1)
+
+    for v in top_income:  # мы знаем что значение всегда будет три иттерации по этому сложность O(1)
+        for k in data.keys():  # O(n)
+            if data[k] == v:  # O(1)
+                result.append(f"{k} : {v}")  # O(1)
+    return result  # O(1)
+
+"""
+Вывод 
+второе решение лучше если судить по O() 
+Но первый подзод мне нравится больше изза количества кода
+"""
+if __name__ == "__main__":
+    print(biggest_income(companies))
+    print(biggest_income2(companies))
