@@ -10,7 +10,10 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+from collections import Counter
+
+array = [1, 3, 1, 3, 4, 5, 1, 3, 3, 5, 5, 5, 5, 5]
 
 
 def func_1():
@@ -38,4 +41,21 @@ def func_2():
 
 
 print(func_1())
+print(timeit('func_1', globals=globals(), number=10000000))
 print(func_2())
+print(timeit('func_2', globals=globals(), number=10000000))
+
+
+def func_3():
+    num = Counter(array).most_common(1)[0]
+    return f'Чаще всего встречается число {num[0]} ' \
+           f'оно встречается в массиве {num[1]} раз(а)'
+
+
+print(func_3())
+print(timeit('func_3', globals=globals(), number=10000000))
+
+# Первый алгоритм отработал за 0.2985780000453815
+# Второй отработал за 0.26736559998244047
+# Мой алгоритм с использованием коллекций отработал за 0.2457509000087157
+# Что быстрее и код лаконичнее
