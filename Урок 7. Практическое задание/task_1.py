@@ -51,7 +51,8 @@ data = [randint(a, b) for _ in range(s)]
 
 print(timeit('bubble1(data[:])', globals=globals(), number=100))
 print(timeit('bubble2(data[:])', globals=globals(), number=100))
-print(timeit('bubble2(data)', globals=globals(), number=100))
+data = bubble1(data)
+print(timeit('bubble2(data[:])', globals=globals(), number=100))
 
 # 0.05075719999149442
 # 0.04913460003444925
