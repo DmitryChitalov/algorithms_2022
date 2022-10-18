@@ -19,6 +19,41 @@
 а по убыванию.
 """
 
+from timeit import timeit
+from random import randint
 
-def start():
-    pass
+
+def sort_small_bubble(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def sort_small_bubble_v2(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+
+        n += 1
+    return lst_obj
+
+
+orig_list_100 = [randint(-100, 100) for _ in range(11)]
+print(f"Original massive >>> {orig_list_100}")
+print(
+    f'Sorted_massive >>> {sort_small_bubble(orig_list_100)}\n'
+    f'Time >>> '
+    f'{timeit("sort_small_bubble(orig_list_100[:])", globals=globals(), number=10000)}')
+
+orig_list_100_v2 = [randint(-100, 100) for _ in range(11)]
+print(f"Original massive >>> {orig_list_100_v2}")
+print(
+    f'Sorted_massive_v2 >>> {sort_small_bubble_v2(orig_list_100_v2)}\n'
+    f'Time >>> '
+    f'{timeit("sort_small_bubble_v2(orig_list_100_v2[:])", globals=globals(), number=10000)}')
