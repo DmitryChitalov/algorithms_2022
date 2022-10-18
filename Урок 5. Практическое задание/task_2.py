@@ -24,3 +24,44 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+hex_nums = defaultdict(list)
+for i in range(2):
+    n = input('Введите шестнадцатиричное число: ')
+    hex_nums[n] = list(n)
+hex_sum = hex(sum([int(i, 16) for i in hex_nums.keys()]))
+res_sum = list(hex_sum[2:])
+
+int_prod = 1
+for i in hex_nums.keys():
+    int_prod *= int(i, 16)
+hex_prod = hex(int_prod)
+res_prod = list(hex_prod[2:])
+print('Сумма чисел: ', res_sum)
+print('Произведение: ', res_prod)
+
+
+class HexNum:
+    def __init__(self, a):
+        self.lis = list(a)
+        self.integer = int(''.join(self.lis), 16)
+
+    def __str__(self):
+        return str(self.lis)
+
+    def __add__(self, other):
+        hex_sum = hex(self.integer + other.int)
+        str_sum = hex_sum[2:]
+        return HexNum(str_sum)
+
+    def __mul__(self, other):
+        hex_sum = hex(self.integer * other.int)
+        str_sum = hex_sum[2:]
+        return HexNum(str_sum)
+
+
+hex_1 = HexNum(input('Введите первое шестнадцатиричное число: '))
+hex_2 = HexNum(input('Введите второе шестнадцатиричное число: '))
+print('Сумма чисел: ', hex_1 + hex_2)
+print('Произведение: ', hex_1 * hex_2)

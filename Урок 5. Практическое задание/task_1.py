@@ -28,3 +28,20 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import Counter
+
+n = int(input('Введите количество предприятий для расчёта прибыли: '))
+cou = Counter()
+
+for i in range(n):
+    name = input('Введите название предприятия: ')
+    pribil = input('через пробел введите прибыль данного предприятия\
+    за каждый квартал(Всего 4 квартала):').split()
+    for j in pribil:
+        cou[name] += int(j)
+
+avg = cou.total() / n
+
+print(f'Средняя годовая прибыль всех предприятий: {avg}')
+print(f'Предприятия, с прибылью выше среднего значения: {" ".join([key for key, value in cou.most_common() if value >= avg])}')
+print(f'Предприятия, с прибылью ниже среднего значения: {" ".join([key for key, value in cou.most_common() if value < avg])}')
