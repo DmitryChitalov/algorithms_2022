@@ -15,3 +15,18 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def min_n2(list):
+    minVal = list[0]                                    # O(1)
+    for i in range(len(list)):                          # O(n)
+        for j in range(len(list)):                      # O(n)
+            if list[i] < list[j] and list[i] < minVal:  # O(1)
+                minVal = list[i]                        # O(1)
+    return minVal                                       # O(1)
+
+def min_n(list):
+    minVal = list[0]               # O(1)
+    for i in range(1, len(list)):  # O(n)
+        if list[i] < minVal:       # O(1)
+            minVal = list[i]       # O(1)
+    return minVal                  # O(1)
