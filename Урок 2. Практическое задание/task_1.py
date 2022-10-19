@@ -27,24 +27,25 @@
 
 def math():
     def summa(a, b):
-        c = a + b
-        return c
+        d = a + b
+        return d
 
     def sub(a, b):
-        c = a - b
-        return c
+        d = a - b
+        return d
 
     def mult(a, b):
-        c = a * b
-        return c
+        d = a * b
+        return d
 
     def div(a, b):
-        c = a / b
         if b == 0:
             return print("результатом деления на ноль будет - бесконечность, а Вам это надо?")
-        return c
+        else:
+          d = a / b
+        return d
 
-    c = 0
+
     operators = ("+", "-", "*", "/")
     print("Введите операцию (+, -, *, / или 0 для выхода): ")
     oper = input()
@@ -66,7 +67,7 @@ def math():
     elif oper == '*':
         c = mult(a, b)
     elif oper == '/':
-         c = div(a, b)
+        c = div(a, b)
 
     print(f'Результатом операции будет число: {c}')
     return math()
