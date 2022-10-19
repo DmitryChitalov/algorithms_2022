@@ -30,3 +30,76 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+
+
+# Функция с урока 2, задание 2, курс Алгоритмы
+@profile
+def counting_arity(number, even=0, odd=0):
+    if number == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+    else:
+        last_number = number % 10
+        if last_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return counting_arity(number // 10, even, odd)
+
+
+user_number = 1234567892
+counting_arity(user_number)
+
+"""
+Каждый вызов рекурсивной функции выдает подобную таблицу с замерами.
+Реализуем функцию через цикл вместо рекурсии.
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    36     19.9 MiB     19.9 MiB          11   @profile
+    37                                         def counting_arity(number, even=0, odd=0):
+    38     19.9 MiB      0.0 MiB          11       if number == 0:
+    39     19.9 MiB      0.0 MiB           1           print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+    40                                             else:
+    41     19.9 MiB      0.0 MiB          10           last_number = number % 10
+    42     19.9 MiB      0.0 MiB          10           if last_number % 2 == 0:
+    43     19.9 MiB      0.0 MiB           5               even += 1
+    44                                                 else:
+    45     19.9 MiB      0.0 MiB           5               odd += 1
+    46     19.9 MiB      0.0 MiB          10           return counting_arity(number // 10, even, odd)
+
+"""
+
+
+@profile
+def counting_arity(number, even=0, odd=0):
+    while number != 0:
+        last_number = number % 10
+        if last_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        number = number // 10
+    print(f"Количество четных и нечетных цифр в числе равно: {even}, {odd}")
+
+
+user_number = 1234567892
+counting_arity(user_number)
+
+"""
+По замерам использование памяти осталось, примерно, на том же уровне, 
+но вызов функции происходит один раз независимо от длины числа.
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    73     19.8 MiB     19.8 MiB           1   @profile
+    74                                         def counting_arity(number, even=0, odd=0):
+    75     19.8 MiB      0.0 MiB          11       while number != 0:
+    76     19.8 MiB      0.0 MiB          10           last_number = number % 10
+    77     19.8 MiB      0.0 MiB          10           if last_number % 2 == 0:
+    78     19.8 MiB      0.0 MiB           5               even += 1
+    79                                                 else:
+    80     19.8 MiB      0.0 MiB           5               odd += 1
+    81     19.8 MiB      0.0 MiB          10           number = number // 10
+    82     19.8 MiB      0.0 MiB           1       print(f"Количество четных и нечетных цифр в числе равно: {even}, {odd}")
+"""
