@@ -96,7 +96,7 @@ sum_list_3()
 после завершения работы.
 2. После оптимизации, первая работает точно также, зато объём использованной памяти второй(оптимизированной) функции
 снижается к концу работы!!! К тому же существенно снизилось количество кода.
-Это видно из таблиц профиллирования памяти их работы:
+Это видно из таблиц профилирования памяти их работы:
 
 До оптимизациии:
 
@@ -106,7 +106,8 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     50                                         def sum_list_1() -> int:
     51     19.4 MiB      0.0 MiB           1       dataset = []
     52     19.4 MiB      0.0 MiB           1       my_list = []
-    53     19.4 MiB      0.0 MiB           1       sum_my_list = 0  # Вводим необходимые для вычисления списки и переменные
+    53     19.4 MiB      0.0 MiB           1       sum_my_list = 0  # Вводим необходимые для вычисления списки и 
+                                                                                переменные
     54     22.7 MiB    -13.1 MiB       50001       for n in range(1, 100000, 2):
     55     22.7 MiB    -10.8 MiB       50000           n = n ** 3 + 17
     56     22.7 MiB    -12.4 MiB       50000           dataset.append(n)  # Создаём список кубов нечетных чисел
@@ -116,17 +117,20 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     60     22.7 MiB   -197.3 MiB      706691               sum += k % 10
     61     22.7 MiB   -197.3 MiB      706691               k = k // 10
     62     22.7 MiB    -13.2 MiB       50000           if sum % 7 == 0:
-    63     22.7 MiB     -2.5 MiB        9580               my_list.append(n)  # Создаем список сумма чисел членов которого делится на 7
+    63     22.7 MiB     -2.5 MiB        9580               my_list.append(n)  # Создаем список сумма чисел членов 
+                                                                которого делится на 7
     64     22.7 MiB      0.0 MiB        9581       for indx in my_list:
     65     22.7 MiB      0.0 MiB        9580           sum_my_list += indx  # Вычисляем сумму членов этого списка
-    66     22.7 MiB      0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант а):  {sum_my_list}')
+    66     22.7 MiB      0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант а):  
+                                                                {sum_my_list}')
 
 Line #    Mem usage    Increment  Occurrences   Line Contents
 =============================================================
     73     20.9 MiB     20.9 MiB           1   @profile
     74                                         def sum_list_3() -> int:
     75     20.9 MiB      0.0 MiB           1       dataset = []
-    76     20.9 MiB      0.0 MiB           1       sum_my_list_1 = 0  # Вводим необходимые для вычисления списки и переменные
+    76     20.9 MiB      0.0 MiB           1       sum_my_list_1 = 0  # Вводим необходимые для вычисления 
+                                                            списки и переменные
     77     22.3 MiB      0.0 MiB       50001       for n in range(1, 100000, 2):
     78     22.3 MiB      1.0 MiB       50000           n = n ** 3 + 17
     79     22.3 MiB      0.4 MiB       50000           dataset.append(n)  # Создаём список кубов нечетных чисел плюс 17
@@ -140,7 +144,8 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     87     22.3 MiB   -101.0 MiB       50000           if sum % 7 == 0:
     88     22.3 MiB    -19.8 MiB        9580               sum_my_list_1 += n 
     89
-    90     22.2 MiB     -0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант с):  {sum_my_list_1}')
+    90     22.2 MiB     -0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант с):  
+                                                                                {sum_my_list_1}')
     
 После оптимизации:
 Функция без изменений.
@@ -150,7 +155,8 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     50                                         def sum_list_1() -> int:
     51     19.4 MiB      0.0 MiB           1       dataset = []
     52     19.4 MiB      0.0 MiB           1       my_list = []
-    53     19.4 MiB      0.0 MiB           1       sum_my_list = 0  # Вводим необходимые для вычисления списки и переменные
+    53     19.4 MiB      0.0 MiB           1       sum_my_list = 0  # Вводим необходимые для вычисления 
+                                                                                    списки и переменные
     54     23.2 MiB    -53.1 MiB       50001       for n in range(1, 100000, 2):
     55     23.2 MiB    -50.8 MiB       50000           n = n ** 3 + 17
     56     23.2 MiB    -51.6 MiB       50000           dataset.append(n)  # Создаём список кубов нечетных чисел
@@ -160,10 +166,12 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     60     23.2 MiB   -796.9 MiB      706691               sum += k % 10
     61     23.2 MiB   -797.0 MiB      706691               k = k // 10
     62     23.2 MiB    -53.1 MiB       50000           if sum % 7 == 0:
-    63     23.2 MiB    -10.9 MiB        9580               my_list.append(n)  # Создаем список сумма чисел членов которого делится на 7
+    63     23.2 MiB    -10.9 MiB        9580               my_list.append(n)  # Создаем список сумма чисел членов 
+                                                                                    которого делится на 7
     64     23.2 MiB      0.0 MiB        9581       for indx in my_list:
     65     23.2 MiB      0.0 MiB        9580           sum_my_list += indx  # Вычисляем сумму членов этого списка
-    66     23.2 MiB      0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант а):  {sum_my_list}')   # Верните значение полученной суммы
+    66     23.2 MiB      0.0 MiB           1       return print(f'Сумма членов списка по заданию вариант а):  
+                                                        {sum_my_list}')   # Верните значение полученной суммы
 
 Функция с изменениями.
 
@@ -172,10 +180,12 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     73     21.4 MiB     21.4 MiB           1   @profile
     74                                         def sum_list_3() -> int:
     75                                             # dataset = []
-    76     21.4 MiB      0.0 MiB           1       sum_my_list_1 = 0  # Вводим необходимые для вычисления списки и переменные
+    76     21.4 MiB      0.0 MiB           1       sum_my_list_1 = 0  # Вводим необходимые для вычисления списки и 
+                                                        переменные
     77                                             # for n in range(1, 100000, 2):
     78                                             #     n = n ** 3 + 17
-    79                                             #     dataset.append(n)  # Создаём список кубов нечетных чисел плюс 17
+    79                                             #     dataset.append(n)  # Создаём список кубов нечетных чисел 
+                                                                                плюс 17
     80                                             #dataset = [n ** 3 + 17 for n in range(1, 100000, 2)]
     81                                         
     82                                             # for n in dataset:
@@ -186,7 +196,8 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
     87                                             #         sum += i
     88                                             #     n = int(n)
     89                                             #     if sum % 7 == 0:
-    90                                             #         sum_my_list_1 += n # Вычисляем сумму членов списка, сумма цифр которых делиться нацело на 7
+    90                                             #         sum_my_list_1 += n # Вычисляем сумму членов списка, 
+                                                            сумма цифр которых делиться нацело на 7
     91     22.1 MiB    -59.7 MiB      100003       for n in [n ** 3 + 17 for n in range(1, 100000, 2)]:
     92     22.1 MiB    -59.0 MiB       50000           sum = 0
     93     22.1 MiB    -59.0 MiB       50000           k = n
@@ -200,6 +211,7 @@ Line #    Mem usage    Increment  Occurrences   Line Contents
    101                                         
    102                                             # for indx in my_list:
    103                                             #     sum_my_list += indx
-   104     20.7 MiB     -1.4 MiB           1       return print(f'Сумма членов списка по заданию вариант с):  {sum_my_list_1}')
+   104     20.7 MiB     -1.4 MiB           1       return print(f'Сумма членов списка по заданию вариант с):  
+                                                    {sum_my_list_1}')
 
 """
