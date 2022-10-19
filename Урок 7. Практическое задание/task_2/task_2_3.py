@@ -16,7 +16,7 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 
-Листинг работы кода приведен на строках 61:76
+Листинг работы кода приведен на строках 74:97
 
 Аналитика:
 для массива 11 элементов:
@@ -49,7 +49,19 @@ from random import randint
 from statistics import median
 from timeit import timeit
 
-print('\n --- Замеры для median --- ')
+
+def lst_generator():
+    print('\n --- Generating Random List ---  ')
+    lst_len = int(input(' Please enter int number (m) : '))
+    print(f'\n List will be generated with length of 2m+1 = {2 * lst_len +1 } ')
+    return [randint(-100, 100) for _ in range(2 * lst_len + 1)]
+
+
+lst_object = lst_generator()
+print(f' list_obj : \n {lst_object}')
+print(f' Median value  = {median(lst_object)}')
+
+print('\n --- Замеры timing для median --- ')
 for i in range(1, 4):
     list_len = 10 ** i + 1
     print(f'\n for list of size {list_len}')
@@ -58,6 +70,14 @@ for i in range(1, 4):
     print(' Sorting time of "median"  (sec) = ', end='')
     print(timeit("median(lst_object[:])", globals=globals(), number=1000))
 
+#
+# --- Generating Random List ---
+# Please enter int number (m) : 10
+#
+# List will be generated with length of 2m+1 = 21
+# list_obj :
+# [-50, 95, 100, 97, -9, -30, 39, -70, 10, 83, -96, -56, -31, 33, 65, -61, -8, -33, -31, -46, -72]
+# Median value  = -30
 #
 #  --- Замеры для median ---
 #

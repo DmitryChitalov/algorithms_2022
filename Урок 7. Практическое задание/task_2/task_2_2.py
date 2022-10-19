@@ -14,7 +14,7 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 
-Листинг работы скрипта приведен на lines : 125 : 154
+Листинг работы скрипта приведен на lines : 132 : 165
 предлагаю 2 варианта функции:
 --  sorting_by_del1 :
 удаляется максимальное число из левой половины списка
@@ -45,6 +45,13 @@
 
 from random import randint
 from timeit import timeit
+
+
+def lst_generator():
+    print('\n --- Generating Random List ---  ')
+    lst_len = int(input(' Please enter int number (m) : '))
+    print(f'\n List will be generated with length of 2m+1 = {2 * lst_len +1 } ')
+    return [randint(-100, 100) for _ in range(2 * lst_len + 1)]
 
 
 def sorting_by_del1(sequence1):
@@ -90,11 +97,10 @@ def is_median(seq):
         result = True
     return result
 
+
+
 print(f'\n  --- Result of Sorting by deleting: ---')
-
-
-print(f'\n for list of size 11')
-lst_object = [randint(-100, 100) for _ in range(11)]
+lst_object = lst_generator()
 print(f' list_obj = {lst_object}')
 lst_object_sorted1 = sorting_by_del1(lst_object[:])
 print(f' Sorted list_ by "sorting_by_del1" = {lst_object_sorted1}')
@@ -122,18 +128,22 @@ for i in range(1, 4):
     print(timeit("sorting_by_del2(lst_object[:])", globals=globals(), number=1000))
 
 
+#
 #  --- Result of Sorting by deleting: ---
 #
-# for list of size 11
-#  list_obj = [5, -99, 89, 85, 25, 61, -79, -69, 92, -41, 84]
-#  Sorted list_ by "sorting_by_del1" = [5, -99, 25, 92, 84]
-#  Median index = 2 ,  Median value  = 25
-#  Sorting time (sec) = 0.004134700000000002
+# --- Generating Random List ---
+# Please enter int number (m) : 10
 #
-#  list_obj = [5, -99, 89, 85, 25, 61, -79, -69, 92, -41, 84]
-#  Sorted list_ by "sorting_by_del2" = = [-99, -79, -69]
-#  Median index = 1 ,  Median value  = -79
-#  Sorting time (sec) = 0.004984100000000002
+# List will be generated with length of 2m+1 = 21
+# list_obj = [-32, 73, -46, -95, -70, 98, 80, -20, -56, 58, -50, 36, 5, -71, -23, 86, 95, -71, 6, -45, -44]
+# Sorted list_ by "sorting_by_del1" = [-32, -46, -95, -23, 86, 95, 6]
+# Median index = 3 ,  Median value  = -23
+# Sorting time (sec) = 0.011046900000000193
+#
+# list_obj = [-32, 73, -46, -95, -70, 98, 80, -20, -56, 58, -50, 36, 5, -71, -23, 86, 95, -71, 6, -45, -44]
+# Sorted list_ by "sorting_by_del2" = = [-95, -71, -71]
+# Median index = 1 ,  Median value  = -71
+# Sorting time (sec) = 0.011785099999999993
 #
 #  -- Замеры: --
 #
