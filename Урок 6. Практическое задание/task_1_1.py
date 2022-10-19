@@ -30,3 +30,85 @@
 
 Это файл для первого скрипта
 """
+import sys
+from collections import namedtuple
+from recordclass import recordclass
+
+
+# # Исходное решение - task_4, практическое задание 1
+# def auth_user(id, passw, users):                                #O(n)
+#     status = ''                                                 #O(1)
+#
+#     if id not in users.keys():                                  #O(n) - для словаря
+#         status = 'Пользователя не существует'                   #O(1)
+#     elif passw != users[id][0]:                                 #O(1)
+#         status = 'Пароль введен неверно'                        #O(1)
+#     elif users[id][1] == False:                                 #O(1)
+#         status = 'Учетная запись не активирована'                #O(1)
+#         to_activate = int(input('Введите 1 - чтобы активировать учетную запись, 0 - для выхода: '))     #O(1)
+#         if to_activate:                                         #O(1)
+#             users[id][1] = True                                 #O(1)
+#             status = 'Учетная запись успешно активирована'      #O(1)
+#     else:
+#         status = 'Вы успешно вошли в систему'
+#     return status, users                            #O(1)
+#
+#
+# users = {                                           #O(1)
+#     'Roman123': ['us123', True],
+#     'Dmitry333': ['su098', True],
+#     'Victor544': ['ssdf', False],
+#     'Alex23': ['werf65', True],
+#     'Nikolai65': ['soie25', False]
+# }
+#
+# print(users)                                        #O(1)
+#
+# i = 0
+# while i <= 3:
+#     id_inp = input('Введите id пользователя: ')         #O(1)
+#     passw_inp = input('Введите пароль: ')               #O(1)
+#     print(auth_user(id_inp, passw_inp, users)[0])       #O(1)
+#     i += 1
+#
+# print(users)                                        #O(1)
+#
+# #--------------------------------------------------------------------------
+# #Оптимизированное решение
+# 1. Замена словаря на record class
+def auth_user_2(id, passw, users):                                #O(n)
+    status = ''                                                 #O(1)
+
+    if id not in users.keys():                                  #O(n) - для словаря
+        status = 'Пользователя не существует'                   #O(1)
+    elif passw != users[id][0]:                                 #O(1)
+        status = 'Пароль введен неверно'                        #O(1)
+    elif users[id][1] == False:                                 #O(1)
+        status = 'Учетная запись не активирована'                #O(1)
+        to_activate = int(input('Введите 1 - чтобы активировать учетную запись, 0 - для выхода: '))     #O(1)
+        if to_activate:                                         #O(1)
+            users[id][1] = True                                 #O(1)
+            status = 'Учетная запись успешно активирована'      #O(1)
+    else:
+        status = 'Вы успешно вошли в систему'
+    return status, users                            #O(1)
+
+
+users = recordclass(                                           #O(1)
+    'Roman123',('us123', True),
+    'Dmitry333',('su098', True),
+    'Victor544',('ssdf', False),
+    'Alex23',('werf65', True),
+    'Nikolai65',('soie25', False)
+)
+
+print(users)                                        #O(1)
+
+i = 0
+while i <= 3:
+    id_inp = input('Введите id пользователя: ')         #O(1)
+    passw_inp = input('Введите пароль: ')               #O(1)
+    print(auth_user(id_inp, passw_inp, users)[0])       #O(1)
+    i += 1
+
+print(users)                                        #O(1)

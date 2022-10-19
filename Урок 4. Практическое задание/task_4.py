@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+from timeit import timeit, default_timer
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,40 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    dct ={}
+    for el in array:
+        if el in dct:
+            dct[el] += 1
+        else:
+            dct[el] = 1
+
+    # dct = {k: v for k, v in dct.items() if v == max_count}
+    # max_count = max(dct.values())
+    max_count = max(dct.values())
+    res_dct = {k: v for k, v in dct.items() if v == max_count}
+    elem = list(res_dct.keys())[0]
+    # elem = res_dct.popitem[0]
+
+
+    # return max_count, elem
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_count} раз(а)'
+
+# def func_3():
+#     array.sort()
+#     elem = array[-1]
+#     for el in array:
+#         count = array.count(el)
+#     return elem, count
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit('func_1()', 'from __main__ import func_1', default_timer, 10000))
+print(timeit('func_2()', 'from __main__ import func_2', default_timer, 10000))
+print(timeit('func_3()', 'from __main__ import func_3', default_timer, 10000))
+
+# Выводы: Ускорения не удалось добиться
