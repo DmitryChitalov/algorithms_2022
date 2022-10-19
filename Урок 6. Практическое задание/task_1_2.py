@@ -30,3 +30,91 @@
 
 Это файл для второго скрипта
 """
+"""
+Основы Python урок 5.
+4. Представлен список чисел. Необходимо вывести те его элементы, значения которых больше
+предыдущего, например:
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+result = [12, 44, 4, 10, 78, 123]
+Подсказка: использовать возможности python, изученные на уроке. Подумайте, как можно
+сделать оптимизацию кода по памяти, по скорости.
+
+"""
+
+from memory_profiler import profile
+import random
+
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+src_1 = [n for n in range(1000000)]
+random.shuffle(src_1)
+
+
+# Функция с использованием list comprehension.
+@profile
+def get_numbers(list_in: list) -> list:
+    return [list_in[i] for i in range(1, len(list_in)) if list_in[i - 1] < list_in[i]]
+
+
+# Оптимизированнная функция генераторного выражения на основе цикла for..in.
+@profile
+def get_numbers_1(list_in: list) -> iter:
+    """Функция возвращает генератор, отдающий только те элементы входного списка, которые больше предыдущего"""
+
+    for i in range(len(list_in) - 1):
+        if list_in[i] < list_in[i + 1]:
+            yield list_in[i + 1]
+
+
+get_numbers(src_1)
+get_numbers_1(src_1)
+
+# print(*get_numbers(src_1))
+# print(get_numbers_1(src_1))
+
+"""
+Получаются следующие выводы:
+1.Замеры используемой памяти во время работы функции с помощью декоратора profile для функции с генератором ничего не
+дали видимо он использует память только в момент работы и выдает результат (результаты проводились 10 раз).
+2. Для функции на основе list comprehension используемая пямять сильно растёт при увелечении объёма входных данных,
+примерно в 2 раза на порядок.
+Вывод: использовать генераторные выражения там, где это возможно!
+Профили замера памяти для list comprehension для 3 объёмов данных(10000, 100000, 1000000) прилагаю:
+
+10000: 
+
+ Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    52     19.9 MiB     19.9 MiB           1   @profile
+    53                                         def get_numbers(list_in: list) -> list:
+    54     19.9 MiB      0.1 MiB       10002       return [list_in[i] for i in range(1, len(list_in)) if list_in[i - 1] < list_in[i]]
+
+
+
+Process finished with exit code 0
+
+100000:
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    52     24.1 MiB     24.1 MiB           1   @profile
+    53                                         def get_numbers(list_in: list) -> list:
+    54     24.2 MiB      0.0 MiB      100002       return [list_in[i] for i in range(1, len(list_in)) if list_in[i - 1] < list_in[i]]
+
+
+    
+Process finished with exit code 0
+
+1000000:
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    52     57.8 MiB     57.8 MiB           1   @profile
+    53                                         def get_numbers(list_in: list) -> list:
+    54     62.1 MiB -91295.1 MiB     1000002       return [list_in[i] for i in range(1, len(list_in)) if list_in[i - 1] < list_in[i]]
+
+
+
+Process finished with exit code 0
+
+Память сначала растёт не сильно, а при очередном порядке сразу в 2!!!
+"""
