@@ -19,9 +19,7 @@ from timeit import timeit
 import statistics
 
 
-def fn_median(data):
-    m = len(data) // 2
-
+def fn_median(data, m):
     for _ in range(m):
         mx = 0
         poz = 0
@@ -32,17 +30,23 @@ def fn_median(data):
 
     return max(data)
 
-def run_def(s):
+
+def run_def(m):
     a, b = 0, 1000
+    s = m * 2 + 1
     data = [randint(a, b) for _ in range(s)]
-    median_my = fn_median(data[:])
+    median_my = fn_median(data[:], m)
     # print(f' median  {median_my}')
     # print(f' median  {statistics.median(data)}')
 
+
 # run_def(11)
-print(timeit('run_def(11)', globals=globals(), number= 100))
-print(timeit('run_def(101)', globals=globals(), number= 100))
-print(timeit('run_def(1001)', globals=globals(), number= 100))
+m = 5
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 50
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 500
+print(timeit('run_def(m)', globals=globals(), number=100))
 
 # 0.001117900013923645
 # 0.022476500016637146

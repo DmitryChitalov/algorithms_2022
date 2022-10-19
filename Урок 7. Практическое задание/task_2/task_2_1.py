@@ -33,19 +33,24 @@ def gnome_sort(data):
     return data
 
 
-def run_def(s):
+def run_def(m):
     a, b = 0, 1000
+    s = m * 2 + 1
     data = [randint(a, b) for _ in range(s)]
     data = gnome_sort(data)
-    median_my = data[len(data) // 2]
+
+    median_my = data[m]
     # print(f' median  {median_my}')
     # print(f' median  {statistics.median(data)}')
 
 
 # run_def(11)
-print(timeit('run_def(11)', globals=globals(), number=100))
-print(timeit('run_def(101)', globals=globals(), number=100))
-print(timeit('run_def(1001)', globals=globals(), number=100))
+m = 5
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 50
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 500
+print(timeit('run_def(m)', globals=globals(), number=100))
 
 # 0.002634700038470328
 # 0.07996830000774935

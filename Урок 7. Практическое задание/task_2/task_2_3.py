@@ -24,17 +24,21 @@ import statistics
 def fn_median(data):
     return statistics.median(data)
 
+
 def run_def(s):
     a, b = 0, 1000
+    s = m * 2 + 1
     data = [randint(a, b) for _ in range(s)]
     median_my = fn_median(data)
     # print(f' median  {median_my}')
 
 
-print(timeit('run_def(11)', globals=globals(), number= 100))
-print(timeit('run_def(101)', globals=globals(), number= 100))
-print(timeit('run_def(1001)', globals=globals(), number= 100))
-
+m = 5
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 50
+print(timeit('run_def(m)', globals=globals(), number=100))
+m = 500
+print(timeit('run_def(m)', globals=globals(), number=100))
 # 0.0008442000253126025
 # 0.006669400027021766
 # 0.07615009997971356
