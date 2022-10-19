@@ -30,3 +30,72 @@
 
 Это файл для третьего скрипта
 """
+# Урок 10 задание 3
+# Реализовать программу работы с органическими
+# клетками, состоящими из ячеек
+
+from pympler import asizeof
+
+
+class Cell:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, other):
+        return Cell(self.number + other.number)
+
+    def __sub__(self, other):
+        if self.number - other.number > 0:
+            return Cell(self.number - other.number)
+        else:
+            raise ValueError('Cell number should be above zero')
+
+    def __mul__(self, other):
+        return Cell(self.number * other.number)
+
+    def __floordiv__(self, other):
+        return Cell(self.number // other.number)
+
+    def make_order(self, number_in_row):
+        number_of_rows = self.number // number_in_row
+        cells_in_last_row = self.number % number_in_row
+        cell = '*'
+        cells_in_row = cell * number_in_row + '\n'
+        return f'{cells_in_row * number_of_rows + cell * cells_in_last_row}'
+
+
+my_obj = Cell(10)
+print(asizeof.asizeof(my_obj))
+
+
+class ModyCell:
+    __slots__ = ['number']
+
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, other):
+        return Cell(self.number + other.number)
+
+    def __sub__(self, other):
+        if self.number - other.number > 0:
+            return Cell(self.number - other.number)
+        else:
+            raise ValueError('Cell number should be above zero')
+
+    def __mul__(self, other):
+        return Cell(self.number * other.number)
+
+    def __floordiv__(self, other):
+        return Cell(self.number // other.number)
+
+    def make_order(self, number_in_row):
+        number_of_rows = self.number // number_in_row
+        cells_in_last_row = self.number % number_in_row
+        cell = '*'
+        cells_in_row = cell * number_in_row + '\n'
+        return f'{cells_in_row * number_of_rows + cell * cells_in_last_row}'
+
+
+my_obj_2 = ModyCell(10)
+print(asizeof.asizeof(my_obj_2))

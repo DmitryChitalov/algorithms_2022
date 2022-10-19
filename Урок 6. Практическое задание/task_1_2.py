@@ -30,3 +30,45 @@
 
 Это файл для второго скрипта
 """
+# Урок 3 задание 1 python basics
+# Написать функцию num_translate,
+# переводящую числительные от 0 до 10
+# c английского на русский язык.
+
+from json import loads, dumps
+from pympler import asizeof
+
+nums_dict = {
+        'zero': 'ноль',
+        'one': 'один',
+        'two': 'два',
+        'three': 'три',
+        'four': 'четыре',
+        'five': 'пять',
+        'six': 'шесть',
+        'seven': 'семь',
+        'eight': 'восемь',
+        'nine': 'девять',
+        'ten': 'десять'
+    }
+
+
+def num_translate(number):
+    number = number.lower()
+    return nums_dict.get(number)
+
+
+# оптимизирую память
+dumped_dict = dumps(nums_dict)
+
+
+def mody_num_translate(number):
+    number = number.lower()
+    return loads(dumped_dict).get(number)
+
+
+if __name__ == '__main__':
+    print(num_translate("one"))
+    print(f'размер = {asizeof.asizeof(nums_dict)}')
+    print(num_translate("one"))
+    print(f'размер = {asizeof.asizeof(dumped_dict)}')
