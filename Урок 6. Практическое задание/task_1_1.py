@@ -30,3 +30,50 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile
+
+# Задание 2 из урока 1 python basics.
+# Для кубов нечётных чисел от 1 до 1000.
+# Вычислить сумму чисел, сумма цифр кубов
+# которых делится нацело на 7.
+
+
+@profile
+def task_1_02():
+    number = 1
+    number_sum = 0
+    while number <= 1000:
+        digit = number**3
+        numeric_sum = 0
+        while digit > 0:
+            numeric = digit % 10
+            numeric_sum += numeric
+            digit = digit // 10
+        if numeric_sum % 7 == 0:
+            number_sum += number
+        print(number, '^3 =', number**3, [numeric_sum], 'накоп. сумма:', number_sum)
+        number += 2
+
+
+@profile
+def mody_task_1_02():  # Использовал f строки
+        number = 1
+        number_sum = 0
+        while number <= 1000:
+            digit = number ** 3
+            numeric_sum = 0
+            while digit > 0:
+                numeric = digit % 10
+                numeric_sum += numeric
+                digit = digit // 10
+            if numeric_sum % 7 == 0:
+                number_sum += number
+            print(f'{number} ^3 = {number**3} [{numeric_sum}] накоп. сумма: {number_sum}')
+            number += 2
+
+
+if __name__ == '__main__':
+    task_1_02()
+    mody_task_1_02()
+
