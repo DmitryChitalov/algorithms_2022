@@ -30,3 +30,53 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import profile
+
+my_list = []
+
+
+# Функция с урока 3, задание 1, курс Алгоритмы
+@profile
+def complete_list(user_list):
+    number = 10 ** 7
+    for i in range(number):  # O(1)
+        user_list.append(i)  # O(1)
+
+
+complete_list(my_list)
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    39     19.9 MiB     19.9 MiB           1   @profile
+    40                                         def complete_list(user_list):
+    41     19.9 MiB      0.0 MiB           1       number = 10 ** 7
+    42    403.8 MiB  -4356.1 MiB    10000001       for i in range(number):  # O(1)
+    43    403.8 MiB  -3972.2 MiB    10000000           user_list.append(i)  # O(1)
+"""
+
+my_list = []
+
+
+@profile
+def complete_list(user_list):
+    number = 10 ** 7
+    for i in range(number):
+        user_list.append(i)
+    del number
+
+
+complete_list(my_list)
+
+"""
+Чем больше число number, тем большей оптимизации использования памяти можно добиться удалив на него ссылку.
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    61     22.5 MiB     22.5 MiB           1   @profile
+    62                                         def complete_list(user_list):
+    63     22.5 MiB      0.0 MiB           1       number = 10 ** 7
+    64    402.6 MiB -19837.0 MiB    10000001       for i in range(number):
+    65    402.6 MiB -19457.0 MiB    10000000           user_list.append(i)
+    66    402.6 MiB      0.0 MiB           1       del number
+"""
