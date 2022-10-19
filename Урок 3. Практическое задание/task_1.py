@@ -28,3 +28,74 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+# A)
+
+def time_scr(func):
+    def scr(arg1):
+        start_time = time.time()
+        ret_val = func(arg1)
+        end_time = time.time()
+        print(end_time - start_time)
+        return ret_val
+    return scr
+
+@time_scr
+def check_lst(n):
+    lst = []                            # O (n)
+    for i in range(n):                  # O (n)
+        lst.append(i + 1)               # O (1)
+    return lst                          # O (1)
+
+@time_scr
+def check_dct(n):
+    dct = {}                            # O (n)
+    for i in range(n):                  # O (n)
+        dct[i * 2] = i + 1              # O (1)
+    return dct                          # O (1)
+
+# check_lst(100000)
+# check_dct(100000)
+
+# Вывод: Списки заполняются немного быстрее, возможно потому что у словаря есть ключ и значение
+
+##########################################################################################
+
+# B)
+
+def check_1(n):
+    lst = []                            # O (n)
+    for i in range(n):                  # O (n)
+        lst.append(i + 1)               # O (1)
+    return lst                          # O (1)
+
+
+def check_2(n):
+    dct = {}                            # O (n)
+    for i in range(n):                  # O (n)
+        dct[i * 2] = i + 1              # O (1)
+    return dct                          # O (1)
+
+@time_scr
+def check_3(a):
+    a[0] = 111111
+    a1 = a.pop(2)
+    print('Список')
+    return a, a1
+
+@time_scr
+def check_4(b):
+   b[199998] = 111111
+   b1 = b.pop(2)
+   print('Словарь')
+   return b, b1
+
+a = check_1(1000000)
+b = check_2(1000000)
+
+check_3(a)
+check_4(b)
+
+# Вывод: Операции в Словаре быстрее, т.к она спроектированна как Хэш-таблицы

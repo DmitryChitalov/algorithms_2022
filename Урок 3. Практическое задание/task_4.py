@@ -15,3 +15,20 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+hash = {'vk.com' : 'bba20c1143a0d57d859abbb4be914105bec5a0acafb9878523507c7868e24439ccdeab761604d0feb798e33ed5bf1521221962be4074701af11b833e0fc097d0'}
+
+salt = 'my_salt'
+
+def check(url):
+    if url in hash:
+        return f'Такой хэш уже есть \n{hash[url]}'
+    else:
+        hash_url = hashlib.sha512(salt.encode() + url.encode()).hexdigest()
+        hash[url] = hash_url
+        return hash
+
+url = input('Введите url-адрес : ')
+
+print(check(url))
