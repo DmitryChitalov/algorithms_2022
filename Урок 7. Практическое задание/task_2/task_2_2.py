@@ -19,7 +19,12 @@ from random import randint
 
 
 def unsorted(data, n):
-    pass
+    avg_data = len(data) - n
+    while len(data) > avg_data:
+        data.remove(max(data))
+    median = max(data)
+
+    return median
 
 
 orig_list_10 = [randint(1, 888) for _ in range(2 * 10 + 1)]
@@ -30,7 +35,12 @@ print(f"Original_massive_10 >>> {orig_list_10}")
 print(
     f'Median >>> {unsorted(orig_list_10[:], 10)}\n'
     f'Time >>> '
-    f'{timeit("unsorted(orig_list_10[:], 5)", globals=globals(), number=100)}')
+    f'{timeit("unsorted(orig_list_10[:], 10)", globals=globals(), number=100)}')
+
+# Original_massive_10 >>>
+# [544, 826, 562, 568, 225, 659, 131, 839, 741, 713, 782, 13, 454, 696, 717, 666, 359, 54, 805, 400, 793]
+# Median >>> 659
+# Time >>> 0.0014064919999999988
 
 print(f"Original_massive_100 >>> {orig_list_100}")
 print(
@@ -38,8 +48,14 @@ print(
     f'Time >>> '
     f'{timeit("unsorted(orig_list_100[:], 100)", globals=globals(), number=100)}')
 
+# Median >>> 415
+# Time >>> 0.068059445
+
 print(f"Original_massive_1000 >>> {orig_list_1000}")
 print(
     f'Median >>> {unsorted(orig_list_1000[:], 1000)}\n'
     f'Time >>> '
     f'{timeit("unsorted(orig_list_1000[:], 1000)", globals=globals(), number=100)}')
+
+# Median >>> 454
+# Time >>> 5.691855118
