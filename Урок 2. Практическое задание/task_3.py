@@ -33,10 +33,10 @@ def num_rev(num):
 # def num_rev(num):
 #     return str(num) if int(num) < 10 else str(num % 10) + num_rev(num // 10)
 
+#num = int(input('Введите число: '))
 
-# num = input('Введите число: ')
 try:
-    num = int(input('Введите число: '))
+    num = input('Введите число: ')
 except ValueError:
     print(' Вы ввели не натуральное число! Исправтесь!')
     exit(1)
