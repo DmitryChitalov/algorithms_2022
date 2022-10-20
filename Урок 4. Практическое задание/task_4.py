@@ -54,7 +54,6 @@ def func_3():
     elem = list(res_dct.keys())[0]
     # elem = res_dct.popitem[0]
 
-
     # return max_count, elem
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_count} раз(а)'
@@ -75,4 +74,5 @@ print(timeit('func_1()', 'from __main__ import func_1', default_timer, 10000))
 print(timeit('func_2()', 'from __main__ import func_2', default_timer, 10000))
 print(timeit('func_3()', 'from __main__ import func_3', default_timer, 10000))
 
-# Выводы: Ускорения не удалось добиться
+# Выводы: Ускорения не удалось добиться, т.к. операция со словарем в цикле
+# можно сделать с генератором словаря, тогда наверное быстрее будет (?)

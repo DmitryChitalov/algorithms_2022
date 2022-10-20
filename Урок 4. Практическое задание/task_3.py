@@ -39,8 +39,6 @@ def revers_3(enter_num):
 
 
 def revers_4(enter_num):
-
-    # revers_num = reversed(str(enter_num))
     revers_num=''
     for num in reversed(str(enter_num)):
         revers_num += num
@@ -53,20 +51,16 @@ print(revers_2(num))
 print(revers_3(num))
 print(revers_4(num))
 
+## Почему не работает globals() ?
+# print(timeit('revers(num)', globals = globals(), default_timer, 10000))
 print(timeit('revers(num)', 'from __main__ import revers, num', default_timer, 10000))
 print(timeit('revers_2(num)', 'from __main__ import revers_2, num', default_timer, 10000))
 print(timeit('revers_3(num)', 'from __main__ import revers_3, num', default_timer, 10000))
 print(timeit('revers_4(num)', 'from __main__ import revers_4, num', default_timer, 10000))
 
-## Почему не работает globals() ?
-# print(timeit('revers(num)', globals = globals(), default_timer, 10000))
-
-
-
-
 # Выводы
 # Вариант 3 - эффективнее, т.к. имеет наименьшую сложность O(1) и минимальное число переменных и операций
-#   по сравнению с другими решениями: вариант 1 - рекурсия: сложность O(2^n), 2 - сложность O(n), на 1 переменную больше, больше операций (цикл)
+#   по сравнению с другими решениями: вариант 1 - рекурсия: сложность больше O(2^n), 2 - сложность O(n), на 1 переменную больше, больше операций (цикл)
 #   вариант 4 - сложность O(n), но больше переменных, и больше операций (цикл).
 
 
