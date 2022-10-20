@@ -10,7 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
-from timeit import timeit, default_timer
+from timeit import timeit, default_timer,repeat
+from collections import Counter
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -65,14 +66,26 @@ def func_3():
 #         count = array.count(el)
 #     return elem, count
 
+def func_4():
+    obj = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {obj[0][0]}, ' \
+           f'оно появилось в массиве {obj[0][1]} раз(а)'
+
 
 print(func_1())
 print(func_2())
 print(func_3())
+print(func_4())
 
 print(timeit('func_1()', 'from __main__ import func_1', default_timer, 10000))
+print(repeat('func_1()', 'from __main__ import func_1', default_timer, 3, 10000))
 print(timeit('func_2()', 'from __main__ import func_2', default_timer, 10000))
+print(repeat('func_2()', 'from __main__ import func_2', default_timer, 3, 10000))
 print(timeit('func_3()', 'from __main__ import func_3', default_timer, 10000))
+print(repeat('func_3()', 'from __main__ import func_3', default_timer, 3,  10000))
+print(timeit('func_4()', 'from __main__ import func_4', default_timer, 10000))
+print(repeat('func_4()', 'from __main__ import func_4', default_timer, 3, 10000))
 
-# Выводы: Ускорения не удалось добиться, т.к. операция со словарем в цикле
-# можно сделать с генератором словаря, тогда наверное быстрее будет (?)
+# Выводы: Ускорения не удалось добиться, т.к. операция со словарем в цикле (много операций)
+# ??? можно сделать с генератором словаря, тогда наверное быстрее будет (?)
+# ??? вариант 4 с Counter - не дает ускорения тоже (? )
