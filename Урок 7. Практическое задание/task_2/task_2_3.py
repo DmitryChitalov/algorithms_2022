@@ -16,3 +16,46 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+import statistics
+from random import randint
+from timeit import timeit
+
+
+m = 10
+rand_list = [randint(0, 100) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "statistics.median(rand_list[:])",
+        globals=globals(),
+        number=100))
+
+
+m = 100
+rand_list = [randint(0, 100) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "statistics.median(rand_list[:])",
+        globals=globals(),
+        number=100))
+
+
+m = 1000
+rand_list = [randint(0, 100) for i in range(2 * m + 1)]
+print(
+    timeit(
+        "statistics.median(rand_list[:])",
+        globals=globals(),
+        number=100))
+
+
+'''
+для 10:
+0.00013979990035295486
+для 100:
+0.0015127999940887094
+для 1000:
+0.020979100023396313
+Самым быстрым оказался встроенный способ поиска медианы.
+Плюс использование встроенной функции оптимизирует код.
+'''
