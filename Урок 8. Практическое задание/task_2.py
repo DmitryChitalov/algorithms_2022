@@ -24,6 +24,8 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node > self.root:
+            raise ValueError(f"Значение должно быть меньше {self.root}")
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -39,6 +41,8 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.root:
+            raise ValueError(f"Значение должно быть больше {self.root}")
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
