@@ -30,3 +30,52 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+# Курс Основ
+# Задан список чисел. Необходимо создать список, содержащий те его элементы,
+# значения которых больше предыдущего.
+
+
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+
+
+@decor
+def nums1(src):
+    result = []
+    for i in range(len(src)):
+        if src[i] > src[i - 1]:
+            result.append(src[i])
+    return result
+
+
+print(nums1(src))
+
+# Оптимизированный вариант
+
+
+@decor
+def nums_2(src):
+    src_1 = []
+    n = len(src)
+    src_gen = (src[num] for num in range(n) if src[num] > src[num - 1])
+    for i in src_gen:
+        src_1.append(i)
+    return src_1
+
+
+print(nums_2(src))
+
+
+# Был применен генератор. В результате занимаемая память оптимизировалась

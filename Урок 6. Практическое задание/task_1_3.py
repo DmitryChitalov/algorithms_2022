@@ -30,3 +30,52 @@
 
 Это файл для третьего скрипта
 """
+
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+# Курс Основ
+# Задан список чисел. Определить элементы списка, не имеющие повторений.
+# Сформировать из этих элементов список с сохранением порядка их следования в исходном списке
+
+src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+
+
+@decor
+def num1(src):
+    result = []
+    for i in src:
+        e = 0
+        for j in src:
+            if i == j:
+                e += 1
+        if e == 1:
+            result.append(i)
+    return result
+
+
+print(num1(src))
+
+# Оптимизированный вариант
+
+
+@decor
+def num2(src):
+    return [x for x in src if src.count(x) == 1]
+
+
+print(num2(src))
+
+
+# Был применен лист коприхеншн. В результате и скорость и занимаемая память оптимизировались

@@ -30,3 +30,50 @@
 
 Это файл для четвертого скрипта
 """
+
+from pympler import asizeof
+
+# Курс Основ
+# Реализовать класс Stationery (канцелярская принадлежность).
+
+
+class Stationery:
+    def __init__(self, title):
+        self.title = title
+
+    def draw(self):
+        print('Запуск отрисовки')
+
+
+class Pen(Stationery):
+    def draw(self):
+        print('Запуск отрисовки ручкой')
+
+
+
+pen = Pen('ручка')
+print(asizeof.asizeof(pen))
+
+# Оптимизированный вариант
+
+
+class Stationery2:
+    __slots__ = ['title']
+
+    def __init__(self, title):
+        self.title = title
+
+    def draw(self):
+        print('Запуск отрисовки')
+
+
+class Pen(Stationery2):
+    def draw(self):
+        print('Запуск отрисовки ручкой')
+
+
+pen = Pen('ручка')
+print(asizeof.asizeof(pen))
+
+
+# Был применен слоты в целях экономии пямяти

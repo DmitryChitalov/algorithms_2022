@@ -30,3 +30,48 @@
 
 Это файл для первого скрипта
 """
+
+from collections import namedtuple
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+# Курс Основ
+# Написать функцию num_translate, переводящую числительные от 0 до 10 c английского на русский язык.
+
+
+@decor
+def num_translate(key):
+    trans = {'one': 'один', 'two': 'два', 'three': 'три', 'four': 'черыре',
+         'five': 'пять', 'six': 'шесть', 'seven': 'семь', 'eight': 'восемь',
+         'nine': 'девять', 'ten': 'десять'}
+    return trans.get(key)
+
+
+print(num_translate('one'))
+
+# Оптимизированный вариант
+
+
+@decor
+def num_translate1(word):
+    trans_type = namedtuple('trans', ('one', 'two', 'three', 'four',
+                             'five', 'six', 'seven', 'eight', 'nine', 'ten'))
+    trans = trans_type(one='один', two='два', three='три', four='черыре',
+                       five='пять', six='шесть', seven='семь', eight='восемь', nine='девять', ten='десять')
+
+    return getattr(trans, word)
+
+
+print(num_translate1('two'))
+
+# В место словаря был использован именуемый кортеж, т.к. хэш таблицы словаря тоже занимают память.
+# в результате память оптимизировалась
