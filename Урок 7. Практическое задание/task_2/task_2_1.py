@@ -15,3 +15,20 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def gnome_sort(n):
+    arr = [randint(-1000, 1000) for i in range(2 * n + 1)]
+    for i in range(len(arr) - 1):
+        while arr[i] > arr[i + 1] and i>=0:
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+            i -= 1
+    return arr[len(arr)//2+1]
+
+
+print(gnome_sort(5))
+print(timeit("gnome_sort(5)", globals=globals(), number=1000))  #0.0093312499957392 11 элементов
+print(timeit("gnome_sort(50)", globals=globals(), number=1000)) #0.30554783300613053 101 элемент
+print(timeit("gnome_sort(500)", globals=globals(), number=1000))#29.29951087500376 1001 элемент
