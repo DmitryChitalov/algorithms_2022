@@ -1,14 +1,8 @@
-from collections import deque
-from random import randint
+dct = {x: x**2 for x in range(0,20)}
+print(dct)
 
-
-lst = [randint(0,100) for i in range(0, 20)]
-deq = deque(lst)
-ext_lst = [i for i in range(0, 20)]
-
-for i in range(len(lst)):
-    lst.pop(0)
-    print(lst)
-
-# for i in deq:
-#     deq.popleft()
+def del_dct(dct):
+    for x in range(5,10):
+        del dct[x]
+    return dct
+print(del_dct(dct))

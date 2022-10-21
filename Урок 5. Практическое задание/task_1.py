@@ -31,6 +31,9 @@
 
 from collections import namedtuple
 
+
+
+# Вариант 1 - namedtuple
 Companies_templ = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
 TOYOTA = Companies_templ(1000, 2000, 3000, 4000)
 MERSEDES = Companies_templ(10000, 25000, 30000, 15000)
@@ -42,7 +45,7 @@ def average_profit():
     companies_up = []
     companies_down =[]
     count = 0
-    sum = 0
+    total = 0
     while flag != '0':
         name_inp = input('Введите название компании: ')
         profits = input('Введите прибыль компании за каждый квартал (4 квартала): ').split()                    #Можно сделать без этого?
@@ -55,12 +58,12 @@ def average_profit():
             prof_quart_4 = int(profits[3])
         )
         companies.append(company)
-        sum = sum + company.prof_quart_1 + company.prof_quart_2 + company.prof_quart_3 + company.prof_quart_4
+        total = total + company.prof_quart_1 + company.prof_quart_2 + company.prof_quart_3 + company.prof_quart_4
         count += 4
 
         flag = input('Для выхода нажмите 0, для продолжения - 1: ')                                             # здесь имя flag - нормальное название по смыслу?
-    print(sum, count)
-    avg = sum /count
+    print(total, count)
+    avg = total /count
 
 
     for company in companies:
@@ -76,6 +79,9 @@ print(f'Среднегодовая прибыль всех компаний: {av
 print(f'Компании с годовой прибылью выше средней: {avg[1]}')
 print(f'Компании с годовой прибылью ниже средней: {avg[2]}')
 
+
+
+# Вариант 2
 
 
 # def average_profit():                                                                                        # можно делать через рекурсию ?
