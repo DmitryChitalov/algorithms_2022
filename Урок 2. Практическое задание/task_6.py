@@ -7,3 +7,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def guess_num(num, attempt=0):
+    print(num)
+    print(f'Attempt #: {attempt+1}')
+    player_num = input('Insert number: ')
+    if attempt == 9:
+        return print('Loss')
+    elif player_num == str(num):
+        return print('Win')
+    else:
+        attempt += 1
+        return guess_num(num, attempt)
+
+
+guess_num(num=random.randint(0, 100))

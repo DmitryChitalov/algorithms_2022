@@ -17,3 +17,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def oddeve(num, odd=0, eve=0):
+    if num == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: {odd}, {eve}')
+    else:
+        if num % 10 % 2 == 0:
+            odd += 1
+        else:
+            eve += 1
+    return oddeve(num//10, odd, eve)
+
+
+oddeve(int(input('Bведите число: ')))

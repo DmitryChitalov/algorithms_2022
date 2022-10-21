@@ -27,3 +27,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc():
+    sign = input('Введите операцию ')
+    if sign == '0':
+        return print('Расчет завершен')
+    else:
+        first_number = int(input('Введите первое число '))
+        second_number = int(input('Введите второе число '))
+
+        if sign == '+':
+            print(first_number + second_number)
+            return calc()
+        elif sign == '-':
+            print(first_number - second_number)
+            return calc()
+        elif sign == '*':
+            print(first_number * second_number)
+            return calc()
+        elif sign == '/':
+            try:
+                print(first_number / second_number)
+            except ZeroDivisionError:
+                print('Деление на ноль')
+            return calc()
+        else:
+            print('Ошибка ввода данных')
+            return calc()
+
+
+calc()
