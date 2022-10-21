@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def check_equal(num):
+    if num == 0:
+        return num
+    else:
+        return num + check_equal(num-1)
+
+try:
+    num = int(input('Insert number: '))
+    if check_equal(num) == num*(num + 1)/2:
+        print('Все верно')
+except ValueError:
+    print('Error')
