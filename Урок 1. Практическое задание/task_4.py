@@ -22,3 +22,26 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+#TODO Не смог придумать 2ой вариант
+
+
+def profile(user, dict):   # O(1)
+    if dict[user][1] == 'да':   # O(1)
+        return 'У этого пользователя есть доступ'   # O(1)
+    else:   # O(1)
+        return 'У этого пользователя нет доступа'  # O(1)
+
+
+def inp_user(dict):
+    usr = input()  # O(len(usr))
+    if usr in dict:  # O(n)
+        return usr  # O(1)
+    else:
+        print('Такого пользователя нет, попробуйте еще раз')   # O(1)
+        return inp_user(dict)  # O(1)
+
+
+dict_of_profiles = {"user1": ['12344321', 'нет'], "user2": ['99002234', 'да']}
+chech_user = inp_user(dict_of_profiles)
+profile(chech_user, dict_of_profiles)
