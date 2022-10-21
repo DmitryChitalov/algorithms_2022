@@ -9,6 +9,7 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -36,6 +37,24 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    mc, num = max(map(lambda v: (array.count(v), v), set(array)))
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {mc} раз(а)'
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", globals=globals(), number=10000))
+print(timeit("func_2()", globals=globals(), number=10000))
+print(timeit("func_3()", globals=globals(), number=10000))
+
+
+"""
+Вывод: 
+func_2 использует append минус скорость, 
+func_1 быстрая в ней нет ничего лишнего, 
+func_3 попробывал сделать через lambda в скорости не особо выйграл.
+"""
