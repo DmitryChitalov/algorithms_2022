@@ -30,3 +30,34 @@
 
 Это файл для пятого скрипта
 """
+
+"""
+Задание 4 к уроку 5 Основы языка Python
+
+Задание:
+Представлен список чисел. Необходимо вывести те его элементы, значения которых больше предыдущего.
+"""
+from random import randint
+from memory_profiler import profile
+src = [randint(0, 100) for i in range(1000000)]
+@profile
+def func1():
+    res = []
+    for i, j in zip(src, src[1::]):
+        if j > i:
+            res.append(j)
+    print(*res)
+
+@profile
+def func2():
+    for i, j in zip(src, src[1::]):
+        if j > i:
+            print(j, end=' ')
+
+
+func1()
+func2()
+"""
+Вместо вовыда результата в отдельный массив, результат выводится сразу в консоль, из-за чего экономим память
+на зельтирующем массиве 7.7 MiB
+"""

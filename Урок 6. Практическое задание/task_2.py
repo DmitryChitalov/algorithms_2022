@@ -9,3 +9,24 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+@profile
+def even_odd(number, even=0, odd=0):
+    def wrapper(number, even=0, odd=0):
+        if not number:
+            print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+            return 0
+        if number % 2:
+            odd += 1
+        else:
+            even += 1
+        return wrapper(number//10, even, odd)
+    return wrapper(number, even, odd)
+
+even_odd(123454445)
+
+"""
+Проблема заключается в том, что каждый раз, когда функция вызывает саму себя, отрабатывает декоратор @profile
+и в консоле мы получает много таблиц профилирования. Решение заключается в том, чтобы включить рабочу функцию
+в функцию обертку, для которой применить декоратор @profile.  
+"""

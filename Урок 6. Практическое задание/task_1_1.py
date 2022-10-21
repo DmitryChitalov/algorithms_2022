@@ -30,3 +30,73 @@
 
 Это файл для первого скрипта
 """
+
+"""
+Задание 1 к уроку 3 Основы языка Python
+
+Задание:
+Написать функцию num_translate(), переводящую числительные от 0 до 10 c английского на русский язык.
+"""
+
+from memory_profiler import profile
+@profile
+def num_translate_adv(word):
+    word_dict = {
+        'zero': 'ноль',
+        'one': 'один',
+        'two': 'два',
+        'three': 'три',
+        'four': 'четыре',
+        'five': 'пять',
+        'six': 'шесть',
+        'seven': 'семь',
+        'eight': 'восемь',
+        'nine': 'девять',
+        'ten': 'десять'
+
+    }
+
+    is_up = word.istitle()
+    word = word.lower()
+    if not (word in word_dict.keys()):
+        return None
+    if is_up:
+        return word_dict[word].capitalize()
+
+    return word_dict[word]
+@profile
+def num_translate_adv2(word):
+    match word:
+        case 'zero':
+            return 'ноль'
+        case 'one':
+            return 'один'
+        case 'two':
+            return 'два'
+        case 'three':
+            return 'три'
+        case 'four':
+            return 'четыре'
+        case 'five':
+            return 'пять'
+        case 'six':
+            return 'шесть'
+        case 'sevem':
+            return 'семь'
+        case 'eight':
+            return 'восемь'
+        case 'nine':
+            return 'девять'
+        case 'ten':
+            return 'десять'
+        case _:
+            return None
+
+
+if __name__ == '__main__':
+    print(num_translate_adv('five'))
+    print(num_translate_adv2('five'))
+
+"""
+Переделал функцию чтобы она не использовала солварь, а работала только на условиях
+"""

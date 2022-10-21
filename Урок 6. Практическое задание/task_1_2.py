@@ -30,3 +30,49 @@
 
 Это файл для второго скрипта
 """
+"""
+Задание 2 к уроку 1 Основы языка Python
+
+Задание:
+Создать список, состоящий из кубов нечётных чисел от 0 до 1000:
+Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7.
+"""
+from memory_profiler import profile
+@profile
+def summing(plus):
+    cub = []
+    for i in range(1, 100000, 2):
+        cub.append(i ** 3)
+    summa = 0
+    for i in cub:
+        temp_sum = 0
+        temp_val = i + plus
+        while temp_val > 0:
+            temp_sum += temp_val % 10
+            temp_val = temp_val // 10
+        if temp_sum % 7 == 0:
+            summa += i
+    return summa
+
+
+print(summing(17))
+@profile
+def summing2(plus):
+    cub = (i**3 for i in range(1, 100000,2))
+    summa = 0
+    for i in cub:
+        temp_sum = 0
+        temp_val = i + plus
+        while temp_val > 0:
+            temp_sum += temp_val % 10
+            temp_val = temp_val // 10
+        if temp_sum % 7 == 0:
+            summa += i
+    return summa
+
+print(summing2(17))
+
+
+"""
+Заменил массив на генератор, уменьшив расход на 2.4 MiB
+"""
