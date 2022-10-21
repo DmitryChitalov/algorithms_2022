@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def revert_number(number, rev=''):
+    dig = number - (number // 10) * 10  # - получаем младший разряд
+    rev = rev + str(dig)
+    if number < 10:
+        return rev
+    else:
+        return revert_number(number // 10, rev)
+
+
+num = int(input('Введите число \n'))
+
+print(revert_number(num))
