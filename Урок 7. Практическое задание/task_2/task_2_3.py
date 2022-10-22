@@ -16,3 +16,49 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+"""
+сделайте замеры на массивах длиной 10, 100, 1000 элементов <- ТАК НЕ ПОЛУЧИТСЯ!!!
+Так как длина массива 2m + 1, т.е. будет нечетное число.
+Сделаем замеры на массивах длиной 11, 101, 1001 элементов
+"""
+
+numbers11 = [randint(-100, 100) for _ in range(11)]
+numbers101 = [randint(-100, 100) for _ in range(101)]
+numbers1001 = [randint(-100, 100) for _ in range(1001)]
+
+"""
+--- ВСТРОЕННАЯ ФУНКЦИЯ ---
+"""
+
+print(f'Исходный массив:\n{numbers11}')
+time1 = timeit(f'median({numbers11})',
+              setup='from statistics import median',
+              number=1000)
+print(f'Медиана: {median(numbers11)}, время на 1000 поисков: {time1} секунд')
+
+print(f'Исходный массив:\n{numbers101}')
+time2 = timeit(f'median({numbers101})',
+              setup='from statistics import median',
+              number=1000)
+print(f'Медиана: {median(numbers101)}, время на 1000 поисков: {time2} секунд')
+
+print(f'Исходный массив:\n{numbers1001}')
+time3 = timeit(f'median({numbers1001})',
+              setup='from statistics import median',
+              number=1000)
+print(f'Медиана: {median(numbers1001)}, время на 1000 поисков: {time3} секунд')
+
+"""
+ВЫВОД:
+
+Использование Гномьего алгоритма сортировки нецелесообразно, т.к. это слишком медленный алгоритм.
+Для 1000 элементов сортировка занимает 1сминуту и более.
+
+Поиск медианы без сортировки проверить не смог, т.к. не понял почему ошибки в определении времени.
+
+Использование стандартных функций очень целесообразно, т.к. времени занимает очень мало!
+"""

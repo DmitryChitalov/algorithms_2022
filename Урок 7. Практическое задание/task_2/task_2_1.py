@@ -15,3 +15,72 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+# https://dzen.ru/media/id/5f04c4d28b9cee73d889add0/python-sortirovki-gnomia-sortirovka-61c168a8a2de17238a45b70f
+
+from random import randint
+from timeit import timeit
+"""
+сделайте замеры на массивах длиной 10, 100, 1000 элементов <- ТАК НЕ ПОЛУЧИТСЯ!!!
+Так как длина массива 2m + 1, т.е. будет нечетное число.
+Сделаем замеры на массивах длиной 11, 101, 1001 элементов
+"""
+
+numbers11 = [randint(-100, 100) for _ in range(11)]
+numbers101 = [randint(-100, 100) for _ in range(101)]
+numbers1001 = [randint(-100, 100) for _ in range(1001)]
+
+"""
+--- ГНОМЬЯ СОРТИРОВКА ---
+Почему гномья? 
+Просто так сортирует гном цветочные горшки.
+Вкратце опишем этот алгоритм:
+Будем двигаться с нулевого элемента в сторону конца массива. 
+Если текущий элемент больше следующего, то переставляем их и при этом делаем шаг назад (учитывая границу массива). 
+Зачем делать шаг назад? 
+Просто перестановка может привести к необходимости еще одной перестановки в предыдущих элементах. 
+Если же данный элемент меньше следующего, то мы делаем шаг вперед. 
+В результате "гном" движется то вперед, то назад и заканчивает свой путь в конце массива.
+"""
+
+def sort_gnom(array):
+    n, i = len(array), 0
+    while True:
+        if i + 1 == n:
+            break
+        if array[i + 1] >= array[i]:
+            i += 1
+        else:
+            array[i], array[i + 1] = array[i + 1], array[i]
+            if i > 0:
+                i -= 1
+            else:
+                i += 1
+
+    return array
+
+print('\nГномья сортировка массива из 11 элементов')
+print(f'Исходный массив:\n{numbers11}')
+time1 = timeit(f'sort_gnom({numbers11[:]})',
+              setup='from __main__ import sort_gnom',
+              number=1000)
+sort_arr = sort_gnom(numbers11[:])
+print(f'Сортированный массив:\n{sort_arr}')
+print(f'Время: {time1} сек., Медиана: {sort_arr[len(numbers11) // 2]}')
+
+print('\nГномья сортировка массива из 101 элементов')
+print(f'Исходный массив:\n{numbers101}')
+time2 = timeit(f'sort_gnom({numbers101[:]})',
+              setup='from __main__ import sort_gnom',
+              number=1000)
+sort_arr = sort_gnom(numbers101[:])
+print(f'Сортированный массив:\n{sort_arr}')
+print(f'Время: {time2} сек., Медиана: {sort_arr[len(numbers101) // 2]}')
+
+print('\nГномья сортировка массива из 1001 элементов')
+print(f'Исходный массив:\n{numbers1001}')
+time3 = timeit(f'sort_gnom({numbers1001[:]})',
+              setup='from __main__ import sort_gnom',
+              number=1000)
+sort_arr = sort_gnom(numbers1001[:])
+print(f'Сортированный массив:\n{sort_arr}')
+print(f'Время 1000 сортировок: {time3} сек., Медиана: {sort_arr[len(numbers1001) // 2]}')
