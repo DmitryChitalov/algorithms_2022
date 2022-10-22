@@ -23,7 +23,7 @@ class BinaryTree:
         self.right_child = None
 
     # добавить левого потомка
-    def insert_left(self, new_node):
+    def __insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -38,7 +38,7 @@ class BinaryTree:
             self.left_child = tree_obj
 
     # добавить правого потомка
-    def insert_right(self, new_node):
+    def __insert_right(self, new_node):
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -52,6 +52,14 @@ class BinaryTree:
             tree_obj.right_child = self.right_child
             self.right_child = tree_obj
 
+    def insert_child(self, new_child):
+        if new_child == self.root:
+            return
+        elif new_child > self.root:
+            self.__insert_right(new_child)
+        else:
+            self.__insert_left(new_child)
+
     # метод доступа к правому потомку
     def get_right_child(self):
         return self.right_child
@@ -63,20 +71,71 @@ class BinaryTree:
     # метод установки корня
     def set_root_val(self, obj):
         self.root = obj
+        # Надо проверить, есть ли chold'ы и возможно их надо пересортировать
+        right_child = self.get_right_child()
+        left_child = self.get_left_child()
+        if right_child:
+            if self.get_root_val() > right_child.get_root_val():
+                self.left_child = right_child
+                self.right_child = None
+        if left_child:
+            if self.get_root_val() < left_child.get_root_val():
+                self.right_child = left_child
+                self.left_child = None
 
     # метод доступа к корню
     def get_root_val(self):
         return self.root
 
+    # показать всех childs
+    def view_childs(self):
+        right_child = self.get_right_child()
+        left_child = self.get_left_child()
+        if right_child:
+            print(f'Правый потомок у {self.get_root_val()}: {right_child.get_root_val()}')
+            right_child.view_childs()
+        if left_child:
+            print(f'Левый потомок у {self.get_root_val()}: {left_child.get_root_val()}')
+            left_child.view_childs()
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+if __name__ == "__main__":
+    r = BinaryTree(8)
+    # print(f'Значение root: {r.get_root_val()}')
+    # print(f'Левый потомок: {r.get_left_child()}')
+    # print(f'Правый потомок у {r.get_root_val()}: {r.get_right_child()}')
+    # print()
+    #
+    # r.insert_child(40)
+    # print(f'Левый потомок: {r.get_left_child()}')
+    # print(f'Правый потомок у {r.get_root_val()}: {r.get_right_child().get_root_val()}')
+    # print()
+    #
+    # r.insert_child(12)
+    # print(f'Левый потомок: {r.get_left_child()}')
+    # print(f'Правый потомок у {r.get_root_val()}: {r.get_right_child().get_root_val()}')
+    # print(f'Правый потомок у {r.get_right_child().get_root_val()}: {r.get_right_child().get_right_child().get_root_val()}')
+    # print()
+    #
+    # r.get_right_child().set_root_val(16)
+    # print(f'Правый потомок у {r.get_root_val()}: {r.get_right_child().get_root_val()}')
+    # print(f'Правый потомок у {r.get_right_child().get_root_val()}: {r.get_right_child().get_right_child().get_root_val()}')
+    # print()
+    # print()
+
+    r.view_childs()
+    r.insert_child(40)
+    r.view_childs()
+    print()
+
+    r.insert_child(12)
+    r.view_childs()
+    print()
+
+    r.get_right_child().set_root_val(16)
+    r.view_childs()
+    print('----------------------------------------------')
+    print()
+
+    r.set_root_val(17)
+    r.view_childs()
+    print()
