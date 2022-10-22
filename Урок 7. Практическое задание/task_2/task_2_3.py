@@ -16,3 +16,46 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+
+import statistics
+from random import randint
+from timeit import timeit
+
+
+m = 10
+obj_list = [randint(1, 100) for _ in range(2*m+1)]
+print(statistics.median(obj_list[:]))
+print(timeit("statistics.median(obj_list[:])", globals=globals(), number=1000))
+
+m = 100
+obj_list = [randint(1, 100) for _ in range(2*m+1)]
+print(statistics.median(obj_list[:]))
+print(timeit("statistics.median(obj_list[:])", globals=globals(), number=1000))
+
+m = 1000
+obj_list = [randint(1, 100) for _ in range(2*m+1)]
+print(statistics.median(obj_list[:]))
+print(timeit("statistics.median(obj_list[:])", globals=globals(), number=1000))
+
+
+
+"""
+Сортировка Шелла
+10 элементов - 0.016677700000400364
+100 элементов - 0.21560144100021716
+100 элементов - 3.4418542719995457
+
+Без сортировки
+10 элементов - 0.007780406000165385
+100 элементов - 0.2441539700002977
+1000 элементов - 21.529072313999677
+
+Встроенная функция statistics
+10 элементов - 0.0007139680001273518
+100 элементов - 0.007294356000784319
+1000 элементов - 0.20555360299931635
+
+Встроенные функции работаю намного быстрее
+До 100 элементов можно обойтись и без сортировки, но всегда лучше пользоваться встроенными функциями. т.к они уже оптимизированы
+"""
