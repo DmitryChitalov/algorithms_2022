@@ -45,10 +45,19 @@ shell(object)
 print(object) 
 
 object = [randint(-100, 100) for _ in range(10)]
-print(timeit('shell(object[:])', globals=globals, number=1000))
+print(timeit('shell(object[:])', globals=globals(), number=1000))
 
 object = [randint(-100, 100) for _ in range(100)]
-print(timeit('shell(object[:])', globals=globals, number=1000))
+print(timeit('shell(object[:])', globals=globals(), number=1000))
 
 object = [randint(-100, 100) for _ in range(1000)]
-print(timeit('shell(object[:])', globals=globals, number=1000))
+print(timeit('shell(object[:])', globals=globals(), number=1000))
+
+"""
+Исходный массив: [2, 8, 5, 1, 4, 10, 0]
+Медиана: 4
+[0, 1, 2, 4, 5, 8, 10]
+0.0039919
+0.0780902
+1.3335138999999998
+"""
