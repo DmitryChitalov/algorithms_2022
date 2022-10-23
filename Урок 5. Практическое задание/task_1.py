@@ -28,3 +28,38 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+dct_enterprise = {}
+enterprise = namedtuple('enterprise', ['p1', 'p2', 'p3', 'p4'])
+count = int(input("Количество предприятий: "))
+
+for i in range(count):
+    enterprise_name = input(str(i + 1) + '-е предприятие: ')
+    enterprise_profit = input('через пробел введите прибыль данного предприятия\n'
+                              'за каждый квартал(Всего 4 квартала): ').split(' ')
+    dct_enterprise[enterprise_name] = enterprise(
+        p1=int(enterprise_profit[0]),
+        p2=int(enterprise_profit[1]),
+        p3=int(enterprise_profit[2]),
+        p4=int(enterprise_profit[3])
+        )
+
+total_profit = ()
+
+for name, profit in dct_enterprise.items():
+    print(f'Предприятие: {name} прибыль за год - {sum(profit)}')
+    total_profit += profit
+
+avg_profit_total = sum(total_profit) / len(dct_enterprise)
+print(f'Средняя прибыль за год для всех предприятий {avg_profit_total}')
+
+print('Предприятия, у которых прибыль выше среднего:')
+for name, profit in dct_enterprise.items():
+    if sum(profit) > avg_profit_total:
+        print(f'{name} - {sum(profit)}')
+
+print('Предприятия, у которых прибыль ниже среднего:')
+for name, profit in dct_enterprise.items():
+    if sum(profit) < avg_profit_total:
+        print(f'{name} - {sum(profit)}')
