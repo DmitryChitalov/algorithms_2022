@@ -16,3 +16,33 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+
+def median(obj):
+    n = len(obj)
+    index = n // 2
+    if n % 2:
+        return sorted(obj)[index]
+
+    return sum(sorted(obj)[index - 1:index + 1]) / 2
+
+
+object = [2, 8, 5, 1, 4, 10, 0]
+print('Медиана:', median(object[:]))
+
+object = [randint(-100, 100) for _ in range(10)]
+print(timeit('median(object[:])', globals=globals(), number=1000))
+
+object = [randint(-100, 100) for _ in range(100)]
+print(timeit('median(object[:])', globals=globals(), number=1000))
+
+object = [randint(-100, 100) for _ in range(1000)]
+print(timeit('median(object[:])', globals=globals(), number=1000))
+
+"""
+Медиана: 4
+0.0006145000000000005
+0.0032323000000000005
+0.0699606
+"""
