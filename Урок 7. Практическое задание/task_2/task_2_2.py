@@ -15,6 +15,7 @@
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
 from random import randint
+from timeit import timeit
 
 def median(l, half):
     if len(l) == 0:
@@ -47,3 +48,4 @@ n = 6
 object = [randint(-100, 100) for _ in range(2 * n + 1)]
 print(f'Исходный массив {object}')
 print(f'Медиана {median(object, n)}')
+
