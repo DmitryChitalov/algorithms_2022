@@ -11,7 +11,6 @@
 
 П.С. задание не такое простое, как кажется
 """
-
 from timeit import timeit
 from random import randint
 
@@ -80,3 +79,21 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+num_564979 = 564979
+print('\n')
+print(
+    timeit(
+        'recursive_reverse(num_564979)',
+        setup='from __main__ import recursive_reverse, num_564979',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_564979)',
+        setup='from __main__ import recursive_reverse_mem, num_564979',
+        number=10000))
+
+"""
+Вывод: мемоизация тут нужна, так как данные записываются в кеш, а при повторном вызове - просто данные берутся с кеша
+при одинарном вызове функции мемоизация бесполезна, так как не требуется повторное получение данных из кеша.
+"""
