@@ -28,3 +28,35 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+
+
+companies_quantity = int(input('Введите количество предприятий для расчета прибыли: '))
+companies = defaultdict(list)
+for i in range(companies_quantity):
+    name = input('Введите название предприятия: ')
+    money = input('через пробел введите прибыль данного предприятия\n\
+за каждый квартал(Всего 4 квартала): ').split(' ')
+    companies[name] = list(map(int, money))
+
+# это, чтобы не вводить вручную
+# companies = defaultdict(list)
+# companies['Рога'] = [235, 345634, 55, 235]
+# companies['Копыта'] = [345, 34, 543, 34]
+
+all_money = 0
+for company in companies:
+    all_money += sum(companies[company])
+medium = all_money / 2
+
+best = []
+losers = []
+for company in companies:
+    if sum(companies[company]) >= medium / 2:
+        best.append(company)
+    else:
+        losers.append(company)
+
+print(f'Средняя годовая прибыль всех предприятий: {medium}\n\
+Предприятия, с прибылью выше среднего значения: {" ".join(best)}\n\
+Предприятия, с прибылью ниже среднего значения: {" ".join(losers)}')
