@@ -30,3 +30,39 @@
 
 Это файл для первого скрипта
 """
+
+
+from memory_profiler import profile
+import collections
+
+array = list(range(100000))
+
+
+@profile
+def func_4(array):
+    counter = collections.Counter(array)
+    m = counter.most_common(1)
+    return f'Чаще всего встречается число {m[0][0]}, ' \
+           f'оно появилось в массиве {m[0][1]} раз(а)'
+
+func_4(array[:])
+
+
+@profile
+def func_3(array):
+    m = 0
+    num = 0
+    for i in array:
+        i = array.pop()
+        count = array.count(i)+1
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+func_3(array[:])
+
+'''
+из задания 4-4, суть в том, что при работе с коллекцией, с объемом списка возврастает объем используемой памяти,
+при обходе циклом списка с удалением элемента, память практически не расходуется.
+'''

@@ -30,3 +30,69 @@
 
 Это файл для пятого скрипта
 """
+
+
+from memory_profiler import profile
+import itertools
+
+
+@profile
+def hobby_dict():
+    with open('hobby.csv', 'r', encoding='utf-8') as f:
+        hobby = f.read().split('\n')
+    with open('users.csv', 'r', encoding='utf-8') as f1:
+        users = f1.read().split('\n')
+
+    if len(hobby) > len(users):
+        return 1
+    h_dict = {user: hobb for user, hobb in itertools.zip_longest(users, hobby)}
+    # Пишем словарь в файл
+    with open('users_hob.txt', 'a', encoding='utf-8') as f2:
+        for user, hobb in itertools.zip_longest(users, hobby):
+            # f2.write(str(f'{user, hobb}'))
+            f2.write(str(user).replace('\n', '') + ': ' + str(hobb).replace('\n', '') + '\n')
+    return h_dict
+
+
+hobby_dict()
+# прирост занял 0.8 MiB во время выполнения
+
+file_hobby = open('hobby.csv', 'r', encoding='utf-8')
+file_users = open('users.csv', 'r', encoding='utf-8')
+
+
+@profile
+def list_hobby():
+    for line in file_hobby:
+        yield line
+    file_hobby.close
+
+
+def list_users():
+    for line in file_users:
+        yield line
+    file_users.close
+
+
+@profile
+def func_1():
+    for item in itertools.zip_longest(list_users(), list_hobby()):
+        with open('users_hobby_1.txt', 'a', encoding='utf-8') as f:
+            f.write(str(item[0]).replace('\n', '') + ': ' + str(item[1]).replace('\n', '') + '\n')
+
+
+func_1()
+# прирост занял 0.0 MiB во время выполнения
+
+'''
+Задача 6-3 из Основ.
+Есть два файла: в одном хранятся ФИО пользователей сайта, а в другом — данные об их хобби. Известно, 
+что при хранении данных используется принцип: одна строка — один пользователь, разделитель между значениями — 
+запятая. Написать код, загружающий данные из обоих файлов и формирующий из них словарь: ключи — ФИО, значения — 
+данные о хобби. Сохранить словарь в файл. Проверить сохранённые данные. Если в файле, хранящем данные о хобби, 
+меньше записей, чем в файле с ФИО, задаём в словаре значение None. Если наоборот — выходим из скрипта с кодом «1». 
+
+#  в первом случае читаем полностью файлы, а во втором чтение построчное, память экономится.
+
+'''
+
