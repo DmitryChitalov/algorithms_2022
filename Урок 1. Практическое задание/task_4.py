@@ -22,3 +22,50 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {
+    'user1': {'password': '12345', 'activation': True},
+    'user2': {'password': '12345', 'activation': False},
+    'user3': {'password': '12345', 'activation': True},
+    'user4': {'password': '12345', 'activation': False},
+    'user5': {'password': '12345', 'activation': True}
+}
+
+
+# O(n)
+def user_check(users, user_name, user_password):
+    for k, v in users.items():  # O(n)
+        if k is user_name:  # O(1)
+            if v['password'] is user_password and v['activation']:  # O(1)
+                return 'Вход разрешен'  # O(1)
+            elif v['password'] is user_password and not v['activation']:  # O(1)
+                return 'Ваш профиль не активирован'  # O(1)
+            elif v['password'] is not user_password:  # O(1)
+                return 'Неверный пароль'  # O(1)
+    return 'Неверное имя пользователя'  # O(1)
+
+
+# O(1)
+def user_check2(users, user_name, user_password):
+    if users.get(user_name):  # O(1)
+        if users[user_name]['password'] is user_password and users[user_name]['activation']:  # O(1)
+            return 'Вход разрешен'  # O(1)
+        elif users[user_name]['password'] is user_password and not users[user_name]['activation']:  # O(1)
+            return 'Ваш профиль не активирован'  # O(1)
+        elif users[user_name]['password'] is not user_password:  # O(1)
+            return 'Неверный пароль'  # O(1)
+    else:  # O(1)
+        return 'Неверное имя пользователя'  # O(1)
+
+
+# второй вариант будет лучше так как при выполнении затрачивает меньше ресурсов
+
+print(user_check(users, 'user1', '12345'))
+print(user_check(users, 'user2', '12345'))
+print(user_check(users, 'user3', '10000'))
+print(user_check(users, 'user6', '12345'))
+
+print(user_check2(users, 'user1', '12345'))
+print(user_check2(users, 'user2', '12345'))
+print(user_check2(users, 'user3', '10000'))
+print(user_check2(users, 'user6', '12345'))

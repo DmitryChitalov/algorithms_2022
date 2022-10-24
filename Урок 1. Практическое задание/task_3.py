@@ -17,3 +17,40 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+company = {
+    'adidas': 12345,
+    'puma': 65432,
+    'nike': 233456,
+    'apple': 1234567890,
+    'samsung': 8765443
+}
+
+
+# O(N*logN)
+def three_bests_company(company):
+    company_list = list(company.items())
+    company_list.sort(key=lambda x: x[1], reverse=True)
+    for i in range(3):
+        print(company_list[i])
+
+
+# O(N^2)
+def three_bests_company2(company):
+    company_list = sorted(company.values(), reverse=True)
+    for i in range(3):
+        for k, v in company.items():
+            if v is company_list[i]:
+                print(company_list[i], k)
+
+
+
+three_bests_company(company)
+three_bests_company2(company)
+
+
+
+
+"""
+Лучшим вариантом будет первый, т.к. имеет минимальную вычислительную 
+сложность
+"""
