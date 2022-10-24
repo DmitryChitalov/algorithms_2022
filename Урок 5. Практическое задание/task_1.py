@@ -48,7 +48,7 @@ def average_profit():
     total = 0
     while flag != '0':
         name_inp = input('Введите название компании: ')
-        profits = input('Введите прибыль компании за каждый квартал (4 квартала): ').split()                    #Можно сделать без этого?
+        profits = input('Введите прибыль компании за каждый квартал (4 квартала): ').split()
         COMPANIES_TEMPL = namedtuple('Companies', 'name prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
         company = COMPANIES_TEMPL(
             name = name_inp,
@@ -61,7 +61,7 @@ def average_profit():
         total = total + company.prof_quart_1 + company.prof_quart_2 + company.prof_quart_3 + company.prof_quart_4
         count += 4
 
-        flag = input('Для выхода нажмите 0, для продолжения - 1: ')                                             # здесь имя flag - нормальное название по смыслу?
+        flag = input('Для выхода нажмите 0, для продолжения - 1: ')
     print(total, count)
     avg = total /count
 
@@ -78,29 +78,3 @@ avg = average_profit()
 print(f'Среднегодовая прибыль всех компаний: {avg[0]}')
 print(f'Компании с годовой прибылью выше средней: {avg[1]}')
 print(f'Компании с годовой прибылью ниже средней: {avg[2]}')
-
-
-
-# Вариант 2
-
-
-# def average_profit():                                                                                        # можно делать через рекурсию ?
-#     company = input('Введите название компании (в конце введите - 0): ')
-#     if company == '0':
-#         print('Вы вышли из программы')
-#         # расчеты среднего значения и вывод компаний наименований
-#
-#     else:
-#         companies = []
-#         profits_inp = input('Введите прибыль компании за каждый квартал (4 квартала) через пробел: ')
-#         profits = profits_inp.split()                                                                       #Можно сделать без этого?
-#         COMPANIES_TEMPL = namedtuple('Companies', 'prof_quart_1 prof_quart_2 prof_quart_3 prof_quart_4')
-#         company = COMPANIES_TEMPL(
-#             prof_quart_1 = profits[0],
-#             prof_quart_2 = profits[1],
-#             prof_quart_3 = profits[2],
-#             prof_quart_4 = profits[3]
-#         )
-#         companies.append(company)
-#
-#         average_profit()
