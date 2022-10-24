@@ -48,7 +48,6 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
@@ -80,3 +79,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+##
+# Вывод: мемоизация не требуется, потому что остаток от деления (%10) - будет всегда разный, и возврат значения из кэша будет не задействован
