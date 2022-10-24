@@ -23,52 +23,74 @@ f1dcaeeafeb855965535d77c55782349444b
 п.с. статья на Хабре - python db-api
 """
 
+import csv
+import os
+from binascii import hexlify
+from uuid import uuid4
+from hashlib import pbkdf2_hmac
+from os import stat
 
-
-def get_key(str, salt):
+def get_key():
+    login = input('Введите логин пользователя: ')
+    passw = input('Введите пароль: ')
     res_hash = hexlify(
         pbkdf2_hmac(hash_name='sha256',
-                    password=str.encode('utf-8'),
-                    salt=salt.encode('utf-8'),
+                    password=passw.encode('utf-8'),
+                    salt=login.encode('utf-8'),             # соль вычисляется из логина всегда при выполнении данной функции (при регистрации / проверке и т.д.)
                     iterations=100)
     )
     res_hash.decode('utf-8')
-    return res_hash
+    return login, res_hash
 
+def register():
+    login, key = get_key()
+    with open("data.csv", 'a+', newline='') as f:                   # не работает чтение в режиме a+
+        writer = csv.DictWriter(f, fieldnames=['login', 'key'])
+        if stat("data.csv").st_size == 0:
+            writer.writeheader()
+        is_reg = False
 
-mod = int(input('Введите - 1  id для сохранения пользователей и паролей или 2. - для проверки пароля пользователя: '))
-
-if mod == 1:
-    with open("data.csv", 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['id', 'salt', 'key'])
-        writer.writeheader()
-        inp_mod = 1
-        while inp_mod !=0:
-            id = input('Введите id пользователя: ')
-            passw = input('Введите пароль: ')
-            salt = uuid4().hex
-            key = get_key(passw, salt).decode('utf-8')
-            print(type(salt),salt)
-            print(type(key),key)
-            writer.writerow({'id': id, 'salt': salt, 'key': key})
-
-
-            inp_mod = int(input('Для продолжения нажмите любую клавишу, для выхода - 0: '))
-
-
-if mod == 2:
-    id = input ('Введите id пользователя: ')
-
-    passw_to_check = input('Введите пароль для проверки: ')
     with open("data.csv", 'r', newline='') as f:
         reader = csv.DictReader(f)
+        print(str(login))
         for row in reader:
-            if row['id'] == id:
-                salt = row['salt']
-                key = row ['key']
-    key_new = get_key(passw_to_check, salt).decode('utf-8')
+            if row['login'] == str(login):
+                print('Пользователь уже зарегистрирован.')
+                is_reg = True
 
-    if key_new == key:
-        print('Пароль введен верно')
+    if is_reg == False:
+        with open("data.csv", 'a+', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=['login', 'key'])  # дублирование кода изза того , что не работает а+
+            writer.writerow({'login': login, 'key': key})
+            print('Вы успешно зарегистрированы')
+
+    f.close()
+
+
+def check():
+    login, check_key = get_key()
+    with open("data.csv", 'r', newline='') as f:
+        reader = csv.DictReader(f)
+        is_reg = False
+        for row in reader:
+            if row['login'] == str(login):
+                is_reg = True
+                if row['key'] == str(check_key):
+                    print('Вы успешно вошли в систему.')
+                else:
+                    print('Неверный пароль')
+        if is_reg == False:
+            print('Пользователь не зарегистрирован.')
+
+
+mod = 1
+while mod != 0:
+    mod = int(input('Введите - 1  для регистрации или 2 - для входа в систему, для выхода - 0: '))
+    if mod == 1:
+        register()
+    elif mod == 2:
+        check()
+    elif mod == 0:
+        print('Выход')
     else:
-        print('Пароль неверный')
+        print('Неверный ввод.')
