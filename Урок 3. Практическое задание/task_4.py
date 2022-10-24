@@ -14,6 +14,7 @@
 
 import hashlib
 import json
+import os
 
 
 def hash_and_cache_func(url):
@@ -22,17 +23,24 @@ def hash_and_cache_func(url):
     salt = 'my_salt'
     res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
 
-    with open('data.txt') as json_file:
-        cache = json.load(json_file)
-        if res in cache.values():
-            return print(res)
-        else:
-            cache_dict.setdefault('hash', res)
+    if os.path.exists("data.txt"):
+        with open('data.txt') as json_file:
+            cache_dict = json.load(json_file)
+            if res in cache_dict.values():
+                return print(res)
+            else:
+                cache_dict.setdefault(url, res)
+
             with open('data.txt', 'w') as outfile:
                 json.dump(cache_dict, outfile)
             return print("Url записан в кеш.")
+    else:
+        with open('data.txt', 'w') as outfile:
+            json.dump(cache_dict, outfile)
 
 
 
 
+hash_and_cache_func('mail.ru')
 hash_and_cache_func('ya.ru')
+hash_and_cache_func('gb.ru')
