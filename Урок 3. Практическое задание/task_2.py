@@ -22,3 +22,75 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import csv
+import os
+from binascii import hexlify
+from uuid import uuid4
+from hashlib import pbkdf2_hmac
+from os import stat
+
+def get_key():
+    login = input('Введите логин пользователя: ')
+    passw = input('Введите пароль: ')
+    res_hash = hexlify(
+        pbkdf2_hmac(hash_name='sha256',
+                    password=passw.encode('utf-8'),
+                    salt=login.encode('utf-8'),             # соль вычисляется из логина всегда при выполнении данной функции (при регистрации / проверке и т.д.)
+                    iterations=100)
+    )
+    res_hash.decode('utf-8')
+    return login, res_hash
+
+def register():
+    login, key = get_key()
+    with open("data.csv", 'a+', newline='') as f:                   # не работает чтение в режиме a+
+        writer = csv.DictWriter(f, fieldnames=['login', 'key'])
+        if stat("data.csv").st_size == 0:
+            writer.writeheader()
+        is_reg = False
+
+    with open("data.csv", 'r', newline='') as f:
+        reader = csv.DictReader(f)
+        print(str(login))
+        for row in reader:
+            if row['login'] == str(login):
+                print('Пользователь уже зарегистрирован.')
+                is_reg = True
+
+    if is_reg == False:
+        with open("data.csv", 'a+', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=['login', 'key'])  # дублирование кода изза того , что не работает а+
+            writer.writerow({'login': login, 'key': key})
+            print('Вы успешно зарегистрированы')
+
+    f.close()
+
+
+def check():
+    login, check_key = get_key()
+    with open("data.csv", 'r', newline='') as f:
+        reader = csv.DictReader(f)
+        is_reg = False
+        for row in reader:
+            if row['login'] == str(login):
+                is_reg = True
+                if row['key'] == str(check_key):
+                    print('Вы успешно вошли в систему.')
+                else:
+                    print('Неверный пароль')
+        if is_reg == False:
+            print('Пользователь не зарегистрирован.')
+
+
+mod = 1
+while mod != 0:
+    mod = int(input('Введите - 1  для регистрации или 2 - для входа в систему, для выхода - 0: '))
+    if mod == 1:
+        register()
+    elif mod == 2:
+        check()
+    elif mod == 0:
+        print('Выход')
+    else:
+        print('Неверный ввод.')
