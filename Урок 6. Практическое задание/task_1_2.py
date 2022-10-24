@@ -30,3 +30,45 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+
+
+'''
+задание из основ 5 задача из 5 дз
+Представлен список чисел. Определить элементы списка, не имеющие повторений. 
+'''
+src = range(10000)
+
+
+@profile
+def func_3(src):
+    uniqie_sp = set()
+    temp = set()
+    for el in src:
+        if el not in temp:
+            uniqie_sp.add(el)
+        else:
+            uniqie_sp.discard(el)
+        temp.add(el)
+    return temp
+
+
+func_3(src[:])
+# прирост занял 0.7 MiB во время выполнения
+
+
+@profile
+def func_1(src):
+    uniqie_sp = [el for el in src if src.count(el) == 1]
+    return uniqie_sp
+
+
+func_1(src[:])
+# прирост занял 0.1 MiB во время выполнения
+
+
+'''
+В первом случае, путем перебора списка в процессе выполнения прирост памятьи составил 0,6 MiB
+После оптимизации, с переходом на генератор, в процессе выполнения прирост составил всего 0,1 MiB,
+так как ленивые итераторы не хранят свое содержимое в памяти.
+'''
