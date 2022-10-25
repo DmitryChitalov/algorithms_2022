@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+from uuid import uuid4
+
+url_store = {}
+
+
+def url_hash(url):
+    if url in url_store.keys():
+        return url_store[url]
+    else:
+        url_store.setdefault(url, hashlib.sha512(url.encode('utf-8')).hexdigest() + uuid4().hex)
+    return url_store
+
+
+url_hash('www.in.com')
+url_hash('www.off.com')
+print(url_hash('www.in.com'))
+print(url_store)
