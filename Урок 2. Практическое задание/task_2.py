@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def calc_e_o(number, odd=0, even=0):
+    last_number = number % 10
+    if last_number % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    if number // 10 == 0:
+        return f"even: {even}\nodd: {odd}\ntotal{even + odd}"
+    return calc_e_o(number // 10, odd, even)
+
+
+if __name__ == "__main__":
+    print(calc_e_o(30300))

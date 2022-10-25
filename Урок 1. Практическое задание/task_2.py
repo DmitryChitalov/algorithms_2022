@@ -15,3 +15,41 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+lst = [25, 44, 12, 65, 0, 12, 2, 78, 50, 94, 2345, 405, 1]
+
+
+def min_number(lst: list):
+    """
+    Алгоритм принимает на взод список
+    берет каждый элемент списка и сравнивает его с со всеми остальными эелементами
+    если элемент меньше другого и меньше первого эелемента сохраняет его в переменную
+    :param lst: список
+    :return: минимальное значение
+    сложность : O(n^2)
+    """
+    min_number = lst[0]  # O(1)
+    for el in lst[1:]:  # O(n)
+        for i in range(len(lst)):  # O(n)
+            min_number = el if el < lst[i] and el < min_number else min_number  # O(1)
+    return min_number  # O(1)
+
+
+def min_number_2(lst: list):
+    """
+    сохраняет первый эелемент
+    проходит по списку и если элемент меньше сохраненного
+    обновляет значение
+    :param lst:
+    :return: минимальное значение
+    сложность : O(n)
+    """
+    min_number = lst[0]  # O(1)
+    for n in lst:  # O(n)
+        min_number = n if n < min_number else min_number  # O(1)
+    return min_number  # O(1)
+
+
+if __name__ == "__main__":
+    print(min_number(lst))
+    print(min_number_2(lst))
