@@ -29,14 +29,14 @@ def uniq_count(string):
 
     hash_set = set()
 
-    for i in range(length + 1):
-        for j in range(i + 1, length + 1):
+    for i in range(length):
+        for j in range(i, length):
             h = hashlib.sha256(string[i:j].encode('utf-8')).hexdigest()
             hash_set.add(h)
 
     return len(hash_set)
 
 
-my_string = 'algorythm'
+my_string = 'papa'
 
 print(f'Количество различных подстрок в строке {my_string}: {uniq_count(my_string)}')
