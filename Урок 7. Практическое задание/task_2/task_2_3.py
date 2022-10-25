@@ -16,3 +16,20 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+def find_median(n):
+    array = [randint(-1000, 1000) for i in range(n*2+1)]
+    return median(array)
+
+
+print(timeit("find_median(5)", globals=globals(), number=1000))     #0.011557700000000004
+print(timeit("find_median(50)", globals=globals(), number=1000))    #0.10530189999999999
+print(timeit("find_median(500)", globals=globals(), number=1000))   #0.9920112999999999
+
+"""
+Аналитика
+Самым эффективным оказалася способ 
+"""
