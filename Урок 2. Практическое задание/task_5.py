@@ -28,5 +28,6 @@ def ascii_recur(current=32, stop=127, row=0):
         return f"\n{current} - {chr(current)} " + ascii_recur(current + 1, row=1)
     return f"{current} - {chr(current)} " + ascii_recur(current + 1, row=row + 1)
 
+
 if __name__ == '__main__':
     print(ascii_recur())

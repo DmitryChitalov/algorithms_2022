@@ -22,3 +22,71 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import sqlite3 as sql
+from hashlib import sha256
+
+con = sql.connect('lesson_3.sqlite')
+
+with con:
+    """
+    Создаю Таблицу
+    """
+    cur = con.cursor()
+    cur.execute('CREATE TABLE IF NOT EXISTS "hash"("password" STRING, "hash" STRING)')
+    con.commit()
+
+
+def write_to_db(password, hash):
+    """
+    Записываю значения в БД
+    """
+    with con:
+        cur = con.cursor()
+        cur.execute('SELECT password FROM "hash"')
+        res = [x[0] for x in cur.fetchall()]
+        if password not in res:
+            cur.execute(f'INSERT into "hash" VALUES ("{password}", "{hash}")')
+
+
+def get_hash_db(password):
+    """
+    Получаю значения из ДБ
+    """
+    with con:
+        cur = con.cursor()
+        cur.execute(f"""
+        SELECT hash
+        FROM 'hash'
+        WHERE password="{password}"
+        """)
+        res = cur.fetchall()
+        return res[0][0]
+
+
+def create_hash(password: str):
+    """
+    Создаю хэш с солью
+    """
+    salt = "simple_salt"
+    hash_obj = sha256(password.encode() + salt.encode())
+    res = hash_obj.hexdigest()
+    return res
+
+
+def main():
+    password = input('Please enter password : ')
+    hash = create_hash(password)
+    write_to_db(password, hash)
+    db_vall = get_hash_db(password)
+    print(f'In Database saved string {db_vall}')
+    rep_password = input('Please enter one more time: ')
+    rep_hash = create_hash(rep_password)
+    if db_vall == rep_hash:
+        print('Hash is Equal')
+    else:
+        print('Hash is different')
+
+
+if __name__ == "__main__":
+    main()

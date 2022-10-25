@@ -15,3 +15,57 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from hashlib import sha256
+from uuid import uuid4
+
+
+class Cache:
+    def __init__(self):
+        self.hash_storage = {}
+        self.salt_storage = {}
+
+    def get_hash(self, url: str):
+        url_cache = self.hash_storage.get(url)
+        if url_cache:
+            return url_cache
+
+        self.hash_storage[url] = self.make_hash(url)
+        return 'Hash Saved'
+
+    def get_salt(self, url: str):
+        """
+        Получаю соль для url если нету в хранилище соли генерирую новую
+
+        !!!!
+        не понимаю смысла соли если мы просто возвразаем хэш но раз есть соль стоит ее сохранить я думаю
+        """
+        salt = self.salt_storage.get(url)
+        if salt:
+            return salt
+
+        salt = uuid4().hex
+        self.salt_storage[url] = salt
+        return salt
+
+    def make_hash(self, url: str):
+        """
+        создаю хэш
+        """
+        salt: str = self.get_salt(url)
+        result: str = sha256(salt.encode() + url.encode()).hexdigest()
+        return result
+
+
+"""
+Очень отстаю от уроков поэтому делаю все как можно быстрее 
+А так задаие интереснной если еще больше развить тут ООП
+"""
+# https://gb.ru/, https://drive.google.com,
+if __name__ == "__main__":
+    cache = Cache()
+    print(cache.get_hash("https://drive.google.com"))
+    print(cache.get_hash("https://gb.ru/"))
+    print(cache.get_hash("https://www.google.ru/"))
+    print(cache.get_hash("https://drive.google.com"))
+    print(cache.get_hash("https://gb.ru/"))
+    print(cache.get_hash("https://www.google.ru/"))

@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+
+def count_substrings(s):
+    f_hash = set()
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+            substring = s[i:j]
+            s_hash = hashlib.sha256(substring.encode()).hexdigest()
+            f_hash.add(s_hash)
+    return f"Unique slices amount is : {len(f_hash) - 1}"
+
+
+if __name__ == '__main__':
+    string = 'papa'
+    print(count_substrings(string))
