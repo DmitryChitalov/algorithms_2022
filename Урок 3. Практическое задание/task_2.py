@@ -27,10 +27,15 @@ import json
 def hashing_func(pswrd=input("Введите пароль: ")):
     user_hash_dict = {}
 
+
+    def hashing(salt, passwd):
+        res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+        return res
+
     salt = 'my_salt'
-    res = hashlib.sha256(salt.encode() + pswrd.encode()).hexdigest()
+    result = hashing(salt, pswrd)
     user_hash_dict.setdefault('salt', salt)
-    user_hash_dict.setdefault('hash', res)
+    user_hash_dict.setdefault('hash', result)
     with open('data.txt', 'w') as outfile:
         json.dump(user_hash_dict, outfile)
 
@@ -40,12 +45,12 @@ def hashing_func(pswrd=input("Введите пароль: ")):
         data = json.load(json_file)
         auth_salt = data['salt']
         auth_hash = data['hash']
-    auth_res = hashlib.sha256(auth_salt.encode() + user_auth.encode()).hexdigest()
+    result = hashing(auth_salt, user_auth)
 
-    if auth_res == auth_hash:
-        return print("Вы ввели правильный пароль")
+    if result == auth_hash:
+        return print("Вы ввели правильный пароль.")
     else:
-        return print("Вы ввели неправильный пароль")
+        return print("Вы ввели неправильный пароль.")
 
 
 hashing_func()
