@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def my_sum(n):
+    if n == 1:
+        return 1
+    else:
+        return my_sum(n-1) + n
+
+
+if __name__ == '__main__':
+    n = random.randint(1, 1000)
+    print(f'n = {n}, результат работы функции: {my_sum(n)}, ответ по формуле: {int((n * (n + 1) / 2))}')
+    if my_sum(n) == (n * (n + 1) / 2):
+        print('Равенство верно')
+    else:
+        print('Равенство не верно')
+
