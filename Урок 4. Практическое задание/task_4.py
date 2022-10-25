@@ -9,6 +9,9 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+import random
+from timeit import timeit
+from collections import defaultdict
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +40,41 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    m = 0
+    num = 0
+    result = defaultdict(int)
+    for i in array:
+        result[i] += 1
+        if result[i] > m:
+            m = result[i]
+            num = i
+
+    return f'Чаще всего встречается число {num}, ' \
+               f'оно появилось в массиве {m} раз(а)'
+
+
+if __name__ == '__main__':
+    print("На небольшом списке")
+    print("func_1:", timeit("func_1()", globals=globals(), number=10000))
+    print("func_2:", timeit("func_2()", globals=globals(), number=10000))
+    print("func_3:", timeit("func_3()", globals=globals(), number=10000))
+    print("На большом списке")
+    array = [random.randint(1,10) for i in range(100)]
+    print("func_1:", timeit("func_1()", globals=globals(), number=10000))
+    print("func_2:", timeit("func_2()", globals=globals(), number=10000))
+    print("func_3:", timeit("func_3()", globals=globals(), number=10000))
+
+"""
+На небольшом списке
+func_1: 0.011661083999999999
+func_2: 0.0140115
+func_3: 0.011966124999999994
+На большом списке
+func_1: 0.786646583
+func_2: 0.8068924169999999
+func_3: 0.07637120800000008
+
+На небольшом массиве разница в алгоритмах не заметна, но при увеличении размера входного массива, третий алгоритм
+имеет приемущество, т.к. имеет линейную алгоритмическую сложность O(n).
+"""
