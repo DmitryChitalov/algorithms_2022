@@ -30,3 +30,46 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import memory_usage
+import numpy as np
+
+
+def mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение функции заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# Задача 3 из курса Алгоритмы. 5 урок.
+
+
+@mem_usage
+def func_1():
+    list_ = []
+    for i in range(1000):
+        list_.append(i)
+
+
+@mem_usage
+def func_2():
+    ar_np = np.array([])
+    for i in range(1000):
+        np.append(ar_np, i)
+
+
+func_1()
+func_2()
+
+
+'''
+Исходный код: 0.05859375 Mib
+Оптимизированный: 0.0078125 Mib
+Это объясняется тем, что массивы в numpy занимают меньше места в памяти,
+чем стандартные питоновские списки.
+'''

@@ -30,3 +30,47 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import memory_usage
+
+
+# Первый скрипт. Курс основы. Урок 5. Задание 5.
+# Представлен список чисел. Определить элементы списка, не имеющие повторений.
+
+def mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение функции заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+
+
+# Исходный вариант
+@mem_usage
+def uniq_l(list_):
+    return [i for i in src if list_.count(i) == 1]
+
+
+print(uniq_l(src))
+
+
+# Оптимизированный
+@mem_usage
+def uniq_l(list_):
+    return (i for i in src if list_.count(i) == 1)
+
+
+print(uniq_l(src))
+
+'''
+Исходный код: 0.0078125 Mib
+Оптимизированный: 0.0 Mib
+Небольшой прирост в памяти, получился благодаря замене list comprehensions (что дает массив)
+на генератор.
+'''

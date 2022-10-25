@@ -30,3 +30,64 @@
 
 Это файл для третьего скрипта
 """
+# Скрипт из Основ. Урок 10. Задание 1. Создать класс матрицы.
+
+from pympler import asizeof
+
+
+class Matrix:
+    def __init__(self, matr):
+        self.matr = matr
+
+    def __str__(self):
+        result = ''
+        for row in self.matr:
+            for i in row:
+                result += f'{i}  '
+            result += '\n'
+        return result
+
+    def __add__(self, other):
+        result = ''
+        for i in range(len(self.matr)):
+            for j in range(len(self.matr[i])):
+                result += f'{self.matr[i][j] + other.matr[i][j]}  '
+            result += '\n'
+        return
+
+
+m1 = Matrix([[31, 22], [37, 43], [51, 86]])
+print(f'{asizeof.asizeof(m1)} bytes')
+
+
+class Matrix1:
+    __slots__ = ['matr']
+
+    def __init__(self, matr):
+        self.matr = matr
+
+    def __str__(self):
+        result = ''
+        for row in self.matr:
+            for i in row:
+                result += f'{i}  '
+            result += '\n'
+        return result
+
+    def __add__(self, other):
+        result = ''
+        for i in range(len(self.matr)):
+            for j in range(len(self.matr[i])):
+                result += f'{self.matr[i][j] + other.matr[i][j]}  '
+            result += '\n'
+        return
+
+
+m2 = Matrix1([[31, 22], [37, 43], [51, 86]])
+print(f'{asizeof.asizeof(m2)} bytes')
+
+'''
+Класс без оптимизации занимает: 696 bytes
+Класс оптимизированный слотом: 528 bytes
+Видим, что второй объект занимает меньше места в памяти, слоты работают
+'''

@@ -30,3 +30,43 @@
 
 Это файл для пятого скрипта
 """
+# Скрипт из 9 урока основ. Задача 2.
+
+from pympler import asizeof
+
+
+class Road:
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def mass_of_asphaltum(self):
+        result = (self._length * self._width * 25 * 5) // 1000
+        print(f'{result} т')
+
+
+road_1 = Road(20, 5000)
+print(f'{asizeof.asizeof(road_1)} bytes')
+
+
+class Road1:
+    __slots__ = ('_length', '_width')
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def mass_of_asphaltum(self):
+        result = (self._length * self._width * 25 * 5) // 1000
+        print(f'{result} т')
+
+
+road_2 = Road1(20, 5000)
+print(f'{asizeof.asizeof(road_2)} bytes')
+
+'''
+Здесь также мы оптимизировали исходный класс слотом и получили размер занимаемого места
+более, чем в 2 раза меньше.
+Исходный: 328 bytes
+Оптимизированный: 112 bytes
+'''

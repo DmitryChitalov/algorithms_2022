@@ -30,3 +30,40 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import memory_usage
+
+
+def mem_usage(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение функции заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# Скрипт из Алгоритмов. Урок 4. Задание 3.
+@mem_usage
+def revers_4(enter_num):
+    return ''.join(reversed(str(enter_num)))
+
+
+print(revers_4(123))
+
+
+@mem_usage
+def revers_5(num):
+    return str(num)[::-1]
+
+
+print(revers_5(123))
+
+"""
+Исходный скрипт: 0.0078125 Mib
+Оптимизированный: 0.0 Mib
+Видим, что вариант через срез занимает меньше памяти,
+чем через функцию reversed.
+"""
