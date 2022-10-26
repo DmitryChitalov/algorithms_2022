@@ -17,3 +17,58 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+class Board:
+    def __init__(self):
+        self.list_of_tasks = []
+        self.adjustment = []
+        self.completed = []
+
+    def clear_board(self):
+        self.list_of_tasks = []
+        self.adjustment = []
+        self.completed = []
+
+    def new_task(self, task):
+        self.list_of_tasks.insert(0, task)
+
+    def from_base(self):
+        return self.list_of_tasks.pop()
+
+    def from_revision(self):
+        return self.adjustment.pop()
+
+    def to_revision(self):
+        self.adjustment.insert(0, self.from_base())
+
+    def to_archive_from_revision(self):
+        self.completed.append(self.from_revision())
+
+    def to_archive_from_base(self):
+        self.completed.append(self.from_base())
+
+    def show_bq(self):
+        bq_str = f'list of tasks: {", ".join(self.list_of_tasks)}'
+        return bq_str
+
+    def show_rev(self):
+        rev_str = f'adjustment: {", ".join(self.adjustment)}'
+        return rev_str
+
+    def show_archive(self):
+        archive_str = f'completed: {", ".join(self.completed)}'
+        return archive_str
+
+    def __str__(self):
+        return self.show_bq() + '\n' + self.show_rev() + '\n' + self.show_archive()
+
+
+if __name__ == '__main__':
+    my_board = Board()
+    for i in range(1, 11):
+        my_board.new_task(f'task {i}')
+    my_board.to_revision()
+    my_board.to_archive_from_base()
+    my_board.to_revision()
+    my_board.to_archive_from_revision()
+    print(my_board)
