@@ -30,3 +30,104 @@
 
 Это файл для пятого скрипта
 """
+"""
+Алгоритмы Python урок 1
+Задание 2.
+
+Реализуйте два алгоритма.
+
+Оба должны обеспечивать поиск минимального значения для списка.
+
+Сложность первого алгоритма должна быть O(n^2) - квадратичная.
+
+Сложность второго алгоритма должна быть O(n) - линейная.
+
+
+Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
+-- нельзя использовать встроенные функции min() и sort()
+-- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
+-- проставьте сложности каждого выражения в двух ваших алгоритмах
+"""
+
+from memory_profiler import profile
+import random
+
+# Зато я немного оптимизировал блок получения данных, убрав из него лишний список!!!
+n_num = 500
+user_list = [2, 3, 9, 34, 1, 90, 67, 25, 8]
+num_list = list(random.sample([num for num in range(1000)], n_num))
+# print(num_list)
+
+
+# Реализуем квадротичный поиск O(n^2).
+# Первую функцию никак не оптимизируем.
+@profile
+def min_of_list_1(user_list):
+    for i in range(len(user_list)):  # O(n)
+        min_el = user_list[i]  # O(1)
+        for j in range(len(user_list)):  # O(n)
+            if min_el < user_list[j]:  # O(1)
+                pass  # O(1)
+            else:
+                min_el = user_list[j]  # O(1)
+
+    return min_el  # O(1)
+    # O(1) + O(n) * O(n) + O(1) + O(1) + O(1) + O(1) = O(n^2)
+
+
+# Реализуем линейный поиск O(n).
+# Во второй функции удалим список входных данных после окончания поиска.
+@profile
+def min_of_list_2(user_list):
+    min_el = user_list[0]  # O(1)
+    for i in range(len(user_list)):  # O(n)
+        if user_list[i] < min_el:  # O(1)
+            min_el = user_list[i]  # O(1)
+    del user_list  # Удалим входной список после окончания поиска.
+
+    return min_el  # O(1)
+    # O(1) + O(n) * (O(1) + O(1)) + O(1) = O(n)
+
+
+# print(min_of_list_1(user_list))
+print(min_of_list_1(num_list))
+# print(min_of_list_2(user_list))
+print(min_of_list_2(num_list))
+
+# Результат выполнения функций одинаков
+
+"""
+В данных функциях оптимизация использования памяти прошла безуспешно, так как функции потребляют практически одинаковое
+её колличество и в процессе их работы она не увеличивается, измерения проводились на выборках 100, 500 и 1000. При
+больших объёмах выборок провести их не удалось из-за большого времени работы.
+Вывод: в данных функциях нужно бороться не с оптимизацией используемой памяти, а с уменьшением времени их работы!!!
+Профили замеров работы функций на выборке 500 прилагаю.
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    65     19.9 MiB     19.9 MiB           1   @profile
+    66                                         def min_of_list_1(user_list):
+    67     20.0 MiB      0.0 MiB         501       for i in range(len(user_list)):
+    68     20.0 MiB      0.0 MiB         500           min_el = user_list[i]
+    69     20.0 MiB      0.0 MiB      250500           for j in range(len(user_list)):
+    70     20.0 MiB      0.0 MiB      250000               if min_el < user_list[j]:
+    71     20.0 MiB      0.0 MiB      248520                   pass
+    72                                                     else:
+    73     20.0 MiB      0.0 MiB        1480                   min_el = user_list[j]
+    74                                         
+    75     20.0 MiB      0.0 MiB           1       return min_el
+    
+   Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    84     20.0 MiB     20.0 MiB           1   @profile
+    85                                         def min_of_list_2(user_list):
+    86                                         
+    87     20.0 MiB      0.0 MiB           1       min_el = user_list[0]  # O(1)
+    88     20.0 MiB      0.0 MiB         501       for i in range(len(user_list)):  # O(n)
+    89     20.0 MiB      0.0 MiB         500           if user_list[i] < min_el:  # O(1)
+    90     20.0 MiB      0.0 MiB           3               min_el = user_list[i]  # O(1)
+    91     20.0 MiB      0.0 MiB           1       del user_list  # Удалим входной список после окончания поиска.
+    92                                         
+    93     20.0 MiB      0.0 MiB           1       return min_el  # O(1)
+ 
+"""
