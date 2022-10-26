@@ -29,44 +29,45 @@ def remove_max(lst_obj):
 
     return max(temp_list)
 
+m = 10
 
-arr_origin = [randint(-100, 100) for _ in range(11)]
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = remove_max(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-#замеры 11
+#замеры 21
 print(
     timeit(
         "remove_max(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m = 100
 
-arr_origin = [randint(-100, 100) for _ in range(101)]
-
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = remove_max(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-# замеры 101
+# замеры 201
 print(
     timeit(
         "remove_max(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m = 1000
 
-arr_origin = [randint(-100, 100) for _ in range(1001)]
-
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = remove_max(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-# замеры 1001
+# замеры 2001
 print(
     timeit(
         "remove_max(arr_origin[:])",
@@ -77,7 +78,7 @@ print(
 Скорость вычисления медианы массива увеличилась примерно на порядок в сравнении с использованием Гномьей сортировки в 
 предыдущем задании!
 
-0.006736399955116212 - 11 элементов
-0.15793180000036955 - 101 элементов
-12.864605900016613 - 1001 элементов
+0.009377799928188324 - 21 элементов
+0.43131569994147867 - 201 элементов
+47.21707590005826 - 2001 элементов
 """

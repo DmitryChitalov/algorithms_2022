@@ -28,44 +28,45 @@ def statistics_median(lst_obj):
 
     return median(lst_obj)
 
+m = 10
 
-arr_origin = [randint(-100, 100) for _ in range(11)]
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = statistics_median(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-#замеры 11
+#замеры 21
 print(
     timeit(
         "statistics_median(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m =100
 
-arr_origin = [randint(-100, 100) for _ in range(101)]
-
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = statistics_median(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-# замеры 101
+# замеры 201
 print(
     timeit(
         "statistics_median(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m = 1000
 
-arr_origin = [randint(-100, 100) for _ in range(1001)]
-
+arr_origin = [randint(-100, 100) for _ in range(2*m + 1)]
 print(arr_origin)
 print(sorted(arr_origin[:]))
 med = statistics_median(arr_origin[:])  # Вычисление медианы массива.
 print(med)
 
-# замеры 1001
+# замеры 2001
 print(
     timeit(
         "statistics_median(arr_origin[:])",
@@ -76,7 +77,7 @@ print(
 Функция median из модуля statistics даёт самый лучший результат по поиску медианы массива, цыфры ещё на порядок лучше,
 чем при поиске удалением как в прошлом задании.
 
-0.0018495999975129962 - 11 элементов
-0.00981560000218451 - 101 элементов
-0.20207640004809946 - 1001 элементов
+0.0021138000302016735 - 21 элементов
+0.019462700001895428 - 201 элементов
+0.019462700001895428 - 2001 элементов
 """

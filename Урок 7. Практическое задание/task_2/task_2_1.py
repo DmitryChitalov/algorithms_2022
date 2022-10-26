@@ -21,7 +21,7 @@ from timeit import timeit
 
 # Через сортировку (Гномья)
 
-def gnome(arr,i = 1):
+def gnome(arr, i=1):
     while i < len(arr):
         if arr[i - 1] <= arr[i]:
             i += 1
@@ -34,54 +34,53 @@ def gnome(arr,i = 1):
     return arr
 
 
+m = 10
 
-arr_origin = [randint(-100, 100) for _ in range(11)]
+arr_origin = [randint(-100, 100) for _ in range(2 * m + 1)]
 print(arr_origin)
-med = gnome(arr_origin[:])[(len(gnome(arr_origin[:])) - 1) // 2]  # Вычисление медианы массива.
+print(gnome(arr_origin[:])[m])  # Вычисление медианы массива.
 print(gnome(arr_origin[:]))
-print(med)
 
-#замеры 11
+# замеры 21
 print(
     timeit(
         "gnome(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m = 100
 
-arr_origin = [randint(-100, 100) for _ in range(101)]
-
-med = gnome(arr_origin[:])[(len(gnome(arr_origin[:])) - 1) // 2]  # Вычисление медианы массива.
+arr_origin = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(arr_origin)
+print(gnome(arr_origin[:])[m])  # Вычисление медианы массива.
 print(gnome(arr_origin[:]))
-print(med)
 
-# замеры 101
+# замеры 201
 print(
     timeit(
         "gnome(arr_origin[:])",
         globals=globals(),
         number=1000))
 
+m = 1000
 
-arr_origin = [randint(-100, 100) for _ in range(1001)]
-
-med = gnome(arr_origin[:])[(len(gnome(arr_origin[:])) - 1) // 2]  # Вычисление медианы массива.
+arr_origin = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(arr_origin)
+print(gnome(arr_origin[:])[m])  # Вычисление медианы массива.
 print(gnome(arr_origin[:]))
-print(med)
 
-# замеры 1001
+# замеры 2001
 print(
     timeit(
         "gnome(arr_origin[:])",
         globals=globals(),
         number=1000))
-
 
 """
 Гномья сортировка довольно длительный процесс и она сравнима с пузырьковой при колличестве элементов до 100,
 обеспечивает приемлемую скорость! При больших массивах время сортировки довольно большое!
 
-0.016518699994776398 - 11 элементов
-1.4911645000101998 - 101 элементов
-145.27000439999392 - 1001 элементов
+0.10488439991604537 - 21 элементов
+6.949105400010012 - 201 элементов
+739.5181122999638 - 2001 элементов
 """
