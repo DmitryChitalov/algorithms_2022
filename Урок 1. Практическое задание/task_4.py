@@ -22,3 +22,60 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+def auth(usrs):
+    # общий O(1)
+    # везде будет O(1)
+    while True:
+        usr = input('enter your login (or 0 to exit): ')
+        if usr == '0':
+            return
+        elif usr not in usrs:
+            print('No such user')
+        else:
+            break
+
+    while True:
+        pswd = input('enter your password (or "x" to exit): ')
+        if pswd == 'x':
+            return
+        elif pswd != users[usr][0]:
+            print('wrong password')
+        elif users[usr][1] == 1:
+            print('everything is ok')
+            return
+        else:
+            print('You have to activate your account')
+        return
+
+
+def auth_2(usrs):
+    # общий O(n)
+    # везде будет O(1) кроме цикла for
+    usr = input('enter your login: ')
+    pswd = input('enter your passwd: ')
+    for key, value in usrs.items():                     # O(n)
+        if usr == key:
+            if pswd == value[0] and value[1] == 1:
+                print('everything is ok')
+            elif pswd == value[0] and value[1] == 0:
+                print('You have to activate your account')
+            else:
+                print('wrong password')
+            return
+    print('wrong login')
+    return
+
+# Вывод: Первое решение эффективнее. В первом решение сложность константная. Во втором решении линейная.
+
+
+if __name__ == '__main__':
+    users = {
+        'user_1': ['password_1', 1],
+        'user_2': ['password_2', 0],
+        'user_3': ['password_3', 1],
+        'user_4': ['password_4', 1],
+        'user_5': ['password_5', 0],
+    }
+    auth(users)
+    auth_2(users)
