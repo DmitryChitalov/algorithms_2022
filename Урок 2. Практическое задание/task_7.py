@@ -12,3 +12,16 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 """
+
+
+def equality(n):
+    def sum_num(n, summ=0):
+        if n == 0:
+            return (summ)
+        return sum_num(n - 1, summ + n)
+    if sum_num(n) == n * ((n + 1) / 2):
+        return print('подтверждено')
+    return print('не подтверждено')
+
+
+equality(5)

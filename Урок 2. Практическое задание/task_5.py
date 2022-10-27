@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def get_codes_and_symbols(start_num, finish_num, idx=0, res=[]):
+    if idx == 10:
+        print(" ".join(res))
+        res.clear()
+        idx = 0
+    elif start_num == finish_num + 1:
+        return print(" ".join(res))
+    res.append(f'{start_num} - {chr(start_num)}')
+    return get_codes_and_symbols(start_num + 1, finish_num, idx + 1)
+
+
+get_codes_and_symbols(32, 127)

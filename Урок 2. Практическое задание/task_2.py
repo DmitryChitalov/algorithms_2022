@@ -17,3 +17,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_num(number):
+    even_numbers = 0
+    odd_numbers = 0
+    while number != 0:
+        num = number % 10
+        if num % 2 == 0:
+            even_numbers += 1
+        else:
+            odd_numbers += 1
+        number = number // 10
+    else:
+        return print(even_numbers, odd_numbers)
+
+
+def check_num2(number, even_numbers=0, odd_numbers=0):
+    if number == 0:
+        return print(even_numbers, odd_numbers)
+    if number % 10 % 2 == 0:
+        even_numbers += 1
+    else:
+        odd_numbers += 1
+    return check_num2(number // 10, even_numbers, odd_numbers)
+
+
+check_num(34560)
+check_num2(34560)
