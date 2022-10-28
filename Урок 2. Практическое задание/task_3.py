@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def num_rev(num):
+    if len(num) == 1:
+        return num
+    else:
+        n = str(int(num) % 10)
+        num = str(int(num) // 10)
+        return n + num_rev(num)
+
+
+if __name__ == '__main__':
+    num = input('Введите число: ')
+    print(num_rev(num))
