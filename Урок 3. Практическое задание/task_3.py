@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+
+string = str(input('input string: '))
+
+h_set = set()
+
+for i in range(len(string)):
+    for j in range(i + 1, len(string) + 1):
+        if string[i:j] != string:
+            h_set.add(hashlib.sha256(string[i:j].encode('utf-8')).hexdigest())
+            print(string[i:j])
+
+print(f'Items in set:{len(h_set)}')
+print(h_set)
