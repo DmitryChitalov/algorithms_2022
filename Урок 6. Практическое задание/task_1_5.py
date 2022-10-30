@@ -30,3 +30,61 @@
 
 Это файл для пятого скрипта
 """
+# из курса основ урок 10 задание 2
+# надо посчитать массу асфальта, необходимого для покрытия дороги
+from pympler import asizeof
+
+
+class Road:
+    # вес одного квадратного метра асфальта толщиной 1 см
+    one_m2_weight = 25
+    # и толщина слоя в см
+    height = 5
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def calculating_weight(self):
+        # вес одного слоя в кг
+        one_layer_weight = self._length * self._width * self.one_m2_weight
+        # возвращаем вес всех слоев в тоннах
+        return one_layer_weight * self.height * 10 ** -3
+
+
+class RoadSlots:
+    # вес одного квадратного метра асфальта толщиной 1 см
+    one_m2_weight = 25
+    # и толщина слоя в см
+    height = 5
+    __slots__ = ['_length', '_width']
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def calculating_weight(self):
+        # вес одного слоя в кг
+        one_layer_weight = self._length * self._width * self.one_m2_weight
+        # возвращаем вес всех слоев в тоннах
+        return one_layer_weight * self.height * 10 ** -3
+
+
+if __name__ == '__main__':
+    road_length = 20
+    road_width = 5000
+    my_road = Road(road_length, road_width)
+    print(f'Масса асфальта, необходимого для покрытия всей дороги: '
+          f'{my_road.calculating_weight():0.2f} тонн')
+    print(f'размер {asizeof.asizeof(my_road)}')
+
+    my_slots_road = RoadSlots(road_length, road_width)
+    print(f'Масса асфальта, необходимого для покрытия всей дороги: '
+          f'{my_slots_road.calculating_weight():0.2f} тонн')
+    print(f'размер: {asizeof.asizeof(my_slots_road)}')
+
+# Масса асфальта, необходимого для покрытия всей дороги: 12500.00 тонн
+# размер 328
+# Масса асфальта, необходимого для покрытия всей дороги: 12500.00 тонн
+# размер: 112
+# Использование слотов позволило уменьшить размер объектов класса почти в три раза
