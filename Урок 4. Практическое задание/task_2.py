@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''  # не добавляется 0.
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,10 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+'''
+Я считаю что мемоизация в данных условиях не нужна, так как в кеше сохраняються данные после первого запуска, 
+а ф-ция timeit запускает код 10000 раз беря результат из кеша и ф-ция не выполняется полностью. 
+Мы не получаем искомые замеры скорости работы 2-х ф-ций. 
+А еще, мне кажеться, есть ошибка в 20-21 строках: if number == 0: return str(number % 10), должно быть return ''.
+'''
