@@ -22,3 +22,17 @@
 р
 а
 """
+import hashlib
+
+s = 'papa'
+
+
+def get_sum_unique_str_in_srt(my_str):
+    my_set = set()
+    for i in range(len(my_str)):
+        my_set.add(hashlib.md5((my_str[0:i + 1]).encode('utf-8')).hexdigest())
+        my_set.add(hashlib.md5((my_str[i:]).encode('utf-8')).hexdigest())
+    return len(my_set)
+
+
+print(get_sum_unique_str_in_srt(s))

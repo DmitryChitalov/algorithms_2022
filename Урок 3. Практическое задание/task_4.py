@@ -4,7 +4,6 @@
 
 Функция должна принимать url-адрес и проверять
 есть ли в кэше соответствующая страница или нет
-есть ли в кэше соответствующая страница или нет
 
 Пример кэша: {'url-адрес': 'хеш url-а'; 'url-адрес': 'хеш url-а'; ...}
 
@@ -15,3 +14,19 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+my_dict = {}
+
+
+def check_url(my_url):
+    salt = 'my_salt'
+    if my_url in my_dict:
+        print('хеш уже есть в кэше', my_dict[my_url])
+    else:
+        my_dict[my_url] = (hashlib.sha512(salt.encode('utf-8') + my_url.encode('utf-8'))).hexdigest()
+        print('хеш добавлен в кэш', my_dict[my_url])
+
+
+check_url('https://www.google.ru/')
+check_url('https://www.google.ru/')
