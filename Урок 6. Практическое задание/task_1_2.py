@@ -30,3 +30,47 @@
 
 Это файл для второго скрипта
 """
+# курс алгоритмы урок 4 задание 4
+# Функция определяет число,
+# которое встречается в массиве чаще всего
+from memory_profiler import memory_usage
+from random import randint
+
+
+def memory_counter(func):
+    def wrapper(*args):
+        start = memory_usage()[0]
+        result = func(*args)
+        end = memory_usage()[0]
+        memory_used = end - start
+        print('Использовано памяти:', memory_used)
+        return result
+    return wrapper
+
+
+@memory_counter
+def function(array):
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+if __name__ == '__main__':
+    num_array = [randint(0, 100) for i in range(10000)]
+    print(function(num_array))
+
+    tpl = tuple(num_array)
+    print(function(num_array))
+
+# Использовано памяти: 0.03515625
+# Чаще всего встречается число 28, оно появилось в массиве 132 раз(а)
+# Использовано памяти: 0.00390625
+# Чаще всего встречается число 28, оно появилось в массиве 132 раз(а)
+
+# Список передаваемый функции заменён на кортеж, что значительно сократило потребление памяти во время работы функции

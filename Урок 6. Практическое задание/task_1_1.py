@@ -30,3 +30,50 @@
 
 Это файл для первого скрипта
 """
+# курс алгоритмы урок 4 задание 1
+# Приведен код, который позволяет сохранить в
+# массиве индексы четных элементов другого массива
+
+from memory_profiler import memory_usage
+from random import randint
+from numpy import array, append
+
+
+def memory_counter(func):
+    def wrapper(*args):
+        start = memory_usage()[0]
+        result = func(*args)
+        end = memory_usage()[0]
+        memory_used = end - start
+        print('Использовано памяти:', memory_used)
+        return result
+    return wrapper
+
+
+@memory_counter
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@memory_counter
+def func_numpy(nums):
+    new_arr_2 = array([])
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            append(new_arr_2, i)
+    return new_arr_2
+
+
+if __name__ == '__main__':
+    num_array = [randint(0, 500) for i in range(100000)]
+
+    func_1(num_array)
+    func_numpy(num_array)
+
+# Использовано памяти: 1.56640625
+# Использовано памяти: 0.0078125
+# в функции заменён список на array из модуля numpy, что значительно сократило потребление памяти
