@@ -19,3 +19,21 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+'''
+как избавиться от None  в конце придумать не смог
+'''
+
+
+def ascii_code(score=31, k=0):  # 127 не отображается
+    if score < 127:
+        k += 1
+        score += 1
+        if k % 10 == 1:
+            return f'\n {str(score)} - {chr(score)} {ascii_code(score, k)}'
+        else:
+            return f'{str(score)} - {chr(score)} {ascii_code(score, k)}'
+
+
+if __name__ == '__main__':
+    print(ascii_code())

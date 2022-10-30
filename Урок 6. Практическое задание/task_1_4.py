@@ -30,3 +30,42 @@
 
 Это файл для четвертого скрипта
 """
+# Алгоритмы и структуры данных на Python. Базовый курс. 4.3
+from memory_profiler import memory_usage
+
+
+def decor_m(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@decor_m
+def func_1(lst):
+    return ''.join(reversed(str(lst)))
+
+
+@decor_m
+def func_2(lst):
+    yield reversed(str(lst))
+
+
+lst = ('123456789' * 1000000)
+
+func_1(lst)
+func_2(lst)
+
+
+
+"""
+Выполнение заняло 8.58984375 Mib (func_1)
+Выполнение заняло 0.0 Mib (func_2)
+Использование yield позволило не использовать память
+Через profile почему-то не выдавало таблицу, как в других заданиях
+"""

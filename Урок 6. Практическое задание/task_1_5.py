@@ -30,3 +30,43 @@
 
 Это файл для пятого скрипта
 """
+# Алгоритмы и структуры данных на Python. Базовый курс. 4.1
+from memory_profiler import profile
+
+
+@profile
+def func_1():
+    result = [i for i in range(0, 1000000, 2)]
+    return result
+
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    50     19.4 MiB     19.4 MiB           1   @profile
+    51                                         def func_1():
+    52     39.8 MiB  -3562.3 MiB      500003       result = [i for i in range(0, 1000000, 2)]
+    53     39.8 MiB      0.0 MiB           1       return result
+"""
+
+
+@profile
+def func_2():
+    return [i for i, el in enumerate(el for el in range(1000000)) if el % 2 == 0]
+
+
+"""
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    57     20.7 MiB     20.7 MiB           1   @profile
+    58                                         def func_2():
+    59     38.6 MiB -77452.5 MiB     3000005       return [i for i, el in enumerate(el for el in range(1000000)) if el % 2 == 0]
+"""
+
+func_1()
+func_2()
+
+"""
+
+Применил функцию enumerate и это позволило не значительно оптимизировать память.
+"""
