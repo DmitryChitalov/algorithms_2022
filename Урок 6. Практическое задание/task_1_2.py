@@ -30,3 +30,39 @@
 
 Это файл для второго скрипта
 """
+"""Фцнкция с переворотом числа"""
+
+
+from memory_profiler import profile
+
+
+# исходное решение
+@profile
+def memo(func):
+    def rev(n, residue=''):
+        residue = residue + str(int(n) % 10)
+        n = int(n) // 10
+        if n == 0:
+            return residue
+        return rev(n, residue)
+    return func
+
+
+# оптимизированное решение
+@profile
+def rev_1(n):
+    n_list = list(n)
+    n_list_rev = map(reversed, n_list)
+    del n_list
+    return ''.join(str(n_list_rev))
+
+
+if __name__ == "__main__":
+    print(memo("01230"))
+    print(rev_1("01230"))
+
+# для оптимизации кода использовал использовал встроенную функцию map для перевертывания списка n_list при помощи
+# встроенной функции reversed не изменяя его.
+# после удалил ссылку при помощи del на первоначальный список n_list
+# для удобства вывода таблицы с профилированием памяти обернул функцию rev(n, residue='') в функцию memo(func)
+# в итоге происходит запуск 1 таблицы

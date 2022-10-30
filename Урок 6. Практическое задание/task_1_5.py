@@ -30,3 +30,60 @@
 
 Это файл для пятого скрипта
 """
+"""
+Ваша программа должна запрашивать пароль
+Для этого пароля вам нужно вычислить хеш, используя алгоритм sha256
+Для генерации хеша обязательно нужно использовать криптографическую соль
+Обязательно выведите созданный хеш
+Далее программа должна запросить пароль повторно и вновь вычислить хеш
+Вам нужно проверить, совпадает ли пароль с исходным
+Для проверки необходимо сравнить хеши паролей
+"""
+
+import json
+from hashlib import sha256
+from memory_profiler import profile
+
+
+# исходное решение
+@profile
+def get_pswd():
+    get_pswd = input("Введите пароль: ")
+    salt = "salt"
+    res = sha256((get_pswd.encode()) + (salt.encode())).hexdigest()
+    print(f'В базе данных хранится строка: {res}')
+    repeat = input("Введите пароль еще раз для проверки: ")
+    res_ = sha256((repeat.encode()) + (salt.encode())).hexdigest()
+    if res_ == res:
+        print("Вы ввели правильный пароль")
+        return res, salt
+    else:
+        print("Пароли не совпадают")
+
+
+with open("password_and_salt.txt", "w") as f:
+    json.dump(get_pswd(), f)
+
+
+# оптимизированное решение
+@profile
+def get_pswd_():
+    get_pswd_ = input("Введите пароль: ")
+    salt = "salt"
+    res = sha256((get_pswd_.encode()) + (salt.encode())).hexdigest()
+    print(f'В базе данных хранится строка: {res}')
+    repeat = input("Введите пароль еще раз для проверки: ")
+    res_ = sha256((repeat.encode()) + (salt.encode())).hexdigest()
+    if res_ == res:
+        print("Вы ввели правильный пароль")
+        del res_, get_pswd_, repeat
+        return res, salt
+    else:
+        print("Пароли не совпадают")
+
+
+with open("password_and_salt1.txt", "w") as f:
+    json.dump(get_pswd_(), f)
+
+# использовал инструкцию del для удаления имени res_, get_pswd_, repeat. В таблице memory_profiler
+# изменений не произошло, тк имя занимает мало памяти.

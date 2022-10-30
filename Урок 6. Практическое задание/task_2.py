@@ -9,3 +9,38 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import memory_usage
+
+
+def memory(f):
+    def wrapper(*args, **kwargs):
+        lst = list()
+        res = f(*args, **kwargs)
+        lst.append(memory_usage())
+        print(f'Выполнение заняло {lst} MiB')
+        return res
+    return wrapper
+
+
+@memory
+def even_odd(n, i=0, j=0):
+    residue = int(n) % 10
+    n = int(n) // 10
+    if residue % 2 == 0:
+        i += 1
+    else:
+        j += 1
+    if n > 0:
+        return even_odd(n, i, j)
+    else:
+        return f'Количество четных цифр - {i} \n' \
+               f'Количество нечетных цифр - {j}'
+
+
+print(even_odd(input("Введите число: ")))
+
+# Проблема профилирования функции с рекурсией в том, что каждый талица с данными вызывается с каждым вызовом функции,
+# число вызовов функции равно числу таблиц с данными.
+# Проблема решается функцией-декоратором @memory, результат инкремента сохраняется в lst при каждом вызове функции
+# even_odd()
