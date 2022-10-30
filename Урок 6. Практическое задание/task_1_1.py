@@ -30,3 +30,40 @@
 
 Это файл для первого скрипта
 """
+"""Приведен код, который позволяет сохранить в
+массиве индексы четных элементов другого массива"""
+
+from memory_profiler import memory_usage
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+@memory  # Выполнение заняло 19.34375 Mib
+def func_test_3():
+    result3 = [i for i in range(0, 1000000, 2)]
+    return result3
+
+
+func_test_3()
+
+nums = list(range(1000000))
+
+
+@memory  # Выполнение заняло 0.00390625 Mib
+def func_test_4(lst):
+    result3 = filter(lambda x: x in range(0, 1000000, 2), lst)
+    return result3
+
+
+print(func_test_4(list(range(1000000))))
+
+# Применил функцию filter, что позволило значительно оптимизировать память.
+# Результат уменьшился с 19.34375 Mib до 0.00390625 Mib
