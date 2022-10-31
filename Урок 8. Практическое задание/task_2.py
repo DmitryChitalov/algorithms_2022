@@ -22,35 +22,46 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def __str__(self):
+        return str(self.root)
+
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+        try:
+            if self.root >= new_node:
+                if self.left_child == None:
+                    self.left_child = BinaryTree(new_node)
+                # если у узла есть левый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.left_child = self.left_child
+                    self.left_child = tree_obj
+            else:
+                raise Exception('Ошибка! Значение должно быть меньше корневого значения!')
+        except Exception as exc:
+            print(exc)
 
     # добавить правого потомка
     def insert_right(self, new_node):
         # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+        try:
+            if self.root <= new_node:
+                if self.right_child == None:
+                    self.right_child = BinaryTree(new_node)
+                # если у узла есть правый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.right_child = self.right_child
+                    self.right_child = tree_obj
+            else:
+                raise Exception('Ошибка! Значение должно быть больше корневого значения!')
+        except Exception as exc:
+            print(exc)
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -69,14 +80,16 @@ class BinaryTree:
         return self.root
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+tree = BinaryTree(8)
+print(tree.get_root_val())  # 8
+print(tree.get_left_child())  # None
+tree.insert_left(40)  # Ошибка! Значение должно быть меньше корневого значения!
+tree.insert_right(40)
+print(tree.get_left_child())  # None
+print(tree.get_right_child())  # До перегрузки __str__: <__main__.BinaryTree object at 0x000001C226763DF0>
+                                    # После - 40
+print(tree.get_right_child().get_root_val())  # 40
+tree.insert_left(7)
+print(tree.get_left_child())  # До перегрузки __str__: <__main__.BinaryTree object at 0x000002CE7D7D3D90>
+                                   # После - 7
+print(tree.get_right_child().get_root_val())  # 40
