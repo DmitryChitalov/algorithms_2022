@@ -28,3 +28,87 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+import time
+
+
+def time_(func):
+    def wrapped(*args):
+        start_val = time.time()
+        func(*args)
+        end_val = time.time()
+        print(end_val - start_val)
+
+    return wrapped
+
+
+# a)
+list_ = []
+dict_ = {}
+
+
+@time_
+def list_append(lst):
+    for i in range(100000):  # O(n)
+        lst.append(i)  # O(1)
+
+
+@time_
+def dict_add(dct):
+    for i in range(100000):  # O(n)
+        dct[str(i)] = i  # O(1)
+
+
+list_append(list_)
+dict_add(dict_)
+
+
+# Заполнение списка - 0.004001140594482422
+# Заполнение словаря - 0.0249941349029541
+# В данном случае список заполняется быстрее
+# Так как списку не требуется вычислять хеш-ключи
+
+
+# b)
+@time_
+def list_read(lst):
+    for i in range(len(lst)):
+        a = lst[i]  # O(1)
+
+
+@time_
+def dict_read(dct):
+    for i in dct.keys():
+        a = dct[i]  # O(1)
+
+
+list_read(list_)
+dict_read(dict_)
+
+
+# Получение элемента списка по индексу - 0.0030002593994140625
+# Получение элемента словаря по ключу -  0.005988359451293945
+# Тем самым мы видим, что получение элемента по ключу отрабатывает быстрее, так как ключи хранятся в хеше
+
+
+# c)
+@time_
+def list_delete(lst):
+    for i in range(len(lst)):
+        lst.pop(0)  # O(1)
+
+
+@time_
+def dict_delete(dct):
+    for i in range(len(dct)):
+        dct.pop(str(i))  # O(1)
+
+
+list_delete(list_)
+dict_delete(dict_)
+
+# Удаление из списка - 9.874006986618042
+# Удаление из словаря - 0.019000768661499023
+# Элементы по ключу в словаре удаляются намного быстрее, чем ппо индексу в списке
+# Из-за хеш-ключи
