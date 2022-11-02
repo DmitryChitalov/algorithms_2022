@@ -22,3 +22,51 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+users = {'Andrei' : ['dsjklasj', 1], 'Peter' : ['hcdchnc', 0], 'Aleksei' : ['jhjdsjcslm', 1], 'Anna' : ['hshskjj', 1],
+         'Tom' : ['wuodjcl', 0]}
+
+#print(users.get('Andrei')[1])
+# 1 способ
+def autentification_1(key):
+    if users.get(key)[1] == 1:               # O(1)
+        print('Доступ разрешён!')            # O(1)
+    else:
+        print('Пройдите аутентификацию!')    # O(1)
+print('1 способ')
+autentification_1('Peter')
+autentification_1('Andrei')
+autentification_1('Anna')
+
+#autentification_1('Lena')
+#T(n) = 1 + 1 + 1 = 3 = 1, O(1)
+
+# 2 способ
+def autentification_2(key):
+    list_access = []                                     # O(1)
+    list_bann = []                                       # O(1)
+    for k, v in users.items():                           # O(n)
+        if v[1] == 1:                                    # O(1)
+            list_access.append(k)                        # O(1)
+        else:
+            list_bann.append(k)                          # O(1)
+
+    if key in list_access:                               # O(n)
+        print('Доступ разрешён!')                        # O(1)
+    elif key in list_bann:                               # O(n)
+        print('Пройдите аутентификацию!')                # O(1)
+    else:
+        print('Пользователь не зарегистрирован!')        # O(1)
+
+print('2 способ')
+autentification_2('Peter')
+autentification_2('Andrei')
+autentification_2('Anna')
+
+autentification_2('Toma')
+
+#T(n) = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + n + n + n = 8 + 3 * n = n, O(n)
+
+# Второй способ более сложный по исполнению, но позволяет ролучить больше данных которые можно использовать в далинейшей
+# разработке проекта и позволяет определить незарегестрированных пользователей.
+
+
