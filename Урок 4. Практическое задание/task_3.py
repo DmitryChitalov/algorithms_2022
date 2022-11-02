@@ -57,7 +57,7 @@ def revers_4(enter_num):
 
 
 def revers_5(enter_num):
-    return (str(enter_num))[::-1]
+    return str(enter_num)[::-1]
 
 
 '''самое оптимальное и быстрое решение по сути тоже что и №4 но без создания лишних переменных'''
