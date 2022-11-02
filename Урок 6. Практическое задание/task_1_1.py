@@ -30,3 +30,40 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+from random import randint
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+# src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+src = [randint(0, 100000) for i in range(100000)]
+
+@memory
+def result():
+    elem = []
+    for i in range(len(src) - 1):
+        if src[i] < src[i + 1]:
+            elem.append(src[i + 1])
+
+@memory
+def new_result():
+    return (src[i + 1] for i in range(len(src) - 1) if src[i] < src[i + 1])
+
+result()
+new_result()
+
+# Выполнение result заняло 0.7421875 Mib
+# Выполнение new_result заняло 0.0 Mib
+
+
+

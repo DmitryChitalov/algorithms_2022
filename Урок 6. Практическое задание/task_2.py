@@ -9,3 +9,47 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+# 1) Вариант
+@profile
+def count(num, even = 0, odd = 0):
+
+    if num < 1:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+        return
+    else:
+        if (num % 10) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        num = num // 10
+        return count(num, even, odd)
+
+if __name__ == "__main__":
+    count(123456789)
+
+# 2) Вариант
+
+@profile
+def wrapper(number):
+    def count(num, even=0, odd=0):
+
+        if num < 1:
+            print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+            return
+        else:
+            if (num % 10) % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+            num = num // 10
+    return count(number)
+
+if __name__ == "__main__":
+    wrapper(123456789)
+
+# Вывод: в первом варианте в процессе профилирования памяти вызов происходит
+# на каждый вызов рекурсии, во втором на все ее вызовы.
+# Решение проблемы - использование функции декоратора.

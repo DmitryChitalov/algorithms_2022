@@ -30,3 +30,35 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import memory_usage
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+people_data = ['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй', 'директор аэлита']
+
+@memory
+def source_version(people_data):
+    for str in people_data:
+        names = str.split()[-1]
+        names = names.title()
+    return f'Привет, {names}!'
+
+@memory
+def new_version(people_data):
+    return f' Привет, {str(map(lambda i: i.split()[-1].capitalize(), people_data))}'
+
+source_version(people_data)
+new_version(people_data)
+
+# Выполнение source_version заняло 0.0078125 Mib
+# Выполнение new_version заняло 0.0 Mib
