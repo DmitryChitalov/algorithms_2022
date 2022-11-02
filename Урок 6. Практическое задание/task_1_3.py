@@ -30,3 +30,47 @@
 
 Это файл для третьего скрипта
 """
+
+from memory_profiler import memory_usage
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение {func.__name__} заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+num = 8159648596785768271045876305139845760285
+
+@memory
+def source_version(n):
+    return reverse_number(n)
+
+def reverse_number(num):
+    reverse = ''
+
+    if num == 0:
+        return reverse
+    else:
+        num = int(num)
+        last_num = num % 10
+        return str(last_num) + str(reverse_number(num // 10))
+
+
+@memory
+def opt_reverse(num):
+    res = ''
+    for i in str(num):
+        res = i + res
+    return res
+
+
+source_version(num)
+opt_reverse(num)
+
+# Выполнение source_version заняло 0.01171875 Mib
+# Выполнение opt_reverse заняло 0.0 Mib
