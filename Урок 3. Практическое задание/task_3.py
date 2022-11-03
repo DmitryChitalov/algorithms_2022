@@ -22,3 +22,24 @@
 р
 а
 """
+
+import hashlib
+
+
+def for_x(str1):
+    set_obj = set()
+    hash_obj = set()
+    for i in range(len(str1)):
+        for j in range(i + 1, len(str1) + 1):
+            set_obj.add(str1[i:j])
+        set_obj.discard(str(str1))
+    for h in set_obj:
+        x = bytes(h, encoding='utf-8')
+        hash_x = hashlib.sha256(x).hexdigest()
+        hash_obj.add(hash_x)
+    print(f"В строке '{str1}': {len(set_obj)} уникальных подстрок")
+    print(set_obj)
+    print(hash_obj)
+
+
+for_x('papa')

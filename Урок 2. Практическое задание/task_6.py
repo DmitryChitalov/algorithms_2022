@@ -7,3 +7,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+from random import randint as rin
+
+
+def rnd_game(play_num=rin(0, 101), cnt=1):
+
+    user_num = (int(input('Угадайте число: ')))
+    if cnt == 10:
+        print(f"Вы проиграли, загаданное число {play_num}")
+        exit()
+    else:
+        if user_num > play_num:
+            print('Ваше число больше загаданного')
+            cnt += 1
+            return rnd_game(play_num, cnt)
+        elif user_num < play_num:
+            print('Ваше число меньше загаданного')
+            cnt += 1
+            return rnd_game(play_num, cnt)
+        else:
+            print('Вы победили')
+
+
+rnd_game()

@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+n = 5
+
+
+def left_exp(n):
+    if n == 1:
+        return n
+    else:
+        return n + left_exp(n-1)
+
+
+print(left_exp(n) == n * (n + 1) / 2)

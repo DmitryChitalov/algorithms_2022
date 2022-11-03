@@ -16,9 +16,43 @@
 А если нет, то польз-лю нужно предложить ее пройти.
 
 Приложение должно давать ответы на эти вопросы
- и быть реализовано в виде функции.
+и быть реализовано в виде функции.
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, применить словарь.
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+sys_dict = {
+    'user1': {'pass': 111, 'active': True},
+    'user2': {'pass': 222, 'active': False},
+    'user3': {'pass': 333, 'active': False}
+}
+
+# O(1)
+
+def check_user():
+    login = input('Введите логин: ')                                    # O(1)
+    if sys_dict[login]['active'] is False:                              # O(1)
+        print('Активируйте учетную запись по ссылке http://user.ru')    # O(1)
+    else:
+        print('Доступ разрешон')                                        # O(1)
+
+# check_user()
+
+# O(N)
+
+def check_user2():
+
+    login = input('Введите логин: ')                                        # O(1)
+    for i in sys_dict.keys():                                               # O(N)
+        if i == login or sys_dict[login]['active'] is True:                 # O(1)
+            print('Доступ разрешон')                                        # O(1)
+            break                                                           # O(1)
+        elif i == login or sys_dict[login]['active'] is False:              # O(1)
+            print('Активируйте учетную запись по ссылке http://user.ru')    # O(1)
+            break                                                           # O(1)
+
+check_user2()
+
+

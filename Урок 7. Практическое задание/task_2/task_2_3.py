@@ -16,3 +16,23 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+
+lst_10 = [randint(0, 1000) for _ in range(11)]
+lst_100 = [randint(0, 1000) for _ in range(101)]
+lst_1000 = [randint(0, 1000) for _ in range(1001)]
+
+
+def get_mediana(lst_obj):
+    return median(lst_obj)
+
+
+print(get_mediana(lst_10))
+print(get_mediana(lst_100))
+print(get_mediana(lst_1000))
+print(timeit("get_mediana(lst_10)", globals=globals(), number=1000))
+print(timeit("get_mediana(lst_100)", globals=globals(), number=1000))
+print(timeit("get_mediana(lst_1000)", globals=globals(), number=1000))
