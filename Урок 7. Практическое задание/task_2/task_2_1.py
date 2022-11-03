@@ -15,3 +15,68 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+from random import randint
+from timeit import timeit
+
+
+# "Гномья"
+def gnome_sort(lst_obj):
+    i = 0
+    while i < len(lst_obj):
+        if i == 0:
+            i += 1
+        if lst_obj[i] >= lst_obj[i - 1]:
+            i += 1
+        else:
+            lst_obj[i], lst_obj[i - 1] = lst_obj[i - 1], lst_obj[i]
+            i -= 1
+    return lst_obj
+
+
+# Длина массива 11 элементов
+m = 5
+my_lst_1 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'Время ф-ции сортировки:',
+      timeit(
+          "gnome_sort(my_lst_1[:])",
+          globals=globals(),
+          number=100))
+
+print(my_lst_1)  # Проверяем точно ли 'm' является медианной
+print(f'Медианна массива №1 {my_lst_1[m]}')
+
+# Длина массива 101 элемент
+m = 50
+my_lst_2 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'Время ф-ции сортировки:',
+      timeit(
+          "gnome_sort(my_lst_2[:])",
+          globals=globals(),
+          number=100))
+
+print(f'Медианна массива №2 {my_lst_2[m]}')
+
+# Длина массива 1001 элемент
+m = 500
+my_lst_3 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(f'Время ф-ции сортировки:',
+      timeit(
+          "gnome_sort(my_lst_3[:])",
+          globals=globals(),
+          number=100))
+
+print(f'Медианна массива №3 {my_lst_3[m]}')
+
+
+"""
+Время ф-ции сортировки: 0.006445099999837112
+[17, -21, 70, 23, 71, 47, -64, 64, -56, 52, 7]
+Медианна массива №1 47
+Время ф-ции сортировки: 0.49725320000288775
+Медианна массива №2 48
+Время ф-ции сортировки: 64.93750569999975   
+Медианна массива №3 4
+
+Уменьшил количество повторений так как копьютер сильно долго считает!
+"""
