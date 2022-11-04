@@ -17,3 +17,34 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+class StackClass:
+    """Класс "Хранилище тарелок". Экземпляр класса наполняется "тарелками" - любыми произвольными элементами или
+    данными. Новые элементы помещаются в "стопку". Если количество элементов в "стопке" достигает 5, наполнение
+    переключается на следующую "стопку". Количество "стопок" не ограничено."""
+
+    def __init__(self):
+        self.input_stack = list()
+        self.output_stack = list()
+        self.i = 1
+
+    def push(self, el):
+        self.input_stack.append(el)
+        substack = list()
+        for k in range(len(self.input_stack) - self.i, len(self.input_stack)):
+            substack.append(self.input_stack[k])
+        if self.i == 1:
+            self.output_stack.append(substack)
+        else:
+            self.output_stack[len(self.output_stack) - 1] = substack
+        if self.i == 5:
+            self.i = 1
+        else:
+            self.i += 1
+
+
+SomeStack = StackClass()
+for i in range(1, 14):
+    SomeStack.push(f'Тарелка №{i}')
+print(SomeStack.output_stack)
