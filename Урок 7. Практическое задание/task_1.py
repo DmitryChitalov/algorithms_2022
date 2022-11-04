@@ -18,3 +18,55 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+
+
+from random import randrange
+from timeit import timeit
+
+
+def bubble_sort(array):
+    for i in range(len(array) - 1):
+        for j in range(len(array) - 1):
+            if array[j] < array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+    return array
+
+
+def bubble_sort_improved(array):
+    for i in range(len(array) - 1):
+        swap = False
+        for j in range(len(array) - 1):
+            if array[j] < array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+                swap = True
+        if not swap:
+            return array
+    return array
+
+
+arr = [randrange(-100, 100) for x in range(20)]
+
+print('Обычная - 10: ', timeit('bubble_sort([randrange(-100, 100) for x in range(10)])', globals=globals(), number=100))
+print('Обычная - 100: ',
+      timeit('bubble_sort([randrange(-100, 100) for x in range(100)])', globals=globals(), number=100))
+print('Обычная - 1000: ',
+      timeit('bubble_sort([randrange(-100, 100) for x in range(1000)])', globals=globals(), number=100))
+print('Улучшенная - 10: ',
+      timeit('bubble_sort_improved([randrange(-100, 100) for x in range(10)])', globals=globals(), number=100))
+print('Улучшенная - 100: ',
+      timeit('bubble_sort_improved([randrange(-100, 100) for x in range(100)])', globals=globals(), number=100))
+print('Улучшенная - 1000: ',
+      timeit('bubble_sort_improved([randrange(-100, 100) for x in range(1000)])', globals=globals(), number=100))
+
+"""
+Обычная - 10:  0.0017998998519033194
+Обычная - 100:  0.10664150002412498
+Обычная - 1000:  11.261642899829894
+Улучшенная - 10:  0.001667700009420514
+Улучшенная - 100:  0.09976530005224049
+Улучшенная - 1000:  10.997549999970943
+
+для случайного распределения оба алгоритма работают примерно одинаково
+если массив уже отсортирован, модифицированный работает много быстрее
+"""
