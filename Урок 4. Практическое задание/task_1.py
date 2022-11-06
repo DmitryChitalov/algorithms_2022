@@ -11,6 +11,9 @@
 
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+from timeit import timeit
+
+nums = range(2, 30)
 
 
 def func_1(nums):
@@ -19,3 +22,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(func_1(nums))
+print(timeit('func_1(nums)', globals=globals(), number=100000))
+
+
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+'''при решении с ипользованием list comprehension скорость выполнения кода выросла так-как для этого его и придумали
+плюс код стал более лаконичным'''
+
+print(func_2(nums))
+print(timeit('func_2(nums)', globals=globals(), number=100000))
