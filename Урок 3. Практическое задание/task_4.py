@@ -9,9 +9,25 @@
 Пример кэша: {'url-адрес': 'хеш url-а'; 'url-адрес': 'хеш url-а'; ...}
 
 Если страница в кэше есть, просто вернуть значение хеша, например, 'хеш url-а'
-Если страницы в кэше нет, то вычислить хеш и записать в кэш
+Если страницы в кэше нет, то вычислить хеш и записать в кэш.
 
 Подсказка: задачу решите обязательно с применением 'соленого' хеширования
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+import uuid
+
+set_url = set()
+salt = uuid.uuid4().hex
+salt_bytes = salt.encode(encoding='utf-8')
+url = input('Введите адрес: ')
+while url != '':
+    url_hash = hashlib.sha512(salt_bytes + url.encode(encoding='utf-8')).hexdigest()
+    if url_hash in set_url:
+        print(f'{url_hash}, такой кеш уже существует.')
+    else:
+        set_url.add(url_hash)
+        print(f'{url_hash}, добавлен в кеш.')
+    url = input('Введите адрес: ')

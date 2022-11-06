@@ -13,6 +13,11 @@
 """
 
 
+class OwnError(Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -24,23 +29,29 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+        #сравниваем с "корнем"(узлом) новый левый листок
+        try:
+            if self.root <= new_node:
+                raise OwnError('Введенные параметры левого листка больше корня')
+            # если у узла нет левого потомка
+            if self.left_child is None:
+                # тогда узел просто вставляется в дерево
+                # формируется новое поддерево
+                self.left_child = BinaryTree(new_node)
+            # если у узла есть левый потомок
+            else:
+                # тогда вставляем новый узел
+                tree_obj = BinaryTree(new_node)
+                # и спускаем имеющегося потомка на один уровень ниже
+                tree_obj.left_child = self.left_child
+                self.left_child = tree_obj
+        except OwnError as err:
+            return err
 
     # добавить правого потомка
     def insert_right(self, new_node):
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -72,8 +83,9 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+print(r.insert_left(40))
 print(r.get_left_child())
+print(r.insert_left(7))
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
 print(r.get_right_child())
