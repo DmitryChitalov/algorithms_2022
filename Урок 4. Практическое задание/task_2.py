@@ -50,9 +50,11 @@ def memoize(f):
     def decorate(*args):
 
         if args in cache:
+            print(f'Аргументы {args} в кеше найдены')
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(f'Аргументы {args} добавлены в кеш. КЕШ = {cache}')
             return cache[args]
     return decorate
 
@@ -80,3 +82,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""     Аналитика
+    Мемоизация тут не нужна так как мы обращаемся к ней однократно,что касается замеров времени ,то 
+    у функции с кешем быстрее т.к в первый запуск из n количества создается кеш
+    и после этого используется в оставшихся запусках.
+"""
