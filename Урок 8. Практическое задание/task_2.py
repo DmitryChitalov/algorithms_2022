@@ -11,19 +11,33 @@
 Поработайте с оптимизированной структурой,
 протестируйте на реальных данных - на клиентском коде
 """
+# валидация try exept
+'''
+Бинарное поисковое дерево (BST) — где для каждого узла выполняется условие, чтобы все
+узлы в левом поддереве были меньше этого узла, а все узлы в правом поддереве — больше.
+Такое дерево еще называют упорядоченным.
+'''
+
+
+class InsertException(Exception):
+    def __init__(self, txt):
+        self.txt = txt
 
 
 class BinaryTree:
     def __init__(self, root_obj):
-        # корень
         self.root = root_obj
-        # левый потомок
         self.left_child = None
-        # правый потомок
         self.right_child = None
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        try:
+            if self.root <= new_node:
+                raise InsertException(f"В левом узле значение ({new_node}) должно быть меньше корня ({self.root})")
+        except InsertException as err:
+            print(err)
+            return
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -39,6 +53,13 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            if self.root > new_node:
+                raise InsertException(f"В правом узле значение ({new_node}) должно быть больше \
+или равно корню ({self.root})")
+        except InsertException as err:
+            print(err)
+            return
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -70,13 +91,12 @@ class BinaryTree:
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
+print(f'корень {r.get_root_val()}')
+print(f'левый узел {r.get_left_child()}')
 r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
+r.insert_left(6)
+print(f'левый узел {r.get_left_child().get_root_val()}')
+r.insert_right(7)
 r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+print(f'правый узел {r.get_right_child().get_root_val()}')
+
