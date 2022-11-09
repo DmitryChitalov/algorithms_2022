@@ -13,6 +13,20 @@
 """
 
 
+class BinaryTreeException(Exception):
+    pass
+
+
+class NodeExist(BinaryTreeException):
+    def __init__(self):
+        super().__init__(f'Node already exists')
+
+
+class ValueGreaterThanRoot(BinaryTreeException):
+    def __init__(self):
+        super().__init__(f'Node value greater than root')
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -22,7 +36,25 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def validation(func):
+        def wrapper(self, new_node):
+            if self.get_root_val() < new_node:
+                raise ValueGreaterThanRoot
+            if new_node in [node.get_root_val() for node in self.walk_tree()]:
+                raise NodeExist
+            return func(self, new_node)
+        return wrapper
+
+    def walk_tree(self):
+        nodes = [self]
+        if self.left_child:
+            nodes.extend(self.left_child.walk_tree())
+        if self.right_child:
+            nodes.extend(self.right_child.walk_tree())
+        return nodes
+
     # добавить левого потомка
+    @validation
     def insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
@@ -38,6 +70,7 @@ class BinaryTree:
             self.left_child = tree_obj
 
     # добавить правого потомка
+    @validation
     def insert_right(self, new_node):
         # если у узла нет правого потомка
         if self.right_child == None:
@@ -68,15 +101,40 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    def __str__(self):
+        return f"Node[{self.root}]"
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+
+if __name__ == "__main__":
+    try:
+        r = BinaryTree(8)
+        print(r.get_root_val())
+        print(r.get_left_child())
+    except BinaryTreeException as e:
+        print(f"Got {e} exception")
+
+    try:
+        r.insert_left(40)
+        print(r.get_left_child())
+        print(r.get_left_child().get_root_val())
+    except BinaryTreeException as e:
+        print(f"Got {e} exception")
+
+    try:
+        r.insert_right(7)
+        print(r.get_right_child())
+        print(r.get_right_child().get_root_val())
+    except BinaryTreeException as e:
+        print(f"Got {e} exception")
+
+    try:
+        r.get_right_child().set_root_val(7)
+        print(r.get_right_child().get_root_val())
+    except BinaryTreeException as e:
+        print(f"Got {e} exception")
+
+    try:
+        r.insert_left(7)
+        print(r.left_child().get_root_val())
+    except BinaryTreeException as e:
+        print(f"Got {e} exception")
