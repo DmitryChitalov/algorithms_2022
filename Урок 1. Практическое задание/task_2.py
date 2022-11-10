@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# O(n^2)
+def min(list):
+    min = 0
+    for i in range(len(list)):
+        cheker = True
+        for j in range(len(list)):
+            if list[i] > list[j]:
+                cheker = False
+        if cheker:
+            min = list[i]
+    return min
+
+# O(n)
+def min2(list):
+    min = list[0]
+    for i in range(1, len(list)):
+        if list[i] < min:
+            min = list[i]
+    return min
+
+temp = [2, 5, 6, 4, 9, 7, 8]
+
+
+print(f'O(n^2) - квадратичная: {min(temp)}')
+print(f'O(n) - линейная: {min2(temp)}')
