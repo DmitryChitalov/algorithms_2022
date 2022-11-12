@@ -2,7 +2,7 @@
 Задание 1.
 
 Вам нужно взять 5 любых скриптов, написанных ВАМИ в рамках работы над ДЗ
-курсов Алгоритмы и Основы Python
+курсов Алгоритмы и Основы
 
 На каждый скрипт нужно два решения - исходное и оптимизированное.
 
@@ -30,3 +30,41 @@
 
 Это файл для первого скрипта
 """
+
+"""
+ДЗ_2.2 курс Алгоритмы и структуры данных на Python
+"""
+from memory_profiler import profile
+
+
+@profile
+def my_func(number):
+    def check_num(number, even_numbers=0, odd_numbers=0):
+        if number == 0:
+            return even_numbers, odd_numbers
+        if number % 10 % 2 == 0:
+            even_numbers += 1
+        else:
+            odd_numbers += 1
+        return check_num(number // 10, even_numbers, odd_numbers)
+
+    return check_num(number)
+
+
+@profile
+def check_num(number):
+    even_numbers = 0
+    odd_numbers = 0
+    number = str(number)
+    for i in range(len(number)):
+        if int(number[i]) % 2 == 0:
+            even_numbers += 1
+        else:
+            odd_numbers += 1
+    return even_numbers, odd_numbers
+
+
+my_func(123456)
+"""сменил рекурсию на цикл, что при увеличении значения number позволяет добиться экономии памяти за счет отсутствия 
+необходимости хранения результатов срабатывания вложений и увеличит скорость срабатывания самой функции"""
+check_num(123456)
