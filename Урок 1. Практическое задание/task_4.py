@@ -22,3 +22,28 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+#Сложность О(n)
+def check_login(mp_dict, login, password):
+    x = ['Пользователь найден', 'Пользователь не найден' ]
+    y = ['пароль верный', 'пароль неверный' ]
+    z = ['ученая запись активирована', 'нужно активировать учетную запись' ]
+    a =[1, 3, 4]
+    print(a.index(4))
+    if login in mp_dict.keys():
+        if mp_dict[login][0] == password:
+            if mp_dict[login][1] == 'Y':
+                print(x[0], ', ', y[0], ', ', z[0])
+            else:
+                print(x[0], ', ', y[0], ', ', z[1])
+        else:
+            if mp_dict[login][1] == 'Y':
+                print(x[0], ', ', y[1], ', ', z[0])
+            else:
+                print(x[0], ', ', y[1], ', ', z[1])
+    else:
+        print(x[1], ', ', y[1], ', ', z[1])
+    return 
+
+customers = {'login1': ['123','Y'], 'login2': ['123','Y'], 'login3': ['123','Y']}
+check_login(customers, 'login1', '1234')
