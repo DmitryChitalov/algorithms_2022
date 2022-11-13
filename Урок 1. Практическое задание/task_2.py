@@ -17,28 +17,28 @@
 """
 
 #Сложность О(n)
-def find_min1(lst):
-    if len(lst) > 0:
-        minimum = lst[1]
-        for i in lst:
-            if i < minimum:
-                minimum = i
-    else:
-        minimum = None
+def find_min1(lst):         #O(1)
+    if len(lst) > 0:        #O(n)
+        minimum = lst[1]    #O(1)
+        for i in lst:       #O(n)
+            if i < minimum: #O(1)
+                minimum = i #O(1)
+    else:   
+        minimum = None      #O(1)
     return minimum
 
 #Сложность О(n^2)
 def find_min2(lst):
-    if len(lst) > 0:
-        minimum = lst[3]
-        for i in range(0, len(lst) // 2 + 1):
-            for j in range(1, len(lst) // 2 + 1):
-                if lst[i] < minimum:
-                    minimum = lst[i]
-                elif lst[-j] < minimum:
-                    minimum = lst[-j]
+    if len(lst) > 0:        #O(n)                   
+        minimum = lst[3]    #O(1)
+        for i in range(0, len(lst) // 2 + 1):       #O(n)
+            for j in range(1, len(lst) // 2 + 1):   #O(n)
+                if lst[i] < minimum:                #O(1)
+                    minimum = lst[i]                #O(1)
+                elif lst[-j] < minimum:             #O(1)
+                    minimum = lst[-j]               #O(1)
     else:
-        minimum = None
+        minimum = None      #O(1)
     return minimum
 
 

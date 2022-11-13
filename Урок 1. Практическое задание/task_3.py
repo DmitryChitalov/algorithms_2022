@@ -18,27 +18,28 @@
 """
 #Сложность O(N log N)
 def find_year_val1(mp_dict):
-    c = []
-    if len(mp_dict) > 0:
-        d = mp_dict
-        a = sorted(list(d.values()))
-        b = a[-3:len(a)]
-        for key in d.keys():
-            if d[key] in b:
-                c.append(key)
+    c = []                            #O(1)
+    if len(mp_dict) > 0:              #O(n)
+        d = mp_dict                   #O(1)
+        a = sorted(list(d.values()))  #O(N log N)
+        b = a[-3:len(a)]              #O(n)
+        for key in d.keys():          #O(n)
+            if d[key] in b:           #O(1) (у нас же всегда будет именно 3 элемента)
+                c.append(key)         #O(1)
     return c
 
+#Сложность О(n)
 def find_year_val2(mp_dict):
-    c = []
-    a = []
-    if len(mp_dict) > 0:
-        d = mp_dict
-        for i in range(3):
-            x = max(d.values())
-            for key in d.keys():
-                if d[key] == x:
-                    c.append(key)
-            d.pop(c[i])
+    c = []                          #O(1)
+    a = []                          #O(1)
+    if len(mp_dict) > 0:            #O(n)
+        d = mp_dict                 #O(1)
+        for i in range(3):          #O(1)
+            x = max(d.values())     #O(n)
+            for key in d.keys():    #O(n)
+                if d[key] == x:     #O(1)
+                    c.append(key)   #O(1)
+            d.pop(c[i])             #O(1)
     return c
 
 company_val1 = {'comp1': 601, 'comp2': 800, 'comp3': 603, 'comp4': 604, 'comp5': 605, 'comp6': 606, 'comp7': 607 }

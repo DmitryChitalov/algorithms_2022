@@ -24,26 +24,52 @@
 """
 
 #Сложность О(n)
-def check_login(mp_dict, login, password):
-    x = ['Пользователь найден', 'Пользователь не найден' ]
-    y = ['пароль верный', 'пароль неверный' ]
-    z = ['ученая запись активирована', 'нужно активировать учетную запись' ]
-    a =[1, 3, 4]
-    print(a.index(4))
-    if login in mp_dict.keys():
-        if mp_dict[login][0] == password:
-            if mp_dict[login][1] == 'Y':
-                print(x[0], ', ', y[0], ', ', z[0])
+def check_login(login):
+    x = ['Пользователь найден', 'Пользователь не найден' ] #O(1)
+    y = ['пароль есть', 'пароля нет' ] #O(1)
+    z = ['ученая запись активирована', 'нужно активировать учетную запись' ] #O(1)
+    a =[1, 3, 4] #O(1)
+
+    mp_dict= {'login1': ['','Y'], 'login2': ['123','Y'], 'login3': ['123','Y']}
+    if login in mp_dict.keys():                         #O(n)
+        if mp_dict[login][0]:             #O(1)
+            if mp_dict[login][1] == 'Y':                #O(1)
+                print(x[0], ', ', y[0], ', ', z[0])     #O(1)
             else:
-                print(x[0], ', ', y[0], ', ', z[1])
+                print(x[0], ', ', y[0], ', ', z[1])     #O(1)
         else:
-            if mp_dict[login][1] == 'Y':
-                print(x[0], ', ', y[1], ', ', z[0])
+            if mp_dict[login][1] == 'Y':                #O(1)
+                print(x[0], ', ', y[1], ', ', z[0])     #O(1)
             else:
-                print(x[0], ', ', y[1], ', ', z[1])
+                print(x[0], ', ', y[1], ', ', z[1])     #O(1)
     else:
-        print(x[1], ', ', y[1], ', ', z[1])
+        print(x[1], ', ', y[1], ', ', z[1])             #O(1)
     return 
 
-customers = {'login1': ['123','Y'], 'login2': ['123','Y'], 'login3': ['123','Y']}
-check_login(customers, 'login1', '1234')
+check_login('login1')
+
+
+#Сложность О(n)
+def check_login2(login):
+    x = ['Пользователь найден', 'Пользователь не найден' ] #O(1)
+    y = ['пароль есть', 'пароля нет' ] #O(1)
+    z = ['ученая запись активирована', 'нужно активировать учетную запись' ] #O(1)
+    a =[1, 3, 4] #O(1)
+
+    mp_dict= {'login1': ['',''], 'login2': ['123','Y'], 'login3': ['123','Y']} #O(1)
+    if mp_dict.get(login) is None:                      #O(1)
+        print(x[1], ', ', y[1], ', ', z[1])             #O(1)
+    else:                         
+        if mp_dict[login][0]:                           #O(1)
+            if mp_dict[login][1] == 'Y':                #O(1)
+                print(x[0], ', ', y[0], ', ', z[0])     #O(1)
+            else:
+                print(x[0], ', ', y[0], ', ', z[1])     #O(1)
+        else:
+            if mp_dict[login][1] == 'Y':                #O(1)
+                print(x[0], ', ', y[1], ', ', z[0])     #O(1)
+            else:
+                print(x[0], ', ', y[1], ', ', z[1])     #O(1)
+    return 
+
+check_login2('login3')
