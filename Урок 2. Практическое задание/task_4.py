@@ -10,3 +10,22 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def total(quantity: int, ref_value=1.0):
+    """
+    Функция вычисляет сумму ряда согласно условию задания. Принимает в качестве аргумента количество элементов ряда.
+    :param quantity: Количество элементов ряда
+    :param ref_value: Начальное значение ряда (опционально)
+    :return:
+    """
+    if quantity == 1:
+        return ref_value
+    else:
+        return ref_value + total((quantity - 1), (ref_value * (-0.5)))
+
+
+if __name__ == '__main__':
+    print('Введите количество элементов:')
+    user_quantity = int(input())
+    print(total(user_quantity))
