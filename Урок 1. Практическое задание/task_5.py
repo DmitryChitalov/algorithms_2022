@@ -18,6 +18,8 @@
 в массив стопок (lst = [[], [], [], [],....]).
 """
 
+
+
 class PlateStack:
 
     def __init__(self):

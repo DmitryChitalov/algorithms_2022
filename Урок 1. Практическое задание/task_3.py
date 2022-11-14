@@ -17,6 +17,7 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
 from time import perf_counter
 
 def pribl1(data): #сложность: O(N,logN) = O(N) + O(N,logN) + O(1) + O(N) * O(1) * O(1) + O(1)

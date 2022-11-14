@@ -12,6 +12,7 @@
     в таблицах (см. материалы к уроку).
 """
 
+
 from random import sample
 
 
