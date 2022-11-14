@@ -18,3 +18,38 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+from math import log10
+
+
+def in_reverse(number: int, result=0):
+    """
+    Функция принимает в качестве аргумента натуральное число и "переворачивает" его. Возвращает также натуральное число
+    :param number: Исходное натуральное число
+    :param result: Результат
+    :return:
+    """
+    result = result + 10 ** (len(str(number)) - 1) * (number % 10)
+    number = number // 10
+    if number != 0:
+        return in_reverse(number, result)
+    else:
+        return result
+
+
+def in_reverse_alt(number: int):
+    """
+    Альтернативный вариант функции, не требующий дополнительного аргумента result (подсмотрел на StackOverflow)
+    :param number: Исходное натуральное число
+    :return:
+    """
+    if not number:
+        return 0
+    return in_reverse_alt(number // 10) + (number % 10) * 10 ** int(log10(number))
+
+
+if __name__ == '__main__':
+    print('Пожалуйста, введите число:')
+    user_number = int(input())
+    print(in_reverse(user_number))
+    print(in_reverse_alt(user_number))

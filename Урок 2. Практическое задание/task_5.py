@@ -19,3 +19,23 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def chr_printout(start_pos: int, end_pos: int, counter=1) -> str:
+    """
+    Функция возвращает символы ASCII в заданном диапазоне в виде отформатированной строки (по 10 символов в строке).
+    :param start_pos: Начало диапазона
+    :param end_pos: Конец диапазона
+    :param counter: Служебный аргумент, необходимый для построчного переноса
+    :return:
+    """
+    if counter % 10 != 0 and start_pos != end_pos:
+        return ' '.join((f'{start_pos} - {chr(start_pos)}', chr_printout(start_pos + 1, end_pos, counter + 1)))
+    elif counter % 10 == 0 and start_pos != end_pos:
+        return ''.join((f'{start_pos} - {chr(start_pos)}', '\n', chr_printout(start_pos + 1, end_pos, counter + 1)))
+    else:
+        return f'{start_pos} - {chr(start_pos)}'
+
+
+if __name__ == '__main__':
+    print(chr_printout(32, 127))

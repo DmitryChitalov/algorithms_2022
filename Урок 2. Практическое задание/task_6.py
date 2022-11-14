@@ -7,3 +7,39 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def guess_number(number: int, count=10):
+    """
+    Функция принимает в качестве аргумента число и просит пользователя отгадать его. Если ответ пользователя меньше или
+    больше загаданного числа, функция сообщает ему об этом. У пользователя по умолчанию 10 попыток.
+    :param number: Загаданное число
+    :param count: Количество попыток
+    :return:
+    """
+    try:
+        print('Какое число загадано? ', end="")
+        answer = int(input())
+        if count != 1:
+            if answer > number:
+                print('Ваше число больше чем то, что было загадано. Попробуйте еще раз.')
+                return guess_number(number, count - 1)
+            elif answer < number:
+                print('Ваше число меньше чем то, что было загадано. Попробуйте еще раз.')
+                return guess_number(number, count - 1)
+            else:
+                print('Ура! Вы угадали.')
+        else:
+            print('Вы не угадали.')
+    except ValueError:
+        print('Нужно вводить только целые числа.')
+        guess_number(number, count)
+
+
+if __name__ == '__main__':
+    print('Загадано некоторое число от 0 до 100.')
+    the_number = randint(0, 100)
+    print(f'...Подсказка, загадано число {the_number}...')
+    guess_number(the_number)
