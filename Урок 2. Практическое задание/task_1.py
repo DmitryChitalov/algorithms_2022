@@ -27,3 +27,62 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def user_input(no_zero: bool, oper: str):  # Функция user_input обеспечивает: 1. Ввод значения. 2. Проверку на
+    """
+    Функция обеспечивает:
+    1. Ввод аргументов.
+    2. Проверку на ноль (для этого в нее заводятся аргументы no_zero и oper).
+    3. Проверку, является ли введенное значение числом.
+    """
+    val = input()
+    try:
+        num_check = float(val)
+        if num_check == 0 and no_zero and oper == '/':
+            print('Деление на ноль невозможно. Пожалуйста, введите другой делитель:')
+            return user_input(no_zero, oper)
+        return val
+    except ValueError:
+        print(f'{val} - это не число. Пожалуйста, введите число:')
+        return user_input(no_zero, oper)
+
+
+def calculator(iteration: int):
+    """
+    Функция обеспечивает:
+    1. Прием аргументов и знака операции.
+    2. Интерфейс взаимодействия с пользователем.
+    3. Проверку знака операции.
+    4. Завершение работы.
+    5. Расчет и вывод результата.
+    """
+    if iteration == 0:
+        print('Добро пожаловать в программу-калькулятор!')
+    print('Пожалуйста, введите арифметическую операцию (+, -, *, /) или 0 для выхода:')
+    operator = input()
+    if operator in ('+', '-', '*', '/'):
+        print('Пожалуйста, введите 1-ое число:')
+        num_1 = user_input(False, operator)
+        print('Пожалуйста, введите 2-ое число:')
+        num_2 = user_input(True, operator)
+        if num_2 != 0:
+            result = eval(num_1 + operator + num_2)
+            if type(result) == float:
+                result = round(result, 2)
+            print(f'Результат вычисления {num_1} {operator} {num_2} = {result}\n')
+    else:
+        try:
+            if int(operator) == 0:
+                print('Работа с калькулятором закончена. До свидания!')
+                return
+            else:
+                print('Вы ввели некорректную арифметическую операцию.')
+        except ValueError:
+            print('Вы ввели некорректную арифметическую операцию.')
+    iteration += 1
+    calculator(iteration)
+
+
+if __name__ == "__main__":
+    calculator(0)
