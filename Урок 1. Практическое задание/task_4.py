@@ -22,3 +22,37 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def auth(users):  # O(1)
+    login = input('Login: ')
+    password = input('Password: ')
+    try:
+        selected_user = users[login]
+    except:
+        return 'Wrong user'
+    if password != selected_user['pass']:
+        return 'Wrong password'
+    return 'Access granted' if selected_user['active'] else 'Please activate account'
+
+
+def auth_for(users):  # O(n)
+    login = input('Login: ')
+    password = input('Password: ')
+    for key, body in users.items():  # O(n)
+        if key == login:
+            if password != body['pass']:
+                return 'Wrong password'
+            return 'Access granted' if body['active'] else 'Please activate account'
+
+    return 'Wrong user'
+
+
+usersList = {
+    'user1': {'pass': 'pass1', 'active': True},
+    'user2': {'pass': 'pass2', 'active': False},
+    'user3': {'pass': 'pass1', 'active': True},
+}
+
+print(auth(usersList))
+print(auth_for(usersList))
