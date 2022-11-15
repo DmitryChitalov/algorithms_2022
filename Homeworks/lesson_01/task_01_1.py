@@ -17,9 +17,9 @@ def check_1(lst_obj):
     """Функция должна создать множество из списка.
     Алгоритм 1:
     Создать множество из списка
-    Сложность: O(len(lst_obj))
+    Сложность: O(n)
     """
-    lst_to_set = set(lst_obj)    # O(len(lst_obj))
+    lst_to_set = set(lst_obj)    # O(n)
     return lst_to_set            # O(1)
 
 
@@ -30,10 +30,10 @@ def check_2(lst_obj):
     Проходимся по списку и для каждого элемента проверяем,
     что такой элемент отсутствует
     в оставшихся справа элементах
-    Сложность: O((len(lst_obj))^2).
+    Сложность: O(n^2).
     """
-    for j in range(len(lst_obj)):          # O(len(lst_obj))
-        if lst_obj[j] in lst_obj[j+1:]:    # O(len(lst_obj)
+    for j in range(len(lst_obj)):          # O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
             return False                   # O(1)
     return True                            # O(1)
 
@@ -44,11 +44,11 @@ def check_3(lst_obj):
     Алгоритм 3:
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
-    Сложность: O(len(lst_obj)*log(len(lst_obj)))
+    Сложность: O(nlogn)
     """
-    lst_copy = list(lst_obj)                 # O(len(lst_obj))
-    lst_copy.sort()                          # O(len(lst_obj)*log(len(lst_obj)))
-    for i in range(len(lst_obj) - 1):        # O(len(lst_obj))
+    lst_copy = list(lst_obj)                 # O(n)
+    lst_copy.sort()                          # O(nlogn)
+    for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)
