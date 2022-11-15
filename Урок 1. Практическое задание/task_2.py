@@ -15,3 +15,23 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def sort_quadratic(lst: list) -> int: # O(n^2)
+    '''Функция возвращает наименьший элемент списка. Квадратичная скорость выполнения алгоритма.'''
+    for element in lst[1:]:           # O(n)
+        if lst[0] > element:          # O(1)
+            lst.insert(0, element)    # O(n)
+    return lst[0]                     # O(1)
+
+def sort_linear(lst: list) -> int: # O(n)
+    '''Функция возвращает наименьший элемент списка. Линейная скорость выполнения алгоритма.'''
+    tmp_item: int = lst[0]      # O(1)
+    for element in lst[1:]:     # O(n)
+        if tmp_item > element:  # O(1)
+            tmp_item = element  # O(1)
+    return tmp_item
+
+if __name__ == '__main__':
+    list_of_numbers = [8, 6, 2, 4, 7, 4, 7, 1, 9, 10, 12, 2]
+    print(f'Минимальный элемент списка: {sort_quadratic(list_of_numbers)}')
+    print(f'Минимальный элемент списка: {sort_linear(list_of_numbers)}')

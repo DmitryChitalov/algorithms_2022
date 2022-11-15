@@ -27,3 +27,27 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+import sys
+
+def calculate() -> None:
+    operator = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operator.strip() not in ['+', '-', '*', '/']:
+        if operator == '0':
+            print('Exit')
+            sys.exit()            
+        print("Введенное значение не является операцией.")
+        calculate()
+    first_item = input("Введите первое число: ")
+    if not first_item.isdigit():
+        print("Введенное значение не является числом.")
+        calculate()
+    second_item = input("Введите второе число: ")
+    if not second_item.isdigit():
+        print("Введенное значение не является числом.")
+        calculate()
+    print(int(first_item) + int(second_item), '\n')
+    return calculate()
+
+if __name__ == '__main__':
+    calculate()
