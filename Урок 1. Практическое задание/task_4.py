@@ -32,11 +32,11 @@ users = {
         'user_6': {'password': 'password_6', 'active': True}
     }
 
-def authentication_1(user): # Общая скорость выполнения O(1)
+def authentication_1(user): # Общая скорость выполнения O(n)
     print("authentication_1:")
-    if user['username'] in users:                                       # O(1)
-        if users[user['username']]['active']:                           # O(1)
-            if user['password'] == users[user['username']]['password']: # O(1)
+    if user in users:                                       # O(n)
+        if users[user]['active']:                           # O(1)
+            if input("Password: ") == users[user]['password']: # O(1)
                 return 'Access is allowed.'                             # O(1)                                              # O(1)
             return 'Access is denied.'                                  # O(1)
         return 'Activate your account!'                                 # O(1)
@@ -45,20 +45,33 @@ def authentication_1(user): # Общая скорость выполнения O
 def authentication_2(user): # Общая скорость выполнения O(n)
     print("\nauthentication_2:")
     for key, value in users.items():                                    # O(n)
-        if user['username'] == key:                                     # O(1)
+        if user == key:                                                 # O(1)
             if value['active']:                                         # O(1)
-                if user['password'] != value['password']:               # O(1)
+                if input("Password: ") != value['password']:            # O(1)
                     return 'Access is denied.'                          # O(1)
                 return 'Access is allowed.'                             # O(1)
             return 'Activate your account!'                             # O(1)
     return 'User not registered.'                                       # O(1)
 
-# Скорость выполнения первого первой функции быстрее, 
+def authentication_3(user): # Общая скорость выполнения O(1)
+    print("\nauthentication_2:")
+    try:                                                            # O(1)
+        data = users[user]                                          # O(1)
+        if data['active']:                                          # O(1)
+            if data['password'] != input("Password: "):             # O(1)
+                return 'Access is denied.'                          # O(1)
+            return 'Access is allowed.'                             # O(1)
+        return 'Activate your account!'                             # O(1)
+    except KeyError as err:
+        return 'User not registered.' 
+
+# Скорость выполнения третьеё функции быстрее, 
 # так как отсутствует необходимость в переборе элементов.
 
 if __name__ == '__main__':
 
-    user = {'username': input("Username: "), 'password': input("Password: ")}
+    user = input("Username: ")
     print('\n')
     print(authentication_1(user))
     print(authentication_2(user))
+    print(authentication_3(user))

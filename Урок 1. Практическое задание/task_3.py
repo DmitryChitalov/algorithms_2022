@@ -31,11 +31,11 @@ dictionary_of_companies: dict = {'company_1': randint(100000, 999999),
 
 print(dictionary_of_companies)
 
-def serch_max_revenue_1(dict_of_company: dict) -> dict:     # O(n^2)
+def serch_max_revenue_1(dict_of_company: dict) -> dict:     # O(n)
     ''' Получить словарь компаний с наибольшей прибылью.'''
     tmp_dict: dict = dict_of_company.copy()                 # O(n)
     dict_of_max_revenue_company: dict = dict()              # O(1)
-    for _ in range(3):                                      # O(n)
+    for _ in range(3):                                      # O(1)
         key: str = max(tmp_dict, key=tmp_dict.get)          # O(n)+O(1)
         value: int = tmp_dict[key]                          # O(1)
         dict_of_max_revenue_company.update({key: value})    # O(1)
