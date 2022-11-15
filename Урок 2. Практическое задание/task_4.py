@@ -10,3 +10,24 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_el(number: int, value=1, result=0):
+    '''
+    Рекурсивная функция.
+    Находит сумму n элементов следующего ряда чисел:
+    1 -0.5 0.25 -0.125 ...
+    Htrehcbdyf
+    :param number: int - количество элементов для сложения
+    :param value: int - начальное знаяение последовательности
+    :param result: int - результат
+    :return: result: int
+    '''
+    if number == 0:
+        return result
+    result += value
+    return sum_el(number - 1, value / (-2), result)
+
+
+n = int(input('Введите количество элементов:'))
+print(f'Количество элементов - {n}, их сумма - {sum_el(n)}')

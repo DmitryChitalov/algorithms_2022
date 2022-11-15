@@ -7,3 +7,59 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def get_value(n_try: int):
+    '''
+    Функция выводит на экран количество оставшихся попыток попыток,
+    принмает от играка число и проверяет его на правильность ввода и возвравращает
+    :param n_try: - количество попыток
+    :return:int
+    '''
+    x = input(f'У тебя {n_try} попыток.\nВведите число:')
+    if x.isdigit():
+        return int(x)
+    else:
+        print('Упс.. Это не число. Попробуй еще раз')
+        return get_value(n_try)
+
+
+def game(n_try: int, answer: int):
+    '''
+    Рекурсивная функция. Принимает кол-ва попыток и правильный ответ.
+    Выполняет игровой-процесс. Выводит на экран ход игры и результат
+    :param n_try:int - количество попыток
+    :param answer:int - правильный ответ
+    :return:str
+    '''
+    if n_try == 0:
+        return f'Не угадал... Ответ: {answer}'
+    number = get_value(n_try)
+    if number < answer:
+        print(f'Твое число меньше.')
+        return game(n_try - 1, answer)
+    elif number > answer:
+        print(f'Твое число больше.')
+        return game(n_try - 1, answer)
+    else:
+        return f'Ты выиграл!!! Поздравляю!'
+
+
+def guess_the_number(n_try: int = 10, a: int = 0, b: int = 100):
+    '''
+    Игра угадай число. Пользователь задает настройки: кол-во попыток и интервал загадываемых чисел
+    По умолчанию: 10 попыток, числа от 0 до 100.
+
+    :param n_try:int - количество попыток
+    :param a:int - начало интервала
+    :param b:int - конец интервала
+    :return: None
+    '''
+    print('*****************************\n~~~~~~Игра угадай число~~~~~~\n*****************************')
+    print(f'Я загадаю число от {a} до {b} \nА Ты попробуй угадать за {n_try} попыток\nНачинаем...')
+    answer = random.randint(a, b)
+    print(game(n_try, answer))
+
+
+guess_the_number()
