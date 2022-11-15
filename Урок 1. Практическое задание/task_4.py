@@ -22,3 +22,44 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+user_1 = {'login': 'keks228', 'password': '123456', 'activated': True}
+user_2 = {'login': 'uralmash', 'password': '321321', 'activated': False}
+
+"""Суммарная сложность O(1)"""
+def authentication_1(user):
+    print(f"Hello, {user['login']}")  # O(1)
+    if user['activated'] == False:  # O(1)
+        email = input("Ваша учетная запись не подтверждена.\nВведите email для подтверждения: ")  # O (1)
+        if email.find("@") == -1:  # O (1)
+            print("Вы не ввели емаил и теперь навечно забанены.")  # O(1)
+        else:   # O(1)
+            user['activated'] = True  # O(1)
+            print("Поздравляем, ваша учетная запись активирована!")  # O(1)
+            print("Вы допущены к ресурсу.")  # O(1)
+            
+    else:  # O(1)
+        print("Вы допущены к ресурсу.")  # O(1)
+
+
+"""Суммарная сложность O(n!)"""
+def authentication_2(user):  # O(1)
+    print(f"Hello, {user['login']}")  # O(1)
+    if user['activated'] == False:  # O(1)
+        email = input("Ваша учетная запись не подтверждена.\nВведите email для подтверждения: ")  # O(1)
+        if email.find("@") == -1:  # O(1)
+            print("Вы не ввели емаил и теперь навечно забанены.")  # O(1)
+        else:  # O(1)
+            user['activated'] = True  # O(1)
+            print("Поздравляем, ваша учетная запись активирована!")  # O(1)
+            authentication_2(user)  # O(n!)
+            
+    else:  # O(1)
+        print("Вы допущены к ресурсу.")  # O(1)
+
+    
+
+# authentication_1(user_1)
+# authentication_1(user_2)
+
+# authentication_2(user_1)
+authentication_2(user_2)
