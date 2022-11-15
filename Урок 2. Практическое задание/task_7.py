@@ -13,3 +13,48 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def recurse_func(n: int):
+    '''
+    Рекурсивная ф-я, для левой части выражения. Принимает натуральное число.
+    Пример:
+    для n = 5 -> 1+2+3+4+5
+
+    :param n:int
+    :return:int
+    '''
+    if n == 0:
+        return 0
+    else:
+        return n + recurse_func(n - 1)
+
+
+def programm_2_7(n: int):
+    '''
+    Функция для проверки равенства 1+2+...+n = n(n+1)/2.
+    Принимает натуральное число. Выводит на экран результат проверки.
+    Возвращает True или False
+    :param n:int
+    :return: bool
+    '''
+    a = recurse_func(n)
+    b = n * (n + 1) / 2
+    if a == b:
+        print(f'Равенство выполняется для n = {n} \n1+2+...+{n} = {n}*({n}+1)/2 \n       {a} = {b}')
+        return True
+    else:
+        print(f'Равенство НЕ выполняется для n = {n} \n1+2+...+{n} = {n}*({n}+1)/2 \n{a} != {b}')
+        return False
+
+
+num = 7
+programm_2_7(num)
+
+
+
+# Проверка равенства для массива чисел
+list_num = []
+for i in range(0, 100):
+    list_num.append(programm_2_7(i))
+print(f'Проверка массива чисел:\n{list_num}')
