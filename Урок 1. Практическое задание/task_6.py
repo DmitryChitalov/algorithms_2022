@@ -35,7 +35,7 @@ class Task_Work:
             task = self.start.pop()
             self.edit.insert(0, task)
 
-    def edit_End(self):
+    def edit_end(self):
         if self.edit:
             task = self.edit.pop()
             self.end.insert(0, task)
@@ -73,8 +73,8 @@ if __name__ == "__main__":
 
     print(work)
 
-    work.edit_End()
-    work.edit_End()
-    work.edit_End()
+    work.edit_end()
+    work.edit_end()
+    work.edit_end()
 
     print(work)
