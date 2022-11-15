@@ -21,26 +21,26 @@
 
 
 
-class TaskWork:
+class Task_Work:
     def __init__(self):
         self.start = []
         self.edit = []
         self.end = []
 
-    def addTask(self, task):
+    def add_task(self, task):
         self.start.insert(0, task)
 
-    def editInsert(self):
+    def edit_insert(self):
         if self.start:
             task = self.start.pop()
             self.edit.insert(0, task)
 
-    def editEnd(self):
+    def edit_End(self):
         if self.edit:
             task = self.edit.pop()
             self.end.insert(0, task)
 
-    def startEnd(self):
+    def start_end(self):
         if self.start:
             task = self.start.pop()
             self.end.insert(0, task)
@@ -50,31 +50,31 @@ class TaskWork:
         return status
 
 if __name__ == "__main__":
-    work = TaskWork()
+    work = Task_Work()
 
-    work.addTask('Сделать Скрипт python')
-    work.addTask('Согласовать Дизайн')
-
-    print(work)
-
-    work.editInsert()
-    work.editInsert()
+    work.add_task('Сделать Скрипт python')
+    work.add_task('Согласовать Дизайн')
 
     print(work)
 
-    work.addTask('Передать на скрипт в прод')
-    work.addTask('Передать рабочий скрипт в производство')
+    work.edit_insert()
+    work.edit_insert()
 
     print(work)
 
-    work.startEnd()
-    work.startEnd()
-    work.startEnd()
+    work.add_task('Передать на скрипт в прод')
+    work.add_task('Передать рабочий скрипт в производство')
 
     print(work)
 
-    work.editEnd()
-    work.editEnd()
-    work.editEnd()
+    work.start_end()
+    work.start_end()
+    work.start_end()
+
+    print(work)
+
+    work.edit_End()
+    work.edit_End()
+    work.edit_End()
 
     print(work)

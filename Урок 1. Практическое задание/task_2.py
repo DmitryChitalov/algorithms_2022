@@ -20,8 +20,8 @@ from time import perf_counter
 import random
 array = [random.randint(-10, 10) for i in range(10)]
 
-def getM_On2(n):                                            # O(n**2)
-    length = len(n)                                         # O(1)
+def get_min1(n):                                            # O(n**2)
+    length = len(n)                                         # O(n)   согласен. понял ошибку
     for i in range(length):                                 # O(n)
         for a in range(length - i - 1):                     # O(n)
             if n[a] > n[a + 1]:                             # O(1)
@@ -30,9 +30,7 @@ def getM_On2(n):                                            # O(n**2)
 
 
 
-
-
-def getM_On(n):  # O(n)
+def get_min2(n):  # O(n)
     value = n[0]                  # O(1)
     for i in n:                   # O(n)
         if i < value:             # O(1)
@@ -43,6 +41,6 @@ def getM_On(n):  # O(n)
 
 print(array)
 start1 = perf_counter()
-print(getM_On2(array),(perf_counter() - start1))
+print(get_min1(array),(perf_counter() - start1))
 start2 = perf_counter()
-print(getM_On(array),(perf_counter() - start2))
+print(get_min2(array),(perf_counter() - start2))
