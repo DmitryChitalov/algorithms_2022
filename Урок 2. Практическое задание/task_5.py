@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def table_symbols_ASCII(symbol_1, symbol_2):
+    if symbol_1 == symbol_2 + 1:
+        return
+    else:
+        print(f'{symbol_1} - {chr(symbol_1)}', end=' ')
+        if symbol_1 % 10 == 1:
+            print('\n', end='')
+
+        symbol_1 += 1
+    return table_symbols_ASCII(symbol_1, symbol_2)
+
+print(table_symbols_ASCII(32, 127))

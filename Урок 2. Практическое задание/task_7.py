@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check(n):
+    if n <= 1:
+        return 1
+    else:
+        return n + check(n - 1)
+
+
+n = 5
+if n * (n + 1) / 2 == check(n):
+    print('True')

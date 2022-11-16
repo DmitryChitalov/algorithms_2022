@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+list_of_inverted_digits = []
+def inverse_number(number):
+    global list_of_inverted_digits
+    if number == 0:
+        return
+    i = number % 10
+    list_of_inverted_digits.append(i)
+    number //= 10
+    return inverse_number(number)
+
+number = int(input('Введите число, которое требуется перевернуть: '))
+inverse_number(number)
+list_of_inverted_digits = str(list_of_inverted_digits)[1:-1].replace(", ", "")
+print(f'Перевернутое число: {list_of_inverted_digits}')

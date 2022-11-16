@@ -28,3 +28,37 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+# a)
+my_list = []
+for i in range(1, 10):
+    my_list.append(i)
+
+print(my_list)
+
+my_dict = {}
+for i in range(1, 10):
+    my_dict[i] = i + 1
+
+print(my_dict)
+
+
+# b)
+for i in my_list:
+    print(i)
+
+for x, y in my_dict.items():
+    print(x, y)
+
+
+# c)
+
+while my_list:
+    my_list.pop()
+
+print(my_list)
+
+while my_dict:
+    my_dict.popitem()
+
+print(my_dict)
