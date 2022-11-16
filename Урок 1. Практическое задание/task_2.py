@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+# O(n)
+def get_min_1(lst):      # O(n)
+    minimal = lst[0]     # O(1)
+    for i in lst:        # O(n)
+        if i < minimal:  # O(1)
+            minimal = i  # O(1)
+    return minimal       # O(1)
+
+
+# O(n**2)
+def get_min_2(lst):                                        # O(n**2)
+    length = len(lst)                                       # O(1)
+    for i in range(length):                                 # O(n)
+        for j in range(length - i - 1):                     # O(n)
+            if lst[j] > lst[j + 1]:                         # O(1)
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]     # O(1)
+    return lst[0]                                           # O(1)
+
+test1 = [10300,5,367]
+test2 = [34,234,3,34,23,4,5333]
+
+print(test1)
+print(get_min_1(test1))
+print(test2)
+print(get_min_2(test2))
