@@ -17,3 +17,33 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+some_dict = {'Билайн': 349103, 'Мегафон' : 233234342, 'МТС' : 798498323, 'Yota' : 433293, 'Tele2' : 129201}
+
+# Вариант 1.  Сложность О(n**2)
+
+sorted_values = sorted(some_dict.values())      # O(n log n)
+sorted_dict = {}
+
+for i in sorted_values[:-4:-1]:                   # O(n)
+    for j in some_dict.keys():                    # O(n)
+        if some_dict[j] == i:                     # O(1)
+            sorted_dict[j] = some_dict[j]         # O(1)
+            break            
+print(sorted_dict)                                # O(1)
+
+
+# Вариант 2.  Сложность О(n log n)
+
+import operator
+
+sorted_tuple = sorted(some_dict.items(), key=operator.itemgetter(1))[:-4:-1]       # O(n log n)
+sorted_dict = {k: v for k, v in sorted_tuple}                                      # O(n)
+print(sorted_dict)
+
+'''
+
+Я думаю, что эффективнее 2-й вариант, потому что он менее сложнее и более лаконичнее, чем 1-й
+
+'''
+
+

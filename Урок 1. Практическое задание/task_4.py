@@ -22,3 +22,36 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+some_dict = {'emasevenn@7' : ['8439923', True], 'anzor@832' : ['433234', True], 'reiow@76372' : ['654543', False]}
+
+
+# Вариант 1. Сложность О(len(some_dict))
+
+user_name = input('Введите имя пользователя: ')      
+if user_name in some_dict:                                # O(len(some_dict))
+    if some_dict[user_name][-1] == False:                 # O(1)
+        print('Пройдите активацию!')
+    else:
+        print(f'Welcome, {user_name}')
+
+
+# Вариант 2. Сложность О(n)
+
+not_active = {}
+for i in some_dict.items():                              # O(n)
+    if i[1][1] == False:                                 # O(len(some_dict.items()))
+        not_active[i[0]] = i[1]                          # O(1)
+
+user_name = input('Введите имя пользователя: ') 
+if user_name in not_active:                              # O(1)
+    print('Пройдите активацию!')                         # O(1)
+else: 
+    print(f'Welcome, {user_name}')                       # O(1)
+        
+
+
+
+'''
+Я думаю, что 1-й варинат лучше, так как считаю это решением в лоб, наиболее легким, и без создания новых списков
+'''
