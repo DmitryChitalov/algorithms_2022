@@ -27,8 +27,8 @@
 
 def check_login_1(user): 
     if user['username'] in users:                                       # O(n)
-        if users[user['username']]['active']:                           # O(n)
-            if user['password'] == users[user['username']]['password']: # O(n)
+        if users[user['username']]['active']:                           # O(1)
+            if user['password'] == users[user['username']]['password']: # O(1)
                 return 'Доступ выполнен!'                             # O(1)                                              # O(1)
             return 'В доступе отказано!'                                  # O(1)
         return 'Необходимо активировать аккаунт!'                                 # O(1)
@@ -38,9 +38,9 @@ def check_login_1(user):
 
 def check_login_2(user): 
     for key, value in users.items():                                    # O(n)
-        if user['username'] == key:                                     # O(n)
-            if value['active']:                                         # O(n)
-                if user['password'] != value['password']:               # O(n)
+        if user['username'] == key:                                     # O(1)
+            if value['active']:                                         # O(1)
+                if user['password'] != value['password']:               # O(1)
                     return 'В доступе отказано!'                          # O(1)
                 return 'Доступ выполнен!'                             # O(1)
             return 'Необходимо активировать аккаунт!'                            # O(1)
