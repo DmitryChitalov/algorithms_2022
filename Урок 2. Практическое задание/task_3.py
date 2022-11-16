@@ -19,11 +19,12 @@
 1230 -> 0321
 """
 
+
 def reverse(num, res=''):
-  if num < 10:
-    return res + str(num)
-  else:
-    return reverse(int(num / 10), res + str(num % 10))
+    if num < 10:
+        return res + str(num)
+    else:
+        return reverse(int(num / 10), res + str(num % 10))
 
 
 number = int(input('Введите число, которое требуется перевернуть: '))

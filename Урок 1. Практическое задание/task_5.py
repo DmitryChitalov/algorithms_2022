@@ -20,6 +20,7 @@
 
 from random import randint
 
+
 class StackClass:
     def __init__(self):
         self.elems = [[]]

@@ -16,28 +16,30 @@
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
 
+
 # O(n^2)
-def min(list):
-    min = 0
-    for i in range(len(list)):
+def my_min(arr):
+    res = 0
+    for i in range(len(arr)):
         cheker = True
-        for j in range(len(list)):
-            if list[i] > list[j]:
+        for j in range(len(arr)):
+            if arr[i] > arr[j]:
                 cheker = False
         if cheker:
-            min = list[i]
-    return min
+            res = arr[i]
+    return res
+
 
 # O(n)
-def min2(list):
-    min = list[0]
-    for i in range(1, len(list)):
-        if list[i] < min:
-            min = list[i]
-    return min
+def my_min2(arr):
+    res = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] < res:
+            res = arr[i]
+    return res
+
 
 temp = [2, 5, 6, 4, 9, 7, 8]
 
-
-print(f'O(n^2) - квадратичная: {min(temp)}')
-print(f'O(n) - линейная: {min2(temp)}')
+print(f'O(n^2) - квадратичная: {my_min(temp)}')
+print(f'O(n) - линейная: {my_min2(temp)}')

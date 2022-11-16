@@ -17,49 +17,46 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
 # Способ 1. Cложность: O(n^2)
 
-def my_max(list): # O(n)
+def my_max(list):  # O(n)
     max = list[0]
     max_index = 0
-    for i in range(1, len(list)): # O(n)
+    for i in range(1, len(list)):  # O(n)
         if list[i] > max:
             max = list[i]
             max_index = i
     return max_index
 
-def top3(dict): # O(n^2) , так как у нас выполняется цикл внутри цикла.
-    keys = list(dict.keys()) # O(len(...))
-    values = list(dict.values()) # O(len(...))
+
+def top3(dict):  # O(n^2) , так как у нас выполняется цикл внутри цикла.
+    keys = list(dict.keys())  # O(len(...))
+    values = list(dict.values())  # O(len(...))
     top3 = {}
-    for i in range(3): # O(n)
-        max_ind = my_max(values) # O(n)
-        key = keys.pop(max_ind) # O(n)
-        value = values.pop(max_ind) # O(n)
-        top3[key] = value # O(1)
+    for i in range(3):  # O(3)
+        max_ind = my_max(values)  # O(n)
+        key = keys.pop(max_ind)  # O(n)
+        value = values.pop(max_ind)  # O(n)
+        top3[key] = value  # O(1)
     return top3
-
-
 
 
 # Способ 2. Cложность: O(n log n)
 
 def top3_2(dict):
-    sorted_tuple = sorted(dict.items(), key = lambda x: x[1]) # O(n log n)
-    return {k: v for k,v in sorted_tuple[:-4:-1]} # O(n)
+    sorted_tuple = sorted(dict.items(), key=lambda x: x[1])  # O(n log n)
+    return {k: v for k, v in sorted_tuple[:-4:-1]}  # O(n)
 
 
 # Способ 3. Cложность: O(n)
 
 def top3_3(dict):
     top3 = {}
-    for i in range(3): # O(n)
-        max_num = max(dict.items(), key=lambda k: k[1]) # O(n)
-        top3[max_num[0]] = dict.pop(max_num[0]) # O(1)
+    for i in range(3):  # O(3)
+        max_num = max(dict.items(), key=lambda k: k[1])  # O(n)
+        top3[max_num[0]] = dict.pop(max_num[0])  # O(1)
     return top3
-
-
-
 
 
 dict = {

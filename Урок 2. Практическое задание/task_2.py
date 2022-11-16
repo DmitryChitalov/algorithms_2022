@@ -18,17 +18,18 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
+
 def magic(num, even_nums=0, odd_nums=0):
-  if num < 10:
-    if num % 2 == 0:
-      return (even_nums +1, odd_nums)
+    if num < 10:
+        if num % 2 == 0:
+            return (even_nums + 1, odd_nums)
+        else:
+            return (even_nums, odd_nums + 1)
     else:
-      return (even_nums, odd_nums + 1)
-  else:
-    if (num % 10) % 2 == 0:
-      return magic(int(num / 10), even_nums +1, odd_nums)
-    else:
-      return magic(int(num / 10), even_nums, odd_nums + 1)
+        if (num % 10) % 2 == 0:
+            return magic(int(num / 10), even_nums + 1, odd_nums)
+        else:
+            return magic(int(num / 10), even_nums, odd_nums + 1)
 
 
 number = int(input('Введите число: '))

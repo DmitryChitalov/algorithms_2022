@@ -50,7 +50,6 @@ class QueueClass:
         return f'\nbasic: {qc_obj.basic}\nbeta: {qc_obj.beta}\nsolved: {qc_obj.solved}\nsize: {qc_obj.size()}\n'
 
 
-
 if __name__ == '__main__':
     qc_obj = QueueClass()
 

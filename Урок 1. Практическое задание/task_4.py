@@ -22,36 +22,40 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
 # Способ 1. Сложность: O(n)
 def login_1(users, name, password):
-  for k, v in users.items():
-    if k == name:
-      if v[0] == password:
-        if v[1] == 'active':
-          return 'Успешный успех, вы вошли!'
-        else:
-          return 'Активируйте аккаунт'
-      else:
-        return 'Проверьте пароль!'
-  return f'Пользователь с именем {name} не найден!'
+    for k, v in users.items():
+        if k == name:
+            if v[0] == password:
+                if v[1] == 'active':
+                    return 'Успешный успех, вы вошли!'
+                else:
+                    return 'Активируйте аккаунт'
+            else:
+                return 'Проверьте пароль!'
+    return f'Пользователь с именем {name} не найден!'
+
 
 # Способ 2. сложность: O(1)
 def login_2(users, name, password):
-  try:
-    if users[name][0] == password:
-      if users[name][1] == 'active':
-        return 'Успешный успех, вы вошли!'
-      else:
-       return 'Активируйте аккаунт'
-    else:
-      return 'Проверьте пароль!'
-  except KeyError:
-    return f'Пользователь с именем {name} не найден!'
+    try:
+        if users[name][0] == password:
+            if users[name][1] == 'active':
+                return 'Успешный успех, вы вошли!'
+            else:
+                return 'Активируйте аккаунт'
+        else:
+            return 'Проверьте пароль!'
+    except KeyError:
+        return f'Пользователь с именем {name} не найден!'
+
 
 users = {
-  'serghei': ['1234', 'active'],
-  'maxim': ['4321', 'no active'],
-  'danil': ['1423', 'active']
+    'serghei': ['1234', 'active'],
+    'maxim': ['4321', 'no active'],
+    'danil': ['1423', 'active']
 }
 
 # Способ 1:
