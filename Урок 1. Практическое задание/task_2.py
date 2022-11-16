@@ -16,17 +16,19 @@
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
 
-def min_n2(list):
-    minVal = list[0]                                    # O(1)
-    for i in range(len(list)):                          # O(n)
-        for j in range(len(list)):                      # O(n)
-            if list[i] < list[j] and list[i] < minVal:  # O(1)
-                minVal = list[i]                        # O(1)
-    return minVal                                       # O(1)
 
-def min_n(list):
-    minVal = list[0]               # O(1)
-    for i in range(1, len(list)):  # O(n)
-        if list[i] < minVal:       # O(1)
-            minVal = list[i]       # O(1)
-    return minVal                  # O(1)
+def min_n2(data_list):
+    min_val = data_list[0]  # O(1)
+    for i in range(len(data_list)):  # O(n)
+        for j in range(len(data_list)):  # O(n)
+            if data_list[i] < data_list[j] and data_list[i] < min_val:  # O(1)
+                min_val = data_list[i]  # O(1)
+    return min_val  # O(1)
+
+
+def min_n(data_list):
+    min_val = data_list[0]  # O(1)
+    for i in range(1, len(data_list)):  # O(n)
+        if data_list[i] < min_val:  # O(1)
+            min_val = data_list[i]  # O(1)
+    return min_val  # O(1)
