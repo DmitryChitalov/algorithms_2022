@@ -14,6 +14,7 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
 corporations = {'corp1': 25000, 'corp2': 8000, 'corp3': 14000, 'corp4': 12000, 'corp5': 48000, 'corp6': 1000}
 
 # O(n*Logn)
@@ -26,7 +27,6 @@ def task_1(corp):
     return corp_max                                  # O(1)
 
 print(task_1(corporations))
-
 
 # O(n**2)
 
