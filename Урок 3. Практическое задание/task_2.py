@@ -27,22 +27,26 @@ import json
 from hashlib import sha256
 
 
+def get_hash(salt, in_string):
+    res = sha256((in_string.encode()) + (salt.encode())).hexdigest()
+    return res
+
+
 def get_passwd():
-    get_passwd = input("Введите пароль: ")
     salt = "solarius"
-    res = sha256((get_passwd.encode()) + (salt.encode())).hexdigest()
-    print(f'В базе данных хранится строка: {res}')
-    repeat = input("Введите пароль еще раз для проверки: ")
-    res_ = sha256((repeat.encode()) + (salt.encode())).hexdigest()
-    if res_ == res:
+    hash_pwd = get_hash(salt, input("Введите пароль: "))
+    print(f'В базе данных хранится строка: {hash_pwd}')
+    repeat = get_hash(salt, input("Введите пароль еще раз для проверки: "))
+    if repeat == hash_pwd:
         print("Вы ввели правильный пароль !")
         with open("pass.csv", "a") as f:
-            json.dump([res, salt], f)
+            json.dump([hash_pwd, salt], f)
         return
     else:
         print("Пароли не совпадают !")
 
 
-get_passwd()
+if __name__ == '__main__':
+    get_passwd()
 
 
