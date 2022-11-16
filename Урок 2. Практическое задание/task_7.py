@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def proof_func(num):
+    if num == 0:
+        return 0
+    elif num == 1:
+        return 1
+    else:
+        return num + proof_func(num - 1)
+
+
+number = int(input('Введите размер множества натуральных чисел: '))
+
+print(
+    f'Результат сложения элементов множества: {proof_func(number)}',
+    f'Результат по формуле n(n+1)/2: {int(number * (number + 1) / 2)}',
+    sep='\n'
+)

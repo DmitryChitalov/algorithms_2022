@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii(start=32, end_f=127, count=1):
+    if start == end_f:
+        print(f'{start} - {chr(start)}', end='')
+    elif count % 10 == 0:
+        print(f'{start} - {chr(start)}')
+        ascii(start + 1, end_f, count + 1)
+    else:
+        print(f'{start} - {chr(start)} ', end='')
+        ascii(start + 1, end_f, count + 1)
+
+
+ascii()
