@@ -22,3 +22,41 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# 1 Способ. Сложность O(n)
+
+def check_login_1(user): 
+    if user['username'] in users:                                       # O(n)
+        if users[user['username']]['active']:                           # O(n)
+            if user['password'] == users[user['username']]['password']: # O(n)
+                return 'Доступ выполнен!'                             # O(1)                                              # O(1)
+            return 'В доступе отказано!'                                  # O(1)
+        return 'Необходимо активировать аккаунт!'                                 # O(1)
+    return 'Пользователь не зарегистрирован!'                                       # O(1)
+
+# 2 Способ. Cложность: O(n)
+
+def check_login_2(user): 
+    for key, value in users.items():                                    # O(n)
+        if user['username'] == key:                                     # O(n)
+            if value['active']:                                         # O(n)
+                if user['password'] != value['password']:               # O(n)
+                    return 'В доступе отказано!'                          # O(1)
+                return 'Доступ выполнен!'                             # O(1)
+            return 'Необходимо активировать аккаунт!'                            # O(1)
+    return 'Пользователь не зарегистрирован!'                                       # O(1)
+
+users = {
+        'user_1': {'password': 'password_1', 'active': True},
+        'user_2': {'password': 'password_2', 'active': False},
+        'user_3': {'password': 'password_3', 'active': False}
+    }
+
+user1 = {'username': 'user_1', 'password': 'password_1'}
+user2 = {'username': 'user_4', 'password': 'password_4'}
+
+print(check_login_1(user1))
+print(check_login_2(user1))    
+
+print(check_login_1(user2))
+print(check_login_2(user2))    
