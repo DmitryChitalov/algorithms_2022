@@ -15,3 +15,38 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+from random import randint
+from timeit import timeit
+
+
+def sort_gnome(array):
+    n, i = len(array), 0
+    while i + 1 < n:
+        if array[i + 1] >= array[i]:
+            i += 1
+        else:
+            array[i], array[i + 1] = array[i + 1], array[i]
+            if i > 0:
+                i -= 1
+            else:
+                i += 1
+    return array
+
+
+m = int(input('Введите натуральное число: '))
+arr = [randint(0, 100) for i in range(2 * m + 1)]
+
+arr_ = sort_gnome(arr[:])
+
+print(arr)
+print(arr_)
+print(f'Медиана массива - {arr_[m]}')
+
+print(timeit("sort_gnome(arr[:])", globals=globals(), number=1000))
+
+'''
+10 - 0.01378850000037346
+100 - 1.2659531000026618
+1000 - 143.16132640000433
+'''
