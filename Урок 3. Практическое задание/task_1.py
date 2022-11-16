@@ -28,3 +28,83 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+from time import time
+
+
+def timer(f):
+    def tmp(*args, **kwargs):
+        t = time()
+        res = f(*args, **kwargs)
+        print(f'{time()-t} \n')
+        return res
+    return tmp
+
+#####
+
+
+@timer
+def add_list():
+    print("Время заполнения list: ")
+    return [i for i in range(10000000)]  # O(n)
+
+
+add_list()
+
+
+@timer
+def add_dict():
+    print("Время заполнения dict: ")
+    return {d: d for d in range(10000000)}  # O(n)
+
+
+add_dict()
+
+# список заполняется быстрей, так как для словаря дополнительно осуществляется хеширование ключа
+
+#####
+
+
+my_list = [i for i in range(1000000)]     # O(n)
+my_dict = {d: d for d in range(1000000)}  # O(n)
+
+@timer
+def read_list():
+    print("Время считывания list: ")
+    return [i for i in my_list if i == 100000]  # O(n)
+
+
+read_list()
+
+
+@timer
+def read_dict():
+    print("Время считывания dict: ")
+    return {my_dict[100000]}  # O(1)
+
+
+read_dict()
+
+# элемент в ключе ищется намного быстрей, так как поиск производится по хешированному ключу, а в списке перебором
+
+#####
+
+
+@timer
+def del_list():
+    print("Время удаления list: ")
+    return my_list.pop(100000)  # O(n)
+
+
+del_list()
+
+
+@timer
+def del_dict():
+    print("Время удаления dict: ")
+    return my_dict.pop(100000)  # O(1)
+
+
+del_dict()
+
+# удаление из словаря происходит намного быстрей, так как словарь работает с хешем
