@@ -27,3 +27,31 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculate() -> None:
+    # Выполнить введённую операцию над двумя введёнными числами.
+    operation: str = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation == "0":
+        print("Выход.")
+        return None
+    elif operation in "+-*/":
+        first_number: str = input("Введите первое целое число: ")
+        if first_number.isdigit():
+            second_number: str = input("Введите второе целое число: ")
+            if second_number.isdigit():
+                try:
+                    print(eval(f'{first_number}{operation}{second_number}'))
+                    return calculate()
+                except ZeroDivisionError as exc:
+                    print("Нельзя делить на ноль!")
+                    return calculate()
+            print(f"{second_number} не целое число.")
+            return calculate()
+        print(f"{first_number} не целое число.")
+        return calculate()
+    else:
+        print("Неверная операция!")
+        return calculate()
+
+if __name__ == "__main__":
+    calculate()
