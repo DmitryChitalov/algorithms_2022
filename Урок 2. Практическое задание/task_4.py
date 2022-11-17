@@ -10,3 +10,18 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def calc(n: int, result: int=1):
+    # Сумму n элементов числового ряда: a{1}=1 ... a{n}=a{n-1}/-2
+    if n == 0:
+        return 0
+    return result + calc(n-1, result/-2)
+
+if __name__ == "__main__":
+    print(calc(7))
+
+# n = 4, result = 1;
+# n = 3, result = -0.5;
+# n = 2, result = 0.25;
+# n = 1, result = -0.125;
+# n = 0, result = 0;

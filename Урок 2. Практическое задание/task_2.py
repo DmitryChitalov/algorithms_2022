@@ -17,3 +17,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def calc(number, odd: int=0, eve: int=0) -> str:
+    # Вычисление чётных и нечётных цифр в числе
+    if number == 0:
+        return f'Чётных чисел: {odd}\nНечётных чисел: {eve}'
+    if number % 10 == 0:
+        return calc(number=number//10, odd=odd, eve=eve)
+    else:
+        if number % 10 % 2 == 0:
+            odd += 1
+        else:
+            eve += 1
+    return calc(number=number//10, odd=odd, eve=eve)
+
+if __name__ == '__main__':
+    print(calc(218020839078))
+
+# number = 2180208390 , odd = 0, eve = 0;
+# number = 218020839 , odd = 0, eve = 0;
+# number = 21802083 , odd = 0, eve = 1;
+# number = 2180208 , odd = 0, eve = 2;
+# number = 218020 , odd = 1, eve = 2;
+# number = 21802 , odd = 1, eve = 2;
+# number = 2180 , odd = 2, eve = 2;
+# number = 218 , odd = 2, eve = 2;
+# number = 21 , odd = 3, eve = 2;
+# number = 2 , odd = 3, eve = 3;
+# number = 0 , odd = 4, eve = 3;

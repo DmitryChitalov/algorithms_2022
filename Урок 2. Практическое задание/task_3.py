@@ -18,3 +18,20 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def reverse(base_string: int, reverse_string: str='') -> str:
+    # Сформировать из введенного числа обратное
+    if not base_string:
+        return f'{reverse_string}'
+    reverse_string = reverse_string + str(base_string % 10)
+    return reverse(base_string//10, reverse_string=reverse_string)
+
+if __name__ == "__main__":
+    print(reverse(10230))
+
+# base_string = 1230, rverse_string = '';
+# base_string = 123, rverse_string = '0';
+# base_string = 12, rverse_string = '03';
+# base_string = 1, rverse_string = '032';
+# base_string = 0, rverse_string = '0321';
+
