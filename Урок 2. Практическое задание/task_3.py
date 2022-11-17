@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def get_reversed_num(num):
+    if num < 10:
+        return num
+    return str(num % 10) + str(get_reversed_num(num // 10))
+
+
+if __name__ == '__main__':
+    try:
+        user_num = int(input('Введите число: '))
+        print(f'Перевернутое число: {get_reversed_num(user_num)}')
+    except ValueError as e:
+        print(f'{e}: Вы ввели не число')

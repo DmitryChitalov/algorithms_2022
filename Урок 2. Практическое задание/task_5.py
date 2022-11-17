@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def get_ascii(n=32, k=41):
+    if n == 127:
+        return f'{n} - {chr(n)} '
+    if n == k:
+        k += 10
+        return f'{n} - {chr(n)} \n' + get_ascii(n + 1, k)
+    else:
+        return f'{n} - {chr(n)} ' + get_ascii(n + 1, k)
+
+
+if __name__ == '__main__':
+    print(get_ascii())
