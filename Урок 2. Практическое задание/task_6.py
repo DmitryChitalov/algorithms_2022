@@ -7,3 +7,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def guess_the_num(num=0, n=1):
+    if n == 1:
+        import random
+        num = random.randint(1, 100)
+        print('Нужно угадать чило за 10 попыток')
+    u_num = int(input('Введите число: '))
+    if n > 9:
+        print(f'Проигрыш загаданное число = {num}')
+        return
+    elif u_num < num:
+        print('Ваше число меньше загаданного')
+        n = n + 1
+        guess_the_num(num, n)
+    elif u_num > num:
+        print('Ваше число больше загаданного')
+        n = n + 1
+        guess_the_num(num, n)
+    elif u_num == num:
+        print(f'win! (число попыток {n})')
+        return
+
+
+guess_the_num()

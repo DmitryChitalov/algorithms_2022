@@ -17,3 +17,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def numbers_of_number():
+    number = int(input('Введите число: '))
+    lst = [0, 0]
+
+    def check_num(num):
+        if num:
+            a = num % 10
+            if not a % 2:
+                lst[0] = (lst[0] + 1)
+            else:
+                lst[1] = (lst[1] + 1)
+            num = num // 10
+            check_num(num)
+        return f'Количество четных цифр равно: {lst[0]}, нечетных цифр равно: {lst[1]}'
+
+    print(check_num(number))
+
+
+numbers_of_number()

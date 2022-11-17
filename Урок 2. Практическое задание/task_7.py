@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check_expr(n, summ=0, i=0):
+    if i <= n:
+        summ = summ + i
+        i = i + 1
+        check_expr(n, summ, i)
+    else:
+        return print(summ == int(n * (n + 1) / 2))
+
+
+check_expr(7)
