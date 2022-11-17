@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def sum_sequence(n: int, iteration: int=1) -> int:
+    # Суммировать множества натуральных чисел: 1+2+...+n
+    if iteration == n:
+        return n
+    return iteration + sum_sequence(n, iteration+1)
+
+def prove(n: int) -> str:
+    # Доказать, что для множества натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2
+    if sum_sequence(n) == n*(n+1)/2:
+        return "Доказано!"
+    return "Ой! Пространнственно-временной континуум нарушен..."
+
+if __name__ == "__main__":
+    print(prove(500))
+
