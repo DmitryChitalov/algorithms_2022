@@ -27,3 +27,28 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc():
+    opr = str(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+    if opr == '0':
+        return None
+    elif opr in '+*-/':
+        valstr1 = input('Введите первое число: ')
+        valstr2 = input('Введите второе число: ')
+        if valstr1.isdigit() and valstr2.isdigit():
+            try:
+                val1 = int(valstr1)
+                val2 = int(valstr2)
+                print('Ваш результат:', eval(f'{val1}{opr}{val2}'))
+                return calc()
+            except ZeroDivisionError:
+                print('На ноль делить нельзя! Попробуте еще раз ')
+                return calc()
+        else:
+            print('Вы ввели строку или нецелое число, попробуйте еще раз ')
+            return calc()
+    elif opr not in '+*-/':
+        print('Введена неверная операция, попробуйте еще раз ')
+        return  calc()
+       
+calc()
+        

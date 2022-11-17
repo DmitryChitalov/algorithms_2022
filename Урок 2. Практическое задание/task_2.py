@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def chu(val, chet=0, nechet=0):
+    if int(val % 10) > 0 and int(val // 10) == 0:
+        if int(val % 10) % 2 == 0 or val == 0:
+            return f'Количество четных и нечетных цифр в числе равно: (  {str(int(chet + 1))} , {str(int(nechet))})'
+        else:
+            #print('nechet')
+            return f'Количество четных и нечетных цифр в числе равно: (' + str(int(chet)) +', '+ str(int(nechet + 1))+ ')'
+        
+    else: 
+        if int(val % 10) % 2 == 0:
+            return chu(val // 10, chet + 1, nechet)
+        else:
+            return chu(val // 10, chet, nechet + 1)
+    
+val = 1234567890    
+print(chu(val))
