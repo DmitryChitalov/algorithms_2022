@@ -7,3 +7,39 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+n=random.randint(1,100)
+count = 0
+print('Добро пожаловать в числовую угадайку')
+def is_valid(num):
+    if num.isdigit():
+        if 1<=int(num)<=100:
+            return True
+    return False
+def compare_n(x):
+    if x > n:
+        print('Ваше число больше загаданного, попробуйте еще разок')
+        input_n()
+    elif x < n:
+        print('Ваше число меньше загаданного, попробуйте еще разок')
+        input_n()
+    else:
+        print('Вы угадали, поздравляем!')
+        print('Спасибо, что играли в числовую угадайку. Еще увидимся...')
+def input_n():
+    print('Введите число от 1 до 100')
+    number = input()
+    global count
+    count+=1
+    print('Количество попыток: ',(10-count))
+    if count<10:
+        if is_valid(number):
+            return compare_n(int(number))
+        else:
+            print('А может быть все-таки введем целое число от 1 до 100?')
+            input_n()
+    else:
+        print('вы проиграли')
+        print('загаданное число = ', n)
+
+input_n()

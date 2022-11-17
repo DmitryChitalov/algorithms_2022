@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+ch = 0
+nech = 0
+def dif_digits(num):
+    global ch
+    global nech
+
+    if num>0:
+        last_digit=num%10
+        if last_digit % 2 == 0:
+            ch += 1
+        else:
+            nech += 1
+        dif_digits(num // 10)
+
+dif_digits(int(input('Введите число: ')))
+print('Количество четных и нечетных чисел: ', (ch, nech))
