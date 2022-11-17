@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def transl(fn):
+
+    if fn==128:
+        return fn
+    else:
+        print(fn, '-', chr(fn), end=' ')
+        if fn%10==0:
+            print()
+    transl(fn+1)
+
+transl(32)

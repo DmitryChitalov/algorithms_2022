@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def summa(num):
+    s = 0
+    if num < 1:
+        return 0
+    else:
+        s = num + summa(num - 1)
+        return s
+
+def compare(num):
+    if (num*(num+1))/2==summa(num):
+        return True
+    return False
+num=5
+print(compare(num))
