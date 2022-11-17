@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def int_to_ASCII(item: int=32, limit: int=1) -> str:
+    # Вывести на экран коды и символы таблицы ASCII, начиная с символа под номером 32 и заканчивая 127-м включительно.
+    result = f'{str(item)} - {chr(item)} '
+    if item == 127:
+        return result
+    if limit//10:
+        limit: int = 0
+        result = f'{result}\n'
+    return result + int_to_ASCII(item+1, limit+1)
+
+if __name__ == "__main__":
+    print(int_to_ASCII())
+
+
