@@ -18,7 +18,7 @@ def calc(n: int, result: int=1):
     return result + calc(n-1, result/-2)
 
 if __name__ == "__main__":
-    print(calc(4))
+    print(calc(7))
 
 # n = 4, result = 1;
 # n = 3, result = -0.5;

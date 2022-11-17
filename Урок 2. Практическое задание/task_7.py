@@ -23,7 +23,7 @@ def sum_sequence(n: int, iteration: int=1) -> int:
 def prove(n: int) -> str:
     # Доказать, что для множества натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2
     if sum_sequence(n) == n*(n+1)/2:
-        return "Доказано!"
+        return "Доказано! 1+2+...+n = n(n+1)/2"
     return "Ой! Пространнственно-временной континуум нарушен..."
 
 if __name__ == "__main__":

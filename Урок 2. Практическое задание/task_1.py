@@ -32,7 +32,7 @@ def calculate() -> None:
     # Выполнить введённую операцию над двумя введёнными числами.
     operation: str = input("Введите операцию (+, -, *, / или 0 для выхода): ")
     if operation == "0":
-        print("Выход.")
+        print("Выход")
         return None
     elif operation in "+-*/":
         first_number: str = input("Введите первое целое число: ")

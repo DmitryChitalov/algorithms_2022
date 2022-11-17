@@ -12,15 +12,15 @@ from random import randint
 def guess_number(counter: int=10, number: int=randint(0,100)) -> str:
     # Угадать число за 10 попыток
     if counter == 0:
-        return "You lose!"
+        return "Ты проиграл!"
     try:
-        guess: int = int(input(f"Try to guess the number from 0 to 100! You have {counter} tries: "))
+        guess: int = int(input(f"{'Попытайся отгадать число от 0 до 100!' if counter == 10 else 'Неверно. Попробуй ещё раз.'} У тебя {counter} {'попыток' if counter > 4 else 'попытки' if counter > 1 else 'попытка'}: "))
     except ValueError as exc:
-        print(f'{exc.args[0].split()[-1]} is not a number! you lost the try.')
+        print(f'{exc.args[0].split()[-1]} не число! Ты потратил попытку.')
         return guess_number(counter-1, number=number)
     if guess == number:
-        return "\nCongratulations! You guessed!!!"
-    print("Too little.") if number > guess else print("Too much.")
+        return f"\nПоздравляю! Ты угадал!!! Это {guess}."
+    print("Загаданное число больше.") if number > guess else print("Загаданное число меньше.")
     return guess_number(counter-1, number=number)
 
 if __name__ == "__main__":

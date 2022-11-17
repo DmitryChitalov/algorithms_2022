@@ -27,7 +27,7 @@ def reverse(base_string: int, reverse_string: str='') -> str:
     return reverse(base_string//10, reverse_string=reverse_string)
 
 if __name__ == "__main__":
-    print(reverse(1230))
+    print(reverse(10230))
 
 # base_string = 1230, rverse_string = '';
 # base_string = 123, rverse_string = '0';

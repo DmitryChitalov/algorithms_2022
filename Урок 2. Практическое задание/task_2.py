@@ -32,7 +32,7 @@ def calc(number, odd: int=0, eve: int=0) -> str:
     return calc(number=number//10, odd=odd, eve=eve)
 
 if __name__ == '__main__':
-    print(calc(2180208390))
+    print(calc(218020839078))
 
 # number = 2180208390 , odd = 0, eve = 0;
 # number = 218020839 , odd = 0, eve = 0;
