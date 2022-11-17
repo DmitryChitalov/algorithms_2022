@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def get_sum(num, i=0, num_sum=0):
+    if i == num:
+        return num_sum + i
+    num_sum += i
+    return get_sum(num, i + 1, num_sum)
+
+
+if __name__ == '__main__':
+    try:
+        user_num = int(input('Введите число: '))
+        print(f'Проверка равенства: {get_sum(user_num) == user_num * (user_num + 1) / 2}')
+    except ValueError as e:
+        print(f'{e}: Вы ввели не число')
