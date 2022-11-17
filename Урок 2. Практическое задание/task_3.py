@@ -18,3 +18,21 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverting():
+    number = int(input('Введите число: '))
+
+    def revert_n(num, res=''):
+        if num:
+            a = num % 10
+            num = num // 10
+            res += str(a)
+            revert_n(num, res)
+        else:
+            return print(f'Перевернутое число: {res}')
+
+    return revert_n(number)
+
+
+reverting()
