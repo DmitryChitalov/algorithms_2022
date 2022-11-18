@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_symbols(counter=32):        
+    last_symbol = 127    
+
+    if counter == last_symbol+1:
+        return ""
+
+    if counter % 10 == 2:  # делает строки по 10 значений. Последняя цифра зависит от последней цифры counter
+        print("")
+    print(f"{counter} - {chr(counter)}",end=" ")    
+
+    counter += 1
+    return ascii_symbols(counter)
+
+print(ascii_symbols())
+
+    
