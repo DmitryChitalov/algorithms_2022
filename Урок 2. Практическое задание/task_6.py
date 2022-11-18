@@ -22,10 +22,11 @@ def guesser(user_input=None, counter=0):
 
     counter += 1
     user_input = int(input(f"Попытка №{counter}: Введите число от 0 до 100: "))
-    if user_input > random_digit:
+    if user_input > digit_to_guess:
         print("Меньше!")
     else:
         print("Больше!")
     return guesser(user_input, counter)
+
 
 guesser()
