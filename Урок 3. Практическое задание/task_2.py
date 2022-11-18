@@ -40,12 +40,17 @@ def save_pass(password):
 
 
 def valid_check(password):
-    with open(hash_log.csv', 'r'
+    with open('hash_log.csv', 'r') as f:
+        saved_hash = f.readline()
     if hashing_pass(password) == saved_hash:
         print('Вы ввели правильный пароль')
     else:
-    print('Вы ввели не правильный пароль')
+        print('Вы ввели не правильный пароль')
 
 
-    user_input = save_pass(input('Введите пароль: '))
-    check = input('Введите пароль еще раз для проверки: ')
+
+
+user_input = input('Введите пароль: ')
+save_pass(user_input)
+check = input('Введите пароль еще раз для проверки: ')
+valid_check(check)
