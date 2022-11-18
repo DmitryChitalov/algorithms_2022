@@ -28,3 +28,89 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def timer(func):
+    def wrapped(*args, **kwargs):
+        start_point = time.time()
+        res = func(*args, **kwargs)
+        end_point = time.time()
+        print(f'Время выполнения {func.__name__}: {end_point - start_point}\n')
+        return res
+
+    return wrapped
+
+
+# Заполнение списка. Сложность O(n)
+@timer
+def fill_list(count, arr):
+    for i in range(count):  # O(n)
+        arr.append(i + 1)  # O(1)
+    return arr
+
+
+# Заполнение словаря. Сложность O(n)
+@timer
+def fill_dict(count, dict):
+    for i in range(count):  # O(n)
+        dict[i + 1] = f'Значение {i + 1}'  # O(1)
+    return dict
+
+
+# Обе операции сохранения элемента имеют константную сложность.
+# Но список заполняется быстрее, так как словарь вычисляет хэш для ключей.
+
+
+# Получение элементов списка. Сложность O(n)
+@timer
+def get_item_list(arr):
+    for i in range(len(arr)):
+        res = arr[i]  # Сложность O(1)
+    return res
+
+
+# Получение элемента словаря. Сложность O(n)
+@timer
+def get_val_dict(dict):
+    for i in range(1, len(dict)):
+        res = dict[i]  # Сложность O(1)
+    return res
+
+
+# Разница не большая, но список чуть быстрее получает значение.
+
+
+# Удаление элемента списка. Сложность O(n^2)
+# Буду использовать команду del, а не pop.
+@timer
+def del_el_arr(arr):  # O(n)
+    for i in range(len(arr)):
+        del arr[0]  # O(n)
+    return arr
+
+
+# Удаление элемента словаря. Сложность O(n)
+@timer
+def del_el_dict(dict):
+    dict_keys = list(dict.keys())  # O(1)
+    for k in dict_keys:
+        del dict[k]  # O(1)
+    return dict
+
+
+# Словарь завершает работу на много быстрее.
+
+
+temp_list = []
+temp_dict = {}
+
+temp_list = fill_list(100000, temp_list)
+temp_dict = fill_dict(100000, temp_dict)
+
+get_item_list(temp_list)
+get_val_dict(temp_dict)
+
+del_el_arr(temp_list)
+del_el_dict(temp_dict)
