@@ -14,3 +14,38 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+from timeit import timeit
+
+
+def find_median(arr, number):
+    for _ in range(number):
+        arr.remove(max(arr))
+    return max(arr)
+
+
+if __name__ == '__main__':
+    numbers = (5, 50, 500)
+    for number in numbers:
+        array_2m_1 = [randint(-100, 100) for _ in range(2 * number + 1)]
+        if number == 5:  # сам массив выводится только из 10 элементов
+            print(f'Массив длинной {2 * number + 1} элементов: \n{array_2m_1}\n'
+                  f'Медиана: {find_median(array_2m_1[:], number)}')
+            print(f'Проверка: {sorted(array_2m_1)[number]}')  # проверяем встроенной сортировкой
+        else:
+            print(f'Массив длинной {2 * number + 1} элементов.')
+        print('Замер:', timeit('find_median(array_2m_1[:], number)', globals=globals(), number=1000))
+        print('-' * 30)
+
+# Массив длинной 11 элементов:
+# [-36, -30, 55, -63, -12, -53, 20, 1, -65, 99, 63]
+# Медиана: -12
+# Проверка: -12
+# Замер: 0.002243799972347915
+# ------------------------------
+# Массив длинной 101 элементов.
+# Замер: 0.065942199958954
+# ------------------------------
+# Массив длинной 1001 элементов.
+# Замер: 6.2428613000083715
+# ------------------------------
