@@ -26,10 +26,10 @@
 some_dict = {'emasevenn@7' : ['8439923', True], 'anzor@832' : ['433234', True], 'reiow@76372' : ['654543', False]}
 
 
-# Вариант 1. Сложность О(len(some_dict))
+# Вариант 1. Сложность О(n)
 
 user_name = input('Введите имя пользователя: ')      
-if user_name in some_dict:                                # O(len(some_dict))
+if user_name in some_dict:                                # O(n)
     if some_dict[user_name][-1] == False:                 # O(1)
         print('Пройдите активацию!')
     else:
@@ -40,7 +40,7 @@ if user_name in some_dict:                                # O(len(some_dict))
 
 not_active = {}
 for i in some_dict.items():                              # O(n)
-    if i[1][1] == False:                                 # O(len(some_dict.items()))
+    if i[1][1] == False:                                 # O(n)
         not_active[i[0]] = i[1]                          # O(1)
 
 user_name = input('Введите имя пользователя: ') 

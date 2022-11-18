@@ -20,14 +20,21 @@
 
 class StackClass:
     def __init__(self):
-        self.elems = [[],[],[],[],[]]
+        self.elems = [[]]
 
     def push_in(self, el):
-        """Предполагаем, что верхний элемент стека находится в конце списка"""
-        for i in range(0, len(self.elems) - 1, 1):
-            if len(self.elems[i]) < 5:
-                self.elems[i].append(el)
-                break
+        if el > 5:
+            for i in range(1, el // 5 + 1):
+                self.elems.append([])
+        for i in range(1, el + 1):
+            for el in self.elems:
+                if len(el) < 5:
+                    el.append(i)
+                    break
+
+      
+        return self.elems
+
 
     def pop_out(self):
         return self.elems.pop()
@@ -41,9 +48,4 @@ class StackClass:
 
 
 stack_1 = StackClass()
-i = 0
-while i < 18:
-    stack_1.push_in(1+i)
-    i += 1
-
-print(stack_1.elems)
+print(stack_1.push_in(6))

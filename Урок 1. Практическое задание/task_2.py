@@ -19,27 +19,27 @@
 # Вариант 1 ( сложность: О(n^2) )
 
 def min_number(some_list: list):
-    min = 0
+    min_el = 0
     for i in some_list:
         for j in some_list:
             if i == 3:
                 break
             j = i+1
             if i < j:
-                min = i
+                min_el = i
             if i < j+1:
-                return min
+                return min_el
 
 print(min_number([1, 2, 3]))
 
 # Вариант 2 ( сложность: О(n) )
 
 def min_number(some_list: list):
-    min = some_list[0]
+    min_el = some_list[0]
     for i in some_list:
-        if i < min:
-            min = i
-    return min
+        if i < min_el:
+            min_el = i
+    return min_el
 
 print(min_number([1, 2, 3]))
 
