@@ -15,3 +15,25 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+
+def get_hash(url):
+    salt = 'sugar'
+    res = hashlib.sha256((url + salt).encode()).hexdigest()
+    return res
+
+cache = {}
+
+def add_url(url):
+    if cache.get(url):
+        print(f'URL - {url} уже сохранен в кэше')
+    else:
+        urls_hash = get_hash(url)
+        cache[url] = urls_hash
+        print(cache)
+
+
+add_url('https://mail.ru/')
+add_url('https://geekbrains.ru/')
+add_url('https://mail.ru/')
