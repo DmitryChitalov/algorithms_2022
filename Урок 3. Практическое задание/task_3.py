@@ -22,3 +22,27 @@
 р
 а
 """
+import hashlib
+
+
+def hashing_str(s):
+    salt = 'sugar'
+    res = hashlib.sha256((s + salt).encode()).hexdigest()
+    return res
+
+
+def substrings(s):
+    n = len(s)
+    hash_set = set()
+    for i in range(n):
+        hash_set.add(hashing_str(s[i]))
+        for j in range(2, n):
+            if i + j > n:
+                break
+            else:
+                hash_set.add(hashing_str(s[i:j + i]))
+    return hash_set
+
+
+user_input = input('Введите строку, состоящую из строчных латинских букв: ')
+print(f'{user_input} - {len(substrings(user_input))} уникальных подстрок')
