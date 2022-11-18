@@ -17,3 +17,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_nums(number: int, carry: dict = {'odd': 0, 'even': 0}):
+    num = number // 10
+    if num != 0:
+        digit = number % 10
+        carry['odd' if digit % 2 == 0 else 'even'] += 1
+        return even_odd_nums(number // 10, carry)
+    return carry
+
+
+if __name__ == '__main__':
+    print(even_odd_nums(480892374902381741))
