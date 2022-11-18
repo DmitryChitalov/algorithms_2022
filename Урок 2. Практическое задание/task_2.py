@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def digit_even_odd_counter(number, even_numbers=0, odd_numbers=0):
+    if number == 0:
+        line = str()
+        return print(f"Четных: {even_numbers}\nНечетных: {odd_numbers}")
+    last_digit = number % 10
+    if last_digit % 2 == 0:
+        even_numbers += 1
+    else: 
+        odd_numbers += 1
+    return digit_even_odd_counter(number // 10, even_numbers, odd_numbers)
+
+number = int(input("Введите число: "))
+digit_even_odd_counter(number)

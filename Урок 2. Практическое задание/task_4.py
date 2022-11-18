@@ -10,3 +10,19 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def weird_sum(n, previous_sum=float(1), count=1):    
+    if count == n:
+        return print(f"Количество элементов - {n}, их сумма - {previous_sum}")
+    count += 1    
+    previous_sum = previous_sum / (-2)
+    return weird_sum(n, previous_sum, count)
+
+
+numbers_quantity = int(input("Введите количество элементов: "))
+weird_sum(numbers_quantity)
+
+
+
+
