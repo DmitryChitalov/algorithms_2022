@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def sum_of_elements(n: int, following: float = 1, carry: float = 0):
+    if n == 0:
+        return print(carry)
+    else:
+        carry += following
+    sum_of_elements(n-1, following / -2, carry)
+
+
+if __name__ == '__main__':
+    print(sum_of_elements(5))

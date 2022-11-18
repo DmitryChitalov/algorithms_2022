@@ -13,3 +13,12 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check_quantity(num):
+    return check_quantity(num - 1) + num if num != 1 else num
+
+
+if __name__ == '__main__':
+    number = 150
+    print('Идентично' if check_quantity(number) == number * (number + 1) / 2 else 'Не иднетично')

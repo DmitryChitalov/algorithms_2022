@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator_recursive(operator: str = None):
+    if operator in ["+", "-", "*", "/"]:
+        try:
+            num = int(input("Введите первое число: "))
+            num2 = int(input("Введите второе число: "))
+            operations = {
+                "-": num - num2,
+                "+": num + num2,
+                "*": num * num2,
+                "/": num / num2
+            }
+            result = operations[operator]
+            print(f"Результат = {result}")
+        except ValueError:
+            print("Не введены нужные зачения")
+        except ZeroDivisionError:
+            print("Мы в 5 классе на ноль не делим.\n")
+        finally:
+            operator = None
+    elif operator == "0":
+        return "Программа завершена"
+    else:
+        print('Недопустимая операция')
+
+    operator = input("ведите операцию (+, -, *, /) или 0 для выхода: ")
+    calculator_recursive(operator)
+
+
+if __name__ == '__main__':
+    calculator_recursive()

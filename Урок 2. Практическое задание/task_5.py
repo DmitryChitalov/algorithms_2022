@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_table(code=32, count=0, stop=127):
+    if code <= stop:
+        print(code, '-', chr(code), end='\n' if count == 10 else ' ')
+        ascii_table(code + 1, 0 if count == 10 else count + 1)
+
+
+if __name__ == '__main__':
+    ascii_table()
+
