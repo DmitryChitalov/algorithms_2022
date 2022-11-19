@@ -17,3 +17,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def counter(num: int, even_digit=0, odd_digit=0):
+    if not num:
+        return f'Количество четных и нечетных цифр в числе равно: {even_digit, odd_digit}'
+    if num % 10 % 2 == 0:
+        even_digit += 1
+    else:
+        odd_digit += 1
+    return counter(num // 10, even_digit, odd_digit)
+
+
+print(counter(435220))

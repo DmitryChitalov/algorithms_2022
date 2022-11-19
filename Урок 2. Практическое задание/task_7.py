@@ -13,3 +13,13 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check_execution(n: int, counter = 1) -> str:
+    if counter < n:
+        print(f'{counter} + ', end = '')
+        return check_execution(n, counter = counter + 1)
+    else:
+        return f'{counter} = {n} ({n} + 1) / 2'
+
+print(check_execution(5))

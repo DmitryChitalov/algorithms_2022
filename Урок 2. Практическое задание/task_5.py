@@ -19,3 +19,25 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def table_ascii(code=32, max_code=127, el_row=0):
+    if code > max_code: # Базовый случай
+        return
+    else:
+        print(f'{code} - {chr(code)} ', end=' ')
+        el_row += 1  # счётчик элементов в строке вывода
+        if el_row == 10:
+           el_row = 0
+           print()  # перевод строки
+        table_ascii(code+1, max_code, el_row)
+
+
+table_ascii()
+
+
+
+# for i in range(32,128):
+#     print("%4d-%s" % (i,chr(i)), end='')
+#     if i%10 == 0:
+#         print()
+# print()
