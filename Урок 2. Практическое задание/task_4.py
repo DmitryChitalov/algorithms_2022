@@ -10,3 +10,14 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def sum_n(num: int, value=1, result=0):
+    
+    if num == 0:
+        return result
+    result += value
+    return sum_n(num - 1, value / (-2), result)
+
+
+n = int(input('Введите количество элементов:'))
+print(f'Количество n - {n}, и их сумма - {sum_n(n)}')

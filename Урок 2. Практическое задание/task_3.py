@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def to_reverse_number(num: int, result: str = ''):
+
+    if num == 0:
+        return result
+    value = num % 10
+    result += str(value)
+    return to_reverse_number(num // 10, result)
+
+
+number = int(input('Введите число, которое требуется перевернуть:'))
+print(f'{number} -> {to_reverse_number(number)}')

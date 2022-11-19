@@ -13,3 +13,28 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+def recurse_func_left_part(n: int):
+    
+    if n == 0:
+        return 0
+    else:
+        return n + recurse_func_left_part(n - 1)
+
+
+def func_both_part(n: int):
+
+    a = recurse_func_left_part(n)
+    b = n * (n + 1) / 2
+    if a == b:
+        print(f'Равенство выполняется для n = {n} \n1+2+...+{n} = {n}*({n}+1)/2 \n{a} = {b}')
+        return True
+    else:
+        print(f'Равенство НЕ выполняется для n = {n} \n1+2+...+{n} = {n}*({n}+1)/2 \n{a} != {b}')
+        return False
+
+num = randint(0, 100)
+func_both_part(num)
+
