@@ -22,3 +22,52 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+# Предположим такой словарь.
+users = [{'login': 'vagon@tron.ru', 'password': '1234qwer', 'activ': 1},
+         {'login': 'marta@mail.ru', 'password': 'qwer1212', 'activ': 1},
+         {'login': 'sasha@tron.ru', 'password': 'asdf4321', 'activ': 0},
+         {'login': 'rita@mail.ru', 'password': '09qw1298', 'activ': 1},
+         {'login': 'karapuz@mail.ru', 'password': '0987uyjh12', 'activ': 0}]
+
+
+def search_activ(dict, activ=0):
+    """Функция принимает в аргумент словарь и возвращает неактивированных пользователей
+    Сложность: O(n^2)"""
+    lst = []                                                                # O(1)
+    tmp = []                                                                # O(1)
+    for i in dict:                                                          # O(n^2)
+        for k, v in i.items():
+            if v == activ:                                                  # O(n)
+                user = str(i).split(",")[0].split(':')[1].replace("'", "")  # O(n) + O(len(n)) + O(n)
+                lst.append(user)                                            # O(1)
+            else:                                                           # O(n)
+                continue                                                    # O(1)
+    if len(lst) == 1:                                                           # O(n)
+        return f'Здравствуйте {lst[0]}. Пройдите пожалйста аутентификацию.'     # O(1)
+    elif len(lst) > 1:                                                          # O(n)
+        for j in lst:                                                           # O(n)
+            tmp.append(f'Здравствуйте {j}. Пройдите пожалйста аутентификацию.') # O(1)
+        return tmp                                                              # O(1)
+    else:                                                                       # O(n)
+        return 'Все польщователи активированны!'                                # O(1)
+
+
+print(search_activ(users))
+
+
+def search_activ_2(dict):
+    """Функция ищет неактивированных пользователей в словаре.
+    Слодновть: O(n)"""
+    lst = []                                                            # O(1)
+    for i in dict:                                                      # O(n)
+        if str(i).endswith('0}'):                                       # O(n)
+            user = str(i).split(",")[0].split(':')[1].replace("'", "")  # O(n) + O(len(n)) + O(n)
+            lst.append(user)                                            # O(1)
+    for j in lst:                                                               # O(n)
+        send_message = f'Здравствуйте {j}. Пройдите пожалйста аутентификацию.'  # O(1)
+        print(send_message)                                                     # O(1)
+
+search_activ_2(users)
+
+
