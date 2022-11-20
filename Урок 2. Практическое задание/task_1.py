@@ -27,3 +27,56 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+import operator
+
+
+def operator_detector():
+    symbol = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if symbol in "+-*/":
+        return symbol
+    elif symbol == 0 or symbol == "0":
+        return 0
+    else:
+        return operator_detector()
+
+
+def get_numbers():
+    try:
+        num1 = int(input("Введите первое число:  "))
+        num2 = int(input("Введите второе число:  "))
+        return num1, num2
+    except ValueError:
+        print("Введите целое число, а не строку!\n")
+        return get_numbers()
+
+
+def get_result():
+    symbol = operator_detector()
+    if symbol == 0:
+        return "Программа завершена, рекурсий больше не будет!"
+    else:
+        if symbol == '*':
+            num1, num2 = get_numbers()
+            print(f"Произведение чисел: ", num1 * num2)
+            return get_result()
+        elif symbol == '/':
+            try:
+                num1, num2 = get_numbers()
+                print("Результат деления: ", num1 / num2)
+                return get_result()
+            except ZeroDivisionError:
+                print("На ноль у нас делить пока не принято!")
+                return get_result()
+        elif symbol == '+':
+            num1, num2 = get_numbers()
+            print("Сумма чисел:", num1 + num2)
+            return get_result()
+        elif symbol == '-':
+            num1, num2 = get_numbers()
+            print("Сумма чисел:", num1 - num2)
+            return get_result()
+
+
+if __name__ == "__main__":
+    print("Приветствую! Это рекурсивная функция для вычисления базовых мат-операций\n")
+    get_result()
