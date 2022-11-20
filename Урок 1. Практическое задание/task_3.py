@@ -17,3 +17,25 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+base_company = {
+    'yandex': 95135,
+    'google': 8412774,
+    'adidas': 54485,
+    'honor': 445,
+    'huawei': 4544,
+    'shell': 5485
+}
+
+
+def sorted_1(base):
+    lst_from_dict = list(base.items())
+    for i in range(len(lst_from_dict)):
+        lowest_value = i
+        for j in range(i+1,len(lst_from_dict)):
+            if lst_from_dict[j][1] > lst_from_dict[lowest_value][1]:
+                lowest_value = j
+        lst_from_dict[lowest_value], lst_from_dict[i] = lst_from_dict[i], lst_from_dict[lowest_value]
+    print(lst_from_dict)
+
+
+print(sorted_1(base_company))

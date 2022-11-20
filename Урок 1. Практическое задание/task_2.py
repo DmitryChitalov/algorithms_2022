@@ -15,3 +15,24 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+lst = [109, 10, 5, 1293, 33854]
+new_lst = []
+
+#O(n^2)
+def min(lst):
+    range_lst = len(lst)
+    for i in range(range_lst - 1):
+        for j in range(range_lst - i - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+print(min(lst))
+
+#O(n)
+def list_min_s(lst):
+    min_value = lst[0]
+    for i in lst:
+        if i < min_value:
+            min_value = i
+    return min_value
