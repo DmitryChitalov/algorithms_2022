@@ -28,3 +28,78 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+
+def capture_time(func):
+    import time
+
+    def wrapper(*args):
+        start_t = time.time()
+        result = func(*args)
+        stop_t = time.time()
+        print(f'функция выполнялась: {stop_t - start_t}')
+        return result
+    return wrapper
+
+
+@capture_time
+def fill_list(n):  # O(n)
+    return [n for n in range(n)]
+
+
+@capture_time
+def fill_dict(n):  # O(n)
+    return {n: n for n in range(n)}
+
+
+@capture_time
+def del_from_list(list_d, start, count):  # O(n)
+    [list_d.pop(n) for n in range(start, start + count)]
+
+
+@capture_time
+def del_from_dict(dict_d, start, count):  # O(n)
+    [dict_d.pop(n) for n in range(start, start + count)]
+
+
+@capture_time
+def change_list(list_ch: list, start, count, new_val):  # O(n)
+    for n in range(start, start + count):
+        list_ch[n] = new_val
+
+
+@capture_time
+def change_dict(dict_ch, start, count, new_val):  # O(n)
+    for n in range(start, start + count):
+        dict_ch[n] = new_val
+
+
+if __name__ == '__main__':
+    print('Заполняем список')
+    my_list = fill_list(1000000)
+
+    print('Заполняем словарь')
+    my_dict = fill_dict(1000000)
+
+    print('Удаляем элементы из списка')
+    del_from_list(my_list, 100000, 1000)
+
+    print('Удаляем элементы из словаря')
+    del_from_dict(my_dict, 100000, 1000)
+
+    print('Изменяем элементы списка')
+    change_list(my_list, 100, 10000, 1)
+
+    print('Изменяем элементы словаря')
+    change_dict(my_dict, 100, 10000, 1)
+
+"""
+Сложность операций одинаковая, выполнение функций занимает разное время
+
+Заполнение списка быстрее заполнения словаря
+При заполнении словаря время уходит на создание хеша для ключей
+Удаление элементов для списка медленее чем из словаря
+При удалении элемента из списка, время уходит на смещение элементов, хотя я думал,
+что память должно помечаться не используемой и очищаться потом.
+Изменение элементов списка и словаря занимают практически одинаковое время
+"""
