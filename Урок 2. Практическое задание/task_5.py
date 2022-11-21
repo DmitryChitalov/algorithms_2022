@@ -19,3 +19,19 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbol_ascii(i=32, result=''):
+    if i == 128:
+        print(result)
+    else:
+        result += str(i) + " - " + chr(i) + " "
+        if i > 32 and (i - 32 + 1) % 10 == 0:
+            result += "\n"
+        i += 1
+        return symbol_ascii(i, result)
+
+
+
+# print(chr(33))
+symbol_ascii()
