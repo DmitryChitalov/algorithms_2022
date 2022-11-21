@@ -22,3 +22,15 @@
 р
 а
 """
+
+import hashlib
+
+
+if __name__ == '__main__':
+    st = 'papa'
+    unique_hashes = set()
+    for i in range(len(st)):
+        for j in range(i + 1, len(st) + 1):
+            sub_str = st[i:j]
+            unique_hashes.add(hashlib.sha512(sub_str.encode()).hexdigest())
+    print(len(unique_hashes)-1)

@@ -22,3 +22,67 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import sqlite3
+from uuid import uuid4
+from hashlib import pbkdf2_hmac
+
+
+def hash_passwd(password: str, salt=uuid4().bytes):
+    pass_hash = pbkdf2_hmac('sha256', password.encode(), salt, 100000)
+    return pass_hash, salt
+
+
+class PasswordChecker:
+
+    def __init__(self):
+        self.login = ''
+        self.connection = sqlite3.connect('passwd.sqlite')
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(
+            """CREATE TABLE IF NOT EXISTS passwd(id INT PRIMARY KEY, login TEXT UNIQUE, hash TEXT, salt TEXT);"""
+        )
+        self.connection.commit()
+
+    def check_passwd(self, password: str):
+        self.cursor.execute('select hash, salt from passwd where login = ?', [self.login])
+        rec = self.cursor.fetchone()
+        original_hash = rec[0]
+        salt = rec[1]
+        input_hash, _ = hash_passwd(password, bytes.fromhex(salt))
+        return input_hash == bytes.fromhex(original_hash)
+
+    def close_connection(self):
+        if (self.connection):
+            self.cursor.close()
+
+    def find_user(self, login: str, pass_hash: bytes, salt: bytes):
+        self.login = login
+        cursor = self.connection.cursor()
+        row = cursor.execute('select hash, salt from passwd where login = ?', [login])
+        if row.fetchone() is None:
+            cursor.execute(
+                'insert into passwd (login, hash, salt) values(?, ?, ?)',
+                [login, pass_hash.hex(), salt.hex()]
+            )
+        else:
+            cursor.execute(
+                'update passwd set hash = ?, salt = ? where login = ?',
+                [pass_hash.hex(), salt.hex(), login]
+            )
+        self.connection.commit()
+
+
+if __name__ == '__main__':
+    pass_checker = PasswordChecker()
+    login = input('Имя пользователя: ')
+    pass_hash, salt = hash_passwd(input('Введите пароль: '))
+    try:
+        pass_checker.find_user(login, pass_hash, salt)
+        new_pass = input('Введите пароль для проверки: ')
+        print('Верно' if pass_checker.check_passwd(new_pass) else 'Не верно')
+
+    except sqlite3.Error as error:
+        print("Ошибка при подключении к sqlite", error)
+    finally:
+        pass_checker.close_connection()
