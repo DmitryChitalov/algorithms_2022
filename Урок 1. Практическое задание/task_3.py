@@ -17,3 +17,54 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+
+# Можно хранить данные в списке кортежей, отсортировать по второму элементу кортежа,
+# например, пузырьком и взять последние 3 кортежа в получившемся списке.
+def max3_1(lst):
+    tuple_el = 1                                         # O(1)
+    for i in range(len(lst)):                            # O(N)
+        for j in range(len(lst) - i - 1):                # O(N)
+            if lst[j][tuple_el] > lst[j + 1][tuple_el]:  # O(1)
+                temp = lst[j]                            # O(1)
+                lst[j] = lst[j + 1]                      # O(1)
+                lst[j + 1] = temp                        # O(1)
+    return lst[len(lst) - 3:]                            # O(N)
+# Итоговая сложность O(N**2)
+
+
+# Сортировка методом .sort():
+def max3_2(lst):
+    tuple_el = 1                                         # O(1)
+    lst.sort(key=lambda x: x[tuple_el])                  # O(N log N)
+    return lst[len(lst) - 3:]                            # O(N)
+# Итоговая сложность O(N log N)
+
+
+# Без сортировки, по аналогии с поиском минимального из task_2, только чуть сложнее.
+# Есть некоторые "костыли" в виде задания изначальных значений в виде минимального INT значения:
+def max3_3(lst):
+    tuple_el = 1                # O(1)
+    max1 = (None, -2147483648)  # O(1)
+    max2 = (None, -2147483648)  # O(1)
+    max3 = (None, -2147483648)  # O(1)
+    for i in range(len(lst)):   # O(N)
+        if lst[i][tuple_el] >= max1[tuple_el] and lst[i][tuple_el] >= max2[tuple_el] and lst[i][tuple_el] >= max3[tuple_el]:   # O(1)
+            max3 = max2         # O(1)
+            max2 = max1         # O(1)
+            max1 = lst[i]       # O(1)
+        elif max1[tuple_el] >= lst[i][tuple_el] >= max2[tuple_el] and max3[tuple_el] <= lst[i][tuple_el] <= max1[tuple_el]:    # O(1)
+            max3 = max2         # O(1)
+            max2 = lst[i]       # O(1)
+        elif lst[i][tuple_el] > max3[tuple_el]:    # O(1)
+            max3 = lst[i]       # O(1)
+    return max1, max2, max3     # O(N)
+# Итоговая сложность O(N)
+
+
+company_lst = [('A', 1), ('B', 2), ('C', 6), ('D', 4), ('E', 8), ('F', 5), ('G', 3), ('H', 9)]
+# print(max3_1(company_lst))
+# print(max3_2(company_lst))
+print(max3_3(company_lst))
+
+# Можно заключить, что по критерию сложности последнее решение является наиболее предпочтительным.
+# Так или иначе, оно имеет недостаток в виде ограничения диапазоном значений INT
