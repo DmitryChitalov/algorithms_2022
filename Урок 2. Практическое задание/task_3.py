@@ -29,5 +29,14 @@ def reverse_number(number):
         return str(out_reversed_number) + str(reverse_number(number))
 
 
-input_number = int(input('Введите число, которое требуется перевернуть: '))
-print(f'Перевернутое число: {reverse_number(input_number)}')
+def user_input(input_number):
+    try:
+        input_number = int(input_number)
+        print(f'Перевернутое число: {reverse_number(input_number)}')
+        return
+    except ValueError:
+        print('Вы ввели строку вместо числа.')
+        return user_input(input(f'Введите число, которое требуется перевернуть: '))
+
+
+user_input(input(f'Введите число, которое требуется перевернуть: '))
