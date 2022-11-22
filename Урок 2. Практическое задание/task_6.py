@@ -24,9 +24,9 @@ def guess_game(rand_number, counter=1):
     print()
     while counter < 10 and user_guess != rand_number:
         if user_guess > rand_number:
-            print(f'Загаданное число меньше чем {user_guess}')
+            print(f'Загаданное число меньше {user_guess}')
         else:
-            print(f'Загаданное число больше чем {user_guess}')
+            print(f'Загаданное число больше {user_guess}')
         print(f'У вас осталось {10 - counter} попыток')
         print()
         counter += 1
