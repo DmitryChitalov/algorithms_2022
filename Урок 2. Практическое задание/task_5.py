@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbol_printer(ascii_number=32):
+    while ascii_number != 128:
+        print(f' {ascii_number} - {chr(ascii_number)} ', end='')
+        if (ascii_number - 31) % 10 == 0:
+            print('\n')
+        ascii_number += 1
+        return symbol_printer(ascii_number)
+
+
+symbol_printer()
