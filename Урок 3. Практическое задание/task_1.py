@@ -87,7 +87,7 @@ def function_a():
    
 
 def function_b():
-   """Поиск по значению (в словаре по ключу) и изменение происходит очень быстро как в списке, так и в словаре."""
+   """Поиск по индексу и изменение происходит очень быстро как в списке, так и в словаре."""
    elements = 1_000
    filled_list = [i for i in range(0, elements)]
    filled_dictionary = {i: i for i in range(elements)}
