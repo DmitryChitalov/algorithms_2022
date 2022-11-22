@@ -13,3 +13,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def recur_sum(number):
+    if number == 1:
+        return number
+    else:
+        return recur_sum(number - 1) + number
+
+
+def user_input(input_number):
+    try:
+        input_number = int(input_number)
+        return input_number
+    except ValueError:
+        print('Вы ввели строку вместо числа.')
+        return user_input(input(f'Введите число: '))
+
+
+user_number = user_input(input(f'Введите число: '))
+if recur_sum(user_number) == user_number * (user_number + 1) / 2:
+    print('Равенство верно!')
+
