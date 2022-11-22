@@ -15,3 +15,29 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+import binascii
+
+
+cache = {}
+
+
+def caching(url):
+    if url in cache:
+        print(f"Хеш {url}: {cache[url]}")
+    else:
+        hashed_url = binascii.hexlify(hashlib.pbkdf2_hmac(hash_name='sha256', password=url.encode(), salt=b'privet', iterations=3))
+        cache[url] = hashed_url
+        print(f"Хэш {url} добавлен в кэш")
+
+
+caching('https://brat.ru/')
+caching('https://brat.ru/')
+caching('https://brat.ru/')
+caching('https://panamka.ru/')
+caching('https://delivery.ru/')
+
+
+# print("Все кеши:")
+# for k, v in cache.items():
+#     print(f"{k}: {v}")

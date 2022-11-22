@@ -22,3 +22,19 @@
 р
 а
 """
+import hashlib
+
+
+word = 'papri'
+underlines = set()
+for left_index in range(len(word)):
+    for right_index in range(left_index + 1, len(word) + 1):
+        if word[left_index:right_index] != word:
+            underlines.add(hashlib.sha512(word[left_index:right_index].encode()).hexdigest())
+            print(word[left_index:right_index])
+
+
+for underline in underlines:
+    print(underline)  
+print(f'Количество элементов в множестве: {len(underlines)}')
+
