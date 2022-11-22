@@ -15,3 +15,27 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# Алгоритм сложностью O(N**2).
+# Например, сортировка пузырьком и потом взятие первого элемента:
+def min_1(lst_obj):
+    for i in range(len(lst_obj) - 1):                                       # O(N)
+        for j in range(len(lst_obj) - i - 1):                               # O(N)
+            if lst_obj[j] > lst_obj[j + 1]:                                 # O(1)
+                lst_obj[j], lst_obj[j + 1] = lst_obj[j + 1], lst_obj[j]     # O(1)
+    return lst_obj[0]                                                       # O(1)
+
+
+# Алгоритм сложностью O(N):
+def min_2(lst_obj):
+    min_obj = lst_obj[0]            # O(1)
+    for i in range(len(lst_obj)):   # O(N)
+        if lst_obj[i] < min_obj:    # O(1)
+            min_obj = lst_obj[i]    # O(1)
+    return min_obj                  # O(1)
+
+
+lst = [2, 3, 4, 5, 6, 7, 8, 9, 1]
+print(min_1(lst))
+print(min_2(lst))
