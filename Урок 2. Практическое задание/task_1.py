@@ -31,41 +31,40 @@
 
 def calculator():
     operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-    if operation == '0':
+    if operation in '+-*/':
+        try:
+            num_1 = int(input('Введите первое число: '))
+            num_2 = int(input('Введите второе число: '))
+            if operation == '+':
+                result = num_1 + num_2
+                print(f'Ваш результат {result}')
+                return calculator()
+            elif operation == '-':
+                result = num_1 - num_2
+                print(f'Ваш результат {result}')
+                return calculator()
+            elif operation == '*':
+                result = num_1 * num_2
+                print(f'Ваш результат {result}')
+                return calculator()
+            elif operation == '/':
+                try:
+                    result = num_1 / num_2
+                except ZeroDivisionError:
+                    print('Деление на 0 невозможно!')
+                else:
+                    print(f'Ваш результат: {result}')
+                finally:
+                    return calculator()
+        except ValueError:
+            print('Вы ввели строку вместо числа. Исправьтесь!')
+            return calculator()
+    elif operation == '0':
         print('Выход')
         return
     else:
-        if operation in '+-*/':
-            try:
-                num_1 = int(input('Введите первое число: '))
-                num_2 = int(input('Введите второе число: '))
-                if operation == '+':
-                    result = num_1 + num_2
-                    print(f'Ваш результат {result}')
-                    return calculator()
-                elif operation == '-':
-                    result = num_1 - num_2
-                    print(f'Ваш результат {result}')
-                    return calculator()
-                elif operation == '*':
-                    result = num_1 * num_2
-                    print(f'Ваш результат {result}')
-                    return calculator()
-                elif operation == '/':
-                    try:
-                        result = num_1 / num_2
-                    except ZeroDivisionError:
-                        print('Деление на 0 невозможно!')
-                    else:
-                        print(f'Ваш результат: {result}')
-                    finally:
-                        return calculator()
-            except ValueError:
-                print('Вы ввели строку вместо числа. Исправьтесь!')
-                return calculator()
-        else:
-            print('Введен неверный символ, попробуйте еще раз')
-            return calculator()
+        print('Введен неверный символ, попробуйте еще раз')
+        return calculator()
 
 
 calculator()
