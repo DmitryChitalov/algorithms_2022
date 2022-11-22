@@ -17,13 +17,13 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
-import random
+from random import randint
 
 
 # Реализуем структуру "Стопка тарелок", представляющую собой стек
 class PlatesStack:
     def __init__(self):
-        self.max_size = random.randint(5, 10)
+        self.max_size = randint(5, 10)
         self.plates = []
 
     def is_empty(self):
@@ -51,7 +51,7 @@ class PlatesStack:
 class PlatesStacksShelf:
     # У шкафа также будет случайно определяться кол-во помещающихся в него стопок
     def __init__(self, stack_of_plates):
-        self.max_size = random.randint(2, 5)
+        self.max_size = randint(2, 5)
         self.stacks = [stack_of_plates]  # Изначально сделаем 1 место для стопки в шкафу
 
     def is_empty(self):
