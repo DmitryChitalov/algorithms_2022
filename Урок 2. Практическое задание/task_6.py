@@ -10,15 +10,6 @@
 from random import randint
 
 
-def is_number(number):
-    try:
-        float(number)
-        return True
-    except ValueError:
-        print("Вы ввели не число!")
-        return False
-
-
 def user_input(input_number):
     try:
         input_number = int(input_number)
