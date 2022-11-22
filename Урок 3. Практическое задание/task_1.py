@@ -28,3 +28,133 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def timer_decorator(function):
+   """Декоратор, засекает время."""
+   def timer(*args, **kwargs):
+      if NameError:
+         None
+      else:
+         list_to_fill.clear()
+      start = time.time()
+      function(*args, **kwargs)
+      stop = time.time()
+      print(f"Время выполнения функции '{function.__name__}': {stop - start:.18f} сек")   
+   return timer
+
+
+def function_a():
+   """Добавление элементов в начало (insert(0, i)) выполняется очень долго из-за сложности O(n^2), 
+   остальные функции вставки действуют быстро:
+   Время выполнения функции 'appending_list': 0.016003131866455078 сек
+   Время выполнения функции 'inserting_list_to_end': 0.023000240325927734 сек
+   Время выполнения функции 'inserting_list_to_start': 25.941519498825073242 сек
+   Время выполнения функции 'generator_list': 0.017500877380371094 сек
+   Время выполнения функции 'lambda_list': 0.036005735397338867 сек
+   Время выполнения функции 'inserting_dictionary': 0.025789737701416016 сек"""
+   
+   elements = 100_000
+   global list_to_fill
+   list_to_fill = []
+
+   @timer_decorator
+   def appending_list():      
+      for i in range(elements):  # O(n)
+         list_to_fill.append(i)  # O(1)
+
+   @timer_decorator
+   def inserting_list_to_end():
+      for i in range(elements):  # O(n)
+         list_to_fill.insert(99999999999999, i)  # добавление в конец; # O(1) судя по времени, # O(n) судя по документу со сложностями операций из 2 урока.
+
+   @timer_decorator
+   def inserting_list_to_start():
+      for i in range(elements):  # O(n)
+         list_to_fill.insert(0, i)  # добавление в начало; # O(n)
+
+   @timer_decorator
+   def generator_list():
+      generator_lst = [x for x in range(0, elements)]  # O(n)
+
+   @timer_decorator
+   def lambda_list():
+      lambda_lst = [(lambda i: i) (i) for i in range (0, elements)]  # O(n)
+
+   @timer_decorator
+   def inserting_dictionary():
+      dictionary = {}
+      for i in range(elements):  # O(n)
+         dictionary[i] = i  # O(1)
+   
+   return appending_list(), inserting_list_to_end(), inserting_list_to_start(), generator_list(), lambda_list(), inserting_dictionary() ,print("")
+   
+
+def function_b():
+   """Поиск по индексу и изменение происходит очень быстро как в списке, так и в словаре.
+   Время выполнения функции 'change_list_elem': 0.000000000000000000 сек      
+   Время выполнения функции 'change_dictionary_elem': 0.000000000000000000 сек"""
+
+   elements = 1_000
+   filled_list = [i for i in range(0, elements)]
+   filled_dictionary = {i: i for i in range(elements)}
+   
+   @timer_decorator
+   def change_list_elem():
+      for i in filled_list[200:300]:  # O(n)
+         filled_list[i] = 'hello'  # O(1)
+
+   @timer_decorator
+   def change_dictionary_elem():
+      for i in range(230, 550):  # O(n)
+         filled_dictionary[i] = 'hello'  # O(1)
+      
+      
+   return change_list_elem(), change_dictionary_elem(), print('')
+
+
+def function_c():
+   """Удаление не с конца, а с указанием индекса, происходит у функций pop(i) и remove(i) со сложностью O(n^2),
+   остальные функции справляются быстро.
+   Время выполнения функции 'pop_list': 0.004000186920166016 сек
+   Время выполнения функции 'pop_list_from_start': 2.249869585037231445 сек
+   Время выполнения функции 'del_list': 0.000000000000000000 сек
+   Время выполнения функции 'remove_list': 1.388281345367431641 сек
+   Время выполнения функции 'pop_dictionary': 0.007000923156738281 сек"""
+   
+   elements = 200_000
+   filled_list = [i for i in range(0, elements)]
+   filled_dictionary = {i: i for i in range(elements)}
+
+   @timer_decorator
+   def pop_list():
+      for i in range(30_000):  # O(n)
+         filled_list.pop()  # O(1)
+
+   @timer_decorator
+   def pop_list_from_start():
+      for i in filled_list[:30_000]:  # O(n)
+         filled_list.pop(i)   # O(n)
+
+   @timer_decorator
+   def del_list():
+      del filled_list[80_000:120_000]  # O(n)
+
+   @timer_decorator
+   def remove_list():
+      for i in filled_list[:30_000]:  # O(n)
+         filled_list.remove(i)  # O(n)
+
+   @timer_decorator
+   def pop_dictionary():
+      for i in range(30_000):  # O(n)
+         filled_dictionary.pop(i)  #O(1)
+
+   return pop_list(),pop_list_from_start(), del_list(), remove_list(), pop_dictionary()   
+
+
+function_a()
+function_b()
+function_c()  
