@@ -15,3 +15,24 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# O(n^2)
+def function_min_1 (lst):
+    for i in lst:
+        is_min = True
+        for j in lst:
+            if i < j:
+                is_min = False
+        if is_min:
+            return i
+
+
+# O(n)
+def function_min_2(lst):
+    is_min = lst[0]
+    for i in lst:
+        if is_min > i:
+            is_min = i
+    return is_min
+
