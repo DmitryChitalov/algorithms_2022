@@ -17,20 +17,20 @@
 
 import hashlib
 
-cash_dict = {}
+hash_dict = {}
 
 
-def cash_url(url, cash):
+def caching_url(url, cache):
     salt = 'sha512'
     res = hashlib.sha512(url.encode() + salt.encode()).hexdigest()
-    if cash.get(url):
-        print(f'Хеш {url} уже есть в кэше. Его хеш: {cash[url]}')
+    if cache.get(url):
+        print(f'Хеш {url} уже есть в кэше. Его хеш: {cache[url]}')
     else:
-        cash[url] = res
+        cache[url] = res
         print(f'Хеш {url} добавлен в кэш.')
 
 
 if __name__ == "__main__":
-    cash_url('https://google.com/', cash_dict)
-    cash_url('https://yandex.ru/', cash_dict)
-    cash_url('https://google.com/', cash_dict)
+    caching_url('https://google.com/', hash_dict)
+    caching_url('https://yandex.ru/', hash_dict)
+    caching_url('https://google.com/', hash_dict)
