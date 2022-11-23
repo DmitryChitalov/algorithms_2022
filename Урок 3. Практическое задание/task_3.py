@@ -22,3 +22,18 @@
 р
 а
 """
+
+from hashlib import md5
+
+def get_unique_slices(string: str) -> int:
+    # Вернуть количество уникальных подстрок
+    result_hashes: set = set()
+    for i in range(1, len(string)):
+        for j in range(len(string)-i+1):
+            result_hashes.add(md5(string[j:j+i].encode()).hexdigest())
+    return len(result_hashes)
+
+if __name__ == "__main__":
+    string = "papara"
+    print(f'Количество уникальных элементов: {get_unique_slices(string)}')
+    
