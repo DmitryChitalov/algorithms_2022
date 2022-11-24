@@ -22,3 +22,42 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+login_password = {'GKDoni': 'qwerty', 'AfrikA': '0123456789', 'Antonio1993': '121212', 'Anna': 'annaanna',
+                  'Lida22': 'ooo000ooo', 'Sergey': 'sekret', 'Viva_Las_Vegas': '666666'}
+
+login_activation = {'GKDoni': 0, 'AfrikA': 1, 'Antonio1993': 1, 'Anna': 0, 'Lida22': 1, 'Sergey': 0,
+                    'Viva_Las_Vegas': 1}
+
+
+'''Итоговая сложность O(1)'''
+
+def authentication(login, password):
+    if login_password[login] == password:  # O(1)
+        if login_activation[login] == 1:  # O(1)
+            return 'Добро пожаловать'  # O(1)
+        else:
+            return 'Ваш аккаунт заблокирован'  # O(1)
+    else:
+        return 'Логин или пароль не верны'  # O(1)
+
+
+print(authentication(input('Введите ваш логин - '), input('Введите ваш пароль - ')))
+
+
+
+
+'''Итоговая сложность O(n)'''
+
+def authentication_2(login, password):
+    for i in login_password:  # O(n)
+        if i == login and login_password[i] == password:  # O(1)
+            if login_activation[login] == 1:  # O(1)
+                return 'Добро пожаловать'  # O(1)
+            else:
+                return 'Ваш аккаунт заблокирован'  # O(1)
+    else:
+        return 'Логин или пароль не верны'  # O(1)
+
+
+print(authentication_2(input('Введите ваш логин - '), input('Введите ваш пароль - ')))
