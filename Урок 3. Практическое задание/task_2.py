@@ -27,6 +27,10 @@ from hashlib import sha256
 import sqlite3
 
 class Database(object):
+    """ Class(object) - первоначальный метод объявления класса(python версий 1, 2) с явным указанием типа
+        наследования от базового класса object. В современной нотации эквивалент class Class: или class Class():.
+    """
+
     """ Класс для определения временной базы данных
 
     Methods:
