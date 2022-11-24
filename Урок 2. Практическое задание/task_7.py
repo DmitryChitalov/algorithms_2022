@@ -13,3 +13,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def prove(n: int, counter = 1):
+    if counter < n:
+
+       print(f'{counter} + ', end='')
+       return prove(n, counter=counter + 1)
+    else:
+        print ( f'{counter} = {n} ({n} + 1) / 2')
+
+
+def prove_go():
+    try:
+        number = int(input('Введите любое натуральное число : '))
+        prove(number)
+    except ValueError:
+        print('Ошибка ввода!')
+        prove_go()
+
+prove_go()
