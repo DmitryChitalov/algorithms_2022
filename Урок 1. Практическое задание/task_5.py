@@ -17,3 +17,20 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+class Stack_of_plates:
+    '''Складывание в стопки по 10 тарелок'''
+    def __init__(self):
+        self.stacks = [[]]
+
+    def folding(self):
+        if len(self.stacks[-1]) < 10:
+            self.stacks[-1].append(1)
+        else:
+            self.stacks.append([])
+            self.stacks[-1].append(1)
+        return self.stacks
+
+add_plates = Stack_of_plates()
+for _ in range(34):
+    print(add_plates.folding())
