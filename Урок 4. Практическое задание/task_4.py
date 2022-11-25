@@ -9,6 +9,7 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    count_dict = {array.count(x): x for x in array}
+    max_3 = max(count_dict)
+    el = count_dict[max_3]
+    return f'Чаще всего встречается число {el}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
+print(timeit("func_1", setup='from __main__ import func_1', number=100000))
+print(timeit("func_2", setup='from __main__ import func_2', number=100000))
+print(timeit("func_3", setup='from __main__ import func_3', number=100000))
+
+
+"""
+При запуске всего кода в 3х из 5 случаев func_3 дает лучшие результаты по времени. 
+Получилось написать короткое решение с использованием dict comprehenshion,
+который работает быстрее традиционного итератора.
+"""
