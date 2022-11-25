@@ -63,6 +63,9 @@ test_func_1 = timeit.timeit('func_1()', 'from __main__ import func_1, array', nu
 test_func_2 = timeit.timeit('func_2()', 'from __main__ import func_2, array', number=10_000)
 test_func_3 = timeit.timeit('func_3()', 'from __main__ import func_3, array', number=10_000)
 
-print(test_func_1)
-print(test_func_2)
-print(test_func_3)
+print(test_func_1)  # 0.0325442999965162
+print(test_func_2)  # 0.04349170000205049
+print(test_func_3)  # 0.041860500001348555
+
+# Собственная функция выполняется чуть быстрее, чем вторая. Вероятно, из за того, что элементы в словаре перемещаются
+# быстрее, чем в списке.
