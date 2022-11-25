@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def show_ascii_rec(current_symbol=32, row=0):
+    if current_symbol == 127:
+        return chr(127)
+
+    if row == 10:
+        return f"\n{current_symbol} - {chr(127)}" + show_ascii_rec(current_symbol + 1, row=1)
+    else:
+        return f"{current_symbol} - {chr(127)} " + show_ascii_rec(current_symbol + 1, row=row + 1)
+
+
+if __name__ == '__main__':
+    print(show_ascii_rec())

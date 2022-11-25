@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def guess_the_number():
+    OPERATIONS = ['+', '-', '*', '/', '0']
+
+    operation = input('Input operation (+, -, *, / or 0 for exit): ')
+
+    if operation not in OPERATIONS:
+        print('Unknown operation')
+        return guess_the_number()
+
+    if operation == '0':
+        print("Have a good day")
+        return
+    else:
+        try:
+            first = int(input('Please enter first number: '))
+            second = int(input('Please enter second number: '))
+        except ValueError:
+            print("You should enter not a string")
+            return guess_the_number()
+
+        if operation == '+':
+            result = first + second
+            print(f"Result {first + second}")
+        elif operation == "-":
+            print(f"Result {first - second}")
+        elif operation == "*":
+            print(f"Result {first * second}")
+        elif operation == "/":
+            try:
+                print(f"Result {first / second}")
+            except ZeroDivisionError:
+                print("Can't divide by zero")
+
+    return guess_the_number()
+
+
+guess_the_number()
