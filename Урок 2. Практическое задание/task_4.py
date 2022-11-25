@@ -27,5 +27,6 @@ def main():
     summ = sum_rec(number)
     print(f"Количество элементов: {number}\nИх сумма : {summ}")
 
+
 if __name__ == '__main__':
     main()
