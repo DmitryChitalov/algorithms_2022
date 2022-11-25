@@ -39,7 +39,7 @@ def guess_the_number():
         return guess_the_number()
 
     if operation == '0':
-        print("Bye")
+        print("Have a good day")
         return
     else:
         try:
