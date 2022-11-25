@@ -11,6 +11,8 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
+from timeit import timeit
+from random import randint
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +37,35 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    if enter_num < 10:
+        return enter_num
+    return str(enter_num % 10) + str(revers_4(enter_num // 10))
+
+
+def revers_5(enter_num):
+    num_list = list(str(enter_num))
+    num_list.reverse()
+    return ''.join(num_list)
+
+
+if __name__ == '__main__':
+    num = 315628546
+    print(revers(num))
+    print(revers_2(num))
+    print(revers_3(num))
+    print(revers_4(num))
+    print(revers_5(num))
+
+    print(timeit('revers(num)', setup='from __main__ import revers, num', number=1000))
+    print(timeit('revers_2(num)', setup='from __main__ import revers_2, num', number=1000))
+    print(timeit('revers_3(num)', setup='from __main__ import revers_3, num', number=1000))
+    print(timeit('revers_4(num)', setup='from __main__ import revers_4, num', number=1000))
+    print(timeit('revers_5(num)', setup='from __main__ import revers_5, num', number=1000))
+"""
+Первая функция возвращает None
+Вторая функция добавляет .0 в конце
+Функция revers_3 отрабатывает быстрее всех, на втором месте revers_5 - т.к. в них нет циклов и рекурсий
+"""

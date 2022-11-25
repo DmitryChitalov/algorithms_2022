@@ -31,17 +31,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=1))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=1))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=1))
 
 
 def memoize(f):
@@ -69,14 +69,26 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=1))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=1))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=1))
+
+"""
+В момоизации смысла нет, т.к. нет совпадений значений, попадающих в кэш при одном вызове функции,
+это видно если в замерах выставить число запусков не 10000, а 1.
+Функции при этом возвращают разные результаты, т.к. в оптимизированной функции:
+    if number == 0:
+        return ''
+А в оригинальной функции
+    if number == 0:
+        return str(number % 10)
+что добавляет 0 в конец числа при выполнении оригинальной функции     
+"""
