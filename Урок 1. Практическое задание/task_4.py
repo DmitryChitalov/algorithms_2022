@@ -22,3 +22,27 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+def autentificy(users, user_name, user_pass):
+    for key, value in users.items():
+        if key == user_name:
+            if str(value['password']) == user_pass and value['activation']:
+                return f'{user_name}, Добро пожаловать!'
+            elif value['password'] == user_pass and value['activation'] == False:
+                return f'{user_name}, Ваша учётная запись не активирована'
+            elif value['password'] != user_pass:
+                return f'{user_name}, Вы ввели неправильный пароль'
+    return 'Такого пользователя не существует'
+
+
+my_users = {
+    'user_1': {'password': '1111', 'activation': True},
+    'user_2': {'password': '2222', 'activation': True},
+    'user_3': {'password': '3333', 'activation': False}
+}
+
+print(autentificy(my_users, 'user_1', '1111'))
+print(autentificy(my_users, 'user_2', '11111'))
+print(autentificy(my_users, 'user_4', '3333'))
+print(autentificy(my_users, 'user_3', '3333'))

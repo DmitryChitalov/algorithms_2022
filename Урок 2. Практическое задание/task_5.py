@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def chr_ascii(asc=32, count=0):
+    if asc == 128:
+        return True
+    print(f'{asc}:{chr(asc)}', end=' ')
+    if count == 10:
+        print('\n')
+        count = 0
+    return chr_ascii(asc + 1, count + 1)
+
+
+chr_ascii()

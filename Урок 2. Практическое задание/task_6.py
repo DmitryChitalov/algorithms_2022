@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def answer_num(rand, count=1):
+    print(f'Попытка №{count}')
+    num = int(input('Введите число\n'))
+
+    if num == rand:
+        return 'вы угадали'
+    elif count == 10:
+        return f'загаданное число : {rand}'
+    else:
+        count += 1
+        if num > rand:
+            print(f'загаданное число меньше')
+            return answer_num(rand, count)
+
+        else:
+            print('загаданое число больше. Попытка № {count}')
+            return answer_num(rand, count)
+
+
+print(answer_num(randint(0, 100)))

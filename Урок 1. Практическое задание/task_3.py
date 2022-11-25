@@ -31,7 +31,7 @@ def sorted_1(base):
     lst_from_dict = list(base.items())
     for i in range(len(lst_from_dict)):
         lowest_value = i
-        for j in range(i+1,len(lst_from_dict)):
+        for j in range(i + 1, len(lst_from_dict)):
             if lst_from_dict[j][1] > lst_from_dict[lowest_value][1]:
                 lowest_value = j
         lst_from_dict[lowest_value], lst_from_dict[i] = lst_from_dict[i], lst_from_dict[lowest_value]

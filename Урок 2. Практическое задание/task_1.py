@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def cals():
+    operation = input('введите +-*/')
+    if operation in '+-*/' and len(operation) == 1:
+        try:
+            num_1 = int(input('введите число: '))
+            num_2 = int(input('введите число: '))
+            if operation == '+':
+                print(f'Ваш результат: {num_1 + num_2}')
+                return cals()
+
+            elif operation == '-':
+                print(f'Ваш результат: {num_1 - num_2}')
+                return cals()
+            elif operation == '*':
+                print(f'Ваш результат: {num_1 * num_2}')
+                return cals()
+
+            elif operation == '/':
+                try:
+                    num_1 / num_2
+                except ZeroDivisionError:
+                    print('на 0 делить нельзя')
+                else:
+                    print(f'Ваш результат: {num_1 / num_2}')
+                finally:
+                    cals()
+        except ValueError:
+            print('Вы ввели не целочисленное значение')
+            return cals()
+
+    print('Вы ввели не знак операции')
+    return cals()
+
+
+cals()

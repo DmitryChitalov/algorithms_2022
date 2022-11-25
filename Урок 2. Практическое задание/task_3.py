@@ -18,3 +18,15 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def recur(num):
+    if num == 0:
+        return ""
+    else:
+        x = num % 10
+        num //= 10
+        return str(x) + str(recur(num))
+
+
+print(recur(6984))

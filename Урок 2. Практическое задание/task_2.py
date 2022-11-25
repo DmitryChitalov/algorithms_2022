@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recurs(num, x=0, y=0):
+    if num == 0:
+        return x, y
+    else:
+        z = num % 10
+        num //= 10
+        if z % 2 == 0:
+            x += 1
+        else:
+            y += 1
+        return recurs(num, x, y)
+
+
+print(recurs(65411))

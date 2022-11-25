@@ -10,3 +10,19 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def recur_method(count, i=0, num=1, sum=0):
+    """Рекурсия"""
+    if i == count:
+        print(f"Количество элементов - {count}, их сумма - {sum}")
+    elif i < count:
+        return recur_method(count, i + 1, (num / 2) * -1, sum + num)
+
+
+while True:
+    try:
+        COUNT = int(input('Введите число\n'))
+        recur_method(COUNT)
+    except ValueError:
+        print('Вместо строки введите число')

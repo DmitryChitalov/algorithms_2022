@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def recur(n):
+    if n == 1:
+        return n
+    else:
+        print(n)
+        return recur(n - 1) + n
+
+
+try:
+    num = int(input('введите число'))
+    if recur(num) == num * (num + 1) / 2:
+        print('равенство верно')
+except ValueError:
+    print('Вы ввели строку')
