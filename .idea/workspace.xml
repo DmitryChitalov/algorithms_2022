@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/vladl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/algorithms_2022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/algorithms_2022.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +140,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.task_3">
+  <component name="RunManager" selected="Python.test_file">
     <configuration name="list_creation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,8 +227,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_3" />
         <item itemvalue="Python.test_file" />
+        <item itemvalue="Python.task_3" />
         <item itemvalue="Python.task_1" />
         <item itemvalue="Python.list_creation" />
       </list>
@@ -299,47 +293,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>5</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>7</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../PythonFIles/test_file.py</url>
-          <line>10</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">
