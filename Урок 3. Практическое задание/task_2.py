@@ -28,16 +28,23 @@ import json
 
 salt = 'u_salt'
 
+
+def get_hash(passwd):
+    return hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+
+
 passwd = input('Введите пароль: ')
-passwd_hash = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+passwd_hash = get_hash(passwd)
 print(f'В базе данных хранится строка: {passwd_hash}')
 data = {salt: passwd_hash}
 with open('task2_data.json', 'w') as f:
     json.dump(data, f)
 
 check_passwd = input('Введите пароль еще раз для проверки: ')
-check_passwd_hash = hashlib.sha256(salt.encode() + check_passwd.encode()).hexdigest()
+check_passwd_hash = get_hash(check_passwd)
 with open('task2_data.json', 'r') as f:
     data = json.load(f)
     if data[salt] == check_passwd_hash:
         print('Вы ввели верный пароль')
+    else:
+        print('Пароли не совпадают, это не вы')
