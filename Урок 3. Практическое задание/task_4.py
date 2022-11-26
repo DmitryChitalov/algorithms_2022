@@ -15,3 +15,25 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+cashe = {}
+
+def get_hash(url):
+    salt = 'peper'
+    res = hashlib.sha256((url + salt).encode()).hexdigest()
+    return res
+
+def add_url(url):
+    if cashe.get(url):
+        print(f'URL - {url} уже сохранен в кэше')
+    else:
+        urls_hash = get_hash(url)
+        cashe[url] = urls_hash
+        print(cashe)
+
+
+add_url('http://problems.net')
+add_url('https://hello.world/')
+add_url('http://problems.net')

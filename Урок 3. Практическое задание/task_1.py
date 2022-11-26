@@ -28,3 +28,75 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+def timer(func):
+
+    def wrapper(*args):
+        start_time = time.time()
+        result = func(*args)
+        stop_time = time.time()
+        print(f'функция выполнялась: {stop_time - stop_time}')
+        return result
+    return wrapper
+
+
+@timer
+def fill_list(n):  # O(n)
+    return [n for n in range(n)]
+
+
+@timer
+def fill_dict(n):  # O(n)
+    return {n: n for n in range(n)}
+
+
+# Операции сохранения элемента имеют константную сложность.
+# Но список заполняется быстрее, тк словарь дополнительно вычисляет хэш для ключей.
+
+
+@timer
+def del_from_list(list_d, start, count):  # O(n)
+    [list_d.pop(n) for n in range(start, start + count)]
+
+
+@timer
+def del_from_dict(dict_d, start, count):  # O(n)
+    [dict_d.pop(n) for n in range(start, start + count)]
+
+# Удаление элементов для списка медленее, чем из словаря
+
+@timer
+def change_list(list_ch: list, start, count, new_val):  # O(n)
+    for n in range(start, start + count):
+        list_ch[n] = new_val
+
+
+@timer
+def change_dict(dict_ch, start, count, new_val):  # O(n)
+    for n in range(start, start + count):
+        dict_ch[n] = new_val
+
+# Изменение элементов списка и словаря занимают практически одинаковое время.
+# Но список чуть быстрее получает значение.
+
+
+if __name__ == '__main__':
+    print('Заполняем список')
+    my_list = fill_list(9999999)
+
+    print('Заполняем словарь')
+    my_dict = fill_dict(9999999)
+
+    print('Удаляем элементы из списка')
+    del_from_list(my_list, 999999, 999)
+
+    print('Удаляем элементы из словаря')
+    del_from_dict(my_dict, 999999, 999)
+
+    print('Изменяем элементы списка')
+    change_list(my_list, 9999, 99999, 1)
+
+    print('Изменяем элементы словаря')
+    change_dict(my_dict, 9999, 99999, 1)
+
