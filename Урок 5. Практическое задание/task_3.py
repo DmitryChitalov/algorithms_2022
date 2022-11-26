@@ -31,15 +31,19 @@ from collections import deque
 """1) операции
 append, pop, extend списка и дека и сделать выводы что и где быстрее
 """
+
+
 def append_lst(lst):
     for i in range(1000):
         lst.append(i)
     return lst
 
+
 def pop_lst(lst):
     for i in range(1000):
         lst.pop()
     return lst
+
 
 def extend_lst(lst):
     lst.extend([i for i in range(100)])
@@ -51,10 +55,12 @@ def append_dq(dq):
         dq.append(i)
     return dq
 
+
 def pop_dq(dq):
     for i in range(1000):
         dq.pop()
     return dq
+
 
 def extend_dq(dq):
     dq.extend([i for i in range(100)])
@@ -65,15 +71,19 @@ def extend_dq(dq):
 appendleft, popleft, extendleft дека и соответствующих им операций списка
 и сделать выводы что и где быстрее
 """
+
+
 def appendleft_lst(lst):
     for i in range(100):
         lst.insert(0, i)
     return lst
 
+
 def popleft_lst(lst):
     for i in range(100):
         lst.pop(0)
     return lst
+
 
 def extendleft_lst(lst):
     lst.insert(0, [i for i in range(100)])
@@ -85,32 +95,35 @@ def appendleft_dq(dq):
         dq.appendleft(i)
     return dq
 
+
 def popleft_dq(dq):
     for i in range(100):
         dq.popleft()
     return dq
+
 
 def extendleft_dq(dq):
     dq.extendleft([i for i in range(100)])
     return dq
 
 
-
 """3) операции получения элемента списка и дека
 и сделать выводы что и где быстрее
 """
+
+
 def get_index_lst(lst):
     el = 0
     for i in range(1000):
         el = lst[i]
     return lst
 
+
 def get_index_dq(dq):
     el = 0
     for i in range(1000):
         el = dq[i]
     return dq
-
 
 
 temp_list = [i for i in range(10 ** 5)]
@@ -141,7 +154,6 @@ extend_dq:  0.002816799998981878
 
 deque показала лучшие результаты. Разница незначительная.
 """
-
 
 print('appendleft_lst: ', timeit("appendleft_lst(temp_list)", globals=globals(), number=100))
 print('appendleft_dq: ', timeit("appendleft_dq(temp_deque)", globals=globals(), number=100))
