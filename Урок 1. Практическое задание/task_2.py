@@ -15,3 +15,25 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+#Сложность  алгоритма  O(n^2) - квадратичная.(Распространенный пример такого алгоритма — цикл, вложенный в другой цикл.)
+def min_of_list(list):
+    for i in range(len(list)):
+        for j in range(len(list)):
+            if list[i] < list[j]:
+                min_elem = list[i]
+            else:
+                min_elem = list[i]
+    return min_elem
+
+#Сложность второго алгоритма должна быть O(n) - линейная.
+def min_of_list(list):
+    min_elem = list[0]  # O(1)
+    for i in range(len(list)):  # O(n)
+        if list[i] < min_elem:  # O(1)
+            min_elem = list[i]  # O(1)
+    return min_elem  # O(1)
+
+
+
+
