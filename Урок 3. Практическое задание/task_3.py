@@ -22,3 +22,21 @@
 р
 а
 """
+from hashlib import sha256
+
+# Создадим искомую строку, а также множества для хранения подстрок и хешей подстрок:
+input_str = 'papa'
+str_set = set()
+hash_set = set()
+
+# Будем получать подстроки и записывать их и их хеши в множества:
+for i in range(len(input_str)):
+    for j in range(i + 1, len(input_str) + 1):
+        if input_str[i:j] != input_str:
+            str_set.add(input_str[i:j])
+            hash_set.add(sha256(input_str[i:j].encode()).hexdigest())
+
+# Выведем результаты:
+print(f'{str_set}')
+print(f'{hash_set}')
+print(f'Количество элементов в множестве: {len(hash_set)}')
