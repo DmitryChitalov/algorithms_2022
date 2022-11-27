@@ -19,3 +19,25 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def print_ASCII(a = 31, b = 0):
+    if a == 31 and b == 0:
+        a += 1
+        b += 1
+        return f'{a} - {chr(a)} {print_ASCII(a, b)}'
+    elif a != 32 and b == 1:
+        a += 1
+        b += 1
+        return f'\n{a} - {chr(a)} {print_ASCII(a, b)}'
+    elif b > 8:
+        b = 1
+        a += 1
+        return f'{a} - {chr(a)} {print_ASCII(a, b)}'
+    elif a == 126:
+        a += 1
+        return f'{a} - {chr(a)}'
+    else:
+        a += 1
+        b += 1
+        return f'{a} - {chr(a)} {print_ASCII(a, b)}'
+
+print(print_ASCII())

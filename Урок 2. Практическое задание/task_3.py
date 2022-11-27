@@ -18,3 +18,10 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def reverse(val):
+    if val // 10 == 0:
+        return val
+    else:
+        return str(val % 10) + str(reverse(val // 10))
+
+print(reverse(45537))

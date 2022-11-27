@@ -27,3 +27,27 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def recursion_calc():
+    opr = str(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+    if opr == '0':
+        return None
+    elif opr in '+*-/':
+        valstr1 = input('Введите первое целое число: ')
+        valstr2 = input('Введите второе целое число: ')
+        if valstr1.isdigit() and valstr2.isdigit():
+            try:
+                val1 = int(valstr1)
+                val2 = int(valstr2)
+                print('Ваш результат:', eval(f'{val1}{opr}{val2}'))
+                return recursion_calc()
+            except ZeroDivisionError:
+                print('На ноль делить нельзя! Попробуте еще раз ')
+                return recursion_calc()
+        else:
+            print('Вы вместо целого числа ввели строку или не целое число (((. Исправьтесь ')
+            return recursion_calc()
+    elif opr not in '+*-/':
+        print('Введена неверная операция, попробуйте еще раз ')
+        return  recursion_calc()
+
+recursion_calc()
