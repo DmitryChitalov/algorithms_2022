@@ -31,12 +31,12 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=1000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
@@ -69,14 +69,24 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=1000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Если не менять число поступающие на вход функции с мемоизацией, это позволит сэкономить время,
+за счёт кэша в хранящегося в рамках единичного запуска.
+
+Правка:
+Нет смысла в мемоизации при однократном запуске функции.
+При многократном мемоизация ускорит процесс выполнения.
+"""
