@@ -19,3 +19,11 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def print_ascii(val=32):
+    if val > 127:
+        return
+    print(val, ' - ', chr(val), end=' ' if (val + 9) % 10 != 0 else '\n')
+    print_ascii(val + 1)
+
+
+print_ascii()
