@@ -22,3 +22,40 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+from hashlib import sha256
+
+
+def pass_saver(string):
+    pass_file = open('passfile.scv', 'w')
+    pass_file.write(string)
+    pass_file.close()
+
+
+def pass_extruder():
+    pass_file = open('passfile.scv')
+    extracted_hash = pass_file.read()
+    pass_file.close()
+    return extracted_hash
+
+
+def register():
+    user_login = input('Введите логин: ')
+    user_password = input('Введите пароль: ')
+    pass_hash = sha256(user_login.encode() + user_password.encode()).hexdigest()
+    print(f'Получившийся хеш: {pass_hash}')
+    pass_saver(pass_hash)
+
+
+def login():
+    user_login = input('Введите логин еще раз для проверки: ')
+    user_password = input('Введите пароль еще раз для проверки: ')
+    pass_hash = sha256(user_login.encode() + user_password.encode()).hexdigest()
+    print(f'Получившийся хеш при проверке: {pass_hash}')
+    if pass_extruder() == pass_hash:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Пароль неверный!')
+
+
+register()
+login()

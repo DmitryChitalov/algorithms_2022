@@ -28,3 +28,96 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+# Декоратор
+def decorator(func):
+    def timer(*args, **kwargs):
+        start = time()
+        res = func(*args, **kwargs)
+        end = time()
+        print(f'Время выполнения функции {func.__name__} - {end - start}')
+        return res
+    return timer
+
+
+# Заполнение
+@decorator
+def list_filler(lst, num=10 ** 7):
+    for i in range(num):
+        lst.append(i)   # O(1)
+
+
+@decorator
+def dict_filler(dictionary, num=10 ** 7):
+    for i in range(num):
+        dictionary[i] = i   # O(1)
+
+
+test_list = []
+list_filler(test_list)
+print()
+test_dict = {}
+dict_filler(test_dict)
+print('-'*50)
+"""
+Время выполнения функции list_filler - 0.5170731544494629
+
+Время выполнения функции dict_filler - 0.6059167385101318
+"""
+
+
+# Изменение
+@decorator
+def list_changer(lst):
+    for i in range(len(lst)-1):
+        lst[i] = 'change'    # O(1)
+
+
+@decorator
+def dict_changer(dictionary):
+    for key in dictionary.keys():
+        dictionary[key] = 'change'  # O(1)
+
+
+list_changer(test_list)
+print()
+dict_changer(test_dict)
+print('-'*50)
+"""
+Время выполнения функции list_changer - 0.3198680877685547
+
+Время выполнения функции dict_changer - 0.36440515518188477
+"""
+
+
+# Удаление
+@decorator
+def list_deleter(lst):
+    for i in range(10000):  # O(N)
+        lst.pop(i)
+
+
+@decorator
+def dict_deleter(dictionary):
+    for i in range(10000):
+        dictionary.pop(i)  # O(1)
+
+
+list_deleter(test_list)
+print()
+dict_deleter(test_dict)
+print('-'*50)
+"""
+Время выполнения функции list_deleter - 72.43614840507507
+
+Время выполнения функции dict_deleter - 0.0010170936584472656
+"""
+
+"""
+ВЫВОДЫ:
+В первых двух случаях разница во времени незначительна, поскольку сложность одинакова.
+В последнем случае (удаление) работа со списком происходит значительно медленнее, поскольку сложность метода pop() 
+для списка O(N), а для словаря - O(1).
+"""
