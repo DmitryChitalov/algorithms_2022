@@ -27,3 +27,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc_number():
+    operation= input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation== '0':
+        print('Конец вычислений')
+    elif operation in '+-*/':
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+        except ValueError:
+            print('Неверно задано число!')
+            return calc_number()
+        if operation== '+':
+            print(f'Результат - {a+b}')
+            return  calc_number()
+        if operation == '-':
+            print(f'Результат - {a - b}')
+            return calc_number()
+        if operation== '*':
+            print(f'Результат - {a*b}')
+            return  calc_number()
+        if operation== '/':
+            if b== 0:
+                print('Невозможно выполнить деление на ноль!')
+                return calc_number()
+            print(f'Результат - {a/b}')
+            return  calc_number()
+    else:
+        print('Неверно задана операция!')
+        return calc_number()
+
+calc_number()
