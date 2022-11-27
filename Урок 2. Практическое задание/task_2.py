@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def rec_even(val, even=0, not_even=0):
+    if int(val % 10) > 0 and int(val // 10) == 0:
+        if int(val % 10) % 2 == 0 or val == 0:
+            return f'Количество четных и нечетных цифр в числе равно: (  {str(int(even + 1))} , {str(int(not_even))})'
+        else:
+            return f'Количество четных и нечетных цифр в числе равно: (' + str(int(even)) +', '+ str(int(not_even+ 1))+ ')'
+
+    else:
+        if int(val % 10) % 2 == 0:
+            return rec_even(val // 10, even + 1, not_even)
+        else:
+            return rec_even(val // 10, even, not_even + 1)
+
+val = 6573984598670
+print(rec_even(val))
