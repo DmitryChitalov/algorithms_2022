@@ -15,3 +15,34 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+##############################################################################
+#О(n)
+def find_min1(lst):
+    if len(lst) > 0:        #O(n)
+        min1 = lst[1]       #O(1)
+        for i in lst:       #O(n)
+            if i < min1:    #O(1)
+                min1 = i    #O(1)
+    else:
+        min1 = None           #O(1)
+    return min1
+##############################################################################
+#О(n^2)
+def find_min2(lst):
+    if len(lst) > 0:                               #O(1)
+        min2 = lst[1]                              # O(1)
+        for i in range(0, len(lst) // 2 + 1):      # O(n)
+            for j in range(1, len(lst) // 2 + 1):  # O(n)
+                if lst[i] < min2:              # O(1)
+                    min2 = lst[i]              # O(1)
+                elif lst[-j] < min2:           # O(1)
+                    min2 = lst[-j]             # O(1)
+    else:
+        min2 = None                            # O(1)
+    return min2
+
+lst1 = [100, 375, 56, 45, 387, 60, 80]
+lst2 = [1000, 445, 3087, 5238, 84, 867, 188, 170, 100]
+
+print(find_min1(lst1))
+print(find_min2(lst2))

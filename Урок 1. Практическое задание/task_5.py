@@ -17,3 +17,54 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+class StackClass:
+
+    st = 0
+    st_top = 2
+
+    def __init__(self):
+        self.elems = [[]]
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        if len(self.elems[self.st]) == self.st_top:
+            self.st += 1
+            self.elems.append([])
+        self.elems[self.st].append(el)
+
+    def pop_out(self):
+        if len(self.elems[self.st]) == 1:
+            self.st -= 1
+            a = self.elems[self.st + 1][0]
+            self.elems.pop()
+            return a
+        else:
+            return self.elems[self.st].pop()
+
+    def get_val(self):
+        return self.elems[self.st][len(self.elems[self.st]) - 1]
+
+    def stack_size(self):
+        for i in range(self.st + 1):
+            print('Размер стопки',  i + 1 , ':', len(self.elems[i]))
+        return len(self.elems)
+
+if __name__ == '__main__':
+    qc_obj = StackClass()
+    print(qc_obj.is_empty())
+
+    qc_obj.push_in('test1')
+    qc_obj.push_in('test2')
+    qc_obj.push_in('test3')
+    qc_obj.push_in('test4')
+
+    print(qc_obj.stack_size())
+
+    qc_obj.pop_out()
+    print(qc_obj.stack_size())
+    qc_obj.pop_out()
+    qc_obj.pop_out()
+    print(qc_obj.stack_size())
