@@ -17,3 +17,19 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+# 1 способ O(n*log n)
+companies = {'Sony': 1000, 'Basf': 2500, 'Apple': 5300, 'Google': 4700, 'Microsoft': 5000}
+sorted_companies = sorted(companies, key=companies.get, reverse=True)[:3]    # O(n*log n)
+for i in sorted_companies:                                                   # O(1)
+   print(i, ':', companies.get(i))                                          # O(1)
+
+# 2 способ O(n)
+companies = {'Sony': 1000, 'Basf': 2500, 'Apple': 5300, 'Google': 4700, 'Microsoft': 5000}
+sorted_list = sorted(list(companies.values()), reverse=True)[:3]     # O(n)
+for elem in sorted_list:                                             # O(1)
+    for i, j in companies.items():                                   # O(n)
+        if j == elem:
+            print(i, ':', j)                                         # O(1)
+
+
+# Первый способ лучше т.к. сложность O(n * log n) меньше, чем O(n)
