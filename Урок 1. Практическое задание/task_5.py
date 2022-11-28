@@ -17,3 +17,31 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+
+
+
+class Stack_of_Plates:
+
+    def __init__(self):
+        self.elems = []
+
+    def push_in(self, el):
+        return self.elems.append(el)
+
+    def is_si(self):
+        return [i for i in self.elems]
+
+# Предположим цифры - это тарелки
+empty_list_start = [11, 22, 31, 45, 50, 6, 73, 88, 39, 102, 111, 12, 13, 56]
+
+
+def stack_1(list):
+    tmp = Stack_of_Plates()
+    for i in range(0, len(list), 4):
+        tmp.push_in(list[i: i + 4])
+    return tmp.is_si()
+
+print(stack_1(empty_list_start))
+

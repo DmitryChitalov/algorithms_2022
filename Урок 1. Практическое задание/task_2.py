@@ -15,3 +15,37 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def min_numbetr(listic):
+    """Принимает в аргумент список чисел(int) и возвращает наибольшее число
+    Сложность: O(n)"""
+
+    listic_1 = listic[:]                    # O(1)
+    while len(listic_1) != 1:               # O(n)
+        if listic_1[0] < listic_1[1]:       # O(n)
+            listic_1.insert(2, listic_1[0]) # O(n)
+            listic_1.remove(listic_1[0])    # O(n)
+        else:                               # O(n)
+            listic_1.remove(listic_1[0])    # O(n)
+    return listic_1                         # O(1)
+
+
+def min_numbetr_2(list_1):
+    """Принимает в аргумент список чисел(int) и возвращает наибольшее число
+    Сложность: O(n^2)"""
+
+    for i in range(0, len(list_1), 2):      # O(n^2)
+        for j in range(1, len(list_1), 2):  # O(1)
+            if list_1[0] < list_1[1]:       # O(n)
+                list_1.insert(2, list_1[0]) # O(n)
+                list_1.remove(list_1[0])    # O(n)
+                list_1.remove(list_1[1])    # O(n)
+            else:
+                list_1.remove(list_1[0])    # O(n)
+    return list_1                           # O(1)
+
+
+
+
+
