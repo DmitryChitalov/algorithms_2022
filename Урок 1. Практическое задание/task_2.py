@@ -15,3 +15,40 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+
+def min_1(ls):
+    min_ = ls[0]
+    max_= ls[0]
+    for i in lst:
+        for j in ls:
+            if j > max_:
+                max_ = j
+            elif j < max_ and j < min_:
+                min_ = j
+                return min_
+
+lst = [5, 3, 4, 10, 8, 6, 9]
+print(min_1(lst))
+
+def min_2(ls):
+    max_ = ls[0]
+    min_ = ls[0]
+    for j in ls:
+        if j > max_:
+            max_ = j
+        elif j < max_ and j < min_:
+            min_ = j
+            return min_
+
+lst2 = [5, 3, 4, 10, 8, 6, 9]
+print(min_2(lst))
+
+
+
+
+
+
+
+
