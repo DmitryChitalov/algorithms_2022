@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from hashlib import sha512
+
+cash_dict = {}
+salt = 'sflpr9fhi2'
+
+
+def check_url_cash(url):
+    if cash_dict.get(url):
+        print(f"Кэш данного url: {cash_dict[url]}")
+    else:
+        url_cash = sha512(salt.encode() + url.encode()).hexdigest()
+        cash_dict[url] = url_cash
+
+check_url_cash('yandex.ru')
+check_url_cash('yandex.ru')
+check_url_cash('rambler.ru')
+print(f"Словарь с url: {cash_dict}")
+
