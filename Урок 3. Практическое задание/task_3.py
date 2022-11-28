@@ -22,3 +22,14 @@
 р
 а
 """
+from hashlib import sha256
+
+begin_str = "рара"
+result_set = set()
+len_str = len(begin_str)
+for i in range(len_str):
+    for j in range(i+1, len_str+1):
+        result_set.add(sha256(begin_str[i:j].encode()).hexdigest())
+        print(begin_str[i:j])
+
+print(f"Уникальных подстроек: {len(result_set)}")

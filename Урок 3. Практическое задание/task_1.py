@@ -28,3 +28,102 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+
+def decor_time(func):
+    def fn_timer(*args, **kwargs):
+        time_begin = time()
+        func(*args, **kwargs)
+        time_end = time()
+        print(f"Функция {func.__name__} выполяется за {time_end-time_begin} за секунд")
+    return fn_timer
+
+
+test_len = 10000
+
+
+"""
+----------------------------------------
+а) Функции заполнения списка и словаря
+Функция list_append выполяется за 0.0009992122650146484 за секунд
+Функция dict_insert выполяется за 0.0009996891021728516 за секунд
+Сложность в О-нотации одинаковая
+----------------------------------------
+"""
+
+
+@decor_time
+def list_append(a_list, n):  # Сложность О(1) - вставка в конец списка
+    for i in range(n):
+        a_list.append(i)
+
+
+result_list = []
+list_append(result_list, test_len)
+# print(result_list)
+
+
+@decor_time
+def dict_insert(i_dict, n):  # Сложность О(1) - т.к. это хэш-таблица
+    for i in range(n):
+        i_dict[i] = i
+
+
+result_dict = {}
+dict_insert(result_dict, test_len)
+# print(result_dict)
+print("--------------------------------------------------------------------------------------------------------")
+
+"""
+----------------------------------------
+б) Функции получения элементов списка и словаря
+Функция list_select выполяется за 0.09756922721862793 за секунд
+Функция dict_select выполяется за 0.06065678596496582 за секунд
+Сложность в О-нотации одинаковая
+----------------------------------------
+"""
+
+
+@decor_time
+def list_select(s_list, n):  # Сложность О(1)
+    for i in range(n):
+        print(f"Значение {i} элемента из списка равно {s_list[i]}")
+
+
+@decor_time
+def dict_select(s_dict, n):  # Сложность О(1)
+    for i in range(n):
+        print(f"Значение {i} элемента из словаря равно {s_dict[i]}")
+
+
+list_select(result_list, test_len)
+dict_select(result_dict, test_len)
+print("--------------------------------------------------------------------------------------------------------")
+
+"""
+----------------------------------------
+в) Функции удаления элементов списка и словаря
+Функция list_delete выполяется за 0.018001794815063477 за секунд
+Функция dict_delete выполяется за 0.0010006427764892578 за секунд
+Сложность в О-нотации при удалении элемента по ключу из списка выше
+----------------------------------------
+"""
+
+
+@decor_time
+def list_delete(d_list, n):  # Сложность О(n)
+    for i in range(0, n):
+        d_list.remove(i)
+
+
+@decor_time
+def dict_delete(d_dict, n):  # Сложность О(1)
+    for i in range(0, n):
+        d_dict.pop(i)
+
+
+list_delete(result_list, test_len)
+dict_delete(result_dict, test_len)
+
+
