@@ -25,7 +25,11 @@
 import json
 
 def check_is_active():
-    dict_acc2 = {'login': {}}
+    dict_acc2 = {'user1': {'password': '11111', 'activation': True},
+                'user2': {'password': '11111', 'activation': False},
+                 'user3': {'password': '11111', 'activation': True},
+                'user4': {'password': '11111', 'activation': False}
+                 }
     FILENAME = 'accounts.json'
     is_activ = True
     login = input("введите логин: ")
@@ -33,29 +37,34 @@ def check_is_active():
     try:
         with open(FILENAME, 'r+', encoding='utf-8') as file:
             data = json.load(file)
-            if login in data['login'] and password in data['login'][login] and data['login'][login][
-                password] is not is_activ:
-                activate_process = input('Необходима активация. Активировать аккаунт?: (д/н)')
-                if activate_process.lower() == 'д':
-                    dict_acc2['login'].setdefault(login, {}).setdefault(password, [])
-                    dict_acc2['login'][login][password] = is_activ
-                    with open(FILENAME, 'r+', encoding='utf-8') as file:
-                        try:
-                            data = json.load(file)
-                            data['login'].setdefault(login, {}).setdefault(password, [])
-                            data['login'][login][password] = is_activ
-                            with open(FILENAME, 'r+', encoding='utf-8') as file:
-                                json.dump(data, file, ensure_ascii=False, indent=4)
-                        except json.JSONDecodeError:
-                            json.dump(dict_acc2, file, ensure_ascii=False, indent=4)
-                else:
-                    print('Досвидания!')
+            if data.get(login):
+                if data[login]['password'] == password and data[login]['activation']:
+                    print("Добро пожаловать! Доступ к ресурсу предоставлен")
+                elif data[login]['password'] == password and not data[login]['activation']:
+                    activate_process = input('Необходима активация. Активировать аккаунт?: (д/н)')
+                    if activate_process.lower() == 'д':
+                        dict_acc2[login] = {'password': password, 'activation': is_activ}
+                        with open(FILENAME, 'r+', encoding='utf-8') as file:
+                            try:
+                                data = json.load(file)
+                                data[login] = {'password': password, 'activation': is_activ}
+                                with open(FILENAME, 'r+', encoding='utf-8') as file:
+                                    json.dump(data, file, ensure_ascii=False, indent=4)
+                            except json.JSONDecodeError:
+                                json.dump(dict_acc2, file, ensure_ascii=False, indent=4)
+                                print('аккаунт активирован!')
+                    else:
+                        print('Досвидания!')
     except json.JSONDecodeError:
-        print('файл пуст')
+        check_ac()
 
 
 def check_ac():
-    dict_acc2 = {'login': {}}
+    dict_acc2 = {'user1': {'password': '11111', 'activation': True},
+                'user2': {'password': '11111', 'activation': False},
+                'user3': {'password': '11111', 'activation': True},
+                'user4': {'password': '11111', 'activation': False}
+                }
     FILENAME = 'accounts.json'
     checkAccount = input("у вас уже есть аккаунт (Д/Н)?")
     if (checkAccount.lower() == 'н'):
@@ -65,31 +74,26 @@ def check_ac():
         try:
             with open(FILENAME, 'r+', encoding='utf-8') as file:
                 data = json.load(file)
-                if login in data['login']:
+                if data.get(login):
                     print("такой логин уже существует, попробуйте снова")
                     check_ac()
                 else:
-                    dict_acc2['login'].setdefault(login, {}).setdefault(password, [])
-                    dict_acc2['login'][login][password] = is_activ
+                    dict_acc2[login] = {'password': password, 'activation': is_activ}
                     with open(FILENAME, 'r+', encoding='utf-8') as file:
                         try:
                             data = json.load(file)
-                            data['login'].setdefault(login, {}).setdefault(password, [])
-                            data['login'][login][password] = is_activ
+                            data[login] = {'password': password, 'activation': is_activ}
                             with open(FILENAME, 'r+', encoding='utf-8') as file:
                                 json.dump(data, file, ensure_ascii=False, indent=4)
                         except json.JSONDecodeError:
                             json.dump(dict_acc2, file, ensure_ascii=False, indent=4)
                             print("Поздравляем, аккаунт создан!")
         except json.JSONDecodeError:
-            print('файл пуст')
-            dict_acc2['login'].setdefault(login, {}).setdefault(password, [])
-            dict_acc2['login'][login][password] = is_activ
+            dict_acc2[login] = {'password': password, 'activation': is_activ}
             with open(FILENAME, 'r+', encoding='utf-8') as file:
                 try:
                     data = json.load(file)
-                    data['login'].setdefault(login, {}).setdefault(password, [])
-                    data['login'][login][password] = is_activ
+                    data[login] = {'password': password, 'activation': is_activ}
                     with open(FILENAME, 'r+', encoding='utf-8') as file:
                         json.dump(data, file, ensure_ascii=False, indent=4)
                 except json.JSONDecodeError:
@@ -100,8 +104,40 @@ def check_ac():
         check_is_active()
 
 check_ac()
-
 #Сложность O(n)
+
+# Общая сложность O(n)
+def authorization_f(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['password'] == user_password \
+                    and not value['activation']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['password'] != user_password:
+                return "Пароль не верный"
+
+    return "Данного пользователя не существует"
+
+
+# общая сложность O(1)
+def authorization_s(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:
+            return "Добро пожаловать! Доступ к ресурсу предоставлен"
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[user_name]['password'] != user_password:
+            return "Пароль не верный"
+    else:
+        return "Данного пользователя не существует"
+
+"""Третья реализация в сравнении со второй будет намного эффективнее,
+#так как в ней не используется цикл,
+#поиск в словаре по ключу имеет сложность - O(1)"""
 
 
 
