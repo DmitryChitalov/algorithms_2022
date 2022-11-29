@@ -17,3 +17,57 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+class Task:
+    task_base = []
+    task_done=[]
+    task_redo = []
+
+    def __init__(self,task_description):
+        self.task_description = task_description
+        self.task_base.append(self.task_description)
+
+    def view_task(self):
+        return print(self.task_description)
+
+    def view_all_tasks(self):
+        return print(f'Очередь текущих задач: {self.task_base} \nОчередь выполненных задач: {self.task_done} \n'
+                     f'Очередь задач на доработке:{self.task_redo}' )
+
+    def done_task(self):
+        for task in self.task_base:
+            if self.task_description == task:
+                self.task_done.append(self.task_description )
+                self.task_base.remove(self.task_description)
+        for task in self.task_redo:
+            if self.task_description == task:
+                self.task_done.append(self.task_description )
+                self.task_redo.remove(self.task_description)
+        return print('Задача выполнена: ',self.task_description)
+
+
+    def redo_task(self):
+        for task in self.task_base:
+            if self.task_description == task:
+                self.task_redo.append(self.task_description)
+                self.task_base.remove(self.task_description)
+        return print('Задача на доработке: ', self.task_description)
+
+
+
+
+a=Task('Задача А')
+b=Task('Задача B')
+c = Task('Задача С')
+d= Task('Задача D')
+
+
+a.view_task()
+b.view_task()
+c.view_task()
+d.view_task()
+a.done_task()
+d.redo_task()
+a.view_all_tasks()
+
+

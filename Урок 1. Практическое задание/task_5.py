@@ -17,3 +17,32 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+class PlatesQueue:
+    def __init__(self):
+        self.plates = [[]]
+
+
+"""Пороговое значение стопки 3"""
+    def put_plate (self):
+        if len(self.plates[len(self.plates) - 1]) == 0:
+            self.plates[len(self.plates) - 1].append('plate')
+        elif len(self.plates[len(self.plates) - 1]) < 3 and len(self.plates[len(self.plates) - 1]) > 0:
+            self.plates[len(self.plates) - 1].append('plate')
+        elif len(self.plates[len(self.plates) - 1]) == 3:
+            self.plates.append(['plate'])
+        return print(self.plates)
+
+
+
+a = PlatesQueue()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+

@@ -22,3 +22,33 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = { 1 : ['Mikky' , '234rddsd' , 'Active'],
+          2 : ['Jimmy' , '21e12321e' , 'No'],
+          3 : ['Stephan' , 'dsd3d' , 'Active']
+}
+
+#Вариант 1 сложность #O(N)
+def check_status (username):
+    for val in users.values(): # O(N)+ O(N)
+        if username == val[0]: #O(1)
+            if val[2] == 'Active': #O(1)
+                return "Проверка пройдена" #O(1)
+            else: #O(1)
+                return "Аккаунт не активирован" #O(1)
+
+print (check_status("Jimmy"))
+print (check_status("Mikky"))
+
+
+#Вариант 2 сложность #O(N^2)
+def check_status2 (username):
+    for val in users.values(): # O(N)+ O(N)
+        for v in val: # O(N)
+            if v == username and val[2] == 'Active': #O(1) + O(1)
+               return "Проверка пройдена" #O(1)
+            else:
+               return "Аккаунт не активирован" #O(1)
+
+print (check_status2("Jimmy"))
+print (check_status2("Mikky"))

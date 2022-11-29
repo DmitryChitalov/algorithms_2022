@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+numbers = [2,4,7,6,5,5,234,1,6,9,7]
+'''O(n)'''
+def complex_n (data):
+    min = data[0]# O(1)
+    for i in range (len(data)): #O(n)
+        if min >data[i]: #O(1)
+            min = data[i] #O(1)
+    return  min #O(1)
+
+'''O(n^2)'''
+def complex_n2(data):
+    min = data[0]  ##O(1)
+    for number in data: # O(n)
+        for i in range(len(data)): #O(n)
+            if min > data[i]: #O(1)
+                min = number #O(1)
+    return min
+
+
+print (complex_n(numbers))
+print (complex_n2(numbers))
