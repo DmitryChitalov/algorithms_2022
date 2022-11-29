@@ -11,16 +11,17 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 """
 
-def recur_checker(n):
-    def recur_sum(n):
-        if n == 1:
-            return n
-        return n + recur_sum(n-1)
-
+def checker(n):
     left_sum = recur_sum(n)
     right_sum = int(n * (n+1) / 2)
 
     return f'При n = {n}   {left_sum} = {right_sum}' if {left_sum == right_sum} else f'При n = {n} суммы не равны'
 
 
-print(recur_checker(10))
+def recur_sum(n):
+    if n == 1:
+        return n
+    return n + recur_sum(n-1)
+
+
+print(checker(15))
