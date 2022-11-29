@@ -28,3 +28,100 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+import time
+
+
+def timeit(func):
+    def wrap(*args):
+        start_val = time.time()
+        time.sleep(1)
+        a = func(*args)
+        end_val = time.time()
+        print(end_val - start_val)
+        return a if a else None
+
+    return wrap
+
+
+# a)
+# a) заполнение списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def fill_list():
+    """Сложность O(1)"""
+    result = []  # O(1)
+    for i in range(10000):  # O(1)
+        result.append(['HELLO', i])  # O(1)
+    return result  # O(1)
+
+
+# a) заполнение словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def fill_dict():
+    """Сложность O(1)"""
+    result = {}  # O(1)
+    for i in range(10000):  # O(1)
+        result[i] = ['HELLO', i]  # O(1)
+    return result  # O(1)
+
+
+print('Fill')
+filled_list = fill_list()
+filled_dict = fill_dict()
+
+# a) сделайте аналитику, что заполняется быстрее и почему
+" список заполняется быстрее, так как словарю приходится вычислять кэш для ключей "
+
+
+
+# b)
+# b) получение элемента списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def get_list(obj: list):
+    """Сложность O(n)"""
+    for i in range(len(obj)):  # O(n)
+        elem = obj[i]  # O(1)
+
+
+# b) получение элемента словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def get_dict(obj: dict):
+    """Сложность O(n)"""
+    for k in range(len(obj)):  # O(n)
+        elem = obj[k]  # O(1)
+
+
+print("Get element")
+get_list(filled_list)
+get_dict(filled_dict)
+
+# b)  сделайте аналитику, что заполняется быстрее и почему
+"По идее получать эелемент списка дольше так как списку приходится проходится по всему списку по оне не найдет значение"
+
+
+
+
+# c)
+# c) удаление элемента списка, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def del_list(obj: list):
+    """Сложность O(n^2)"""
+    for i in range(len(obj) - 1, 0, -1):  # O(n)
+        del obj[i]  # O(n)
+
+
+# с) удаление элемента словаря, оцените сложность в O-нотации (операции нужно провдить в цикле)
+@timeit
+def del_dict(obj: dict):
+    """Сложность O(n)"""
+    for i in range(len(obj)):  # O(n)
+        del obj[i]  # O(1)
+
+
+print('Delete')
+del_list(filled_list)
+del_dict(filled_dict)
+
+# с) сделайте аналитику, что заполняется быстрее и почему
+
+" Удаление из словаря быстрее по той же причене что и в прошлом примере "
