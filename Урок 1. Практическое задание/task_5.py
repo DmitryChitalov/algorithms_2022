@@ -17,3 +17,49 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+class PlatesStacks:
+    max_stack_size = 5
+
+    def __init__(self):
+        self.lst = [[]]
+
+    def plus_plates(self, plate):
+        if len(self.lst[len(self.lst) - 1]) < self.max_stack_size:
+            self.lst[len(self.lst) - 1].append(plate)
+        else:
+            self.lst.append([plate])
+
+    def show_plates(self):
+        print(self.lst)
+
+    def minus_plate(self):
+        if len(self.lst[len(self.lst) - 1]) == 1:
+            return self.lst.pop()[0]
+        else:
+            return self.lst[len(self.lst) - 1].pop()
+
+
+some_plates = PlatesStacks()
+
+some_plates.plus_plates('small_plate')
+some_plates.plus_plates('big_plate')
+some_plates.plus_plates('broken_plate')
+some_plates.plus_plates('good_plate')
+some_plates.plus_plates('dirty_plate')
+some_plates.plus_plates('deep_plate')
+some_plates.plus_plates('tall_plate')
+
+some_plates.show_plates()
+
+print(some_plates.minus_plate())
+
+some_plates.show_plates()
+
+print(some_plates.minus_plate())
+print(some_plates.minus_plate())
+
+some_plates.show_plates()
+
+
