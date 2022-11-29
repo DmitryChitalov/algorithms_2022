@@ -22,3 +22,14 @@
 р
 а
 """
+
+import hashlib
+
+
+def unique_string(string: str):
+    string_cache = len(
+        {hashlib.sha256(string[start:end].encode()).hexdigest() for start in range(len(string)) for end in
+         range(start + 1, len(string) + 1)}) - 1
+
+
+print(unique_string("papa"))
