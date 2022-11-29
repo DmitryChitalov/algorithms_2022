@@ -17,3 +17,30 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+profit = {'x5': 1000, 'Yandex': 9999, 'Apple': 10000000, 'Google': 100150, 'VK Group': 0}
+
+
+def find_max_profit_1(company_profit: dict):
+    "Минимум затрат времени написание кода, но довольно высокая сложность алгоритма O(N log N)"
+    return dict(sorted(company_profit.items(), key=lambda item: item[1], reverse=True)[0:3])  # O(N log N)
+
+
+print('Вариант 1 \n', find_max_profit_1(profit), '\n')
+
+
+def find_max_profit_2(company_profit: dict):
+    "Сложность алгоритма O(n)"
+    res = []  # O(1)
+    if len(company_profit) > 0:  # O(1)
+        for i in range(3):  # O(1)
+            x = max(company_profit.values())  # O(n)
+            for key in company_profit.keys():  # O(n)
+                if company_profit[key] == x:  # O(1)
+                    res.append(key)  # O(1)
+            company_profit.pop(res[i])  # O(1)
+    return res
+
+
+print('Вариант 2 \n', find_max_profit_2(profit), '\n')
+
+# Вывод: Вариант решения 2 более рационален в использовании так считается менее сложным.
