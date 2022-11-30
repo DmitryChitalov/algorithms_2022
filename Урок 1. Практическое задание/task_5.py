@@ -18,44 +18,31 @@
 в массив стопок (lst = [[], [], [], [],....]).
 """
 
-
 class PlatesQueue:
     def __init__(self):
         self.plates = [[]]
-        self.count = 0
 
-    """Пороговое значение стопки 3"""
 
-    def put_plate(self):
+"""Пороговое значение стопки 3"""
+    def put_plate (self):
         if len(self.plates[len(self.plates) - 1]) == 0:
-            self.plates[len(self.plates) - 1].append(f'plate{self.count + 1}')
-            self.count += 1
+            self.plates[len(self.plates) - 1].append('plate')
         elif len(self.plates[len(self.plates) - 1]) < 3 and len(self.plates[len(self.plates) - 1]) > 0:
-            self.plates[len(self.plates) - 1].append(f'plate{self.count + 1}')
-            self.count += 1
+            self.plates[len(self.plates) - 1].append('plate')
         elif len(self.plates[len(self.plates) - 1]) == 3:
-            self.plates[len(self.plates) - 1].append(f'plate{self.count + 1}')
-            self.plates.append([self.plates[len(self.plates) - 1][2]])
-            self.plates[len(self.plates) - 2].pop(2)
-            self.count += 1
-        return self.plates
+            self.plates.append(['plate'])
+        return print(self.plates)
 
-    def pop_plate(self):
-        self.plates[len(self.plates) - 1].pop()
-        if len(self.plates[len(self.plates) - 1]) == 0:
-            self.plates.pop()
-        return self.plates
 
 
 a = PlatesQueue()
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.put_plate())
-print(a.pop_plate())
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+a.put_plate()
+
