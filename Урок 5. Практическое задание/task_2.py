@@ -24,3 +24,20 @@ reduce
 __mul__
 __add__
 """
+class HexClass:
+    def __init__(self, number):
+        self.number = list(number)
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.number), 16) + int(''.join(other.number), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.number), 16) * int(''.join(other.number), 16)))[2:]
+
+
+if __name__ == '__main__':
+    number_1 = HexClass('A2')
+    number_2 = HexClass('C4F')
+
+    print(number_1 + number_2)
+    print(number_1 * number_2)
