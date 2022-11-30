@@ -13,3 +13,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randrange
+
+
+def checker(n, t=1, sum=0, str=''):
+    if n == 0:
+        if sum == (t - 1) * (t - 1 + 1) / 2:
+            return print(f'Равенство выполняется для n = {t - 1}: Сумма равна {sum} | {str[:-2]} = {t - 1}*({t - 1}+1)/2 ')
+        else:
+            return print(f'равенсто не выполняется {sum}  {str[:-2]} = {t - 1}*({t - 1}+1)/2 ')
+    return checker(n - 1, t + 1, sum=sum + t, str=str + f'{t} + ')
+
+
+n = randrange(4, 15)
+print(f'n равно: {n}')
+checker(n)
