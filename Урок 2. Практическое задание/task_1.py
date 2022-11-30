@@ -11,7 +11,7 @@
 если он ввел 0 в качестве делителя.
 
 Подсказка:
-Вариант исполнения:
+Вариант  исполнения:
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
@@ -33,16 +33,22 @@ def calc():
     operation = input('Введите операцию (+, -, *, / или 0 для выхода):')
     if operation == '0':
         return 'Calc closed'
-    a = int(input("Введите первое число:"))
-    b = int(input("Введите второе число:"))
-    if operation == '+':
-        print(a + b)
-    elif operation == '-':
-        print(a - b)
-    elif operation == '*':
-        print(a * b)
-    elif operation == '/':
-        print(a / b)
+    try:
+        a = int(input("Введите первое число:"))
+        b = int(input("Введите второе число:"))
+        if operation == '+':
+            print(a + b)
+        elif operation == '-':
+            print(a - b)
+        elif operation == '*':
+           print(a * b)
+        elif operation == '/':
+            try:
+                print(a / b)
+            except ZeroDivisionError:
+                print('Деление на ноль невозможно')
+    except ValueError:
+        print('Введены некорректные значения')
     return calc()
 
 

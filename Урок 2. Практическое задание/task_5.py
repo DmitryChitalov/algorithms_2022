@@ -17,18 +17,19 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 
-Допускается исп-е встроенных ф-ций
+Допускается
+ исп-е встроенных ф-ций
 """
 
 
-def acsii32(n=32, column=1, str=''):
+def acsii32(n=32, column=1, result=''):
     if column == 10:
-        str += '\n'
+        result += '\n'
         column = 1
     if n == 128:
-        return print(str)
-    str = str + f'{n} - {chr(n)} '
-    return acsii32(n + 1, column + 1, str)
+        return result
+    result = result + f'{n} - {chr(n)} '
+    return acsii32(n + 1, column + 1, result)
 
 
-acsii32()
+print(acsii32())

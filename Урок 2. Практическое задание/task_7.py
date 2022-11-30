@@ -11,17 +11,18 @@
 Результат нужно сверить с правой частью.
 Правой части выражения в рекурсивной ф-ции быть не должно!
 
-Решите через рекурсию. В задании нельзя применять циклы.
+Решите через
+рекурсию. В задании нельзя применять циклы.
 """
 
 from random import randrange
 
 
-def checker(n, sum=0):
+def checker(n, result=0):
     if n == 0:
-        return sum
+        return result
     else:
-        return checker(n - 1, sum=sum + n)
+        return checker(n - 1, result = result + n)
 
 
 n = randrange(4, 15)
