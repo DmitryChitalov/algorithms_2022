@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def pairs_impairs(nombre, pairs=0, impairs=0):
+    if nombre == 0:
+        return f'Сумма четных чифр {pairs}, нечетных {impairs}'
+    elif (nombre % 10) % 2 == 0:
+        pairs += nombre % 10
+        return pairs_impairs(nombre // 10, pairs, impairs)
+    else:
+        impairs += nombre % 10
+        return pairs_impairs(nombre // 10, pairs, impairs)
+
+
+print(pairs_impairs(653456))

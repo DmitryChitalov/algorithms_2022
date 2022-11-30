@@ -18,3 +18,13 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def conversely(nombre, erbmon=''):
+    erbmon += str(nombre % 10)
+    if nombre < 10:
+        return erbmon
+    return conversely(nombre // 10, erbmon)
+
+
+print(conversely(1230))

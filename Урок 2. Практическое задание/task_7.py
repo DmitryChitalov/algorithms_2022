@@ -13,3 +13,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+import sys
+
+sys.setrecursionlimit(5000)
+
+
+def sum_n(n, count=0):
+    if count == n:
+        return count
+    return count + sum_n(n, count + 1)
+
+
+def check(n=1):
+    if sum_n(n) == n * (n + 1) / 2:
+        print(f'Верно для n = {n}')
+        return check(n + 1)
+    else:
+        print(f'Неверно для n = {n}')
+        return
+
+
+check()
