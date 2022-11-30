@@ -24,3 +24,37 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+fst = list(input('Введите число 1: '))
+snd = list(input('Введите число 2: '))
+
+# Решение вариант 1:
+numbers_d = defaultdict(list)
+numbers_d['fst'] = fst
+numbers_d['snd'] = snd
+f_num = int((''.join(numbers_d['fst'])), 16)
+s_num = int((''.join(numbers_d['snd'])), 16)
+print(f'Сумма чисел из примера: {list(hex(f_num + s_num).upper())[2:]}')
+print(f'Произведение чисел из примера: {list(hex(f_num * s_num).upper())[2:]}\n')
+
+
+# Решение вариант 2:
+class Number:
+    def __init__(self, num_lst):
+        self.num_16 = int(''.join(num_lst), 16)
+
+    def __add__(self, other):
+        res = self.num_16 + other.num_16
+        return list(hex(res).upper()[2:])
+
+    def __mul__(self, other):
+        res = self.num_16 * other.num_16
+        return list(hex(res).upper()[2:])
+
+
+f_num = Number(fst)
+s_num = Number(snd)
+
+print(f'Сумма чисел из примера: {f_num + s_num}')
+print(f'Произведение чисел из примера: {f_num * s_num}')
