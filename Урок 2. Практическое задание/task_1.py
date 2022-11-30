@@ -27,3 +27,102 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operator():
+    operations = ('+', '-', '*', '/', '0')
+    x = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if x in operations:
+        return x
+    else:
+        print('Неверный знак. Повторите операцию')
+        return operator()
+
+
+def get_value(text):
+    x = input(f'{text}:')
+    if x.replace(".", "", 1).isdigit():
+        return float(x)
+    else:
+        print('Вы вместо числа ввели строку. Исправьтесь')
+        return get_value(text)
+
+
+def sum(a, b):
+    return a + b
+
+
+def sub(a, b):
+    return a - b
+
+
+def mult(a, b):
+    return a * b
+
+
+def div(a, b):
+    return a / b
+
+
+def calculation(a, b, operator):
+    if operator == '+':
+        return sum(a, b)
+    elif operator == '-':
+        return sub(a, b)
+    elif operator == '*':
+        return mult(a, b)
+    elif operator == '/':
+        return div(a, b)
+
+
+def prog_1():
+    ''''
+    Программа выполняет '+', '-', '*', '/' двух чисел
+    ввод '0' - выход из программы
+    '''
+    operation = operator()
+    if operation == '0':
+        return print('Программа завершена')
+    x = get_value('Введите первое число')
+    y = get_value('Введите второе число')
+    if operation == '/' and y == 0:
+        print('Делить на ноль нельзя!!! Повторите ввод:')
+        return prog_1()
+    print(calculation(x, y, operation))
+    return prog_1()
+
+
+prog_1()
+
+
+# Второй вариант программы, выполняет много операций подряд, результат выводится по команде пользователя
+
+def operator_2():
+    operations = ('+', '-', '*', '/', '=')
+    x = input('Введите операцию (+, -, *, /,  или = для выхода с выводом результата): ')
+    if x in operations:
+        return x
+    else:
+        print('Неверный знак. Повторите операцию')
+        return operator_2()
+
+
+def prog_2(result):
+    ''''
+        Программа принимает первое число, выполняет много операций '+', '-', '*', '/',
+        после ввода '=' завершается программа с выводом результата всех вычислений
+    '''
+    operation = operator_2()
+    # if operation == '0':
+    #     return print('Программа завершена')
+    if operation == '=':
+        return print(f'{result}')
+    y = get_value('Введите число')
+    if operation == '/' and y == 0:
+        print('Делить на ноль нельзя!!! Повторите ввод:')
+        return prog_2(result)
+    return prog_2(calculation(result, y, operation))
+
+
+# result = get_value('Введите первое число')
+# prog_2(result)

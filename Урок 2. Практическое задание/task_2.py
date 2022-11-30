@@ -17,3 +17,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+# x = number % 10
+# print(number//10, x)
+
+def count_even_and_odd(value: int, count_even: int = 0, count_odd: int = 0):
+    '''
+    Рекурсивная функция, подсчитывает четные и нечетные цифры введенного натурального числа.
+    Возвращает кортеж: (кол-во четных, кол-во нечетных)
+
+    :param value: int
+    :param count_even: int
+    :param count_odd: int
+    :return: tuple
+    '''
+
+    if value == 0:
+        return count_even, count_odd
+    num = value % 10
+    if num % 2 == 0:
+        count_even += 1
+    else:
+        count_odd += 1
+    return count_even_and_odd(value // 10, count_even, count_odd)
+
+
+number = 123
+print(f'Количество четных и нечетных цифр в числе равно: {count_even_and_odd(number)}')

@@ -18,3 +18,30 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse_number(value: int, result: str = ''):
+    '''
+    Рекурсивная функция, формирует из введенного числа
+    обратное по порядку входящих в него цифр
+    Возвращает str
+
+    Примеры:
+    123 -> 321
+    1230 -> 0321
+
+    :param value: int
+    :param result: str
+    :return: str
+    '''
+
+    if value == 0:
+        return result
+    num = value % 10
+    result += str(num)
+    return reverse_number(value // 10, result)
+
+
+number = int(input('Введите число, которое требуется перевернуть:'))
+print(f'{number} -> {reverse_number(number)}')
+
