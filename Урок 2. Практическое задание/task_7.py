@@ -13,3 +13,20 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randrange
+
+
+def checker(n, sum=0):
+    if n == 0:
+        return sum
+    else:
+        return checker(n - 1, sum=sum + n)
+
+
+n = randrange(4, 15)
+print(f'n равно: {n}')
+if checker(n) == n * (n + 1) / 2:
+    print('Для множества натуральных чисел  равенство выполняется')
+else:
+    print('Для множества натуральных чисел  равенство не выполняется')
