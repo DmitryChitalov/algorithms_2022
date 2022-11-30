@@ -17,3 +17,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def count_nums(num, even_nums=0, odd_nums=0):
+  if num < 10:
+    if num % 2 == 0:
+      return (even_nums +1, odd_nums)
+    else:
+      return (even_nums, odd_nums + 1)
+  else:
+    if (num % 10) == 0: #if (num % 10) % 2 == 0:
+      return count_nums(int(num / 10), even_nums +1, odd_nums)
+    else:
+      return count_nums(int(num / 10), even_nums, odd_nums + 1)
+
+lets_count = int(input('Введите число: '))
+print(count_nums(lets_count,0,0))

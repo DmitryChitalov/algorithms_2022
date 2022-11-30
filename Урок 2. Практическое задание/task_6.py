@@ -7,3 +7,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+def guess_the_number(num=randint(0, 100), count=0, user_try=int(input('Попробуй угадать число: '))):
+
+    if num == user_try:
+        print("Молодец! Угадал!")
+        return num
+
+    elif count == 10:
+        print("Увы, ты проиграл! Загаданное чилсо - ")
+        return num
+    elif num > user_try:
+        print("Загаданное число больше. Попробуйте еще.")
+        count += 1
+        guess_the_number(num, count, user_try=int(input('Попробуй угадать число: ')))
+    elif num < user_try:
+        print("Загаданное число меньше. Попробуйте еще.")
+        count += 1
+        guess_the_number(num, count, user_try=int(input('Попробуй угадать число: ')))
+
+guess_the_number()

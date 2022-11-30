@@ -22,3 +22,27 @@
 р
 а
 """
+
+import hashlib
+
+def hashing_str(a):
+    salt = 'peper'
+    res = hashlib.sha256((a + salt).encode()).hexdigest()
+    return res
+
+
+def substrings(a):
+    n = len(a)
+    hash_set = set()
+    for i in range(n):
+        hash_set.add(hashing_str(a[i]))
+        for j in range(2, n):
+            if i + j > n:
+                break
+            else:
+                hash_set.add(hashing_str(a[i:j + i]))
+    return hash_set
+
+
+user_input = input('Введите строку: ')
+print(f'Из строки {user_input} можно получить {len(substrings(user_input))} уникальных подстрок')
