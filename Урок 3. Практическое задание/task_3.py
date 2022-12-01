@@ -22,3 +22,29 @@
 р
 а
 """
+
+from task_2 import password_hash_sha
+
+
+def unique_substr():
+    print('Пожалуйста, введите Вашу строку: ', end='')
+    user_string = input()
+    # user_list = list()  # Чтобы вывести сами подстроки (для проверки)
+    user_set = set()
+    for i in range(0, len(user_string)):
+        for k in range(0, len(user_string) - i):
+            if i != 0 or k != 0:
+                if k == 0:
+                    # user_list.append(user_string[i:])  # Чтобы вывести сами подстроки (для проверки)
+                    user_hash = password_hash_sha(user_string[i:])
+                    user_set.add(user_hash)
+                else:
+                    # user_list.append(user_string[i:][:-k])  # Чтобы вывести сами подстроки (для проверки)
+                    user_hash = password_hash_sha(user_string[i:][:-k])
+                user_set.add(user_hash)
+    # print(user_list)  # Чтобы вывести сами подстроки (для проверки)
+    print(f'Количество уникальных подстрок: {len(user_set)}')
+
+
+if __name__ == '__main__':
+    unique_substr()
