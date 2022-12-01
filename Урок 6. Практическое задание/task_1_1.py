@@ -30,3 +30,46 @@
 
 Это файл для первого скрипта
 """
+
+
+from pympler import asizeof
+
+
+#  Задание с курса "Основы языка Python". применяем слоты
+
+class Date:
+    """Дата"""
+
+    def __init__(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    def __str__(self):
+        return f"{self.day:02}.{self.month:02}.{self.year:04}"
+
+
+raw_date = Date(28, 2, 2021)
+
+print(asizeof.asizeof(raw_date))
+
+
+class DateNew:
+    """Дата"""
+    __slots__ = ('day', 'month', 'year')
+
+    def __init__(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    def __str__(self):
+        return f"{self.day:02}.{self.month:02}.{self.year:04}"
+
+
+raw_date = DateNew(28, 2, 2021)
+
+print(asizeof.asizeof(raw_date))
+
+# Использование слотов в ООП существенно экономит память
+# В первом случае у нас 416, во втором со слотами 152

@@ -30,3 +30,73 @@
 
 Это файл для второго скрипта
 """
+
+from timeit import default_timer
+import memory_profiler
+
+
+def decor(func):
+    """Замер времени и памяти"""
+
+    def wrapper(*args):
+        mem_1 = memory_profiler.memory_usage()
+        start_time = default_timer()
+        res = func(args[0])
+        mem_2 = memory_profiler.memory_usage()
+        print(f'memory: {mem_2[0] - mem_1[0]}, time: {default_timer() - start_time}')
+        return res
+
+    return wrapper
+
+
+# Задание с курса "Основы языка Python"
+
+@decor
+def old_version(num):
+    """Вычислить сумму тех чисел из списка,
+    сумма цифр которых делится нацело на 7"""
+    my_list = []
+    full_summ = 0
+    for i in range(1, num + 1, 2):
+        my_list.append(i ** 3)
+    for i in my_list:
+        num = i
+        sum_num = 0
+        while num > 0:
+            sum_num += num % 10
+            num //= 10
+        if sum_num % 7 == 0:
+            full_summ += i
+    print(full_summ)
+
+
+def nums_generator(max_num):
+    """Генератор кубов нечетных чисел от 1 до n"""
+    for i in range(1, max_num + 1, 2):
+        num = i ** 3
+        sum_num = 0
+        while num > 0:
+            sum_num += num % 10
+            num //= 10
+        yield i ** 3 if sum_num % 7 == 0 else 0
+
+
+@decor
+def new_version(num):
+    """Вычисляет сумму тех чисел из списка,
+    сумма цифр которых делится нацело на 7"""
+    nums_gen = nums_generator(num)
+    full_summ = 0
+
+    for _ in range(1, num + 1, 2):
+        num = next(nums_gen)
+        full_summ += num
+    print(full_summ)
+
+
+old_version(1000)  # memory: 0.07421875, time: 0.10943380000000003
+new_version(1000)  # memory: 0.0, time: 0.10862699999999981
+
+# Оптимизация алгоритма с помощью генератора. Для данной ситуации, где нет необходимости
+# хранить значения массива,
+# подходит хорошо, памяти опрактически не занимает
