@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+'''Сложность O(n) - линейная.'''
+
+def min_list(new_list):
+    res = new_list[0]
+    for i in new_list[1:]:
+        if i > res:
+            res = i
+    return res
+
+list_1 = [4,7,5,2,7,8,5,0]
+print(min_list(list_1))
+
+'''Сложность O(n^2) - квадратичная.'''
+
+def min_list_2(new_list):
+    res = new_list[0]
+    for i in new_list[1:]:
+        for _ in new_list:
+            if i > res:
+                res = i
+    return res
+
+
+list_2 = [4, 7, 5, 2, 7, 8, 5, 0]
+print(min_list(list_1))
