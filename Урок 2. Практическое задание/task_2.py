@@ -17,3 +17,14 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def count_odds_evens(numb):
+    if numb == 0:
+        return [0, 1]
+    else:
+        odds = ((numb % 10) % 2) + count_odds_evens(numb // 10)[0]
+        return [odds, len(str(numb)) - odds]
+
+numb = int(input('Введите число: '))
+odds, evens = count_odds_evens(numb)
+print('Количество нечетных цифр - ' + str(odds) + ', количество четных - ' + str(evens))

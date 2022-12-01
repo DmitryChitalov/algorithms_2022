@@ -7,3 +7,24 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+def guess_numb(attempt=1, numb=None):
+    guess = int(input('Введите вашу догадку: '))
+    if attempt == 1:
+        numb = randint(0, 100)
+    if attempt == 10:
+        print('Вы не отгадали загаданное число, а именно - ' + str(numb))
+        return
+    elif guess == numb:
+        print('Вы отгадали число!')
+        return
+    else:
+        if guess > numb:
+            print('Загаданное число меньше ' + str(guess))
+        else:
+            print('Загаданное число больше ' + str(guess))
+        guess_numb(attempt + 1, numb)
+
+guess_numb()

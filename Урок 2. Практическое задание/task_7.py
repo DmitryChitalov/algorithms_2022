@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def get_sum(numb):
+    if numb == 0:
+        return 0
+    else:
+        return numb + get_sum(numb - 1)
+
+numb = int(input('Введите число: '))
+if get_sum(numb) == numb*(numb+1)/2:
+    print('Все верно')
+else:
+    print('Неверно, хотя это невозможно')
