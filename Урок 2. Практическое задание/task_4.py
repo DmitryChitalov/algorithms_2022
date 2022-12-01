@@ -10,3 +10,12 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+def get_sum(numb_of_el):
+    if numb_of_el == 1:
+        return 1
+    else:
+        return (-0.5)**(numb_of_el - 1) + get_sum(numb_of_el - 1)
+
+numb_of_el = int(input('Сколько элементов хотите сложить? '))
+print(get_sum(numb_of_el))

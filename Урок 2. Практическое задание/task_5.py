@@ -19,3 +19,13 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def all_characters(code=32, step=10):
+    if code > 127:
+        return ''
+    elif step == 0:
+        return '\n' + all_characters(code)
+    else:
+        return '{} - {} {}'.format(code, chr(code), all_characters(code + 1, step - 1))
+
+print(all_characters())

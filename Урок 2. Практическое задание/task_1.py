@@ -27,3 +27,24 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def complete_math_oper(firstNumb=None, secondNumb=None, oper=None):
+    acceptedOpers = ['0', '+', '-', '/', '*']
+    if firstNumb is None or secondNumb is None or oper is None:
+        firstNumb = input('Введите первое число:')
+        secondNumb = input('Введите второе число: ')
+        oper = input('Введите знак операции: ')
+    if oper == '0':
+        print('Завершили')
+        return
+    elif oper not in acceptedOpers:
+        oper = input('Неправильный знак операции. Введите новый:')
+        complete_math_oper(firstNumb, secondNumb, oper)
+    elif oper == '/' and secondNumb == '0':
+        print('Деление на ноль! Попробуем снова.')
+        complete_math_oper()
+    else:
+        print(eval(firstNumb + oper + secondNumb))
+        complete_math_oper()
+
+complete_math_oper()
