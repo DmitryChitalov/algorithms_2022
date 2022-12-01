@@ -30,26 +30,26 @@
 
 
 def calculator():
-    opération = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-    if opération == '0':
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
         print('Калькулятор выключен')
         return
-    elif opération not in ('+', '-', '*', '/'):
+    elif operation not in ('+', '-', '*', '/'):
         print('Неверный знак')
         calculator()
     else:
-        nombre_1 = int(input('Введите первое число: '))
-        nombre_2 = int(input('Введите второе число: '))
-        if opération == '+':
-            print(f'Ваш результат {nombre_1 + nombre_2}')
-        elif opération == '-':
-            print(f'Ваш результат {nombre_1 - nombre_2}')
-        elif opération == '*':
-            print(f'Ваш результат {nombre_1 * nombre_2}')
-        elif nombre_2 == 0:
+        number_1 = int(input('Введите первое число: '))
+        number_2 = int(input('Введите второе число: '))
+        if operation == '+':
+            print(f'Ваш результат {number_1 + number_2}')
+        elif operation == '-':
+            print(f'Ваш результат {number_1 - number_2}')
+        elif operation == '*':
+            print(f'Ваш результат {number_1 * number_2}')
+        elif number_2 == 0:
             print('Делить на ноль нельзя')
         else:
-            print(f'Ваш результат {nombre_1 / nombre_2}')
+            print(f'Ваш результат {number_1 / number_2}')
         calculator()
 
 

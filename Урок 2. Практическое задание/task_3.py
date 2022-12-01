@@ -20,11 +20,11 @@
 """
 
 
-def conversely(nombre, erbmon=''):
-    erbmon += str(nombre % 10)
-    if nombre < 10:
-        return erbmon
-    return conversely(nombre // 10, erbmon)
+def convert(number, res=''):
+    res += str(number % 10)
+    if number < 10:
+        return res
+    return convert(number // 10, res)
 
 
-print(conversely(1230))
+print(convert(1230))

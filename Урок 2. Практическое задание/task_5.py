@@ -20,7 +20,7 @@
 Допускается исп-е встроенных ф-ций
 """
 
-def screen_ASCII(count=32):
+def print_ASCII(count=32):
     if count == 127:
         print(f'{count} - {chr(count)}')
         return
@@ -28,6 +28,6 @@ def screen_ASCII(count=32):
         print(f'{count} - {chr(count)}', end='\n')
     else:
         print(f'{count} - {chr(count)}', end=' ')
-    return screen_ASCII(count + 1)
+    return print_ASCII(count + 1)
 
-screen_ASCII()
+print_ASCII()

@@ -19,15 +19,15 @@
 """
 
 
-def pairs_impairs(nombre, pairs=0, impairs=0):
-    if nombre == 0:
-        return f'Сумма четных чифр {pairs}, нечетных {impairs}'
-    elif (nombre % 10) % 2 == 0:
-        pairs += nombre % 10
-        return pairs_impairs(nombre // 10, pairs, impairs)
+def even_odd(number, even=0, odd=0):
+    if number == 0:
+        return f'Сумма четных чифр {even}, нечетных {odd}'
+    elif (number % 10) % 2 == 0:
+        even += number % 10
+        return even_odd(number // 10, even, odd)
     else:
-        impairs += nombre % 10
-        return pairs_impairs(nombre // 10, pairs, impairs)
+        odd += number % 10
+        return even_odd(number // 10, even, odd)
 
 
-print(pairs_impairs(653456))
+print(even_odd(653456))

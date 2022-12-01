@@ -10,7 +10,7 @@
 
 import random
 
-def guess_the_number(attempt=1, number=-1):
+def guess_number(attempt=1, number=-1):
     if attempt > 10:
         return print('Ваши попытки закончились')
     if number < 0:
@@ -19,8 +19,8 @@ def guess_the_number(attempt=1, number=-1):
     if answer == number:
         return print('Поздравляю, вы угадали!!!')
     elif answer < number:
-        return print('Ваше число МЕНЬШЕ загаданного.\n'), guess_the_number(attempt+1, number)
+        return print('Ваше число МЕНЬШЕ загаданного.\n'), guess_number(attempt + 1, number)
     else:
-        return print('Ваше число БОЛЬШЕ загаданного.\n'), guess_the_number(attempt + 1, number)
+        return print('Ваше число БОЛЬШЕ загаданного.\n'), guess_number(attempt + 1, number)
 
-guess_the_number()
+guess_number()
