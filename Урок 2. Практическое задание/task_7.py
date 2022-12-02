@@ -13,3 +13,11 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_(num):
+    return num if num == 1 else sum_(num - 1) + num
+
+
+n = 5
+print(sum_(n) == n * (n + 1) / 2)

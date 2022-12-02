@@ -18,3 +18,10 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse(num):
+    return '' if num == 0 else str(num % 10) + reverse(num // 10)
+
+
+print(f'Результат: {reverse(int(input("Введите число: ")))}')
