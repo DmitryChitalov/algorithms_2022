@@ -27,3 +27,53 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def argument():
+    return input("Input operator: ")
+
+
+def check(arg):
+    return arg == '0' or arg == '+' or arg == '-' or arg == '*' or arg == '/'
+
+
+def calc(a, b, arg):
+    if arg == '+':
+        return a + b
+    elif arg == '-':
+        return a - b
+    elif arg == '*':
+        return a * b
+    else:
+        return a / b
+
+def calc_go(a=None, b=None):
+    try:
+        if a is None:
+            a = float(input('Input a: '))
+    except ValueError:
+        print('Error Input only float!')
+        calc_go(a, b)
+    try:
+        if b is None:
+            b = float(input('Input b: '))
+    except ValueError:
+        print('Error Input only float!')
+        calc_go(a, b)
+    arg = argument()
+
+    if not check(arg):
+        print('Check you operator!')
+        calc_go(a, b)
+        return
+    elif arg == '0':
+        return
+    elif arg == '/' and b == 0:
+        print('I can not do it!')
+        calc_go()
+        return
+    else:
+        print(calc(a, b, arg))
+        calc_go()
+
+
+calc_go()
