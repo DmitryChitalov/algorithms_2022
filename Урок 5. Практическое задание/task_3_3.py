@@ -25,3 +25,39 @@ appendleft, popleft, extendleft дека и соответствующих им 
 для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
 (append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+
+from collections import deque
+from timeit import timeit
+
+lst_test = [5, 60, 900, 8000, 15000, 350000, 700000]
+deq_test = deque('307981456820')
+
+num = 5
+
+""" 3. операции получения элемента списка и дека """
+# Список
+
+
+def get_el_from_lst(lst_test):
+    for i in range(num):
+        j = lst_test[i]
+
+
+# Дек
+
+
+def get_el_from_deq(deq_test):
+    for i in range(num):
+        j = deq_test[i]
+
+
+# Замеры времени
+print(timeit("get_el_from_lst(lst_test)", globals=globals()))
+print(timeit("get_el_from_deq(deq_test)", globals=globals()))
+
+"""
+0.742349261
+0.699704514
+
+Элементы из списка можно получить быстрее
+"""
