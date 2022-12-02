@@ -16,3 +16,46 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def median_search_3(lst):
+    return f"медиана равна {median(lst[:])}"
+
+
+if __name__ == '__main__':
+    m = 5
+    obj_lst_1 = [randint(0, 100) for _ in range(2 * m + 1)]
+    print(timeit("median_search_3(obj_lst_1[:])", globals=globals(), number=100))
+
+    m = 50
+    obj_lst_2 = [randint(0, 100) for _ in range(2 * m + 1)]
+    print(timeit("median_search_3(obj_lst_2[:])", globals=globals(), number=100))
+
+    m = 500
+    obj_lst_3 = [randint(0, 100) for _ in range(2 * m + 1)]
+    print(timeit("median_search_3(obj_lst_3[:])", globals=globals(), number=100))
+
+"""
+0.00026546900000001816
+0.0021465210000000123
+0.037266567
+
+Гномья сортировка:
+0.001514916999999949
+0.122654343
+13.894106971
+
+Без сортировки
+0.00043690799999999974
+0.015991382000000002
+1.423940663ъ
+
+Всетроенная функция
+0.00026546900000001816
+0.0021465210000000123
+0.037266567
+
+"""
