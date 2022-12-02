@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def print_ascii(cur=0, stop=127, i=0):
+    if cur > stop:
+        return
+    else:
+        print(str(cur).ljust(3), chr(cur), end=' ')
+        if i % 10 == 0:
+            print()
+    return print_ascii(cur=cur + 1, stop=stop, i=i + 1)
+
+
+if __name__ == '__main__':
+    print_ascii(cur=32, stop=127)
