@@ -30,3 +30,33 @@
 
 Это файл для первого скрипта
 """
+
+'''
+Курс Основы языка Python
+Задание:
+Решить задачу генерации нечётных чисел от 1 до n (включительно), не используя ключевое слово yield.
+'''
+from memory_profiler import profile
+from numpy import array
+from pympler import asizeof
+
+
+# старое решение
+@profile
+def odd_nums(m):
+    """Return odd nums from 1 to n"""
+    return [num for num in range(1, m + 1, 2)]
+
+
+# новое решение
+@profile
+def odd_nums_new(m):
+    """Return odd nums from 1 to n"""
+    return array([num for num in range(1, m + 1, 2)])
+
+
+n = 100
+print(asizeof.asizeof(odd_nums(n)))
+print(asizeof.asizeof(odd_nums_new(n)))
+
+# с помощью numpy удалось значительно уменьшить размер, необходимый для массива
