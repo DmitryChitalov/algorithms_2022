@@ -10,3 +10,15 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def series_of_numbers(n, i=1, summary=0, cnt=0):
+    if n > 0:
+        return series_of_numbers(n - 1, i=i * -0.5, summary=summary + i, cnt=cnt)
+    else:
+        print(f'Количество элементов - {cnt}, их сумма - {summary}')
+        return
+
+
+if __name__ == '__main__':
+    series_of_numbers(int(input('Введите количество элементов:\t')))
