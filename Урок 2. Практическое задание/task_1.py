@@ -28,34 +28,33 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
+
 def calculator():
-    num_1 = int(input('Введите первое число: '))
-    num_2 = int(input('Введите второе число: '))
     sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-    if sign != '+' and sign != '-' and sign != '*' and sign != '/' and sign != '0':
-        print('ошибка ввода опреации')
-    elif sign == '/' and num_2 == 0:
-        print(f'нельзя делить на {num_2}')
-    elif sign == '+':
-        print(num_1 + num_2)
-    elif sign == '-':
-        print(num_1 - num_2)
-    elif sign == '*':
-        print(num_1 * num_2)
-    elif sign == '/':
-        print(num_1 / num_2)
+    if sign in "+-*/":
+        try:
+            num_1 = int(input('Введите первое число: '))
+            num_2 = int(input('Введите второе число: '))
+            if sign == '+':
+                print(num_1 + num_2)
+            elif sign == '-':
+                print(num_1 - num_2)
+            elif sign == '*':
+                print(num_1 * num_2)
+            elif sign == '/':
+                try:
+                    print(num_1 / num_2)
+                except ZeroDivisionError:
+                    print('нельзя делить на 0')
+            return calculator()
+        except ValueError:
+            print('введите число')
     elif sign == '0':
         return 'выход'
-    return calculator()
-
-
+    else:
+        print('ошибка ввода операции')
+        return calculator()
 
 
 
 print(calculator())
-
-
-
-
-
-

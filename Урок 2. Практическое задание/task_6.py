@@ -18,7 +18,7 @@ def guess_number(n, r):
     elif res > r:
         print('больше')
     elif res == r:
-        return 'угодал'
+        return 'угадал'
     return guess_number(n-1, r)
 
 random = random.randint(0, 100)

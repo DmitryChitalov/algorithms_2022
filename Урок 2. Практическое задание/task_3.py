@@ -19,10 +19,9 @@
 1230 -> 0321
 """
 
-
 def flip_over(num, res = ''):
     if num == 0:
-        return res.replace('0', '')
+        return res
     else:
         x = num % 10
         num = num // 10
