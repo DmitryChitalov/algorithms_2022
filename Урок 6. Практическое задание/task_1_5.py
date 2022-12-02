@@ -30,3 +30,43 @@
 
 Это файл для пятого скрипта
 """
+
+'''
+Алгоритмы и структуры данных на Python. Базовый курс
+Подсчитать четные и нечетные цифры введенного натурального числа.
+'''
+
+from memory_profiler import profile
+
+
+@profile
+def get_even_odd_count(num, even=0, odd=0):
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even}, {odd}'
+    else:
+        cur_num = num % 10
+        if cur_num % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        num //= 10
+        return get_even_odd_count(num, even, odd)
+
+
+@profile
+def get_even_odd_count_new(number, even=0, odd=0):
+    for num in str(number):
+        if int(num) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return f'Количество четных и нечетных цифр в числе равно: {even}, {odd}'
+
+
+print(get_even_odd_count(100126546540))
+print(get_even_odd_count_new(100126546540))
+
+# пытался оптимизировать код избавившись от рекурсии, но цифры остались те же,
+# вероятно, польза если и есть, то незначительная
+# при этом для функции с рекурсией на каждый вызов строится таблица профилирования,
+# а для функции без рекурсии одна

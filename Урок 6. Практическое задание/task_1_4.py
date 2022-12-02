@@ -30,3 +30,40 @@
 
 Это файл для четвертого скрипта
 """
+
+'''
+Алгоритмы и структуры данных на Python. Базовый курс
+Сформировать из введенного числа
+обратное по порядку входящих в него
+цифр и вывести на экран
+'''
+from memory_profiler import profile
+
+
+@profile
+def get_reversed_num(num):
+    if num < 10:
+        return num
+    return str(num % 10) + str(get_reversed_num(num // 10))
+
+
+@profile
+def get_reversed_num_new(num):
+    return str(num)[::-1]
+
+
+@profile
+def get_reversed_num_new_2(enter_num):
+    num_list = list(str(enter_num))
+    num_list.reverse()
+    return ''.join(num_list)
+
+
+print(get_reversed_num(100126546540))
+print(get_reversed_num_new(100126546540))
+print(get_reversed_num_new_2(100126546540))
+
+# пытался оптимизировать код избавившись от рекурсии, но цифры остались те же,
+# вероятно, польза если и есть, то незначительная
+# при этом для функции с рекурсией на каждый вызов строится таблица профилирования,
+# а для функции без рекурсии одна
