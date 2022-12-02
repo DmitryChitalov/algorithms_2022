@@ -10,3 +10,20 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+n = 3
+e = 1
+s = 0
+for i in range(n):
+    s += e
+    e /= -2
+#print(s)
+
+def sum_elements(n, s=0, e = 1):
+    if n == 0:
+        return s
+    else:
+        s += e
+        e /= -2
+    return sum_elements(n-1, s, e)
+
+print(sum_elements(3))

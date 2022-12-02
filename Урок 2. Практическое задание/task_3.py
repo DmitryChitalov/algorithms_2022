@@ -18,3 +18,31 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def flip_over(num, res = ''):
+    if num == 0:
+        return res.replace('0', '')
+    else:
+        x = num % 10
+        num = num // 10
+        res += str(x)
+    return flip_over(num, res)
+
+print(flip_over(int(input('введите число: '))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
