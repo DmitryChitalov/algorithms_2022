@@ -18,3 +18,57 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort(array):
+    n = len(array)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if array[j] < array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+    return array
+
+
+def optimized_bubble(array):
+    n = len(array)
+    is_sorted = True
+    for i in range(n):
+        for j in range(n - i - 1):
+            is_sorted = True
+            if array[j] < array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+                is_sorted = False
+        if is_sorted:
+            break
+    return array
+
+
+if __name__ == "__main__":
+    for n in (10, 100, 1000):
+        my_list = [randint(-100, 100) for i in range(n)]
+        print(f"Длинна массива: {n}")
+        print(timeit("bubble_sort(my_list[:])", number=1000, globals=globals()))
+        print(timeit("optimized_bubble(my_list[:])", number=1000, globals=globals()))
+"""
+Длинна массива: 10
+0.020145827999999998
+0.007606326999999996
+при обработке небольших списков время с доработкой немного меньше
+
+Длинна массива: 100
+1.343505508
+0.2299010319999999
+при увеличении колличества элементов в списке время работы с доработкой начинает рости
+
+Длинна массива: 1000
+149.312524994
+158.189899575
+при большом колличестве несортированных элементов время с доработкой увеличивается
+
+При оптимизации мы выиграываем в тот момент когда массив становится отсортированым и дальнейшие действия не нужны
+Если при прохде не было замен, массив уже отсортирован и дальнейшие проходы по элементам не нужны
+"""
