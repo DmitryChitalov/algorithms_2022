@@ -38,9 +38,7 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-# [1, 3, 1, 3, 4, 5, 1] # list
-# [3, 2, 3, 2, 1, 1, 3] # count
-#
+
 
 def func_3():
     res = max(array, key=lambda x: array.count(x))
