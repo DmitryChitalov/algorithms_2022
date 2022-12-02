@@ -13,22 +13,26 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
-
-def prove(n: int, counter = 1):
-    if counter < n:
-
-       print(f'{counter} + ', end='')
-       return prove(n, counter=counter + 1)
+def prove(number):
+    if number == 1:
+       return 1
+    elif number == 0:
+       return 0
     else:
-        print ( f'{counter} = {n} ({n} + 1) / 2')
-
+        return number + prove(number - 1)
 
 def prove_go():
+
     try:
-        number = int(input('Введите любое натуральное число : '))
-        prove(number)
+        number = int(input('Введите натуральное число n: '))
+
+        print(f'Первая половина где  n(n+1)/2  равная : {int(number * (number + 1) / 2)}',
+    f'сумме множества натуральных чисел от  1 до n равна (1+2+...+n) : {prove(number)}', sep='    =    ')
+
     except ValueError:
-        print('Ошибка ввода!')
-        prove_go()
+        print('Неправильный ввод. Введите число!')
+
+
 
 prove_go()
+

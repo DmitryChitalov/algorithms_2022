@@ -10,7 +10,7 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
-def summa(number, sum = 0, n = 1):
+def count_summa(number, sum = 0, n = 1):
     if number == 0 :
         print(f"Сумма n элементов =   {sum}")
         #calc_go() если требуется не выходить из программы, не понял по заданию.
@@ -18,12 +18,12 @@ def summa(number, sum = 0, n = 1):
     else:
         sum += n
         n = n * (-0.5)
-        return summa(number - 1, sum, n)
+        return count_summa(number - 1, sum, n)
 
 def calc_go():
     try:
         number = float(input('Введите количество элементов : '))
-        summa(number)
+        count_summa(number)
     except ValueError:
         print('Ошибка ввода!')
         calc_go()
