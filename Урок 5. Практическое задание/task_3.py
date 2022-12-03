@@ -221,5 +221,5 @@ Deque медленнее
 """
 Выводы:
 Если нет необходимости использовать методы deque 
-(appendleft, popleft, extendleft), использовать OrderedDict нецелесообразно.
+(appendleft, popleft, extendleft), использовать deque нецелесообразно.
 """
