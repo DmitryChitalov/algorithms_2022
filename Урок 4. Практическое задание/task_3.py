@@ -11,7 +11,7 @@
 
 Сделайте вывод, какая из четырех реализаций эффективнее и почему!
 """
-
+import timeit
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -35,3 +35,17 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(enter_num):
+    num_list = list(str(enter_num))
+    num_list.reverse()
+    return ''.join(num_list)
+
+num = 21423
+
+print(timeit.timeit('revers(num)', globals=globals(), number=1000))
+print(timeit.timeit('revers_2(num)', globals=globals(), number=1000))
+print(timeit.timeit('revers_3(num)', globals=globals(), number=1000))
+print(timeit.timeit('revers_4(num)', globals=globals(), number=1000))
+
+# Самый эффективный вариант решения - revers_3, т.к. времени на выполнение этой функции нужно меньше всего.
