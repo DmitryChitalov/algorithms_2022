@@ -69,9 +69,9 @@ def sum_finder_cycle(number):
     return founded_sum
 
 
-my_sum1, mem1 = sum_finder_recur(10**2)
-print(mem1)
-# Выполнение заняло 0.21875 Mib
+# my_sum1, mem1 = sum_finder_recur(10**2)
+# print(mem1)
+# Выполнение заняло 0.21484375 Mib
 
 my_sum2, mem2 = sum_finder_cycle(10**2)
 print(mem2)
