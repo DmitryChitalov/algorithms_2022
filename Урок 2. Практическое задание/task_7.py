@@ -13,25 +13,3 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
-
-
-def check_exp(n, count=0, x=0):
-    if n == 0:
-        if x == count*(count + 1) / 2:
-            print('Равенстве верно')
-
-        else:
-            print('Равенство неверно')
-
-    else:
-        if count == 0:
-            count += 1
-            x = n + (n - 1)
-            check_exp(n-1,  count, x)
-        else:
-            count += 1
-            x = x + (n - 1)
-            check_exp(n-1, count, x)
-
-
-check_exp(5)
