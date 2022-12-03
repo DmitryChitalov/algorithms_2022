@@ -68,7 +68,7 @@ def get_jokes_2(number):
     nouns = ("автомобиль", "лес", "огонь", "город", "дом")
     adverbs = ("сегодня", "вчера", "завтра", "позавчера", "ночью")
     adjectives = ("веселый", "яркий", "зеленый", "утопичный", "мягкий")
-    for i in range(number):
+    for _ in range(number):
         yield f'{nouns[random.randint(0, len(nouns) - 1)]} {adverbs[random.randint(0, len(adverbs) - 1)]} ' \
               f'{adjectives[random.randint(0, len(adjectives) - 1)]} '
 
