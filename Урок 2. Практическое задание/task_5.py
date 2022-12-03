@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def tabl_ascii(x):
+    if x > 127:
+        return
+    else:
+        print(x, '-', chr(x), ' ', end='')
+        if x % 10 == 0:
+            print('\n')
+        tabl_ascii(x + 1)
+
+
+tabl_ascii(32)
