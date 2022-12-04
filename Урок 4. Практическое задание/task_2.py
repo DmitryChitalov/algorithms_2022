@@ -45,15 +45,15 @@ print(
 
 
 def memoize(f):
-    cache = {}
-
     def decorate(*args):
+        cache = {}
 
         if args in cache:
             return cache[args]
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +80,17 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+'''
+Внесли изменения, создаем пустой словарь cache при каждом вызове функции и результаты изменились.
+Не оптимизированная функция recursive_reverse
+0.032075800001621246
+0.037005200050771236
+0.0683695999905467
+Оптимизированная функция recursive_reverse_mem
+0.06862789997830987
+0.07270199991762638
+0.14305120008066297
+
+Вывод : в данном случае мемоизация бесполезна.
+'''
