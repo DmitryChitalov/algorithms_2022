@@ -52,8 +52,34 @@ print(timeit("bubble_sort_marker(user_lst_2)", globals=globals(), number=100))
 
 """
 Результаты:
-4.404167400000006
-0.1465819000004558
+4.8226908999968146
+0.14204780000000028
 
 Использование маркера значительно сокращает время, затрачиваемое на сортировку
+"""
+
+
+user_lst_1 = [randint(-100, 100) for i in range(10**2)]
+user_lst_2 = [randint(-100, 100) for i in range(10**2)]
+print(timeit("bubble_sort(user_lst_1)", globals=globals(), number=100))
+print(timeit("bubble_sort_marker(user_lst_2)", globals=globals(), number=100))
+"""
+Результаты:
+0.042267199998605065
+0.002100300000165589
+"""
+
+
+user_lst_1 = [randint(-100, 100) for i in range(10)]
+user_lst_2 = [randint(-100, 100) for i in range(10)]
+print(timeit("bubble_sort(user_lst_1)", globals=globals(), number=100))
+print(timeit("bubble_sort_marker(user_lst_2)", globals=globals(), number=100))
+"""
+Результаты:
+0.0006639999992330559
+0.0001281000004382804
+"""
+
+"""
+Чем меньше список, тем меньше разница в пользу использования маркера
 """
