@@ -22,7 +22,8 @@ from random import randint
 from timeit import timeit
 
 
-user_lst = [randint(-100, 100) for i in range(10**3)]
+user_lst_1 = [randint(-100, 100) for i in range(10**3)]
+user_lst_2 = [randint(-100, 100) for i in range(10**3)]
 
 
 # Изначальная функция:
@@ -46,13 +47,13 @@ def bubble_sort_marker(lst_obj):
     return lst_obj
 
 
-print(timeit("bubble_sort(user_lst)", globals=globals(), number=100))
-print(timeit("bubble_sort_marker(user_lst)", globals=globals(), number=100))
+print(timeit("bubble_sort(user_lst_1)", globals=globals(), number=100))
+print(timeit("bubble_sort_marker(user_lst_2)", globals=globals(), number=100))
 
 """
 Результаты:
-2.763781599998765
-0.005621000000246568
+4.404167400000006
+0.1465819000004558
 
 Использование маркера значительно сокращает время, затрачиваемое на сортировку
 """
