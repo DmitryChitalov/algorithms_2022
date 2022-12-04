@@ -22,3 +22,14 @@
 р
 а
 """
+
+import hashlib
+
+S = 'рара'
+N = len(S)
+hash_s = set()
+for i in range(N):
+    for j in range(N + 1):
+        if len(S[i:j]) != 0 and len(S[i:j]) < N:
+            hash_s.add(hashlib.sha256(S[i:j].encode()).hexdigest())
+print(len(hash_s))
