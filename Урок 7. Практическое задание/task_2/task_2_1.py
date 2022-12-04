@@ -51,15 +51,15 @@ def med_num(lst):
 
 
 m = 10
-user_lst = [randint(0, 100) for i in range(2*m+1)]
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
 print(timeit("med_num(heap_sort(user_lst))", globals=globals(), number=100))
 
 m = 100
-user_lst = [randint(0, 100) for i in range(2*m+1)]
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
 print(timeit("med_num(heap_sort(user_lst))", globals=globals(), number=100))
 
 m = 1000
-user_lst = [randint(0, 100) for i in range(2*m+1)]
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
 print(timeit("med_num(heap_sort(user_lst))", globals=globals(), number=100))
 
 """
