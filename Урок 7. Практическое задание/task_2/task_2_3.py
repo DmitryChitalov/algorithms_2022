@@ -16,3 +16,31 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+m = 10
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
+print(timeit("median(user_lst)", globals=globals(), number=100))
+
+m = 100
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
+print(timeit("median(user_lst)", globals=globals(), number=100))
+
+m = 100
+user_lst = [randint(0, 100) for _ in range(2*m+1)]
+print(timeit("median(user_lst)", globals=globals(), number=100))
+
+"""
+Результаты:
+5.720000626752153e-05
+0.0011961999989580363
+0.000545599999895785
+
+Выводы:
+Нахождение медианы с помощью встроенной функции является наиболее эффективным.
+Сортировка кучей - на втором месте, т.к. сложность O(n log n).
+При отсутствии сортировки сложность O(n2) - она самая медленная.
+"""
