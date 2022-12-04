@@ -51,32 +51,32 @@ def decor(func):
     return wrapper
 
 
-@decor
-def recur_sum(number):
-    if number == 1:
-        return number
-    else:
-        return recur_sum(number-1)[0] + number
-
-
-recur_check, mem1 = recur_sum(user_number)
-print(recur_check)
-if recur_check == user_number * (user_number + 1) / 2:
-    print('Равенство верно!')
-print(mem1)
+# @decor
+# def recur_sum(number):
+#     if number == 1:
+#         return number
+#     else:
+#         return recur_sum(number-1)[0] + number
+#
+#
+# recur_check, mem1 = recur_sum(user_number)
+# print(recur_check)
+# if recur_check == user_number * (user_number + 1) / 2:
+#     print('Равенство верно!')
+# print(mem1)
 # Выполнение заняло 0.20703125 Mib
 
 # Используем цикл
-# @decor
-# def cycle_sum(number):
-#         s = 0
-#         for num in range(1, number + 1):
-#             s += num
-#         return s
-#
-#
-# cycle_check, mem2 = cycle_sum(user_number)
-# if cycle_check == user_number * (user_number + 1) / 2:
-#     print('Равенство верно!')
-# print(mem2)
+@decor
+def cycle_sum(number):
+        s = 0
+        for num in range(1, number + 1):
+            s += num
+        return s
+
+
+cycle_check, mem2 = cycle_sum(user_number)
+if cycle_check == user_number * (user_number + 1) / 2:
+    print('Равенство верно!')
+print(mem2)
 # Выполнение заняло 0.00390625 Mib
