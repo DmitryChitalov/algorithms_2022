@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_string(number=32):
+    if number == 128:
+        return True
+    print(f'{number} - {chr(number)}', end=' ')
+    if (number - 31) % 10 == 0:
+        print('\n')
+    ascii_string(number + 1)
+
+
+ascii_string()
