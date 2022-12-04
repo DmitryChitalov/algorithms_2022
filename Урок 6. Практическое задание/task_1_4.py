@@ -31,7 +31,6 @@
 Это файл для четвертого скрипта
 """
 from memory_profiler import memory_usage
-import numpy
 
 
 def decor(func):
