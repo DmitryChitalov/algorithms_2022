@@ -48,7 +48,6 @@ def decor(func):
         m2 = memory_usage()
         mem_diff = m2[0] - m1[0]
         return res, mem_diff
-
     return wrapper
 
 
@@ -61,7 +60,7 @@ def decor(func):
 #
 #
 # recur_check, mem1 = recur_sum(user_number)
-# if recur_sum(user_number) == user_number * (user_number + 1) / 2:
+# if recur_check == user_number * (user_number + 1) / 2:
 #     print('Равенство верно!')
 # print(mem1)
 # Выполнение заняло 0.20703125 Mib
@@ -76,7 +75,7 @@ def cycle_sum(number):
 
 
 cycle_check, mem2 = cycle_sum(user_number)
-if cycle_sum(user_number) == user_number * (user_number + 1) / 2:
+if cycle_check == user_number * (user_number + 1) / 2:
     print('Равенство верно!')
 print(mem2)
 # Выполнение заняло 0.00390625 Mib
