@@ -13,3 +13,23 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_numbers(num, res=0):
+    if num == 0:
+        return res
+    else:
+        res += num
+        num -= 1
+        return sum_numbers(num, res)
+
+
+def check_num(n):
+    num = sum_numbers(n)
+    if num == n * (n + 1) / 2:
+        return True
+    else:
+        return False
+
+
+print(check_num(6))

@@ -10,3 +10,29 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+
+def sum_numbers(n, num=1, count=0):
+
+    if n == 1:
+        return f'Количество элементов - {count + 1}, их сумма - {num}'
+    else:
+        if n % 2 == 0:
+            num -= num / 2
+            count += 1
+            n -= 1
+            return sum_numbers(n, num, count)
+        else:
+            num += num / 2
+            count += 1
+            n -= 1
+            return sum_numbers(n, num, count)
+
+print(sum_numbers(4))
+list_1 = [1, -0.5, 0.25, -0.125, 0.0625, -0.03125, 0.015625]
+
+# n = 4, num = 1 --> sum_numbers(3, 0.5, 1)
+# n = 3, num = 0.5 --> sum_numbers(2, 0.75, 2)
+# n = 2, num = 0.75 --> sum_numbers(1, 0.75, 2)
+# n = 1, f'Количество элементов - {count + 1}, их сумма - {num}'

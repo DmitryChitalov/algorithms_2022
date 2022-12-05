@@ -30,3 +30,28 @@
 
 Это файл для первого скрипта
 """
+import sys
+"""
+Основы Python (5 урок)
+4. Представлен список чисел. Необходимо вывести те его элементы,
+значения которых больше предыдущего.
+"""
+
+src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+
+new_list = [src[i] for i in range(1, len(src)) if src[i] > src[i - 1]]
+
+print(sys.getsizeof(new_list))
+
+
+
+def check_numbers(lst_1):
+    lst = tuple(lst_1)
+    return (lst[i] for i in range(1, len(lst)) if lst[i] > lst[i - 1])
+
+
+result = check_numbers(src)
+print(sys.getsizeof(result))
+
+# Для оптимизации по памяти, я список сделал картежем и поменял LC на генератор, еще убрал одну переменную.
+# Для того, чтобы было видно результат оптимизации, я сделал замеры через sys.getsizeof().
