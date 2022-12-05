@@ -14,3 +14,37 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+import timeit
+import random
+
+
+# удаление маклимальных элементов
+
+def median_for_remove(list_obj, med):
+    list_temp = list_obj[:]
+    for el in range(med):
+        list_temp.remove(max(list_temp))
+    return max(list_temp)
+
+
+m = int(input('Введите число: '))
+test_list = [random.randint(0, 100) for _ in range(2 * m + 1)]
+
+print(f'Сгенерированный массив: {test_list}')
+print(f'Медианный элемент с помощю удаления: {median_for_remove(test_list, m)}')
+
+print(
+    timeit.timeit(
+        "median_for_remove(test_list[:], m)",
+        globals=globals(),
+        number=1000))
+
+# Введите число: 10
+# Время - 0.0072752999999998735
+
+# Введите число: 100
+# Время - 0.33032309999999976
+
+# Введите число: 1000
+# Время - 31.321967
