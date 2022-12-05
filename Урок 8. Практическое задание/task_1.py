@@ -18,7 +18,7 @@ from collections import Counter, deque
 
 # Будем делать на основе кода примера с урока с добавлением ООП
 class HuffmanCode:
-    # У класса будут атрибуты: строка, словарь с кодировками, код Хаффмана, счетчик:
+    # У класса будут атрибуты: строка, словарь с кодировками, код Хаффмана:
     def __init__(self, input_str):
         self.input_str = input_str
         self.code_dict = dict()
