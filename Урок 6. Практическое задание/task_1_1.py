@@ -29,4 +29,64 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+
+Курс: Алгоритмы и структуры данных на Python. Урок 2. Задание 2.
+
+Подсчитать четные и нечетные цифры введенного натурального числа.
+Например, если введено число 34560, то у него 3 четные цифры
+(4, 6 и 0) и 2 нечетные (3 и 5).
+
 """
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor
+def magic(num, even_nums=0, odd_nums=0):
+    if num < 10:
+        if num % 2 == 0:
+            return (even_nums + 1, odd_nums)
+        else:
+            return (even_nums, odd_nums + 1)
+    else:
+        if (num % 10) % 2 == 0:
+            return magic(int(num / 10), even_nums + 1, odd_nums)
+        else:
+            return magic(int(num / 10), even_nums, odd_nums + 1)
+
+
+@decor
+def magic_cycle(num):
+    even = 0
+    odd = 0
+    for i in str(num):
+        if int(i) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return (even, odd)
+
+
+number = 123456789123465789123456789
+
+# print(magic_cycle(number))
+# print(magic(number))
+
+"""
+Результаты цикла: 0.01171875
+Результаты рекурсии: 0.03515625
+
+Заменил рекурсию на цикл. Результат подтвердил ожидания. Цикл использует меньше памяти.
+"""
+
