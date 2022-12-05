@@ -9,3 +9,26 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+from memory_profiler import profile
+
+# Напишу простую рекурсию для примера
+# Попробую выполнить профилирование памяти
+# Результат Неинформативный
+@profile
+def rec_func(num):
+    if num == 1:
+        return 1
+    elif num <= 0:
+        return 0
+    else:
+        return num * rec_func(num-1)
+
+
+# Теперь оберну рекурсию в другую функцию
+# Теперь четко видно сколько памяти потребляет рекурсия
+# 20.5 MiB      1.0 MiB           1       return rec_func(num)
+@profile
+def temp(num):
+    return rec_func(num)
+
+# print(temp(100))

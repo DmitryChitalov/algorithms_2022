@@ -29,4 +29,55 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для третьего скрипта
+
+Курс: Основы языка Python. Урок 3. Задание 5.
+
+Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов,
+взятых из трёх списков (по одному из каждого)
+"""
+
+from memory_profiler import memory_usage
+from random import choice
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return mem_diff
+
+    return wrapper
+
+
+@decor
+def get_jokes(quantity):
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+    res = []
+    for i in range(quantity):
+        joke_result = f'{choice(nouns)} {choice(adverbs)} {choice(adjectives)}'
+        res.append(joke_result)
+    return res
+
+
+@decor
+def get_jokes_update(quantity):
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+    for i in range(quantity):
+        yield f'{choice(nouns)} {choice(adverbs)} {choice(adjectives)}'
+
+
+# print(get_jokes(10**5))
+# Список: 13.12890625
+
+# print(get_jokes_update(10**5))
+# Генератор: 0.01171875
+
+"""
+Генератор использует в разы меньше памяти, как и говорится в документации.
 """
