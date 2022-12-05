@@ -10,6 +10,16 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+"""
+Замеры выполнения 1000 вызовов каждой из функций:
+0.0014593000000000002
+0.0020984000000000003
+0.0022698999999999983
+Ускорить решение задачи не удалось, первый алгоритм является оптимальным
+"""
+
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +47,12 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    result = max(array, key=lambda el: array.count(el))
+    result_count = array.count(result)
+    return f'Чаще всего встречается число {result}, оно появилось в массиве {result_count} раз(а)'
+
+
+print(timeit("func_1()", setup="from __main__ import func_1", number=1000))
+print(timeit("func_2()", setup="from __main__ import func_2", number=1000))
+print(timeit("func_3()", setup="from __main__ import func_3", number=1000))
