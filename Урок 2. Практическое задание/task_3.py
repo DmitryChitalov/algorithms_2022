@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def revers_num2(num, list1=''):
+    count = len(str(num))
+    if count == 1:
+        return str(list1) + str(num % 10)
+    else:
+        count -= 1
+        list1 = str(list1) + str(num % 10)
+        num //= 10
+        return revers_num2(num, list1)
+
+
+num1 = int(input('Введите число '))
+print(revers_num2(num1))
