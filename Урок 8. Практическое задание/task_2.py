@@ -67,8 +67,8 @@ class BinaryTree:
             print(e)
 
     # метод доступа к правому потомку
-    # появлялась ошибка AttributeError 'NoneType' object has no attribute 'get_root_val')
-    # try - except поймать не получится, поскольку возвращаемое значение None считается адекватным
+    # Появлялась ошибка AttributeError 'NoneType' object has no attribute 'get_root_val')
+    # try-except поймать не получится, поскольку возвращаемое значение None считается адекватным
     # Чтобы не выдавало ошибки (адекватно работал метод get_root_val()), будем возвращать бинарное дерево от None
     def get_right_child(self):
         if self.right_child is not None:
@@ -85,17 +85,38 @@ class BinaryTree:
             return BinaryTree(None)
 
     # метод установки корня
+    # Доработаем, чтобы нельзя было изменить дерево неправильно
     def set_root_val(self, obj):
-        self.root = obj
+        # Если равен, то по сути оставляем неизменным
+        if obj == self.root:
+            self.root = obj
+        else:
+            # Если меньше, то добавляем в качестве левого потомка
+            if obj < self.root:
+                # Если потомка нет, то создаем его
+                if self.left_child is None:
+                    self.left_child = BinaryTree(obj)
+                else:
+                    # Если есть, то меняем рекурсией
+                    self.left_child.set_root_val(obj)
+            # Если больше, то добавляем в качестве правого потомка
+            elif obj > self.root:
+                # Если потомка нет, то создаем его
+                if self.right_child is None:
+                    self.right_child = BinaryTree(obj)
+                else:
+                    # Если есть, то меняем рекурсией
+                    self.right_child.set_root_val(obj)
 
     # метод доступа к корню
     # Если потомка нет (приходит BinaryTree(None)), будем об этом сообщать
     def get_root_val(self):
         if self.root is not None:
-            return self.root
+            return f'Значение - {self.root}'
         else:
             return 'Ошибка доступа к значению, потомка нет!'
 
+    # При попытке вывода несуществующего объекта также будем об этом сообщать
     def __str__(self):
         if self.root is None:
             return 'Потомка нет!'
@@ -105,18 +126,59 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
+print()
 
 r.insert_left(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
+print()
 
 r.insert_right(12)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
+print()
 
 r.right_child.insert_right(13)
 print(r.right_child.get_right_child())
 print(r.right_child.get_right_child().get_root_val())
+print()
 
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print()
+
+
+print(r.get_root_val())
+print(r.get_right_child().get_root_val())
+print(r.right_child.get_right_child().get_root_val())
+print()
+"""
+Изначально выводилось:
+Значение - 8
+Значение - 16
+Значение - 13
+
+Это неверно, поскольку не соблюдается порядок для значений потомков.
+Это можно решить доработав метод set_root_val()
+"""
+"""
+После доработки set_root_val():
+Значение - 8
+Значение - 16
+Значение - 13
+
+Значение же 16, которое мы пытались добавить, теперь является еще одним потомком
+"""
+
+print(r.get_root_val())
+print(r.get_right_child().get_root_val())
+print(r.right_child.get_right_child().get_root_val())
+print(r.right_child.right_child.get_right_child().get_root_val())
+
+"""
+Получим:
+Значение - 8
+Значение - 12
+Значение - 13
+Значение - 16
+"""
