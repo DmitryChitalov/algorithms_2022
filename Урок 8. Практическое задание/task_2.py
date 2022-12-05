@@ -149,8 +149,8 @@ print()
 
 
 print(r.get_root_val())
-print(r.get_right_child().get_root_val())
-print(r.right_child.get_right_child().get_root_val())
+print(r.right_child.get_root_val())
+print(r.right_child.right_child.get_root_val())
 print()
 """
 Изначально выводилось:
@@ -171,9 +171,9 @@ print()
 """
 
 print(r.get_root_val())
-print(r.get_right_child().get_root_val())
-print(r.right_child.get_right_child().get_root_val())
-print(r.right_child.right_child.get_right_child().get_root_val())
+print(r.right_child.get_root_val())
+print(r.right_child.right_child.get_root_val())
+print(r.right_child.right_child.right_child.get_root_val())
 
 """
 Получим:
