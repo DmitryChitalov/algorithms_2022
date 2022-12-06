@@ -22,41 +22,46 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
-from uuid import uuid4
 import hashlib
 import json
+
+
+def get_hash():   #запросил логин и пароль, вычислил хэш(соль логин, пароль password, солёный пароль key
+    login = input('Введите логин: ')
+    passwd = input('Введите пароль: ')
+    key = hashlib.sha256(login.encode() + passwd.encode()).hexdigest()
+    return login, key
 
 
 def create():
     password = {}
     FILENAME = 'password.json'
-    login = input('введите логин: ')
-    pass_input = input('введите пароль: ')
-    salt = uuid4().hex
-    key = hashlib.sha256(salt.encode() + pass_input.encode()).hexdigest()
-    storage = salt + key
-    password[login] = {'password': storage}
+    login, reg_hash = get_hash()
     with open(FILENAME, 'r+', encoding='utf-8') as file:
-        try:
-            data = json.load(file)
-            data[login] = {'password': storage}
+        data = json.load(file)
+        if data[login]['password'] == reg_hash:
+            print("Вы уже есть в базе, выполните вход.")
+            check()
+        else:
+            password[login] = {'password': reg_hash}
             with open(FILENAME, 'r+', encoding='utf-8') as file:
-                json.dump(data, file, ensure_ascii=False, indent=4)
-        except json.JSONDecodeError:
-            json.dump(password, file, ensure_ascii=False, indent=4)
+                try:
+                    data = json.load(file)
+                    data[login] = {'password': reg_hash}
+                    with open(FILENAME, 'r+', encoding='utf-8') as file:
+                        json.dump(data, file, ensure_ascii=False, indent=4)
+                except json.JSONDecodeError:
+                    json.dump(password, file, ensure_ascii=False, indent=4)
 
 
 
 def check():
     try:
-        login = input('введите логин: ')
+        login, reg_hash = get_hash()
         FILENAME = 'password.json'
         with open(FILENAME, 'r+', encoding='utf-8') as file:
             data = json.load(file)
-        pass_input = input('введите пароль: ')
-        salt = data[login]['password'][:32]
-        key = hashlib.sha256(salt.encode() + pass_input.encode()).hexdigest()
-        if key == data[login]['password'][32:]:
+        if reg_hash == data[login]['password']:
             print('Вы авторизованы')
         else:
             print('неверный логин или пароль')
@@ -64,13 +69,16 @@ def check():
         print('неверный логин или пароль')
 
 
+
 """логин user1 пароль qwerty, (user2, 123), (user3, 12345)"""
 
 while True:
-    choose = input('создать/проверить')
-    if choose == 'создать':
+    choose = input('создать/проверить: ')
+    if choose in 'создать':
         create()
-    elif choose == 'проверить':
+        print('создание')
+    elif choose in 'проверить':
+        print('проверка')
         check()
 
 
