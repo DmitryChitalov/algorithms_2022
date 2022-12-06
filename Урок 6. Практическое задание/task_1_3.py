@@ -30,3 +30,43 @@
 
 Это файл для третьего скрипта
 """
+
+from timeit import default_timer
+import memory_profiler
+from numpy import array
+
+
+def decor(func):
+    """Замер времени и памяти"""
+
+    def wrapper(*args):
+        mem_1 = memory_profiler.memory_usage()
+        start_time = default_timer()
+        res = func(args[0])
+        mem_2 = memory_profiler.memory_usage()
+        print(f'memory: {mem_2[0] - mem_1[0]}, time: {default_timer() - start_time}')
+        return res
+
+    return wrapper
+
+# задание из курса алгоритмы и структуры данных
+
+@decor
+def func_3(num):
+    """Возвращает список четных чисел от 0 до n"""
+    return [i for i in range(0, len(num), 2)]
+
+
+@decor
+def func_4(num):
+    """Возвращает список четных чисел от 0 до n"""
+    return array([i for i in range(0, len(num), 2)])
+
+
+nums = [num ** 2 for num in range(1000000)]
+
+func_3(nums)  # memory: 20.08984375, time: 0.143509
+func_4(nums)  # memory: 1.8671875, time: 0.1875547999999998
+
+# Использование модуля numpy - переход к array вместо list - наглядная
+# экономия памяти

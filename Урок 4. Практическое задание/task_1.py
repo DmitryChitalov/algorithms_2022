@@ -12,6 +12,8 @@
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -19,3 +21,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+# использование comprehensions уменьшает время работы
+
+def func_2(nums):
+    return [x for x in nums if x % 2 == 0]
+
+
+num = tuple(range(10000))
+
+print(timeit('func_1(num)', globals=globals(), number=1000)) # 0.8359207999999999
+print(timeit('func_2(num)', globals=globals(), number=1000)) # 0.4382494000000001
+
+# Сложность func_1 и func_2 одинаковая - O(n). В func_1 есть метод append.
+# Сложность append O(1) - констанстна, поэтому не заментно для МАЛЕНЬКОГО списка.
+# Делаем вывод: несмотря на то, что метод append имеет O(1)-сложность,
+# при работе с большими массивами даже такая сложность сказывается на скорости выполнения кода.

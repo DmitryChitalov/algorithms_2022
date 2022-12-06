@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
+    <list default="true" id="5bbf8a4f-7f87-4741-b5d4-ffa2b6702a6d" name="Default Changelist" comment="урок 7. задание 1-2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 8. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 8. Практическое задание/task_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 8. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 8. Практическое задание/task_2.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -73,6 +60,9 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -89,6 +79,7 @@
     <option name="width" value="1555" />
     <option name="height" value="981" />
   </component>
+  <component name="ProjectId" id="2GU5tXx2owacUCuAEeVAZIawr5M" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -138,22 +129,133 @@
       </pane>
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../main.py" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RunManager" selected="Python.task_2">
+    <configuration name="task_1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="algorithms_2022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 8. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 8. Практическое задание/task_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="algorithms_2022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 8. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 8. Практическое задание/task_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="algorithms_2022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="algorithms_2022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="algorithms_2022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 7. Практическое задание/task_2/task_2_3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1 (1)" />
+        <item itemvalue="Python.task_2_3" />
+        <item itemvalue="Python.task_2_2" />
+        <item itemvalue="Python.task_2_1" />
       </list>
-    </option>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -165,6 +267,98 @@
       <option name="presentableId" value="Default" />
       <updated>1635328220289</updated>
     </task>
+    <task id="LOCAL-00001" summary="урок 1. задание 1">
+      <created>1666445134524</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666445134524</updated>
+    </task>
+    <task id="LOCAL-00002" summary="урок 1. задание 2">
+      <created>1666609526758</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666609526758</updated>
+    </task>
+    <task id="LOCAL-00003" summary="урок 1. задание 3">
+      <created>1666612302412</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666612302412</updated>
+    </task>
+    <task id="LOCAL-00004" summary="урок 1. задание 5">
+      <created>1666772103598</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666772103598</updated>
+    </task>
+    <task id="LOCAL-00005" summary="урок 1. задание 6">
+      <created>1666774458906</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666774458906</updated>
+    </task>
+    <task id="LOCAL-00006" summary="урок 1. задание 7">
+      <created>1666774812144</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666774812144</updated>
+    </task>
+    <task id="LOCAL-00007" summary="урок 1. задание 4">
+      <created>1666776618346</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1666776618346</updated>
+    </task>
+    <task id="LOCAL-00008" summary="урок 2. задание 1-7">
+      <created>1668624273086</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668624273086</updated>
+    </task>
+    <task id="LOCAL-00009" summary="урок 3. задание 1-4">
+      <created>1669191111992</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669191111992</updated>
+    </task>
+    <task id="LOCAL-00010" summary="урок 4. задание 1-4">
+      <created>1669201529620</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669201529620</updated>
+    </task>
+    <task id="LOCAL-00011" summary="урок 5. задание 1-4">
+      <created>1669815818237</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669815818237</updated>
+    </task>
+    <task id="LOCAL-00012" summary="урок 5. задание 1-2">
+      <created>1669912201099</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669912201099</updated>
+    </task>
+    <task id="LOCAL-00013" summary="урок 7. задание 1-2">
+      <created>1670245322221</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1670245322221</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -190,6 +384,33 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="урок 1. задание 1" />
+    <MESSAGE value="урок 1. задание 2" />
+    <MESSAGE value="урок 1. задание 3" />
+    <MESSAGE value="урок 1. задание 5" />
+    <MESSAGE value="урок 1. задание 6" />
+    <MESSAGE value="урок 1. задание 7" />
+    <MESSAGE value="урок 1. задание 4" />
+    <MESSAGE value="урок 2. задание 1-7" />
+    <MESSAGE value="урок 3. задание 1-4" />
+    <MESSAGE value="урок 4. задание 1-4" />
+    <MESSAGE value="урок 5. задание 1-4" />
+    <MESSAGE value="урок 5. задание 1-2" />
+    <MESSAGE value="урок 7. задание 1-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="урок 7. задание 1-2" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py">

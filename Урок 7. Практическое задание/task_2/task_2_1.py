@@ -15,3 +15,42 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+import timeit
+import random
+
+
+# Метод сортировки Шелла
+
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+m = int(input('Введите число: '))
+test_list = [random.randint(0, 100) for _ in range(2 * m + 1)]
+
+print(f'Сгенерированный массив: {test_list}')
+print(f'Медианный элемент по индексу после сортировки Шеллом: {shell(test_list)[m]}')
+
+print(
+    timeit.timeit(
+        "shell(test_list[:])[m]",
+        globals=globals(),
+        number=1000))
+
+# Введите число: 10
+# Время - 0.008666300000000682
+
+# Введите число: 100
+# Время - 0.11775990000000025
+
+# Введите число: 1000
+# Время - 2.1892796
