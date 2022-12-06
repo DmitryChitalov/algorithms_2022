@@ -28,3 +28,80 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+def decorator(function):
+    def calc_time(*args, **kwargs):
+        start_val = time.time()
+        function(*args, **kwargs)
+        end_val = time.time()
+        print(f"Функция '{function.__name__}' выполнилась за {end_val - start_val:.18f} сек")   
+    return calc_time
+
+
+@decorator
+#O(n)
+def fill_list(lst, n):
+    for i in range(n): #O(n)
+        lst.append(i)  #O(1)
+    return lst
+
+
+
+@decorator
+#O(n)
+def fill_dict(n):
+    dict = {}
+    for i in range(n): #O(n)
+        dict[i] = i    #O(1)
+    return dict
+
+
+
+@decorator
+#O(n)
+def list_get_el(lst, el):
+    for i in range(len(lst)): #O(n)
+        if lst[i] == el:      #O(1)
+            return i
+        
+@decorator
+#O(n)
+def dict_get_el(dict, el): 
+    dict = {}
+    for i in dict.keys():  #O(n)
+        if dict[i] == el:  #O(1)
+            return i
+
+@decorator
+#O(n^2)
+def list_del_el(lst, el):
+    for i in range(len(lst)): #O(n)
+        if lst[i] == el:      #O(1)
+            lst.remove(i)     #O(n)
+            return lst
+        
+@decorator
+#O(n)
+def dict_del_el(dict, el): 
+    dict = {}
+    for i in dict.keys():  #O(n)
+        if dict[i] == el:  #O(1)
+            dict.pop(i)
+            return dict        
+        
+        
+list=[]
+n = 1000000
+lst = fill_list(list, n)
+dict = fill_dict(n)
+#Словарь заполняется дольше, т.к. в словарях используется хэширование данных 
+
+list_get_el(list, n)
+dict_get_el(dict, n)
+#Зато в словаре извлечение элемента происхожит быстрее за счет использования ключа
+#В списке же проходится по всем элементам
+
+list_del_el(list, n)
+dict_del_el(dict, n)
+#По тем же причинам, что и извлечение данных, из списка удаляется медленнее, а из словаря - быстрее

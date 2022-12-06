@@ -22,3 +22,14 @@
 р
 а
 """
+from hashlib import sha256
+
+def unique_cnt(s):
+    mp_set = set()
+    for i in range(len(s)):
+        mp_set.add(sha256(s[0: i + 1].encode()).hexdigest())
+        mp_set.add(sha256(s[i:].encode()).hexdigest())
+    return len(mp_set) 
+
+s = 'papa'
+print(unique_cnt(s))

@@ -22,3 +22,49 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import psycopg2
+from hashlib import sha256
+
+con = psycopg2.connect(
+  database="postgres", 
+  user="postgres", 
+  password="1111", 
+  host="127.0.0.1", 
+  port="5432"
+)
+
+con.cursor().execute('''CREATE TABLE IF NOT EXISTS passwords
+(
+  hash   VARCHAR(512)
+);
+commit;''')
+
+
+def create_hash(password):
+
+    salt = "!@#$"
+    hash_obj = sha256(password.encode() + salt.encode())
+    result = hash_obj.hexdigest()
+    return result
+   
+def check_pass(password):
+
+    with con:
+        curs = con.cursor()
+        curs.execute('SELECT hash FROM passwords')
+        res = [x[0] for x in curs.fetchall()]
+        if hash not in res:
+            h = create_hash(password)
+            curs.execute(f"INSERT into passwords (hash) VALUES ('{h}'); commit;")
+            print(f'В базе данных хранится строка: {h}')
+        else:
+            print(f'В базе данных хранится строка: {res}')
+        pass2 = create_hash(input('Введите пароль еще раз для проверки:'))
+        curs.execute('SELECT hash FROM passwords')
+        res = [x[0] for x in curs.fetchall()]
+        if pass2 in res:
+            return 'Вы ввели правильный пароль'
+        else:
+            return 'Вы ввели неправильный пароль'
+
+print(check_pass(input('Введите пароль:')))
