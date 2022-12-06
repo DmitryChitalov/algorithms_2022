@@ -28,3 +28,38 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+def time_measurement(func):
+    def wrapper():
+        start = time.time()
+        func()
+        print(f'функция: {str(func)}, время выполнения: {time.time() - start}')
+    return wrapper
+
+
+lst = list()
+dct = dict()
+
+
+# a)
+
+@time_measurement
+def filling_out_list():
+    for i in range(1000000):
+        lst.append(i)  # O(1)
+
+
+@time_measurement
+def filling_out_dict():
+    for i in range(1000000):
+        dct[i] = 0  # O(1)
+
+
+filling_out_list()
+filling_out_dict()
+
+# сложность заполнения списка и словаря в О-нотации одинаковая,
+# но список заполняется быстрее по времени,
+# т.к. словарь это хэш-таблица и при его заполнении создаются хэши ключей
