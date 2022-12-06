@@ -28,3 +28,80 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+#Заполнение списка в начало и в конец
+def completion_element(func):
+    def g(*args):
+        start = time.time()
+        func(*args)
+        time_res = time.time() - start
+        print(f' время работы функции {func.__name__}: {time_res}')
+        return func(*args)
+    return g
+
+@completion_element
+def list_append():
+    list_ = []
+    for i in range(100000):
+        list_.append(i)
+    return list_
+
+list_append()  #Сложность O(1), append() добавляет в конец.
+print(10*'*')
+
+@completion_element
+def list_insert():
+    list_ = []
+    for i in range(100000):
+        list_.insert(0,i)
+    return list_
+
+list_insert() #сложность O(n) т.к. insert() добавляет в начало
+
+print(10*'*')
+@completion_element
+def dict_():
+    dct = {}
+    for i in range(100000):
+        dct[i] = i
+    return dct
+
+dict_() #сложность O(1), "l[i] = 0	O(1)"
+
+print(10*'*')
+#получение элементов
+@completion_element
+def deleting(list_): #сложность удаление O(n)
+    for i in range(5000):
+        list_.pop(i)
+
+@completion_element
+def receiving(lst): # сложность получения и измененияO(1)
+    for i in range(10000):
+        list_[i] = list_[i+2]
+
+
+list_ = []
+for i in range(100000):
+    list_.append(i)
+
+deleting(list_)
+print(10*'*')
+receiving(list_)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
