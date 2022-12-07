@@ -30,3 +30,44 @@
 
 Это файл для второго скрипта
 """
+from recordclass import recordclass
+from sys import getsizeof
+
+"""
+Основы Python (3 урок)
+2. * (вместо задачи 1) Доработать предыдущую функцию в num_translate_adv(): 
+реализовать корректную работу с числительными, начинающимися с заглавной буквы — результат тоже должен 
+быть с заглавной.
+"""
+
+
+def num_translate_1(value):
+    translate = {'one': 'один', 'two': 'два', 'three': 'три', 'for': 'четыре',
+                 'five': 'пять', 'six': 'шесть', 'seven': 'семь', 'eight': 'восемь',
+                 'nine': 'девять', 'ten': 'десять'}
+    print(getsizeof(translate))
+    if value[0].isupper():
+        str_out = translate[value.lower()].title()
+    else:
+        str_out = translate[value]
+    return str_out
+
+
+print(num_translate_1('one'))
+
+
+def num_translate(value):
+    trs = recordclass('var', ('one', 'two', 'three', 'fore', 'five', 'six', 'seven', 'eight', 'nine', 'ten'))
+    translate = trs(one='один', two='два', three='три', fore='четыре', five='пять', six='шесть', seven='семь',
+                    eight='восемь', nine='девять', ten='десять')
+    print(getsizeof(translate))
+    if value[0].isupper():
+        return getattr(translate, value.lower()).title()
+    else:
+        return getattr(translate, value)
+
+
+print(num_translate('one'))
+
+# Вместо словаря я использую recordclass. Внутри функции сделал замеры выделенной папяти для словаря и recordclass.
+# Второе выигрывает по памяти почти в 3 раза. Еще убрал 3 переменные (хотя это не влияет на память).

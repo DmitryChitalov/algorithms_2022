@@ -28,3 +28,34 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import defaultdict
+import numpy
+
+
+def comp_as():
+    st_1 = 'Предприятия, с прибылью выше среднего значения: '
+    st_2 = 'Предприятия, с прибылью ниже среднего значения: '
+    num = int(input('Введите количество компаний: '))
+    tmp = defaultdict(list)
+    while num > 0:
+        name = input('Введите название компании: ')
+        tmp[name] = []
+        num -= 1
+    for k, v in tmp.items():
+        while len(tmp[k]) != 4:
+            prib = int(input(f'Введите прибыль за период компании {k} (всего будет 4 периода): '))
+            tmp[k].append(prib)
+    tmp_1 = {k: numpy.average(v) for k, v in tmp.items()}
+    sr = numpy.average(list(tmp_1.values()))
+    for k, v in tmp_1.items():
+        if v > sr:
+            st_1 += f'{k}, '
+        else:
+            st_2 += f'{k}, '
+    return f'Средняя годовая прибыль всех предприятий: {sr}\n{st_1}\n{st_2}'
+
+
+print(comp_as())
+
+

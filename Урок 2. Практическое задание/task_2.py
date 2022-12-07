@@ -17,3 +17,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def number_even(num, count_1=0, count_2=0):
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: ({count_1}, {count_2})'
+    else:
+        n = num % 10
+        k = num // 10
+        if n % 2 == 0:
+            count_1 += 1
+        else:
+            count_2 += 1
+        return number_even(k, count_1, count_2)
+
+num = int(input('Введите число: '))
+print(number_even(num))

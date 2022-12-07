@@ -19,3 +19,20 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbol_ascii(n=32, result='', count=1):
+    if n == 128:
+        return result
+    else:
+        if count % 10 == 0:
+            result += f' {n} - {chr(n)}\n'
+            n += 1
+            count += 1
+            return symbol_ascii(n, result, count)
+        else:
+            result += f' {n} - {chr(n)}'
+            n += 1
+            count += 1
+            return symbol_ascii(n, result, count)
+print(symbol_ascii())
