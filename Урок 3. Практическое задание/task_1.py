@@ -100,7 +100,7 @@ def delete_dict_el(key):
             return                        # O(1)
     return 'Нет такого элемента'          # O(1)
 
-# Сложность delete_array_el() = O(N^2)
+# Сложность delete_dict_el() = O(N^2)
 
 print('ПУНКТ А: Сравнение заполнения списка и словаря')
 print(fill_array())
