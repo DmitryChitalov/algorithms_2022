@@ -22,3 +22,46 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+
+from time import perf_counter
+
+activeD = {
+    'Admin': {'password': 'Admin', 'status': True},
+    'User': {'password': 'bnmtyj5t3gbbgcb', 'status': True},
+    'Guest': {'password': 'Guest', 'status': False},
+}
+
+
+
+def access1(data):  # O(1)
+    log = input('Логин : ')
+    pswrd = input('Пароль : ')
+    try:
+        user = data[log]   # O(1)
+    except:
+        return f"Неправильное имя пользователя {log}"  # O(1)
+    if pswrd != user['password']: # O(1)
+        return 'Неправильный пароль'  # O(1)
+    return f"Добрый день {log}" if user['status'] else f'Аккаунт  {log}  требует активации.'   # O(1)
+
+
+def access2(data):  # O(n)
+    log = input('Логин  : ')
+    pswrd = input('Пароль  : ')
+    for key, user in data.items():  # O(n)
+        if key == log:
+            if pswrd != user['password']:
+                return 'Неправильный пароль'# O(1)
+            return f"Добрый день {log}"  if user['status'] else f'Аккаунт  {log} требует активации.' # O(1)
+
+    return f"Неправильное имя пользователя {log}"  # O(n)
+
+start1 = perf_counter()
+
+print(access1(activeD),(perf_counter() - start1))
+
+start2 = perf_counter()
+
+print(access2(activeD),(perf_counter() - start2))
