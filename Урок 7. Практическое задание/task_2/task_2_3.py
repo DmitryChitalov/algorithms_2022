@@ -16,3 +16,25 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from statistics import median
+from random import randint
+from timeit import timeit
+
+
+def mediana_3(m):
+    lst = [randint(0, m + 10) for i in range(2 * m + 1)]
+    return f'Список:\n{lst}\nМедиана списка: {median(lst)}'
+
+
+print(mediana_3(4))
+print(timeit('mediana_3(5)', globals=globals(), number=1000))
+print(timeit('mediana_3(50)', globals=globals(), number=1000))
+print(timeit('mediana_3(500)', globals=globals(), number=1000))
+"""
+Результаты замеров:
+0.045197299998108065
+0.2654320000001462
+2.1400166000021272
+"""
+# Встроенная функция работает гораздо быстрее чем те, которые я использовал ранее. Я думаю, что встроенная функция
+# использует алгоритм быстрой сортировки.
