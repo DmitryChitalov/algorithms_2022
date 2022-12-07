@@ -16,3 +16,31 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def get_arr(num):
+    return [randint(1, num * 2) for x in range(2 * num + 1)]
+
+
+arr_10 = get_arr(5)
+arr_100 = get_arr(50)
+arr_1000 = get_arr(500)
+
+print(timeit('median(arr_10)', globals=globals(), number=1000))
+print(timeit('median(arr_100)', globals=globals(), number=1000))
+print(timeit('median(arr_1000)', globals=globals(), number=1000))
+
+"""
+Результат:
+0.0003792999777942896
+0.002494900021702051
+0.06635110010392964
+
+Вывод:
+Этот способ самый быстрый.
+Скорее всего, за счет более быстрого алгоритма сортировки.
+"""
