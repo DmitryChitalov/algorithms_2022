@@ -16,3 +16,32 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from statistics import median
+from random import randint
+from timeit import timeit
+
+
+def med_func(m):
+    my_lst = [randint(-100, 100) for _ in range(2 * m + 1)]
+    return median(my_lst)
+
+
+# print(med_func(5))
+
+
+print(timeit("med_func(5)", globals=globals(), number=1000))
+print(timeit("med_func(50)", globals=globals(), number=1000))
+print(timeit("med_func(500)", globals=globals(), number=1000))
+
+"""
+Результаты замеров:
+0.021423099999083206
+0.1159429999825079
+1.2679411999997683
+
+Вывод:
+Самым эффективным способом является использование встроенной функции.
+
+В небольших массивах разница между всеми тремя способами не сильно отличается. Но с ростом размера массива, результаты
+замеров отличаются значительно. 
+"""
