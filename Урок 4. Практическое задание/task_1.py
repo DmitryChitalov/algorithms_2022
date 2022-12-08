@@ -11,6 +11,7 @@
 
 ОБЯЗАТЕЛЬНО! Добавьте аналитику: что вы сделали и какой это принесло эффект
 """
+from timeit import timeit
 
 
 def func_1(nums):
@@ -19,3 +20,20 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+num = [1, 5, 4, 7, 9, 6, 4, 1, 32, 5, 48, 5, 1865, 1548, 545]
+
+print(timeit("func_1(num)", globals=globals(), number=100000))
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+func_2([1, 5, 4, 7, 9, 6, 4, 1, 32, 5, 48, 5, 1865, 1548, 545])
+print(timeit("func_2(num)", globals=globals(), number=100000))
+'''0.2454268200090155
+0.22737631609197706 - в LC отсутствует append и ее не надо загружать как функцию,
+ поэтому скорость выполнения func_2 быстрее '''
