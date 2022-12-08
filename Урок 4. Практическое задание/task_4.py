@@ -9,6 +9,7 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    x = max(array, key=array.count)
+    y = array.count(x)
+
+    return f'Чаще всего встречается число {x}, ' \
+           f'оно появилось в массиве {y} раз(а)'
+
+
+print(func_1.__name__, timeit("func_1()", globals=globals(), number=100000))
+print(func_2.__name__, timeit("func_2()", globals=globals(), number=100000))
+print(func_3.__name__, timeit("func_3()", globals=globals(), number=100000))
 print(func_1())
 print(func_2())
+print(func_3())
+
+'''
+func_1 0.2824838520027697
+func_2 0.3350892059970647
+func_3 0.21124042209703475
+'''
+'''Задачу удалось ускорить, сложность функции func_3 - O(n) '''

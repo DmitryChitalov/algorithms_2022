@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def summ_def(count, num, summ=0):
+    if count == 0:
+        print('Сумма элементов', summ)
+    elif count < 0:
+        print('Число должно быть больше 0')
+    else:
+        return summ_def(count - 1, num / -2, summ + num)
+
+
+count1 = int(input('Введите количество элементов '))
+summ_def(count1, 1)
