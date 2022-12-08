@@ -15,6 +15,19 @@
 Пример:
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
-Не забудьте проверить на числе, которое оканчивается на 0.
+Не забудьте  проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def reverse(number, reverse_number=''):
+    if number == 0:
+        return print(f'Перевернутое число: {reverse_number}')
+    if number % 10 == 0 and number >= 0:
+        reverse_number += '0'
+    else:
+        reverse_number += str(number % 10)
+    return reverse(number // 10, reverse_number)
+
+
+reverse(int(input('Введите число, которое требуется перевернуть: ')))

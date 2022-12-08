@@ -22,3 +22,61 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = {1: ['Mikky', '234rddsd', 'Active'],
+         2: ['Jimmy', '21e12321e', 'No'],
+         3: ['Stephan', 'dsd3d', 'Active']
+         }
+
+
+# Вариант 1 сложность #O(N)
+def check_status(username):
+    for val in users.values():  # O(N)+ O(N)
+        if username == val[0]:  # O(1)
+            if val[2] == 'Active':  # O(1)
+                return "Проверка пройдена"  # O(1)
+            else:  # O(1)
+                return "Аккаунт не активирован"  # O(1)
+
+
+print(check_status("Jimmy"))
+print(check_status("Mikky"))
+
+
+# Вариант 2 сложность #O(N^2)
+def check_status2(username):
+    for val in users.values():  # O(N)+ O(N)
+        for v in val:  # O(N)
+            if v == username and val[2] == 'Active':  # O(1) + O(1)
+                return "Проверка пройдена"  # O(1)
+            else:
+                return "Аккаунт не активирован"  # O(1)
+
+
+print(check_status2("Jimmy"))
+print(check_status2("Mikky"))
+
+"""
+Замечание:в этом задании можно добиться константной
+
+Исправление: сложность  константой не реализовать для словаря users, нужно искать значение имени в каждой паре словаря 
+
+"""
+
+users = {'Mikky': ['234rddsd', 'Active'],
+         'Jimmy': ['21e12321e', 'No'],
+         'Stephan': ['dsd3d', 'Active']
+         }
+
+
+# Вариант 3 сложность #O(1)
+
+def check_status3(username):
+    if users[username][1] == 'Active':  # O(1)
+        return "Проверка пройдена"  # O(1)
+    else:  # O(1)
+        return "Аккаунт не активирован"  # O(1)
+
+
+print(check_status3('Jimmy'))
+print(check_status3('Mikky'))

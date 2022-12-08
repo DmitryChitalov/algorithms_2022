@@ -28,3 +28,90 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+
+"""**************************** Задание A *******************************************"""
+
+from time import perf_counter
+
+
+def perf_time(func):
+    def wrapper(*args):
+        start = perf_counter()
+        data = func(*args)
+        print(f'Время выполнения {func.__name__}: {perf_counter() - start}')
+        return data
+
+    return wrapper
+
+
+@perf_time
+def fill_list(n):
+    data = []
+    for i in range(0, n):
+        data.append(i)
+    return data
+
+
+@perf_time
+def fill_dict(n):
+    data = {}
+    for i in range(0, n):
+        data[i] = i
+    return data
+
+
+n = int(input('Задание А, введите размер: '))
+
+print(fill_list(n))
+print(fill_dict(n))
+
+"""**************************** Задание B *******************************************"""
+
+
+@perf_time
+def get_list_elm(n, data):
+    for i in range(0, len(data)):
+        if i == n:
+            return data.index(n)
+
+
+@perf_time
+def get_dict_elm(n, data):
+    for i in range(0, len(list(data.keys())) - 1):
+        if i == n:
+            return f'{list(data.keys()).index(n)}: {data.get(list(data.keys()).index(n))}'
+
+
+n = int(input('Задание B , Введите номер элемента: '))
+
+data_list = fill_list(n ** 2)
+data_dict = fill_dict(n ** 2)
+print(get_list_elm(n, data_list))
+print(get_dict_elm(n, data_dict))
+
+"""**************************** Задание C *******************************************"""
+
+
+@perf_time
+def del_list_elm(n, data):
+    for i in range(0, len(data)):
+        if i == n:
+            return data.pop(n)
+
+
+@perf_time
+def del_dict_elm(n, data):
+    for i in range(0, len(list(data.keys())) - 1):
+        if i == n:
+            return data.pop(list(data.keys()).index(n))
+
+
+n = int(input('Задание C , Введите номер элемента: '))
+print(del_list_elm(n, data_list))
+print(del_dict_elm(n, data_dict))
+
+"""
+ Функции  по  работе со словарями быстрее , чем со списками, т.к. за счет хэш таблиц в словарях сложность операций 
+состаляет O(1). При реализации работы со словарями через циклы по требованию ДЗ присутствует избыточный код , который 
+усложняет и замедялет расчеты.
+"""

@@ -22,3 +22,16 @@
 р
 а
 """
+import hashlib
+
+str_input = 'papa'
+set_output = set()
+result = ''
+for i in range(0, len(str_input) + 1):
+    for j in range(0, len(str_input) + 1):
+        if i != j and i < j and str_input[i:j] != str_input:
+            result = result + str_input[i:j] + ' '  # Все возможные  подстроки
+            set_output.add(hashlib.sha256((str_input[i:j].encode())).hexdigest())
+
+print(result)
+print(set_output)
