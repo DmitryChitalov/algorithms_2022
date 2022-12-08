@@ -24,3 +24,23 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+
+def calculation16():
+    numbers = defaultdict(list)
+    for i in range(2):
+        number = input("Введите первое шестнадцатеричное число: ")
+        numbers[number] = list(number)
+    sum_numbers = 0
+    mult_numbers = 1
+    for i in numbers.values():
+        sum_numbers += int(''.join(i), 16)
+        mult_numbers *= int(''.join(i), 16)
+    sum_numbers = list(hex(sum_numbers).split('x')[-1])
+    mult_numbers = list(hex(mult_numbers).split('x')[-1])
+    return f"Сумма чисел: {sum_numbers}, произведение чисел: {mult_numbers}"
+
+
+print(calculation16())
+
