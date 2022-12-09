@@ -30,3 +30,63 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args):
+        mem_1 = memory_usage(max_usage=True)
+        func(*args)
+        mem_2 = memory_usage(max_usage=True)
+        mem_diff = mem_2 - mem_1
+        return mem_diff
+    return wrapper
+
+
+@memory
+def odd_or_even(number: int, odd_count=0, even_count=0):
+    """
+    Функция принимает в качестве аргументов исходное натуральное число и начальные значения счетчиков (четных
+    и нечетных чисел), которые по умолчанию равны нулю, и выводит на экран количество четных и нечетных чисел,
+    входящих в данное число.
+    :param number: Исходное натуральное число
+    :param odd_count: Начальное значение счетчика нечетных чисел
+    :param even_count: Начальное значение счетчика четных чисел
+    :return:
+    """
+    left = number // 10
+    right = number % 10
+    if right % 2 != 0:
+        odd_count += 1
+    else:
+        even_count += 1
+    if left != 0:
+        odd_or_even(left, odd_count, even_count)
+    else:
+        print(f'Нечетных чисел {odd_count}, четных чисел {even_count} (включая нули)')
+
+
+@memory
+def odd_or_even_opt(number: str, odd_count=0, even_count=0):
+    for i in range(len(number)):
+        if int(number[i]) % 2 != 0:
+            odd_count += 1
+        else:
+            even_count += 1
+    print(f'Нечетных чисел {odd_count}, четных чисел {even_count} (включая нули)')
+
+
+if __name__ == "__main__":
+    print('\nСкрипт №2 д/з №2 "Алгоритмы и структуры данных Python".\n'
+          'Исходный код был с рекурсией. Оптимизация через цикл и строки.\n')
+    print('Работу какой функции вы хотите проверить? (1 - исходная, 2 - оптимизированная): ', end='')
+    mode = input()
+    user_number = '45288179046261480180626678776300392807572401632'
+    print(f'Число для разбора {user_number}')
+    if mode == '1':
+        mem = odd_or_even(int(user_number))
+        print(f'Выполнение заняло {mem} MiB')
+    elif mode == '2':
+        mem = odd_or_even_opt(user_number)
+        print(f'Выполнение заняло {mem} MiB')
