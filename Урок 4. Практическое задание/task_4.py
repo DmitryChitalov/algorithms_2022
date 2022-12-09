@@ -9,10 +9,9 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
-
-
 def func_1():
     m = 0
     num = 0
@@ -36,6 +35,13 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():  # получилось только замедлить .
+    return f'Чаще всего встречается число {max(array, key=array.count)}, ' \
+           f'оно появилось в массиве {array.count(max(array, key=array.count))} раз(а)'
 
 print(func_1())
+print(timeit.timeit('func_1()', globals=globals(), number=1000)) # 1  место
 print(func_2())
+print(timeit.timeit('func_2()', globals=globals(), number=1000))# 2  место
+print(func_3())
+print(timeit.timeit('func_3()', globals=globals(), number=1000))# 3  место   получилось только замедлить .
