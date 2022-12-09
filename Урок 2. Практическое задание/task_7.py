@@ -13,3 +13,15 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def recur_sum(num):
+    if num == 0:
+        return 0
+    return num + recur_sum(num - 1)
+
+
+if __name__ == '__main__':
+    number = int(input("Введите число: "))
+    if recur_sum(number) == number * (number + 1) / 2:
+        print(recur_sum(number), '=', int(number * (number + 1) / 2))
