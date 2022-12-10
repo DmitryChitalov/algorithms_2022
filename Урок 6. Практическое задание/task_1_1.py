@@ -30,3 +30,46 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+@decor
+def proof_func(num):
+    if num == 0:
+        return 0
+    elif num == 1:
+        return 1
+    else:
+        return num + proof_func(num - 1)[0]
+
+
+@decor
+def cycle_func(num):
+    res = num
+    for i in range(num):
+        res += i
+    return res
+
+
+number = 100
+
+print(proof_func(number))
+print(cycle_func(number))
+
+"""
+Результаты цикла: 0.01171875
+Результаты рекурсии: 0.2421875
+Заменил рекурсию на цикл. Успешно6 тк цикл использует меньше памяти.
+"""

@@ -30,3 +30,29 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import profile
+from numpy import array
+
+src = [23, 233, 22, 4, 12, 143, 4, 150, 6, 1, 78, 543, 90]
+
+@profile()
+def get_res(src):
+    result = [src[i] for i in range(len(src)) if src[i] > src[i - 1] and i != 0]
+    return result
+
+@profile()
+def get_res2(src):
+    result = array([src[i] for i in range(len(src)) if src[i] > src[i - 1] and i != 0])
+    return result
+
+get_res(src)
+get_res2(src)
+
+"""
+Использовал array вместо обычного списка.
+Данный способ помогает уменьшить количество выделяемой памяти. 
+"""
+
+
+

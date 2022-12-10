@@ -30,3 +30,25 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import profile
+
+src = [23, 233, 22, 4, 12, 143, 4, 150, 6, 1, 78, 543, 90]
+
+@profile()
+def get_res(src):
+    result = [src[i] for i in range(len(src)) if src[i] > src[i - 1] and i != 0]
+    return result
+
+my_list = [23, 233, 22, 4, 12, 143, 4, 150, 6, 1, 78, 543, 90]
+
+def get_res2(my_list):
+    for i in range(len(my_list)):
+        if my_list[i] > my_list[i - 1] and i != 0:
+            yield my_list[i]
+
+print(get_res(src))
+print(next(get_res2(my_list)))
+
+"""
+Использовал генератор, чтобы уменьшить выделяемую память. 
+"""
