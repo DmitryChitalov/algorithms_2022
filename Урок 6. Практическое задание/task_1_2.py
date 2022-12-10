@@ -30,3 +30,35 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+from json import dumps
+
+@profile()
+def dictionary1(*args):
+    name_dict = {}
+    for i in args:
+        key = i[0]
+        if not key in name_dict:
+            name_dict[key] = [i]
+        else:
+            name_dict[key].append(i)
+    return name_dict
+
+@profile()
+def dictionary2(*args):
+    name_dict = {}
+    for i in args:
+        key = i[0]
+        if not key in name_dict:
+            name_dict[key] = [i]
+        else:
+            name_dict[key].append(i)
+    return dumps(name_dict)
+
+
+print(dictionary1("Саша", "Маша", "Глаша", "Соня", "Миша", "Леша", "Лужа"))
+print(dictionary2("Саша", "Маша", "Глаша", "Соня", "Миша", "Леша", "Лужа"))
+
+"""
+Использовал сериализацию данных, что позволило сэкономить память.
+"""

@@ -30,3 +30,40 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import profile
+from json import dumps, loads
+import hashlib
+
+my_dict = {}
+
+
+@profile()
+def check_url(my_url):
+    salt = 'peper'
+    if my_url in my_dict:
+        return 'хеш уже есть в кэше', my_dict[my_url]
+    else:
+        my_dict[my_url] = (hashlib.sha512(salt.encode('utf-8') + my_url.encode('utf-8'))).hexdigest()
+        return 'хеш добавлен в кэш', my_dict[my_url]
+
+
+my_dict2 = {}
+my_json_dict = dumps(my_dict2)
+
+
+@profile()
+def check_url2(my_url):
+    salt = 'peper'
+    if my_url in loads(my_json_dict):
+        return f'хеш уже есть в кэше, {loads(my_json_dict)[my_url]}'
+    else:
+        loads(my_json_dict)[my_url] = (hashlib.sha512(salt.encode('utf-8') + my_url.encode('utf-8'))).hexdigest()
+        return f'хеш добавлен в кэш, {loads(my_json_dict)[my_url]}'
+
+check_url('https://gb.ru/')
+check_url2('https://gb.ru/')
+
+"""
+Использовал сериализацию данных и f-строки для вывода данных, чтобы уменьшить потребление памяти.
+"""
