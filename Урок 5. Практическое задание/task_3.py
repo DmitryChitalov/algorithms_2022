@@ -13,15 +13,130 @@ deque – это обобщение стеков и очередей.
 
 1) сравнить операции
 append, pop, extend списка и дека и сделать выводы что и где быстрее
+"""
+from collections import deque
+from timeit import timeit
 
+lst = [x for x in range(10000)]
+dqe = deque([x for x in range(10000)])
+
+print('Append')
+
+def append_list(lst):
+    for x in range(1000):
+        lst.append(x)
+    return lst
+
+def append_deque(dqe):
+    for x in range(1000):
+        dqe.append(x)
+    return dqe
+
+print(timeit('append_list(lst)', globals=globals(), number=100))  # 0.004859295906499028
+print(timeit('append_deque(dqe)', globals=globals(), number=100))  # 0.004988557891920209
+
+print('Pop')
+
+def pop_list(lst):
+    for x in range(1000):
+        lst.pop()
+    return lst
+
+def pop_deque(dqe):
+    for x in range(1000):
+        dqe.pop()
+    return dqe
+
+print(timeit('pop_list(lst)', globals=globals(), number=100))  # 0.003951883874833584
+print(timeit('pop_deque(dqe)', globals=globals(), number=100))  # 0.0041117239743471146
+
+print('Extend')
+
+def extend_list(lst):
+    for x in range(1000):
+        lst.extend([1, 2])
+    return lst
+
+def extend_deque(dqe):
+    for x in range(1000):
+        dqe.extend([1, 2])
+    return dqe
+
+print(timeit('extend_list(lst)', globals=globals(), number=100))  # 0.008521605981513858
+print(timeit('extend_deque(dqe)', globals=globals(), number=100))  # 0.013185746036469936
+
+#Операции выполняются практически за одинаковое время.
+
+"""
 2) сравнить операции
 appendleft, popleft, extendleft дека и соответствующих им операций списка
 и сделать выводы что и где быстрее
+"""
 
+print('Insert & Appendleft')
+
+def insert_list(lst):
+    for x in range(1000):
+        lst.insert(0, x)
+    return lst
+
+def appendleft_deque(dqe):
+    for x in range(1000):
+        dqe.appendleft(x)
+    return dqe
+
+print(timeit('insert_list(lst)', globals=globals(), number=100))  # 14.902617412852123
+print(timeit('appendleft_deque(dqe)', globals=globals(), number=100))  # 0.007762820925563574
+
+print('Pop(index) & Popleft')
+
+def popindex_list(lst):
+    for x in range(100):
+        lst.pop(x)
+    return lst
+
+def popleft_deque(dqe):
+    for x in range(100):
+        dqe.popleft()
+    return dqe
+
+print(timeit('popindex_list(lst)', globals=globals(), number=100))  # 0.6520498350728303
+print(timeit('popleft_deque(dqe)', globals=globals(), number=100))  # 0.00036249286495149136
+
+print('Insert[0] & extendleft')
+
+def insertfirst_list(lst):
+    for i in range(1000):
+        lst.insert(0, [1, 2])
+    return lst
+
+def extendleft_deque(dqe):
+    for i in range(1000):
+        dqe.extendleft([1, 2])
+    return dqe
+
+print(timeit('insertfirst_list(lst)', globals=globals(), number=100))  # 19.71265246416442
+print(timeit('extendleft_deque(dqe)', globals=globals(), number=100))  # 0.01100533688440919
+
+#Операции appendleft, popleft, extendleft в деке заметно быстрее, чем теже операции у списка.
+
+"""
 3) сравнить операции получения элемента списка и дека
 и сделать выводы что и где быстрее
-
-Подсказка:
-для того, чтобы снизить погрешность, желательно операции по каждой ф-ции
-(append, pop и т.д.) проводить в циклах. Для замеров используйте timeit.
 """
+print('List & Deque')
+
+def list_elem(lst):
+    for x in range(1000):
+        lst[x] = x
+    return lst
+
+def deque_elem(dqe):
+    for x in range(1000):
+        dqe[x] = x
+    return dqe
+
+print(timeit('list_elem(lst)', globals=globals(), number=100))  # 0.002804424148052931
+print(timeit('deque_elem(dqe)', globals=globals(), number=100))  # 0.005205700872465968
+
+#Операция получения элемента списка немного быстрее, чем аналог дека.
