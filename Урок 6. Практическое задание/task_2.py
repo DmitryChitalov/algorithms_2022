@@ -9,3 +9,56 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+import os
+
+from memory_profiler import profile, memory_usage
+
+
+def mem_dec(func):
+    def wrapper(*args):
+        start_mem = memory_usage()
+        res = func(*args)
+        end_mem = memory_usage()
+        diff = end_mem[0] - start_mem[0]
+        return diff
+
+    return wrapper
+
+
+"""
+Урок 2 Задание 2.	Подсчитать четные и нечетные цифры введенного натурального числа.
+Например, если введено число 34560, то у него 3 четные цифры
+(4, 6 и 0) и 2 нечетные (3 и 5).
+"""
+
+
+@mem_dec
+def count_odd_even(number, odd=0, even=0):
+    if number // 10 == 0:
+        if number % 2 == 0:
+            even += 1
+
+        odd += 1
+        return f'Amount Odd = {odd}\nAmount of Even = {even}'
+
+    last_number = number % 10
+    number = number // 10
+
+    if last_number % 2 == 0:
+        return count_odd_even(number, odd, even + 1)
+    return count_odd_even(number, odd + 1, even)
+
+
+if __name__ == '__main__':
+    a = count_odd_even(12312314124124122)
+    print(a)
+
+"""
+Описание пробелеммы 
+Мы считаем память на каждый вызов рекурсии таким образом у нас не 
+все время которое заняла рекурсия а время на каждый вызов 
+главная проблема конечно нечитабельность 
+
+Самой поростое решение это чтобы декоратор возвращал количество памяти использованое функцией через декоратор 
+но так теряется значение которое возвращает функция но при замерах памяти это не важно 
+"""
