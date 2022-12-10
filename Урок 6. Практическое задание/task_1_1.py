@@ -30,3 +30,44 @@
 
 Это файл для первого скрипта
 """
+from memory_profiler import profile
+from numpy import array
+
+
+# создания списка задание 1 урок 3
+@profile
+def fill_list():
+    """Сложность O(1)"""
+    result = []  # O(1)
+    for i in range(100000):  # O(1)
+        result.append(['HELLO', i])  # O(1)
+    return result
+"""
+Рузельтат выполнения функции выше
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    37     30.5 MiB     30.5 MiB           1   @profile
+    38                                         def fill_list():
+    39                                             
+    40     30.5 MiB      0.0 MiB           1       result = []  # O(1)
+    41     43.1 MiB      0.0 MiB      100001       for i in range(100000):  # O(1)
+    42     43.1 MiB     12.7 MiB      100000           result.append(['HELLO', i])  # O(1)
+    43     43.1 MiB      0.0 MiB           1       return result
+"""
+
+@profile
+def fill_list_optimised():
+    return array([i, 'hello'] for i in range(100000))
+"""
+Рузельтат выполнения функции выше
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    59     32.7 MiB     32.7 MiB           1   @profile
+    60                                         def fill_list_optimised():
+    61     32.7 MiB      0.0 MiB           1       return array([i, 'hello'] for i in range(100000))
+"""
+
+if __name__ == '__main__':
+    fill_list()
+    fill_list_optimised()

@@ -30,3 +30,42 @@
 
 Это файл для третьего скрипта
 """
+# урок 4 задание 1
+from memory_profiler import profile, memory_usage
+
+
+def mem_dec(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+@mem_dec
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+@mem_dec
+def optimised_func(nums):
+    print(nums)
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            yield i
+
+
+if __name__ == '__main__':
+    array = list(range(100000))
+    a, usage = func_1(array)
+    print(f"Func used {usage}")
+    b, usage_b = optimised_func(list(range(10000000)))
+    print(f"Func used {usage_b}")
+    """
+    генератор занимает здесь 0 памяти наверное число просто очень маленькое
+    """

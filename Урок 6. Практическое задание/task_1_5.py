@@ -30,3 +30,44 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import memory_usage
+from json import loads, dumps
+
+
+def mem_dec(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+
+# урок 3 задание 1 заполнение словаря
+@mem_dec
+def fill_dict():
+    """Сложность O(1)"""
+    result = {}  # O(1)
+    for i in range(10000):  # O(1)
+        result[i] = ['HELLO', i]  # O(1)
+    return result  # O(1)
+
+
+@mem_dec
+def fill_dict_dump():
+    res = {i: ['hello', i] for i in range(10000)}
+    return dumps(res)
+
+
+if __name__ == '__main__':
+    res, mem_use = fill_dict()
+    print(f"Memory taking {mem_use}")
+    res_2, mem_use_2 = fill_dict_dump()
+    print(f"Memory took optimised {mem_use_2}")
+    """
+    Memory taking 1.63671875
+    Memory took optimised 1.484375
+    Ну не такая большая разница но с обьектами по больше наверное будет заметно больше 
+    """
