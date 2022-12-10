@@ -28,3 +28,77 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+from time import time
+
+n = 10 ** 6
+
+
+def time_decorator(func):
+    def time_test(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'время выполнения функции {func.__name__} {end - start}')
+        return result
+
+    return time_test
+
+
+@time_decorator
+def list_append(lst, n):
+    for i in range(n):
+        lst.append(i)  # O(1) Вставка в конец
+
+
+new_lst = []
+list_append(new_lst, n)
+print('_' * 50)
+
+
+@time_decorator
+def dict_app(some_dict, n):
+    for i in range(n):
+        some_dict[i] = i  # так как словарь это хеш-таблица,
+        # оперция заполнения словаря занимает меньше времени
+
+
+some_dict = dict()
+dict_app(some_dict, n)
+print('_' * 50)
+
+
+# Операции удаления, получения по индексу и ключу
+
+@time_decorator
+def del_and_change_lst(some_lst):
+    for i in range(1000):
+        some_lst.pop(i)
+    for j in range(1000):
+        some_lst[j] = some_lst[j - 1]
+
+
+del_and_change_lst(new_lst)
+print('_' * 50)
+
+"""
+В функции del_and_change_lst операции удаления элемента не 
+с конца списка lst.pop(i) выполняются за О(n). Обращение по
+индексу с изменением элемента списка выполняется за О(1).
+"""
+
+
+@time_decorator
+def del_and_change_dict(some_dict):
+    for i in range(1000):
+        some_dict.pop(i)
+    for j in range(1000):
+        some_dict[j] = 'fill'
+
+
+del_and_change_dict(some_dict)
+print('_' * 50)
+"""
+В функции change_dict(some_dict) все операции 
+изменения словаря проходят за время O(1).
+Следовательно функция по изменению словаря отрабатывает гораздо быстрее.
+"""

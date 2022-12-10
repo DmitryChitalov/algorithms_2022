@@ -15,3 +15,21 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+from uuid import uuid4
+from hashlib import sha256
+salt = uuid4().hex
+hash_url = {}
+
+
+def validate(url):
+    if hash_url.get(url):
+        print(f'данный адрес {url} присутствует в базе')
+    else:
+        hashing = sha256(salt.encode() + url.encode()).hexdigest()
+        hash_url[url] = hashing
+        print(hash_url)
+
+
+validate('https://geekbrains.ru/')
+validate('https://geekbrains.ru/')
+validate('https://geekbrains.ru/')

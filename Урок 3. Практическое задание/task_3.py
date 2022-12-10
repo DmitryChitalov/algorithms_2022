@@ -22,3 +22,16 @@
 р
 а
 """
+
+from hashlib import sha256
+
+some_set = set()
+some_str = 'papa'
+for i in range(len(some_str)):
+    for j in range(i + 1, len(some_str) + 1):
+        if some_str[i:j] != some_str:
+            some_set.add(sha256(some_str[i:j].encode()).hexdigest())
+            print(some_str[i:j])
+for i in some_set:
+    print(i)
+print('количество элементов:', len(some_set))
