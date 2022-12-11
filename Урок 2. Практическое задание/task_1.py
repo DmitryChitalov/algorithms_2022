@@ -27,3 +27,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator(a=True, b=True, z=True):
+    operation = '+, -, *, /'
+    z = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if z == '0':
+        return
+    elif z not in operation:
+        print('ПОВНИМАТЕЛЬНЕЕ ЧИТАЕМ!!!')
+        return calculator()
+    else:
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+
+            if z == '+':
+                print(f'Ваш результат {a + b}')
+                return calculator()
+            elif z == '-':
+                print(f'Ваш результат {a - b}')
+                return calculator()
+            elif z == '*':
+                print(f'Ваш результат {a * b}')
+                return calculator()
+            elif z == '/':
+                print(f'Ваш результат {a / b}')
+                return calculator()
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            return calculator()
+
+calculator()
+
+
