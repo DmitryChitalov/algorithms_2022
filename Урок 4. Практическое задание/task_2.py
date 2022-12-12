@@ -12,6 +12,7 @@
 П.С. задание не такое простое, как кажется
 """
 
+
 from timeit import timeit
 from random import randint
 
@@ -80,3 +81,10 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+КОММЕНТАРИЙ ФАДЕЕВ Е. В.
+Мемоизация работает, но только в рамках вызова timeit, так как задан параметр number=10000.
+При единичном вызове функции recursive_reverse мемоизация не будет работать.
+"""
