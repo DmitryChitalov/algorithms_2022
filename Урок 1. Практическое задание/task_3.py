@@ -17,3 +17,28 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+annual_profit = {'Сургутнефтегаз': 513300000, 'Роснефть': 1012000000, 'Лукойл': 775500000, 'Газпром': 2159100000,
+                 'Сбербанк': 1245900000, 'Норильский никель': 512200000}
+
+'''Итоговая сложность O(n)'''
+
+def maximum_profit(annual_profit):
+    max_element = max(annual_profit.values())   # O(n)
+    for i in annual_profit:   # O(n)
+        if annual_profit[i] == max_element:   # O(1)
+            return i, max_element   # O(1)
+
+print(maximum_profit(annual_profit))
+
+
+
+'''Итоговая сложность O(n log n)'''
+
+def maximum_profit_2(annual_profit):
+    sorted_profit = sorted(annual_profit.items(), key=lambda x: x[1])   # O(n log n)
+    return sorted_profit[-1]   # O(1)
+
+print(maximum_profit_2(annual_profit))
+
+
+'''Вывод: функция maximum_profit эффективнее так как линейная сложность алгоритма эффективнее логарифмической'''

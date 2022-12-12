@@ -15,5 +15,19 @@
 
 Пример:
 Введите число: 123
-Количество четных и нечетных цифр в числе равно: (1, 2)
+Количество  четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd(number, even=0, odd=0):
+    if number == 0:
+        return f'Сумма четных чифр {even}, нечетных {odd}'
+    elif (number % 10) % 2 == 0:
+        even += number % 10
+        return even_odd(number // 10, even, odd)
+    else:
+        odd += number % 10
+        return even_odd(number // 10, even, odd)
+
+
+print(even_odd(653456))
