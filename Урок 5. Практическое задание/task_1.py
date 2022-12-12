@@ -28,3 +28,31 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+
+def accounting():
+    count = int(input('Введите количество предприятий для расчета прибыли: '))
+    company_add = {}
+    for i in range(count):
+        name_company = input('Введите название предприятия: ')
+        x, y, z, v = input('Через пробел введите прибыль данного предприятия'
+                           ' за каждый квартал(Всего 4 квартала): ').split(' ')
+        RES = namedtuple('accounting', 'name quarter_1 quarter_2 quarter_3 quarter_4')
+        RESUME_NAME = RES(
+            name=name_company,
+            quarter_1=x,
+            quarter_2=y,
+            quarter_3=z,
+            quarter_4=v
+        )
+        company_add[RESUME_NAME.name] = (int(RESUME_NAME.quarter_1) + int(RESUME_NAME.quarter_2)
+                                         + int(RESUME_NAME.quarter_3) + int(RESUME_NAME.quarter_4)) / 4
+    profit_max = [k for k, v in company_add.items() if v == max(company_add.values())][0]
+    profit_min = [k for k, v in company_add.items() if v == min(company_add.values())][0]
+    print('Средняя прибыль по', count, 'предприятиям', (sum(company_add.values())) / count, '\n',
+          'Предприятие с максимальной прибылью,', profit_max, '-', company_add[profit_max], '\n',
+          'Предприятие с минимальной прибылью,', profit_min, '-', company_add[profit_min])
+
+
+accounting()
