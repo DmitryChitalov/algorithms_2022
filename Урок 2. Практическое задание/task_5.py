@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def table_ascii(i):
+    if i == 128:
+        return i
+    print('%d - %s ' % (i, chr(i)), end=' ')
+    if (i) % 10 == 0:
+        print()
+    return table_ascii(i+1)
+
+table_ASCII(32)
+
+
+
+

@@ -17,3 +17,34 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def number(n, even=0, odd=0):
+    if n == 0:
+        return even, odd
+    else:
+        a = n % 10
+        n = n // 10
+        if a % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return number(n, even, odd)
+
+print(number(int(input('введите число '))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
