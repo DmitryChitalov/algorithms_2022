@@ -28,3 +28,47 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+from collections import defaultdict, namedtuple
+
+
+def check():
+    try:
+        count_company = int(input('введите колличество компаний '))
+    except ValueError:
+        print('введите число')
+        return check()
+    d_1 = defaultdict(float)
+    max_val = []
+    min_val = []
+    while count_company > 0:
+        company = input('введите название компании ')
+        try:
+            s = sum(list(map(int, input('введите прибыль за каждый квартал '
+                                        'через пробел(всего 4 квартала) ').split(' '))))
+            d_1[company] = s
+            count_company -= 1
+        except ValueError:
+            print('введите число')
+            return check()
+    average_sum_cmp = sum(d_1.values()) / 2
+    for i, v in d_1.items():
+        if v > average_sum_cmp:
+            max_val.append(i)
+        elif v < average_sum_cmp:
+            min_val.append(i)
+    return max_val, min_val
+
+
+max_val, min_val = check()
+print('Предприятия, с прибылью выше среднего значения: ', ', '.join(max_val),
+      'Предприятия, с прибылью ниже среднего значения: ', ', '.join(min_val), sep='\n')
+
+
+
+
+
+
+
+
+

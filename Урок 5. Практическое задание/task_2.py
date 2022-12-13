@@ -24,3 +24,75 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+from functools import reduce
+
+
+def hex_():
+    dct = defaultdict(list)
+    count_ = 1
+    while count_ < 3:
+        num = input('введите шеснадцатеричное число: ')
+        for i in num:
+            dct[num + '_' + str(count_)].append(i)
+        count_ += 1
+    print(dct)
+    number = []
+    for i in dct.values():
+        res = int(''.join(i), 16)
+        res.append(res)
+    add_ = list(hex(sum(number)).upper())[2:]
+    mul = list(hex(reduce(lambda x, y: x * y, number)))[2:]
+    return f'сумма: {add_}, произведение: {mul}'
+
+print(hex_())
+
+
+class HexOperation:
+    def __init__(self, num_1, num_2):
+        self.num_1 = num_1
+        self.num_2 = num_2
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.num_1), 16) + int(''.join(self.num_2), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.num_1), 16) * int(''.join(self.num_2), 16)))[2:]
+
+
+hex_add = HexOperation(input('введите первое шеснадцатеричное число: '),
+                       input('введите второе шеснадцатеричное число: '))
+sum_hex_add = hex_add + hex_add
+print(f'сумма {sum_hex_add}')
+hex_mul = HexOperation('A2', 'CF4')
+sum_hex_mul = hex_mul * hex_mul
+print(f'произведение :{sum_hex_mul}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
