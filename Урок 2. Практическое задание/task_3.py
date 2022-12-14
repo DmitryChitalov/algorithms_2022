@@ -18,3 +18,17 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+def even_odd(num=int(input('Введите число:')), rev=''):
+
+    if num == 0:
+        print(f'Перевернутое число: {rev}')
+        return rev
+
+    rev += str(num % 10)
+
+    even_odd(num//10, rev)
+
+
+
+
+even_odd()

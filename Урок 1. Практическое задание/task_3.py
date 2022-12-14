@@ -17,3 +17,59 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+def first_solution(data: dict):
+    """
+    Получает доход всех компаний в виде списка
+    сортирует его по убыванию
+    в цикле перебирает значение словаря и если они сопадают сохраняет его
+    сложность : O(n log n)
+    1 + n + 1 +n + 1 + 1 + n log n
+    """
+    result = {}  # O(1)
+    income = sorted(list(data.values()), reverse=True)  # O(n log n)
+
+    for i in income[:3]:  # O(1) константное
+        for k in data.keys():  # O(n)
+            if data[k] == i:  # O(1)
+                result[k] = i  # O(1)
+    return result  # O(1)
+
+
+def second_solution(data: dict):
+    """
+    получает доход всех компаний списком
+    берет оттуда максимальное значение 3 раза и сохраняет их в переменную
+    сравнивает взятые значения с ключами и сохраняет в новый словарь
+    сложность : O(n ^ 2)
+    """
+    result = {}  # O(1)
+    income = list(data.values())  # O(n)
+    top_3 = []  # O(1)
+    for i in income:  # O(n)
+        max_val = max(income)  # O(n)
+        top_3.append(max_val)  # O(1)
+        income.remove(max_val)  # O(n)
+
+    for i in top_3:  # O(n)
+        for k in data.keys():  # O(n)
+            if i == data[k]:  # O(n)
+                result[k] = i  # O(1)
+
+    return result  # O(1)
+
+
+##  сделайте вывод, какое решение эффективнее и почему
+"""
+Я Думаю  первое решение красивее и эфективнее не смотря на сложность (n log n) в первом алгоритме 
+меньше дейстивий и меньше сложность 
+"""
+
+if __name__ == "__main__":
+    companies = {'activision': 1000000,
+                 'electronic arts': 222532343221231241,
+                 'rockstar': 98888500023400,
+                 'ubisoft': 102312988787243643,
+                 'rebellion': 212312313}
+
+    print(first_solution(companies))
+    print(second_solution(companies))
