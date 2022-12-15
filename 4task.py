@@ -1,60 +1,83 @@
-from collections import Counter
 import timeit
-array = [1, 3, 1, 3, 4, 5, 1]
+
+
+dictionary = {'персона': 'человек',
+              'марафон': 'гонка бегунов длиной около 26 миль',
+              'противостоять': 'оставаться сильным, несмотря на давление',
+              'бежать': 'двигаться со скоростью'}
+
+
+code_to_test_1 = """
+dictionary = {'персона': 'человек',
+              'марафон': 'гонка бегунов длиной около 26 миль',
+              'противостоять': 'оставаться сильным, несмотря на давление',
+              'бежать': 'двигаться со скоростью'}
+dictionary['гонка'] = 12"""
+elapsed_time_1 = timeit.timeit(code_to_test_1, number=1)*100
+print(elapsed_time_1)
+
+
+code_to_test_2 = """
+dictionary = {'персона': 'человек',
+              'марафон': 'гонка бегунов длиной около 26 миль',
+              'противостоять': 'оставаться сильным, несмотря на давление',
+              'бежать': 'двигаться со скоростью'}
+dictionary['персона'] = ['человек прямоходящий']"""
+elapsed_time_2 = timeit.timeit(code_to_test_2, number=1)*100
+print(elapsed_time_2)
+
+
+
+code_to_test_3 = """
+dictionary = {'персона': 'человек',
+              'марафон': 'гонка бегунов длиной около 26 миль',
+              'противостоять': 'оставаться сильным, несмотря на давление',
+              'бежать': 'двигаться со скоростью'}
+del dictionary['марафон']"""
+elapsed_time_3 = timeit.timeit(code_to_test_3, number=1)*100
+print(elapsed_time_3)
+
+
+print('----------------------------------------------------------------------------------------------------------------')
+
+
+code_to_test_4 = """
+from collections import OrderedDict
+my_dict = {'kiwi': 4, 'apple': 5, 'cat': 3}
+ordered_dict = OrderedDict(my_dict) 
+ordered_dict['dog'] = 3"""
+elapsed_time_4 = timeit.timeit(code_to_test_4, number=1)*100
+print(elapsed_time_4)
+
+code_to_test_5 = """
+from collections import OrderedDict
+my_dict = {'kiwi': 4, 'apple': 5, 'cat': 3}
+ordered_dict = OrderedDict(my_dict) 
+ordered_dict['kiwi'] = 10 
+print(ordered_dict)"""
+elapsed_time_5 = timeit.timeit(code_to_test_5, number=1)*100
+print(elapsed_time_5)
+
+
+code_to_test_6 = """
+from collections import OrderedDict
+my_dict = {'kiwi': 4, 'apple': 5, 'cat': 3}
+ordered_dict = OrderedDict(my_dict) 
+ordered_dict.pop('kiwi') 
+print(ordered_dict) """
+elapsed_time_6 = timeit.timeit(code_to_test_6, number=1)*100
+print(elapsed_time_6)
+
+
+#вывод:исходя из результатов замеров словарь работает значительно быстрее
+#использовать Ordereddict не вижу смысла.
 
 
 
 
-code_to_test = """
-
-def func_1():
-    m = 0
-    num = 0
-    for i in array:
-        count = array.count(i)
-        if count > m:
-            m = count
-            num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
-"""
-
-elapsed_time = timeit.timeit(code_to_test, number=100)/100
-print(elapsed_time)
-
-code_to_test = """
-
-def func_2():
-    new_array = []
-    for el in array:
-        count2 = array.count(el)
-        new_array.append(count2)
-
-    max_2 = max(new_array)
-    elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'"""
-elapsed_time = timeit.timeit(code_to_test, number=100)/100
-print(elapsed_time)
-
-
-code_to_test = """
-def func_3():
-    l = ['1', '3', '1', '3', '4', '5','1']
-    return f'Чаще всего встречается число{Counter(l).most_common(1)}раза оно появилось в массиве'"""
-elapsed_time = timeit.timeit(code_to_test, number=100)/100
-print(elapsed_time)
 
 
 
 
 
 
-
-#7.099999999999468e-08
-#7.100000000002937e-08
-#3.689999999999943e-07  судя по результатам ускорить задачу удалось.
-
-#print(func_1())
-#print(func_2())
-#print(func_3())
