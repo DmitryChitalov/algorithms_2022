@@ -1,61 +1,139 @@
 import timeit
 
+#append
 code_to_test = """
-
-def revers(enter_num, revers_num=0):
-    if enter_num == 0:
-        return
-    else:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-        revers(enter_num, revers_num)"""
-
-
-elapsed_time = timeit.timeit(code_to_test, number=100)/100
-print(elapsed_time)
-
+my_list = ['Apple',"Banana","Orange"]
+my_list.append("Pineapple")
+print(my_list)"""
+elapsed_time_1 = timeit.timeit(code_to_test, number=10)
+print(elapsed_time_1)
 
 
 code_to_test_2 = """
-def revers_2(enter_num, revers_num=0):
-    while enter_num != 0:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-    return revers_num"""
-
-elapsed_time_2 = timeit.timeit(code_to_test_2, number=100)/100
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+deq.append('Pineapple')
+print(deq)"""
+elapsed_time_2 = timeit.timeit(code_to_test_2, number=10)
 print(elapsed_time_2)
 
-
-
+#pop
 code_to_test_3 = """
-def revers_3(enter_num):
-    enter_num = str(enter_num)
-    revers_num = enter_num[::-1]
-    return revers_num"""
-
-elapsed_time_3 = timeit.timeit(code_to_test_3, number=100)/100
+my_list = ['Apple',"Banana","Orange"]
+my_list.pop()
+print(my_list)"""
+elapsed_time_3 = timeit.timeit(code_to_test_3, number=10)
 print(elapsed_time_3)
 
 
-
-
-code_to_test_4 = """
-def revers_4(enter_num):
-    string = ''.join(reversed(enter_num))
-    return string"""
-
-elapsed_time_4 = timeit.timeit(code_to_test_4, number=100)/100
+code_to_test_4 ="""
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+deq.pop()
+print(deq)"""
+elapsed_time_4= timeit.timeit(code_to_test_4, number=10)
 print(elapsed_time_4)
 
 
+#extend
+code_to_test_5 = """
+my_list = ['Apple',"Banana","Orange"]
+my_list_2 = ['Mango','Pear']
+my_list.extend(my_list_2)
+print(my_list)"""
+elapsed_time_5 = timeit.timeit(code_to_test_5, number=10)
+print(elapsed_time_5)
+
+
+code_to_test_6 ="""
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+my_list_2 = ['Mango','Pear']
+deq.extend(my_list_2)
+print(deq)"""
+elapsed_time_6= timeit.timeit(code_to_test_6, number=10)
+print(elapsed_time_6)
+
+print('---------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 
 
-#Вывод:По результатом замеров видно что самый долгая функция первая так как это рекурсия. 7.400000000001155e-08
-#На втором месте цикл while с сложностью O(N), цикл оказался быстрее рекурсии 5.1999999999968735e-08 
-#Третие место разделяет встроенная функция reversed O(N) и срезO(N) встроенные функции всегда быстро работают, так же как и срезы.
-# 4.8999999999986555e-08 
-# 4.900000000002125e-08
+#2)appendleft
+code_to_test = """
+my_list = ['Apple',"Banana","Orange"]
+my_list.append("Pineapple")
+print(my_list)"""
+elapsed_time_1 = timeit.timeit(code_to_test, number=10)
+print(elapsed_time_1)
+
+
+code_to_test_2 = """
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+deq.appendleft('Pineapple')
+print(deq)"""
+elapsed_time_2 = timeit.timeit(code_to_test_2, number=10)
+print(elapsed_time_2)
+
+#pop
+code_to_test_3 = """
+my_list = ['Apple',"Banana","Orange"]
+my_list.pop()
+print(my_list)"""
+elapsed_time_3 = timeit.timeit(code_to_test_3, number=10)
+print(elapsed_time_3)
+
+
+code_to_test_4 = """
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+deq.popleft()
+print(deq)"""
+elapsed_time_4= timeit.timeit(code_to_test_4, number=10)
+print(elapsed_time_4)
+
+
+#extend
+code_to_test_5 = """
+my_list = ['Apple',"Banana","Orange"]
+my_list_2 = ['Mango','Pear']
+my_list.extend(my_list_2)
+print(my_list)"""
+elapsed_time_5 = timeit.timeit(code_to_test_5, number=10)
+print(elapsed_time_5)
+
+
+code_to_test_6 = """
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+my_list_2 = ['Mango','Pear']
+deq.extendleft(my_list_2)
+print(deq)"""
+elapsed_time_6= timeit.timeit(code_to_test_6, number=10)
+print(elapsed_time_6)
+
+
+print('---------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+
+
+
+#получение элемента списка
+code_to_test_5 = """
+my_list = ['Apple',"Banana","Orange"]
+print(my_list[0])"""
+elapsed_time_5 = timeit.timeit(code_to_test_5, number=10)
+print(elapsed_time_5)
+
+
+code_to_test_6 = """
+from collections import deque
+deq = deque(["Apple","Banana","Orange"])
+print(deq[0])"""
+elapsed_time_6= timeit.timeit(code_to_test_6, number=10)
+print(elapsed_time_6)
+
+
+#Вывод по первому пункту:дека затрачивает больше времени,лист меньше.
+#по второну пункту:дека оказалась чуть бытрее списка. Как и предполагалось.
+#по третьему: лист оказался быстрее в доступе по индексу.
