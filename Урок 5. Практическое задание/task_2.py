@@ -37,10 +37,7 @@ def hex_():
             dct[num + '_' + str(count_)].append(i)
         count_ += 1
     print(dct)
-    number = []
-    for i in dct.values():
-        res = int(''.join(i), 16)
-        res.append(res)
+    number = [int(''.join(i), 16) for i in dct.values()]
     add_ = list(hex(sum(number)).upper())[2:]
     mul = list(hex(reduce(lambda x, y: x * y, number)))[2:]
     return f'сумма: {add_}, произведение: {mul}'

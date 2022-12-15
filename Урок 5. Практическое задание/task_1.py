@@ -35,34 +35,34 @@ from collections import defaultdict, namedtuple
 def check():
     try:
         count_company = int(input('введите колличество компаний '))
+        cmp = count_company # делитель отелён от кол-ва компаний, чтоб потом найти среднее значение прибыли всех к-ий
     except ValueError:
         print('введите число')
         return check()
     d_1 = defaultdict(float)
-    max_val = []
-    min_val = []
     while count_company > 0:
         company = input('введите название компании ')
         try:
-            s = sum(list(map(int, input('введите прибыль за каждый квартал '
-                                        'через пробел(всего 4 квартала) ').split(' '))))
-            d_1[company] = s
+            d_1[company] = sum(list(map(int, input('введите прибыль за каждый квартал '
+                                        'через пробел(всего 4 квартала) ').split(' ')))) / 4
             count_company -= 1
         except ValueError:
             print('введите число')
             return check()
-    average_sum_cmp = sum(d_1.values()) / 2
-    for i, v in d_1.items():
-        if v > average_sum_cmp:
-            max_val.append(i)
-        elif v < average_sum_cmp:
-            min_val.append(i)
-    return max_val, min_val
+    average_sum_cmp = sum(d_1.values()) / cmp
+    max_val = [i for i, v in d_1.items() if v > average_sum_cmp]
+    min_val = [i for i, v in d_1.items() if v < average_sum_cmp]
+    return ''.join(max_val), ''.join(min_val), average_sum_cmp
 
 
-max_val, min_val = check()
-print('Предприятия, с прибылью выше среднего значения: ', ', '.join(max_val),
-      'Предприятия, с прибылью ниже среднего значения: ', ', '.join(min_val), sep='\n')
+max_val, min_val, average_sum_cmp = check()
+print(f'\nПредприятия, с прибылью выше среднего значения: {max_val} '
+      f'\nПредприятия, с прибылью ниже среднего значения: {min_val} '
+      f'\nсредняя прибыль компаний: {average_sum_cmp}')
+
+
+
+
 
 
 
