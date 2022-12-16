@@ -16,3 +16,27 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+"""
+2*5+1 элементов: 0.001582199999999867
+2*50+1 элементов: 0.006467400000000012
+2*500+1 элементов: 0.1136105999999999
+Самый эффективный оказался метод, использующий имеющуюся функцию поиска медианы
+"""
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def fn_median(lst):
+    return median(lst)
+
+
+m = int(input("Введите натуральное число m: "))
+list_len = 2*m+1
+orig_list = [randint(0, 100) for _ in range(list_len)]
+
+
+print(timeit("fn_median(orig_list[:])", globals=globals(), number=1000))
+print(orig_list)
+print(fn_median(orig_list))
+

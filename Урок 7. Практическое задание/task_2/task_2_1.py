@@ -15,3 +15,37 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+
+"""
+2*5+1 элементов: 0.01870269999999996
+2*50+1 элементов: 1.2925638
+2*500+1 элементов: 192.9323915
+"""
+
+from random import randint
+from timeit import timeit
+
+
+def median_gnome(lst):
+    i = 1
+    while i < len(lst):
+        if lst[i - 1] <= lst[i]:
+            i += 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            if i > 1:
+                i -= 1
+    return lst[m]
+
+
+m = int(input("Введите натуральное число m: "))
+list_len = 2*m+1
+orig_list = [randint(0, 100) for _ in range(list_len)]
+
+
+print(timeit("median_gnome(orig_list[:])", globals=globals(), number=1000))
+print(orig_list)
+print(median_gnome(orig_list))
+
+
+
