@@ -30,3 +30,46 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import memory_usage
+
+def memory_decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        func(args[0])
+        m2 = memory_usage()
+        return m2[0] - m1[0]
+    return wrapper
+
+'''
+Скрипт из урока 2 задания 4.
+'''
+
+@memory_decor
+def get_sum(numb_of_el):
+    if numb_of_el == 1:
+        return 1
+    else:
+        return (-0.5)**(numb_of_el - 1) + get_sum(numb_of_el - 1)
+
+'''В отимизированной версии использовала цикл'''
+
+@memory_decor
+def get_sum_2(numb_of_el):
+    res = 0
+    while numb_of_el > 0:
+        res += (-0.5)**(numb_of_el - 1)
+        numb_of_el -= 1
+    return res
+
+print(get_sum(500))
+print(get_sum_2(500))
+
+'''
+Мои результаты:
+
+get_sum()     - 2.79296875
+get_sum_2()   - 0.0
+
+Оптимизированная версия занимает меньше памяти
+'''
