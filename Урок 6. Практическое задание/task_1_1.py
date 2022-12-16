@@ -30,3 +30,46 @@
 
 Это файл для первого скрипта
 """
+
+"""
+Алгоритмы и структуры данных на Python.
+Урок 3, Задание 3:
+Определить количество различных (уникальных) подстрок
+с использованием хеш-функции
+Дана строка S длиной N, состоящая только из строчных латинских букв
+"""
+from hashlib import sha256
+from memory_profiler import profile
+from numpy import array, empty
+
+
+begin_str = "рараappppaaaaapaaaaappppaaaapapapрараappppaaaaapaaaaappppaaaapapapрараappppaaaaapaaaaappppaaaapapapрараappppaaaaapaaaaappppaaaapapap"
+
+
+@profile
+def fn_hash(str1):
+    result_set = set()
+    len_str = len(str1)
+    for i in range(len_str):
+        for j in range(i+1, len_str+1):
+            result_set.add(sha256(str1[i:j].encode()).hexdigest())
+    return f"Уникальных подстроек: {len(result_set)}"
+
+
+@profile
+def fn_hash1(str1):
+    result_set = empty()
+    len_str = len(str1)
+    for i in range(len_str):
+        for j in range(i+1, len_str+1):
+            result_set.add(sha256(str1[i:j].encode()).hexdigest())
+    return f"Уникальных подстроек: {len(result_set)}"
+
+
+
+
+fn_hash(begin_str)
+fn_hash1(begin_str)
+
+
+
