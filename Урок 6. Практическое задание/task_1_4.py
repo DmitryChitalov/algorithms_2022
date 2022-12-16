@@ -30,3 +30,53 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import profile, memory_usage
+from pympler.asizeof import asizeof
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        start = memory_usage()
+        my_func = func(*args)
+        stop = memory_usage()
+        result = stop[0] - start[0]
+        return my_func, result
+
+    return wrapper
+
+
+@memory
+def even_odd_count(num, even=0, odd=0):
+    if num == 0:
+        return print('Четных чисел:', even, 'Нечетных чисел:', odd)
+    else:
+        even_or_odd = num % 10
+        num //= 10
+        if even_or_odd % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd_count(num, even, odd)
+
+
+print(asizeof(even_odd_count(4446545)))
+
+
+@memory
+def revers_num(num):
+    even = 0
+    odd = 0
+    for i in range(len(str(num))):
+        even_or_odd = num % 10
+        num //= 10
+        if even_or_odd % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+    return print('Четных чисел:', even, 'Нечетных чисел:', odd)
+
+
+print(asizeof(revers_num(4446545)))
+'''Использовал цикл for вместо рекурсии, заняло меньше памяти 656 vs 96'''

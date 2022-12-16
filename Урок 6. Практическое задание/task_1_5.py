@@ -30,3 +30,50 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import profile, memory_usage
+from pympler.asizeof import asizeof
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        start = memory_usage()
+        my_func = func(*args)
+        stop = memory_usage()
+        result = stop[0] - start[0]
+        return my_func, result
+
+    return wrapper
+
+
+@memory
+def revers_num2(num, list1=''):
+    count = len(str(num))
+    if count == 1:
+        print(str(list1) + str(num % 10))
+    else:
+        count -= 1
+        list1 = str(list1) + str(num % 10)
+        num //= 10
+        return revers_num2(num, list1)
+
+
+print(asizeof(revers_num2(3699632345543212548)))
+
+
+@memory
+def revers_num(num):
+    revers = 0
+    while num > 0:
+        digit = num % 10
+        num = num // 10
+        revers = revers * 10
+        revers = revers + digit
+
+    print(revers)
+
+
+print(asizeof(revers_num(3699632345543212548)))
+
+'''Использовал цикл while, вместо рекурсии, так как занимет меньше оперативной памяти.
+(1536 vs 96)'''
