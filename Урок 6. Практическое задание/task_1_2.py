@@ -30,3 +30,45 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import memory_usage
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+# Исходное решение - задание 3_3 из курса 'Основы языка Python'
+@decor
+def thesaurus(names):
+    dict_of_names = {}
+    for name in names:
+        a = name[0]
+        list_of_names = list(filter(lambda el: el.startswith(a), names))
+        dict_of_names.setdefault(a, list_of_names)
+    return dict_of_names
+
+
+# Оптимизированное решение
+@decor
+def thesaurus2(names):
+    dict_of_names2 = {name[0]: list(filter(lambda el: el.startswith(name[0]), names)) for name in names}
+    return dict_of_names2
+
+
+if __name__ == '__main__':
+    your_names = input('Введите имена сотрудников через запятую: ')  # иван, борис, петр, ирина, алексей, михаил
+    names = sorted(your_names.split(', '))
+    print('Исходное решение')
+    res1, mem_dif = thesaurus(names)
+    print(res1)
+    print(f'Выполнение исходного решения заняло {mem_dif} Mib')  # 0.0078125 Mib
+    print('\nОптимизированное решение')
+    res2, mem_dif = thesaurus2(names)
+    print(res2)
+    print(f'Выполнение оптимизированного решения заняло {mem_dif} Mib')  # 0.00390625 Mib
