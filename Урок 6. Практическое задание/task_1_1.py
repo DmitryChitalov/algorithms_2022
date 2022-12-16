@@ -26,10 +26,10 @@
 import collections
 from collections import defaultdict, namedtuple
 import pickle
-from memory_profiler import profile
-from pympler import asizeof
 from memory_profiler import memory_usage
 from time import time
+from memoty_profiler import profile
+from pympler import asizeof
 
 
 
@@ -94,17 +94,17 @@ def check_2():
     return max_val, min_val, average_sum_cmp
 
 
-#max_val, min_val, average_sum_cmp = check_2()
+max_val, min_val, average_sum_cmp = check_2()
 #print('Предприятия, с прибылью выше среднего значения: ', pickle.loads(max_val),
 #      'Предприятия, с прибылью ниже среднего значения: ', pickle.loads(min_val),
 #      'средняя прибыль всех предприятий за год:', average_sum_cmp, sep='\n')
-#print(asizeof.asizeof(max_val, min_val, average_sum_cmp))
+print(asizeof.asizeof(max_val, min_val, average_sum_cmp))
 
 
 
 
 '''АНАЛИТИКА
-Оптимизировал функцию check c помощью list comprehension и сериализацией списков с помощью pickle
+Уменьшил объём занимаемой памяти функцию check путём сериализации списков при помощи модуля pickle
 check: 208 общий размер занимаемой памяти asizeof 
 check_2: 104 общий размер занимаемой памяти asizeof
 
