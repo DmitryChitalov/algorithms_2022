@@ -30,3 +30,40 @@
 
 Это файл для четвертого скрипта
 """
+
+from memory_profiler import memory_usage
+
+def memory_decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        func(args[0])
+        m2 = memory_usage()
+        return m2[0] - m1[0]
+    return wrapper
+
+nums = list(range(1, 100000))
+
+'''
+Скрипт из урока 3 задания 3. Тот же самый, но по-другому оптимизировала
+'''
+
+@memory_decor
+def get_indexes_of_even(nums):
+    new_arr = [i for i, num in enumerate(nums) if num % 2 == 0]
+    return new_arr
+
+'''В отимизированной версии сделала через функцию map()'''
+
+@memory_decor
+def get_indexes_of_even_3(nums):
+    new_arr = map(lambda i, num: i if num % 2 == 0 else None, enumerate(nums))
+    return new_arr
+
+'''
+Мои результаты:
+
+get_indexes_of_even()     - 1.7890625
+get_indexes_of_even_3()   - 0.0
+
+Оптимизированная версия занимает меньше памяти
+'''
