@@ -30,3 +30,57 @@
 
 Это файл для третьего скрипта
 """
+from memory_profiler import memory_usage
+from random import choice
+
+
+def decor(func):
+    def wrapper(*args):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+
+# Исходное решение - задание 3_5 из курса 'Основы языка Python'
+'''Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов, 
+взятых из трёх списков (по одному из каждого)'''
+
+
+@decor
+def get_jokes(count):
+    list_of_jokes = []
+    for x in range(0, count):
+        noun = choice(nouns)
+        adverb = choice(adverbs)
+        adjective = choice(adjectives)
+        joke = noun + ' ' + adverb + ' ' + adjective
+        list_of_jokes.append(joke)
+    return list_of_jokes
+
+
+# Оптимизированное решение
+@decor
+def get_jokes2(count):
+    list_of_jokes = [f'{choice(nouns)} {choice(adverbs)} {choice(adjectives)}' for _ in range(0, count)]
+    return list_of_jokes
+
+
+if __name__ == '__main__':
+    nouns = ['автомобиль', 'лес', 'огонь', 'город', 'дом']
+    adverbs = ['сегодня', 'вчера', 'завтра', 'позавчера', 'ночью']
+    adjectives = ['веселый', 'яркий', 'зеленый', 'утопичный', 'мягкий']
+    count = int(input("Введите количество шуток: "))  # 500
+    print('Исходное решение')
+    res1, mem_dif = get_jokes(count)
+    print(res1)
+    print(f'Выполнение исходного решения заняло {mem_dif} Mib')  # 0.0703125 Mib
+    print('\nОптимизированное решение')
+    res2, mem_dif = get_jokes2(count)
+    print(res2)
+    print(f'Выполнение оптимизированного решения заняло {mem_dif} Mib')  # 0.0078125 Mib
+
+'''В оптимизированном решении были использованы List Comprehensions и f-строка, 
+что позволило уменьшить расходование памяти.'''
