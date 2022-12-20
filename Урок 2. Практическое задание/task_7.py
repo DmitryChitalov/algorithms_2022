@@ -13,3 +13,44 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def func(n, s=0):
+    if n == 0:
+        return s
+    else:
+        s += n
+        return func(n-1, s)
+
+n = int(input())
+right = n * (n + 1) // 2
+if func(n) == right:
+    print(True)
+    print(func(n))
+    print(right)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
