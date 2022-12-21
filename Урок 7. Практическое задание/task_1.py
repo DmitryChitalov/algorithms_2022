@@ -19,10 +19,8 @@
 а по убыванию.
 """
 
-from copy import deepcopy
 from random import randint
 from timeit import timeit
-import re
 
 '''Изначальная функция сортировки по убыванию пузырем'''
 
