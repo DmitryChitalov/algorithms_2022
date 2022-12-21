@@ -30,3 +30,37 @@
 
 Это файл для второго скрипта
 """
+
+from memory_profiler import profile, memory_usage
+import numpy
+
+def memory(func):
+    def wrapper():
+        start = memory_usage()
+        my_func = func()
+        stop = memory_usage()
+        result = stop[0] - start[0]
+        return my_func, print(result)
+
+    return wrapper()
+
+@memory
+def func():
+    src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+    result = [num for i, num in zip(src, src[1:]) if num > i]
+    return result
+
+
+# func()
+
+
+@memory
+def boostfunc():
+    src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+    result = numpy.array([num for i, num in zip(src, src[1:]) if num > i])
+    return result
+
+
+# boostfunc()
+
+'''Использовал класс numpy.ndarray, использует меньше оперативной памяти '''

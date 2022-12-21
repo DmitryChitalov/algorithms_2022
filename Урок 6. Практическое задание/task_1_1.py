@@ -30,3 +30,60 @@
 
 Это файл для первого скрипта
 """
+
+from memory_profiler import profile, memory_usage
+from itertools import zip_longest
+from pympler.asizeof import asizeof
+
+
+def memory(func):
+    def wrapper():
+        start = memory_usage()
+        my_func = func()
+        stop = memory_usage()
+        result = stop[0] - start[0]
+        return my_func, print(result)
+
+    return wrapper()
+
+
+@memory
+def appendhobby():
+    with open('Users.csv', encoding='utf-8') as f_users:
+        users = []
+        for line in f_users:
+            users.append(line.strip().replace('"', ''))
+    with open('Hobby.csv', encoding='utf-8') as f_hobby:
+        hobby = []
+        for line in f_hobby:
+            hobby.append(line.strip().replace('"', ''))
+
+    if len(users) > len(hobby):
+        exit(1)
+
+    else:
+        dict_zip = ((users, hobby) for users, hobby in zip_longest(users, hobby, fillvalue=None))
+        print(dict(dict_zip))
+
+
+# appendhobby()
+# print(asizeof(appendhobby()))
+
+@memory
+def appendhobby_nitro():
+    with open('Users.csv', encoding='utf-8') as f_users:
+        users = [line.strip().replace('"', '') for line in f_users]
+    with open('Hobby.csv', encoding='utf-8') as f_hobby:
+        hobby = [line.strip().replace('"', '') for line in f_hobby]
+    if len(users) > len(hobby):
+        exit(1)
+
+    else:
+        dict_zip = ((users, hobby) for users, hobby in zip_longest(users, hobby, fillvalue=None))
+        print(dict(dict_zip))
+
+
+# print(asizeof(appendhobby_nitro()))
+
+'''Использовал LC, вместо цикла for, тем самым используется меньше памяти, 6 урок базовый курс Python'''
+

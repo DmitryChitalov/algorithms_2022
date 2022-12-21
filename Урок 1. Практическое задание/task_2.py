@@ -15,3 +15,30 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+"""Сложность О(n)"""
+
+
+def min_num2(list1):
+    min_num = list1[0]       # O(1)
+    for num in list1:        # O(n)
+        if num < min_num:    # O(1)
+            min_num = num    # O(1)
+    return min_num           # O(1)
+
+
+print(min_num2([9, 4, 16, 5, 6, 3]))
+
+
+def min_num(nums):
+    n = len(nums)                                                   #O(1)
+    for i in range(n):                                              #O(n)
+        for x in range(n - 1):                                      #O(n)
+            if nums[x] > nums[x + 1]:                               #O(1)
+                list1[x], list1[x + 1] = list1[x + 1], list1[x]     #O(1)
+
+
+list1 = [9, 4, 16, 5, 6, 3]
+min_num(list1)
+print(list1[0])
+
