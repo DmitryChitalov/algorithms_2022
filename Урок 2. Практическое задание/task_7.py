@@ -13,3 +13,17 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+def prove(n=1, lst=[], num=int(input('Задайте длину суммируемого ряда: '))):
+    lst.append(n)
+    if n == num:
+        if sum(lst) == n * (n + 1) / 2:
+            print(f'Выражение истинно. {sum(lst)} == {n * (n + 1) / 2}')
+            return True
+
+        else:
+            print(f'Выражение ложно. {sum(lst)} != {n * (n + 1) / 2}')
+            return False
+
+    prove(n+1, lst, num)
+
+prove()
