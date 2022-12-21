@@ -17,3 +17,45 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+"""Сложность функции cash O(nlogn) - решение функции cash эффективанее, 
+ленейно логарифмическая функция имеет меньшую сложность"""
+
+
+def cash(s, x):
+
+    cash_top3 = dict(sorted(s.items(), key=lambda item: item[1]))    # O(nlogn)
+    cash_top3 = list(reversed(cash_top3))                            # O(n)
+    return cash_top3[:x]                                             # O(1)
+
+
+dict_1 = {'apple': 1500,
+          'nokia': 900,
+          'samsung': 1200,
+          'xiaomi': 1100,
+          'sony': 700}
+print(cash(dict_1, 3))
+
+
+"""Сложность функции cash2 O(n**2)"""
+
+
+def cash2(s):
+    s2 = {v: k for k, v in s.items()}                                        #O(n)
+    cash_top3 = list(s2.keys())                                              #O(1)
+    cash = cash_top3[0]                                                      #O(1)
+    for i in cash_top3:                                                      #O(n)
+        if i < cash:                                                         #O(1)
+            cash = i                                                         #O(1)
+            cash_top3.remove(i)                                              #O(n)
+    return s2.get(cash_top3[0]), s2.get(cash_top3[1]), s2.get(cash_top3[2])  #O(n)
+
+
+dict_1 = {'apple': 1500,
+          'nokia': 900,
+          'samsung': 1200,
+          'xiaomi': 1100,
+          'sony': 700}
+
+print(cash2(dict_1))
+
+

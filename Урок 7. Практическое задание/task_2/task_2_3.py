@@ -16,3 +16,37 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+def median1(lists):
+    return median(lists)
+
+
+m = 5
+my_list10 = [randint(-100, 100) for i in range(2 * m + 1)]
+print('Длина массива 10 элементов', timeit(
+    "median1(my_list10[:])",
+    globals=globals(),
+    number=100))
+
+m = 50
+my_list100 = [randint(-100, 100) for _ in range(2 * m + 1)]
+print('Длина массива 100 элементов', timeit(
+    "median1(my_list100[:])",
+    globals=globals(),
+    number=100))
+
+m = 500
+my_list1000 = [randint(-100, 100) for j in range(2 * m + 1)]
+print('Длина массива 1000 элементов', timeit(
+    "median1(my_list1000[:])",
+    globals=globals(),
+    number=100))
+
+'''Длина массива 10 элементов 0.00013188202865421772
+Длина массива 100 элементов 0.0006722400430589914
+Длина массива 1000 элементов 0.011772408965043724'''
+'''Встроенная функция median эффективанее'''

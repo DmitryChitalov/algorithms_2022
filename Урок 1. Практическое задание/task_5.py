@@ -17,3 +17,37 @@
 --создание нового стопки можно реализовать добавлением нового пустого массива
 в массив стопок (lst = [[], [], [], [],....]).
 """
+
+
+class StackStopok:
+    def __init__(self):
+        self.box_stopok = []
+        self.stopka = []
+        self.count = 1
+        self.main()
+
+    def tarelka_add(self):
+        self.stopka.append(self.count)
+        self.count += 1
+        return self.stopka
+
+    def add_stopka_to_box(self):
+        x = self.stopka.copy()
+        self.stopka.clear()
+        self.box_stopok.append(x)
+        return self.box_stopok
+
+    def main(self):
+        while len(self.stopka) <= 3:
+            if len(self.stopka) == 3:
+                self.add_stopka_to_box()
+            if len(self.box_stopok) == 4:
+                print('Всего в коробке стопок: ', len(self.box_stopok))
+                break
+            x = input('Положить тарелку в стопку?')
+            if x == 'y':
+                self.tarelka_add()
+                print('тарелок в стопке', len(self.stopka), '\n' 'в коробке стопок ', len(self.box_stopok))
+
+
+x = StackStopok()

@@ -17,3 +17,40 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+import random
+
+
+class Task:
+    def __init__(self):
+        num = random.sample(range(1, 99), 10)
+        self.task_base = num
+        self.task_rework = []
+        self.task_complete = []
+        self.task_add_from_task_base()
+
+    def task_add_from_task_base(self):
+        while len(self.task_base) != 0:
+            task = self.task_base.pop(0)
+            print('Задача', task)
+            answer = input('Решена задача? ')
+            if answer == 'y':
+                self.task_complete.append(task)
+                print('Решенные задачи', self.task_complete)
+            if answer == 'n':
+                self.task_rework.append(task)
+                print('Задачи отправленные на корректировку', self.task_rework)
+        self.task_add_from_rework()
+
+    def task_add_from_rework(self):
+        while len(self.task_rework):
+            task = self.task_rework.pop(0)
+            print(task)
+            answer = input('Задача исправлена?' )
+            if answer == 'y':
+                self.task_complete.append(task)
+                print('Решенные задачи', self.task_complete)
+        print('Все задачи выполнены')
+
+
+x = Task()
