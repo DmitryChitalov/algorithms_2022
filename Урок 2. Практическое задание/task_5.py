@@ -19,3 +19,14 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def symbols_print(first, last, i=0, arr=[]):
+    if i == 10:
+        print(" ".join(arr))
+        arr.clear()
+        i = 0
+    elif first == last + 1:
+        return print(" ".join(arr))
+    arr.append(f'{first} - {chr(first)}')
+    return symbols_print(first + 1, last, i + 1)
+symbols_print(32, 127)

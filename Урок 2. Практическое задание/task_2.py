@@ -17,3 +17,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def calc_numbers(numbers, odd=0, even=0):
+    if numbers == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    else:
+        if numbers % 10 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return calc_numbers(numbers//10, odd, even)
+def calc_go():
+    try:
+        numbers = int(input('Bведите число: '))
+        calc_numbers(numbers)
+
+    except ValueError:
+        print('Неправильный ввод. Введите число!')
+        calc_go()
+
+calc_go()
