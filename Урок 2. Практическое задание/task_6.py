@@ -7,3 +7,25 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def guess(num=randint(0, 100), count=0, chance=int(input('Введите предполагаемое число: '))):
+
+    if num == chance:
+        print("You Win!!!!!")
+        return num
+
+    elif count == 10:
+        print("You loose")
+        return num
+    elif num > chance:
+        print("Загаданное число больше Вашего ответа. Попробуйте снова.")
+        count += 1
+        guess(num, count, chance=int(input('Введите предполагаемое число: ')))
+    elif num < chance:
+        print("Загаданное число меньше Вашего ответа. Попробуйте снова.")
+        count += 1
+        guess(num, count, chance=int(input('Введите предполагаемое число: ')))
+
+guess()

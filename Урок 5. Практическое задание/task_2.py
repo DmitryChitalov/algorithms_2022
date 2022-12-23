@@ -24,3 +24,26 @@ reduce
 __mul__
 __add__
 """
+"""
+1) Через collections
+"""
+from collections import defaultdict
+from functools import reduce
+
+
+print('1) Через collections')
+def hex_sum_mult():
+    nums = defaultdict(list)
+    for i in range(2):
+        numb_16 = input(f'Введите {i+1}-е натуральное число: ')
+        nums[numb_16] = list(numb_16)
+        print(f'{i+1}-е число: {nums[numb_16]}')
+    print()
+
+    nums_int_list = [int(''.join(i), 16) for i in nums.values()]
+
+    sum_res = sum(nums_int_list)
+    print('Сумма:', list('%X' % sum_res))
+
+    mul_res = reduce(lambda x, y: x * y, nums_int_list)
+    print('Произведение:', list('%X' % mul_res))

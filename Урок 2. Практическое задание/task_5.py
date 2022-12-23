@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+def sym_code(a, b, n=0):
+    print(f"{a} - {chr(a)}", end=' ')
+    if n % 10 == 0 and n != 0:
+        print('')
+
+    if a == b:
+        print(f"{a} - {chr(a)}", end=' ')
+        return 1
+
+    sym_code(a + 1, b, n + 1)
+
+
+sym_code(32, 127)

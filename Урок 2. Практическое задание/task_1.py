@@ -27,3 +27,52 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def math():
+    def summa(a, b):
+        d = a + b
+        return d
+
+    def sub(a, b):
+        d = a - b
+        return d
+
+    def mult(a, b):
+        d = a * b
+        return d
+
+    def div(a, b):
+        if b == 0:
+            return print("результатом деления на ноль будет - бесконечность, а Вам это надо?")
+        else:
+          d = a / b
+        return d
+
+
+    operators = ("+", "-", "*", "/")
+    print("Введите операцию (+, -, *, / или 0 для выхода): ")
+    oper = input()
+    if oper == "0":
+        return print("Насчитались, хватит.")
+    elif oper not in operators:
+        print("Это не знак математической операции, начнем заново")
+        return math()
+
+    print("Введите первое число:")
+    a = float(input())
+    print("Введите второе число:")
+    b = float(input())
+
+    if oper == '+':
+        c = summa(a, b)
+    elif oper == '-':
+        c = sub(a, b)
+    elif oper == '*':
+        c = mult(a, b)
+    elif oper == '/':
+        c = div(a, b)
+
+    print(f'Результатом операции будет число: {c}')
+    return math()
+
+
+math()
