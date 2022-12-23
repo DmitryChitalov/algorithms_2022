@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,32 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    array_set = set(array)
+    max_quant = 0
+    most_common = None
+    for i in array_set:
+        if array.count(i) > max_quant:
+            max_quant = array.count(i)
+            most_common = i
+    return f'Чаще всего встречается число {most_common}, ' \
+           f'оно появилось в массиве {max_quant} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+
+print(timeit('func_1()', globals=globals()))
+print(timeit('func_2()', globals=globals()))
+print(timeit('func_3()', globals=globals()))
+
+"""
+Замеры времени:
+4.4241261000000005
+5.6148195
+3.7522009
+Совсем немного уменьшается время выполнения задачи, если перевести массив во множество, так как во множестве только
+уникальные значения, то есть мы не считаем по несколько раз максимальное значение одного и того же числа
+"""

@@ -13,3 +13,16 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+def recur_check(number):
+    if number == 0:
+        return 0
+    return number + recur_check(number - 1)
+
+
+try:
+    number = int(input("Введите число: "))
+    if recur_check(number) == number * (number + 1) / 2:
+        print(recur_check(number), '=', int(number * (number + 1) / 2))
+except ValueError:
+    print('Вы ввели строку, введите число')
