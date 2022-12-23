@@ -11,72 +11,74 @@
 Поработайте с оптимизированной структурой,
 протестируйте на реальных данных - на клиентском коде
 """
+from collections import Counter, deque
 
 
 class BinaryTree:
-    def __init__(self, root_obj):
-        # корень
-        self.root = root_obj
-        # левый потомок
-        self.left_child = None
-        # правый потомок
-        self.right_child = None
+    def __init__(self, user_str):
+        self.user_str = user_str
+        self.code_table = dict()
+        self.huffman_code(self.get_tree())
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+    def sort_counter(self):
+        counter = Counter(self.user_str)
+        return deque(sorted(counter.items(),
+                            key=lambda item: item[1]))
+
+    def get_tree(self):
+        sort_value = self.sort_counter().copy()
+        if len(sort_value) != 1:
+            while len(sort_value) > 1:
+                weight = sort_value[0][1] + sort_value[1][1]
+                new_elem = {0: sort_value.popleft()[0],
+                            1: sort_value.popleft()[0]}
+                for i, _count in enumerate(sort_value):
+                    if weight > _count[1]:
+                        continue
+                    else:
+                        sort_value.insert(i, (new_elem, weight))
+                        break
+                else:
+                    sort_value.append((new_elem, weight))
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            weight = sort_value[0][1]
+            new_elem = {0: sort_value.popleft()[0], 1: None}
+            sort_value.append((new_elem, weight))
+        return sort_value[0][0]
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+    def huffman_code(self, tree, path=''):
+        if not isinstance(tree, dict):
+            self.code_table[tree] = path
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            self.huffman_code(tree[0], path=f'{path}0')
+            self.huffman_code(tree[1], path=f'{path}1')
 
-    # метод доступа к правому потомку
-    def get_right_child(self):
-        return self.right_child
+    def get_str_code(self):
+        res = ''
+        for i in self.user_str:
+            res += self.code_table[i]
+        return res
 
-    # метод доступа к левому потомку
-    def get_left_child(self):
-        return self.left_child
-
-    # метод установки корня
-    def set_root_val(self, obj):
-        self.root = obj
-
-    # метод доступа к корню
-    def get_root_val(self):
-        return self.root
+    def decoding(self, code_string):
+        res = ''
+        i = 0
+        codes_dict = self.code_table
+        while i < len(code_string):
+            for code in codes_dict:
+                if code_string[i:].find(codes_dict[code]) == 0:
+                    res += code
+                    i += len(codes_dict[code])
+        return res
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+str_1 = input("Введите строку: ")
+tr_obj = BinaryTree(str_1)
+print(f"Исходная строка:\n'{str_1}'")
+
+tree_1 = tr_obj.get_tree()
+print(f"Дерево:\n{tree_1}")
+
+print(f"Таблица c кодами:\n{tr_obj.code_table}")
+
+print(f"Строка кода после кодирования:\n{tr_obj.get_str_code()}")
+print(f"Декодированная строка:\n'{tr_obj.decoding(tr_obj.get_str_code())}'")
