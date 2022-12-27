@@ -30,3 +30,73 @@
 
 Это файл для четвертого скрипта
 """
+
+"""
+Основы языка Python
+Урок 3. Функции. Словари
+5. Реализовать функцию get_jokes(), возвращающую n шуток, сформированных из трех случайных слов,
+ взятых из трёх списков (по одному из каждого):
+"""
+from timeit import timeit
+from memory_profiler import memory_usage
+from random import randrange, choice, choices, sample, randrange
+
+nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+
+
+
+
+def decor(func):
+
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+
+    return wrapper
+
+'''Функция генерации шуток из списков'''
+'''Старый вариант функции'''
+
+
+@decor
+def get_jokes(number):
+    list1 = []
+    for i in range(0, number):
+        list1.append(f"{choice(nouns)} {choice(adverbs)} {choice(adjectives)}")
+    return list1
+
+
+"""Новый вариант. Для оптимизации используем генератор с yeild"""
+
+
+@decor
+def get_jokes_new(number):
+    list1 = []
+    for i in range(0, number):
+        list1.append(f"{choice(nouns)} {choice(adverbs)} {choice(adjectives)}")
+    yield list1
+
+
+if __name__ == '__main__':
+    res, mem_diff = get_jokes(1000)
+    print(res)
+    print(f"Выполнение заняло {mem_diff} Mib")
+
+if __name__ == '__main__':
+
+    my_generator, mem_diff = get_jokes_new(1000)
+    print(type(my_generator))
+    for i in my_generator:
+        print(i)
+
+    print(f"Выполнение заняло {mem_diff} Mib")
+
+"""
+Как видно из результатов,  с помощью генератора использование памяти функцией уменьшается на порядок
+В старом варианте из основ используется 0.16015625 Mib , в оптимизиваронном варианте 0.0 Mib
+"""

@@ -28,3 +28,29 @@
 Предприятия, с прибылью выше среднего значения: Рога
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import Counter, namedtuple
+
+n = int(input('Введите количество предприятий для расчета прибыли: '))
+companies = namedtuple('company', 'name first_quarter second_quarter third_quarter fourth_quarter')
+
+midle_val = {}
+for i in range(n):
+    company = companies(name=input('Введите название предприятия: '),
+                        first_quarter=int(input('Введите прибыль квартала 1: ')),
+                        second_quarter=int(input('Введите прибыль квартала 2: ')), third_quarter=int(
+            input('Введите прибыль квартала 3: ')), fourth_quarter=int(
+            input('Введите прибыль квартала 4: ')))
+    midle_val[company.name] = (
+                                          company.first_quarter + company.second_quarter + company.third_quarter + company.fourth_quarter) / 4
+midle_val_companies = sum(midle_val.values()) / n
+
+max_companies = ''
+min_companies = ''
+for key, val in midle_val.items():
+    if val > midle_val_companies:
+        max_companies += f'{key} '
+    else:
+        min_companies += f'{key} '
+print(f'Предприятия, с прибылью выше среднего значения: {max_companies}')
+print(f'Предприятия, с прибылью ниже среднего значения: {min_companies}')
+
