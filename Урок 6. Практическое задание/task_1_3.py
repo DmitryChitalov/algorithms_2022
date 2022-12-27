@@ -30,3 +30,112 @@
 
 Это файл для третьего скрипта
 """
+
+"""
+Основы языка Python
+Урок 9. Объектно-ориентированное программирование (ООП)
+1. Создать класс TrafficLight (светофор).
+"""
+
+import time
+from pympler import asizeof
+
+'''
+Класс Светофор с защищенным аргументом color и методом running
+Атрибут определяет с какого цвета начинает работать светофор циклически
+'''
+
+
+
+class TrafficLight:
+    def __init__(self, color):
+        self._color = color
+
+    def running(self):
+        if self._color == 'красный':
+            while True:
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+        elif self._color == 'желтый':
+            while True:
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+        elif self._color == 'зеленый':
+            while True:
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+
+
+a = TrafficLight('желтый')
+print(a.__dict__)
+print(asizeof.asizeof((a)))
+
+"""Оптимизация, добавляем слоты"""
+
+class TrafficLightOpt:
+    __slots__ = ('_color')
+    def __init__(self, color):
+        self._color = color
+
+    def running(self):
+        if self._color == 'красный':
+            while True:
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+        elif self._color == 'желтый':
+            while True:
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+        elif self._color == 'зеленый':
+            while True:
+                self._color = 'зеленый'
+                print(self._color)
+                time.sleep(4)
+                self._color = 'красный'
+                print(self._color)
+                time.sleep(7)
+                self._color = 'желтый'
+                print(self._color)
+                time.sleep(2)
+
+
+b = TrafficLightOpt('желтый')
+print(b.__slots__)
+print(asizeof.asizeof((b)))
+
+"""Слоты в виде кортежа сократили размер с 296 до 40"""

@@ -15,4 +15,56 @@
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
+
+"""
+
+from random import randint
+from timeit import timeit
+
+
+def internal_sort(lst_obj):
+    lst_obj.sort()
+    return lst_obj
+
+m = 10
+orig_list = [randint(1, 10) for _ in range(2*m+1)]
+print(orig_list)
+sort_list = internal_sort(orig_list[:])
+print ('Медиана: ' , sort_list, sort_list[m],sep='\n')
+
+
+
+# замеры 10
+
+print(orig_list,internal_sort(orig_list[:]),
+    timeit(
+        "internal_sort(orig_list[:])",
+        globals=globals(),
+        number=100),sep='\n')
+
+
+orig_list = [randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+
+print(orig_list,internal_sort(orig_list[:]),
+    timeit(
+        "internal_sort(orig_list[:])",
+        globals=globals(),
+        number=100) ,sep='\n')
+
+
+orig_list = [randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+
+print(orig_list,internal_sort(orig_list[:]),
+    timeit(
+        "internal_sort(orig_list[:])",
+        globals=globals(),
+        number=100),sep='\n' )
+
+"""
+Встроенная функция показала наилучшие результаты на порядок быстрее как при малых массивах, так и при больших .
+Самая медленная сортировка Шелла
 """
