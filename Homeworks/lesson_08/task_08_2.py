@@ -25,45 +25,38 @@ class BinaryTree:
         self.left_child = None
         self.right_child = None
 
-    def insert_left(self, new_node):
+    def insert(self, new_node):
         try:
-            if self.root <= new_node:
+            if self.root > new_node:
+                if self.left_child is None:
+                    self.left_child = BinaryTree(new_node)
+                else:
+                    try:
+                        if self.left_child.root >= new_node:
+                            raise BinaryTreeError
+                    except BinaryTreeError:
+                        print('Вставляемый слева новый узел не может быть меньше или равен узлу, который опустится ниже.')
+                    else:
+                        tree_obj = BinaryTree(new_node)
+                        tree_obj.left_child = self.left_child
+                        self.left_child = tree_obj
+            elif self.root < new_node:
+                if self.right_child is None:
+                    self.right_child = BinaryTree(new_node)
+                else:
+                    try:
+                        if self.right_child.root <= new_node:
+                            raise BinaryTreeError
+                    except BinaryTreeError:
+                        print('Вставляемый справа новый узел не может быть больше или равен узлу, который опустится ниже.')
+                    else:
+                        tree_obj = BinaryTree(new_node)
+                        tree_obj.right_child = self.right_child
+                        self.right_child = tree_obj
+            else:
                 raise BinaryTreeError
         except BinaryTreeError:
-            print('Левый потомок не может быть больше или равен родителю.')
-        else:
-            if self.left_child is None:
-                self.left_child = BinaryTree(new_node)
-            else:
-                try:
-                    if self.left_child.root >= new_node:
-                        raise BinaryTreeError
-                except BinaryTreeError:
-                    print('Вставляемый слева новый узел не может быть меньше или равен узлу, который опустится ниже.')
-                else:
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.left_child = self.left_child
-                    self.left_child = tree_obj
-
-    def insert_right(self, new_node):
-        try:
-            if self.root >= new_node:
-                raise BinaryTreeError
-        except BinaryTreeError:
-            print('Правый потомок не может быть меньше или равен родителю.')
-        else:
-            if self.right_child is None:
-                self.right_child = BinaryTree(new_node)
-            else:
-                try:
-                    if self.right_child.root <= new_node:
-                        raise BinaryTreeError
-                except BinaryTreeError:
-                    print('Вставляемый справа новый узел не может быть больше или равен узлу, который опустится ниже.')
-                else:
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.right_child = self.right_child
-                    self.right_child = tree_obj
+            print('Новый потомок не может быть равен родителю.')
 
     def get_right_child(self):
         return self.right_child
@@ -74,50 +67,31 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
-    def del_root_val(self):
-        try:
-            if self.left_child is not None or self.right_child is not None:
-                raise BinaryTreeError
-        except BinaryTreeError:
-            print('Невозможно удалить узел, т.к. он является родителем.')
-        else:
-            self.root = None
-
 
 if __name__ == '__main__':
 
     root = BinaryTree(15)
     print(root.get_root_val())
 
-    root.insert_left(8)
+    root.insert(12)
     print(root.get_left_child().get_root_val())
 
-    root.insert_left(7)
+    root.get_left_child().insert(12)
 
-    root.insert_left(9)
-    print(root.get_left_child().get_root_val())
-    print(root.get_left_child().get_left_child().get_root_val())
+    root.insert(11)
 
-    root.insert_right(6)
-
-    root.insert_right(20)
+    root.insert(25)
     print(root.get_right_child().get_root_val())
 
-    root.get_left_child().insert_right(11)
-    print(root.get_left_child().get_right_child().get_root_val())
+    root.insert(27)
 
-    root.get_left_child().insert_left(7)
-
-    root.get_left_child().get_right_child().del_root_val()
-    print(root.get_left_child().get_right_child().get_root_val())
-
-    root.get_left_child().del_root_val()
+    root.get_right_child().insert(20)
+    print(root.get_right_child().get_left_child().get_root_val())
 
 # Убрал метод установки корня (set_root_val), потому что могла нарушиться структура двоичного дерева,
-# а как сделать проверку нового установленного корня при данной реализации бинарного дерева, я не придумал.
-# Но всё равно может возникнуть ситуация, когда в дерево вставляется элемент, который либо уже есть в нём,
-# либо всё равно нарушает его структуру. Тогда нужно как-то хранить все узлы дерева и сравнивать с новым узлом,
-# который будет вставлен.
+# и вообще не уверен, что проверка нового установленного корня при данной реализации бинарного дерева возможна.
+# Но всё равно при данной реализации может возникнуть ситуация, когда в дерево вставляется элемент, который либо уже есть в нём,
+# либо всё равно нарушает его структуру.
 
-# Смог реализовать удаление узла, только если он "лист". Как удалять узел, если у него есть один или два потомка
-# при данной реализации бинарного дерева, тоже не придумал.
+# Методы вставки узла справа и слева заменил на общий метод вставки,
+# в котором уже определяется, куда вставлять элемент: справа или слева.
