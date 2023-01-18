@@ -22,3 +22,72 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+import hashlib
+import json
+
+
+def get_hash():   #запросил логин и пароль, вычислил хэш(соль логин, пароль password, солёный пароль key
+    login = input('Введите логин: ')
+    passwd = input('Введите пароль: ')
+    key = hashlib.sha256(login.encode() + passwd.encode()).hexdigest()
+    return login, key
+
+
+def create():
+    password = {}
+    FILENAME = 'password.json'
+    login, reg_hash = get_hash()
+    with open(FILENAME, 'r+', encoding='utf-8') as file:
+        data = json.load(file)
+        if data[login]['password'] == reg_hash:
+            print("Вы уже есть в базе, выполните вход.")
+            check()
+        else:
+            password[login] = {'password': reg_hash}
+            with open(FILENAME, 'r+', encoding='utf-8') as file:
+                try:
+                    data = json.load(file)
+                    data[login] = {'password': reg_hash}
+                    with open(FILENAME, 'r+', encoding='utf-8') as file:
+                        json.dump(data, file, ensure_ascii=False, indent=4)
+                except json.JSONDecodeError:
+                    json.dump(password, file, ensure_ascii=False, indent=4)
+
+
+
+def check():
+    try:
+        login, reg_hash = get_hash()
+        FILENAME = 'password.json'
+        with open(FILENAME, 'r+', encoding='utf-8') as file:
+            data = json.load(file)
+        if reg_hash == data[login]['password']:
+            print('Вы авторизованы')
+        else:
+            print('неверный логин или пароль')
+    except KeyError:
+        print('неверный логин или пароль')
+
+
+
+"""логин user1 пароль qwerty, (user2, 123), (user3, 12345)"""
+
+while True:
+    choose = input('создать/проверить: ')
+    if choose in 'создать':
+        create()
+        print('создание')
+    elif choose in 'проверить':
+        print('проверка')
+        check()
+
+
+
+
+
+
+
+
+
+
+

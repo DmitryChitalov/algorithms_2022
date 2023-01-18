@@ -1,0 +1,26 @@
+{
+    "user1": {
+        "password": "11111",
+        "activation": true
+    },
+    "user2": {
+        "password": "11111",
+        "activation": true
+    },
+    "user3": {
+        "password": "11111",
+        "activation": true
+    },
+    "user4": {
+        "password": "11111",
+        "activation": false
+    },
+    "qwerty": {
+        "password": "1234",
+        "activation": false
+    },
+    "qwertyu": {
+        "password": "12345",
+        "activation": false
+    }
+}}
