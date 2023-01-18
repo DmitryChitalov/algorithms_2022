@@ -28,3 +28,103 @@ b) получение элемента списка, оцените сложно
 обязательно реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к своим функциям!
 """
+import time
+
+
+#Заполнение списка в начало и в конец
+def completion_element(func):
+    def g(*args):
+        start = time.time()
+        res = func(*args)
+        time_res = time.time() - start
+        print(f' время работы функции {func.__name__}: {time_res}')
+        return res
+    return g
+
+@completion_element
+def list_append():
+    list_ = []
+    for i in range(100000):
+        list_.append(i)
+    return list_
+
+list_append()  #Сложность O(1), append() добавляет в конец.
+print(10*'*')
+
+@completion_element
+def list_insert():
+    list_ = []
+    for i in range(100000): #сложность O(n) т.к. insert() добавляет в начало
+        list_.insert(0,i)
+    return list_
+
+list_insert()
+
+print(10*'*')
+@completion_element
+def dict_element():
+    dct = {}
+    for i in range(100000): #сложность О(1) т.к. словарь имеет хэш таблицу
+        dct[i] = i
+    return dct
+
+
+dict_element()
+
+print(10*'*')
+"""время работы функции list_append: 0.015616655349731445
+   время работы функции list_insert: 5.582796096801758
+   время работы функции dict_: 0.031261444091796875"""
+
+
+"""получение и удаление элементов"""
+@completion_element
+def deleting_receiving_lst(list_):
+    for i in range(15000): #сложность удаления list_.pop(i) O(n) т.к. удаляется с начала списка
+        list_.pop(i)
+    for i in range(1000): # сложность получения по индексу и изменение O(1)
+        list_[i] = list_[i+2]
+
+list_ = []
+for i in range(100000):
+    list_.append(i)
+
+deleting_receiving_lst(list_)
+print(10*'*')
+
+
+
+@completion_element
+def deleting_receiving_dict(dict_):
+    for i in range(15000):
+        dict_.pop(i)              #удаление и изменение из словарая происходит быстрее и имеет сложность O(i)
+    for j in range(1001, 2002):
+        dict_[j] = 'hello'
+
+dict_ = {}
+for i in range(100000):
+    dict_[i] = i
+deleting_receiving_dict(dict_)
+
+
+"""время работы функции deleting_receiving_lst: 1.0001413822174072
+   время работы функции deleting_receiving_dict: 0.0
+   функция по удаленияю и изменния элементов словаря отработала намного
+   быстрее"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
