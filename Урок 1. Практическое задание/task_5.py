@@ -31,7 +31,7 @@ class StackClass:
         for i in range(len(self.elems)):
             if len(self.elems[i]) < n:
                 self.elems[i].append(el)
-                break
+
 
 
     def push_in(self):
@@ -60,7 +60,7 @@ def divide_by_two(dec_number):
 
     while dec_number > 0:
         res = dec_number % 2
-        sc_obj.push_stack(res, 2)
+        sc_obj.push_stack(res, 4)
         dec_number = dec_number // 2
 
 
