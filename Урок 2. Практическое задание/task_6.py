@@ -7,3 +7,22 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+rand_num = randint(0, 100)
+
+
+def guess_num(num, *, counter=10):
+    inp = int(input('Введите число: '))
+    if counter == 0:
+        return f'Вы проиграли. Загаданное число: {num}'
+    if inp == num:
+        return f'Вы победили! Загаданное число: {num}'
+    if inp > num:
+        print('Загаданное число меньше вашего')
+        return guess_num(num, counter=counter - 1)
+    print('Загаданное число больше вашего')
+    return guess_num(num, counter=counter - 1)
+
+
+print(guess_num(rand_num))
