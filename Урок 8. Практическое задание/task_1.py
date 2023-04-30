@@ -162,11 +162,11 @@ def haffman(text):
         counter.pop(0)
         counter.sort(key=lambda counter: counter[1])
     encoding = recScan(nodes[len(nodes)-1])[1]
-    print(encoding)
+    #print(encoding)
     codedTxt = ''
     for i in range(len(text)):
         codedTxt = codedTxt + encoding[text[i]]
-    return codedTxt
+    return encoding, codedTxt
 
 if __name__ == "__main__":
     #message = "122333444455555"
@@ -209,7 +209,10 @@ if __name__ == "__main__":
     ctr = sorted(ctr, key=lambda ctr: ctr[1])
     l = lambda i: ctr[i][1]
     #print(l())
-    print(haffman("texttext2233kekeke1111111111111t8"))
+    h = haffman("texttext2233kekeke1111111111111t8")
+    print(h[0])
+    print(h[1])
+
 
 
 
