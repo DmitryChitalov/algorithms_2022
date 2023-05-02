@@ -16,3 +16,32 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+
+import random
+import statistics
+import timeit
+
+if __name__ == "__main__":
+    random.seed()
+    m = 100
+    lenght = 2*m+1
+    inputdata = [random.randint(-100,100) for i in range(lenght)]
+    #print(inputdata)
+    print(f"Медиана - {statistics.median(inputdata)}")
+    print(f"Проверка - {sorted(inputdata)[m]}")  # медиана с помощью встроенной функции для проверки
+    print(f"{sorted(inputdata)}")
+
+    a = lambda: statistics.median([random.randint(-100, 100) for i in range(10)])
+    b = lambda: statistics.median([random.randint(-100, 100) for i in range(100)])
+    c = lambda: statistics.median([random.randint(-500, 500) for i in range(1000)])
+    print(timeit.timeit(a, number=1000))
+    print(timeit.timeit(b, number=1000))
+    print(timeit.timeit(c, number=1000))
+    # Во всех трёх размерах побеждает встроенный метод. Выглядит так будто он имеет линейную сложность, из чего можно
+    # сделать вывод что встроенный метод использует алгоритм median of medians.
+    # На втором месте решение с сортировкой shellsort. Shellsort имеет сложность nlogn, что делает решение менее
+    # эффективным. Данное решение сортирует весь список тогда как median of medians лишь его часть
+    # Хуже всего работает безсортировочное решение, так как оно имеет сложность до n^2 и требует дополнительного прохода
+    # по списку с помощью функции count (де-факто 2n^2). Однако функция может сработать быстрее если медиана находится
+    # близко к началу списка
