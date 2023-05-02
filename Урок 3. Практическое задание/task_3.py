@@ -22,3 +22,10 @@
 р
 а
 """
+import hashlib
+
+s = 'papa'
+dip = set(hashlib.sha256(s[i:j].encode()).hexdigest() for i in range(len(s))
+          for j in range(i + 1, len(s) + 1) if s[i:j] != s)
+print(len(dip))
+print(dip)
