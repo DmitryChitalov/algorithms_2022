@@ -15,3 +15,16 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+
+
+urls = {}
+
+SALT = b"qskd3213_as10AkJFJE30a_"
+
+def cacheURL():
+    url = input("URL: ")
+    if url in urls.keys():
+        return urls[url]
+    hashed = hashlib.sha256(SALT+str.encode(url)).hexdigest()
+    urls[url] = hashed

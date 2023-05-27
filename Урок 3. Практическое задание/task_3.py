@@ -22,3 +22,31 @@
 р
 а
 """
+
+import hashlib
+
+text = "sallaslasrieocne"
+combs = []
+for l in range(len(text),0,-1):
+    for ii in range(len(text) - l+1):
+        end = ii + l
+        if end > len(text):
+            break
+        combs.append(hashlib.sha256(str.encode(text[ii:ii+l])).hexdigest())
+        #combs.append(text[ii:ii+l])
+print(len(set(combs)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
