@@ -13,3 +13,21 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def lhs(n, res=0):
+    """
+    LHS - left hand side
+    """
+    print(n, end = "")
+    if n == 0:
+        return res
+    print("+", end ="")
+    res += n
+    return lhs(n-1,res)
+
+
+n = int(input("для n = "))
+res = lhs(n)
+print(f" = {res} = {n}({n}+1)/2 = {n*(n+1)/2}")
+print(res == n*(n+1)/2)

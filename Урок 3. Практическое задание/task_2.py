@@ -22,3 +22,28 @@ f1dcaeeafeb855965535d77c55782349444b
 воспользуйтесь базой данный sqlite, postgres и т.д.
 п.с. статья на Хабре - python db-api
 """
+
+import pickle
+import hashlib
+
+SALT = b"w0e_cw03_0e3j_3kcjjaADASC"
+
+def setPass() -> None:
+    p = hashlib.sha256(SALT+str.encode(input("Set the password: "))).hexdigest()
+    print(f"String stored in DB: {p}")
+    with open("hshdpswd.txt", "w") as f:
+        f.write(p)
+
+
+def checkPass():
+    p = hashlib.sha256(SALT+str.encode(input("Input the password: "))).hexdigest()
+    with open("hshdpswd.txt", "r") as f:
+        preal = f.read()
+    if preal == p:
+        return True
+    else:
+        return False
+
+setPass()
+print(checkPass())
+

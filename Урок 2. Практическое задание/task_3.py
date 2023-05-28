@@ -18,3 +18,12 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+def reverseNum(num,revd = []):
+    if num == 0:
+        return ''.join(str(x) for x in revd)
+    revd.append(num % 10)
+    return reverseNum(num//10, revd)
+
+n = reverseNum(1230)
+print(n)
