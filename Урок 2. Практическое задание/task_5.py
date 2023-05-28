@@ -19,3 +19,23 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def recLine(n, i, l):
+    if i == l:
+        return
+    print(f"{32+i+10*n} - {chr(32+i+10*n)}", end = " ")
+    return recLine(n,i+1,l)
+
+
+def recASCII(n=0):
+    if n == 10:
+        return
+    elif n == 9:
+        recLine(n,0,6)
+    else:
+        recLine(n, 0, 10)
+    print("")
+    return recASCII(n+1)
+
+
+recASCII()

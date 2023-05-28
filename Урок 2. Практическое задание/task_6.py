@@ -7,3 +7,27 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+from random import randint
+
+
+r = randint(0,100)
+
+
+def guessNum(n = 10):
+    if n == 0:
+        print(f"Вы проиграли, число - {r}")
+        return
+    num = int(input("Введите число"))
+    if num > r:
+        print(f"Ваше число больше")
+        return guessNum(n-1)
+    elif num < r:
+        print(f"Ваше число меньше")
+        return guessNum(n-1)
+    elif num == r:
+        print(f"Правильно")
+
+
+guessNum()
+

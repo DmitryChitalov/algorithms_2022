@@ -17,3 +17,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def getDigits(num, odd, even):
+    if num == 0:
+        return even, odd
+    digi = num%10
+    if digi % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return getDigits(num//10,odd,even)
+
+
+print("чёт, нечёт: ",getDigits(122201220011333,0,0))

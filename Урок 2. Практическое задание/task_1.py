@@ -27,3 +27,58 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+ALLOWEDCHARS = ['+','-','*','/','0']
+terminator = False
+
+
+def requestNum(i):
+    f = input("Введите первое число:")
+    s = input("Введите второе число:")
+    try:
+        f = float(f)
+        s = float(s)
+        if i == '+':
+            print(f + s)
+        elif i == '-':
+            print(f - s)
+        elif i == '*':
+            print(f * s)
+        elif i == '/':
+            print(f / s)
+    except:
+        print("Не число")
+        requestNum(i)
+
+
+
+def requestOperation():
+    global terminator
+    i = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    if i not in ALLOWEDCHARS:
+        print("Неправильный символ")
+        requestOperation()
+    elif i == '0':
+        terminator = True
+    else:
+        requestNum(i)
+    if terminator == True:
+        return
+    else:
+        requestOperation()
+
+requestOperation()
+
+
+"""
+f = int(input("Введите первое число:"))
+        s = int(input("Введите второе число:"))
+        if i == '+':
+            print(f+s)
+        elif i == '-':
+            print(f-s)
+        elif i == '*':
+            print(f*s)
+        elif i == '/':
+            print(f/s)
+"""
