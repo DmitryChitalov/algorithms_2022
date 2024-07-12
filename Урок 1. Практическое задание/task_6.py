@@ -17,3 +17,55 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+        self.solved = []
+        self.revision = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+    def solved_lst(self):
+        self.solved.insert(0, self.elems.pop())
+
+    def revision_lst(self):
+        self.revision.insert(0, self.elems.pop())
+
+    def solved_task(self):
+        self.elems.insert(0, self.revision.pop())
+
+
+#if __name__ == '__main__':
+qc_obj = QueueClass()
+
+qc_obj.to_queue('123')
+qc_obj.to_queue(5)
+qc_obj.to_queue(True)
+
+print(qc_obj.elems)
+qc_obj.solved_lst()
+print(qc_obj.solved)
+qc_obj.revision_lst()
+print(qc_obj.elems)
+print(qc_obj.revision)
+qc_obj.solved_task()
+print(qc_obj.revision)
+print(qc_obj.elems)
+
+
+
+
+
+
+
+
