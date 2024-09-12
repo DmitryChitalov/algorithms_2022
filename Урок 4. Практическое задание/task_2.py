@@ -26,7 +26,7 @@ num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
-print('Не оптимизированная функция recursive_reverse')
+print('Не оптимизированная функция recursive_reverse', end='')
 print(
     timeit(
         "recursive_reverse(num_100)",
@@ -52,6 +52,7 @@ def memoize(f):
         if args in cache:
             return cache[args]
         else:
+
             cache[args] = f(*args)
             return cache[args]
     return decorate
@@ -64,7 +65,7 @@ def recursive_reverse_mem(number):
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
-print('Оптимизированная функция recursive_reverse_mem')
+print('Оптимизированная функция recursive_reverse_mem', end='')
 print(
     timeit(
         'recursive_reverse_mem(num_100)',
@@ -80,3 +81,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+'''
+меморизация нужна т.к. она уберает вложенность рекурсии, ускоряя функцию'''

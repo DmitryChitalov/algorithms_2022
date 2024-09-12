@@ -9,7 +9,9 @@
 Обязательно напишите третью версию (здесь возможно даже решение одной строкой).
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу
 """
-
+from timeit import timeit
+from collections import Counter
+from collections import OrderedDict
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    val = max(array,key=array.count)
+    return f'Чаще всего встречается число {val}, ' \
+           f'оно появилось в массиве {array.count(val)} раз(а)'
+
+
+
+print(timeit('func_1()', globals=globals()))
+print(timeit('func_2()', globals=globals()))
+print(timeit('func_3()', globals=globals()))
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+
+'''Самые быстрые это встроенные функции, они быстрее  циклов
+1.2470711779997146 цикл
+1.4442878269996982 цикл
+1.0807000609997885 встроенная функция
+'''
