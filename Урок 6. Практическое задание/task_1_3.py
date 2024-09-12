@@ -30,3 +30,55 @@
 
 Это файл для третьего скрипта
 """
+'''Курс основы python урок 5 задание №5
+5. Подумайте, как можно сделать оптимизацию кода по памяти, по скорости.
+Представлен список чисел. Определить элементы списка, не имеющие повторений. Сформировать из этих элементов список с сохранением порядка их следования в исходном списке, например:
+
+src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+result = [23, 1, 3, 10, 4, 11]
+'''
+from time import sleep
+from random import randint
+from collections import Counter
+from memory_profiler import memory_usage
+
+def decor(func):
+    def wrapper():
+        m1 = memory_usage()
+        res = func()
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        return res, mem_diff
+    return wrapper
+
+# src = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]  # заменено для увеличения нагрузки
+src = [randint(1000,10000) for _ in range(10000000)]  
+# 1) До оптимизации
+@decor
+def func1():
+    unic_set = set()
+    for i in src:
+        if i not in unic_set:
+            unic_set.add(i)
+        else:
+            unic_set.discard(i)
+    unic_li = [i for i in src if i in unic_set]
+    return unic_li  # [23, 1, 3, 10, 4, 11]
+
+
+# 2) После оптимизации
+@decor
+def func2():   
+    li_count = Counter(src)
+    unic_li = [k for k, v in li_count.items() if v == 1]
+    return unic_li  # [23, 1, 3, 10, 4, 11]
+
+
+res1, mem1 = func1()
+sleep(2)
+res2, mem2 = func2()
+print(mem1, mem2)  # 38.328125 0.359375
+
+'''Произведен переход с for на Counter и списковую сборку при выборе уникальных чисел
+использование памяти до оптимизации составляет 38.328125
+после оптимизации 0.359375'''
