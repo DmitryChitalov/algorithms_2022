@@ -22,3 +22,5 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+def authentifiction(name, password):
+    users_dict = {}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/structures_examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/structures_examples/stack" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/structures_examples/queue" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/structures_examples/deque" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.7" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
