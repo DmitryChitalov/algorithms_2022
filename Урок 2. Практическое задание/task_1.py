@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def start():
+    exit_param = False
+    try:
+        print('Вас приветствует полукалькулятор!\n'
+              'Программа может складывать/вычитать/умножать/делить первое число на второе число.')
+        operation = input('Введите знак операции (+, -, *, /, ввод 0 - выход из программы): ')
+        if operation == '0':
+            exit_param = True
+        else:
+            first_num = float(input('Введите первое число: '))
+            second_num = float(input('Введите второе число: '))
+            if operation == '+':
+                print('Результат сложенния: ', first_num + second_num)
+            elif operation == '-':
+                print('Результат вычитания: ', first_num - second_num)
+            elif operation == '*':
+                print('Результат умножения: ', first_num * second_num)
+            elif operation == '/':
+                print('Результат деления: ', first_num / second_num)
+            else:
+                raise TypeError
+    except ValueError:
+        print('Неправильный ввод пользовательских данных!')
+    except ZeroDivisionError:
+        print('пользователь, помни: НА НОЛЬ ДЕЛИТЬ НЕДЬЗЯ!!!!1111')
+    except Exception:
+        print('Неизвестная ошибка! (Автор полукалькулятора поленился перебирать все=))')
+    finally:
+        if exit_param:
+            print('Работа полукалькулятора завершена!')
+            exit(0)
+        else:
+            start()
+
+
+if __name__ == '__main__':
+    start()

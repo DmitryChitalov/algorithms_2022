@@ -10,3 +10,16 @@
 Решите через рекурсию. В задании нельзя применять циклы.
 Нужно обойтисть без создания массива!
 """
+
+
+def funny_sequence(n, next_el=1, sum_el=0):
+    if n > 0:
+        sum_el += next_el
+        funny_sequence(n - 1, next_el * (-0.5), sum_el)
+    else:
+        return print(f' Результат работы программы : {sum_el}')
+
+
+if __name__ == '__main__':
+    a = int(input('Введите количество элементов n: '))
+    funny_sequence(a)
