@@ -22,3 +22,22 @@
 р
 а
 """
+
+import hashlib
+
+
+def get_unique_hash(s, set):
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+            if s[i: j] == s:
+                pass
+            else:
+                my_set.add(hashlib.sha256(s[i: j].encode('utf-8')).hexdigest())
+    return set
+
+
+my_set = set()
+s = 'papa'
+
+print(len(get_unique_hash(s, my_set)))
+
