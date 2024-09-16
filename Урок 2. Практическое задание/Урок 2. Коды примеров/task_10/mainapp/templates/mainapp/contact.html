@@ -1,0 +1,46 @@
+{% extends 'mainapp/layout.html' %}
+
+{% load staticfiles %}
+
+{% block menu %}
+<div class="hero">
+    <div class="header clearfix">
+        <a href="/" class="logo"></a>
+
+        {% include 'mainapp/menu.html' %}
+
+        <a href="#" class="search"></a>
+{#        <a href="#" class="basket"></a>#}
+    </div>
+
+    <h1>наши контакты</h1>
+    <p>{{ visit_date | date:"l, j F, Y, H:i" }} </p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="location">
+
+    {% for location in locations %}
+    <div class="location-1">
+        <i class="fa fa-map-marker fa-5x"></i>
+        <h4>{{ location.city }}</h4>
+        <div class="contacts">
+            <h5>Телефон</h5>
+            <p>{{ location.phone }}</p>
+        </div>
+        <div class="contacts">
+            <h5>Email</h5>
+            <p>{{ location.email }}</p>
+        </div>
+        <div class="contacts">
+            <h5>Адрес</h5>
+            <p>{{ location.address }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}

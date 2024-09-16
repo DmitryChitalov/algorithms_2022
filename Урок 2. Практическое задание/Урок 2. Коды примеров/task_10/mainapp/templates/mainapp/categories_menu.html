@@ -1,0 +1,18 @@
+<ul class="links-menu">
+        <li>
+            <a href="{%  url 'products:index' %}" class="{% if request.path == '/products/' %}
+              active
+            {% endif %}">
+                Все продукты
+            </a>
+        </li>
+    {% for link in links_menu %}
+        <li>
+
+            <a class="{% if request.path == link.get_absolute_url %} active{% endif %}"
+               href="{{ link.get_absolute_url }}">
+                {{ link.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

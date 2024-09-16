@@ -1,0 +1,51 @@
+<ul class="menu">
+    <li>
+        <a href="{% url 'main' %}" class="{% if request.path == '/' %}active{% endif %}">
+            домой
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'products:index' %}" class="{% if request.path == '/products/' %}active{% endif %}">
+            продукты
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">
+            контакты
+        </a>
+    </li>
+
+{% if user.is_authenticated %}
+    <li>
+        <a href="{% url 'auth:edit' %}">
+            Мой профиль ({{ user.first_name }})
+        </a>
+    </li>
+    {% endif %}
+    {% if user.is_superuser %}
+        <li>
+            <a href="{% url 'admin:categories' %}">
+                Админ-панель
+            </a>
+        </li>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'auth:logout' %}">
+            выйти
+        </a>
+        {% else %}
+        <a href="{% url 'auth:login' %}">
+            войти
+        </a>
+        {% endif %}
+    </li>
+</ul>
+<a href="{% url 'basket:index' %}" class="basket">
+    <span>
+        {% if basket %}
+            {{ basket.0.total_quantity}} товаров <br>
+        {% endif %}
+    </span>
+</a>
+
