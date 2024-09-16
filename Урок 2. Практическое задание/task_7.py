@@ -13,3 +13,12 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def check(num):
+    return num if num == 1 else num + check(num - 1)
+
+
+n = 5
+
+print(f"Is 1+2+...+{n} = {n}({n}+1)/2? \nAnswer: {check(n) == n * (n + 1) / 2} (Sum = {check(n)})")
