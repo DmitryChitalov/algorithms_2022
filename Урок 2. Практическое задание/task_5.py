@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def func(n=32):
+    if n == 127:
+        print(f'{n} - {chr(n)}')
+    else:
+        print(f'{n} - {chr(n)}', end=' ')
+        if n % 10 == 1:
+            print()
+        func(n+1)
+
+
+func()
