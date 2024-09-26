@@ -13,3 +13,14 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_row(num):
+    if num == 0:
+        return 0
+    return num + sum_row(num - 1)
+
+
+n = int(input("Введите число: "))
+if sum_row(n) == n*(n+1)/2:
+    print("равенство верно")

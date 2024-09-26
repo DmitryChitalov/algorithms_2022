@@ -17,3 +17,29 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_num(num=None, count_num=None):
+    if num is None:
+        num = input("Введите число:\n")
+        if not num.isdigit():
+            print("вы ввели не число!")
+            even_num()
+        num = int(num)
+    if count_num is None:
+        count_num = [0, 0]
+
+    tail = num % 10
+    body = num // 10
+    # count_num[tail % 2] += 1
+    if tail % 2 == 0:
+        count_num[0] += 1
+    else:
+        count_num[1] += 1
+    if body == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: {count_num}")
+        return
+    even_num(body, count_num)
+
+
+even_num()

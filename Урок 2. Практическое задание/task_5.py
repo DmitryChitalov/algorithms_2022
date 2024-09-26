@@ -19,3 +19,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def asc_table(asc_num=32):
+    if asc_num > 127:
+        return
+    if (asc_num + 9) % 10 == 1:
+        print("\n")
+    print(f' {asc_num} - {chr(asc_num)}', end=' ')
+    asc_table(asc_num + 1)
+
+
+asc_table()
+
+
+
