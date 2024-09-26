@@ -24,3 +24,15 @@ reduce
 __mul__
 __add__
 """
+from collections import defaultdict
+
+ddict = defaultdict(list)
+
+ddict[1] = list(input('Введите первое число: '))
+ddict[2] = list(input('Введите второе число: '))
+print(ddict)
+
+c = hex(int(''.join(str(i) for i in ddict[1]), 16) * int(''.join(str(i) for i in ddict[2]), 16))
+d = hex(int(''.join(str(i) for i in ddict[1]), 16) + int(''.join(str(i) for i in ddict[2]), 16))
+print(f'Сумма: {list(c[2:].upper())}')
+print(f'Произведение: {list(d[2:].upper())}')
