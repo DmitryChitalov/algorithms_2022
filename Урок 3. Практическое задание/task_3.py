@@ -22,3 +22,25 @@
 р
 а
 """
+import hashlib
+
+
+def get_str(in_st):
+    str_len = len(in_st)
+    start = 0
+    st_set = set()
+    while start < str_len:
+        buff = str_len
+        while buff != start:
+            buff_stg = in_st[start:buff]
+            if buff_stg != in_st:
+                hash_obj = hashlib.md5(buff_stg.encode('utf-8'))
+                res = hash_obj.hexdigest()
+                st_set.add(res)
+            buff -= 1
+        start += 1
+    return len(st_set)
+
+
+st = 'qwewe'
+print('Количество уникальных подстрок в строке %s = %s ' % (st, get_str(st)))
