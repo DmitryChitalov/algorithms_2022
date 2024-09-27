@@ -13,3 +13,29 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+import random
+
+
+def num_sum(n):
+    if n == 1:
+        return 1
+    else:
+        return num_sum(n - 1) + n
+
+def recur_sum(n):
+    ''' Через тернарный оператор'''
+    return n if n == 0 else n + recur_sum(n - 1)
+
+n = random.randint(1, 1000)
+print(f'Вычислим сумму ряда для n = {n} и проверим равенство! ')
+res = num_sum(n)
+res_1 = recur_sum(n)
+f_res = (n * (n + 1) / 2)
+print(f'Получим результат: 1 + 2 + 3 +  ... + n = {res} , n(n+1)/2  = {f_res}')
+print()
+print(f'Получим результат: 1 + 2 + 3 +  ... + n = {res_1} , n(n+1)/2  = {f_res}')  # Через тернарный оператор
+
+if res == f_res and res_1 == f_res:
+    print('Равенство верно!')
+else:
+    print('Равенство не верно!')

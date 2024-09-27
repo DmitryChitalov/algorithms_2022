@@ -27,3 +27,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+# Напмшим функцию производящую вычисления.
+def calculations():
+
+    operator = input('Введите арифметический оператор или q для выхода: ')
+
+    if operator == 'q':
+        print('Вычисления завершены!')
+        return exit(0)
+    else:
+        if operator in '+-*/':
+
+            try:
+                a, b = float(input('Введите число a: ')), float(input('Введите число b: '))
+
+                if operator == '+':
+                    print(f'Сумма чисел {a} и {b} равна {a + b}')
+                    calculations()
+                elif operator == '-':
+                    print(f'Разность чисел {a} и {b} равна {a - b}')
+                    calculations()
+                elif operator == '*':
+                    print(f'Произведение чисел {a} и {b} равно {a * b}')
+                    calculations()
+                elif operator == '/':
+                    try:
+                        print(f'Частное от деления чисел {a} и {b} равно {a / b}')
+                    except ZeroDivisionError:
+                        print('На ноль делить нельзя!')
+                    finally:
+                       return calculations()
+            except ValueError:
+                print('Введите числа!')
+                return calculations()
+
+        else:
+            print('Введите +, -, * или /')
+            return calculations()
+
+calculations()

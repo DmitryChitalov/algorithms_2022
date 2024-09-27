@@ -18,3 +18,34 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def num_rev(num):
+    if len(num) == 1:
+        return num
+    else:
+        n_s = str(int(num) % 10)
+        num = str(int(num) // 10)
+
+        return n_s + num_rev(num)
+
+# Решим задачу через тернарный оператор.
+# def num_rev(num):
+#     return str(num) if int(num) < 10 else str(num % 10) + num_rev(num // 10)
+
+
+# num = input('Введите число: ')
+try:
+    num = int(input('Введите число: '))
+except ValueError:
+    print(' Вы ввели не натуральное число! Исправтесь!')
+    exit(1)
+
+print(num_rev(num))
+
+# num = 3451
+# num_rev('3451')
+# num_rev('345') -> 1
+# num_rev(34) -> 15
+# num_rev(3) -> 154
+# Срабатывает базовое условие len(num) == 1 -> 1543

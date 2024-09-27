@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_code(i, k, t):  # i - начало кодировки символов, k - счётчик переноса строки, t - конец кодировки символов
+    if i < t:
+        k += 1
+        i += 1
+        if k % 10 == 1:
+            return f'\n {str(i)} - {chr(i)} {ascii_code(i, k, t)}'
+        else:
+            return f'{str(i)} - {chr(i)} {ascii_code(i, k, t)}'
+
+
+print(ascii_code(31, 0, 127))
