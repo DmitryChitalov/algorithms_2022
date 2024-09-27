@@ -17,3 +17,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_even_count_recursion(number, odd_count, even_count):
+    if number == 0:
+        return odd_count, even_count
+    else:
+        digit = number % 10
+        if digit % 2:
+            even_count += 1
+        else:
+            odd_count += 1
+        return odd_even_count_recursion(number // 10, odd_count, even_count)
+
+
+if __name__ == '__main__':
+    number = int(input('Введите число:  '))
+    print(f'Количество четных и нечетных цифр в числе равно: {odd_even_count_recursion(number, 0, 0)}')

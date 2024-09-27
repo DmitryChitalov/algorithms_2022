@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def show_chars_recursion(current, step=1):
+    if current == 128:
+        return
+    else:
+        end = '' if step % 10 else '\n'
+        print(f'{current} - {chr(current)} ', end=end)
+        return show_chars_recursion(current + 1, step + 1)
+
+
+if __name__ == '__main__':
+    show_chars_recursion(32)
