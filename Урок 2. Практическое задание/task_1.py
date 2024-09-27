@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+from memory_profiler import profile
+# Задание № 1
+
+
+@profile
+def calculator(count):
+    # Базовый случай
+    if count == "0":
+        print("Выход")
+        return count
+
+    else:
+        # Шаг рекурсии
+        if count == "+":
+            number_1 = input(" Введите первое число: ")
+            number_2 = input(" Введите второе число: ")
+            print(int(number_1) + int(number_2))
+
+        elif count == "-":
+            number_1 = input(" Введите первое число: ")
+            number_2 = input(" Введите второе число: ")
+            print(int(number_1) - int(number_2))
+        elif count == "*":
+            number_1 = input(" Введите первое число: ")
+            number_2 = input(" Введите второе число: ")
+            print(int(number_1) * int(number_2))
+        elif count == "/":
+            number_1 = input(" Введите первое число: ")
+            number_2 = input(" Введите второе число: ")
+            print(int(number_1) / int(number_2))
+        else:
+            print("Вы ввели не правильное значение")
+
+    return calculator(input(" Введите операцию (+, -, *, / или 0 для выхода): "))
+
+
+calculator(input(" Введите операцию (+, -, *, / или 0 для выхода): "))

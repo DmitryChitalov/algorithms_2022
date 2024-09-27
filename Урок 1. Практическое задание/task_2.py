@@ -15,3 +15,22 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+my_list = [10, 5, 7, 2, 18, 1]
+
+# O(n^2) - квадратичная.
+test = 0
+for x in my_list:
+    for y in my_list:
+        if x < y:
+            test = x
+        else:
+            continue
+print(test)
+
+# O(n) - линейная.
+test = my_list[0]
+for x in my_list:
+    if x < test:
+        test = x
+print(test)

@@ -30,3 +30,73 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import profile
+from pympler import asizeof
+from json import dumps, loads
+
+
+# Задание 1. Урок № 4
+num_100 = range(1, 1000)
+
+
+@profile
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    print(f'память - {asizeof.asizeof(new_arr)}')
+    return new_arr
+
+
+@profile
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    print(f'память - {asizeof.asizeof(new_arr)}')
+    return new_arr
+
+
+func_1(num_100)
+func_2(num_100)
+
+# count_time_1 = timeit.timeit('func_1(num_100)', setup='from __main__ import func_1, num_100')
+# count_time_2 = timeit.timeit('func_2(num_100)', setup='from __main__ import func_2, num_100')
+#
+# print(count_time_1, "Время 1 функции")
+# print(count_time_2, "Время 2 функции")
+
+# Аналитика
+# 18.63887419970706 Время 1 функции
+# 16.245855399873108 Время 2 функции
+# используем генератор списка для ускорения работы, как видно по замерам, время работы улучшили.
+
+
+@profile
+def func_1_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    dumped_arr = dumps(new_arr)
+    print(f'память - {asizeof.asizeof(dumped_arr)}')
+    return dumped_arr
+
+
+@profile
+def func_2_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    dumped_arr = dumps(new_arr)
+    print(f'память - {asizeof.asizeof(dumped_arr)}')
+    return dumped_arr
+
+
+func_1_1(num_100)
+func_2_2(num_100)
+
+
+# Аналитика
+# память - 20184 1 функции
+# память - 20184 Время 2 функции
+# используем dumps для сжатия данных,
+# и получаем меньше занемаймой памяти, результат функций с сжатием:  память 1_1 функции - 2496,
+# память 2_2 функции - 2496, как видим снизили показатели практически в 10 раз, при этом сами функции не поменялись.
