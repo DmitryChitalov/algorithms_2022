@@ -19,3 +19,17 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+def ascii_show(n=32, i=1):
+    if n not in range(31, 128):
+        return
+    else:
+        if i % 10 == 0:
+            print(f'{n} - {chr(n)}', end='\n')
+        else:
+            print(f'{n} - {chr(n)}', end='  ')
+        ascii_show(n + 1, i + 1)
+
+
+ascii_show()
+

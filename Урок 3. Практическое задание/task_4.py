@@ -15,3 +15,20 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+
+import hashlib
+
+address_lib = {}
+
+
+def url_adr(url):
+    if url in address_lib:
+        return f'Хэш url: {address_lib[url]}'
+    else:
+        address_lib[url] = hashlib.pbkdf2_hmac(hash_name='sha512', password=url.encode('utf-8'),
+                                              salt='qwerty'.encode('utf-8'), iterations=100)
+        return f'{url} - добавлен в кэш'
+
+
+print(url_adr('www.google.ru'))
+print(url_adr('www.google.ru'))
