@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def asci(i):
+    if i > 126:
+        return print('%4d-%s' % (i, chr(i)), end=' ')
+    if i % 10 == 0:
+        print()
+    print('%4d-%s' % (i, chr(i)), end=' ')
+    return asci(i + 1)
+
+
+asci(32)

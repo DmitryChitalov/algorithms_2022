@@ -27,3 +27,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calcul():
+    n = input('Введите операцию (+, -, *, / или 0 для выхода)')
+    if n == '0':
+        return print(f'Выход')
+    n1 = input('Введите первое число:')
+    try:
+        n1 = int(n1)
+    except:
+        print('Вы вместо числа ввели строку')
+        return calcul()
+    n2 = input('Введите второе число:')
+    try:
+        n2 = int(n2)
+    except:
+        print('Вы вместо числа ввели строку')
+        return calcul()
+    if n == '*':
+        print(f' {n1} * {n2} = {n1 * n2}')
+        return calcul()
+    elif n == '+':
+        print(f' {n1} + {n2} = {n1 + n2}')
+        return calcul()
+    elif n == '-':
+        print(f' {n1} - {n2} = {n1 - n2}')
+        return calcul()
+    elif n == '/':
+        if n2 == 0:
+            print(f'Делитель = 0, На 0 делить нельзя!')
+            return calcul()
+        else:
+            print(f' {n1} / {n2} = {n1 / n2}')
+            return calcul()
+
+
+p = calcul()
