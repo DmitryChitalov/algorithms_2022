@@ -30,3 +30,40 @@
 
 Это файл для пятого скрипта
 """
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+
+# Исходный код (Курс основ, урок 3, задание 3)
+
+
+@memory
+def thesaurus(*args):
+    names = {}
+    for value in sorted(args):
+        key = value[0]
+        names.setdefault(key, []).append(value)
+    return names
+
+# Оптимизация: использовал filter и lambda, благодаря чему снизилось потребление памяти
+@memory
+def optimized(*args):
+    names = {}
+    for i in sorted(args):
+        if i[0] not in names:
+            names[i[0]] = list(filter(lambda el: el.startswith(i[:1]), args))
+    return names
+
+print(thesaurus("Иван", "Мария", "Петр", "Илья"))
+print(optimized("Иван", "Мария", "Петр", "Илья"))

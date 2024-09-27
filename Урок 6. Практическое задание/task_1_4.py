@@ -30,3 +30,53 @@
 
 Это файл для четвертого скрипта
 """
+# Изначальный код (Курс основ):
+def num_translate(adv_en_num=None):
+    """Переводит числительные от 0 до 10 с английского нужном регистре"""
+
+    translate_dict = {'zero': 'ноль',
+                      'one': 'один',
+                      'two': 'два',
+                      'three': 'три',
+                      'four': 'четыре',
+                      'five': 'пять',
+                      'six': 'шесть',
+                      'seven': 'семь',
+                      'eight': 'восемь',
+                      'nine': 'девять',
+                      'ten': 'десять'}
+
+    print(f'Размер словаря: {getsizeof(translate_dict)}')
+    if 64 < ord(adv_en_num[0]) < 91 and adv_en_num.lower() in translate_dict:
+        return f'{str(translate_dict[adv_en_num.lower()]).capitalize()}'
+    elif adv_en_num in translate_dict:
+        return f'{translate_dict[adv_en_num]}'
+    else:
+        return None
+
+# Оптимизация: использовал именованный кортеж, скоратил объемы использованной памяти
+def optimized(adv_en_num=None):
+    """Переводит числительные от 0 до 10 с английского нужном регистре"""
+
+    nt = namedtuple('translate_dict',
+                                ('zero', 'one', 'two', 'three', 'four', 'five',
+                                 'six', 'seven', 'eight', 'nine', 'ten'))
+
+    a = nt(zero='ноль', one='один', two='два', three='три',
+           four='четыре', five='пять', six='шесть', seven='семь',
+           eight='восемь', nine='девять', ten='десять')
+
+    print(f'Размер именовоанного кортежа: {getsizeof(a)}')
+    if 64 < ord(adv_en_num[0]) < 91 and adv_en_num.lower() in a._asdict():
+        return f'{str(a._asdict()[adv_en_num.lower()]).capitalize()}'
+    elif adv_en_num in a:
+        return f'{a._asdict()[adv_en_num]}'
+    else:
+        return None
+
+
+if __name__ == '__main__':
+
+    num_translate('one')
+    optimized('one')
+

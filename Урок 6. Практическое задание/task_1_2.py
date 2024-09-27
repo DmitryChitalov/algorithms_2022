@@ -30,3 +30,51 @@
 
 Это файл для второго скрипта
 """
+#Урок 2 задание 2
+from memory_profiler import memory_usage
+
+
+def memory(func):
+    def wrapper(*args, **kwargs):
+        m1 = memory_usage()
+        res = func(*args)
+        m2 = memory_usage()
+        mem_diff = m2[0] - m1[0]
+        print(f"Выполнение заняло {mem_diff} Mib")
+        return res
+
+    return wrapper
+
+# Исзодный код:
+@memory
+def my_func(j):
+    def recur_method(numb, even=0, odd=0):
+        if numb == 0:
+            return even, odd
+        else:
+            cur_n = numb % 10
+            numb = numb // 10
+            if cur_n % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+        return recur_method(numb, even, odd)
+    return recur_method(j)
+
+
+
+# Оптимизация: заменил рекурсию на цикл, потребление памяти сильно снизилось
+
+@memory
+def optimized(numb, even=0, odd=0):
+    while numb > 0:
+        if numb % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        numb = numb // 10
+    print(f'\nКоличество четных цифр: {even}\nКоличество нечетных цифр: {odd}\n')
+
+num = int(input('Введите число: '))
+print(f'\nКоличество четных и нечетных цифр в числе равно: {my_func(i)}\n')
+optimized(num)
