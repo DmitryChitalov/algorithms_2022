@@ -14,3 +14,31 @@
 
 сделайте замеры на массивах длиной 10, 100, 1000 элементов
 """
+from random import randint
+import timeit
+
+def func(li):
+    print(f'in {li}')
+    count_for_del = int((len(li)-1)/2)
+    print(count_for_del)
+    for _ in range(count_for_del):
+        res = max(li)
+        li.remove(res)
+    return max(li)
+
+
+
+m = 500
+li = [randint(-100, 100) for i in range(2*m+1)]
+median = func(li[:])
+
+res = timeit.timeit('func(li[:])', number=10, globals=globals())
+print(f'медиана {median} по индексу {li.index(median)} в массиве длинной {len(li)} за {res} секунд')
+
+'''
+медиана 15 по индексу 4 в массиве длинной 11 за 0.00012743099978251848 секунд
+
+медиана 1 по индексу 75 в массиве длинной 101 за 0.001329738999629626 секунд
+
+медиана 3 по индексу 137 в массиве длинной 1001 за 0.07003168299979734 секунд
+'''

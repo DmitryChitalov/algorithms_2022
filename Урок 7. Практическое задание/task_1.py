@@ -18,3 +18,45 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+from random import randint
+import timeit
+
+def func(rnd_li, stop_flag=False):
+    print(f'in list {rnd_li}')
+    break_on = True
+    out_count = 1
+    while out_count < len(rnd_li):
+        for inner_count in range(len(rnd_li) - out_count):
+            if rnd_li[inner_count] < rnd_li[inner_count+1]:
+                break_on = False
+                rnd_li[inner_count], rnd_li[inner_count+1] = rnd_li[inner_count+1], rnd_li[inner_count]
+        if stop_flag and break_on:
+            break
+        out_count += 1
+
+    print(f'out list {rnd_li}')
+    return rnd_li
+
+len_li = 10
+li = [randint(-100, 100) for _ in range(len_li)]
+
+res = timeit.timeit('func(li[:])', number=10, globals=globals())
+print()
+mod_res = timeit.timeit('func(li[:], True)', number=10, globals=globals())
+
+print(f'время сортировки пузырьком массива из {len_li} элементов составляет {res}\n\
+время после модернизации массива {mod_res}, сортировка стала в {round(res/mod_res,3)} раз быстрее')
+'''
+время сортировки пузырьком массива из 10 элементов составляет 0.00018686099974729586
+время после модернизации массива 0.00017520100027468288, сортировка стала в 1.067 раз быстрее
+
+время сортировки пузырьком массива из 100 элементов составляет 0.006269285999223939
+время после модернизации массива 0.006157904999781749, сортировка стала в 1.018 раз быстрее
+
+время сортировки пузырьком массива из 1000 элементов составляет 0.7024550119995183
+время после модернизации массива 0.7008210349995352, сортировка стала в 1.002 раз быстрее
+
+Выводы: 1) сортировка пузырьком является медленной сортировкой
+        2) Оптимизация помогает на маленьких массивах, чем больше массив тем менее эффективна работа флага остановки.
+'''
