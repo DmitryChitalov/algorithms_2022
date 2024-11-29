@@ -17,3 +17,31 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+storage = {'НЛМК': 150, 'Тинькофф': 125, 'Газпром': 100, 'Лукойл': 175}
+
+
+def best_of_1(data_in):                                                         # O(N)
+    data = data_in.copy()                                                       # O(N)
+    best_of = []
+    for i in range(3):                                                          # O(1)
+        best_of.append(max(data, key=data.get))                                 # O(N)
+        data.pop(best_of[i])                                                    # O(1)
+    return best_of                                                              # O(1)
+
+
+def best_of_2(data_in):                                                         # O(N*logN)
+    data = data_in.copy()                                                       # O(N)
+    data_in = sorted(data.items(), key=lambda x: x[1], reverse=True)[:3]        # O(N*LogN)
+    return data_in                                                              # O(1)
+
+
+best_of_1(storage)
+best_of_2(storage)
+
+
+"""
+Решение "best_of_1" эффективнее, так как используются функции словаря,
+опирающиеся не столько на перебор значений, сколько на отсев максимального
+значения. При этом, если потребуется перебрать весь словарь, то сложность
+"best_of_1" станет O(N^2) и best_of_2 станет предпочтительнее
+"""

@@ -18,3 +18,10 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def digit_rev(digit):
+    return str(digit) if digit // 10 == 0 else str(digit-(digit//10)*10) + str(digit_rev(digit//10))
+
+
+print(digit_rev(1235400))

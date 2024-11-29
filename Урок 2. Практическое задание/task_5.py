@@ -19,3 +19,15 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def ascii_table(n=32, t=10):
+    if t != 0 and n < 128:
+        return f'{n} - {chr(n)} ' + str(ascii_table(n+1, t-1))
+    elif n < 127:
+        return '\n' + str(ascii_table(n))
+    else:
+        return ''
+
+
+print(ascii_table())
