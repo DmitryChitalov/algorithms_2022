@@ -17,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_num(num, count_even_digit=0, count_odd_digit=0):
+    """
+    Функция подсчитывает четные и нечетные цифры введенного натурального числа.
+    """
+    last_digit = num % 10
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {count_even_digit}, {count_odd_digit}'
+    elif last_digit % 2 == 0:
+        count_even_digit += 1
+    elif last_digit % 2 != 0:
+        count_odd_digit += 1
+    return count_num(num // 10, count_even_digit, count_odd_digit)
+
+
+number = int(input('Введите число: '))
+print(count_num(number))

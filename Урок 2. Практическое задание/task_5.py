@@ -19,3 +19,24 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+# Почему-то не отображается при выводе символ 
+
+
+def symbol_ascii(b, e, quantity_num=1):
+    """
+    Функция выводит на экран коды и символы таблицы ASCII,
+    начиная с символа под номером 32 и заканчивая 127-м включительно
+    """
+    if quantity_num % 10 == 0 and b <= e:
+        sep = '\n'
+        return f'{b} - {chr(b)} {sep}{(symbol_ascii(b + 1, e, quantity_num + 1))}'
+    elif b < e:
+        return f'{b} - {chr(b)} {(symbol_ascii(b + 1, e, quantity_num + 1))}'
+    elif b == e:
+        return f'{b} - {chr(b)}'
+
+
+begin_num = 32
+end_num = 127
+print(symbol_ascii(begin_num, end_num))

@@ -27,3 +27,73 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operation_func():
+    """
+    Функция запрашивает знак операции с числами у пользователя или 0 для закрытия программы
+    """
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    try:
+        if operation == '-' or operation == '+' or operation == '/' or operation == '*' or operation == '0':
+            raise ValueError
+        else:
+            print('Вы ввели не верный символ.')
+            return operation_func()
+    except ValueError:
+        return operation
+
+
+def num_1_func():
+    """
+    Функция запрашивает первое число у пользователя и проверяет, что введено число.
+    Функция возвращает число типа float
+    """
+    try:
+        return float(input('Введите первое число: '))
+    except ValueError:
+        print('Вы ввели не число.')
+        return num_1_func()
+
+
+def num_2_func(operation_symbol):
+    """
+        Функция запрашивает второе число у пользователя и проверяет, что введено число.
+        Также проверяет, чтобы число не было '0' если знак операции '/'.
+        Функция возвращает число типа float
+        """
+    try:
+        num_2 = float(input('Введите второе число: '))
+        if operation_symbol == '/' and float(num_2) == 0:
+            raise ZeroDivisionError
+        return num_2
+    except ValueError:
+        print('Вы ввели не число.')
+        return num_2_func(operation_symbol)
+    except ZeroDivisionError:
+        print('Деление на ноль не возможно.')
+        return num_2_func(operation_symbol)
+
+
+def calculator():
+    """
+    Калькулятор
+    """
+    action = operation_func()
+    if action == '0':
+        return 'Калькулятор закрыт'
+    else:
+        number_1 = float(num_1_func())
+        number_2 = float(num_2_func(action))
+        if action == '-':
+            print(number_1 - number_2)
+        elif action == '+':
+            print(number_1 + number_2)
+        elif action == '/':
+            print(number_1 / number_2)
+        elif action == '*':
+            print(number_1 * number_2)
+        return calculator()
+
+
+print(calculator())
