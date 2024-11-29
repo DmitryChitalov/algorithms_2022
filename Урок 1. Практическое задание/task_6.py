@@ -17,3 +17,28 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+class Tasks:
+
+    def init(self):
+        self.base = []
+        self.revision = []
+        self.solution = []
+    
+    def is_base(self, task):
+    
+        self.base.append(task)
+        
+        for element in self.base:
+            self.solution.insert(0, element)
+         
+        return self.solution  
+
+    def _is_revision(self, task):
+    
+         self.revision.append(task)
+         
+         for element in self.revision:
+              self.solution.insert(0, element)
+              
+         return self.solution

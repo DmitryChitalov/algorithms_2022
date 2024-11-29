@@ -15,3 +15,26 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+def min1(listElements):
+
+    minValue = listElements[0]      # O(1)
+
+    for element in listElements:    # O(N)
+        if element < minValue:      # O(len(n))
+            minValue = element      # O(1)
+
+    return minValue                 # O(1)
+
+
+def min2(listElements):
+
+    for element1 in listElements:      # O(N)
+        isMin = True                   # O(1)
+
+        for element2 in listElements:  # O(N)
+            if element1 > element2:    # O(len(n))
+                isMin = False          # O(1)
+
+        if isMin:                      # O(1)
+            return element1            # O(1)
