@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 1:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: Линейная, O(n).
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # Линейная O(n)
+    return lst_to_set  # Константная, O(1)
 
 
 ##############################################################################
@@ -37,12 +37,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: !!! Квадратичная, О(n ^ 2).
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # !!! Линейная O(n), O(len(lst_obj))
+        if lst_obj[j] in lst_obj[j+1:]:    # !!! O(n) - slise + in >> O(n) + O(n)
+            return False                   # !!! Константная, O(1)
+    return True                            # !!! Константная, O(1)
 
 
 ##############################################################################
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: !!! O(n log n), Линейно-логарифмическая
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # !!! Линейная, O(n)
+    lst_copy.sort()                          # !!! O(n log n), Линейно-логарифмическая
+    for i in range(len(lst_obj) - 1):        # !!! Линейная O(n), O(len(lst_obj))
+        if lst_copy[i] == lst_copy[i+1]:     # !!! Константная, O(1)
+            return False                     # !!! Константная, O(1)
+    return True                              # !!! Константная, O(1)
 
 
 for j in (50, 500, 1000, 5000, 10000):

@@ -15,3 +15,25 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+# Qudratic sort, O(n^2)
+def quadratic(lst):
+    for i in lst:
+        is_min = True
+        for j in lst:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+# linear sort, O(n)
+def linear(lst):
+    min_value = lst[0]
+    for i in lst:
+        if i < min_value:
+            min_value = i
+    return min_value
+
+

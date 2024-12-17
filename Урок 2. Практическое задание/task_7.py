@@ -13,3 +13,30 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def sum_recursive(n):
+    # Базовое условие: если n = 1, то возвращаем 1
+    if n == 1:
+        return 1
+    # Рекурсивный случай: сумма чисел от 1 до n
+    return n + sum_recursive(n - 1)
+
+
+def verify_formula(n):
+    # Вычисляем левую часть (рекурсивно)
+    left_sum = sum_recursive(n)
+
+    # Вычисляем правую часть по формуле
+    right_sum = n * (n + 1) // 2
+
+    # Сравниваем левую и правую части
+    if left_sum == right_sum:
+        print(f"Для n = {n} верно: {left_sum} = {right_sum}")
+    else:
+        print(f"Для n = {n} неверно: {left_sum} != {right_sum}")
+
+
+# Пример для n = 5
+n = 5
+verify_formula(n)

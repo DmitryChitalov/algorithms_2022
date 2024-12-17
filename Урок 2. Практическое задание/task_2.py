@@ -17,3 +17,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def count_num(number, even, odd):
+    # базовый случай - число пустое
+    if not number:
+        return even, odd
+
+    else:
+        # достаем последню цифру
+        last_digit = number % 10
+
+        # считаем четность и нечетность
+        if last_digit % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+        # рекурсивный вызов
+        return count_num(number // 10, even, odd)
+
+try:
+    number = int(input("Введите число: "))
+    even, odd = count_num(number, 0, 0)
+    print(f"Количество четных цифр = {even}, нечетных цифр = {odd}.")
+except ValueError:
+    print("Ошибка: введено не число. Попробуйте снова.")

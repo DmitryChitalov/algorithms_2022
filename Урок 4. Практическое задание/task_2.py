@@ -16,7 +16,7 @@ from timeit import timeit
 from random import randint
 
 
-def recursive_reverse(number):
+def recursive_reverse(number: int) -> str:
     if number == 0:
         return str(number % 10)
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
@@ -58,7 +58,7 @@ def memoize(f):
 
 
 @memoize
-def recursive_reverse_mem(number):
+def recursive_reverse_mem(number: int):
     if number == 0:
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
@@ -80,3 +80,12 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Мемоизация не оказывает значительного эффекта на производительность функции реверсирующей число.
+Это связано с тем, что мемоизация полезна в тех случаях,
+когда вычисления повторяются с одинаковыми параметрами.
+В задаче с реверсированием числа каждый шаг рекурсии зависит от нового состояния числа,
+что делает кэширование результатов для промежуточных состояний неэффективным.
+"""

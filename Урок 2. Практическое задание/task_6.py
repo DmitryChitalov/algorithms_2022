@@ -7,3 +7,31 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+from random import randint
+
+
+def guess_number(secret_number: int, attempts_left=10) -> None:
+    # Базовое условие завершения рекурсии: если попытки закончились
+    if attempts_left == 0:
+        print(f"Вы не угадали число. Загаданное число было: {secret_number}")
+        return
+
+    # Запрос числа у пользователя
+    user_guess = int(input(f"У вас осталось {attempts_left} попыток. Введите число: "))
+
+    # Проверяем, угадал ли пользователь
+    if user_guess == secret_number:
+        print("Поздравляем! Вы угадали число!")
+        return
+    elif user_guess < secret_number:
+        print("Ваше число меньше загаданного.")
+    else:
+        print("Ваше число больше загаданного.")
+
+    # Рекурсивный вызов для следующей попытки
+    guess_number(secret_number, attempts_left - 1)
+
+
+# Запуск игры
+# Генерируем случайное число от 0 до 100 и запускам цикл
+guess_number(randint(0, 100))

@@ -29,4 +29,48 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+Задание взял из Урок 2, task_2.
+"""
+from lesson_2_task_2 import count_num
+from timeit import timeit
+from memory_profiler import memory_usage
+
+
+# Декоратор для подсчёта использования памяти
+def count_memory_usage(func):
+    def wrapper(*args, **kwargs):
+        mem_before = memory_usage()[0]
+        print(f'Время выполнения: {timeit(lambda: func(*args, **kwargs), number=1000000)} секунд')
+        result = func(*args, **kwargs)  # Вызываем оригинальную функцию с параметрами
+        print(f'Использовано памяти: {memory_usage()[0] - mem_before} MiB')
+        return result
+
+    return wrapper
+
+
+number = 12345684987431214465
+
+
+# Вызываем декоратор для подсчёта памяти
+@count_memory_usage
+def test_count_num(*args) -> tuple[int, int]:
+    return count_num(*args)
+
+
+# Вызываем рекурсивную функцию с декоратором для подсчёта памяти
+test_count_num(number, 0, 0)
+
+
+@count_memory_usage
+def count_num_optimized(number: str) -> tuple[int, int]:
+    odd = sum(1 for i in number if i in '13579')
+    return len(number) - odd, odd
+
+
+# Вызываем функцию с использованием list comprehension декоратором для подсчёта памяти
+count_num_optimized(str(number))
+
+"""
+Время выполнения уменьшилось 3 раза,
+объем потребляемой памяти и время выполнения уменьшился многократно.
 """
